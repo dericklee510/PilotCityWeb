@@ -32,7 +32,9 @@
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.16.0",
+    "eslint-loader": "^2.1.2",
     "eslint-plugin-es-beautifier": "^1.0.1",
+    "eslint-plugin-html": "^5.0.5",
     "eslint-plugin-vue": "^5.0.0",
     "sass": "^1.18.0",
     "sass-loader": "^7.1.0",
@@ -51,10 +53,19 @@
     "extends": [
       "plugin:es-beautifier/standard",
       "plugin:vue/essential",
-      "@vue/prettier",
       "@vue/typescript"
     ],
-    "rules": {},
+    "rules": {
+      "comma-dangle": ["error", "never"],
+      "no-unused-vars": [
+        "error",
+        {
+          "vars": "all",
+          "args": "after-used",
+          "ignoreRestSiblings": false
+        }
+      ]
+    },
     "parserOptions": {
       "parser": "@typescript-eslint/parser"
     }
