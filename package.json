@@ -13,6 +13,7 @@
   "dependencies": {
     "core-js": "^2.6.5",
     "firebase": "^6.2.0",
+    "semantic-ui-vue": "^0.8.1",
     "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",
     "vue-property-decorator": "^8.1.0",
@@ -21,10 +22,11 @@
   },
   "devDependencies": {
     "@types/jest": "^23.1.4",
+    "@typescript-eslint/eslint-plugin": "^1.10.2",
     "@vue/cli-plugin-babel": "^3.8.0",
     "@vue/cli-plugin-e2e-cypress": "^3.8.0",
     "@vue/cli-plugin-eslint": "^3.8.0",
-    "@vue/cli-plugin-typescript": "^3.8.0",
+    "@vue/cli-plugin-typescript": "^3.8.1",
     "@vue/cli-plugin-unit-jest": "^3.8.0",
     "@vue/cli-service": "^3.8.0",
     "@vue/eslint-config-prettier": "^4.0.1",
@@ -49,14 +51,30 @@
       "node": true
     },
     "plugins": [
-      "es-beautifier"
+      "es-beautifier",
+      "@typescript-eslint"
     ],
     "extends": [
       "plugin:es-beautifier/standard",
       "plugin:vue/essential",
-      "@vue/typescript"
+      "prettier/@typescript-eslint",
+      "plugin:@typescript-eslint/recommended",
+      "@vue/typescript",
+      "@vue/prettier",
+      "eslint:recommended"
     ],
     "rules": {
+      "linebreak-style": "off",
+      "semi": [
+        "error",
+        "never"
+      ],
+      "max-lines-per-function": [
+        "error",
+        {
+          "max": 25
+        }
+      ],
       "comma-dangle": [
         "error",
         "never"
@@ -69,9 +87,6 @@
           "ignoreRestSiblings": false
         }
       ]
-    },
-    "parserOptions": {
-      "parser": "@typescript-eslint/parser"
     }
   },
   "postcss": {
