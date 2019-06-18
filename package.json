@@ -49,14 +49,27 @@
       "node": true
     },
     "plugins": [
-      "es-beautifier"
+      "es-beautifier",
+      "@typescript-eslint"
     ],
     "extends": [
       "plugin:es-beautifier/standard",
       "plugin:vue/essential",
-      "@vue/typescript"
+      "plugin:@typescript-eslint/recommended",
+      "@vue/typescript",
+      "eslint:recommended"
     ],
     "rules": {
+      "semi":[
+        "error",
+        "never"
+      ],
+      "max-lines-per-function":[
+        "error",
+        {
+          "max": 25
+        }
+      ],
       "comma-dangle": [
         "error",
         "never"

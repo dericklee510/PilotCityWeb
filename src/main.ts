@@ -9,7 +9,7 @@ new Vue({
   router,
   store,
   methods: {
-    chicken() {}
+    chicken() { }
   },
-  render: h => h(App)
+  render: h => h (App)
 }).$mount("#app");
