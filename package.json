@@ -15,6 +15,7 @@
     "semantic-ui-vue": "^0.8.1",
     "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",
+    "vue-eslint-parser": "^6.0.4",
     "vue-property-decorator": "^8.1.0",
     "vue-router": "^3.0.3",
     "vuex": "^3.0.1"
@@ -36,7 +37,6 @@
     "eslint": "^5.16.0",
     "eslint-loader": "^2.1.2",
     "eslint-plugin-es-beautifier": "^1.0.1",
-    "eslint-plugin-html": "^5.0.5",
     "eslint-plugin-vue": "^5.0.0",
     "sass": "^1.18.0",
     "sass-loader": "^7.1.0",
@@ -56,11 +56,10 @@
     "extends": [
       "plugin:es-beautifier/standard",
       "plugin:vue/essential",
-      "prettier/@typescript-eslint",
       "plugin:@typescript-eslint/recommended",
       "@vue/typescript",
-      "@vue/prettier",
-      "eslint:recommended"
+      "eslint:recommended",
+      "plugin:vue/recommended"
     ],
     "rules": {
       "linebreak-style": "off",
