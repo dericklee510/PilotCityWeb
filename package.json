@@ -11,6 +11,7 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "@types/zxcvbn": "^4.4.0",
     "babel-plugin-transform-decorators": "^6.24.1",
     "core-js": "^2.6.5",
     "firebase": "^6.2.0",
@@ -20,7 +21,8 @@
     "vue-eslint-parser": "^6.0.4",
     "vue-property-decorator": "^8.1.0",
     "vue-router": "^3.0.3",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
     "@types/jest": "^23.1.4",
