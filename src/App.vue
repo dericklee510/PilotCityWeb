@@ -7,7 +7,7 @@
       <router-link to="/about">
         About
       </router-link>
-      <span></span>
+      <span />
     </div>
     <router-view />
   </div>
