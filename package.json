@@ -11,6 +11,7 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "babel-plugin-transform-decorators": "^6.24.1",
     "core-js": "^2.6.5",
     "firebase": "^6.2.0",
     "semantic-ui-vue": "^0.8.1",
@@ -43,7 +44,8 @@
     "sass-loader": "^7.1.0",
     "ts-jest": "^23.0.0",
     "typescript": "^3.4.3",
-    "vue-template-compiler": "^2.6.10"
+    "vue-template-compiler": "^2.6.10",
+    "vuex-module-decorators": "^0.9.9"
   },
   "eslintConfig": {
     "root": true,
