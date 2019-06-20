@@ -17,9 +17,7 @@
     "firebase": "^6.2.0",
     "semantic-ui-vue": "^0.8.1",
     "vue": "^2.6.10",
-    "vue-class-component": "^7.0.2",
     "vue-eslint-parser": "^6.0.4",
-    "vue-property-decorator": "^8.1.0",
     "vue-router": "^3.0.3",
     "vuex": "^3.0.1",
     "zxcvbn": "^4.4.2"
@@ -46,6 +44,8 @@
     "sass-loader": "^7.1.0",
     "ts-jest": "^23.0.0",
     "typescript": "^3.4.3",
+    "vue-class-component": "^7.1.0",
+    "vue-property-decorator": "^8.2.1",
     "vue-template-compiler": "^2.6.10",
     "vuex-module-decorators": "^0.9.9"
   },
