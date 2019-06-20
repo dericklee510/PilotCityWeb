@@ -11,17 +11,17 @@ export default class signup extends VuexModule {
     [PASSWORD_PROCESSED](validator: password_validator) {
         this.password_info = validator
     }
-    @Action({commit:'set_password_result'})
-    async processPassword(password:string){
+    @Action({ commit: 'set_password_result' })
+    processPassword(password: string): password_validator {
         let validator = <password_validator>zxcvbn(password)
         validator.password = password
         return validator
     }
     @Action
-    async process(email:string){
-        if(this.password_info.score < REQ_PASSWORD_STRENGTH)
-            throw("Password is too weak")
+    async process(email: string): Promise<void> {
+        if (this.password_info.score < REQ_PASSWORD_STRENGTH)
+            throw ("Password is too weak")
         else
-        await this.context.dispatch('Auth/createAccount',email)
+            await this.context.dispatch('Auth/createAccount', email)
     }
 }
