@@ -1,7 +1,7 @@
 import Vue from 'vue'
-import Vuetify from 'vuetify/lib'
+var Vuetify = require('vuetify/lib')
 import 'vuetify/src/stylus/app.styl'
 
 Vue.use(Vuetify, {
-  iconfont: 'md',
+  iconfont: 'fa',
 })

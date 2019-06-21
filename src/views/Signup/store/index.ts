@@ -1,8 +1,13 @@
-import { Module, VuexModule, Mutation, Action } from 'vuex-module-decorators'
+import { 
+    Module, 
+    VuexModule, 
+    Mutation, 
+    Action 
+} from 'vuex-module-decorators'
 import zxcvbn from 'zxcvbn'
-import { password_validator } from './types';
-import { REQ_PASSWORD_STRENGTH } from './const';
-import { PASSWORD_PROCESSED } from './mutation-types';
+import { password_validator } from './types'
+import { REQ_PASSWORD_STRENGTH } from './const'
+import { PASSWORD_PROCESSED } from './mutation-types'
 
 @Module({ namespaced: true, name: 'signup' })
 export default class signup extends VuexModule {

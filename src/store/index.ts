@@ -1,19 +1,16 @@
-import Vue from "vue";
+import Vue from "vue"
 import { RootState } from "./types"
-import Vuex, { StoreOptions } from "vuex";
+import Vuex, { StoreOptions } from "vuex"
 import login from "@/views/Login/store"
 import signup from "@/views/Signup/store"
 import Auth from "./Auth"
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 const store: StoreOptions<RootState> = {
-  state: {
-    test: true
-  },
-  modules: {
-    login,
-    signup,
-    Auth
-  }
+    modules: {
+        login,
+        signup,
+        Auth
+    }
 }
-export default new Vuex.Store<RootState>(store);
+export default new Vuex.Store<RootState>(store)

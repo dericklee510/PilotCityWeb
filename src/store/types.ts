@@ -1,3 +1,3 @@
 export interface RootState{
-    test: boolean
+    test: boolean;
 }
