@@ -68,7 +68,7 @@
     ],
     "extends": [
       "plugin:es-beautifier/standard",
-      "plugin:vue/strongly-recommended",
+      "plugin:vue/essential",
       "plugin:@typescript-eslint/recommended",
       "@vue/typescript",
       "eslint:recommended",

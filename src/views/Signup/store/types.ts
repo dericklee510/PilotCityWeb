@@ -1,4 +1,4 @@
 
-export interface password_validator extends zxcvbn.ZXCVBNResult{
+export interface passwordValidator extends zxcvbn.ZXCVBNResult{
     password: string;
 }

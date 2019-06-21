@@ -1,14 +1,14 @@
 import { REAL_DB_KEY, TEST_DB_KEY } from './../keys'
 
-export class Application_config {
-    apiKey: string = TEST_DB_KEY
-    authDomain: string = "test-database-5c3f8.firebaseapp.com"
-    databaseURL: string = "https://test-database-5c3f8.firebaseio.com"
-    projectId: string = "test-database-5c3f8"
-    storageBucket: string = "test-database-5c3f8.appspot.com"
-    messagingSenderId: string = "206893838009"
-    constructor(production_mode: string) {
-        if (production_mode === "production") {
+export class ApplicationConfig {
+    public apiKey: string = TEST_DB_KEY
+    public authDomain: string = "test-database-5c3f8.firebaseapp.com"
+    public databaseURL: string = "https://test-database-5c3f8.firebaseio.com"
+    public projectId: string = "test-database-5c3f8"
+    public storageBucket: string = "test-database-5c3f8.appspot.com"
+    public messagingSenderId: string = "206893838009"
+    public constructor(productionMode: string) {
+        if (productionMode === "production") {
             REAL_DB_KEY
             this.authDomain = "pilotcity-firestore.firebaseapp.com"
             this.databaseURL = "https://pilotcity-firestore.firebaseio.com",
