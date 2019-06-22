@@ -1,5 +1,5 @@
 <template>
-  <v-container />
+  <v-container grid-list-xs />
 </template>
 
 <script lang="ts">
@@ -21,8 +21,10 @@ export default class Signup extends Vue {
         // console.log(this.something)
     }
 @signup.Action process!: (email: string) => Promise<void>
+
 @signup.Action processPassword!: (password: string) => passwordValidator
 }
+
 </script>
 
 <style>

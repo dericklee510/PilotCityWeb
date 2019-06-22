@@ -9,7 +9,7 @@ export class ApplicationConfig {
     public messagingSenderId: string = "206893838009"
     public constructor(productionMode: string) {
         if (productionMode === "production") {
-            REAL_DB_KEY
+            this.apiKey = REAL_DB_KEY
             this.authDomain = "pilotcity-firestore.firebaseapp.com"
             this.databaseURL = "https://pilotcity-firestore.firebaseio.com",
             this.projectId = "pilotcity-firestore"

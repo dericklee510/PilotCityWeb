@@ -7,7 +7,7 @@ import "firebase/firestore"
 import "firebase/functions"
 
 // Initialize Firebase
-
+//Change firebase configuration based on environment mode
 var config = new ApplicationConfig(process.env.NODE_ENV)
 
 const firebaseApp = firebase.initializeApp(config)
