@@ -1,17 +1,15 @@
+import Signup from '@/views/Signup/store';
 import Vue from "vue"
-import { RootState } from "./types"
 import Vuex from "vuex"
-import login from "@/views/Login/store"
-import Signup from "@/views/Signup/store"
-import Auth from "./Auth"
+import { AuthModule } from "./Auth"
+
+
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
-    state:{},
+    state: {},
     modules: {
-        login,
-        signup:Signup,
-        Auth
+        ...AuthModule
     }
 })
 export default store
