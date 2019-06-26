@@ -11,11 +11,11 @@
               <i class="fa fa-user" aria-hidden="true"></i>
             </v-layout>
           </v-flex>
-          <v-flex xs5>
+          <v-flex xs11 md5>
             <v-text-field class="signup__subtitle" v-model="first_name" name="First Name" v-validate="'required'" :error-messages="errors.collect('First Name')" label="First Name" placeholder="Enter your First Name" required></v-text-field>
           </v-flex>
           <v-spacer></v-spacer>
-          <v-flex xs5>
+          <v-flex xs11 md5 offset-xs1>
             <v-text-field class="signup__subtitle" v-model="last_name" name="Last Name" v-validate="'required'" :error-messages="errors.collect('Last Name')" label="Last Name" placeholder="Enter your Last Name" required></v-text-field>
           </v-flex>
         </v-layout>
@@ -35,10 +35,10 @@
               <i class="fa fa-lock" aria-hidden="true"></i>
             </v-layout>
           </v-flex>
-          <v-flex xs12 md8>
+          <v-flex xs11 md8>
             <v-text-field class="signup__subtitle" name="password |custom_validation" @input="processPassword" v-validate="'required|truthy'" :error-messages="errors.collect('password')" label="Password" placeholder="Enter your Password"></v-text-field>
           </v-flex>
-          <v-flex xs12 md8 offset-md1>
+          <v-flex xs11 md8 offset-xs1>
             <v-text-field class="signup__subtitle" name="password |custom_validation" @input="processPassword" v-validate="'required|truthy'" :error-messages="errors.collect('password')" label="Password" placeholder="Please confirm your Password"></v-text-field>
           </v-flex>
         </v-layout>
@@ -58,7 +58,7 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-
+import HeaderMain from "@/components/layout/header.vue";
 import { passwordValidator } from "./store/types";
 import { getModule } from "vuex-module-decorators";
 import signup_store from "./store";
@@ -75,8 +75,14 @@ Validator.extend("truthy", {
     return SignupStore.isPasswordComplex;
   }
 });
+@Component({
+  components: {
+    HeaderMain
+  }
+})
 @Component
 export default class Signup extends Vue {
+
   public first_name: string = "";
   public last_name: string = "";
   public email: string = "";

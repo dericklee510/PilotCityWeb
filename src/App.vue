@@ -1,5 +1,7 @@
 <template>
   <v-app>
+    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet"> 
+    <HeaderMain />
     <v-content>
       <v-container fluid>
         <router-view/>
@@ -9,13 +11,16 @@
   </v-app>
 </template>
 
+
 <script lang="ts">
 import Vue from "vue";
+import HeaderMain from "@/components/layout/header.vue";
 import Component from "vue-class-component";
 import FooterMain from "./components/layout/footer.vue";
 @Component({
   components: {
-    FooterMain
+    FooterMain,
+    HeaderMain
   }
 })
 export default class App extends Vue {}
