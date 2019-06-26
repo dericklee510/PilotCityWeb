@@ -129,11 +129,7 @@
               required
             />
           </v-flex>
-          <v-flex
-            xs12
-            md8
-            offset-md1
-          >
+          <v-flex xs11 md8 offset-xs1>
             <v-text-field
               v-model="confirm_password"
               v-validate="'required|confirmed:password'"
@@ -186,6 +182,12 @@ import store from "@/store"
 import { Validator, Rules } from "vee-validate"
 import { passwordStrength } from "./store/const"
 import Auth from "@/store/Auth"
+import HeaderMain from "@/components/layout/header.vue";
+
+
+
+
+
 
 const SignupStore = getModule(SignupImport, store)
 const AuthStore = getModule(Auth, store)
