@@ -2,21 +2,21 @@
   <v-app>
     <v-content>
       <v-container fluid>
-        <router-view/>
+        <router-view />
       </v-container>
     </v-content>
-    <FooterMain/>
+    <FooterMain />
   </v-app>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-import FooterMain from "./components/layout/footer.vue";
+import Vue from "vue"
+import Component from "vue-class-component"
+import FooterMain from "./components/layout/footer.vue"
 @Component({
-  components: {
-    FooterMain
-  }
+    components: {
+        FooterMain
+    }
 })
 export default class App extends Vue {}
 </script>
