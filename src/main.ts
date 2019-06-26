@@ -2,7 +2,7 @@
 import Vue from "vue"
 import './plugins/vuetify'
 import App from "./App.vue"
-import router from "./router"
+import router from "@/router"
 import store from "./store"
 
 import * as firebase from "firebase/app"
@@ -14,6 +14,9 @@ import { SET_USER } from './store/Auth/mutation-types'
 import Vuetify from 'vuetify/lib'
 import 'vuetify/src/stylus/app.styl'
 
+import VeeValidate from 'vee-validate';
+
+Vue.use(VeeValidate);
 Vue.use(Vuetify)
 Vue.config.productionTip = false
 firestore // enables firebaseApp and firestore

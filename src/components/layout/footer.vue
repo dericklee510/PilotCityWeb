@@ -1,20 +1,21 @@
 <template>
-  <v-footer
+  <v-footer class="footer__main"
     dark
     height="auto"
   >
     <v-card
-      class="flex"
+      class="flex footer_card"
       flat
       tile
     >
-      <v-card-title class="teal">
+      <v-card-title class="white black--text footer_card__title">
         <v-layout
           align-start
           justify-center
           column
+          class="footer_card__text"
         >
-          <strong class="subheading">Get connected with us on social networks!</strong>
+          <strong class="subheading">PilotCity Inc</strong>
           <p class="caption">
             ©2019 PilotCity Inc LLC, All Right Reserved
           </p>
@@ -25,7 +26,7 @@
         <v-btn
           v-for="icon in icons"
           :key="icon"
-          class="mx-3"
+          class="mx-3 black--text footer_card__icon"
           dark
           icon
         >
@@ -42,7 +43,7 @@
 import Vue from "vue"
 import Component from "vue-class-component"
 @Component
-export default class footer extends Vue {
+export default class FooterMain extends Vue {
     icons: string[] = [
         "fab fa-instagram", 
         "fab fa-facebook", 
@@ -51,5 +52,18 @@ export default class footer extends Vue {
 }
 </script>
 
-<style>
+<style lang="scss">
+.footer_main {
+  &.footer_card {
+    &.footer_card__title{
+      color: gray;
+      &.footer_card__text {
+        
+      }
+      &.footer_card__icon {
+
+      }
+    }
+  }
+}
 </style>
