@@ -1,63 +1,58 @@
 <template>
-  <!-- <v-container fluid>
-    <v-layout align-center justify-center>
-      <v-card>
-        <label for="first_name">First Name</label>
-        <v-form :label="'First Name'"></v-form>
-      </v-card>
-    </v-layout>
-  </v-container>-->
-
-  <v-layout>
-    <v-flex xs12 sm6 offset-sm3>
-      <v-card>
-        <!-- <v-img :src="require('@/assets/PilotCityLogo.png')" ></v-img> -->
-        <v-layout align-center justify-center column fill-height>
-          <v-card-title primary-title>
-            <div>
-              <h3 class="headline mb-0">Create an Account</h3>
-            </div>
-          </v-card-title>
-          <form>
-            <v-text-field
-              v-model="first_name"
-              name="First Name"
-              v-validate="'required'"
-              :error-messages="errors.collect('First Name')"
-              label="First Name"
-              required
-            ></v-text-field>
-            <v-text-field
-              v-model="last_name"
-              name="Last Name"
-              v-validate="'required'"
-              :error-messages="errors.collect('Last Name')"
-              label="Last Name"
-              required
-            ></v-text-field>
-            <v-text-field
-              v-model="email"
-              name="email"
-              v-validate="'required | email'"
-              :error-messages="errors.collect('email')"
-              label="Email"
-              required
-            ></v-text-field>
-            <v-text-field
-              name="password |custom_validation"
-              @input="processPassword"
-              v-validate="'required|truthy'"
-              :error-messages="errors.collect('password')"
-              label="Password"
-            ></v-text-field>
-          </form>
-          <v-card-actions>
-            <v-btn flat color>Sign Up</v-btn>
-          </v-card-actions>
+  <v-container class="signup-container" fill-height xs6>
+    <v-layout row wrap>
+      <v-flex style="text-align: center" xs12>
+        <h1 class="signup__title">Create new Account</h1>
+      </v-flex>
+      <v-flex class="signup__questions">
+        <v-layout row wrap>
+          <v-flex class="signup__icons" align-self-center xs1>
+            <v-layout row justify-end>
+              <i class="fa fa-user" aria-hidden="true"></i>
+            </v-layout>
+          </v-flex>
+          <v-flex xs5>
+            <v-text-field class="signup__subtitle" v-model="first_name" name="First Name" v-validate="'required'" :error-messages="errors.collect('First Name')" label="First Name" placeholder="Enter your First Name" required></v-text-field>
+          </v-flex>
+          <v-spacer></v-spacer>
+          <v-flex xs5>
+            <v-text-field class="signup__subtitle" v-model="last_name" name="Last Name" v-validate="'required'" :error-messages="errors.collect('Last Name')" label="Last Name" placeholder="Enter your Last Name" required></v-text-field>
+          </v-flex>
         </v-layout>
-      </v-card>
-    </v-flex>
-  </v-layout>
+        <v-layout row wrap>
+          <v-flex class="signup__icons" align-self-center xs1>
+            <v-layout row justify-end>
+              <i class="fa fa-envelope" aria-hidden="true"></i>
+            </v-layout>
+          </v-flex>
+          <v-flex xs11>
+            <v-text-field class="signup__subtitle" v-model="email" name="email" v-validate="'required | email'" :error-messages="errors.collect('email')" label="Email" placeholder="Enter your Email" required></v-text-field>
+          </v-flex>
+        </v-layout>
+        <v-layout row wrap>
+          <v-flex class="signup__icons" xs1 align-self-center>
+            <v-layout row justify-end>
+              <i class="fa fa-lock" aria-hidden="true"></i>
+            </v-layout>
+          </v-flex>
+          <v-flex xs12 md8>
+            <v-text-field class="signup__subtitle" name="password |custom_validation" @input="processPassword" v-validate="'required|truthy'" :error-messages="errors.collect('password')" label="Password" placeholder="Enter your Password"></v-text-field>
+          </v-flex>
+          <v-flex xs12 md8 offset-md1>
+            <v-text-field class="signup__subtitle" name="password |custom_validation" @input="processPassword" v-validate="'required|truthy'" :error-messages="errors.collect('password')" label="Password" placeholder="Please confirm your Password"></v-text-field>
+          </v-flex>
+        </v-layout>
+      </v-flex>
+      <v-flex style="text-align: center" xs12>
+        <v-btn :loading="loading" :disabled="loading" color="secondary" @click="loader = 'loading'">
+          Sign Up
+        </v-btn>
+      </v-flex>
+      <v-flex style="text-align: center" xs12>
+        <a href="#" class="signup__switch">Already have an account? Sign In!</a>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script lang="ts">
@@ -74,7 +69,7 @@ const SignupStore = getModule(signup_store, store);
 Validator.extend("truthy", {
   getMessage: (field, params, data) =>
     `Password strength is ${
-      passwordStrength[SignupStore.password_info.score]
+    passwordStrength[SignupStore.password_info.score]
     } \n ${SignupStore.password_info.feedback.suggestions}`,
   validate: (value, arg, data) => {
     return SignupStore.isPasswordComplex;
@@ -86,11 +81,17 @@ export default class Signup extends Vue {
   public last_name: string = "";
   public email: string = "";
   public isPasswordComplex: boolean = SignupStore.isPasswordComplex;
-  public process: (email: string, password:string) => Promise<void> = SignupStore.process;
+  public process: (email: string, password: string) => Promise<void> = SignupStore.process;
   public processPassword: (password: string) => void =
     SignupStore.processPassword;
 }
 </script>
 
-<style>
+<style lang="scss">
+.signup-container {
+  max-width: 50rem;
+}
+.signup__icons {
+  padding-right: 1rem;
+}
 </style>
