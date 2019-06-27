@@ -186,36 +186,41 @@
 <script lang="ts">
 import Vue from "vue"
 import Component from "vue-class-component"
-import HeaderMain from "@/components/layout/header.vue"
-import { passwordValidator } from "./store/types"
+
 import { getModule } from "vuex-module-decorators"
-import signup_store from "./store"
+import SignupImport from "./store"
 import store from "@/store"
 import { Validator, Rules } from "vee-validate"
 import { passwordStrength } from "./store/const"
 import Auth from "@/store/Auth"
+import HeaderMain from "@/components/layout/header.vue";
 
-const SignupStore = getModule(signup_store, store)
+
+
+
+
+
+const SignupStore = getModule(SignupImport, store)
 const AuthStore = getModule(Auth, store)
 Validator.extend("complex_password", {
     getMessage: (field, params, data) =>
         `Password strength is ${
-            passwordStrength[SignupStore.password_info.score]
-        } \n ${SignupStore.password_info.feedback.suggestions}`,
+            passwordStrength[SignupStore.passwordInfo.score]
+        } \n ${SignupStore.passwordInfo.feedback.suggestions}`,
     validate: (value, arg, data) => {
         return SignupStore.isPasswordComplex
     }
 })
+
 @Component
 export default class Signup extends Vue {
-
     public first_name: string = "";
     public last_name: string = "";
     private confirm_password: string = "";
     public email: string = "";
     public loading: boolean = false;
     public get auth_response() {
-        return AuthStore.auth_response
+        return AuthStore.authResponse
     }
     public get isPasswordComplex(): boolean {
         return SignupStore.isPasswordComplex
@@ -227,11 +232,8 @@ export default class Signup extends Vue {
         SignupStore.processPassword(value)
     }
     public async process(email: string, password: string): Promise<void> {
-        console.log("running")
-        var self
         this.loading = true
         if (await this.$validator.validateAll()) {
-            console.log(this.password)
             await SignupStore.process({
                 email:this.email, 
                 password:this.password

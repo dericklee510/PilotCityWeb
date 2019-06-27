@@ -1,4 +1,3 @@
-import Signup from '@/views/Signup/store';
 import Vue from "vue"
 import Vuex from "vuex"
 import { AuthModule } from "./Auth"
