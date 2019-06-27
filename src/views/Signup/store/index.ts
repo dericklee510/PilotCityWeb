@@ -3,7 +3,7 @@ import {
     Module,
     VuexModule,
     Mutation,
-    Action,
+    Action
 } from 'vuex-module-decorators'
 import zxcvbn from 'zxcvbn'
 import { passwordValidator } from './types'
@@ -13,14 +13,14 @@ import { PASSWORD_PROCESSED } from './mutation-types'
 @Module({ namespaced: true, name: 'signup' })
 export default class Signup extends VuexModule {
     public passwordInfo: passwordValidator = {} as passwordValidator
-    public get isPasswordComplex():boolean {
+    public get isPasswordComplex(): boolean {
         return this.passwordInfo.score >= REQ_PASSWORD_STRENGTH
     }
     public get getPassword(): string {
         return this.passwordInfo.password
     }
     @Mutation
-    private [PASSWORD_PROCESSED](validator: passwordValidator):void {
+    private [PASSWORD_PROCESSED](validator: passwordValidator): void {
         this.passwordInfo = validator
     }
     @Action({ commit: PASSWORD_PROCESSED })

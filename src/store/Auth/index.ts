@@ -53,6 +53,6 @@ export default class Auth extends VuexModule {
 }
 export const AuthModule = {
     Auth,
-    login:Login,
-    signup:Signup
+    login: Login,
+    signup: Signup
 }

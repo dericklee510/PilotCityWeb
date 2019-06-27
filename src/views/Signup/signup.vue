@@ -36,7 +36,7 @@
               />
             </v-layout>
           </v-flex>
-          <v-flex xs5>
+          <v-flex xs11 md5>
             <v-text-field
               v-model="first_name"
               v-validate="'required'"
@@ -49,7 +49,7 @@
             />
           </v-flex>
           <v-spacer />
-          <v-flex xs5>
+          <v-flex xs11 md5 offset-xs1>
             <v-text-field
               v-model="last_name"
               v-validate="'required'"
@@ -161,13 +161,13 @@
         </v-btn>
       </v-flex>
       <v-flex
-        v-show="auth_response.length"
+        v-show="authResponse.length"
         xs12
         class="signup__message"
         align-self-center
       >
         <v-layout justify-center>
-          <h4>{{ auth_response }}</h4>
+          <h4>{{ authResponse }}</h4>
         </v-layout>
       </v-flex>
       <v-flex
@@ -186,28 +186,20 @@
 <script lang="ts">
 import Vue from "vue"
 import Component from "vue-class-component"
-
 import { getModule } from "vuex-module-decorators"
 import SignupImport from "./store"
 import store from "@/store"
-import { Validator, Rules } from "vee-validate"
+import { Validator } from "vee-validate"
 import { passwordStrength } from "./store/const"
 import Auth from "@/store/Auth"
-import HeaderMain from "@/components/layout/header.vue";
-
-
-
-
-
-
 const SignupStore = getModule(SignupImport, store)
 const AuthStore = getModule(Auth, store)
 Validator.extend("complex_password", {
-    getMessage: (field, params, data) =>
+    getMessage: () =>
         `Password strength is ${
             passwordStrength[SignupStore.passwordInfo.score]
         } \n ${SignupStore.passwordInfo.feedback.suggestions}`,
-    validate: (value, arg, data) => {
+    validate: () => {
         return SignupStore.isPasswordComplex
     }
 })
@@ -219,7 +211,7 @@ export default class Signup extends Vue {
     private confirm_password: string = "";
     public email: string = "";
     public loading: boolean = false;
-    public get auth_response() {
+    public get authResponse() {
         return AuthStore.authResponse
     }
     public get isPasswordComplex(): boolean {
@@ -231,7 +223,7 @@ export default class Signup extends Vue {
     public set password(value: string) {
         SignupStore.processPassword(value)
     }
-    public async process(email: string, password: string): Promise<void> {
+    public async process(): Promise<void> {
         this.loading = true
         if (await this.$validator.validateAll()) {
             await SignupStore.process({
