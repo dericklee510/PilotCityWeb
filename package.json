@@ -114,8 +114,14 @@
   ],
   "jest": {
     "collectCoverage": true,
-    "collectCoverageFrom": ["**/*.{js,vue,ts}", "!**/node_modules/**"],
-    "coverageReporters": ["html", "text-summary"],
+    "collectCoverageFrom": [
+      "**/*.{js,vue,ts}",
+      "!**/node_modules/**"
+    ],
+    "coverageReporters": [
+      "html",
+      "text-summary"
+    ],
     "moduleFileExtensions": [
       "js",
       "jsx",
