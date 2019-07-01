@@ -36,7 +36,10 @@
               />
             </v-layout>
           </v-flex>
-          <v-flex xs11 md5>
+          <v-flex
+            xs11
+            md5
+          >
             <v-text-field
               v-model="first_name"
               v-validate="'required'"
@@ -49,7 +52,11 @@
             />
           </v-flex>
           <v-spacer />
-          <v-flex xs11 md5 offset-xs1>
+          <v-flex
+            xs11
+            md5
+            offset-xs1
+          >
             <v-text-field
               v-model="last_name"
               v-validate="'required'"

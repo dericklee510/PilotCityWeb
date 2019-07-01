@@ -12,7 +12,7 @@ import { PASSWORD_PROCESSED } from './mutation-types'
 
 @Module({ namespaced: true, name: 'signup' })
 export default class Signup extends VuexModule {
-    public passwordInfo: passwordValidator = {} as passwordValidator
+    public passwordInfo: passwordValidator = <passwordValidator>{}
     public get isPasswordComplex(): boolean {
         return this.passwordInfo.score >= REQ_PASSWORD_STRENGTH
     }

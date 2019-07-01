@@ -24,8 +24,8 @@
               </v-layout>
             </v-flex>
             <v-spacer/>
-            <v-flex shrink xs12 md1 shrink align-self-center class="footer__subheading--small">
-              <v-layout offset-md10 justify-center>
+            <v-flex shrink xs12 md1 align-self-center class="footer__subheading--small">
+              <v-layout offset-md10 class="align">
                 <span>Endorsed by:</span>
               </v-layout>
             </v-flex>
