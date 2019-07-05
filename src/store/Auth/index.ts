@@ -1,5 +1,4 @@
-import  Signup  from '@/views/Signup/store'
-import  Login  from '@/views/Login/store'
+import Login from '@/views/Login/store'
 import {
     Module,
     VuexModule,
@@ -34,7 +33,7 @@ export default class Auth extends VuexModule {
     public async createAccount({ email, password }: UserCredentials): Promise<void> {
         try {
             await firebase.auth().createUserWithEmailAndPassword(email, password)
-            this.context.commit(NEW_AUTH_RESPONSE,"Account creation succesful, email verification sent")
+            this.context.commit(NEW_AUTH_RESPONSE, "Account creation succesful, email verification sent")
         }
         catch (err) {
             this.context.commit(NEW_AUTH_RESPONSE, err.message)
@@ -54,5 +53,4 @@ export default class Auth extends VuexModule {
 export const AuthModule = {
     Auth,
     login: Login,
-    signup: Signup
 }

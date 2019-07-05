@@ -1,0 +1,1 @@
+export { complexPassword } from "./complex_password"
