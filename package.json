@@ -16,6 +16,7 @@
     "babel-plugin-transform-decorators": "^6.24.1",
     "core-js": "^2.6.5",
     "firebase": "^6.2.1",
+    "flush-promises": "^1.0.2",
     "semantic-ui-vue": "^0.8.1",
     "vee-validate": "^2.2.11",
     "vue": "^2.6.10",
@@ -66,8 +67,7 @@
     },
     "plugins": [
       "es-beautifier",
-      "@typescript-eslint",
-      "transform-es2015-modules-commonjs"
+      "@typescript-eslint"
     ],
     "extends": [
       "plugin:es-beautifier/standard",
@@ -114,8 +114,8 @@
     "last 2 versions"
   ],
   "jest": {
-    "cache":false,
-    "collectCoverage": true,
+    "cache": false,
+    "collectCoverage": false,
     "collectCoverageFrom": [
       "**/*.{js,vue,ts}",
       "!**/node_modules/**"
