@@ -38,7 +38,7 @@
             </v-layout>
           </v-flex>
           <v-flex xs11 md8>
-            <v-text-field ref="password" v-model="password" v-validate="'required|complex-password'" class="signup__subtitle" name="password" :error-messages="errors.collect('password')" label="Password" placeholder="Enter a password" required />
+            <v-text-field ref="password" type="password" v-model="password" v-validate="'required|complex-password'" class="signup__subtitle" name="password" :error-messages="errors.collect('password')" label="Password" placeholder="Enter a password" required />
           </v-flex>
           <v-flex xs11 md8 offset-xs1>
             <v-text-field v-model="confirm_password" v-validate="'required|confirmed:password'" :error-messages="errors.collect(`Confirm Password`)" class="signup__subtitle" label="Confirm Password" name="Confirm Password" placeholder="Please confirm your Password" type="password" />
@@ -56,7 +56,8 @@
         </v-layout>
       </v-flex>
       <v-flex style="text-align: center" xs12>
-        <a href="#" class="signup__switch">Already have an account? Sign In!</a>
+        <router-link :to="{name:'login'}" class="signup__switch">Already have an account? Sign In!</router-link>
+        
       </v-flex>
     </v-layout>
   </v-container>
