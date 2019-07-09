@@ -1,13 +1,13 @@
 
 import Vue from "vue"
-import Router, { RouterOptions } from "vue-router"
+import Router from "vue-router"
 
 import signup from "@/views/Signup"
 import login from "@/views/Login"
 import about from "@/views/About.vue"
 Vue.use(Router)
 
-export default new Router(<RouterOptions>{
+export default new Router({
     mode: "history",
     base: process.env.BASE_URL,
     routes: [
