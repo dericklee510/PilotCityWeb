@@ -46,6 +46,7 @@
               v-validate="'required|email'"
               class="login__subtitle"
               name="email"
+              outline
               :error-messages="errors.collect('email')"
               label="Username"
               placeholder="Enter your email"
@@ -88,6 +89,7 @@
               v-validate="'required|email'"
               class="login__subtitle"
               name="password"
+              outline
               :error-messages="errors.collect('email')"
               label="Password"
               placeholder="Enter your password"
@@ -107,7 +109,8 @@
             <v-btn
               :loading="loading"
               :disabled="loading"
-              color="secondary"
+              color="#dda0dd"
+              class="login__btn"
               @click="process"
             >
               Login
@@ -144,4 +147,24 @@ export default{
 .login__icons {
   padding-right: 1rem;
 }
+.login__title{
+  color: grey;
+  font-family: arial;
+  margin-bottom: 50px;
+}
+.login__icons{
+  color: #dda0dd;
+}
+.login__btn{
+  border-radius: 12px;
+  width: 300px;
+  margin-top: 30px;
+}
+.v-messages__message {
+  margin-bottom: 10px;
+}
+.v-text-field.v-text-field--enclosed .v-text-field__details, .v-text-field.v-text-field--enclosed > .v-input__control > .v-input__slot {
+  border-radius: 25px;
+}
+
 </style>

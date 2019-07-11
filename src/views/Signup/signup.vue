@@ -47,6 +47,7 @@
               name="First Name"
               :error-messages="errors.collect('First Name')"
               label="First Name"
+              outline
               placeholder="Enter your First Name"
               required
             />
@@ -64,6 +65,7 @@
               name="Last Name"
               :error-messages="errors.collect('Last Name')"
               label="Last Name"
+              outline
               placeholder="Enter your Last Name"
               required
             />
@@ -96,6 +98,7 @@
               name="email"
               :error-messages="errors.collect('email')"
               label="Email"
+              outline
               placeholder="Enter your Email"
               required
             />
@@ -132,6 +135,7 @@
               name="password"
               :error-messages="errors.collect('password')"
               label="Password"
+              outline
               placeholder="Enter a password"
               required
             />
@@ -146,8 +150,9 @@
               v-validate="'required|confirmed:password'"
               :error-messages="errors.collect(`Confirm Password`)"
               class="signup__subtitle"
-              label="Confirm Password"
               name="Confirm Password"
+              outline
+              label="Confirm Password"
               placeholder="Please confirm your Password"
               type="password"
             />
@@ -159,9 +164,10 @@
         xs12
       >
         <v-btn
+          class="signup__btn"
           :loading="loading"
           :disabled="loading"
-          color="secondary"
+          color="rgb(204, 77, 183)"
           @click="process"
         >
           Sign Up
@@ -184,7 +190,7 @@
         <a
           href="#"
           class="signup__switch"
-        >Already have an account? Sign In!</a>
+        >Already have an account?</a>
       </v-flex>
     </v-layout>
   </v-container>
@@ -245,12 +251,33 @@ export default class Signup extends Vue {
 
 <style lang="scss">
 .signup__message{
-  
+
 }
 .signup-container {
   max-width: 50rem;
 }
 .signup__icons {
   padding-right: 1rem;
+}
+.signup__title{
+  color: grey;
+  font-family: arial;
+  margin-bottom: 50px;
+}
+.signup__icons{
+  color: plum;
+}
+.signup__btn{
+  border-radius: 12px;
+  width: 300px;
+  margin-top: 30px;
+}
+.signup-container{
+  .v-text-field--outline .v-input__control .v-input__slot{
+    border-radius: 25px;
+  }
+}
+.v-messages__message {
+  margin-bottom: 10px;
 }
 </style>
