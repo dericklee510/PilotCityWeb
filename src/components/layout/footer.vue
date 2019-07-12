@@ -25,7 +25,7 @@
                   md3
                   align-self-center
                 >
-                  <strong class="footer__heading">PilotCity Inc</strong>
+                  <strong class="footer__heading">PilotCity</strong>
                 </v-flex>
                 <v-flex
                   xs11

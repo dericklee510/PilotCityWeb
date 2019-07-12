@@ -9,12 +9,15 @@
       wrap
     >
       <v-flex
+        offset-xs1
         style="text-align: center"
-        xs12
+        xs11
       >
-        <h1 class="signup__title">
-          Create new Account
-        </h1>
+        <div class="signup__title">
+          <span>
+            Create new Account
+          </span>
+        </div>
       </v-flex>
       <v-flex class="signup__questions">
         <v-layout
@@ -38,33 +41,44 @@
           </v-flex>
           <v-flex
             xs11
-            md5
           >
+            <label
+              class="signup__label"
+              for="first_name"
+            >First Name</label>
             <v-text-field
+              id="first_name"
               v-model="first_name"
               v-validate="'required'"
               class="signup__subtitle"
               name="First Name"
               :error-messages="errors.collect('First Name')"
               label="First Name"
+              single-line
               outline
               placeholder="Enter your First Name"
               required
             />
           </v-flex>
-          <v-spacer />
+        </v-layout>
+        <v-layout>
           <v-flex
             xs11
-            md5
             offset-xs1
           >
+            <label
+              class="signup__label"
+              for="last_name"
+            >Last Name</label>
             <v-text-field
+              id="last_name"
               v-model="last_name"
               v-validate="'required'"
               class="signup__subtitle"
               name="Last Name"
               :error-messages="errors.collect('Last Name')"
               label="Last Name"
+              single-line
               outline
               placeholder="Enter your Last Name"
               required
@@ -91,13 +105,19 @@
             </v-layout>
           </v-flex>
           <v-flex xs11>
+            <label
+              class="signup__label"
+              for="email"
+            >Email</label>
             <v-text-field
+              id="email"
               v-model="email"
               v-validate="'required|email'"
               class="signup__subtitle"
               name="email"
               :error-messages="errors.collect('email')"
               label="Email"
+              single-line
               outline
               placeholder="Enter your Email"
               required
@@ -125,34 +145,39 @@
           </v-flex>
           <v-flex
             xs11
-            md8
           >
+            <label
+              class="signup__label"
+              for="password"
+            >Password</label>
             <v-text-field
+              id="password"
               ref="password"
               v-model="password"
               v-validate="'required|complex_password'"
+              single-line
               class="signup__subtitle"
               name="password"
               :error-messages="errors.collect('password')"
               label="Password"
               outline
-              placeholder="Enter a password"
+              placeholder="Create a password"
               required
             />
           </v-flex>
           <v-flex
             xs11
-            md8
             offset-xs1
           >
             <v-text-field
               v-model="confirm_password"
               v-validate="'required|confirmed:password'"
+              single-line
               :error-messages="errors.collect(`Confirm Password`)"
               class="signup__subtitle"
-              name="Confirm Password"
+              name="Confirm your password"
               outline
-              label="Confirm Password"
+              label="Confirm your password"
               placeholder="Please confirm your Password"
               type="password"
             />
@@ -161,16 +186,18 @@
       </v-flex>
       <v-flex
         style="text-align: center"
-        xs12
+        xs11
+        offset-xs1
       >
         <v-btn
+          flat
+          round
           class="signup__btn"
           :loading="loading"
           :disabled="loading"
-          color="rgb(204, 77, 183)"
           @click="process"
         >
-          Sign Up
+          Signup
         </v-btn>
       </v-flex>
       <v-flex
@@ -185,7 +212,8 @@
       </v-flex>
       <v-flex
         style="text-align: center"
-        xs12
+        xs11
+        offset-xs1
       >
         <a
           href="#"
@@ -197,6 +225,7 @@
 </template>
 
 <script lang="ts">
+import '@/assets/scss/signup.scss'
 import Vue from "vue"
 import Component from "vue-class-component"
 import { getModule } from "vuex-module-decorators"
@@ -250,34 +279,6 @@ export default class Signup extends Vue {
 </script>
 
 <style lang="scss">
-.signup__message{
 
-}
-.signup-container {
-  max-width: 50rem;
-}
-.signup__icons {
-  padding-right: 1rem;
-}
-.signup__title{
-  color: grey;
-  font-family: arial;
-  margin-bottom: 50px;
-}
-.signup__icons{
-  color: plum;
-}
-.signup__btn{
-  border-radius: 12px;
-  width: 300px;
-  margin-top: 30px;
-}
-.signup-container{
-  .v-text-field--outline .v-input__control .v-input__slot{
-    border-radius: 25px;
-  }
-}
-.v-messages__message {
-  margin-bottom: 10px;
-}
+
 </style>
