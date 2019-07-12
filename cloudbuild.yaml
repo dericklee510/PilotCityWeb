@@ -3,5 +3,4 @@ steps:
   args: ['install']
 - name: gcr.io/cloud-builders/npm
   args: ['test']
-- name: gcr.io/cloud-builders/git
-  args: ['push', 'https://source.developers.google.com/p/pilotcity-firestore/r/github_pilotcityinc_pilotcityweb', 'master']
+  
