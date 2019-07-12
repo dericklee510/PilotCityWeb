@@ -41,6 +41,10 @@
             xs8
           >
             <v-spacer />
+            <label
+              class="login__label"
+              for="email"
+            >Username</label>
             <v-text-field
               v-model="email"
               v-validate="'required|email'"
@@ -48,9 +52,9 @@
               name="email"
               outline
               :error-messages="errors.collect('email')"
-              label="Email"
               placeholder="Enter your email"
               required
+              single-line
             />
           </v-flex>
           <v-flex
@@ -87,6 +91,10 @@
             xs8
           >
             <v-spacer />
+            <label
+              class="login__label"
+              for="password"
+            >Password</label>
             <v-text-field
               v-model="password"
               v-validate="'required|password'"
@@ -94,7 +102,7 @@
               name="password"
               outline
               :error-messages="errors.collect('password')"
-              label="Password"
+              single-line
               placeholder="Enter your password"
               required
             />
