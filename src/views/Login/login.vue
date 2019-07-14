@@ -10,7 +10,8 @@
     >
       <v-flex
         style="text-align: center"
-        xs12
+        xs11
+        offset-xs1
       >
         <h1 class="login__title">
           Sign in to PilotCity
@@ -116,6 +117,7 @@
           <v-flex
             style="text-align: center"
             xs9
+            offset-xs1
           >
             <v-btn
               :loading="loading"
@@ -130,6 +132,7 @@
           <v-flex
             style="text-align: center"
             xs9
+            offset-xs1
           >
             <a
               href="#"

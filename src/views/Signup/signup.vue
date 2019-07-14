@@ -21,6 +21,7 @@
       </v-flex>
       <v-flex class="signup__questions">
         <v-layout
+          justify-center
           row
           wrap
         >
@@ -40,7 +41,7 @@
             </v-layout>
           </v-flex>
           <v-flex
-            xs11
+            xs8
           >
             <label
               class="signup__label"
@@ -61,9 +62,11 @@
             />
           </v-flex>
         </v-layout>
-        <v-layout>
+        <v-layout
+          justify-center
+        >
           <v-flex
-            xs11
+            xs8
             offset-xs1
           >
             <label
@@ -88,6 +91,7 @@
         <v-layout
           row
           wrap
+          justify-center
         >
           <v-flex
             class="signup__icons"
@@ -104,7 +108,7 @@
               />
             </v-layout>
           </v-flex>
-          <v-flex xs11>
+          <v-flex xs8>
             <label
               class="signup__label"
               for="email"
@@ -125,6 +129,7 @@
           </v-flex>
         </v-layout>
         <v-layout
+          justify-center
           row
           wrap
         >
@@ -144,7 +149,7 @@
             </v-layout>
           </v-flex>
           <v-flex
-            xs11
+            xs8
           >
             <label
               class="signup__label"
@@ -166,7 +171,7 @@
             />
           </v-flex>
           <v-flex
-            xs11
+            xs8
             offset-xs1
           >
             <v-text-field
@@ -184,42 +189,54 @@
           </v-flex>
         </v-layout>
       </v-flex>
-      <v-flex
-        style="text-align: center"
-        xs11
-        offset-xs1
-      >
-        <v-btn
-          flat
-          round
-          class="signup__btn"
-          :loading="loading"
-          :disabled="loading"
-          @click="process"
+      <v-flex>
+        <v-layout
+          xs12
+          row
+          wrap
+          justify-center
         >
-          Signup
-        </v-btn>
-      </v-flex>
-      <v-flex
-        v-show="authResponse.length"
-        xs12
-        class="signup__message"
-        align-self-center
-      >
-        <v-layout justify-center>
-          <h4>{{ authResponse }}</h4>
+          <v-flex
+            style="text-align: center"
+            xs9
+            offset-xs1
+          >
+            <v-btn
+              flat
+              round
+              class="signup__btn"
+              :loading="loading"
+              :disabled="loading"
+              @click="process"
+            >
+              Signup
+            </v-btn>
+          </v-flex>
+          <v-flex
+            v-show="authResponse.length"
+            xs12
+            class="signup__message"
+            align-self-center
+          >
+            <v-layout justify-center>
+              <h4>{{ authResponse }}</h4>
+            </v-layout>
+          </v-flex>
+          <v-flex
+            style="text-align: center"
+            xs11
+            offset-xs1
+          >
+            <a
+              href="#"
+              class="signup__switch"
+            >Already have an account?</a>
+          </v-flex>
         </v-layout>
       </v-flex>
-      <v-flex
-        style="text-align: center"
-        xs11
-        offset-xs1
-      >
-        <a
-          href="#"
-          class="signup__switch"
-        >Already have an account?</a>
-      </v-flex>
+    </v-layout>
+      
+    
     </v-layout>
   </v-container>
 </template>
