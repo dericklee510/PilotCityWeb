@@ -1,4 +1,5 @@
-import Login from '@/views/Login/store'
+import { SUCCESSFUL_SIGNUP_RESP, SUCCESSFUL_LOGIN_RESP } from './const'
+
 import {
     Module,
     VuexModule,
@@ -12,6 +13,7 @@ import "firebase/auth"
 import { User } from 'firebase'
 import { UserCredentials } from './types'
 import { SET_USER, NEW_AUTH_RESPONSE } from './mutation-types'
+import { customSignupResponse, customLoginResponse } from './helpers'
 
 
 @Module({ namespaced: true, name: 'Auth' })
@@ -30,27 +32,28 @@ export default class Auth extends VuexModule {
     }
 
     @Action
-    public async createAccount({ email, password }: UserCredentials): Promise<void> {
+    public async createAccount({ email, password }: UserCredentials): Promise<string> {
         try {
-            await firebase.auth().createUserWithEmailAndPassword(email, password)
-            this.context.commit(NEW_AUTH_RESPONSE, "Account creation succesful, email verification sent")
+            let userResponse = await firebase.auth().createUserWithEmailAndPassword(email, password)
+            this.context.commit(SET_USER,userResponse)
+            return SUCCESSFUL_SIGNUP_RESP
         }
         catch (err) {
-            this.context.commit(NEW_AUTH_RESPONSE, err.message)
+            return customSignupResponse(err)
         }
     }
 
     @Action
-    public async login({ email, password }: UserCredentials): Promise<void> {
+    public async login({ email, password }: UserCredentials): Promise<string> {
         try {
-            await firebase.auth().signInWithEmailAndPassword(email, password)
+            this.context.commit(SET_USER,await firebase.auth().signInWithEmailAndPassword(email, password))
+            return SUCCESSFUL_LOGIN_RESP
         }
         catch (err) {
-            this.context.commit(NEW_AUTH_RESPONSE, err)
+            return customLoginResponse(err)
         }
     }
 }
 export const AuthModule = {
-    Auth,
-    login: Login,
+    Auth
 }

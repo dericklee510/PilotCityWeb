@@ -169,7 +169,7 @@
         </v-btn>
       </v-flex>
       <v-flex
-        v-show="authResponse.length"
+        v-if="authResponse"
         xs12
         class="signup__message"
         align-self-center
@@ -207,15 +207,12 @@ export default class Signup extends Vue {
     public firstName: string = "";
     public lastName: string = "";
     public loading: boolean = false;
-
-    public get authResponse() {
-        return AuthStore.authResponse
-    }
+    public authResponse: string = ""
 
     public async process(): Promise<void> {
         this.loading = true
         if (await this.$validator.validateAll())
-            await AuthStore.createAccount({
+            this.authResponse = await AuthStore.createAccount({
                 email: this.email,
                 password: this.password
             })

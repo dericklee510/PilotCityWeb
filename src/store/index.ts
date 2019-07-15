@@ -14,4 +14,3 @@ const store = new Vuex.Store({
 })
 export default store
 export const AuthStore = getModule(AuthModule.Auth, store)
-export const LoginStore = getModule(AuthModule.login, store)
