@@ -10,7 +10,8 @@
     >
       <v-flex
         style="text-align: center"
-        xs12
+        xs11
+        offset-xs1
       >
         <h1 class="login__title">
           Sign in to PilotCity
@@ -41,6 +42,10 @@
             xs8
           >
             <v-spacer />
+            <label
+              class="login__label"
+              for="email"
+            >Username</label>
             <v-text-field
               v-model="email"
               v-validate="'required|email'"
@@ -48,16 +53,19 @@
               name="email"
               outline
               :error-messages="errors.collect('email')"
-              label="Username"
               placeholder="Enter your email"
               required
+              single-line
             />
           </v-flex>
           <v-flex
             style="text-align: right"
             xs9
           >
-            <a href="#">Forgot Username?</a>
+            <a 
+              href="#" 
+              class="login__helplinks"
+            >Forgot Username?</a>
           </v-flex>
         </v-layout>
         <v-layout
@@ -84,14 +92,18 @@
             xs8
           >
             <v-spacer />
+            <label
+              class="login__label"
+              for="password"
+            >Password</label>
             <v-text-field
-              v-model="email"
-              v-validate="'required|email'"
+              v-model="password"
+              v-validate="'required|password'"
               class="login__subtitle"
               name="password"
               outline
-              :error-messages="errors.collect('email')"
-              label="Password"
+              :error-messages="errors.collect('password')"
+              single-line
               placeholder="Enter your password"
               required
             />
@@ -105,6 +117,7 @@
           <v-flex
             style="text-align: center"
             xs9
+            offset-xs1
           >
             <v-btn
               :loading="loading"
@@ -119,9 +132,11 @@
           <v-flex
             style="text-align: center"
             xs9
+            offset-xs1
           >
             <a
               href="#"
+              class="login__helplinks"
             >Sign up for PilotCity</a>
           </v-flex>
         </v-layout>
@@ -133,7 +148,7 @@
 
 <script lang="ts">
 import Vue from "vue"
-
+import '@/assets/scss/login.scss'
 export default{
     
 }
@@ -141,30 +156,5 @@ export default{
 
 
 <style>
-.login-container {
-  max-width: 50rem;
-}
-.login__icons {
-  padding-right: 1rem;
-}
-.login__title{
-  color: grey;
-  font-family: arial;
-  margin-bottom: 50px;
-}
-.login__icons{
-  color: #dda0dd;
-}
-.login__btn{
-  border-radius: 12px;
-  width: 300px;
-  margin-top: 30px;
-}
-.v-messages__message {
-  margin-bottom: 10px;
-}
-.v-text-field.v-text-field--enclosed .v-text-field__details, .v-text-field.v-text-field--enclosed > .v-input__control > .v-input__slot {
-  border-radius: 25px;
-}
 
 </style>
