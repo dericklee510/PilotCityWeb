@@ -79,7 +79,7 @@
       "plugin:vue/recommended"
     ],
     "rules": {
-      "no-object-literal-type-assertion": true,
+      "no-object-literal-type-assertion": [false, { "allow-arguments": true }],
       "linebreak-style": "off",
       "semi": [
         "error",

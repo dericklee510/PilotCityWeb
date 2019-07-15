@@ -1,6 +1,6 @@
-import { REQ_PASSWORD_STRENGTH, passwordStrength } from './const';
+import { REQ_PASSWORD_STRENGTH, passwordStrength } from './const'
 import zxcvbn from "zxcvbn"
-import { Rule, RuleValidate } from 'vee-validate';
+import { Rule, RuleValidate } from 'vee-validate'
 
 
 export const complexPassword: Rule | RuleValidate = {

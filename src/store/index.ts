@@ -1,7 +1,7 @@
 import Vue from "vue"
 import Vuex from "vuex"
 import { AuthModule } from "./Auth"
-import { getModule } from 'vuex-module-decorators';
+import { getModule } from 'vuex-module-decorators'
 
 
 Vue.use(Vuex)

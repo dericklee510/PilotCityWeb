@@ -1,9 +1,17 @@
 <template>
   <v-card>
-    <v-flex xs1 align-self-center class="header__main">
-        <v-layout justify-center>
-            <img class="header__logo" src="../../assets/PilotCityLogo.png" alt="Pilot City">
-        </v-layout>
+    <v-flex
+      xs1
+      align-self-center
+      class="header__main"
+    >
+      <v-layout justify-center>
+        <img
+          class="header__logo"
+          src="../../assets/PilotCityLogo.png"
+          alt="Pilot City"
+        >
+      </v-layout>
     </v-flex>
   </v-card>
 </template>
@@ -11,15 +19,14 @@
 <script lang="ts">
 import Vue from "vue"
 import Component from "vue-class-component"
-import { Prop } from 'vue-property-decorator';
 @Component
 export default class HeaderMain extends Vue {
     
-  private icons: string[] = [
-    "fab fa-instagram",
-    "fab fa-facebook",
-    "fab fa-twitter"
-  ];
+    private icons: string[] = [
+        "fab fa-instagram",
+        "fab fa-facebook",
+        "fab fa-twitter"
+    ];
 }
 </script>
 
