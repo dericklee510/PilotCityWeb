@@ -1,6 +1,6 @@
 steps:
 - name: gcr.io/cloud-builders/npm
-  args: ['serve']
+  args: ['run build']
 - name: gcr.io/cloud-builders/npm
-  args: ['test:unit']
+  args: ['run test:unit']
   
