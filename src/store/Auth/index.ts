@@ -4,13 +4,13 @@ import {
     Module,
     VuexModule,
     Mutation,
-    Action
+    Action,
 } from 'vuex-module-decorators'
 import * as firebase from "firebase/app"
 
 import "firebase/auth"
 
-import { User } from 'firebase'
+import { User as FirebaseUser} from 'firebase'
 import { UserCredentials } from './types'
 import { SET_USER, NEW_AUTH_RESPONSE } from './mutation-types'
 import { customSignupResponse, customLoginResponse } from './helpers'
@@ -18,11 +18,10 @@ import { customSignupResponse, customLoginResponse } from './helpers'
 
 @Module({ namespaced: true, name: 'Auth' })
 export default class Auth extends VuexModule {
-    public user: User | null = null
+    public user: FirebaseUser | null = null
     public authResponse: string = ""
-
     @Mutation
-    private [SET_USER](userDoc: User | null): void {
+    private [SET_USER](userDoc: FirebaseUser | null): void {
         this.user = userDoc
     }
 

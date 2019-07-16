@@ -1,9 +1,9 @@
 import { AuthStore } from '@/store'
-import { wrapper as SignupWrapper} from "./const"
+import { wrapper} from "./const"
 import flushPromises from 'flush-promises'
 import {COMPLEXPASSWORD} from "./const"
 jest.mock('@/store')
-let wrapper = SignupWrapper
+
 export const invalidInputFields = async (): Promise<void>  => {
     AuthStore.createAccount = jest.fn()
     wrapper.find('button').trigger('click')
