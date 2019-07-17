@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "test": "jest",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
@@ -15,13 +16,15 @@
     "babel-plugin-transform-decorators": "^6.24.1",
     "core-js": "^2.6.5",
     "firebase": "^6.2.1",
+    "flush-promises": "^1.0.2",
     "semantic-ui-vue": "^0.8.1",
+    "vee-validate": "^2.2.11",
     "vue": "^2.6.10",
     "vue-eslint-parser": "^6.0.4",
     "vue-router": "^3.0.3",
     "vuetify": "^1.5.16",
     "vuex": "^3.0.1",
-    "vuex-class": "^0.3.2",
+    "vuex-module-decorators": "^0.9.9",
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
@@ -31,7 +34,7 @@
     "@vue/cli-plugin-e2e-cypress": "^3.8.0",
     "@vue/cli-plugin-eslint": "^3.8.0",
     "@vue/cli-plugin-typescript": "^3.8.1",
-    "@vue/cli-plugin-unit-jest": "^3.8.0",
+    "@vue/cli-plugin-unit-jest": "^3.9.0",
     "@vue/cli-service": "^3.8.0",
     "@vue/eslint-config-prettier": "^4.0.1",
     "@vue/eslint-config-typescript": "^4.0.0",
@@ -52,15 +55,16 @@
     "typescript": "^3.4.3",
     "vue-class-component": "^7.1.0",
     "vue-cli-plugin-vuetify": "^0.5.0",
+    "vue-jest": "^3.0.4",
     "vue-property-decorator": "^8.2.1",
     "vue-template-compiler": "^2.6.10",
-    "vuetify-loader": "^1.2.2",
-    "vuex-module-decorators": "^0.9.9"
+    "vuetify-loader": "^1.2.2"
   },
   "eslintConfig": {
     "root": true,
     "env": {
-      "node": true
+      "node": true,
+      "jest":true
     },
     "plugins": [
       "es-beautifier",
@@ -75,6 +79,7 @@
       "plugin:vue/recommended"
     ],
     "rules": {
+      "no-object-literal-type-assertion": [false, { "allow-arguments": true }],
       "linebreak-style": "off",
       "semi": [
         "error",
@@ -110,6 +115,24 @@
     "last 2 versions"
   ],
   "jest": {
+    "cache": false,
+    "collectCoverage": false,
+    "collectCoverageFrom": [
+      "**/*.{js,vue,ts}",
+      "!**/node_modules/**"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "package.json"
+    ],
+    "coverageReporters": [
+      "html",
+      "text-summary"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
     "moduleFileExtensions": [
       "js",
       "jsx",
@@ -133,7 +156,9 @@
       "jest-serializer-vue"
     ],
     "testMatch": [
-      "**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)"
+      "**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)",
+      "**/views/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)",
+      "**/store/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)"
     ],
     "testURL": "http://localhost/",
     "watchPlugins": [

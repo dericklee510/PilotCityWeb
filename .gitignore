@@ -5,7 +5,7 @@ src/keys.ts
 /firebase-build-step/
 /tests/e2e/videos/
 /tests/e2e/screenshots/
-
+/coverage
 # local env files
 .env.local
 .env.*.local

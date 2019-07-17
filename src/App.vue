@@ -1,41 +1,41 @@
 <template>
   <v-app>
-    <v-toolbar app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
-      </v-toolbar-title>
-      <v-spacer />
-      <v-btn
-        flat
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-      >
-        <span class="mr-2">Latest Release</span>
-      </v-btn>
-    </v-toolbar>
-
+    <link
+      href="https://fonts.googleapis.com/css?family=Raleway&display=swap"
+      rel="stylesheet"
+    >
+    <HeaderMain />
     <v-content>
-      <HelloWorld />
+      <v-container fluid>
+        <router-view />
+      </v-container>
     </v-content>
+    <FooterMain />
   </v-app>
 </template>
 
+
 <script lang="ts">
 import Vue from "vue"
-import "./components/HelloWorld"
-import HelloWorld from  "./components/HelloWorld.vue"
-import {Component} from "vue-property-decorator"
-@Component ({
-    components:{
-        HelloWorld
+import HeaderMain from "@/components/layout/header.vue"
+import Component from "vue-class-component"
+import FooterMain from "./components/layout/footer.vue"
+@Component({
+    components: {
+        FooterMain,
+        HeaderMain
     }
 })
-export default class App extends Vue{
-    data () {
-        return {
-            //
-        }
-    }
-}
+export default class App extends Vue { }
 </script>
+
+<style>
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* needed for container min-height */
+
+  font-family: Raleway;
+}
+</style>
