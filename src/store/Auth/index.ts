@@ -7,15 +7,13 @@ import {
     Action,
 } from 'vuex-module-decorators'
 import * as firebase from "firebase/app"
-
 import "firebase/auth"
-
 import { User as FirebaseUser} from 'firebase'
 import { UserCredentials } from './types'
 import { SET_USER, NEW_AUTH_RESPONSE } from './mutation-types'
 import { customSignupResponse, customLoginResponse } from './helpers'
 
-
+firebase.auth
 @Module({ namespaced: true, name: 'Auth' })
 export default class Auth extends VuexModule {
     public user: FirebaseUser | null = null
@@ -52,6 +50,7 @@ export default class Auth extends VuexModule {
             return customLoginResponse(err)
         }
     }
+
 }
 export const AuthModule = {
     Auth
