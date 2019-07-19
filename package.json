@@ -64,7 +64,7 @@
     "root": true,
     "env": {
       "node": true,
-      "jest":true
+      "jest": true
     },
     "plugins": [
       "es-beautifier",
@@ -79,7 +79,12 @@
       "plugin:vue/recommended"
     ],
     "rules": {
-      "no-object-literal-type-assertion": [false, { "allow-arguments": true }],
+      "no-object-literal-type-assertion": [
+        false,
+        {
+          "allow-arguments": true
+        }
+      ],
       "linebreak-style": "off",
       "semi": [
         "error",
