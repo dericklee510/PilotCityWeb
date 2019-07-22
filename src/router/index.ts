@@ -3,21 +3,23 @@ import Vue from "vue"
 import Router from "vue-router"
 
 import signup, * as signups from "@/views/Signup"
+// import phone from "@/views/Signup/signupPhone.vue"
 import login from "@/views/Login"
 import about from "@/views/About.vue"
 Vue.use(Router)
 
 //signup routes
-var container = new signups.Container()
-var profile = new signups.Profile()
-
+var container = new signups.Container
+var profile = new signups.Profile
+var phone = new signups.Phone
+var upload = new signups.Upload
 export default new Router({
     mode: "history",
     base: process.env.BASE_URL,
     routes: [
         {
             path: "/signup",
-            name: "signup",
+            name: "signup-container",
             component: container,
             children: [
                 {
@@ -28,12 +30,17 @@ export default new Router({
                 {
                     path:`profile`,
                     name: "signup-profile",
-                    component: profile
-                    // children:[{
-                    //     path: `1`,
-                    //     name: `signup-number`,
-                    //     component: signup.Phone
-                    // }]
+                    component: profile,
+                    children:[{
+                        path: `1`,
+                        name: `signup-number`,
+                        component: phone
+                    },
+                    {
+                        path: ``,
+                        name: `signup-upload`,
+                        component: upload
+                    }]
                 }
             ]
         },

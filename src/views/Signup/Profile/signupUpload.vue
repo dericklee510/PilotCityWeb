@@ -5,7 +5,7 @@
     >
       <v-layout justify-center>
         <v-layout
-          style="max-width: 30rem"
+          style="max-width: 33rem"
           row
           wrap
         >
@@ -56,7 +56,10 @@
                     </v-btn>
                   </v-layout>
                   <v-layout justify-center>
-                    <h5 class="signup-profile__button--secondary">
+                    <h5
+                      class="signup-profile__button--secondary"
+                      @click="eventListener"
+                    >
                       I'd rather skip this
                     </h5>
                   </v-layout>
@@ -86,7 +89,7 @@ export default class Profile extends Vue {
 .signup-profile__container{
   width: 100%;
   height: 100%;
-  background-color: #56B6E6;
+  background-color: #F79960;
   .signup-profile__card{
     margin-top: 5rem;
     height: 500px;
