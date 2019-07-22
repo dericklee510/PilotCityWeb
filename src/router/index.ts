@@ -13,6 +13,7 @@ var container = new signups.Container
 var profile = new signups.Profile
 var phone = new signups.Phone
 var upload = new signups.Upload
+
 export default new Router({
     mode: "history",
     base: process.env.BASE_URL,

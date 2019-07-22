@@ -1,0 +1,70 @@
+/* eslint-disable */
+.login-container {
+    font-family: raleway;
+    font-weight: 800;
+    max-width: 50rem;
+
+    .login__title{
+        font-family: Raleway;
+        font-style: normal;
+        font-weight: 800;
+        font-size: 30px;
+        line-height: 33px;
+        color: #4f4f4f;
+        margin: 50px 0px;
+    }
+    
+    .login__questions {
+        .primary--text{
+            color: purple !important;
+                caret-color: purple !important;
+        }
+        .login__label {
+            font-weight: bold;
+            color: #4f4f4f;
+            font-size: 15px;
+        }
+        .v-text-field--outline .v-input__control .v-input__slot{
+            margin-bottom: 0px;
+            border-radius: 25px;
+        }
+        .v-text-field__details {
+            margin-bottom: 0px;
+        }
+    }
+    .login__icons {
+        padding-right: 1rem;
+        margin-bottom:1rem;
+        margin-top: 2rem;
+        color: #7b5d7d;
+        i {
+            width: 24px;
+            height: 24px;
+        }
+    }
+    .login__btn{
+        background-color: #7b5d7d !important;
+        width: 200px;
+        height: 40px;
+        margin-top: 30px;
+        border-radius: 25px;
+        .v-btn{
+            &__content{
+                font-weight: 1000;
+                color: #fff;;
+            }
+        }
+    }
+    .layout.wrap {
+        margin-bottom: 10px;
+    }
+    .v-messages-message{
+        margin-bottom: 10px;
+    }
+    .signup__message{
+
+    }
+}
+
+
+

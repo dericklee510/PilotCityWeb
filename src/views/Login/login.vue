@@ -1,7 +1,7 @@
 <template>
   <v-container
-    class="login-container"
-    fill-height
+    class="login-container" 
+    fill-height 
     xs6
   >
     <v-layout
@@ -10,7 +10,8 @@
     >
       <v-flex
         style="text-align: center"
-        xs12
+        xs11
+        offset-xs1
       >
         <h1 class="login__title">
           Sign in to PilotCity
@@ -20,6 +21,7 @@
         <v-layout
           row
           wrap
+          justify-center
         >
           <v-flex
             class="login__icons"
@@ -37,20 +39,105 @@
             </v-layout>
           </v-flex>
           <v-flex
-            xs11
-            md5
+            xs8
           >
             <v-spacer />
+            <label
+              class="login__label"
+              for="email"
+            >Username</label>
             <v-text-field
               v-model="email"
               v-validate="'required|email'"
-              class="signup__subtitle"
+              class="login__subtitle"
               name="email"
+              outline
               :error-messages="errors.collect('email')"
-              label="Email"
-              placeholder="Enter your Email"
+              placeholder="Enter your email"
+              required
+              single-line
+            />
+          </v-flex>
+          <v-flex
+            style="text-align: right"
+            xs9
+          >
+            <a 
+              href="#" 
+              class="login__helplinks"
+            >Forgot Username?</a>
+          </v-flex>
+        </v-layout>
+        <v-layout
+          row
+          wrap
+          justify-center
+        >
+          <v-flex
+            class="login__icons"
+            align-self-center
+            xs1
+          >
+            <v-layout
+              row
+              justify-end
+            >
+              <i
+                class="fa fa-lock"
+                aria-hidden="true"
+              />
+            </v-layout>
+          </v-flex>
+          <v-flex
+            xs8
+          >
+            <v-spacer />
+            <label
+              class="login__label"
+              for="password"
+            >Password</label>
+            <v-text-field
+              v-model="password"
+              v-validate="'required|password'"
+              class="login__subtitle"
+              name="password"
+              outline
+              :error-messages="errors.collect('password')"
+              single-line
+              placeholder="Enter your password"
               required
             />
+          </v-flex>
+          <v-flex
+            style="text-align: right"
+            xs9
+          >
+            <a href="#">Forgot Password?</a>
+          </v-flex>
+          <v-flex
+            style="text-align: center"
+            xs9
+            offset-xs1
+          >
+            <v-btn
+              :loading="loading"
+              :disabled="loading"
+              color="#dda0dd"
+              class="login__btn"
+              @click="process"
+            >
+              Login
+            </v-btn>
+          </v-flex>
+          <v-flex
+            style="text-align: center"
+            xs9
+            offset-xs1
+          >
+            <a
+              href="#"
+              class="login__helplinks"
+            >Sign up for PilotCity</a>
           </v-flex>
         </v-layout>
       </v-flex>
@@ -60,9 +147,10 @@
 
 
 <script lang="ts">
-
-export default {
-
+import Vue from "vue"
+import '@/assets/scss/login.scss'
+export default{
+    
 }
 </script>
 
