@@ -35,7 +35,7 @@ export default class HeaderMain extends Vue {
     margin: 1rem 0 .5rem;
 }
 .header__logo {
-  max-height: 70px;
-  max-width: 70px;
+  max-height: 53px;
+  max-width: 42px;
 }
 </style>
