@@ -32,6 +32,7 @@ export default class HeaderMain extends Vue {
 
 <style lang="scss">
 .header__main{
+  height: 4em;
     margin: 1rem 0 .5rem;
 }
 .header__logo {

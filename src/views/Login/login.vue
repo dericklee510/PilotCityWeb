@@ -1,8 +1,7 @@
 <template>
   <v-container
     class="login-container" 
-    fill-height 
-    xs6
+    fill-height
   >
     <v-layout
       row
@@ -124,7 +123,6 @@
               :disabled="loading"
               color="#dda0dd"
               class="login__btn"
-              @click="process"
             >
               Login
             </v-btn>

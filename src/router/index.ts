@@ -3,9 +3,10 @@ import Vue from "vue"
 import Router from "vue-router"
 
 import signup, * as signups from "@/views/Signup"
-// import phone from "@/views/Signup/signupPhone.vue"
+import forgotPassword from "@/views/forgotPassword"
 import login from "@/views/Login"
 import about from "@/views/About.vue"
+import doka from "@/components/uploadfiles/doka.vue"
 Vue.use(Router)
 
 //signup routes
@@ -13,7 +14,6 @@ var container = new signups.Container
 var profile = new signups.Profile
 var phone = new signups.Phone
 var upload = new signups.Upload
-
 export default new Router({
     mode: "history",
     base: process.env.BASE_URL,
@@ -46,9 +46,19 @@ export default new Router({
             ]
         },
         {
+            path: `/test`,
+            name: "test",
+            component: doka
+        },
+        {
             path: "/login",
             name: "login",
             component: login
+        },
+        {
+            path: "/password-recovery",
+            name: "password-recovery",
+            component: forgotPassword
         },
         {
             path: "/about",

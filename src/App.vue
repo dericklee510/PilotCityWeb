@@ -33,7 +33,6 @@ body {
   margin: 0;
   padding: 0;
   height: 100%; /* needed for container min-height */
-
   font-family: Raleway;
 }
 </style>
