@@ -56,8 +56,8 @@ export default new Router({
             component: login
         },
         {
-            path: "/password-recovery",
-            name: "password-recovery",
+            path: "/password-reset",
+            name: "password-reset",
             component: forgotPassword
         },
         {

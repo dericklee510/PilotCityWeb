@@ -15,6 +15,9 @@
         <h1>
           Forgot Password?
         </h1>
+        <h1>
+          Enter Recovery Code
+        </h1>
       </v-flex>
       <v-flex
         style="text-align: center"
@@ -23,6 +26,9 @@
       >
         <p>
           Enter your email address you’re using for your account below to send a recover password email
+        </p>
+        <p>
+          Enter the verification code sent to your email
         </p>
       </v-flex>
       <v-flex
@@ -33,6 +39,7 @@
           class="recoverPassword__input"
         >
           <v-text-field
+            v-model="input_email"
             name="email"
             outline
             placeholder="Enter your email"
@@ -50,6 +57,7 @@
             flat
             :loading="loading"
             :disabled="loading"
+            @click="queryEmail"
           >
             Recover Password
           </v-btn>
@@ -64,7 +72,25 @@
 <script lang="ts">
 import Vue from "vue"
 import '@/assets/scss/login.scss'
-export default{
+export default class RecoverPassword extends Vue {
+    public input_email: string | undefined
+    
+    private queryEmail() {
+        //compares email 
+
+        // if(email==email){
+        //     sendRecoveryCode()
+        // }
+        // else return error
+    }
+    private sendRecoveryCode() {
+        //sends SMS to enter code
+        // if(phone){
+        // sendSMS
+        // }
+        // else sendEmail
+    }
+  
     
 }
 </script>
