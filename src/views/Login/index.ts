@@ -1,2 +1,9 @@
 import login from "./login.vue"
-export default login
+import {forgotPassword, code, email} from "./forgotPassword" 
+
+export{
+    login,
+    forgotPassword, 
+    code,
+    email
+}

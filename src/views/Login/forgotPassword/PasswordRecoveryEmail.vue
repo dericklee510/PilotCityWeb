@@ -15,9 +15,6 @@
         <h1>
           Forgot Password?
         </h1>
-        <h1>
-          Enter Recovery Code
-        </h1>
       </v-flex>
       <v-flex
         style="text-align: center"
@@ -26,9 +23,6 @@
       >
         <p>
           Enter your email address you’re using for your account below to send a recover password email
-        </p>
-        <p>
-          Enter the verification code sent to your email
         </p>
       </v-flex>
       <v-flex
@@ -71,8 +65,10 @@
 
 <script lang="ts">
 import Vue from "vue"
-import '@/assets/scss/login.scss'
-export default class RecoverPassword extends Vue {
+import Component from "vue-class-component"
+
+@Component
+export default class PasswordRecoveryEmail extends Vue {
     public input_email: string | undefined
     
     private queryEmail() {
@@ -94,50 +90,3 @@ export default class RecoverPassword extends Vue {
     
 }
 </script>
-
-
-<style lang="scss">
-.recoverPassword__container{
-  font-family: raleway;
-  max-width: 50rem;
-  .recoverPassword__title{
-    font-weight: 800;
-  }
-  .recoverPassword__desc{
-
-  }
-  .recoverPassword__input{
-    .primary--text{
-            color: purple !important;
-                caret-color: purple !important;
-        }
-        .login__label {
-            font-weight: bold;
-            color: #4f4f4f;
-            font-size: 15px;
-        }
-        .v-text-field--outline .v-input__control .v-input__slot{
-            margin-bottom: 0px;
-            border-radius: 25px;
-        }
-        .v-text-field__details {
-            margin-bottom: 0px;
-        }
-  }
-  .recoverPassword__btn{
-    font-family: raleway;
-    background-color: #7b5d7d !important;
-    width: 200px;
-    height: 40px;
-    border-radius: 25px;
-    .v-btn{
-        &__content{
-            font-weight: 1000;
-            color: #fff;;
-        }
-    }
-  }
-}
-</style>
->
-</style>

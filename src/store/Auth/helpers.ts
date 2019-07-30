@@ -21,7 +21,7 @@ export function customLoginResponse(error: FirebaseError): string {
 }
 export function customResetPasswordResponse(error: FirebaseError): string {
     if(hasKey(PasswordResetResp,error.code))
-        return (PasswordResetResp[error.code] === DEFAULT_RESPONSE)?error.message:LogPasswordResetResp[error.code]
+        return (PasswordResetResp[error.code] === DEFAULT_RESPONSE)?error.message:PasswordResetResp[error.code]
     else 
         return error.message
 }
