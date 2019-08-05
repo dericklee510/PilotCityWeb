@@ -45,6 +45,7 @@ export default class Auth extends VuexModule {
             return SUCCESSFUL_RESETEMAIL_RESP
         }
         catch(err) {
+            console.log(err)
             return "Reset failed, please try again later"
         }
 

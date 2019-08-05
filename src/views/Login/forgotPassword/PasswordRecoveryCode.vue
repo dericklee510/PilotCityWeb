@@ -1,5 +1,6 @@
 <template>
-  <v-container 
+  <div />
+  <!-- <v-container 
     fill-height 
     class="recoverPassword__container"
   >
@@ -58,7 +59,7 @@
         </v-layout>
       </v-flex>
     </v-layout>
-  </v-container>
+  </v-container> -->
 </template>
 
 
@@ -70,24 +71,6 @@ import Component from "vue-class-component"
 @Component
 export default class PasswordRecoveryCode extends Vue {
     public input_email: string | undefined
-    
-    private queryEmail() {
-        //compares email 
-
-        // if(email==email){
-        //     sendRecoveryCode()
-        // }
-        // else return error
-    }
-    private sendRecoveryCode() {
-        //sends SMS to enter code
-        // if(phone){
-        // sendSMS
-        // }
-        // else sendEmail
-    }
-  
-    
 }
 </script>
 

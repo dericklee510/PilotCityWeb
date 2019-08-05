@@ -33,7 +33,9 @@
           class="recoverPassword__input"
         >
           <v-text-field
-            v-model="input_email"
+            v-model="email"
+            v-validate="'required|email'"
+            :error-messages="errors.collect('email')"
             name="email"
             outline
             placeholder="Enter your email"
@@ -49,12 +51,23 @@
           <v-btn
             class="recoverPassword__btn"
             flat
+            round
             :loading="loading"
             :disabled="loading"
-            @click="queryEmail"
+            @click="process"
           >
             Recover Password
           </v-btn>
+        </v-layout>
+      </v-flex>
+      <v-flex
+        v-show="authResponse"
+        xs12
+        class="signup__message"
+        align-self-center
+      >
+        <v-layout justify-center>
+          <h4>{{ authResponse }}</h4>
         </v-layout>
       </v-flex>
     </v-layout>
@@ -65,28 +78,24 @@
 
 <script lang="ts">
 import Vue from "vue"
-import Component from "vue-class-component"
+import Component from "vue-class-component" 
+import { AuthStore } from "@/store"
 
 @Component
 export default class PasswordRecoveryEmail extends Vue {
-    public input_email: string | undefined
-    
-    private queryEmail() {
-        //compares email 
+    public email: string = ``;
+    public authResponse: string = ``;
+    public loading: boolean = false;
 
-        // if(email==email){
-        //     sendRecoveryCode()
-        // }
-        // else return error
+    private async process(): Promise<void> {
+        this.loading = true
+        if (await this.$validator.validateAll()){
+            this.authResponse = await AuthStore.sendPassReset(
+                this.email
+            )
+        }
+        this.loading = false
     }
-    private sendRecoveryCode() {
-        //sends SMS to enter code
-        // if(phone){
-        // sendSMS
-        // }
-        // else sendEmail
-    }
-  
     
 }
 </script>

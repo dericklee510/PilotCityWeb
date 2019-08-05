@@ -45,11 +45,11 @@
           >
             <label
               class="signup__label"
-              for="first_name"
+              for="first_Name"
             >First Name</label>
             <v-text-field
               id="first_name"
-              v-model="first_name"
+              v-model="firstName"
               v-validate="'required'"
               class="signup__subtitle"
               name="First Name"
@@ -75,7 +75,7 @@
             >Last Name</label>
             <v-text-field
               id="last_name"
-              v-model="last_name"
+              v-model="lastName"
               v-validate="'required'"
               class="signup__subtitle"
               name="Last Name"
@@ -168,6 +168,7 @@
               outline
               placeholder="Create a password"
               required
+              type="password"
             />
           </v-flex>
           <v-flex
@@ -227,10 +228,13 @@
             xs11
             offset-xs1
           >
-            <a
+            <router-link
+              :to="{name: 'login'}"
               href="#"
               class="signup__switch"
-            >Already have an account?</a>
+            >
+              Already have an account?
+            </router-link>
           </v-flex>
         </v-layout>
       </v-flex>
