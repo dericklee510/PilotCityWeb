@@ -1,17 +1,26 @@
-import { SUCCESSFUL_SIGNUP_RESP, SUCCESSFUL_LOGIN_RESP } from './const'
+import {
+    SUCCESSFUL_SIGNUP_RESP, 
+    SUCCESSFUL_LOGIN_RESP,
+    SUCCESFUL_RESETPASS_RESP,
+    SUCCESSFUL_RESETEMAIL_RESP
+} from './const'
 
 import {
     Module,
     VuexModule,
     Mutation,
-    Action,
+    Action
 } from 'vuex-module-decorators'
 import * as firebase from "firebase/app"
 import "firebase/auth"
 import { User as FirebaseUser} from 'firebase'
 import { UserCredentials } from './types'
 import { SET_USER, NEW_AUTH_RESPONSE } from './mutation-types'
-import { customSignupResponse, customLoginResponse } from './helpers'
+import { 
+    customSignupResponse, 
+    customLoginResponse, 
+    customResetPasswordResponse
+} from './helpers'
 
 firebase.auth
 @Module({ namespaced: true, name: 'Auth' })
@@ -26,6 +35,28 @@ export default class Auth extends VuexModule {
     @Mutation
     private [NEW_AUTH_RESPONSE](message: string): void {
         this.authResponse = message
+    }
+    @Action
+    public async sendPassReset(email: string): Promise<string>{
+        try{
+            await firebase.auth().sendPasswordResetEmail(email)
+            return SUCCESSFUL_RESETEMAIL_RESP
+        }
+        catch(err) {
+            console.log(err)
+            return "Reset failed, please try again later"
+        }
+
+    }
+    @Action
+    public async resetPassword(hash: string, newpass: string): Promise<string>{
+        try{
+            await firebase.auth().confirmPasswordReset(hash, newpass)
+            return SUCCESFUL_RESETPASS_RESP
+        }
+        catch (err) {
+            return customResetPasswordResponse(err)
+        }
     }
 
     @Action

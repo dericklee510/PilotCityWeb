@@ -51,16 +51,20 @@
                   <v-layout
                     justify-center
                   >
-                    <v-btn class="signup-profile__button">
+                    <v-btn
+                      class="signup-profile__button"
+                      :to="{name:`signup-number`}"
+                    >
                       Upload
                     </v-btn>
                   </v-layout>
                   <v-layout justify-center>
                     <h5
                       class="signup-profile__button--secondary"
-                      @click="eventListener"
                     >
-                      I'd rather skip this
+                      <router-link :to="{name:`signup-number`}">
+                        I'd rather skip this
+                      </router-link>
                     </h5>
                   </v-layout>
                 </v-flex>
@@ -98,7 +102,7 @@ export default class Profile extends Vue {
       background-color: #BDBDBD;
       height: 400px;
       .signup-profile__picture{
-        box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         margin-top: 1.5rem;
         height: 200px;
         max-width: 200px;
@@ -110,8 +114,9 @@ export default class Profile extends Vue {
       }
     }
     h1{
+      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       font-size: 2em;
-      color: #4F4F4F;
+      color: #fff;
       @media only screen and (max-width: 375px ){
         font-size: 142%;
       }
@@ -129,6 +134,7 @@ export default class Profile extends Vue {
     margin-bottom: 1rem;
   }
   .signup-profile__button{
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     width: 40%;
     height: 42px;
     background-color: #7B5D7D !important;
@@ -137,7 +143,9 @@ export default class Profile extends Vue {
     font-size: 1.25em;
     margin-bottom: .5rem;
     &--secondary{
-      color: red;
+      a{
+        color: red;
+      }
     }
   }
 }

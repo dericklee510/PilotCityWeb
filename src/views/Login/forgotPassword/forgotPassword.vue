@@ -1,13 +1,13 @@
 <template>
   <router-view />
 </template>
- 
+
 <script lang="ts">
 import Vue from 'vue'
 import Component from "vue-class-component"
 
 @Component
-export default class SignupContainer extends Vue {
+export default class ForgotPasword extends Vue {
 
 }
 

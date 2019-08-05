@@ -3,10 +3,15 @@
     <v-container>
       <v-flex>
         <v-layout justify-start>
-          <h5>
+          <h4 class="signup-phone__back">
             <i class="fas fa-angle-left" /> 
-            &nbsp; back
-          </h5>
+            &nbsp;
+            <router-link
+              :to="{name:`signup-upload`}"
+            >
+              back
+            </router-link>
+          </h4>
         </v-layout>
         <v-layout justify-center>
           <v-layout
@@ -15,7 +20,7 @@
             wrap
           >
             <v-flex xs12> 
-              <v-card class="signup-phone__card">
+              <div class="signup-phone__card">
                 <v-layout
                   justify-center
                   class="signup-phone__text-input"
@@ -44,10 +49,11 @@
                     </v-layout>
                     <v-layout class="signup-phone__text-field">
                       <v-text-field
+                        placeholder="Enter your phone number"
+                        mask="(###)-###-####"
                         color="#7B5D7D"
                         outline
                         flat
-                        background-color="#fff"
                       />
                     </v-layout>
                   </v-flex>
@@ -66,7 +72,7 @@
                     </v-layout>
                   </v-flex>
                 </v-layout>
-              </v-card>
+              </div>
             </v-flex>
           </v-layout>
         </v-layout>
@@ -93,6 +99,12 @@ export default class Phone extends Vue {
   width: 100%;
   height: 100%;
   background-color: #F79960;
+  .signup-phone__back{
+    text-shadow:  0px 4px 4px rgba(0, 0, 0, 0.25);
+    a{
+      color: white;
+    }
+  }
   .signup-phone__card{
     color: white;
     margin-top: 5rem;
@@ -101,12 +113,24 @@ export default class Phone extends Vue {
     background-color: #F79960;
     .signup-phone__text-input{
       height: 400px;
-      .signup-phone__text-field .v-input-slot{
-        color: #fff;
-        background-color: white;
+      .v-input__control{
+        margin-top: 5.5em;
+        padding: 1em;
+        .v-input__slot{
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+        input{
+          margin: .5em;
+        }
+      }
+      .v-text-field--outline > .v-input__control > .v-input__slot{
+        background-color: white !important;
+        margin: 0px;
+        border-radius: 10em;
       }
     }
     h1{
+      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       font-size: 2em;
       @media only screen and (max-width: 37
       5px ){
@@ -114,6 +138,7 @@ export default class Phone extends Vue {
       }
     }
     p{
+      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       font-size: 1em;
       margin: 2em 2.3em 0
     }
@@ -138,6 +163,7 @@ export default class Phone extends Vue {
     border-radius: 50px;
     font-size: 1.25em;
     margin-bottom: .5rem;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     &--secondary{
       color: red;
     }
