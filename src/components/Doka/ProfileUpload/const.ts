@@ -1,0 +1,1 @@
+const ACTION_HTML = `Drag & Drop your picture or <span class="filepond--label-action">Browse</span>`
