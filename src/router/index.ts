@@ -18,6 +18,7 @@ import
     email
 } from "@/views/Login"
 import about from "@/views/About.vue"
+import { ProfileUpload } from '@/components/Doka';
 Vue.use(Router)
 
 //signup routes
@@ -59,11 +60,11 @@ export default new Router({
                 }
             ]
         },
-        // {
-        //     path: `/test`,
-        //     name: "test",
-        //     component: 
-        // },
+        {
+            path: `/test`,
+            name: "test",
+            component: ProfileUpload
+        },
         {
             path: "/login",
             name: "login",

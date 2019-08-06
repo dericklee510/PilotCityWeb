@@ -28,8 +28,7 @@
                     >
                       <v-flex align-self-center>
                         <v-layout justify-center>
-                          <i class="fas fa-plus" />
-                          <i class="fas fa-user fa-4x" />
+                          <ProfileUpload />
                         </v-layout>
                       </v-flex>
                     </v-layout>
@@ -80,10 +79,15 @@
 <script lang="ts">
 import Vue from "vue"
 import Component from "vue-class-component"
+import {ProfileUpload} from "@/components/Doka"
 // import { AuthStore } from "@/store"
 
 
-@Component
+@Component({
+  components:{
+    ProfileUpload
+  }
+})
 export default class Profile extends Vue {
 
 }
