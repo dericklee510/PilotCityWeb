@@ -1,6 +1,7 @@
 <template>
   <div class="signup-profile__container">
-    <v-container
+    <h1>Hi</h1>
+    <!-- <v-container
       fill-height
     >
       <v-layout justify-center>
@@ -28,7 +29,8 @@
                     >
                       <v-flex align-self-center>
                         <v-layout justify-center>
-                          <ProfileUpload />
+                          <i class="fas fa-plus" />
+                          <i class="fas fa-user fa-4x" />
                         </v-layout>
                       </v-flex>
                     </v-layout>
@@ -72,7 +74,7 @@
           </v-flex>
         </v-layout>
       </v-layout>
-    </v-container>
+    </v-container> -->
   </div>
 </template>
 
@@ -88,7 +90,7 @@ import {ProfileUpload} from "@/components/Doka"
     ProfileUpload
   }
 })
-export default class Profile extends Vue {
+export default class Upload extends Vue {
 
 }
 </script>
@@ -110,7 +112,7 @@ export default class Profile extends Vue {
         margin-top: 1.5rem;
         height: 200px;
         max-width: 200px;
-        background-color: #F2F2F2;
+        background-color: rgb(142, 140, 140);
         border-radius: 100%;
         i{
           color: #bdbdbd;
