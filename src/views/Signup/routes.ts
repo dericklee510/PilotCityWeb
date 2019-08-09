@@ -1,5 +1,5 @@
 import * as Signup from "../Signup"
-import newUpload from "@/views/Signup/Profile/Upload"
+// import newUpload from "@/views/Signup/Profile/Upload"
 console.log(Signup)
 export default {
     path: "/signup",
@@ -8,7 +8,7 @@ export default {
         {
             name: "signup",
             path: ``,
-            component: newUpload,
+            component: Signup.Main,
         },
         {
             name: "signup.profile",
