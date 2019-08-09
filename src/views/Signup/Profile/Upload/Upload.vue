@@ -1,7 +1,6 @@
 <template>
   <div class="signup-profile__container">
-    <h1>Hi</h1>
-    <!-- <v-container
+    <v-container
       fill-height
     >
       <v-layout justify-center>
@@ -29,8 +28,7 @@
                     >
                       <v-flex align-self-center>
                         <v-layout justify-center>
-                          <i class="fas fa-plus" />
-                          <i class="fas fa-user fa-4x" />
+                          <ProfileUpload />
                         </v-layout>
                       </v-flex>
                     </v-layout>
@@ -74,7 +72,7 @@
           </v-flex>
         </v-layout>
       </v-layout>
-    </v-container> -->
+    </v-container>
   </div>
 </template>
 
@@ -96,6 +94,7 @@ export default class Upload extends Vue {
 </script>
 
 <style lang="scss">
+
 .signup-profile__container{
   width: 100%;
   height: 100%;
@@ -155,7 +154,6 @@ export default class Upload extends Vue {
     }
   }
 }
-
 </style>
 
 

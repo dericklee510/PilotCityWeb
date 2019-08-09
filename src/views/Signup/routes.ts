@@ -1,6 +1,5 @@
 import * as Signup from "../Signup"
-// import newUpload from "@/views/Signup/Profile/Upload"
-console.log(Signup)
+
 export default {
     path: "/signup",
     component: Signup.App,
@@ -13,12 +12,12 @@ export default {
         {
             name: "signup.profile",
             path: `profile`,
-            component: Signup.Upload,
+            component: Signup.children.Upload,
         },
         {
             name: `signup.number`,
             path: `verifyphone`,
-            component: Signup.Phone
+            component: Signup.children.Phone
         }
 
     ]
