@@ -83,6 +83,3 @@ export default class Auth extends VuexModule {
     }
 
 }
-export const AuthModule = {
-    Auth
-}
