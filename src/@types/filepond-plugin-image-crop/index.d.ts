@@ -1,4 +1,4 @@
 declare module "filepond-plugin-image-crop"{
-    const FilePondPluginImageCrop: Object
+    const FilePondPluginImageCrop: Record<string, any>
     export default FilePondPluginImageCrop
 }

@@ -1,4 +1,4 @@
 declare module "filepond-plugin-file-validate-type" {
-    const FilePondPluginFileValidateType:Object
+    const FilePondPluginFileValidateType: Record<string, any>
     export default FilePondPluginFileValidateType
 }
