@@ -1,4 +1,4 @@
 declare module "filepond-plugin-image-preview"{
-    const FilePondPluginImagePreview: Record<string, any> 
+    const FilePondPluginImagePreview:Object 
     export default FilePondPluginImagePreview
 }

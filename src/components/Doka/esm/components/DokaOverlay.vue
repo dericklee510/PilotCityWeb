@@ -1,8 +1,8 @@
 <template>
   <div class="doka-overlay">
-    <slot />
+    <slot></slot>
     <div class="doka-container">
-      <div />
+        <div></div>
     </div>
   </div>
 </template>

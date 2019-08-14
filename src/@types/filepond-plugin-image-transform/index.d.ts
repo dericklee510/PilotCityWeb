@@ -1,4 +1,4 @@
 declare module "filepond-plugin-image-transform"{
-    const FilePondPluginImageTransform: Record<string, any>
+    const FilePondPluginImageTransform: Object
     export default FilePondPluginImageTransform
 }

@@ -1,4 +1,4 @@
 declare module "filepond-plugin-image-edit"{
-    const FilePondPluginImageEdit: Record<string, any>
+    const FilePondPluginImageEdit:Object
     export default FilePondPluginImageEdit
 }

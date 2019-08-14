@@ -1,5 +1,20 @@
 <template>
-  <file-pond ref="pond" class="filepond" name="filepond" :label-idle="html" :image-preview-height="170" image-crop-aspect-ratio="1:1" :image-resize-target-width="200" :image-resize-target-height="200" style-panel-layout="compact circle" style-load-indicator-position="center bottom" style-button-remove-item-position="right" :server="{process,load}" :files="ProfilePicture" :image-edit-editor="Doka.create({cropMask:mask})" />
+  <file-pond
+    ref="pond"
+    class="filepond"
+    name="filepond"
+    :label-idle="html"
+    :image-preview-height="170"
+    image-crop-aspect-ratio="1:1"
+    :image-resize-target-width="200"
+    :image-resize-target-height="200"
+    style-panel-layout="compact circle"
+    style-load-indicator-position="center bottom"
+    style-button-remove-item-position="right"
+    :server="{process,load}"
+    :files="myFiles"
+    :image-edit-editor="Doka.create({cropMask:mask})"
+  />
 </template>
 
 <script lang="ts">
@@ -25,58 +40,51 @@ import { StorageStore, AuthStore } from '@/store'
     }
 })
 export default class ProfileUpload extends Vue {
-  get ProfilePicture(): filepond.ServerFileReference[] {
-    if (AuthStore.user && AuthStore.user.photoURL)
-      return [{
-        source: AuthStore.user.photoURL,
-        options: { type: 'local' }
-      }]
-    return []
-  }
-  html: string = CONST.ACTION_HTML
-  Doka = Doka
-  mask = (root: Record<string, any>, setInnerHTML: (root: Record<string, any>, html: string) => Record<string, any>) => {
-    // https://pqina.nl/doka/docs/patterns/api/doka-instance/#setting-the-crop-mask
-    setInnerHTML(
-      root,
-      CONST.MASK_HTML
-    )
-  }
-  process: filepond.server.process = async (fieldName, file, metadata, load, error, progress, abort) => {
-    let uploadTask = StorageStore.uploadProfilePicture(file)
-    uploadTask.on("state_changed", snapshot => {
-      progress(true, snapshot.bytesTransferred, snapshot.totalBytes)
-    }),
-      (error: any) => {
-        console.log(error)
-        error("Upload error")
-      },
-      async () => {
-        load(await uploadTask.snapshot.ref.getDownloadURL())
-      }
-    return {
-      abort: () => {
-        uploadTask.cancel()
-        abort()
-      }
+    get ProfilePicture(): filepond.ServerFileReference[] {
+        if (AuthStore.user && AuthStore.user.photoURL)
+            return [{
+                source: AuthStore.user.photoURL,
+                options: { type: 'local' }
+            }]
+        return []
     }
-  }
-  load: filepond.server.load = (source, load, error, progress, abort) => {
-    var xhr = new XMLHttpRequest();
-    xhr.responseType = 'blob';
-    xhr.onload = function (event) {
-      var blob = xhr.response;
-    };
-    xhr.open('GET', source);
-    xhr.send();
-
-    // var myRequest = new Request(source)
-    // fetch(myRequest).then(function (response) {
-    //     response.blob().then(function (myBlob) {
-    //         load(new File([myBlob], 'Profile_Image'))
-    //     })
-    // })
-  }
+    html: string = CONST.ACTION_HTML
+    Doka = Doka
+    mask = (root: Record<string, any>, setInnerHTML: (root: Record<string, any>, html: string) => Record<string, any>) => {
+    // https://pqina.nl/doka/docs/patterns/api/doka-instance/#setting-the-crop-mask
+        setInnerHTML(
+            root,
+            CONST.MASK_HTML
+        )
+    }
+    process: filepond.server.process = async (fieldName, file, metadata, load, error, progress, abort) => {
+        let uploadTask = StorageStore.uploadProfilePicture(file)
+        uploadTask.on("state_changed", snapshot => {
+            progress(true, snapshot.bytesTransferred, snapshot.totalBytes)
+        }),
+        (error: any) => {
+            // eslint-disable-next-line no-console
+            console.log(error)
+            error("Upload error")
+        },
+        async () => {
+            load(await uploadTask.snapshot.ref.getDownloadURL())
+        }
+        return {
+            abort: () => {
+                uploadTask.cancel()
+                abort()
+            }
+        }
+    }
+    load: filepond.server.load = (source, load, error, progress, abort, headers) => {
+        var myRequest = new Request(source)
+        fetch(myRequest).then(function (response) {
+            response.blob().then(function (myBlob) {
+                load(new File([myBlob], 'Profile_Image'))
+            })
+        })
+    }
 }
 </script>
 

@@ -1,4 +1,4 @@
 declare module "filepond-plugin-image-exif-orientation"{
-    const FilePondPluginImageExifOrientation: Record<string, any>
+    const FilePondPluginImageExifOrientation:Object
     export default FilePondPluginImageExifOrientation
 }

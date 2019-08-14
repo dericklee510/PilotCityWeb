@@ -1,7 +1,7 @@
 
 declare module "vue-filepond" {
-    import { Component } from 'vue'
+    import { Component } from 'vue';
 
-    const vueFilePond: (...args: Record<string, any>[]) => Component
+    const vueFilePond: (...args: Object[]) => Component
     export default vueFilePond
 }
