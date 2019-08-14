@@ -25,7 +25,7 @@ export const SignupResp = {
 export const LoginResp = {
     [`auth/invalid-email`]: `${DEFAULT_RESPONSE}`,
     [`auth/user-disabled`]: `${DEFAULT_RESPONSE}`,
-    [`auth/user-not-found`]: `${DEFAULT_RESPONSE}`,
+    [`auth/user-not-found`]: `That username and password does not match our records`,
     [`auth/wrong-password`]: `${DEFAULT_RESPONSE}`
 }
 export const PasswordResetResp = { 

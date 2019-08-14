@@ -89,5 +89,9 @@ export default class Auth extends VuexModule {
             return customLoginResponse(err)
         }
     }
+    @Action
+    public async logout(): Promise<void>{
+        return firebase.auth().signOut()
+    }
 
 }
