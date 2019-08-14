@@ -7,16 +7,16 @@ export default {
         {
             name: "signup",
             path: ``,
-            component: Signup.Main,
+            component: Signup.Main
         },
         {
             name: "signup.profile",
             path: `profile`,
-            component: Signup.children.Upload,
+            component: Signup.children.Upload
         },
         {
             name: `signup.number`,
-            path: `verifyphone`,
+            path: `profile/1`,
             component: Signup.children.Phone
         }
 

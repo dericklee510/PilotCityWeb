@@ -3,7 +3,7 @@ import Container from "./Container.vue"
 
 export {
     Signup as Main,
-    Container as App,
+    Container as App
 }
 
 export {children} from "./Profile"

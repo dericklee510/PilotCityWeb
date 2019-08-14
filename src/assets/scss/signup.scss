@@ -2,7 +2,9 @@
 .signup-container {
     font-family: raleway;
     font-weight: 800;
-    max-width: 50rem;
+    background-color: #56B6E6;
+    height:  100%;
+    
     .signup__title{
     font-family: Raleway;
     font-style: normal;
@@ -14,8 +16,8 @@
     }
     .signup__questions{
       .primary--text{
-          color: purple !important;
-          caret-color: purple !important;
+          color: #7b5d7d !important;
+          caret-color: #7b5d7d !important;
       }
       .signup__label{
         font-weight: bold;
@@ -30,11 +32,11 @@
         margin-bottom: 0px;
       }
     }
-    .signup__icons{
+    .signup__icons{ 
       padding-right: 1rem;
       margin-bottom: 1rem;
       margin-top: 4rem;
-      color: #7B5D7D;
+      color: #7b5d7d;
       i{
         width: 24px;
         height: 24px;

@@ -1,17 +1,15 @@
 <template>
-  <v-container
+  <div
     class="signup-container"
-    fill-height
-    xs6
   >
     <v-layout
+      class="form-layout"
       row
       wrap
     >
       <v-flex
-        offset-xs1
         style="text-align: center"
-        xs11
+        xs12
       >
         <div class="signup__title">
           <span>
@@ -19,7 +17,10 @@
           </span>
         </div>
       </v-flex>
-      <v-flex class="signup__questions">
+      <v-flex
+        xs11
+        class="signup__questions"
+      >
         <v-layout
           justify-center
           row
@@ -199,8 +200,7 @@
         >
           <v-flex
             style="text-align: center"
-            xs9
-            offset-xs1
+            xs12
           >
             <v-btn
               flat
@@ -225,8 +225,7 @@
           </v-flex>
           <v-flex
             style="text-align: center"
-            xs11
-            offset-xs1
+            xs12
           >
             <router-link
               :to="{name: 'login'}"
@@ -239,7 +238,7 @@
         </v-layout>
       </v-flex>
     </v-layout>
-  </v-container>
+  </div>
 </template>
 
 <script lang="ts">

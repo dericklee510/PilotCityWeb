@@ -1,4 +1,4 @@
-import { Module, VuexModule, Action } from "vuex-module-decorators";
+import { Module, VuexModule, Action } from "vuex-module-decorators"
 import { firebaseApp } from "@/firebase/init"
 
 import Auth from "@/store/Auth"
@@ -8,7 +8,7 @@ import {updateUserPhotoUrl} from "./helpers"
 export default class Storage extends VuexModule {
     public bucket: firebase.storage.Storage = firebaseApp.storage()
 
-    get bucketRef(): firebase.storage.Reference {
+    public get bucketRef(): firebase.storage.Reference {
         return this.bucket.ref()
     }
     /**

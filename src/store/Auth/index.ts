@@ -43,7 +43,8 @@ export default class Auth extends VuexModule {
             return SUCCESSFUL_RESETEMAIL_RESP
         }
         catch(err) {
-            console.log(err)
+            // eslint-disable-next-line no-console
+            console.error(err)
             return "Reset failed, please try again later"
         }
 
@@ -75,6 +76,13 @@ export default class Auth extends VuexModule {
     public async login({ email, password }: UserCredentials): Promise<string> {
         try {
             this.context.commit(SET_USER,await firebase.auth().signInWithEmailAndPassword(email, password))
+            // eslint-disable-next-line no-console 
+            console.info(" %c Successfully logged in!", [
+                'background: green', 
+                'color: white', 
+                'display: block', 
+                'text-align: center'
+            ].join(';')) 
             return SUCCESSFUL_LOGIN_RESP
         }
         catch (err) {

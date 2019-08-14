@@ -5,7 +5,7 @@ import Auth from "@/store/Auth"
  * @export
  * @param {firebase.storage.UploadTask} uploadTask
  */
-export async function updateUserPhotoUrl(uploadTask:firebase.storage.UploadTask) {
+export async function updateUserPhotoUrl(uploadTask: firebase.storage.UploadTask): Promise<void>{
     Auth.state.user.updateProfile({
         photoUrl:await uploadTask.snapshot.ref.getDownloadURL()
     })

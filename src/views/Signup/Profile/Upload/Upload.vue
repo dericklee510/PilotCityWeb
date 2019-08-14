@@ -84,9 +84,9 @@ import {ProfileUpload} from "@/components/Doka"
 
 
 @Component({
-  components:{
-    ProfileUpload
-  }
+    components:{
+        ProfileUpload
+    }
 })
 export default class Upload extends Vue {
 
