@@ -1,19 +1,15 @@
 import { SET_USER } from './../store/Auth/mutation-types'
 
 import {
-    Login,
     forgotPassword,
     code,
     email
 } from "@/views/Login"
 import {routes as Signup} from "@/views/Signup"
+import {routes as Login} from "@/views/Login"
 let routes: RouteConfig [] = [
     Signup,
-    {
-        path: "/login",
-        name: "login",
-        component: Login
-    },
+    Login,
     {
         path: `/reset_password`,
         name: "recover-pass-container",

@@ -182,7 +182,6 @@ export default class Login extends Vue{
           this.$router.push({name:`signup.profile`})
         this.loading = false
     }
-
 }
 </script>
 

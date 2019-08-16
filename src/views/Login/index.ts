@@ -7,3 +7,4 @@ export{
     code,
     email
 }
+export {routes} from "./routes"

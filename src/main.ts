@@ -24,7 +24,7 @@ firestore // enables firebaseApp and firestore
 new Vue({
     router,
     store,
-    created(): void {
+    beforeCreate(): void {
         firebase.auth().onAuthStateChanged((user): void => {
             store.commit(`Auth/${SET_USER}`, user)
         })
