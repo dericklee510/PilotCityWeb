@@ -12,6 +12,7 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "@types/lodash": "^4.14.136",
     "@types/zxcvbn": "^4.4.0",
     "babel-plugin-transform-decorators": "^6.24.1",
     "core-js": "^2.6.5",
