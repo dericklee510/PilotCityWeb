@@ -125,6 +125,7 @@
               single-line
               outline
               placeholder="Enter your Email"
+              @keyup.enter="$refs"
               required
             />
           </v-flex>
@@ -246,7 +247,7 @@ import '@/assets/scss/signup.scss'
 import Vue from "vue"
 import Component from "vue-class-component"
 import { AuthStore } from "@/store"
-
+import _ from "lodash"
 
 @Component
 export default class Signup extends Vue {
@@ -257,16 +258,19 @@ export default class Signup extends Vue {
     public lastName: string = "";
     public loading: boolean = false;
     public authResponse: string = ""
-
+    get displayName() {
+      return _.lowerCase(`${this.firstName} ${this.lastName}`)
+    }
     public async process(): Promise<void> {
         this.loading = true
         if (await this.$validator.validateAll())
             this.authResponse = await AuthStore.createAccount({
                 email: this.email,
                 password: this.password
-            })
+            },this.displayName)
         this.loading = false
     }
+    
 }
 </script>
 

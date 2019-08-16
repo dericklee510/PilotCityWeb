@@ -10,6 +10,7 @@ export const EMAIL_IN_USE_ERR = `${DEFAULT_RESPONSE}`
 export const OPERATION_NOT_ALLOWED_ERR = `${DEFAULT_RESPONSE}`
 export const INVALID_EMAIL_ERR = `${DEFAULT_RESPONSE}`
 export const WEAK_PASSWORD_ERR = `Password too weak`
+export const EMAIL_NOT_VERIFIED_ERR = "Email not verified, please check your inbox"
 // Password reset error responses
 export const RESET_CODE_EXPIRED_ERR =  "Password reset code is expired"
 export const RESET_CODE_INVALID_ERR = "Password reset code is invalid"

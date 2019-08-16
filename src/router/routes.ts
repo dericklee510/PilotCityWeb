@@ -1,7 +1,7 @@
 import { SET_USER } from './../store/Auth/mutation-types'
 
 import {
-    login,
+    Login,
     forgotPassword,
     code,
     email
@@ -12,7 +12,7 @@ let routes: RouteConfig [] = [
     {
         path: "/login",
         name: "login",
-        component: login
+        component: Login
     },
     {
         path: `/reset_password`,

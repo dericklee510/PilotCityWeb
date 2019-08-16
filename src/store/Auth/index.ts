@@ -2,7 +2,8 @@ import {
     SUCCESSFUL_SIGNUP_RESP, 
     SUCCESSFUL_LOGIN_RESP,
     SUCCESFUL_RESETPASS_RESP,
-    SUCCESSFUL_RESETEMAIL_RESP
+    SUCCESSFUL_RESETEMAIL_RESP,
+    EMAIL_NOT_VERIFIED_ERR
 } from './const'
 
 import {
@@ -61,10 +62,12 @@ export default class Auth extends VuexModule {
     }
 
     @Action
-    public async createAccount({ email, password }: UserCredentials): Promise<string> {
+    public async createAccount({ email, password }: UserCredentials, displayName:string): Promise<string> {
         try {
             let userResponse = await firebase.auth().createUserWithEmailAndPassword(email, password)
             this.context.commit(SET_USER,userResponse)
+            if(this.user)
+                this.user.updateProfile({displayName})
             return SUCCESSFUL_SIGNUP_RESP
         }
         catch (err) {
@@ -76,6 +79,11 @@ export default class Auth extends VuexModule {
     public async login({ email, password }: UserCredentials): Promise<string> {
         try {
             this.context.commit(SET_USER,await firebase.auth().signInWithEmailAndPassword(email, password))
+            if(this.user && !this.user.emailVerified){
+                this.user.sendEmailVerification()
+                throw(EMAIL_NOT_VERIFIED_ERR)
+            }
+                
             // eslint-disable-next-line no-console 
             console.info(" %c Successfully logged in!", [
                 'background: green', 

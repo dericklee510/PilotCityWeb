@@ -1,8 +1,8 @@
-import login from "./login.vue"
+import Login from "./Login.vue"
 import {forgotPassword, code, email} from "./forgotPassword" 
 
 export{
-    login,
+    Login,
     forgotPassword, 
     code,
     email

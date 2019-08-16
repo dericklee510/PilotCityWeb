@@ -54,6 +54,7 @@
               placeholder="Enter your email"
               required
               single-line
+              @keyup.enter="$refs.password.focus()"
             />
           </v-flex>
           <v-flex
@@ -95,6 +96,7 @@
               for="password"
             >Password</label>
             <v-text-field
+              ref="password"
               v-model="password"
               v-validate="'required'"
               class="login__subtitle"
@@ -104,6 +106,7 @@
               single-line
               placeholder="Enter your password"
               required
+              @keyup.enter="process()"
             />
           </v-flex>
           <v-flex
@@ -160,6 +163,7 @@ import Component from "vue-class-component"
 
 @Component
 export default class Login extends Vue{
+
     private password: string = ``;
     public email: string = ``;
     public loading: boolean = false;
