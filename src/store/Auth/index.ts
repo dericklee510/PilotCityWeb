@@ -1,5 +1,5 @@
 import {
-    SUCCESSFUL_SIGNUP_RESP, 
+    SUCCESSFUL_SIGNUP_RESP,
     SUCCESSFUL_LOGIN_RESP,
     SUCCESFUL_RESETPASS_RESP,
     SUCCESSFUL_RESETEMAIL_RESP,
@@ -14,12 +14,12 @@ import {
 } from 'vuex-module-decorators'
 import * as firebase from "firebase/app"
 import "firebase/auth"
-import { User as FirebaseUser} from 'firebase'
+import { User as FirebaseUser } from 'firebase'
 import { UserCredentials } from './types'
 import { SET_USER, NEW_AUTH_RESPONSE } from './mutation-types'
-import { 
-    customSignupResponse, 
-    customLoginResponse, 
+import {
+    customSignupResponse,
+    customLoginResponse,
     customResetPasswordResponse
 } from './helpers'
 
@@ -38,12 +38,12 @@ export default class Auth extends VuexModule {
         this.authResponse = message
     }
     @Action
-    public async sendPassReset(email: string): Promise<string>{
-        try{
+    public async sendPassReset(email: string): Promise<string> {
+        try {
             await firebase.auth().sendPasswordResetEmail(email)
             return SUCCESSFUL_RESETEMAIL_RESP
         }
-        catch(err) {
+        catch (err) {
             // eslint-disable-next-line no-console
             console.error(err)
             return "Reset failed, please try again later"
@@ -51,8 +51,8 @@ export default class Auth extends VuexModule {
 
     }
     @Action
-    public async resetPassword(hash: string, newpass: string): Promise<string>{
-        try{
+    public async resetPassword(hash: string, newpass: string): Promise<string> {
+        try {
             await firebase.auth().confirmPasswordReset(hash, newpass)
             return SUCCESFUL_RESETPASS_RESP
         }
@@ -62,12 +62,12 @@ export default class Auth extends VuexModule {
     }
 
     @Action
-    public async createAccount({ email, password }: UserCredentials, displayName:string): Promise<string> {
+    public async createAccount({ email, password }: UserCredentials, displayName: string): Promise<string> {
         try {
             let userResponse = await firebase.auth().createUserWithEmailAndPassword(email, password)
-            this.context.commit(SET_USER,userResponse)
-            if(this.user)
-                this.user.updateProfile({displayName})
+            this.context.commit(SET_USER, userResponse)
+            if (this.user)
+                this.user.updateProfile({ displayName })
             return SUCCESSFUL_SIGNUP_RESP
         }
         catch (err) {
@@ -78,19 +78,19 @@ export default class Auth extends VuexModule {
     @Action
     public async login({ email, password }: UserCredentials): Promise<string> {
         try {
-            this.context.commit(SET_USER,await firebase.auth().signInWithEmailAndPassword(email, password))
-            if(this.user && !this.user.emailVerified){
-                this.user.sendEmailVerification()
-                throw(EMAIL_NOT_VERIFIED_ERR)
+            this.context.commit(SET_USER, await firebase.auth().signInWithEmailAndPassword(email, password))
+            if (this.user && !this.user.emailVerified && this.user.email) {
+                firebase.auth().sendSignInLinkToEmail(this.user.email, { url: `pilotcity.com` })
+                throw (EMAIL_NOT_VERIFIED_ERR)
             }
-                
+
             // eslint-disable-next-line no-console 
             console.info(" %c Successfully logged in!", [
-                'background: green', 
-                'color: white', 
-                'display: block', 
+                'background: green',
+                'color: white',
+                'display: block',
                 'text-align: center'
-            ].join(';')) 
+            ].join(';'))
             return SUCCESSFUL_LOGIN_RESP
         }
         catch (err) {
@@ -98,7 +98,7 @@ export default class Auth extends VuexModule {
         }
     }
     @Action
-    public async logout(): Promise<void>{
+    public async logout(): Promise<void> {
         return firebase.auth().signOut()
     }
 

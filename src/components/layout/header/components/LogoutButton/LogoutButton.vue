@@ -2,6 +2,7 @@
 <v-btn
               flat
               round
+              color="primary"
               :loading="loading"
               :disabled="loading"
               v-if="user"

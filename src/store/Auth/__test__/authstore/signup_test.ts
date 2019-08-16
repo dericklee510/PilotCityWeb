@@ -10,7 +10,7 @@ export const createAccount = async (): Promise<void> => {
     expect(await AuthStore.createAccount({
         email: "test",
         password: "test"
-    })).toBe(resp.SUCCESSFUL_SIGNUP_RESP)
+    },`testname`)).toBe(resp.SUCCESSFUL_SIGNUP_RESP)
     expect(AuthStore.user).toBeTruthy
 }
 
@@ -24,6 +24,6 @@ export const handleCreateAccErr = async (): Promise<void> => {
     expect(await AuthStore.createAccount({
         email: "test",
         password: "test"
-    })).toBe("This is the default firebase email error response")
+    },`testname`)).toBe("This is the default firebase email error response")
     expect(AuthStore.user).toBeFalsy
 }
