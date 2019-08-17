@@ -12,7 +12,7 @@
     style-load-indicator-position="center bottom"
     style-button-remove-item-position="right"
     :server="{process,load}"
-    :files="myFiles"
+    :files="ProfilePicture"
     :image-edit-editor="Doka.create({cropMask:mask})"
   />
 </template>
@@ -30,6 +30,7 @@ import Component from 'vue-class-component'
 import filepond from "filepond"
 import * as CONST from "./const"
 import { StorageStore, AuthStore } from '@/store'
+import { process } from './wrapper';
 
 
 
@@ -57,30 +58,12 @@ export default class ProfileUpload extends Vue {
             CONST.MASK_HTML
         )
     }
-    process: filepond.server.process = async (fieldName, file, metadata, load, error, progress, abort) => {
-        let uploadTask = StorageStore.uploadProfilePicture(file)
-        uploadTask.on("state_changed", snapshot => {
-            progress(true, snapshot.bytesTransferred, snapshot.totalBytes)
-        }),
-        (error: any) => {
-            // eslint-disable-next-line no-console
-            console.log(error)
-            error("Upload error")
-        },
-        async () => {
-            load(await uploadTask.snapshot.ref.getDownloadURL())
-        }
-        return {
-            abort: () => {
-                uploadTask.cancel()
-                abort()
-            }
-        }
-    }
+    process: filepond.server.process = process
     load: filepond.server.load = (source, load, error, progress, abort, headers) => {
         var myRequest = new Request(source)
         fetch(myRequest).then(function (response) {
             response.blob().then(function (myBlob) {
+                console.log(myBlob)
                 load(new File([myBlob], 'Profile_Image'))
             })
         })
