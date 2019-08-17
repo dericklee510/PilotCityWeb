@@ -4,9 +4,8 @@ import App from "./App.vue"
 import router from "@/router"
 import store from "./store"
 
-import * as firebase from "firebase/app"
-import firestore from "@/firebase/init"
-import "firebase/auth"
+
+import firestore,{firebaseApp} from "@/firebase/init"
 import { SET_USER } from './store/Auth/mutation-types'
 
 
@@ -15,8 +14,10 @@ import 'vuetify/src/stylus/app.styl'
 
 import VeeValidate from '@/utilities/validation'
 
-import { Observable, Observer, of } from 'rxjs'
-import { first, tap, concatMap } from 'rxjs/operators'
+import {authState} from 'rxfire/auth'
+import {tap, concatMap } from 'rxjs/operators'
+
+
 Vue.use(VeeValidate)
 Vue.use(Vuetify)
 Vue.config.productionTip = false
@@ -31,17 +32,10 @@ function createVueInstance() {
     }).$mount("#app")
 }
 
-// creates an observables from firebase onAuthStateChanged
-let onAuthStateChanged$ = Observable.create((obs: Observer<firebase.User | null>) => {
-    return firebase.auth().onAuthStateChanged(
-        user => obs.next(user),
-        err => obs.error(err),
-        () => obs.complete());
-})
 
 // On first emit commits user and creates vue instance
 // On second...end commits user to store
-onAuthStateChanged$.pipe(concatMap((user, index) =>
+authState(firebaseApp.auth()).pipe(concatMap((user, index) =>
     index === 0 ? of(user).pipe(
         tap((user) => {
             store.commit(`Auth/${SET_USER}`, user)
