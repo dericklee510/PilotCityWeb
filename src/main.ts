@@ -1,3 +1,4 @@
+import { create } from './components/Doka/esm/lib/doka.esm.min.d';
 import Vue from "vue"
 import './plugins/vuetify'
 import App from "./App.vue"
@@ -14,9 +15,9 @@ import 'vuetify/src/stylus/app.styl'
 
 import VeeValidate from '@/utilities/validation'
 
-import {authState} from 'rxfire/auth'
+import {authState, user} from 'rxfire/auth'
 import { of } from 'rxjs'
-import { tap, concatMap } from 'rxjs/operators'
+import { tap, concatMap, first, skip } from 'rxjs/operators'
 
 
 Vue.use(VeeValidate)
@@ -34,17 +35,19 @@ function createVueInstance() {
 }
 
 
-// On first emit commits user and creates vue instance
-// On second...end commits user to store
-authState(firebaseApp.auth()).pipe(concatMap((user, index) =>
-    index === 0 ? of(user).pipe(
-        tap((user) => {
-            store.commit(`Auth/${SET_USER}`, user)
-            createVueInstance()
-        })
-    ) : of(user)
-)).subscribe((user: firebase.User | null) => {
+//ref to observer
+const AuthObserver = authState(firebaseApp.auth())
+
+//on first response creates vue instance
+AuthObserver.pipe(first()).subscribe(user => {
     store.commit(`Auth/${SET_USER}`, user)
-},
-    (err: Error) => { console.log(err) })
+    createVueInstance()
+    console.log('create',user)
+})
+
+//updates user on other responses
+AuthObserver.pipe(skip(1)).subscribe(user => {
+    store.commit(`Auth/${SET_USER}`, user)
+    console.log('update',user)
+})
 
