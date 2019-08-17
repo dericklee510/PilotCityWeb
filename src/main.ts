@@ -22,7 +22,7 @@ Vue.use(Vuetify)
 Vue.config.productionTip = false
 firestore // enables firebaseApp and firestore
 
-
+//creates instance
 function createVueInstance() {
     new Vue({
         router,
@@ -31,6 +31,7 @@ function createVueInstance() {
     }).$mount("#app")
 }
 
+// creates an observables from firebase onAuthStateChanged
 let onAuthStateChanged$ = Observable.create((obs: Observer<firebase.User | null>) => {
     return firebase.auth().onAuthStateChanged(
         user => obs.next(user),
@@ -38,6 +39,8 @@ let onAuthStateChanged$ = Observable.create((obs: Observer<firebase.User | null>
         () => obs.complete());
 })
 
+// On first emit commits user and creates vue instance
+// On second...end commits user to store
 onAuthStateChanged$.pipe(concatMap((user, index) =>
     index === 0 ? of(user).pipe(
         tap((user) => {
