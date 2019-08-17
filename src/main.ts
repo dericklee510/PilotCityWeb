@@ -15,7 +15,8 @@ import 'vuetify/src/stylus/app.styl'
 import VeeValidate from '@/utilities/validation'
 
 import {authState} from 'rxfire/auth'
-import {tap, concatMap } from 'rxjs/operators'
+import { of } from 'rxjs'
+import { first, tap, concatMap } from 'rxjs/operators'
 
 
 Vue.use(VeeValidate)
