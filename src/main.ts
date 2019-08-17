@@ -1,5 +1,3 @@
-
-
 import Vue from "vue"
 import './plugins/vuetify'
 import App from "./App.vue"
@@ -17,19 +15,38 @@ import 'vuetify/src/stylus/app.styl'
 
 import VeeValidate from '@/utilities/validation'
 
+import { Observable, Observer, of } from 'rxjs'
+import { first, tap, concatMap } from 'rxjs/operators'
 Vue.use(VeeValidate)
 Vue.use(Vuetify)
 Vue.config.productionTip = false
 firestore // enables firebaseApp and firestore
-new Vue({
-    router,
-    store,
-    beforeCreate(): void {
-        firebase.auth().onAuthStateChanged((user): void => {
+
+
+function createVueInstance() {
+    new Vue({
+        router,
+        store,
+        render: h => h(App)
+    }).$mount("#app")
+}
+
+let onAuthStateChanged$ = Observable.create((obs: Observer<firebase.User | null>) => {
+    return firebase.auth().onAuthStateChanged(
+        user => obs.next(user),
+        err => obs.error(err),
+        () => obs.complete());
+})
+
+onAuthStateChanged$.pipe(concatMap((user, index) =>
+    index === 0 ? of(user).pipe(
+        tap((user) => {
             store.commit(`Auth/${SET_USER}`, user)
+            createVueInstance()
         })
-    },
-    // eslint-disable-next-line
-    render: h => h(App)
-}).$mount("#app")
+    ) : of(user)
+)).subscribe((user: firebase.User | null) => {
+    store.commit(`Auth/${SET_USER}`, user)
+},
+    (err: Error) => { console.log(err) })
 
