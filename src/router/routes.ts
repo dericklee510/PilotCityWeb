@@ -8,8 +8,8 @@ import {
 import {routes as Signup} from "@/views/Signup"
 import {routes as Login} from "@/views/Login"
 let routes: RouteConfig [] = [
-    Signup,
-    Login,
+    ...Signup,
+    ...Login,
     {
         path: `/reset_password`,
         name: "recover-pass-container",

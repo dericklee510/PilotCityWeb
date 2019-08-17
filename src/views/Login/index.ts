@@ -7,4 +7,4 @@ export{
     code,
     email
 }
-export {routes} from "./routes"
+export {default as routes} from "./routes"

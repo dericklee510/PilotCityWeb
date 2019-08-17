@@ -1,7 +1,7 @@
 import { AuthStore } from '@/store';
 import Login from "./Login.vue"
 import { RouteConfig } from 'vue-router';
-export const routes:RouteConfig = {
+const routes:RouteConfig[] = [{
     path: "/login",
     name: "login",
     component: Login,
@@ -13,9 +13,8 @@ export const routes:RouteConfig = {
      * @param {*} next
      */
     beforeEnter(to,from,next){
-        console.log("hi")
-        console.log(AuthStore.user)
         AuthStore.user?next({name:'signup.profile'}):next()
     }
 
-}
+}]
+export default routes
