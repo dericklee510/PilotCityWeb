@@ -1,11 +1,12 @@
-import { getDownloadURL } from 'rxfire/storage';
-import { StorageStore } from '@/store/index';
-import { AuthStore } from '@/store';
+
 import filepond from "filepond"
+import { StorageStore, AuthStore } from '@/store';
 import { updateUserPhotoUrl } from './helpers';
-import { put } from 'rxfire/storage';
-import { empty, from } from 'rxjs';
+
+import { getDownloadURL, put } from 'rxfire/storage';
+import { from , of } from 'rxjs';
 import { switchMap, map, tap } from 'rxjs/operators';
+
 
 
 export const process: filepond.server.process = (fieldName, file, metadata, load, error, progress, abort) => {
@@ -37,13 +38,20 @@ export const process: filepond.server.process = (fieldName, file, metadata, load
         }
     }
 }
-export const ProfilePictureObservable = (AuthStore.user && AuthStore.user.photoURL) ?
-    getDownloadURL(StorageStore.bucket.refFromURL(AuthStore.user.photoURL)).pipe(switchMap(url =>
-        from(fetch(new Request(url)))
-    ), switchMap(response => from(response.blob())),
-        map(blob => [blob]),
-        tap(blobArr => {
-            console.log(blobArr)
-        })
-    ) :
-    empty().pipe(tap(() => console.log("empty")))
+
+export const createProfilePictureObservable = () => {
+    if(!AuthStore.user)
+        throw("User is not logged in")
+    if(AuthStore.user.photoURL)
+        return getDownloadURL(StorageStore.bucket.refFromURL(AuthStore.user.photoURL)).pipe(switchMap(url =>
+            from(fetch(new Request(url)))
+        ), switchMap(response => from(response.blob())),
+            map(blob => [blob]),
+            tap(blobArr => {
+                console.log(blobArr)
+            })
+        )
+    else 
+            return of([])
+}
+    
