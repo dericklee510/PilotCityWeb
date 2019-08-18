@@ -43,12 +43,10 @@ const AuthObserver = authState(firebaseApp.auth())
 AuthObserver.pipe(first()).subscribe(user => {
     store.commit(`Auth/${SET_USER}`, user)
     createVueInstance()
-    console.log('create',user)
 })
 
 //updates user on other responses
 AuthObserver.pipe(skip(1)).subscribe(user => {
     store.commit(`Auth/${SET_USER}`, user)
-    console.log('update',user)
 })
 
