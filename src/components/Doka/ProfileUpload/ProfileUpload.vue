@@ -15,7 +15,7 @@ import Component from 'vue-class-component'
 import filepond from "filepond"
 import * as CONST from "./const"
 import { StorageStore, AuthStore } from '@/store'
-import { process, ProfilePictureObservable } from './wrapper';
+import { process, createProfilePictureObservable } from './wrapper';
 import { getDownloadURL } from 'rxfire/storage/';
 import { switchMap, map, tap } from 'rxjs/operators';
 import { from, empty } from 'rxjs';
@@ -29,13 +29,7 @@ import { from, empty } from 'rxjs';
   },
   subscriptions() {
     return {
-      ProfilePicture:  (AuthStore.user && AuthStore.user.photoURL) ?
-    getDownloadURL(StorageStore.bucket.refFromURL(AuthStore.user.photoURL)).pipe(switchMap(url =>
-        fetch(new Request(url))
-    ), switchMap(response => response.blob()),
-        map(blob => [blob])
-    ) :
-    empty()
+      ProfilePicture: createProfilePictureObservable()
     }
   }
 })
