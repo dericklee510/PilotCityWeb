@@ -1,20 +1,5 @@
 <template>
-  <file-pond
-    ref="pond"
-    class="filepond"
-    name="filepond"
-    :label-idle="html"
-    :image-preview-height="170"
-    image-crop-aspect-ratio="1:1"
-    :image-resize-target-width="200"
-    :image-resize-target-height="200"
-    style-panel-layout="compact circle"
-    style-load-indicator-position="center bottom"
-    style-button-remove-item-position="right"
-    :server="{process,load}"
-    :files="ProfilePicture"
-    :image-edit-editor="Doka.create({cropMask:mask})"
-  />
+  <file-pond ref="pond" class="filepond" name="filepond" :label-idle="html" :image-preview-height="170" image-crop-aspect-ratio="1:1" :image-resize-target-width="200" :image-resize-target-height="200" style-panel-layout="compact circle" style-load-indicator-position="center bottom" style-button-remove-item-position="right" :server="{process}" :files="ProfilePicture" :image-edit-editor="Doka.create({cropMask:mask})" />
 </template>
 
 <script lang="ts">
@@ -30,44 +15,42 @@ import Component from 'vue-class-component'
 import filepond from "filepond"
 import * as CONST from "./const"
 import { StorageStore, AuthStore } from '@/store'
-import { process } from './wrapper';
+import { process, ProfilePictureObservable } from './wrapper';
+import { getDownloadURL } from 'rxfire/storage/';
+import { switchMap, map, tap } from 'rxjs/operators';
+import { from, empty } from 'rxjs';
 
 
 
 
 @Component({
-    components: {
-        FilePond: FilePondProfileInstance
+  components: {
+    FilePond: FilePondProfileInstance
+  },
+  subscriptions() {
+    return {
+      ProfilePicture:  (AuthStore.user && AuthStore.user.photoURL) ?
+    getDownloadURL(StorageStore.bucket.refFromURL(AuthStore.user.photoURL)).pipe(switchMap(url =>
+        fetch(new Request(url))
+    ), switchMap(response => response.blob()),
+        map(blob => [blob])
+    ) :
+    empty()
     }
+  }
 })
 export default class ProfileUpload extends Vue {
-    get ProfilePicture(): filepond.ServerFileReference[] {
-        if (AuthStore.user && AuthStore.user.photoURL)
-            return [{
-                source: AuthStore.user.photoURL,
-                options: { type: 'local' }
-            }]
-        return []
-    }
-    html: string = CONST.ACTION_HTML
-    Doka = Doka
-    mask = (root: Record<string, any>, setInnerHTML: (root: Record<string, any>, html: string) => Record<string, any>) => {
+  ProfilePicture: File[] = []
+  html: string = CONST.ACTION_HTML
+  Doka = Doka
+  mask = (root: Record<string, any>, setInnerHTML: (root: Record<string, any>, html: string) => Record<string, any>) => {
     // https://pqina.nl/doka/docs/patterns/api/doka-instance/#setting-the-crop-mask
-        setInnerHTML(
-            root,
-            CONST.MASK_HTML
-        )
-    }
-    process: filepond.server.process = process
-    load: filepond.server.load = (source, load, error, progress, abort, headers) => {
-        var myRequest = new Request(source)
-        fetch(myRequest).then(function (response) {
-            response.blob().then(function (myBlob) {
-                console.log(myBlob)
-                load(new File([myBlob], 'Profile_Image'))
-            })
-        })
-    }
+    setInnerHTML(
+      root,
+      CONST.MASK_HTML
+    )
+  }
+  process: filepond.server.process = process
 }
 </script>
 

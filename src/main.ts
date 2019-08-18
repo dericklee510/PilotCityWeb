@@ -9,17 +9,18 @@ import store from "./store"
 import firestore,{firebaseApp} from "@/firebase/init"
 import { SET_USER } from './store/Auth/mutation-types'
 
+import {authState} from 'rxfire/auth'
+import { first, skip } from 'rxjs/operators'
+
 
 import Vuetify from 'vuetify/lib'
 import 'vuetify/src/stylus/app.styl'
 
 import VeeValidate from '@/utilities/validation'
 
-import {authState, user} from 'rxfire/auth'
-import { of } from 'rxjs'
-import { tap, concatMap, first, skip } from 'rxjs/operators'
+import VueRx from 'vue-rx'
 
-
+Vue.use(VueRx)
 Vue.use(VeeValidate)
 Vue.use(Vuetify)
 Vue.config.productionTip = false
