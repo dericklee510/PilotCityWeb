@@ -1,4 +1,3 @@
-
 import filepond from "filepond"
 import { StorageStore, AuthStore } from '@/store';
 import { updateUserPhotoUrl } from './helpers';
