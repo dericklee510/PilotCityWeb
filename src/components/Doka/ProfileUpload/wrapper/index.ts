@@ -43,12 +43,9 @@ export const createProfilePictureObservable = () => {
         throw("User is not logged in")
     if(AuthStore.user.photoURL)
         return getDownloadURL(StorageStore.bucket.refFromURL(AuthStore.user.photoURL)).pipe(switchMap(url =>
-            from(fetch(new Request(url)))
-        ), switchMap(response => from(response.blob())),
-            map(blob => [blob]),
-            tap(blobArr => {
-                console.log(blobArr)
-            })
+            fetch(new Request(url))
+        ), switchMap(response => response.blob()),
+            map(blob => [blob])
         )
     else 
             return of([])
