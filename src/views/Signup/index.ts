@@ -1,9 +1,7 @@
 import Signup from "./Signup.vue"
-import Container from "./Container.vue"
 
 export {
-    Signup as Main,
-    Container as App
+    Signup as Main
 }
 
 export {children} from "./Profile"
