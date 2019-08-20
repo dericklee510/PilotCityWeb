@@ -6,10 +6,10 @@ import router from "@/router"
 import store from "./store"
 
 
-import firestore,{firebaseApp} from "@/firebase/init"
+import firestore, { firebaseApp } from "@/firebase/init"
 import { SET_USER } from './store/Auth/mutation-types'
 
-import {authState} from 'rxfire/auth'
+import { authState } from 'rxfire/auth'
 import { first, skip } from 'rxjs/operators'
 
 
@@ -38,15 +38,13 @@ function createVueInstance() {
 
 //ref to observer
 const AuthObserver = authState(firebaseApp.auth())
+let instanceCreated = false
 
-//on first response creates vue instance
-AuthObserver.pipe(first()).subscribe(user => {
+AuthObserver.subscribe(user => {
     store.commit(`Auth/${SET_USER}`, user)
-    createVueInstance()
-})
-
-//updates user on other responses
-AuthObserver.pipe(skip(1)).subscribe(user => {
-    store.commit(`Auth/${SET_USER}`, user)
+    if (instanceCreated){
+        createVueInstance()
+        instanceCreated = true
+    }
 })
 
