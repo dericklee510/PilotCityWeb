@@ -125,7 +125,6 @@
               single-line
               outline
               placeholder="Enter your Email"
-              @keyup.enter="$refs"
               required
             />
           </v-flex>
@@ -161,7 +160,7 @@
               id="password"
               ref="password"
               v-model="password"
-              v-validate="'required|complex_password'"
+              v-validate="'required|complex-password'"
               single-line
               class="signup__subtitle"
               name="password"
@@ -188,6 +187,7 @@
               label="Confirm your password"
               placeholder="Please confirm your Password"
               type="password"
+              @keyup.enter="process"
             />
           </v-flex>
         </v-layout>
@@ -258,16 +258,15 @@ export default class Signup extends Vue {
     public lastName: string = "";
     public loading: boolean = false;
     public authResponse: string = ""
-    get displayName() {
-      return _.lowerCase(`${this.firstName} ${this.lastName}`)
-    }
     public async process(): Promise<void> {
         this.loading = true
-        if (await this.$validator.validateAll())
+        if (await this.$validator.validateAll()){
             this.authResponse = await AuthStore.createAccount({
                 email: this.email,
-                password: this.password
-            },this.displayName)
+                password: this.password,
+                firstName:this.firstName,
+                lastName:this.lastName
+            })}
         this.loading = false
     }
     

@@ -3,7 +3,6 @@ import { StorageStore, AuthStore } from '@/store';
 import { updateUserPhotoUrl } from './helpers';
 
 import { getDownloadURL, put } from 'rxfire/storage';
-import { from , of } from 'rxjs';
 import { switchMap, map, tap } from 'rxjs/operators';
 
 
@@ -38,16 +37,12 @@ export const process: filepond.server.process = (fieldName, file, metadata, load
     }
 }
 
-export const createProfilePictureObservable = () => {
-    if(!AuthStore.user)
-        throw("User is not logged in")
-    if(AuthStore.user.photoURL)
-        return getDownloadURL(StorageStore.bucket.refFromURL(AuthStore.user.photoURL)).pipe(switchMap(url =>
-            fetch(new Request(url))
-        ), switchMap(response => response.blob()),
-            map(blob => [blob])
-        )
-    else 
-            return of([])
+export const load: filepond.server.load = (source, load, error, progress, abort, headers) => {
+    getDownloadURL(StorageStore.bucket.refFromURL(source)).pipe(
+        switchMap(url => fetch(new Request(url)))
+        , switchMap(response => response.blob())
+    ).subscribe(blob => load(blob),
+        err => {
+            error(`Could not fetch Profile Picture ${JSON.stringify(err)}`)
+        })
 }
-    

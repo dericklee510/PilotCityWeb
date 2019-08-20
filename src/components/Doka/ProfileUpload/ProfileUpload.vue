@@ -1,5 +1,5 @@
 <template>
-  <file-pond ref="pond" class="filepond" name="filepond" :label-idle="html" :image-preview-height="170" image-crop-aspect-ratio="1:1" :image-resize-target-width="200" :image-resize-target-height="200" style-panel-layout="compact circle" style-load-indicator-position="center bottom" style-button-remove-item-position="right" :server="{process}" :files="ProfilePicture" :image-edit-editor="Doka.create({cropMask:mask})" />
+  <file-pond ref="pond" class="filepond" name="filepond" :label-idle="html" :image-preview-height="170" image-crop-aspect-ratio="1:1" :image-resize-target-width="200" :image-resize-target-height="200" style-panel-layout="compact circle" style-load-indicator-position="center bottom" style-button-remove-item-position="right" :server="{process, load}" :files="ProfilePicture" :image-edit-editor="Doka.create({cropMask:mask})" />
 </template>
 
 <script lang="ts">
@@ -15,7 +15,7 @@ import Component from 'vue-class-component'
 import filepond from "filepond"
 import * as CONST from "./const"
 import { StorageStore, AuthStore } from '@/store'
-import { process, createProfilePictureObservable } from './wrapper';
+import { process, load } from './wrapper';
 import { getDownloadURL } from 'rxfire/storage/';
 import { switchMap, map, tap } from 'rxjs/operators';
 import { from, empty } from 'rxjs';
@@ -26,15 +26,19 @@ import { from, empty } from 'rxjs';
 @Component({
   components: {
     FilePond: FilePondProfileInstance
-  },
-  subscriptions() {
-    return {
-      ProfilePicture: createProfilePictureObservable()
-    }
   }
 })
 export default class ProfileUpload extends Vue {
-  ProfilePicture: File[] = []
+  get ProfilePicture(): filepond.ServerFileReference[] {
+    if(!AuthStore.user)
+      throw("not logged in!")
+    if (AuthStore.user.photoURL)
+      return [{
+        source: AuthStore.user.photoURL,
+        options: { type: 'local' }
+      }]
+    return []
+  }
   html: string = CONST.ACTION_HTML
   Doka = Doka
   mask = (root: Record<string, any>, setInnerHTML: (root: Record<string, any>, html: string) => Record<string, any>) => {
@@ -45,6 +49,7 @@ export default class ProfileUpload extends Vue {
     )
   }
   process: filepond.server.process = process
+  load: filepond.server.load = load
 }
 </script>
 

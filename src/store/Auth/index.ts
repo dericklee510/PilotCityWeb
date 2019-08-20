@@ -22,7 +22,7 @@ import {
     customLoginResponse,
     customResetPasswordResponse
 } from './helpers'
-
+import _ from 'lodash'
 firebase.auth
 @Module({ namespaced: true, name: 'Auth' })
 export default class Auth extends VuexModule {
@@ -62,12 +62,18 @@ export default class Auth extends VuexModule {
     }
 
     @Action
-    public async createAccount({ email, password }: UserCredentials, displayName: string): Promise<string> {
+    public async createAccount(credentials:{ email:string, password:string, firstName:string, lastName:string }): Promise<string> {
+        let {email,password,firstName,lastName} = credentials
         try {
             let userResponse = await firebase.auth().createUserWithEmailAndPassword(email, password)
             this.context.commit(SET_USER, userResponse)
-            if (this.user)
-                this.user.updateProfile({ displayName })
+            if (this.user) {
+                this.user.updateProfile({ displayName: `${_.lowerCase(firstName)} ${_.lowerCase(lastName)}` })
+                this.context.rootState.Fb.firestore.collection('users').doc(this.user.uid).set({
+                    firstName,
+                    lastName
+                })
+            }
             return SUCCESSFUL_SIGNUP_RESP
         }
         catch (err) {
