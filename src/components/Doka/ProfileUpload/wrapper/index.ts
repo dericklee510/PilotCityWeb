@@ -11,7 +11,6 @@ export const process: filepond.server.process = (fieldName, file, metadata, load
     if (!AuthStore.user)
         throw ("User not defined")
     let imgPath = `user/${AuthStore.user.uid}/user_img/${file.name}`
-    updateUserPhotoUrl(imgPath)
     let imgRef = StorageStore.bucketRef.child(imgPath)
     let uploadTask = put(imgRef, file)
     uploadTask.subscribe(snap => {
@@ -25,6 +24,7 @@ export const process: filepond.server.process = (fieldName, file, metadata, load
             getDownloadURL(imgRef).subscribe(url => {
                 load(url)
             })
+            updateUserPhotoUrl(imgPath)
         }
     )
     return {
