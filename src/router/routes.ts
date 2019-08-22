@@ -5,11 +5,11 @@ import {
     code,
     email
 } from "@/views/Login"
-import {routes as Signup} from "@/views/Signup"
-import {routes as Login} from "@/views/Login"
+import {routes as SignupRoutes} from "@/views/Signup"
+import {routes as LoginRoutes} from "@/views/Login"
 let routes: RouteConfig [] = [
-    ...Signup,
-    ...Login,
+    ...SignupRoutes,
+    ...LoginRoutes,
     {
         path: `/reset_password`,
         name: "recover-pass-container",
