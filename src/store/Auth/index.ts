@@ -85,6 +85,7 @@ export default class Auth extends VuexModule {
     public async login({ email, password }: UserCredentials): Promise<string> {
         try {
             try{
+                await firebase.auth().signInWithEmailAndPassword(email, password)
                 this.context.commit(SET_USER, await firebase.auth().signInWithEmailAndPassword(email, password))
             }
             catch{
