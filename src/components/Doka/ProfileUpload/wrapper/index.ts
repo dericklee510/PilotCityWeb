@@ -18,13 +18,18 @@ export const process: filepond.server.process = (fieldName, file, metadata, load
     },
         err => {
             console.log(err)
-            error(err)
+            error(`Couldn't upload photo`)
         },
         () => {
-            getDownloadURL(imgRef).subscribe(url => {
-                load(url)
-            })
-            updateUserPhotoUrl(imgPath)
+                updateUserPhotoUrl(imgPath).then(() => {
+                    getDownloadURL(imgRef).subscribe(url => {
+                        load(url)
+                    })
+                }).catch(err => {
+                    console.log(err)
+                    error(`Couldn't upload photo`)
+                })
+                
         }
     )
     return {

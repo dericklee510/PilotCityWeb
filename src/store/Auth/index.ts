@@ -44,9 +44,9 @@ export default class Auth extends VuexModule {
             return SUCCESSFUL_RESETEMAIL_RESP
         }
         catch (err) {
-            // eslint-disable-next-line no-console
-            console.error(err)
-            return "Reset failed, please try again later"
+            const error = err as firebase.auth.Error
+            console.error(error)
+            return error.message
         }
 
     }
@@ -68,8 +68,8 @@ export default class Auth extends VuexModule {
             let userResponse = await firebase.auth().createUserWithEmailAndPassword(email, password)
             this.context.commit(SET_USER, userResponse)
             if (this.user) {
-                this.user.updateProfile({ displayName: `${_.lowerCase(firstName)} ${_.lowerCase(lastName)}` })
-                this.context.rootState.Fb.firestore.collection('users').doc(this.user.uid).set({
+                await this.user.updateProfile({ displayName: `${_.lowerCase(firstName)} ${_.lowerCase(lastName)}` })
+                await this.context.rootState.Fb.firestore.collection('users').doc(this.user.uid).set({
                     firstName,
                     lastName
                 })
@@ -84,7 +84,12 @@ export default class Auth extends VuexModule {
     @Action
     public async login({ email, password }: UserCredentials): Promise<string> {
         try {
-            this.context.commit(SET_USER, await firebase.auth().signInWithEmailAndPassword(email, password))
+            try{
+                this.context.commit(SET_USER, await firebase.auth().signInWithEmailAndPassword(email, password))
+            }
+            catch{
+                throw("Could not sign in, please refresh and try again")
+            }
             if (this.user && !this.user.emailVerified && this.user.email) {
                 firebase.auth().sendSignInLinkToEmail(this.user.email, { url: `pilotcity.com` })
                 throw (EMAIL_NOT_VERIFIED_ERR)
