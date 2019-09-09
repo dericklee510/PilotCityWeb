@@ -42,7 +42,7 @@ let instanceCreated = false
 
 AuthObserver.subscribe(user => {
     store.commit(`Auth/${SET_USER}`, user)
-    if (instanceCreated){
+    if (!instanceCreated){
         createVueInstance()
         instanceCreated = true
     }
