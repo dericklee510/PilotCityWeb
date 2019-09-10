@@ -4,7 +4,7 @@
 
 <script lang="ts">
 //
-import FilePondProfileInstance from "./utilities/FilePondInstance"
+import FilePondProfileInstance from "../utilities/FilePondInstance"
 import * as Doka from "../esm/lib/doka.esm.min.js"
 import "../esm/lib/doka.min.css"
 
@@ -30,8 +30,8 @@ import { from, empty } from 'rxjs';
 })
 export default class ProfileUpload extends Vue {
   get ProfilePicture(): filepond.ServerFileReference[] {
-    if(!AuthStore.user)
-      throw("not logged in!")
+    if (!AuthStore.user)
+      throw ("not logged in!")
     if (AuthStore.user.photoURL)
       return [{
         source: AuthStore.user.photoURL,
@@ -53,7 +53,7 @@ export default class ProfileUpload extends Vue {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .filepond--drop-label {
   color: #4c4e53;
 }

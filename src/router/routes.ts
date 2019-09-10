@@ -27,12 +27,12 @@ let routes: RouteConfig [] = [
     }
 ]
 
-import { ProfileUpload } from '@/components/Doka'
+import { ProfileBanner } from '@/components/Doka'
 import { RouterOptions, RouteConfig } from 'vue-router'
 if(process.env.NODE_ENV === "development")
     routes.push({
         path: `/test`,
         name: "test",
-        component: ProfileUpload
+        component: ProfileBanner
     })
 export default routes

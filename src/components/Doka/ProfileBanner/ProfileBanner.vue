@@ -1,0 +1,42 @@
+<template>
+<div>
+<file-pond
+        name="test"
+        ref="pond"
+        label-idle="Upload Here"
+        accepted-file-types="image/jpeg, image/png"
+        imageEditInstantEdit="true"
+        imageCropAspectRatio=".223"
+        :image-edit-editor="Doka.create()"
+        />
+</div>
+
+          <!-- <file-pond ref="pond" class="filepond" name="filepond" :label-idle="html" :image-preview-height="170" image-crop-aspect-ratio="1:1" :image-resize-target-width="200" :image-resize-target-height="200" style-panel-layout="compact circle" style-load-indicator-position="center bottom" style-button-remove-item-position="right" :server="{process, load}" :files="ProfilePicture" :image-edit-editor="Doka.create({cropMask:mask})" /> -->
+</template>
+<script lang="ts">
+import FilePondProfileInstance from "../utilities/FilePondInstance"
+import * as Doka from "../esm/lib/doka.esm.min.js"
+import Vue from 'vue'
+import Component from 'vue-class-component';
+@Component({
+    components:{
+         FilePond: FilePondProfileInstance
+    }
+})
+export default class ProfileBanner extends Vue {
+    Doka = Doka
+}
+</script>
+<style lang="scss" scoped>
+@media (min-width: 40em) {
+    .filepond--item {
+        width: calc(50% - .5em);
+    }
+}
+
+@media (min-width: 50em) {
+    .filepond--item {
+        width: calc(33.33% - .5em);
+    }
+}
+</style>
