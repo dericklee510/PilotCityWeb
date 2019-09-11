@@ -27,12 +27,12 @@ let routes: RouteConfig [] = [
     }
 ]
 
-import { ProfileBanner } from '@/components/Doka'
+import { AutoComplete } from '@/components/GoogleMaps/'
 import { RouterOptions, RouteConfig } from 'vue-router'
 if(process.env.NODE_ENV === "development")
     routes.push({
         path: `/test`,
         name: "test",
-        component: ProfileBanner
+        component: AutoComplete
     })
 export default routes
