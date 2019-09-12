@@ -4,7 +4,7 @@ import {
     Module,
     VuexModule,
     Mutation,
-    Action,
+    Action
 } from 'vuex-module-decorators'
 import * as firebase from "firebase/app"
 

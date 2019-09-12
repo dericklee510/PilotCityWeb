@@ -5,6 +5,8 @@ import Router from "vue-router"
 import signup from "@/views/Signup"
 import login from "@/views/Login"
 import about from "@/views/About.vue"
+import profile from "@/views/Profile"
+
 Vue.use(Router)
 
 export default new Router({
@@ -25,6 +27,11 @@ export default new Router({
             path: "/about",
             name: "about",
             component: about
+        },
+        {
+            path: "/profile",
+            name: "citizenProfile",
+            component: profile
         }
     ]
 })

@@ -1,14 +1,12 @@
 <template>
-  <v-app>
+  <v-app id="pc-app">
     <link
       href="https://fonts.googleapis.com/css?family=Raleway&display=swap"
       rel="stylesheet"
     >
     <HeaderMain />
     <v-content>
-      <v-container fluid>
-        <router-view />
-      </v-container>
+      <router-view />
     </v-content>
     <FooterMain />
   </v-app>
@@ -16,6 +14,7 @@
 
 
 <script lang="ts">
+import "@/assets/SCSS/main.scss"
 import Vue from "vue"
 import HeaderMain from "@/components/layout/header.vue"
 import Component from "vue-class-component"
@@ -28,14 +27,3 @@ import FooterMain from "./components/layout/footer.vue"
 })
 export default class App extends Vue { }
 </script>
-
-<style>
-html,
-body {
-  margin: 0;
-  padding: 0;
-  height: 100%; /* needed for container min-height */
-
-  font-family: Raleway;
-}
-</style>
