@@ -1,6 +1,7 @@
 @import "@/assets/SCSS/variables.scss";
 
 /* GLOBAL */
+
 html,
 body {
   margin: 0;
@@ -14,6 +15,15 @@ body {
         color: #000 !important;
         caret-color: #000 !important;
     }
+}
+.pc-background{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.pc-container{
+    margin: 0 5%;
 }
 
 p{
@@ -37,7 +47,7 @@ h1 {
     letter-spacing: 0.025em;
 }
 
-h3 {
+h3{
     font-family: Raleway;
     font-style: normal;
     font-weight: 800;
@@ -107,13 +117,30 @@ h3 {
 
 
 
+/* CITIZEN-ID - PAGE */
+.citizen-id__header{
+    background-color: #000;
+    height: 300px;
+}
+.citizen-id__title{
+    color: #fff;
+}
 
 
 
 
 
 
-/* PROFILE - PAGE */
+/* PRIVATE-PROFILE - PAGE */
+
+
+
+
+
+
+
+
+/* PUBLIC-PROFILE - PAGE */
 .pc-profile-page{
 }
 
@@ -184,10 +211,6 @@ h3 {
     bottom: 0;
     left: -50%;
     right: 0%;
-}
-
-#profileCard{
-    margin: 0 5%;
 }
 
 #profileBanner{

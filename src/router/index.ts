@@ -6,6 +6,7 @@ import signup from "@/views/Signup"
 import login from "@/views/Login"
 import about from "@/views/About.vue"
 import profile from "@/views/Profile"
+import test from "@/views/Test"
 
 Vue.use(Router)
 
@@ -13,6 +14,11 @@ export default new Router({
     mode: "history",
     base: process.env.BASE_URL,
     routes: [
+        {
+            path: `/test`,
+            name: `test-file`,
+            component: test
+        },
         {
             path: "/signup",
             name: "signup",
@@ -31,7 +37,7 @@ export default new Router({
         {
             path: "/profile",
             name: "citizenProfile",
-            component: profile
+            component: profile.PublicProfile
         }
     ]
 })

@@ -45,7 +45,7 @@
       <!-- </div> -->
     </v-row>
     <v-container fluid>
-      <v-card id="profileCard">
+      <v-card class="pc-container">
         <!-- probably going to use Doka here.... -->
         <img
           id="profileBanner"
@@ -219,7 +219,6 @@
                           <div class="pc-profile-picture pc-profile-picture--icon" />
                         </v-list-item-avatar>
                       </v-col>
-                      </v-colcols="5">
                     </v-row>
                   </v-list-item-content>
                 </v-list-item>
