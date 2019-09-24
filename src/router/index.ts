@@ -7,7 +7,9 @@ import login from "@/views/Login"
 import about from "@/views/About.vue"
 import profile from "@/views/Profile"
 
+import routes from "./routes"
 Vue.use(Router)
+
 
 export default new Router({
     mode: "history",
@@ -34,4 +36,5 @@ export default new Router({
             component: profile
         }
     ]
+    // routes
 })

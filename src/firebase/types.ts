@@ -13,7 +13,7 @@ export class ApplicationConfig {
             this.authDomain = "pilotcity-firestore.firebaseapp.com"
             this.databaseURL = "https://pilotcity-firestore.firebaseio.com",
             this.projectId = "pilotcity-firestore"
-            this.storageBucket = "pilotcity-firestore.appspot.com"
+            this.storageBucket = "gs://pilotcity-firestore-site_data"
             this.messagingSenderId = "80767280856"
         }
     }
