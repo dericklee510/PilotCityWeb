@@ -26,7 +26,6 @@
         </v-row>
         <v-row
           class="citizen-id__body "
-          justify="center"
           align="center"
         >
           <!-- create selector component -->
@@ -43,46 +42,48 @@
           </v-col>
           <v-col cols="12">
             <v-col cols="4">
-              <v-col
-                cols="12"
-                style="padding: 0;"
-              >
-                <v-btn
-                  id="citizen-id__type--teacher"
-                  block
-                  class=".pc-background--pink"
+              <v-row justify="center">
+                <v-col
+                  cols="12"
+                  style="padding: 0;"
                 >
-                  <h2 class="text-capitalize">
-                    Teacher
-                  </h2>
-                </v-btn>
-              </v-col>
-              <v-col
-                cols="12"
-                style="padding: 0;"
-              >
-                <v-btn
-                  id="citizen-id__type--employer"
-                  block
+                  <v-btn
+                    id="citizen-id__type--teacher"
+                    block
+                    class=".pc-background--pink"
+                  >
+                    <h2 class="text-capitalize">
+                      Teacher
+                    </h2>
+                  </v-btn>
+                </v-col>
+                <v-col
+                  cols="12"
+                  style="padding: 0;"
                 >
-                  <h2 class="text-capitalize">
-                    Employer
-                  </h2>
-                </v-btn>
-              </v-col>
-              <v-col
-                cols="12"
-                style="padding: 0;"
-              >
-                <v-btn
-                  id="citizen-id__type--student"
-                  block
+                  <v-btn
+                    id="citizen-id__type--employer"
+                    block
+                  >
+                    <h2 class="text-capitalize">
+                      Employer
+                    </h2>
+                  </v-btn>
+                </v-col>
+                <v-col
+                  cols="12"
+                  style="padding: 0;"
                 >
-                  <h2 class="text-capitalize">
-                    Student
-                  </h2>
-                </v-btn>
-              </v-col>
+                  <v-btn
+                    id="citizen-id__type--student"
+                    block
+                  >
+                    <h2 class="text-capitalize">
+                      Student
+                    </h2>
+                  </v-btn>
+                </v-col>
+              </v-row>
             </v-col>
           </v-col>
           <v-col cols="12">
