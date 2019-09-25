@@ -10,7 +10,6 @@
       <v-card class="pc-container">
         <v-row
           class=" citizen-id__header pc-background"
-          align="end"
         >
           <v-col cols="12">
             <img

@@ -7,10 +7,6 @@
     background-color: #000;
     height: 350px;
 }
-.citizen-id__title
-{
-    padding-bottom: 3%;
-}
 .citizen-id__title h1{
     display: block;
     text-align: center;
@@ -18,7 +14,7 @@
 }
 .citizen-id__icon{
     margin: 0 auto;
-    bottom: 100%;
+    bottom: -20%;
 }
 #citizen-id__select{
     background-color: #58595B !important;
