@@ -2,7 +2,7 @@
 .citizen-id{
 
 }
-.pc-background.citizen-id__header{
+.citizen-id .citizen-id__header{
     margin: 0;
     background-color: #000;
     height: 350px;
@@ -63,10 +63,11 @@
     }
 }
 
-.citizen-id__body{
+.citizen-id .citizen-id__body{
     height: 861px;
     width: 100%;
     background: #414042;
     border: 1px solid #414042;
     box-sizing: border-box;
+    margin: 0;
 }

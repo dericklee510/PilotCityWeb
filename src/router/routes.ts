@@ -5,6 +5,7 @@ import {
     code,
     email
 } from "@/views/Login"
+import test from "@/views/Test"
 import {routes as SignupRoutes} from "@/views/Signup"
 import {routes as LoginRoutes} from "@/views/Login"
 let routes: RouteConfig [] = [
@@ -24,6 +25,11 @@ let routes: RouteConfig [] = [
             name: "reset-code",
             component: code
         }]
+    },{
+        path: `/test`,
+        name: `test-page`,
+        component: test
+
     }
 ]
 

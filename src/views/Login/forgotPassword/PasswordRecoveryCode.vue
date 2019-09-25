@@ -49,7 +49,7 @@
         >
           <v-btn
             class="recoverPassword__btn"
-            flat
+            text
             :loading="loading"
             :disabled="loading"
             @click="queryEmail"

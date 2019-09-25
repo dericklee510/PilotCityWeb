@@ -88,7 +88,7 @@
           <v-col cols="12">
             <v-btn
               id="pc-button"
-              flat
+              text
               outlined
             >
               NEXT

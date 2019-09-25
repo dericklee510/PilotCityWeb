@@ -22,7 +22,7 @@
           style="display: flex"
         >
           <v-switch
-            flat
+            text
             readonly
           >
             <template v-slot:label>
@@ -107,7 +107,7 @@
           <v-container>
             <v-list
               id="profileFields"
-              flat
+              text
             >
               <v-list-group
                 no-action

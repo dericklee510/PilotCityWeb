@@ -1,5 +1,5 @@
 // export profile from "./Profile.vue"
-import PrivateProfile from "./profile.vue"
+import PrivateProfile from "./Profile.vue"
 
 
 export default PrivateProfile

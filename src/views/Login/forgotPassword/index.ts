@@ -1,4 +1,4 @@
-import forgotPassword from "./forgotPassword.vue"
+import forgotPassword from "./ForgotPassword.vue"
 import code from "./PasswordRecoveryCode.vue"
 import email from "./PasswordRecoveryEmail.vue"
  

@@ -11,7 +11,7 @@
       <v-flex>
         <v-card
           class="flex"
-          flat
+          text
           tile
         >
           <v-card-title class="white black--text footer__body">

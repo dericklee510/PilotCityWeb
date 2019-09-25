@@ -53,7 +53,7 @@
                         mask="(###)-###-####"
                         color="#7B5D7D"
                         outline
-                        flat
+                        text
                       />
                     </v-layout>
                   </v-flex>

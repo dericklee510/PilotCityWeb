@@ -50,7 +50,7 @@
         >
           <v-btn
             class="recoverPassword__btn"
-            flat
+            text
             round
             :loading="loading"
             :disabled="loading"

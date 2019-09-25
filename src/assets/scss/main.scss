@@ -1,6 +1,9 @@
 @import "@/assets/SCSS/variables.scss";
+@import "@/assets/SCSS/components/components.scss";
+@import "@/assets/SCSS/views/views.scss";
 
 /* GLOBAL */
+
 html,
 body {
   margin: 0;
@@ -8,12 +11,41 @@ body {
   height: 100%; /* needed for container min-height */
   font-size: 16px;
   font-family: Raleway;
+  word-wrap: break-word;
+}
+.row{ 
+    margin: 0;
 }
 #pc-app{
     .primary--text{
         color: #000 !important;
         caret-color: #000 !important;
     }
+}
+.pc-background{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+#pc-button{
+    color: #fff;
+    width: 400px;
+    height: 100px;
+    font-weight: 900;
+    font-size: 2.5em;
+    line-height: 2.9em;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    letter-spacing: 0.125em;
+}
+.pc-h-center{
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+.pc-container{
+    margin: 0 5%;
 }
 
 p{
@@ -36,8 +68,17 @@ h1 {
     align-items: center;
     letter-spacing: 0.025em;
 }
-
-h3 {
+h2{
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 3em;
+    line-height: 1em;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.025em;
+}
+h3{
     font-family: Raleway;
     font-style: normal;
     font-weight: 800;
@@ -47,173 +88,6 @@ h3 {
     align-items: center;
     letter-spacing: 0.025em;
 }
-
-
-/* PICTURE - COMPONENT */
-.pc-profile-picture{
-    border-radius: 50%;
-    background-color: grey; // filler
-    &--page{
-        height: 260px;
-        width: 260px;
-    }
-    &--icon{
-        width: 50px;
-        height: 50px;
-    }
-}
-
-/* ROLE-BADGE - COMPONENT*/
-.pc-badge{
-    width: 100%;
-    color: #fff;
-    border-radius: 50px;
-    height: fit-content;
-    text-align: center;
-    // max-width: fit-content;
-    &__employer{
-       background-color: $pc-purple;
-       &--inverted{
-            color: $pc-purple;
-            background-color: white;
-            border: 0.75px solid #939598;
-       }
-    }
-    &__teacher{
-        background-color: $pc-pink;
-        &--inverted{
-            color: $pc-pink;
-            background-color: white;
-            border: 0.75px solid #939598;
-        }
-    }
-    &__student{
-        background-color: $pc-green;
-        &--inverted{
-            color: $pc-green;
-            background-color: white;
-            border: 0.75px solid #939598;
-        }
-    }
-    h2 {
-        text-align: center;
-    }
-}
-
-.pc-badge h3{
-    justify-content: center
-}
-
-
-
-
-
-
-
-
-
-
-/* PROFILE - PAGE */
-.pc-profile-page{
-}
-
-.pc-profile-page #profileDescription{
-    box-shadow: none;
-    border: 2px dashed #BFBFBF;
-}
-#profileDescription{
-    margin-top: 80px;
-    margin-right: 10%;
-    margin-left: 10%;
-}
-#profileDescription .container{
-    padding: 40px;
-}
-
-#profileFields .v-list-item__title{
-    // color: #000;
-
-    font-family: Raleway;
-    font-style: normal;
-    font-weight: 800;
-    font-size: 2.5em;
-    line-height: 1.2em;
-    display: flex;
-    align-items: center;
-    letter-spacing: 0.0625em;
-}
-#profileFields .v-list-item__subtitle{
-    font-family: Raleway;
-    font-style: normal;
-    font-weight: 800;
-    font-size: 1.5em;
-    line-height: 1.8em;
-    display: flex;
-    align-items: center;
-    letter-spacing: 0.2em;
-}
-#profileFields .pc-badge{
-    font-family: Raleway;
-    font-style: normal;
-    font-weight: 800;
-    font-size: 1.4em;
-    line-height: 2.1em;
-    align-items: center;
-    text-align: center;
-    letter-spacing: 0.034em;
-    padding: 0 px;
-}
-.pc-profile-page .v-list{
-    margin-top: 80px;
-    
-}
-#profileFields .v-list-item{
-    padding: 0;
-}
-#profileFields .mdi-chevron-down{
-    font-size: 70px;
-}
-
-#profileContainer{
-    position: relative;
-    width: 100%;
-}
-#profileContainer .pc-profile-picture{
-    position: absolute;
-    top: -15;
-    bottom: 0;
-    left: -50%;
-    right: 0%;
-}
-
-#profileCard{
-    margin: 0 5%;
-}
-
-#profileBanner{
-// MUST set height property, using Doka
-    height: 400px;
-    object-fit: cover;
-    width: 100%;
-}
-
-.profile__switch{
-    font-family: Raleway;
-    font-style: normal;
-    font-weight: 800;
-    line-height: 1.8em;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    letter-spacing: 0.312em;
-    &--active{
-        color: #000;
-    }
-    &--inactive{
-        color: #c7c8ca;
-    }
-}
- 
 
 /* Media Queries */
     @media only screen and (min-width : 1900px){
@@ -255,6 +129,9 @@ h3 {
         }
         h1{
             font-size: 2.6em;
+        }   
+        h2{
+            font-size: 1.95em;
         }
         h3{
             font-size: 1.3em;
@@ -301,6 +178,9 @@ h3 {
         }
         h1{
             font-size: 1.3em;
+        }
+        h2{
+            font-size: .97em;
         }
         h3{
             font-size: 0.6em;

@@ -204,7 +204,7 @@
             xs12
           >
             <v-btn
-              flat
+              text
               round
               class="signup__btn"
               :loading="loading"
