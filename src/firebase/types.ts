@@ -1,4 +1,4 @@
-import { REAL_DB_KEY, TEST_DB_KEY } from './../keys'
+import { REAL_DB_KEY, TEST_DB_KEY } from '@/keys'
 
 export class ApplicationConfig {
     public apiKey: string = TEST_DB_KEY

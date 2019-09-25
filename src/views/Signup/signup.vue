@@ -243,7 +243,7 @@
 </template>
 
 <script lang="ts">
-import '@/assets/scss/signup.scss'
+import '@/assets/SCSS/signup.scss'
 import Vue from "vue"
 import Component from "vue-class-component"
 import { AuthStore } from "@/store"

@@ -25,7 +25,7 @@ import VueRx from 'vue-rx'
 
 Vue.use(VueRx)
 Vue.use(VeeValidate)
-
+Vue.use(Vuetify)
 Vue.use(VuetifyGoogleAutocomplete, {
     apiKey: MAPS_API_KEY
 })
