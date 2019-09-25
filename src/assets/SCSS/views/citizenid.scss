@@ -1,0 +1,72 @@
+/* CITIZEN-ID - PAGE */
+.citizen-id{
+
+}
+.pc-background.citizen-id__header{
+    margin: 0;
+    background-color: #000;
+    height: 350px;
+}
+.citizen-id__title
+{
+    padding-bottom: 3%;
+}
+.citizen-id__title h1{
+    display: block;
+    text-align: center;
+    color: #fff;
+}
+.citizen-id__icon{
+    display: block;
+    margin: 0 auto;
+    bottom: 20%;
+}
+#citizen-id__select{
+    background-color: #58595B !important;
+    color: #fff !important;
+    width: 400px;
+    height: 75px;
+    font-weight: 800;
+    line-height: 2.9em;
+    text-align: center;
+    letter-spacing: 0.0625em;
+    display: block;
+    margin: 50px auto 0;
+}
+#citizen-id__type{
+    &--teacher{
+        width: 400px;
+        height: 75px;
+        line-height: 2.9em;
+        text-align: center;
+        letter-spacing: .0625em;
+        color: #fff;
+        background-color: $pc-pink !important;
+    }
+    &--employer{
+        width: 400px;
+    height: 75px;
+    line-height: 2.9em;
+    text-align: center;
+    letter-spacing: .0625em;
+        color: #fff;
+        background-color: $pc-purple !important;
+    }
+    &--student{
+        width: 400px;
+    height: 75px;
+    line-height: 2.9em;
+    text-align: center;
+    letter-spacing: .0625em;
+        color: #fff;
+        background-color: $pc-green !important;
+    }
+}
+
+.citizen-id__body{
+    height: 861px;
+    width: 100%;
+    background: #414042;
+    border: 1px solid #414042;
+    box-sizing: border-box;
+}

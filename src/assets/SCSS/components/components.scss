@@ -1,0 +1,56 @@
+
+/* PICTURE - COMPONENT */
+.pc-profile-picture{
+    border-radius: 50%;
+    background-color: grey; // filler
+    &--page{
+        height: 260px;
+        width: 260px;
+    }
+    &--icon{
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/* ROLE-BADGE - COMPONENT*/
+.pc-badge{
+    width: 100%;
+    color: #fff;
+    border-radius: 50px;
+    height: fit-content;
+    text-align: center;
+    // max-width: fit-content;
+    &__employer{
+       background-color: $pc-purple;
+       &--inverted{
+            color: $pc-purple;
+            background-color: white;
+            border: 0.75px solid #939598;
+       }
+    }
+    &__teacher{
+        background-color: $pc-pink;
+        &--inverted{
+            color: $pc-pink;
+            background-color: white;
+            border: 0.75px solid #939598;
+        }
+    }
+    &__student{
+        background-color: $pc-green;
+        &--inverted{
+            color: $pc-green;
+            background-color: white;
+            border: 0.75px solid #939598;
+        }
+    }
+}
+
+.pc-badge h2{
+    text-align: center;
+}
+
+.pc-badge h3{
+    justify-content: center
+}
