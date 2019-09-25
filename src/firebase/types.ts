@@ -1,4 +1,4 @@
-import { REAL_DB_KEY, TEST_DB_KEY } from './../keys'
+import { REAL_DB_KEY, TEST_DB_KEY } from '@/keys'
 
 export class ApplicationConfig {
     public apiKey: string = TEST_DB_KEY
@@ -13,7 +13,7 @@ export class ApplicationConfig {
             this.authDomain = "pilotcity-firestore.firebaseapp.com"
             this.databaseURL = "https://pilotcity-firestore.firebaseio.com",
             this.projectId = "pilotcity-firestore"
-            this.storageBucket = "pilotcity-firestore.appspot.com"
+            this.storageBucket = "gs://pilotcity-firestore-site_data"
             this.messagingSenderId = "80767280856"
         }
     }

@@ -16,7 +16,7 @@
 <script lang="ts">
 import "@/assets/SCSS/main.scss"
 import Vue from "vue"
-import HeaderMain from "@/components/layout/header.vue"
+import HeaderMain from "@/components/layout/header/header.vue"
 import Component from "vue-class-component"
 import FooterMain from "./components/layout/footer.vue"
 @Component({

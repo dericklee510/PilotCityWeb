@@ -1,1 +1,5 @@
-export { complexPassword } from "./complex_password"
+import { complexPassword } from "./complex_password"
+
+export{
+    complexPassword
+}

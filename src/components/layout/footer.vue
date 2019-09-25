@@ -15,74 +15,74 @@
           tile
         >
           <v-card-title class="white black--text footer__body">
-            <v-flex
-              xs12
-              md1
-              align-self-center
-            >
-              <v-layout justify-center>
-                <strong class="footer__heading">PilotCity Inc</strong>
-              </v-layout>
-            </v-flex>
-            <v-flex
-              xs12
-              md11
-              class="footer__icons"
-            >
-              <v-layout>
-                <v-btn
-                  v-for="icon in icons"
-                  :key="icon"
-                  class="mx-3 black--text footer_card__icon"
-                  dark
-                  icon
-                >
-                  <v-icon size="24px">
-                    {{ icon }}
-                  </v-icon>
-                </v-btn>
-              </v-layout>
-            </v-flex>
-            <v-flex
-              xs12
-              md2
-              grow
-              class="footer__subheading"
-            >
-              <v-layout justify-center>
-                ©2019 PilotCity Inc LLC, All Right Reserved
-              </v-layout>
-            </v-flex>
-            <v-spacer />
-            <v-flex
-              shrink
-              xs12
-              md1
-              align-self-center
-              class="footer__subheading--small"
-            >
+            <v-layout column>
               <v-layout
-                offset-md10
-                class="align"
+                xs12
+                md4
               >
-                <span>Endorsed by:</span>
+                <v-flex
+                  xs11
+                  md3
+                  align-self-center
+                >
+                  <strong class="footer__heading">PilotCity</strong>
+                </v-flex>
+                <v-flex
+                  xs11
+                  md5
+                  class="footer__icons"
+                >
+                  <v-btn
+                    v-for="icon in icons"
+                    :key="icon"
+                    class="mx-3 black--text footer_card__icon"
+                    dark
+                    icon
+                  >
+                    <v-icon size="24px">
+                      {{ icon }}
+                    </v-icon>
+                  </v-btn>
+                </v-flex>
               </v-layout>
-            </v-flex>
-            <v-flex
-              xs12
-              md1
-              shrink
-            >
-              <v-layout
-                offset-md1
-                justify-center
+              <v-flex
+                xs12
+                md11
+                grow
+                class="footer__subheading"
+              >
+                <v-layout>
+                  ©2019 PilotCity Inc LLC, All Rights Reserved
+                </v-layout>
+              </v-flex>
+            </v-layout>
+            <v-spacer />
+            <v-layout justify-end>
+              <v-flex
+                shrink
+                xs5
+                md3
+                align-self-center
+                class="footer__subheading--small"
+              >
+                <v-layout
+                  offset-md10
+                  text-xs-right
+                >
+                  <span>Endorsed By:</span>
+                </v-layout>
+              </v-flex>
+              <v-flex
+                xs3
+                md3
+                shrink
               >
                 <img
                   src="../../assets/ACoE.jpg"
                   class="footer__acoe"
                 >
-              </v-layout>
-            </v-flex>
+              </v-flex>
+            </v-layout> 
           </v-card-title>
         </v-card>
       </v-flex>
