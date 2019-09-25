@@ -12,11 +12,14 @@
           class=" citizen-id__header pc-background"
           align="end"
         >
-          <img
-            src="@/assets/citizen-id.jpg"
-            class="citizen-id__icon pc-h-center"
-          >
+          <v-col cols="12">
+            <img
+              src="@/assets/citizen-id.jpg"
+              class="citizen-id__icon pc-h-center"
+            >
+          </v-col>
           <v-col
+            cols="12"
             class="citizen-id__title"
           >
             <h1 class="text-center">
@@ -41,8 +44,8 @@
             </v-btn>
           </v-col>
           <v-col cols="12">
-            <v-col cols="4">
-              <v-row justify="center">
+            <v-row justify="center">
+              <v-col cols="4">
                 <v-col
                   cols="12"
                   style="padding: 0;"
@@ -83,8 +86,8 @@
                     </h2>
                   </v-btn>
                 </v-col>
-              </v-row>
-            </v-col>
+              </v-col>
+            </v-row>
           </v-col>
           <v-col cols="12">
             <v-btn
@@ -92,7 +95,7 @@
               text
               outlined
             >
-              NEXT
+              <h2>NEXT</h2>
             </v-btn>
           </v-col>
         </v-row>

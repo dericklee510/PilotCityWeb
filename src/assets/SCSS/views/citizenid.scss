@@ -17,9 +17,8 @@
     color: #fff;
 }
 .citizen-id__icon{
-    display: block;
     margin: 0 auto;
-    bottom: 20%;
+    bottom: 100%;
 }
 #citizen-id__select{
     background-color: #58595B !important;
@@ -35,8 +34,8 @@
 }
 #citizen-id__type{
     &--teacher{
-        width: 400px;
-        height: 75px;
+        min-width: 512px;
+        height: 90px;
         line-height: 2.9em;
         text-align: center;
         letter-spacing: .0625em;
@@ -44,20 +43,20 @@
         background-color: $pc-pink !important;
     }
     &--employer{
-        width: 400px;
-    height: 75px;
-    line-height: 2.9em;
-    text-align: center;
-    letter-spacing: .0625em;
+        min-width: 512px;
+        height: 90px;
+        line-height: 2.9em;
+        text-align: center;
+        letter-spacing: .0625em;
         color: #fff;
         background-color: $pc-purple !important;
     }
     &--student{
-        width: 400px;
-    height: 75px;
-    line-height: 2.9em;
-    text-align: center;
-    letter-spacing: .0625em;
+        min-width: 512px;
+        height: 90px;
+        line-height: 2.9em;
+        text-align: center;
+        letter-spacing: .0625em;
         color: #fff;
         background-color: $pc-green !important;
     }
