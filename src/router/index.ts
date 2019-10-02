@@ -2,8 +2,8 @@
 import Vue from "vue"
 import Router from "vue-router"
 
-import signup from "@/views/Signup"
-import login from "@/views/Login"
+import Signup from "@/views/Signup"
+import Login from "@/views/Login"
 // import about from "@/views/About.vue"
 import profile from "@/views/Profile"
 import test from "@/views/Test"
@@ -24,12 +24,12 @@ export default new Router({
         {
             path: "/signup",
             name: "signup",
-            component: signup
+            component: Signup
         },
         {
             path: "/login",
             name: "login",
-            component: login
+            component: Login
         },
         // {
         //     path: "/about",
