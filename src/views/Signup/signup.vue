@@ -205,7 +205,7 @@
           >
             <v-btn
               text
-              round
+              rounded
               class="signup__btn"
               :loading="loading"
               :disabled="loading"

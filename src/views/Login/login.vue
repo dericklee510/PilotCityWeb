@@ -96,10 +96,10 @@
               for="password"
             >Password</label>
             <v-text-field
-            type="password"
               ref="password"
               v-model="password"
               v-validate="'required'"
+              type="password"
               class="login__subtitle"
               name="password"
               outline
@@ -161,7 +161,10 @@ import Vue from "vue"
 import '@/assets/SCSS/login.scss'
 import { AuthStore } from "@/store"
 import Component from "vue-class-component"
-import { SUCCESSFUL_SIGNUP_RESP, SUCCESSFUL_LOGIN_RESP } from '../../store/Auth/const';
+import { 
+    SUCCESSFUL_SIGNUP_RESP, 
+    SUCCESSFUL_LOGIN_RESP 
+} from '../../store/Auth/const'
 
 @Component
 export default class Login extends Vue{
@@ -179,7 +182,7 @@ export default class Login extends Vue{
                 password: this.password
             })
         if(this.authResponse == SUCCESSFUL_LOGIN_RESP && AuthStore.user && !AuthStore.user.photoURL)
-          this.$router.push({name:`signup.profile`})
+            this.$router.push({name:`signup.profile`})
         this.loading = false
     }
 }

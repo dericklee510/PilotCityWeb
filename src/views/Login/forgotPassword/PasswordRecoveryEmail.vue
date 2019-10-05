@@ -51,7 +51,7 @@
           <v-btn
             class="recoverPassword__btn"
             text
-            round
+            rounded
             :loading="loading"
             :disabled="loading"
             @click="process"
