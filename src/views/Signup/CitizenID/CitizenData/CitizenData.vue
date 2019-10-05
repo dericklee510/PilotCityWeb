@@ -1,0 +1,153 @@
+<template>
+  <v-row
+    class="citizen-id__body "
+    align="center"
+  >
+    <v-col
+      cols="12"
+      class="mt-6 pt-6 mb-3"
+    >
+      <v-menu
+        class="citizen-id__menu"
+        :offset-y="true"
+      >
+        <template v-slot:activator="{ on, attrs }">
+          <v-col cols="12">
+            <v-row justify="center">
+              <v-col cols="12" md="6" lg="4">
+                <v-btn
+                  :id="CITIZENSTYLES[citizenType]"
+                  v-bind="attrs"
+                  rounded
+                  v-on="on"
+                >
+                  <h2
+                    class="text-capitalize pr-5 pl-5"
+                  >
+                    {{ citizenType }}
+                  </h2>
+                </v-btn>
+              </v-col>
+            </v-row>
+          </v-col>
+        </template>
+
+        <v-list style="padding: 0">
+          <v-list-item
+            v-for="(type, index) in AVAILABLETYPES"
+            :key="type + index"
+            style="padding: 0;"
+            @click="changeCitizenType(type)"
+          >
+            <v-col cols="12" class="pa-0">
+              <v-list-item-title :id="CITIZENSTYLES[type]">
+                <v-row
+                  align="center"
+                  justify="center"
+                >
+                  <v-col cols="8">
+                    <h3 class="text-center">
+                      {{ type }}
+                    </h3>
+                  </v-col>
+                </v-row>
+              </v-list-item-title>
+            </v-col>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+    </v-col>
+    <v-col
+      cols="12"
+      class="pt-0"
+    >
+      <v-row
+        id="citizen-id__base-questions"
+        justify="center"
+      >
+        <v-col
+          cols="12"
+          md="6"
+          lg="4"
+        >
+          <v-col
+            cols="12"
+            class="citizen-title"
+          >
+            <pcSelect
+              title="TITLE"
+              :items="['Mr.', 'Mrs.', 'Ms.', 'no preference']" 
+              placeholder="How may we address you?"
+            />
+          </v-col>
+          <v-col cols="12">
+            <pcTextfield
+              title="FIRST NAME"
+              placeholder="First Name"
+            />
+          </v-col>
+          <v-col cols="12">
+            <pcTextfield
+              title="LAST NAME"
+              placeholder="Last Name"
+            />
+          </v-col>
+          <v-col cols="12">
+            <pcTextfield
+              title="PHONE NUMBER"
+              placeholder="(###) ###-####"
+            />
+          </v-col>
+        </v-col>
+      </v-row>
+    </v-col>
+    <v-col cols="12">
+      <v-row justify="center">
+        <v-col
+          cols="12"
+          md="6"
+          lg="4"
+        >
+          <v-btn
+            id="citizen-id__next"
+            class="pc-button"
+            text
+            outlined
+          >
+            <h3 class="text-center">
+              NEXT
+            </h3>
+          </v-btn>
+        </v-col>
+      </v-row>
+    </v-col>
+  </v-row>
+</template>
+
+<script lang="ts">
+import Vue from "vue"
+import PCselect from "@/components/inputs/PCselect.vue"
+import PCtextfield from "@/components/inputs/PCtextfield.vue"
+import {Component, Prop} from "vue-property-decorator"
+
+@Component({
+    components:{
+        pcSelect: PCselect,
+        pcTextfield: PCtextfield
+    }
+})
+export default class CitizenData extends Vue {
+    @Prop({type: String, required: true})
+    public citizenType!: string;
+    private CITIZENSTYLES = {
+        Teacher: "citizen-id__type--teacher", 
+        Employer: "citizen-id__type--employer", 
+        Student: "citizen-id__type--student"
+    }
+    private AVAILABLETYPES: string[] = ["Teacher", "Employer", "Student"]
+    
+    private changeCitizenType(intype: string): void {
+        this.citizenType = intype
+    }
+}
+</script>

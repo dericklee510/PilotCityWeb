@@ -4,7 +4,7 @@ export {
     Signup as Main
 }
 
-export {children} from "./Profile"
+export {children} from "./CitizenID"
 
 export default Signup
 export {default as routes} from "./routes"
