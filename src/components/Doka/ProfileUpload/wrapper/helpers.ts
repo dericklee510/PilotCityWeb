@@ -6,8 +6,8 @@ import { getDownloadURL } from "rxfire/storage"
 
 export function updateUserPhotoUrl(filepath: string): Promise<void> {
     if (!AuthStore.user || !FbStore.userDoc){
-            throw ('Not logged in!')
-        }
+        throw ('Not logged in!')
+    }
     const AuthStoreUser = AuthStore.user as firebase.User
     const FbStoreUserDoc = FbStore.userDoc as firebase.firestore.DocumentReference
     const ref = StorageStore.bucketRef.child(filepath)

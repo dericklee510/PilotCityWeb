@@ -17,32 +17,35 @@
   <div>
     <v-toolbar>
       <v-toolbar-title>
-        <img class="header__logo" src="@/assets/PilotCityLogo.png" alt="Pilot City">
+        <img
+          class="header__logo"
+          src="@/assets/PilotCityLogo.png"
+          alt="Pilot City"
+        >
       </v-toolbar-title>
 
-      <v-spacer></v-spacer>
+      <v-spacer />
       <LogoutButton />
     </v-toolbar>
   </div>
-
 </template>
 
 <script lang="ts">
 import Vue from "vue"
 import Component from "vue-class-component"
-import LogoutButton from "./components/LogoutButton/LogoutButton.vue"
+import LogoutButton from "./components/LogoutButton.vue"
 @Component({
-  components: {
-    LogoutButton
-  }
+    components: {
+        LogoutButton
+    }
 })
 export default class HeaderMain extends Vue {
 
-  private icons: string[] = [
-    "fab fa-instagram",
-    "fab fa-facebook",
-    "fab fa-twitter"
-  ];
+    private icons: string[] = [
+        "fab fa-instagram",
+        "fab fa-facebook",
+        "fab fa-twitter"
+    ];
 }
 </script>
 
