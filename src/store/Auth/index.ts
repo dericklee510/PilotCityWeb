@@ -48,7 +48,6 @@ export default class Auth extends VuexModule {
             console.error(error)
             return error.message
         }
-
     }
     @Action
     public async resetPassword(hash: string, newpass: string): Promise<string> {
