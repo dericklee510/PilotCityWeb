@@ -16,7 +16,6 @@ let routes: RouteConfig [] = [
     ...ProfileRoutes,
     {
         path: `/reset_password`,
-        name: "recover-pass-container",
         component: forgotPassword,
         children: [{
             path: "",

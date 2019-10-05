@@ -12,7 +12,6 @@ const routes: RouteConfig[] = [
         }
     },
     {
-        name: "signup.id",
         path: `/signup/citizen-id`,
         component: Signup.children.CitizenID,
         children: [
