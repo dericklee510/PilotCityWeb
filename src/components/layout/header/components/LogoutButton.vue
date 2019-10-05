@@ -2,7 +2,7 @@
   <v-btn
     v-if="user"
     text
-    round
+    rounded
     color="primary"
     :loading="loading"
     :disabled="loading"
