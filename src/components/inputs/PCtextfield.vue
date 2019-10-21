@@ -7,7 +7,9 @@
       for="citizen-title"
       class="pc-input__label"
     > 
-      {{ title }}
+      <h5 class="text-uppercase">
+        {{ title }}
+      </h5>
     </label>
     <v-text-field
       flat
@@ -16,6 +18,7 @@
       :placeholder="placeholder"
       class="pc-input__textfield"
       background-color="transparent"
+      :dark="darkMode"
       hide-selected
     />
   </div>
@@ -28,6 +31,8 @@ import {Component, Prop} from "vue-property-decorator"
 
 @Component
 export default class PCtextfield extends Vue {
+    @Prop({type: Boolean, default: false})
+    public darkMode!: boolean;
     @Prop({type: String, required: true})
     public title!: string;
     @Prop({type: String, required: true})
