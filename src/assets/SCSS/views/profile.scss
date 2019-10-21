@@ -1,5 +1,16 @@
 /* PUBLIC-PROFILE - PAGE */
 .pc-profile-page{
+    &--light{
+        background-color: #fff;
+        color: black;
+    }
+    &--dark .v-list-item__title, &--dark{
+        background-color: #414042 !important;
+        color: #fff !important;
+    }
+    &--dark .mdi-chevron-down{
+        color: #C7C8CA !important;
+    }
 }
 
 .pc-profile-page #profileDescription{
@@ -16,8 +27,6 @@
 }
 
 #profileFields .v-list-item__title{
-    // color: #000;
-
     font-family: Raleway;
     font-style: normal;
     font-weight: 800;
@@ -26,6 +35,7 @@
     display: flex;
     align-items: center;
     letter-spacing: 0.0625em;
+
 }
 #profileFields .v-list-item__subtitle{
     font-family: Raleway;
@@ -55,7 +65,7 @@
 #profileFields .v-list-item{
     padding: 0;
 }
-#profileFields .mdi-chevron-down{
+#profileFields .v-list-group__header .mdi-chevron-down{
     font-size: 70px;
 }
 
@@ -140,10 +150,7 @@
     #profileDetails .pc-badge{
         border-radius: 0px;
     }
-    #profileDetails h3{
-        justify-content:center;
-    }
-    #profileContainer h1{
+    #profileDetails h3, h1{
         justify-content:center;
     }
     #profileDescription{
@@ -173,7 +180,7 @@
         margin: 20px;
     }
     #profileFields{
-        .mdi-chevron-down{
+        .v-list-group__header .mdi-chevron-down{
             font-size: 1.35em;
         }
         .v-list-item__title{
