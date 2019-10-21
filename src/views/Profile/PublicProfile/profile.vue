@@ -54,17 +54,30 @@
         > 
         <v-container>
           <!-- make tag component -- backlog -->
-          <v-row>
+          <v-row justify="end">
             <!-- insert Doka-profile-picture-component -->
-            <v-spacer />
             <v-col
               id="profileContainer"
-              cols="12"
+              cols="11"
               md="7"
-              style="margin-right: 100px; padding-bottom: 0"
+              class="pl-6"
+              style="padding-bottom: 0"
             >
               <h1> Tommie Ebanez </h1>
               <div class="pc-profile-picture pc-profile-picture--page" />
+            </v-col>
+            <v-col cols="1">
+              <v-row
+                justify="start"
+                align="start"
+              >
+                <v-col>
+                  <i
+                    class="mdi mdi-settings"
+                    style="font-size: 1.8em"
+                  />
+                </v-col>
+              </v-row>
             </v-col>
           </v-row>
           <v-row>
@@ -263,7 +276,6 @@
 <script lang="ts">
 import Vue from "vue"
 import Component from "vue-class-component"
-
 
 @Component
 export default class Profile extends Vue {

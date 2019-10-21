@@ -14,8 +14,8 @@
           <v-col cols="12">
             <img
               id="citizen-id__icon"
-              src="@/assets/citizen-id.jpg"
-              class="pc-h-center pc-icon"
+              src="@/assets/citizen-id.png"
+              class="pc-vh-center pc-icon"
             >
           </v-col>
           <v-col
