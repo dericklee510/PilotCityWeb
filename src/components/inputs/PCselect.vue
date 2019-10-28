@@ -12,7 +12,7 @@
       </h5>
     </label>
     <v-select
-      id="citizen-title"
+      v-model="content"
       :multiple="multiselect"
       append-icon="mdi-chevron-down"
       flat
@@ -36,6 +36,8 @@ import {Component, Prop} from "vue-property-decorator"
 
 @Component
 export default class PCselect extends Vue {
+    @Prop({type: String})
+    public value: string;
     @Prop({type: Boolean, default: false})
     public darkMode!: boolean;
     @Prop({type: Boolean, default: false})
@@ -46,6 +48,11 @@ export default class PCselect extends Vue {
     public items!: string[];
     @Prop({type: String, required: true})
     public placeholder!: string;
+
+    public content: string = this.value;
+    public handleInput(){
+        this.$emit('input', this.content)
+    }
 }
 </script>
 
