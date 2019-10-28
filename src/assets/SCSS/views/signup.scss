@@ -10,3 +10,11 @@
     display: block;
     margin: 0 auto;
 }
+@media only screen and (max-width : 500px){
+    #signup-image{
+        height: 108px;
+    }
+    #login-button{
+        height: 5vh;
+    }
+}

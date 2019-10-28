@@ -1,157 +1,105 @@
 <template>
-  <div
-    class="login-container" 
-  >
-    <v-layout
-      class="form-layout"
-      row
-      wrap
-    >
-      <v-flex
-        style="text-align: center"
-        xs12
-      >
-        <h1 class="login__title">
-          Sign in to PilotCity
-        </h1>
-      </v-flex>
-      <v-flex class="login__questions">
-        <v-layout
-          row
-          wrap
-          justify-center
-        >
-          <v-flex
-            class="login__icons"
-            align-self-center
-            xs1
+  <div class="pc-background--dark">
+    <v-container style="padding-top: 10vh; padding-bottom: 25vh">
+      <v-row justify="center">
+        <v-col cols="12">
+          <v-row
+            justify="center"
           >
-            <v-layout
-              row
-              justify-end
+            <v-col
+              cols="12"
+              md="4"
             >
-              <i
-                class="fa fa-user"
-                aria-hidden="true"
-              />
-            </v-layout>
-          </v-flex>
-          <v-flex
-            xs8
+              <img
+                id="login-image"
+                src="@/assets/Knock_knock.png"
+              >
+            </v-col>
+          </v-row>
+        </v-col>
+        <v-col cols="12">
+          <v-row justify="center">
+            <v-col
+              cols="12"
+              md="3"
+            >
+              <h2
+                id="login-title"
+                class="text-center text-uppercase"
+                style="display:block"
+              >
+                Who's There
+              </h2>
+            </v-col>
+          </v-row>
+        </v-col>
+        <v-col
+          cols="12"
+          sm="7"
+          md="6"
+          lg="4"
+        >
+          <v-col
+            cols="12"
           >
-            <v-spacer />
-            <label
-              class="login__label"
-              for="email"
-            >Username</label>
-            <v-text-field
+            <pcTextfield
               v-model="email"
               v-validate="'required|email'"
-              class="login__subtitle"
-              name="email"
-              outline
-              :error-messages="errors.collect('email')"
+              :dark-mode="true"
+
+
+              title="EMAIL"
               placeholder="Enter your email"
+              name="email"
+              :error-messages="errors.collect('email')"
               required
-              single-line
               @keyup.enter="$refs.password.focus()"
             />
-          </v-flex>
-          <v-flex
-            style="text-align: right"
-            xs9
+          </v-col> 
+          <v-col
+            cols="12"
           >
-            <a 
-              href="#" 
-              class="login__helplinks"
-            >Forgot Username?</a>
-          </v-flex>
-        </v-layout>
-        <v-layout
-          row
-          wrap
-          justify-center
-        >
-          <v-flex
-            class="login__icons"
-            align-self-center
-            xs1
-          >
-            <v-layout
-              row
-              justify-end
-            >
-              <i
-                class="fa fa-lock"
-                aria-hidden="true"
-              />
-            </v-layout>
-          </v-flex>
-          <v-flex
-            xs8
-          >
-            <v-spacer />
-            <label
-              class="login__label"
-              for="password"
-            >Password</label>
-            <v-text-field
+            <pcTextfield
               ref="password"
               v-model="password"
               v-validate="'required'"
               type="password"
-              class="login__subtitle"
-              name="password"
-              outline
+              :dark-mode="true"
+              title="PASSWORD"
+              placeholder="Enter a password"
               :error-messages="errors.collect('password')"
-              single-line
-              placeholder="Enter your password"
               required
               @keyup.enter="process()"
             />
-          </v-flex>
-          <v-flex
-            style="text-align: right"
-            xs9
-          >
-            <a href="#">Forgot Password?</a>
-          </v-flex>
-          <v-flex
-            style="text-align: center"
-            xs12
-          >
+          </v-col> 
+          <v-col cols="12">
+            <h4>{{ 'chicken' }}</h4>
             <v-btn
+              id="login-button"
+              block
               :loading="loading"
               :disabled="loading"
-              color="#dda0dd"
-              class="login__btn"
-              @click="process"
+              class="mb-6"
+              @click="process()"
             >
-              Login
+              <h3 class="text-uppercase">
+                LOGIN
+              </h3>
             </v-btn>
-          </v-flex>
-          <v-flex
-            v-show="authResponse.length"
-            xs12
-            class="signup__message"
-            align-self-center
-          >
-            <v-layout justify-center>
-              <h4>{{ authResponse }}</h4>
-            </v-layout>
-          </v-flex>
-          <v-flex
-            style="text-align: center"
-            xs12
-          >
-            <a
-              href="#"
-              class="login__helplinks"
-            >Sign up for PilotCity</a>
-          </v-flex>
-        </v-layout>
-      </v-flex>
-    </v-layout>
+            <router-link
+              :to="{name: 'login'}"
+            >
+              <h4
+                class="text-center pc-background--dark"
+                style="display: block"
+              >
+                Don't have an account yet? Sign-up here
+              </h4>
+            </router-link>
+          </v-col>
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
@@ -165,8 +113,15 @@ import {
     SUCCESSFUL_SIGNUP_RESP, 
     SUCCESSFUL_LOGIN_RESP 
 } from '../../store/Auth/const'
+import PCselect from "@/components/inputs/PCselect.vue"
+import PCtextfield from "@/components/inputs/PCtextfield.vue"
 
-@Component
+@Component({
+    components:{
+        pcSelect: PCselect,
+        pcTextfield: PCtextfield
+    }
+})
 export default class Login extends Vue{
 
     private password: string = ``;
@@ -182,7 +137,7 @@ export default class Login extends Vue{
                 password: this.password
             })
         if(this.authResponse == SUCCESSFUL_LOGIN_RESP && AuthStore.user && !AuthStore.user.photoURL)
-            this.$router.push({name:`signup.profile`})
+            this.$router.push({name:`signup.type`})
         this.loading = false
     }
 }
