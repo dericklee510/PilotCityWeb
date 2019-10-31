@@ -78,7 +78,7 @@
                 shrink
               >
                 <img
-                  src="../../assets/ACoE.jpg"
+                  src="@/assets/ACoE.jpg"
                   class="footer__acoe"
                 >
               </v-flex>

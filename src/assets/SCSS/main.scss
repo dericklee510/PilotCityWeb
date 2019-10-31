@@ -118,10 +118,25 @@ h6{
         background-color: #fff;
     }
 }
-.pc-icon{
-    
-}
 
+#pc-app .pc-toolbar{
+    &__buttons{
+
+    }
+}
+.pc-toolbar .v-toolbar__content{
+    margin: .5em 0em;
+}
+.pc-title {
+    &--header{
+        padding: 0px 16px;
+    }
+}
+.pc-logo {
+    &--header{
+      max-width: 42px;
+    }
+}
 #pc-app .pc-button{
     color: #fff;
     font-weight: 900;

@@ -1,61 +1,83 @@
 <template>
-  <!-- <v-card>
-    <v-flex
-      xs1
-      align-self-center
-      class="header__main"
-    >
-      <v-layout justify-center>
-        <img
-          class="header__logo"
-          src="@/assets/PilotCityLogo.png"
-          alt="Pilot City"
-        >
-      </v-layout>
-    </v-flex>
-  </v-card> -->
-  <div>
-    <v-toolbar>
-      <v-toolbar-title>
-        <img
-          class="header__logo"
-          src="@/assets/PilotCityLogo.png"
-          alt="Pilot City"
-        >
-      </v-toolbar-title>
-
-      <v-spacer />
-      <LogoutButton />
-    </v-toolbar>
-  </div>
+  <v-toolbar
+    dark
+    style="height: fit-content"
+    max-height="64px;"
+    class="pc-toolbar"
+  >
+    <v-toolbar-side-icon>
+      <img
+        class="pc-logo--header"
+        src="@/assets/Pilotcity_logo.png"
+        alt="Pilot City"
+      >
+    </v-toolbar-side-icon>
+    <v-spacer />
+    <v-toolebar-items>
+      <v-row class="pc-toolbar__buttons">
+        <v-col>
+          <v-btn
+            v-if="user"
+            dark
+            text
+            rounded
+            color="primary"
+            :loading="loading"
+            :disabled="loading"
+            @click="logout()"
+          >
+            Explore
+          </v-btn>
+        </v-col>
+        <v-col>
+          <v-btn
+            v-if="user"
+            dark
+            text
+            rounded
+            color="primary"
+            :loading="loading"
+            :disabled="loading"
+            @click="logout()"
+          >
+            My Programs
+          </v-btn>
+        </v-col>
+        <v-col>
+          <v-btn
+            v-if="user"
+            dark
+            text
+            rounded
+            color="primary"
+            :loading="loading"
+            :disabled="loading"
+            @click="logout()"
+          >
+            Logout
+          </v-btn>
+        </v-col>
+      </v-row>
+    </v-toolebar-items>
+    <v-toolbar-side-icon>
+      <v-list-item-avatar size="50">
+        <div class="pc-profile-picture pc-profile-picture--icon" />
+      </v-list-item-avatar>
+    </v-toolbar-side-icon>
+  </v-toolbar>
 </template>
 
 <script lang="ts">
 import Vue from "vue"
 import Component from "vue-class-component"
-import LogoutButton from "./components/LogoutButton.vue"
-@Component({
-    components: {
-        LogoutButton
-    }
-})
-export default class HeaderMain extends Vue {
+import { AuthStore } from '@/store'
 
-    private icons: string[] = [
-        "fab fa-instagram",
-        "fab fa-facebook",
-        "fab fa-twitter"
-    ];
+@Component
+export default class HeaderMain extends Vue {
+    public loading = false
+    get user(){
+        return AuthStore.user
+    }
+    public logout:  () => Promise<void> = AuthStore.logout
 }
 </script>
-
-<style lang="scss">
-.header__main {
-  height: 4em;
-  margin: 1rem 0 0.5rem;
-}
-.header__logo {
-  max-height: 53px;
-  max-width: 42px;
-}
-</style>

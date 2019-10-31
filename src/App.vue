@@ -1,15 +1,17 @@
 <template>
-  <v-app id="pc-app">
-    <link
-      href="https://fonts.googleapis.com/css?family=Raleway&display=swap"
-      rel="stylesheet"
-    >
-    <HeaderMain />
-    <v-content>
-      <router-view />
-    </v-content>
-    <FooterMain />
-  </v-app>
+  <div id="app">
+    <v-app id="pc-app">
+      <link
+        href="https://fonts.googleapis.com/css?family=Raleway&display=swap"
+        rel="stylesheet"
+      >
+      <HeaderMain />
+      <v-content>
+        <router-view />
+      </v-content>
+      <FooterMain />
+    </v-app>
+  </div>
 </template>
 
 
@@ -18,7 +20,7 @@ import "@/assets/SCSS/main.scss"
 import Vue from "vue"
 import HeaderMain from "@/components/layout/header/header.vue"
 import Component from "vue-class-component"
-import FooterMain from "./components/layout/footer.vue"
+import FooterMain from "./components/layout/footer/FooterDefault.vue"
 @Component({
     components: {
         FooterMain,
