@@ -119,12 +119,18 @@ h6{
     }
 }
 
-#pc-app .pc-toolbar{
-    &__buttons{
+/* COMOPNENT STYLES */
 
+#pc-app .pc-header{
+    button{
+        color: #fff !important;
     }
 }
-.pc-toolbar .v-toolbar__content{
+.v-toolbar.pc-header.v-sheet{
+    background-color: #414042;
+    flex: 0 1 auto;
+}
+.pc-header .v-toolbar__content{
     margin: .5em 0em;
 }
 .pc-title {
@@ -134,8 +140,11 @@ h6{
 }
 .pc-logo {
     &--header{
-      max-width: 42px;
+      max-width: 2.5em;
     }
+}
+.pc-dropdown__menu.v-list{
+    padding: 0;
 }
 #pc-app .pc-button{
     color: #fff;

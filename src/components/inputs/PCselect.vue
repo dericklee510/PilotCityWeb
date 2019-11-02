@@ -36,8 +36,8 @@ import {Component, Prop} from "vue-property-decorator"
 
 @Component
 export default class PCselect extends Vue {
-    @Prop({type: String})
-    public value: string;
+    @Prop({type: String, required: true})
+    public value!: string;
     @Prop({type: Boolean, default: false})
     public darkMode!: boolean;
     @Prop({type: Boolean, default: false})

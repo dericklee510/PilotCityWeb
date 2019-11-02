@@ -73,7 +73,6 @@
             />
           </v-col> 
           <v-col cols="12">
-            <h4>{{ 'chicken' }}</h4>
             <v-btn
               id="login-button"
               block
