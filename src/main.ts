@@ -16,15 +16,11 @@ import { authState } from 'rxfire/auth'
 
 
 
-
-import VeeValidate from '@/utilities/validation'
-
 import VuetifyGoogleAutocomplete from 'vuetify-google-autocomplete'
 
 import VueRx from 'vue-rx'
 
 Vue.use(VueRx)
-Vue.use(VeeValidate)
 Vue.use(vuetify)
 Vue.use(VuetifyGoogleAutocomplete, {
     apiKey: MAPS_API_KEY

@@ -1,6 +1,8 @@
 
 import * as validators from "./validators"
-import VeeValidate from 'vee-validate'
+import {ValidationProvider, extend} from 'vee-validate'
 
-VeeValidate.Validator.extend('complex-password',validators.complexPassword)
-export default VeeValidate
+extend('complex-password',validators.complexPassword)
+extend('DECIMAL', validators.DECIMAL)
+
+export default ValidationProvider
