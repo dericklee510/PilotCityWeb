@@ -1,6 +1,6 @@
 <template>
   <v-footer
-    class="footer__main"
+    class="pc-footer pc-footer--simple"
     dark
     height="auto"
   >

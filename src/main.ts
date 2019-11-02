@@ -15,7 +15,8 @@ import vuetify from './plugins/vuetify' // used to fix sass errors
 import { authState } from 'rxfire/auth'
 
 
-
+import Default from "@/components/layout/Default.vue"
+import Simple from "@/components/layout/Simple.vue"
 
 import VeeValidate from '@/utilities/validation'
 
@@ -29,6 +30,8 @@ Vue.use(vuetify)
 Vue.use(VuetifyGoogleAutocomplete, {
     apiKey: MAPS_API_KEY
 })
+Vue.component('default-layout', Default)
+Vue.component('simple-layout', Simple)
 Vue.config.productionTip = false
 firestore // enables firebaseApp and firestore
 
