@@ -3,95 +3,40 @@
     <v-container style="padding-top: 10vh; padding-bottom: 25vh">
       <v-row justify="center">
         <v-col cols="12">
-          <v-row
-            justify="center"
-          >
-            <v-col
-              cols="12"
-              md="4"
-            >
-              <img
-                id="login-image"
-                src="@/assets/Knock_knock.png"
-              >
+          <v-row justify="center">
+            <v-col cols="12" md="4">
+              <img id="login-image" src="@/assets/Knock_knock.png">
             </v-col>
           </v-row>
         </v-col>
         <v-col cols="12">
           <v-row justify="center">
-            <v-col
-              cols="12"
-              md="3"
-            >
-              <h2
-                id="login-title"
-                class="text-center text-uppercase"
-                style="display:block"
-              >
+            <v-col cols="12" md="3">
+              <h2 id="login-title" class="text-center text-uppercase" style="display:block">
                 Who's There
               </h2>
             </v-col>
           </v-row>
         </v-col>
-        <v-col
-          cols="12"
-          sm="7"
-          md="6"
-          lg="4"
-        >
-          <v-col
-            cols="12"
-          >
-            <pcTextfield
-              v-model="email"
-              v-validate="'required|email'"
-              :dark-mode="true"
-
-
-              title="EMAIL"
-              placeholder="Enter your email"
-              name="email"
-              :error-messages="errors.collect('email')"
-              required
-              @keyup.enter="$refs.password.focus()"
-            />
-          </v-col> 
-          <v-col
-            cols="12"
-          >
-            <pcTextfield
-              ref="password"
-              v-model="password"
-              v-validate="'required'"
-              type="password"
-              :dark-mode="true"
-              title="PASSWORD"
-              placeholder="Enter a password"
-              :error-messages="errors.collect('password')"
-              required
-              @keyup.enter="process()"
-            />
-          </v-col> 
+        <v-col cols="12" sm="7" md="6" lg="4">
           <v-col cols="12">
-            <v-btn
-              id="login-button"
-              block
-              :loading="loading"
-              :disabled="loading"
-              class="mb-6"
-              @click="process()"
-            >
+            <ValidationProvider rules="required|email" ref="email" v-slot={errors}>
+              <pcTextfield v-model="email" :dark-mode="true" title="EMAIL" placeholder="Enter your email" name="email" :error-messages="errors" required @keyup.enter="$refs.password.focus()" />
+            </ValidationProvider>
+          </v-col>
+          <v-col cols="12">
+            <ValidationProvider rules="required" ref="password" v-slot={errors}>
+              <pcTextfield ref="password" v-model="password" type="password" :dark-mode="true" title="PASSWORD" placeholder="Enter a password" :error-messages="errors" required @keyup.enter="process()" />
+            </ValidationProvider>
+          </v-col>
+          <v-col cols="12">
+            <v-btn id="login-button" block :loading="loading" :disabled="loading" class="mb-6" @click="process()">
               <h3 class="text-uppercase">
                 LOGIN
               </h3>
             </v-btn>
-            <router-link
-              :to="{name: 'login'}"
-            >
-              <h4
-                class="text-center pc-background--dark"
-                style="display: block"
-              >
+            <router-link :to="{name: 'login'}">
+              <h4 class="text-center pc-background--dark" style="display: block">
                 Don't have an account yet? Sign-up here
               </h4>
             </router-link>
@@ -107,37 +52,40 @@
 import Vue from "vue"
 import { AuthStore } from "@/store"
 import Component from "vue-class-component"
-import { 
-    SUCCESSFUL_SIGNUP_RESP, 
-    SUCCESSFUL_LOGIN_RESP 
+import {
+  SUCCESSFUL_SIGNUP_RESP,
+  SUCCESSFUL_LOGIN_RESP
 } from '../../store/Auth/const'
 import PCselect from "@/components/inputs/PCselect.vue"
 import PCtextfield from "@/components/inputs/PCtextfield.vue"
+import { ValidationProvider } from 'vee-validate'
+import { ProviderInstance } from "vee-validate/dist/types/types"
 
 @Component({
-    components:{
-        pcSelect: PCselect,
-        pcTextfield: PCtextfield
-    }
+  components: {
+    pcSelect: PCselect,
+    pcTextfield: PCtextfield,
+    ValidationProvider
+  }
 })
-export default class Login extends Vue{
+export default class Login extends Vue {
 
-    private password: string = ``;
-    public email: string = ``;
-    public loading: boolean = false;
-    public authResponse: string = ``; 
+  private password: string = ``;
+  public email: string = ``;
+  public loading: boolean = false;
+  public authResponse: string = ``;
 
-    public async process(): Promise<void> {
-        this.loading = true
-        if (await this.$validator.validateAll())
-            this.authResponse = await AuthStore.login({
-                email: this.email,
-                password: this.password
-            })
-        if(this.authResponse == SUCCESSFUL_LOGIN_RESP && AuthStore.user && !AuthStore.user.photoURL)
-            this.$router.push({name:`signup.type`})
-        this.loading = false
-    }
+  public async process(): Promise<void> {
+    this.loading = true
+    if ((await Promise.all([(this.$refs.email as ProviderInstance).validate(), (this.$refs.password as ProviderInstance).validate()])).every(ValidationResult => ValidationResult.valid))
+      this.authResponse = await AuthStore.login({
+        email: this.email,
+        password: this.password
+      })
+    if (this.authResponse == SUCCESSFUL_LOGIN_RESP && AuthStore.user && !AuthStore.user.photoURL)
+      this.$router.push({ name: `signup.type` })
+    this.loading = false
+  }
 }
 </script>
 
