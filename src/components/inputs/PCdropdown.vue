@@ -54,7 +54,7 @@ export default class PCdropdown extends Vue {
     private icon!: string;
 
     public content: string = this.value;
-    public handleInput(e){
+    public handleInput(e:any){
         this.content =  e.target.dataset.content
         this.$emit('input', this.content)
     }

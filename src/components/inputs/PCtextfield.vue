@@ -35,9 +35,9 @@ import {Component, Prop} from "vue-property-decorator"
 @Component
 export default class PCtextfield extends Vue {
     @Prop({type: String})
-    public value: string;
+    public value?: string;
     @Prop({type: Boolean, default: false})
-    public darkMode: boolean;
+    public darkMode?: boolean;
     @Prop({type: String, required: true})
     public title!: string;
     @Prop({type: String, required: true})
@@ -45,7 +45,7 @@ export default class PCtextfield extends Vue {
     @Prop({type: String})
     public type!: string;
 
-    public content: string = this.value;
+    public content?: string = this.value;
     public handleInput(){
         this.$emit('input', this.content)
     }
