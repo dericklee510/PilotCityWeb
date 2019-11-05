@@ -1,10 +1,10 @@
 import filepond from "filepond"
 import { StorageStore, AuthStore } from '@/store';
-import { updateUserPhotoUrl } from './helpers';
+
 
 import { getDownloadURL, put } from 'rxfire/storage';
 import { switchMap, map, tap } from 'rxjs/operators';
-
+var updateUserBanner:(imgPath:string) => Promise<string>
 // Need to save image filepath into database
 // Retrieve filepath from database
 export const process: filepond.server.process = (fieldName, file, metadata, load, error, progress, abort) => {
