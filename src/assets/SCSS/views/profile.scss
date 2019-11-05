@@ -71,14 +71,9 @@
 
 #profileContainer{
     position: relative;
-    width: 100%;
 }
-#profileContainer .pc-profile-picture{
+#profileContainer .pc-profile-picture{ 
     position: absolute;
-    top: -15;
-    bottom: 0;
-    left: -50%;
-    right: 0%;
 }
 
 #profileBanner{
@@ -111,25 +106,16 @@
         &--page{
             height: 400px;
             width: 400px;
-            left: -20%;
         }
 
     }
 }
-@media only screen and (min-width : 1500px){
-    #profileContainer .pc-profile-picture{
-        &--page{
-            left: -40%;
-        }
-
-    }
-}
+@media only screen and (min-width : 1500px){}
 @media only screen and (max-width : 1240px){
     #profileContainer .pc-profile-picture{
         position: absolute;
         top: 20%;
         bottom: 0%;
-        left: -45%;
         right: 0%;
     }
 
@@ -142,10 +128,12 @@
 @media only screen and (max-width :950px){
     #profileContainer .pc-profile-picture{
         position: absolute;
-        top: -300px;
+        top: -150px;
         bottom: 0%;
-        left: 35%;
         right: 30%;
+    } 
+    .pc-profile-page .v-list{
+        margin-top: 40px;
     }
     #profileDetails .pc-badge{
         border-radius: 0px;
@@ -163,7 +151,7 @@
 @media only screen and (max-width : 500px){
     #profileContainer .pc-profile-picture{
         position: absolute;
-        top: -100px;
+        top: -75px;
         bottom: 0%;
     }
     #profileContainer .pc-profile-picture--page{

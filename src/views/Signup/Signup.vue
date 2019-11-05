@@ -141,7 +141,6 @@
 </template>
 
 <script lang="ts">
-import '@/assets/SCSS/signup.scss'
 import { AuthStore } from "@/store"
 import _ from "lodash"
 import Vue from "vue"

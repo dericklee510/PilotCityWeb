@@ -18,13 +18,13 @@ const routes: RouteConfig[] = [
         beforeEnter(to,from,next): void{
             AuthStore.user?next({name:'signup.profile'}):next(`/login`)
         }
-    },
-    {
-        path: `/*`,
-        name: `404`,
-        beforeEnter(to,from,next): void{
-            AuthStore.user?next({name:'signup.profile'}):next(`/login`)
-        }
     }
+    // {
+    //     path: `/*`,
+    //     name: `404`,
+    //     beforeEnter(to,from,next): void{
+    //         AuthStore.user?next({name:'signup.profile'}):next(`/login`)
+    //     }
+    // }
 ]
 export default routes

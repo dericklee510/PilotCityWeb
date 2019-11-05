@@ -105,7 +105,6 @@
 
 <script lang="ts">
 import Vue from "vue"
-import '@/assets/SCSS/login.scss'
 import { AuthStore } from "@/store"
 import Component from "vue-class-component"
 import { 
