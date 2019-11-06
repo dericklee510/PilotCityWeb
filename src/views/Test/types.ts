@@ -1,4 +1,4 @@
-import {IEmployerQuery} from "@/store/Graphql/types"
+export {IEmployerQuery} from "@/store/Graphql/types"
 import { ProgramDetails } from './types';
 export interface Citizen {
     first_name: string,
@@ -76,15 +76,11 @@ export interface Internship {
 
 }
 
-interface EmployerPage{
+export interface EmployerPage{
     Citizen:Citizen
     Organization:Organization
     ProgramDetails:ProgramDetails
     Internship:Internship
-}
-
-function (EmployerPage:EmployerPage):IEmployerQuery {
-    
 }
 
 

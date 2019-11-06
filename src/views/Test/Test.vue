@@ -232,10 +232,11 @@ import Component from "vue-class-component"
     pcTextfield: PCtextfield
   }
 })
-import * as Employer from "./types"
+  import * as Employer from "./types"
+import { tableToDecimal } from "./helpers"
 export default class Test extends Vue {
   public citizenType: string = "Teacher";
-  
+
   private CITIZENSTYLES = {
     Teacher: "citizen-id__type--teacher",
     Employer: "citizen-id__type--employer",
@@ -246,10 +247,70 @@ export default class Test extends Vue {
   private changeCitizenType(intype: string): void {
     this.citizenType = intype
   }
-  public Citizen?:Employer.Citizen
-  public Organization?:Employer.Organization
-  public ProgramDetails?:Employer.ProgramDetails
-  public Intership?:Employer.Internship
+  public citizen: Employer.Citizen = {
+    first_name: "",
+    last_name: "",
+    position: "",
+    organization: "",
+  }
+  public organization: Employer.Organization = {
+    department: [],
+    location: "",
+    industry: [],
+    products_services: [],
+    employee_count: "",
+  }
+  public programdetails?: Employer.ProgramDetails
+  public internship?: Employer.Internship
+
+  public syncStorage(): void {
+
+
+  }
+  public syncStorageCitizen() {
+    localStorage.citizen_first_name = this.citizen.first_name
+    localStorage.citizen_last_name = this.citizen.last_name
+    localStorage.citizen_position = this.citizen.position
+    localStorage.citizen_organization = this.citizen.organization
+  }
+  organization_industry_options = ['Agriculture and Natural Resources', 'Arts, Media, and Entertainment', 'Building and Construction Trades', 'Business and Finance',
+    'Education, Child Development, and Family Services', 'Energy, Environment, and Utilities',
+    'Engineering and Architecture',
+    'Fashion and Interior Design',
+    'Health Science and Medical Technology',
+    'Hospitality, Tourism, and Recreation',
+    'Information and Communication Technologies',
+    'Manufacturing and Product Development',
+    'Marketing Sales and Service',
+    'Public Services',
+    'Transportation',
+  ]
+
+  programdetails_externship_contribution_options = [
+    'Donation',
+    'Loan',
+    'Purchase'
+  ]
+  public syncStorageOrganization() {
+    localStorage.organization_division = this.organization.department
+    localStorage.organization_location_text
+    localStorage.organization_location_lng
+    localStorage.organization_location_lat
+    localStorage.organization_industry = tableToDecimal(this.organization_industry_options, this.organization.industry)
+    localStorage.organization_industry_other = this.organization.industry[this.organization.industry.length - 1]
+    localStorage.organization_product_list = this.organization.products_services
+    localStorage.organization_product_employee_count = this.organization.employee_count
+  }
+  syncStorageProgramDetails() {
+    var programdetails = this.programdetails as Employer.ProgramDetails
+    if (this.programdetails) {
+      localStorage.program_externship_time_first = this.programdetails.externship.prefered_date.primary
+      localStorage.program_externship_time_second = this.programdetails.externship.prefered_date.secondary
+      localStorage.program_externship_time_third = this.programdetails.externship.prefered_date.final
+      localStorage.program_externship_options = tableToDecimal(this.programdetails_externship_contribution_options, this.programdetails.externship.contribution)
+      localStorage.program_externship_options_other = this.programdetails.externship.contribution[this.programdetails.externship.contribution.length - 1]
+    }
+  }
 
 
 }
