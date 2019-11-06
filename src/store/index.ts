@@ -17,4 +17,4 @@ export default store
 export const AuthStore = getModule(modules.Auth, store)
 export const StorageStore = getModule(modules.Storage,store)
 export const FbStore = getModule(modules.Fb,store)
-export const GraphqlStore = getModule(modules.Graphql)
+export const GraphqlStore = getModule(modules.Graphql, store)

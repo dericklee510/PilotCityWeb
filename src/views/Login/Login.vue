@@ -35,7 +35,7 @@
                 LOGIN
               </h3>
             </v-btn>
-            <router-link :to="{name: 'login'}">
+            <router-link :to="{name: 'signup'}">
               <h4 class="text-center pc-background--dark" style="display: block">
                 Don't have an account yet? Sign-up here
               </h4>

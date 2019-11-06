@@ -129,6 +129,12 @@
                 SIGN-UP
               </h3>
             </v-btn>
+            <h4
+                class="text-center pc-background--dark"
+                style="display: block"
+              >
+                {{authResponse}}
+              </h4>
             <router-link
               :to="{name: 'login'}"
             >
@@ -153,7 +159,8 @@ import Vue from "vue"
 import PCselect from "@/components/inputs/PCselect.vue"
 import PCtextfield from "@/components/inputs/PCtextfield.vue"
 import Component from "vue-class-component"
-import { ValidationObserver, ValidationProvider } from 'vee-validate'
+import { ValidationProvider } from './validation'
+import {ValidationObserver} from 'vee-validate'
 import {VeeObserver} from "vee-validate/dist/types/types"
 declare type ObserverInstance = InstanceType<typeof ValidationObserver>
 
@@ -174,8 +181,9 @@ export default class Signup extends Vue {
     public loading: boolean = false;
     public authResponse: string = ""
     public async process(): Promise<void> {
-        this.loading = true;
-        if(await (this.$refs.observer as ObserverInstance).validate()){
+        this.loading = true
+        console.log(this.$refs)
+        if(await (this.$refs.Observer as ObserverInstance).validate()){
             this.authResponse = await AuthStore.createAccount({
                 email: this.email,
                 password: this.password,
