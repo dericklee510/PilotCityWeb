@@ -1,4 +1,4 @@
-interface IEmployerQuery {
+export interface IEmployerQuery {
         id_token: string
         citizen_first_name: string,
         citizen_last_name: string,

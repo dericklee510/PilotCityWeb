@@ -1,3 +1,5 @@
+import {IEmployerQuery} from "@/store/Graphql/types"
+import { ProgramDetails } from './types';
 export interface Citizen {
     first_name: string,
     last_name: string,
@@ -54,7 +56,7 @@ export interface ProgramDetails {
         };
     }
 }
-export interface Intership {
+export interface Internship {
     project: string[]
     hiring_adult: boolean,
     travel: string,
@@ -74,6 +76,16 @@ export interface Intership {
 
 }
 
+interface EmployerPage{
+    Citizen:Citizen
+    Organization:Organization
+    ProgramDetails:ProgramDetails
+    Internship:Internship
+}
+
+function (EmployerPage:EmployerPage):IEmployerQuery {
+    
+}
 
 
 

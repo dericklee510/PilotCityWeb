@@ -249,7 +249,7 @@ export default class Test extends Vue {
   public Citizen?:Employer.Citizen
   public Organization?:Employer.Organization
   public ProgramDetails?:Employer.ProgramDetails
-  public Intership?:Employer.Intership
+  public Intership?:Employer.Internship
 
 
 }
