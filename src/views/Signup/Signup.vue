@@ -182,7 +182,6 @@ export default class Signup extends Vue {
     public authResponse: string = ""
     public async process(): Promise<void> {
         this.loading = true
-        console.log(this.$refs)
         if(await (this.$refs.Observer as ObserverInstance).validate()){
             this.authResponse = await AuthStore.createAccount({
                 email: this.email,
@@ -192,6 +191,10 @@ export default class Signup extends Vue {
             })
         }
         this.loading = false
+    }
+    public syncLocalStorage(){
+      localStorage.citizen_first_name = this.firstName
+      localStorage.citizen_last_name = this.lastName
     }
     
 }
