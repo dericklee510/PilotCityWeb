@@ -161,8 +161,7 @@ import PCtextfield from "@/components/inputs/PCtextfield.vue"
 import Component from "vue-class-component"
 import { ValidationProvider } from './validation'
 import {ValidationObserver} from 'vee-validate'
-import {VeeObserver} from "vee-validate/dist/types/types"
-declare type ObserverInstance = InstanceType<typeof ValidationObserver>
+import {ObserverInstance} from "@/utilities/validation"
 
 @Component({
     components:{
