@@ -30,6 +30,7 @@
 
 <script lang="ts">
 import Vue from "vue"
+import 'reflect-metadata'
 import {Component, Prop} from "vue-property-decorator"
 
 
