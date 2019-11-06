@@ -11,6 +11,8 @@ import Vue from 'vue'
 import Component from 'vue-class-component';
 
 import VuetifyGoogleAutocomplete from 'vuetify-google-autocomplete'
+import 'reflect-metadata'
+import { Prop } from 'vue-property-decorator';
 
 @Component({
 
@@ -23,11 +25,13 @@ export default class AutoComplete extends Vue {
     elements: HTMLInputElement[],
     address: any
   }
-
-
+  @Prop()
+  public value?:string
   address: string | Object = ""
+
   getAddressData(addressData: Object, placeResultData: Object, id: string) {
     this.address = addressData
+    this.$emit('input',this.address)
   }
 }
 </script>
