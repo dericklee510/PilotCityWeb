@@ -8,7 +8,7 @@ const routes: RouteConfig[] = [
         path: "/signup",
         component: Signup.Main,
         beforeEnter(to,from,next): void{
-            AuthStore.user?next({name:'signup.id'}):next()
+            AuthStore.user?next({name:'signup.type'}):next()
         }
     },
     {
