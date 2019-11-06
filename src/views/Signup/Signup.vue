@@ -39,11 +39,15 @@
           md="6"
           lg="4"
         >
-         <ValidationObserver ref="Observer">
+          <ValidationObserver ref="Observer">
             <v-col
               cols="12"
             >
-             <ValidationProvider vid="first_name" rules="required" v-slot ={errors}>
+              <ValidationProvider
+                v-slot="{errors}"
+                vid="first_name"
+                rules="required"
+              >
                 <pcTextfield
                   v-model="firstName"
                   title="FIRST NAME"
@@ -52,12 +56,16 @@
                   :error-messages="errors"
                   required
                 />
-             </ValidationProvider>
+              </ValidationProvider>
             </v-col> 
             <v-col
               cols="12"
             >
-             <ValidationProvider vid="last_name" rules="required" v-slot ={errors}>
+              <ValidationProvider
+                v-slot="{errors}"
+                vid="last_name"
+                rules="required"
+              >
                 <pcTextfield
                   v-model="lastName"
                   title="LAST NAME"
@@ -66,44 +74,54 @@
                   :error-messages="errors"
                   required
                 />
-             </ValidationProvider>
+              </ValidationProvider>
             </v-col> 
             <v-col
               cols="12"
             >
-            <ValidationProvider vid="email" rules="required|email" v-slot ={errors}>
-               <pcTextfield
-                id="email"
-                v-model="email"
-                :dark-mode="true"
-                title="EMAIL"
-                placeholder="Enter your email"
-                :error-messages="errors"
-                required
-              />
-            </ValidationProvider>
-             
+              <ValidationProvider
+                v-slot="{errors}"
+                vid="email"
+                rules="required|email"
+              >
+                <pcTextfield
+                  id="email"
+                  v-model="email"
+                  :dark-mode="true"
+                  title="EMAIL"
+                  placeholder="Enter your email"
+                  :error-messages="errors"
+                  required
+                />
+              </ValidationProvider>
             </v-col>
             <v-col
               cols="12"
             >
-            <ValidationProvider vid="password" rules="required|complex-password" v-slot ={errors}>
-              <pcTextfield
-                v-model="password"
-                type="password"
-                :dark-mode="true"
-                title="PASSWORD"
-                placeholder="Enter a password"
-                :error-messages="errors"
-                required
-              />
-            </ValidationProvider>
-              
+              <ValidationProvider
+                v-slot="{errors}"
+                vid="password"
+                rules="required|complex-password"
+              >
+                <pcTextfield
+                  v-model="password"
+                  type="password"
+                  :dark-mode="true"
+                  title="PASSWORD"
+                  placeholder="Enter a password"
+                  :error-messages="errors"
+                  required
+                />
+              </ValidationProvider>
             </v-col> 
             <v-col
               cols="12"
             >
-             <ValidationProvider vid="confirmPassword" rules="required|confirmed:password" v-slot="{errors}">
+              <ValidationProvider
+                v-slot="{errors}"
+                vid="confirmPassword"
+                rules="required|confirmed:password"
+              >
                 <pcTextfield
                   v-model="confirmPassword"
                   type="password"
@@ -113,9 +131,9 @@
                   :error-messages="errors"
                   @keyup.enter="process"
                 />  
-             </ValidationProvider>
+              </ValidationProvider>
             </v-col>
-         </ValidationObserver>
+          </ValidationObserver>
           <v-col cols="12">
             <v-btn
               id="signup-button"
@@ -130,11 +148,11 @@
               </h3>
             </v-btn>
             <h4
-                class="text-center pc-background--dark"
-                style="display: block"
-              >
-                {{authResponse}}
-              </h4>
+              class="text-center pc-background--dark"
+              style="display: block"
+            >
+              {{ authResponse }}
+            </h4>
             <router-link
               :to="{name: 'login'}"
             >
@@ -154,6 +172,7 @@
 
 <script lang="ts">
 import { AuthStore } from "@/store"
+/* eslint-disable-next-line */
 import _ from "lodash"
 import Vue from "vue"
 import PCselect from "@/components/inputs/PCselect.vue"
@@ -161,6 +180,7 @@ import PCtextfield from "@/components/inputs/PCtextfield.vue"
 import Component from "vue-class-component"
 import { ValidationProvider } from './validation'
 import {ValidationObserver} from 'vee-validate'
+/* eslint-disable-next-line */
 import {VeeObserver} from "vee-validate/dist/types/types"
 declare type ObserverInstance = InstanceType<typeof ValidationObserver>
 
@@ -182,7 +202,7 @@ export default class Signup extends Vue {
     public authResponse: string = ""
     public async process(): Promise<void> {
         this.loading = true
-        console.log(this.$refs)
+        // console.log(this.$refs)
         if(await (this.$refs.Observer as ObserverInstance).validate()){
             this.authResponse = await AuthStore.createAccount({
                 email: this.email,

@@ -1,5 +1,5 @@
-import { extend, ValidationProvider } from 'vee-validate';
-import { required, email, confirmed } from 'vee-validate/dist/rules';
+import { extend, ValidationProvider } from 'vee-validate'
+import { required, email, confirmed } from 'vee-validate/dist/rules'
 
 extend('required', {
     ...required,

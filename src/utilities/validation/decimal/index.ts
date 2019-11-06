@@ -1,8 +1,8 @@
 import { ValidationRule } from 'vee-validate/dist/types/types'
 import { countDigits, countDecimals } from '../helpers'
-interface paramaters{
-    total_digits:bigint,
-    decimal_digits:bigint
+interface Parameters{
+    totalDigits: bigint;
+    decimalDigits: bigint;
 }
 
 export const DECIMAL: ValidationRule= {
@@ -13,9 +13,10 @@ export const DECIMAL: ValidationRule= {
  * @param {*} args
  * @returns {boolean}
  */
-validate:(value, args ): boolean => {
-        var {total_digits,decimal_digits} = <paramaters>args
-        return total_digits >= countDigits(value) && decimal_digits >= countDecimals(value)
+    validate:(value, args ): boolean => {
+        /* eslint-disable-next-line */
+        var {totalDigits, decimalDigits} = <Parameters>args
+        return totalDigits >= countDigits(value) && decimalDigits >= countDecimals(value)
     }
 
 }

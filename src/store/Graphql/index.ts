@@ -1,11 +1,16 @@
+/* eslint-disable */
 import { EMPLOYER_QUERY } from './const';
-import { Module, VuexModule, Action, Mutation } from "vuex-module-decorators"
+import { 
+    Module, 
+    VuexModule, 
+    Action, 
+    Mutation 
+} from "vuex-module-decorators"
 import {every} from "lodash"
 import {GraphQLClient} from 'graphql-request'
-
 @Module({ namespaced: true, name: "Graphql" })
 export default class Storage extends VuexModule {
-    client = new GraphQLClient("http://localhost:8080/graphql")
+    private client = new GraphQLClient("http://localhost:8080/graphql")
     get EmployerQueryData(): IEmployerQuery & object {
         return {
             id_token: this.context.rootState.Auth.idToken,

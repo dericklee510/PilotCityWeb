@@ -32,7 +32,11 @@
           justify-center
           class="recoverPassword__input"
         >
-       <ValidationProvider rules="required|email" v-slot={errors} ref="email">
+          <ValidationProvider
+            ref="email"
+            v-slot="{errors}"
+            rules="required|email"
+          >
             <v-text-field
               v-model="email"
               :error-messages="errors"
@@ -42,7 +46,7 @@
               required
               single-line
             />
-       </ValidationProvider>
+          </ValidationProvider>
         </v-layout>
       </v-flex>
       <v-flex xs12>
@@ -84,9 +88,9 @@ import { AuthStore } from "@/store"
 import ValidationProvider from "@/utilities/validation"
 import {ProviderInstance} from "vee-validate/dist/types/types"
 @Component({
-  components:{
-    ValidationProvider
-  }
+    components:{
+        ValidationProvider
+    }
 })
 export default class PasswordRecoveryEmail extends Vue {
     public email: string = ``;

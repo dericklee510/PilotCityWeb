@@ -44,7 +44,6 @@ export default class Auth extends VuexModule {
         }
         catch (err) {
             const error = err as firebase.auth.Error
-            console.error(error)
             return error.message
         }
     }
@@ -60,13 +59,15 @@ export default class Auth extends VuexModule {
     }
 
     @Action
-    public async createAccount(credentials:{ email:string, password:string, firstName:string, lastName:string }): Promise<string> {
+    public async createAccount(credentials: { email: string; password: string; firstName: string; lastName: string }): Promise<string> {
         let {email,password,firstName,lastName} = credentials
         try {
             let userResponse = await firebase.auth().createUserWithEmailAndPassword(email, password)
             this.context.commit(SET_USER, userResponse)
             if (this.user) {
-                await this.user.updateProfile({ displayName: `${lowerCase(firstName)} ${lowerCase(lastName)}` })
+                await this.user.updateProfile({ 
+                    displayName: `${lowerCase(firstName)} ${lowerCase(lastName)}` 
+                })
                 await this.context.rootState.Fb.firestore.collection('users').doc(this.user.uid).set({
                     firstName,
                     lastName
@@ -78,7 +79,7 @@ export default class Auth extends VuexModule {
             return customSignupResponse(err)
         }
     }
-
+    /* eslint-disable */
     @Action
     public async login({ email, password }: UserCredentials): Promise<string> {
         try {
@@ -90,7 +91,9 @@ export default class Auth extends VuexModule {
                 throw("Could not sign in, please refresh and try again")
             }
             if (this.user && !this.user.emailVerified && this.user.email) {
-                firebase.auth().sendSignInLinkToEmail(this.user.email, { url: `pilotcity.com` })
+                firebase.auth().sendSignInLinkToEmail(this.user.email, { 
+                    url: `pilotcity.com` 
+                })
                 throw (EMAIL_NOT_VERIFIED_ERR)
             }
 
@@ -107,6 +110,7 @@ export default class Auth extends VuexModule {
             return customLoginResponse(err)
         }
     }
+    /* eslint-enable*/
     @Action
     public async logout(): Promise<void> {
         return firebase.auth().signOut()

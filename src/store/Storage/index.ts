@@ -1,4 +1,5 @@
-import { Module, VuexModule, Action } from "vuex-module-decorators"
+/* eslint-disable-next-line */
+import { Module, VuexModule, Action } from "vuex-module-decorators" //Action unsed
 import { firebaseApp } from "@/firebase/init"
 
 @Module({ namespaced: true, name: "Storage" })

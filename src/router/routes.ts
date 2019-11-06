@@ -1,5 +1,7 @@
-import { SET_USER } from './../store/Auth/mutation-types'
-import { RouterOptions, RouteConfig } from 'vue-router'
+/* eslint-disable-next-line */
+import { SET_USER } from './../store/Auth/mutation-types' //unsed
+/* eslint-disable-next-line */
+import { RouterOptions, RouteConfig } from 'vue-router' //routeroptions unused
 
 import {
     forgotPassword,
