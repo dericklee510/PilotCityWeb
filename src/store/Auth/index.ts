@@ -87,8 +87,8 @@ export default class Auth extends VuexModule {
                 await firebase.auth().signInWithEmailAndPassword(email, password)
                 this.context.commit(SET_USER, await firebase.auth().signInWithEmailAndPassword(email, password))
             }
-            catch{
-                throw("Could not sign in, please refresh and try again")
+            catch(err){
+                throw(err)
             }
             if (this.user && !this.user.emailVerified && this.user.email) {
                 firebase.auth().sendSignInLinkToEmail(this.user.email, { 

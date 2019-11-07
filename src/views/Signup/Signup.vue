@@ -180,9 +180,7 @@ import PCtextfield from "@/components/inputs/PCtextfield.vue"
 import Component from "vue-class-component"
 import { ValidationProvider } from './validation'
 import {ValidationObserver} from 'vee-validate'
-/* eslint-disable-next-line */
-import {VeeObserver} from "vee-validate/dist/types/types"
-declare type ObserverInstance = InstanceType<typeof ValidationObserver>
+import {ObserverInstance} from "@/utilities/validation"
 
 @Component({
     components:{
@@ -202,7 +200,6 @@ export default class Signup extends Vue {
     public authResponse: string = ""
     public async process(): Promise<void> {
         this.loading = true
-        // console.log(this.$refs)
         if(await (this.$refs.Observer as ObserverInstance).validate()){
             this.authResponse = await AuthStore.createAccount({
                 email: this.email,
@@ -212,6 +209,10 @@ export default class Signup extends Vue {
             })
         }
         this.loading = false
+    }
+    public syncLocalStorage(){
+        localStorage.citizenFirstName = this.firstName
+        localStorage.citizenLastName = this.lastName
     }
     
 }

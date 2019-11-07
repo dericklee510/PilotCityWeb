@@ -37,43 +37,45 @@
           md="6"
           lg="4"
         >
-          <v-col cols="12">
-            <ValidationProvider
-              ref="email"
-              v-slot="{errors}"
-              rules="required|email"
-            >
-              <pcTextfield
-                v-model="email"
-                :dark-mode="true"
-                title="EMAIL"
-                placeholder="Enter your email"
-                name="email"
-                :error-messages="errors"
-                required
-                @keyup.enter="$refs.password.focus()"
-              />
-            </ValidationProvider>
-          </v-col>
-          <v-col cols="12">
-            <ValidationProvider
-              ref="password"
-              v-slot="{errors}"
-              rules="required"
-            >
-              <pcTextfield
+          <ValidationObserver ref="Observer">
+            <v-col cols="12">
+              <ValidationProvider
+                ref="email"
+                v-slot="{errors}"
+                rules="required|email"
+              >
+                <pcTextfield
+                  v-model="email"
+                  :dark-mode="true"
+                  title="EMAIL"
+                  placeholder="Enter your email"
+                  name="email"
+                  :error-messages="errors"
+                  required
+                  @keyup.enter="$refs.password.focus()"
+                />
+              </ValidationProvider>
+            </v-col>
+            <v-col cols="12">
+              <ValidationProvider
                 ref="password"
-                v-model="password"
-                type="password"
-                :dark-mode="true"
-                title="PASSWORD"
-                placeholder="Enter a password"
-                :error-messages="errors"
-                required
-                @keyup.enter="process()"
-              />
-            </ValidationProvider>
-          </v-col>
+                v-slot="{errors}"
+                rules="required"
+              >
+                <pcTextfield
+                  ref="password"
+                  v-model="password"
+                  type="password"
+                  :dark-mode="true"
+                  title="PASSWORD"
+                  placeholder="Enter a password"
+                  :error-messages="errors"
+                  required
+                  @keyup.enter="process()"
+                />
+              </ValidationProvider>
+            </v-col>
+          </ValidationObserver>
           <v-col cols="12">
             <v-btn
               id="login-button"
@@ -88,6 +90,12 @@
               </h3>
             </v-btn>
             <router-link :to="{name: 'signup'}">
+              <h4
+                class="text-center pc-background--dark"
+                style="display: block"
+              >
+                {{ authResponse }}
+              </h4>
               <h4
                 class="text-center pc-background--dark"
                 style="display: block"
@@ -114,14 +122,15 @@ import {
 } from '../../store/Auth/const'
 import PCselect from "@/components/inputs/PCselect.vue"
 import PCtextfield from "@/components/inputs/PCtextfield.vue"
-import { ValidationProvider } from 'vee-validate'
-import { ProviderInstance } from "vee-validate/dist/types/types"
+import { ValidationProvider, ValidationObserver } from 'vee-validate'
+import { ObserverInstance } from "@/utilities/validation"
 
 @Component({
     components: {
         pcSelect: PCselect,
         pcTextfield: PCtextfield,
-        ValidationProvider
+        ValidationProvider,
+        ValidationObserver
     }
 })
 export default class Login extends Vue {
@@ -133,14 +142,12 @@ export default class Login extends Vue {
 
     public async process(): Promise<void> {
         this.loading = true
-        if ((await Promise.all([
-            (this.$refs.email as ProviderInstance).validate(), 
-            (this.$refs.password as ProviderInstance).validate()
-        ])).every(ValidationResult => ValidationResult.valid))
+        if(await (this.$refs.Observer as ObserverInstance).validate()){
             this.authResponse = await AuthStore.login({
                 email: this.email,
                 password: this.password
             })
+        }
         if (this.authResponse == SUCCESSFUL_LOGIN_RESP && AuthStore.user && !AuthStore.user.photoURL)
             this.$router.push({ name: `signup.type` })
         this.loading = false

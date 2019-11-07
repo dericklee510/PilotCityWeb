@@ -1,4 +1,4 @@
-interface IEmployerQuery {
+export interface IEmployerQuery {
         id_token: string
         citizen_first_name: string,
         citizen_last_name: string,
@@ -21,13 +21,13 @@ interface IEmployerQuery {
         projects_max: bigint,
         projects_engagement: bigint,
         projects_engagement_2: bigint,
-        projects_requests: string [],
-        projects_missions: string [],
-        projects_specifications: string [],
+        projects_requests: string [], //BROKEN FIX THIS
+        projects_missions: string [], //BROKEN FIX THIS
+        projects_specifications: string [], //BROKEN FIX THIS
         internships_project: bigint,
         internships_project_other: string,
         internships_hiring_adult: boolean,
-        internships_travel: bigint,
+        internships_travel: bigint, //BROKEN FIX THIS
         internships_education: bigint,
         internships_education_other: string,
         internships_talent: bigint,

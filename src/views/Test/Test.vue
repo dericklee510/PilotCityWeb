@@ -3,9 +3,7 @@
     fluid
     class="pc-profile-page"
   >
-    <v-row
-      justify="end"
-    >
+    <v-row justify="end">
       <!-- <div > -->
       <v-col
         xl="2"
@@ -26,16 +24,12 @@
             readonly
           >
             <template v-slot:label>
-              <label
-                class="profile__switch profile__switch--active"
-              >
+              <label class="profile__switch profile__switch--active">
                 public
               </label>
             </template>
             <template v-slot:prepend>
-              <label
-                class="profile__switch profile__switch--inactive"
-              >
+              <label class="profile__switch profile__switch--inactive">
                 private
               </label>
             </template>
@@ -50,7 +44,7 @@
           id="profileBanner"
           src="@/assets/banner-1018818_960_720.jpg"
           alt=""
-        > 
+        >
         <v-container>
           <!-- make tag component -- backlog -->
           <v-row>
@@ -86,16 +80,14 @@
                             rounded
                             v-on="on"
                           >
-                            <h2
-                              class="text-capitalize pr-5 pl-5"
-                            >
+                            <h2 class="text-capitalize pr-5 pl-5">
                               {{ citizenType }}
                             </h2>
                           </v-btn>
                         </v-col>
                       </v-row>
                     </template>
-  
+
                     <v-list style="padding: 0">
                       <v-list-item
                         v-for="(type, index) in AVAILABLETYPES"
@@ -159,7 +151,7 @@
                     </v-col>
                   </v-row>
                 </template>
-            
+
                 <v-list-item>
                   <v-list-item-content>
                     <v-col
@@ -599,14 +591,15 @@ import PCtextfield from "@/components/inputs/PCtextfield.vue"
 import PCdropdown from "@/components/inputs/PCdropdown.vue"
 import autoComplete from "@/components/GoogleMaps/Autocomplete/AutoComplete.vue"
 import Component from "vue-class-component"
+import * as Employer from "./types"
+import { tableToDecimal } from "./helpers"
 
 @Component({
     components:{
-        pcSelect: PCselect,
-        pcTextfield: PCtextfield,
-        pcDropdown: PCdropdown,
-        autoComplete
-
+    pcSelect: PCselect,
+    pcTextfield: PCtextfield,
+    pcDropdown: PCdropdown,
+    autoComplete
     }
 })
 export default class Test extends Vue {
