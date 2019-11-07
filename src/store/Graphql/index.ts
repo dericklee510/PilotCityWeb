@@ -8,6 +8,7 @@ import {
 } from "vuex-module-decorators"
 import {every} from "lodash"
 import {GraphQLClient} from 'graphql-request'
+import { IEmployerQuery } from './types'
 @Module({ namespaced: true, name: "Graphql" })
 export default class Storage extends VuexModule {
     private client = new GraphQLClient("http://localhost:8080/graphql")
