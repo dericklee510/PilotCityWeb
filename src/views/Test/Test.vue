@@ -168,30 +168,50 @@
                           lg="6"
                           xl="5"
                         >
-                          <pcTextfield
-                            v-model="firstname"
-                            :dark-mode="true"
-                            title="FIRST NAME"
-                            placeholder="First Name"
-                          />
-                          <pcTextfield
-                            v-model="lastname"
-                            :dark-mode="true"
-                            title="LAST NAME"
-                            placeholder="Last Name"
-                          />
-                          <pcTextfield
-                            v-model="position"
-                            :dark-mode="true"
-                            title="POSITION"
-                            placeholder="Role"
-                          />
-                          <pcTextfield
-                            v-model="companyname"
-                            :dark-mode="true"
-                            title="ORGANIZATION"
-                            placeholder="Company Name"
-                          />
+                          <ValidationProvider
+                            v-slot="{errors}"
+                            rules="required"
+                          >
+                            <pcTextfield
+                              v-model="citizen.first_name"
+                              :dark-mode="true"
+                              title="FIRST NAME"
+                              placeholder="First Name"
+                            />
+                          </ValidationProvider>
+                          <ValidationProvider
+                            v-slot="{errors}"
+                            rules="required"
+                          >
+                            <pcTextfield
+                              v-model="citizen.last_name"
+                              :dark-mode="true"
+                              title="LAST NAME"
+                              placeholder="Last Name"
+                            />
+                          </ValidationProvider>
+                          <ValidationProvider
+                            v-slot="{errors}"
+                            rules="required"
+                          >
+                            <pcTextfield
+                              v-model="citizen.position"
+                              :dark-mode="true"
+                              title="POSITION"
+                              placeholder="Role"
+                            />
+                          </ValidationProvider>
+                          <ValidationProvider
+                            v-slot="{errors}"
+                            rules="required"
+                          >
+                            <pcTextfield
+                              v-model="citizen.organization"
+                              :dark-mode="true"
+                              title="ORGANIZATION"
+                              placeholder="Company Name"
+                            />
+                          </ValidationProvider>
                         </v-col>
                       </v-row>
                     </v-col>
@@ -221,36 +241,108 @@
                   <v-list-item-content>
                     <v-col cols="12">
                       <v-row justify="start">
-                        <v-col
-                          cols="12"
-                          md="8"
-                          lg="6"
-                          xl="5"
-                        >
-                          <pcSelect
-                            :dark-mode="true"
-                            title="Your Department"
-                            placeholder="Enter Department Name"
-                          />
-                          <v-btn block="true">
-                            +
-                          </v-btn>
-                          <autoComplete />
-                          <v-checkbox label="Agriculture" />
-                          <pcTextfield
-                            v-model="product" 
-                            :dark-mode="true"
-                            title="LIST YOUR PRODUCT OR SERVICE"
-                            placeholder="Name of Product"
-                          />
-                          <v-btn block="true">
-                            +
-                          </v-btn>
-                          <pcSelect
-                            :dark-mode="true"
-                            title="EMPLOYEE COUNT"
-                            placeholder="Select Number of Employeer"
-                          />
+                        <v-col cols="12">
+                          <v-col
+                            cols="12"
+                            md="8"
+                            lg="6"
+                            xl="5"
+                          >
+                            <ValidationProvider
+                              v-slot="{errors}"
+                              rules="required"
+                            >
+                              <pcTextfield
+                                v-model="organization.department[0]"
+                                :dark-mode="true"
+                                title="Your Department"
+                                placeholder="Enter Department Name"
+                              />
+                            </ValidationProvider>
+                          </v-col>
+                          <!-- <v-col
+                            cols="12"
+                            md="8"
+                            lg="6"
+                            xl="5"
+                          >
+                            <v-btn
+                              :block="true"
+                              @click="addDept"
+                            >
+                              +
+                            </v-btn>
+                          </v-col> -->
+                          <v-col
+                            cols="12"
+                            md="8"
+                            lg="6"
+                            xl="5"
+                          >
+                            <autoComplete />
+                          </v-col>
+                          <v-col
+                            v-for="(industry, index) in organization_industry_options"
+                            :key="index"
+                            cols="12"
+                            md="8"
+                            lg="6"
+                            xl="5"
+                          >
+                            <ValidationProvider
+                              v-slot="{error}"
+                              rules="required"
+                            >
+                              <v-checkbox :label="industry" />
+                            </ValidationProvider>
+                          </v-col>
+                          <v-col
+                            cols="12"
+                            md="8"
+                            lg="6"
+                            xl="5"
+                          >
+                            <ValidationProvider
+                              v-slot="{error}"
+                              rules="required"
+                            >
+                              <pcTextfield
+                                v-model="program_details_organization.products_services" 
+                                :dark-mode="true"
+                                title="LIST YOUR PRODUCT OR SERVICE"
+                                placeholder="Name of Product"
+                              />
+                            </ValidationProvider>
+                          </v-col>
+                          <v-col
+                            cols="12"
+                            md="8"
+                            lg="6"
+                            xl="5"
+                          >
+                            <v-btn :block="true">
+                              +
+                            </v-btn>
+                          </v-col>
+                          <v-col
+                            cols="12"
+                            md="8"
+                            lg="6"
+                            xl="5"
+                          >
+                            <ValidationProvider
+                              v-slot="{error}"
+                              rules="required"
+                            >
+                              <pcSelect
+                                v-model="organization.employee_count"
+                                :items="WORKFORCE_COUNT"
+                                :dark-mode="true"
+                                title="EMPLOYEE COUNT"
+                                placeholder="Select Number of Employees"
+                              />
+                            </ValidationProvider>
+                          </v-col>
                         </v-col>
                       </v-row>
                     </v-col>
@@ -281,13 +373,13 @@
                     <v-col cols="12">
                       <v-row justify="start">
                         <v-col cols="12">
-                          <h3 style="color:white">
+                          <h3 style="color:#AE90B0">
                             Externship
                           </h3>
                         </v-col>
                         <v-col cols="12">
                           <h4
-                            style="color:white"
+                            style="color:#C7C8CA"
                             class="text-uppercase"
                           >
                             SELECT THREE DATE OPTIONS FOR YOUR FULL DAY TEACHER EXTERNSHIP DAY AT YOUR WORKPLACE BETWEEN JAN 1 - FEB 1
@@ -295,7 +387,7 @@
                         </v-col>
                         <v-col
                           cols="12"
-                          style="color:white"
+                          style="color:#C7C8CA"
                         >
                           <v-col
                             cols="12"
@@ -303,8 +395,17 @@
                             lg="6"
                             xl="5"
                           >
-                            <label for="firstdate"><h4 class="text-uppercase">First choice</h4></label>
-                            <v-date-picker id="firstdate" />
+                            <ValidationProvider
+                              v-slot="{errors}"
+                              rules="required"
+                            >
+                              <pcTextfield
+                                v-model="program_details_externship.prefered_date.primary"
+                                :dark-mode="true"
+                                placeholder="Primary option"
+                                title="First Choice"
+                              />
+                            </ValidationProvider>
                           </v-col>
                           <v-col
                             cols="12"
@@ -312,8 +413,17 @@
                             lg="6"
                             xl="5"
                           >
-                            <label for="nextdate"><h4 class="text-uppercase">Second choice</h4></label>
-                            <v-date-picker id="nextdate" />
+                            <ValidationProvider
+                              v-slot="{errors}"
+                              rules="required"
+                            >
+                              <pcTextfield
+                                v-model="program_details_externship.prefered_date.primary"
+                                :dark-mode="true"
+                                placeholder="Secondary option"
+                                title="Second Choice"
+                              />
+                            </ValidationProvider>
                           </v-col>
                           <v-col
                             cols="12"
@@ -321,68 +431,112 @@
                             lg="6"
                             xl="5"
                           >
-                            <label for="lastdate"><h4 class="text-upperca">Third choicde</h4></label>
-                            <v-date-picker id="lastdate" />
-                            <v-col />
+                            <ValidationProvider
+                              v-slot="{errors}"
+                              rules="required"
+                            >
+                              <pcTextfield
+                                v-model="program_details_externship.prefered_date.primary"
+                                :dark-mode="true"
+                                placeholder="Final option"
+                                title="Third Choice"
+                              />
+                            </ValidationProvider>
                           </v-col>
                         </v-col>
                         <v-col cols="12">
                           <h4
-                            style="color:white"
+                            style="color:#C7C8CA"
                             class="text-uppercase"
                           >
                             WILL YOU BE ABLE TO PROVIDE CLASSROOMS ACCESS TO YOUR PRODUCT OR SERVICE WITH ANY OF THE FOLLOWING?
                           </h4>
                         </v-col>
                         <v-col cols="12">
-                          <v-col cols="12">
-                            <v-checkbox label="Donation" />
+                          <v-col
+                            v-for="(contribution, index) in programdetails_externship_contribution_options"
+                            :key="contribution+index"
+                            cols="12"
+                          >
+                            <ValidationProvider
+                              v-slot="{errors}"
+                              rules="required"
+                            >
+                              <v-checkbox :label="contribution" />
+                            </ValidationProvider>
                           </v-col>
                           <v-col cols="12">
-                            <v-checkbox label="Loan" />
-                          </v-col>
-                          <v-col cols="12">
-                            <v-checkbox label="Purchase" />
-                          </v-col>
-                          <v-col cols="12">
-                            <v-checkbox>
-                              <template v-slot:label>
-                                <v-text-field placeholder="Other" />
-                              </template>
-                            </v-checkbox>
+                            <ValidationProvider
+                              v-slot="{errors}"
+                              rules="required"
+                            >
+                              <v-checkbox @change="addOption(contributionOther, programdetails_externship_contribution_options)">
+                                <template v-slot:label>
+                                  <v-text-field
+                                    v-model="contributionOther"
+                                    placeholder="Other"
+                                  />
+                                </template>
+                              </v-checkbox>
+                            </ValidationProvider>
                           </v-col>
                         </v-col>
                       </v-row>
                       <v-row>
                         <v-col cols="12">
-                          <h3 style="color:white">
+                          <h3 style="color:#AE90B0">
                             Project
                           </h3>
                         </v-col>
-                        
-                        <v-col
-                          cols="12"
-                          md="6"
-                        >
-                          <pcDropdown
-                            v-model="minStudents"
-                            :items="CLASSROOM_COUNT"
-                            placeholder="Select Minimum"
-                          />
+                        <v-col cols="12">
+                          <h4
+                            id="text-uppercase"
+                            style="color:#c7c8ca"
+                          >
+                            WHAT IS THE MINIMUM AND MAXIMUM NUMBER OF CLASSROOMS YOU’D LIKE IN YOUR PROGRAM?
+                          </h4>
                         </v-col>
                         <v-col
                           cols="12"
-                          md="6"
                         >
-                          <pcDropdown
-                            v-model="maxStudents"
-                            :items="CLASSROOM_COUNT"
-                            placeholder="Select Maximum"
-                          />
+                          <v-row>
+                            <v-col
+                              cols="12"
+                              md="4"
+                            >
+                              <ValidationProvider
+                                v-slot="{errors}"
+                                rules="required"
+                              >
+                                <pcSelect
+                                  v-model="minStudents"
+                                  :dark-mode="true"
+                                  :items="CLASSROOM_COUNT"
+                                  title=""
+                                  placeholder="Select Minimum"
+                                />
+                              </ValidationProvider>
+                            </v-col>
+                            <v-col
+                              cols="4"
+                            >
+                              <ValidationProvider
+                                v-slot="{errors}"
+                                rules="required"
+                              >
+                                <pcSelect
+                                  v-model="maxStudents"
+                                  :items="CLASSROOM_COUNT"
+                                  title=""
+                                  placeholder="Select Maximum"
+                                />
+                              </ValidationProvider>
+                            </v-col>
+                          </v-row>
                         </v-col>
                         <v-col cols="12">
                           <h4
-                            style="color:white"
+                            style="color:#C7C8CA"
                             class="text-uppercase"
                           >
                             How do you prefer to engage with the classroom?
@@ -390,27 +544,22 @@
                         </v-col>
                         <v-col cols="12">
                           <v-col
+                            v-for="(eng, index) in programdetails_project_engagement_type_options "
+                            :key="eng+index"
                             cols="12"
                             md="6"
                           >
-                            <v-radio label="In-person" />
-                          </v-col>
-                          <v-col
-                            cols="12"
-                            md="6"
-                          >
-                            <v-radio label="Digital" />
-                          </v-col>
-                          <v-col
-                            cols="12"
-                            md="6"
-                          >
-                            <v-radio label="Either" />
+                            <ValidationProvider
+                              v-slot="{errors}"
+                              rules="required"
+                            >
+                              <v-radio :label="eng" />
+                            </ValidationProvider>
                           </v-col>
                         </v-col>
                         <v-col cols="12">
                           <h4
-                            style="color:white"
+                            style="color:#C7C8CA"
                             class="text-uppercase"
                           >
                             How far would you travel to engage with a classroom in person?
@@ -418,40 +567,29 @@
                         </v-col>
                         <v-col cols="12">
                           <v-col
+                            v-for="(rad, index) in programdetails_project_engagement_radius_options "
+                            :key="rad+index"
                             cols="12"
                             md="6"
                           >
-                            <v-radio label="5 Miles" />
-                          </v-col>
-                          <v-col
-                            cols="12"
-                            md="6"
-                          >
-                            <v-radio label="10 Miles" />
-                          </v-col>
-                          <v-col
-                            cols="12"
-                            md="6"
-                          >
-                            <v-radio label="25 Miles" />
-                          </v-col>
-                          <v-col
-                            cols="12"
-                            md="6"
-                          >
-                            <v-radio label="50 Miles" />
+                            <ValidationProvider
+                              v-slot="{errors}"
+                              rules="required"
+                            >
+                              <v-radio :label="rad" />
+                            </ValidationProvider>
                           </v-col>
                         </v-col>
                       </v-row>
                       <v-row>
                         <v-col cols="12">
-                          <h3 style="color:white">
+                          <h3 style="color:#AE90B0">
                             Internships
                           </h3>
                         </v-col>
                         <v-col cols="12">
                           <h4
-                            style="color:white"
+                            style="color:#C7C8CA"
                             class="text-uppercase"
                           >
                             What would be the primary focus of their internship program
@@ -459,32 +597,38 @@
                         </v-col>
                         <v-col cols="12">
                           <v-col
+                            v-for="(op, index) in internship_project_type "
+                            :key="op+index"
                             cols="12"
                             md="6"
                           >
-                            <v-checkbox label="Further development of their project from the classroom" />
+                            <ValidationProvider
+                              v-slot="{errors}"
+                              rules="required"
+                            >
+                              <v-checkbox :label="op" />
+                            </ValidationProvider>
                           </v-col>
                           <v-col
                             cols="12"
                             md="6"
                           >
-                            <v-checkbox
-                              label="Work on a newly assigned project or task" 
-                            />
-                          </v-col>
-                          <v-col
-                            cols="12"
-                            md="6"
-                          >
-                            <v-checkbox label="Further development of their project from the classroom">
-                              <v-textfield placeholder="other" />
-                              <v-checkbox />
-                            </v-checkbox>
+                            <ValidationProvider
+                              v-slot="{errors}"
+                              rules="required"
+                            >
+                              <v-checkbox @change="addOption(internother, internship_project_type)">
+                                <v-textfield
+                                  v-model="internother"
+                                  placeholder="other"
+                                />
+                              </v-checkbox>
+                            </ValidationProvider>
                           </v-col>
                         </v-col>
                         <v-col cols="12">
                           <h4
-                            style="color:white"
+                            style="color:#C7C8CA"
                             class="text-uppercase"
                           >
                             Do you require hiring adults 18 years or older?
@@ -495,20 +639,31 @@
                             cols="12"
                             md="6"
                           >
-                            <v-radio label="Yes" />
-                          </v-col>
-                          <v-col
-                            cols="12"
-                            md="6"
-                          >
-                            <v-radio
-                              label="No" 
-                            />
+                            <v-radio-group v-model="program_details_internship.hiring_adult">
+                              <ValidationProvider
+                                v-slot="{error}"
+                                rules="required"
+                              >
+                                <v-radio
+                                  label="Yes"
+                                  value="yes" 
+                                />
+                              </ValidationProvider>
+                              <ValidationProvider
+                                v-slot="{error}"
+                                rules="required"
+                              >
+                                <v-radio
+                                  label="No"
+                                  value="no" 
+                                />
+                              </ValidationProvider>
+                            </v-radio-group>
                           </v-col>
                         </v-col>
                         <v-col cols="12">
                           <h4
-                            style="color:white"
+                            style="color:#C7C8CA"
                             class="text-uppercase"
                           >
                             Would you need the student(s) to have either a drivers license or a vehicle?
@@ -519,28 +674,40 @@
                             cols="12"
                             md="6"
                           >
-                            <v-radio label="No" />
-                          </v-col>
-                          <v-col
-                            cols="12"
-                            md="6"
-                          >
-                            <v-radio
-                              label="Yes, both a license and a car" 
-                            />
-                          </v-col>
-                          <v-col
-                            cols="12"
-                            md="6"
-                          >
-                            <v-radio
-                              label="Yes only a license" 
-                            />
+                            <v-radio-group v-model="program_details_internship.travel">
+                              <ValidationProvider
+                                v-slot="{error}"
+                                rules="required"
+                              >
+                                <v-radio
+                                  label="No"
+                                  value="no"
+                                />
+                              </ValidationProvider>
+                              <ValidationProvider
+                                v-slot="{error}"
+                                rules="required"
+                              >
+                                <v-radio
+                                  label="Yes, both a license and a car"
+                                  value="both"
+                                />
+                              </ValidationProvider>
+                              <ValidationProvider
+                                v-slot="{error}"
+                                rules="required"
+                              >
+                                <v-radio
+                                  label="Yes only a license"
+                                  value="license"
+                                />
+                              </ValidationProvider>
+                            </v-radio-group>
                           </v-col>
                         </v-col>
                         <v-col cols="12">
                           <h4
-                            style="color:white"
+                            style="color:#C7C8CA"
                             class="text-uppercase"
                           >
                             What level of education do you typically hire from?
@@ -551,23 +718,362 @@
                             cols="12"
                             md="6"
                           >
-                            <v-checkbox label="Highschool" />
+                            <ValidationProvider
+                              v-slot="{error}"
+                              rules="required"
+                            >
+                              <v-checkbox
+                                v-model="program_details_internship.education_level"
+                                label="Highschool"
+                                value="High school"
+                              />
+                            </ValidationProvider>
+                            <ValidationProvider
+                              v-slot="{error}"
+                              rules="required"
+                            >
+                              <v-checkbox
+                                v-model="program_details_internship.education_level"
+                                label="Specialty Training"
+                                value="Specialty Training"
+                              />
+                            </ValidationProvider>
+                            <ValidationProvider
+                              v-slot="{error}"
+                              rules="required"
+                            >
+                              <v-checkbox
+                                v-model="program_details_internship.education_level"
+                                label="Community College"
+                                value="Community College"
+                              />
+                            </ValidationProvider>
+                            <ValidationProvider
+                              v-slot="{error}"
+                              rules="required"
+                            >
+                              <v-checkbox
+                                v-model="program_details_internship.education_level"
+                                label="Bachelors"
+                                value="Bachelors"
+                              />
+                            </ValidationProvider>
+                            <ValidationProvider
+                              v-slot="{error}"
+                              rules="required"
+                            >
+                              <v-checkbox
+                                v-model="program_details_internship.education_level"
+                                label="Doctorate"
+                                value="Doctorate"
+                              />
+                            </ValidationProvider>
                           </v-col>
+                        </v-col>
+                        <v-col cols="12">
+                          <h4
+                            id="text-uppercase"
+                            style="color:#C7C8CA"
+                          >
+                            WHAT TYPE OF HIGH SCHOOL TALENT WOULD YOU LIKE TO HIRE?
+                          </h4>
+                        </v-col>
+                        <v-col cols="12">
+                          <v-col
+                            cols="12"
+                            md="4"
+                          >
+                            <div
+                              v-for="(tal, index) in internship_talent_options"
+                              :key="tal+index"
+                            >
+                              <ValidationProvider
+                                v-slot="{error}"
+                                rules="required"
+                              >
+                                <v-checkbox
+                                  v-model="program_details_internship.talent"
+                                  :label="tal"
+                                  :value="tal" 
+                                />
+                              </ValidationProvider>
+                            </div>
+                          </v-col>
+                        </v-col>
+                        <v-col cols="12">
+                          <h4
+                            class="text-uppercase"
+                            style="color:#C7C8CA"
+                          >
+                            HOW MANY DAYS PER WEEK WILL YOU BE ABLE TO HOST INTERNS & FELLOWS BETWEEN JUNE 29 - AUGUST 7?
+                          </h4>
+                        </v-col>
+                        <v-col cols="12">
+                          <v-col
+                            cols="12"
+                            md="4"
+                          >
+                            <v-radio-group v-model="program_details_internship.days_week">
+                              <div
+                                v-for="(sched, index) in HOST_SCHED"
+                                :key="sched+index"
+                              >
+                                <ValidationProvider
+                                  v-slot="{error}"
+                                  rules="required"
+                                >
+                                  <v-radio
+                                    :label="sched"
+                                    :value="sched"
+                                  />
+                                </ValidationProvider>
+                              </div>
+                            </v-radio-group>
+                          </v-col>
+                        </v-col>
+                        <v-col cols="12">
+                          <h4
+                            class="text-uppercase"
+                            style="color:#C7C8CA"
+                          >
+                            HOW MANY HOURS PER DAY WILL YOU BE ABLE TO HOST INTERNS & FELLOWS BETWEEN JUNE 29 - AUGUST 7?
+                          </h4>
+                        </v-col>
+                        <v-col cols="12">
+                          <v-col
+                            cols="12"
+                            md="4"
+                          >
+                            <v-radio-group v-model="program_details_internship.hours_day">
+                              <div
+                                v-for="(freq, index) in HOST_FREQ"
+                                :key="freq+index"
+                              >
+                                <ValidationProvider
+                                  v-slot="{error}"
+                                  rules="required"
+                                >
+                                  <v-radio
+                                    :label="freq"
+                                    :value="freq"
+                                  />
+                                </ValidationProvider>
+                              </div>
+                            </v-radio-group>
+                          </v-col>
+                        </v-col>
+                        <v-col cols="12">
+                          <h4
+                            class="text-uppercase"
+                            style="color:#C7C8CA"
+                          >
+                            WHO DO YOU PREFER TO BE THE EMPLOYER-OF-RECORD?
+                          </h4>
+                        </v-col>
+                        <v-col cols="12">
+                          <v-col
+                            cols="12"
+                            md="4"
+                          >
+                            <v-radio-group v-model="program_details_internship.employer_of_record">
+                              <div
+                                v-for="(option, index) in EOR"
+                                :key="option+index"
+                              >
+                                <ValidationProvider
+                                  v-slot="{error}"
+                                  rules="required"
+                                >
+                                  <v-radio
+                                    :label="option"
+                                    :value="option"
+                                  />
+                                </ValidationProvider>
+                              </div>
+                            </v-radio-group>
+                          </v-col>
+                        </v-col>
+                        <v-col cols="12">
+                          <h4
+                            class="text-uppercase"
+                            style="color:#C7C8CA"
+                          >
+                            WHAT COMPENSATION TYPES WOULD YOU CONSIDER FOR OUR INTERNSHIP PROGRAM?
+                          </h4>
+                        </v-col>
+                        <v-col cols="12">
+                          <v-col
+                            cols="12"
+                            md="4"
+                          >
+                            <div
+                              v-for="(comp, index) in INTERN_COMP"
+                              :key="comp+index"
+                            >
+                              <ValidationProvider
+                                v-slot="{error}"
+                                rules="required"
+                              >
+                                <v-checkbox
+                                  v-model="program_details_internship.compensation"
+                                  :label="comp"
+                                  :value="comp" 
+                                />
+                              </ValidationProvider>
+                            </div>
+                          </v-col>
+                        </v-col>
+                        <v-col cols="12">
+                          <h4
+                            class="text-uppercase"
+                            style="color:#C7C8CA"
+                          >
+                            IF YOU HAVE AN INTERNSHIP BUDGET IN MIND FOR OUR PROGRAM, ENTER THE MININMUM AND MAXIMUM AMOUNT
+                          </h4>
+                        </v-col>
+                        <v-col cols="12">
+                          <v-row>
+                            <v-col
+                              cols="12"
+                              md="4"
+                            >
+                              <pcTextfield
+                                v-model="program_details_internship.budget_min"
+                                :dark-mode="true"
+                                placeholder="Minimum"
+                                title=""
+                              />
+                            </v-col>
+                            <v-col
+                              cols="12"
+                              md="4"
+                            >
+                              <pcTextfield
+                                v-model="program_details_internship.budget_max"
+                                :dark-mode="true"
+                                placeholder="Maximum"
+                                title=""
+                              />
+                            </v-col>
+                          </v-row>
+                        </v-col>
+                        <v-col cols="12">
+                          <v-col
+                            cols="12"
+                            md="8"
+                            lg="6"
+                            xl="5"
+                          >
+                            <ValidationProvider
+                              v-slot="{errors}"
+                              rules="required"
+                            >
+                              <pcTextfield
+                                v-model="program_details_internship.interview_1"
+                                :dark-mode="true"
+                                placeholder="Primary option"
+                                title="First Choice"
+                              />
+                            </ValidationProvider>
+                          </v-col>
+                          <v-col
+                            cols="12"
+                            md="8"
+                            lg="6"
+                            xl="5"
+                          >
+                            <ValidationProvider
+                              v-slot="{errors}"
+                              rules="required"
+                            >
+                              <pcTextfield
+                                v-model="program_details_internship.interview_2"
+                                :dark-mode="true"
+                                placeholder="Secondary option"
+                                title="Second Choice"
+                              />
+                            </ValidationProvider>
+                          </v-col>
+                          <v-col
+                            cols="12"
+                            md="8"
+                            lg="6"
+                            xl="5"
+                          >
+                            <ValidationProvider
+                              v-slot="{errors}"
+                              rules="required"
+                            >
+                              <pcTextfield
+                                v-model="program_details_internship.interview_3"
+                                :dark-mode="true"
+                                placeholder="Final option"
+                                title="Third Choice"
+                              />
+                            </ValidationProvider>
+                          </v-col>
+                        </v-col>
+                        <v-col cols="12">
+                          <h4
+                            class="text-uppercase"
+                            style="color:#C7C8CA"
+                          >
+                            SELECT THREE DATE OPTIONS FOR INTERVIEWING CANDIDATES BETWEEN APRIL 15 - MAY 15 FROM 4PM - 6PM
+                          </h4>
+                        </v-col>
+                        <v-col cols="12">
                           <v-col
                             cols="12"
                             md="6"
                           >
-                            <v-checkbox
-                              label="Yes, both a license and a car" 
-                            />
+                            <v-radio-group v-model="program_details_internship.employment">
+                              <ValidationProvider
+                                v-slot="{error}"
+                                rules="required"
+                              >
+                                <v-radio
+                                  label="Yes"
+                                  value="yes" 
+                                />
+                              </ValidationProvider>
+                              <ValidationProvider
+                                v-slot="{error}"
+                                rules="required"
+                              >
+                                <v-radio
+                                  label="No"
+                                  value="no" 
+                                />
+                              </ValidationProvider>
+                            </v-radio-group>
                           </v-col>
+                        </v-col>
+                        <h4
+                            class="text-uppercase"
+                            style="color:#C7C8CA"
+                          >
+                            WHAT POSITIONS WOULD YOU HAVE AVAILABLE FOR CONTINUED EMPLOYMENT OF IN-SCHOOL OR GRADUATED HIGH SCHOOL TALENT?
+                          </h4>
+                        <v-col cols="12">
                           <v-col
                             cols="12"
-                            md="6"
+                            md="4"
                           >
-                            <v-checkbox
-                              label="Yes only a license" 
-                            />
+                            <div
+                              v-for="(pos, index) in internship_position_type_options"
+                              :key="pos+index"
+                            > 
+                              <ValidationProvider
+                                v-slot="{error}"
+                                rules="required"
+                              >
+                                <v-checkbox
+                                  v-model="program_details_internship.position_type"
+                                  :label="pos"
+                                  :value="pos" 
+                                />
+                              </ValidationProvider>
+                            </div>
                           </v-col>
                         </v-col>
                       </v-row>
@@ -592,6 +1098,7 @@ import PCdropdown from "@/components/inputs/PCdropdown.vue"
 import autoComplete from "@/components/GoogleMaps/Autocomplete/AutoComplete.vue"
 import Component from "vue-class-component"
 import * as Employer from "./types"
+import {ValidationProvider} from 'vee-validate'
 import { tableToDecimal } from "./helpers"
 
 @Component({
@@ -599,7 +1106,8 @@ import { tableToDecimal } from "./helpers"
         pcSelect: PCselect,
         pcTextfield: PCtextfield,
         pcDropdown: PCdropdown,
-        autoComplete
+        autoComplete,
+        ValidationProvider
     }
 })
 
@@ -613,29 +1121,10 @@ export default class Test extends Vue {
     }
     private AVAILABLETYPES: string[] = ["Teacher", "Employer", "Student"]
     private ispublic: boolean = true;
-
-    public CLASSROOM_COUNT = [
-        {title: "1 Classroom"}, 
-        {title: "2 Classrooms"}, 
-        {title: "3 Classrooms"}, 
-        {title: "4 Classrooms"}, 
-        {title: "5 Classrooms"}, 
-        {title: "6 Classrooms"}, 
-        {title: "7 Classrooms"}, 
-        {title: "8 Classrooms"}, 
-        {title: "9 Classrooms"}, 
-        {title: "10 Classrooms"}
-    ]
-    firstname: string = '';
-    lastname: string = '';
-    position: string = '';
-    product: string = '';
-    companyname: string = '';
-    minStudents: string = "";
-    maxStudents: string = "";
     private changeCitizenType(intype: string): void {
         this.citizenType = intype
     }
+
     public citizen: Employer.Citizen = {
         first_name: "",
         last_name: "",
@@ -647,8 +1136,10 @@ export default class Test extends Vue {
         location: "",
         industry: [],
         products_services: [],
-        employee_count: ""
+        employee_count: ``
     }
+    minStudents: string = "";
+    maxStudents: string = "";
     public programdetails?: Employer.ProgramDetails
     public internship?: Employer.Internship
 
@@ -658,6 +1149,39 @@ export default class Test extends Vue {
         localStorage.citizen_last_name = this.citizen.last_name
         localStorage.citizen_position = this.citizen.position
         localStorage.citizen_organization = this.citizen.organization
+    }
+    private program_details_internship =  {
+        project: [],
+        hiring_adult: '',
+        travel: '',
+        education_level:[],
+        talent: [],
+        days_week: ``,
+        hours_day: ``,
+        employer_of_record: '',
+        compensation: [],
+        budget_min: ``,
+        budget_max: ``,
+        interview_1: '',
+        interview_2: '',
+        interview_3: '',
+        employment: ``,
+        position_type: []
+    }
+    private program_details_externship = {
+        prefered_date: {
+            primary: ``,
+            secondary: ``,
+            final: ``
+        },
+        contribution: []
+    }
+    private program_details_organization = {
+        department: [],
+        location: '',
+        industry: [],
+        products_services: [], 
+        employee_count: ''
     }
     organization_industry_options = [
         'Agriculture and Natural Resources', 
@@ -676,12 +1200,34 @@ export default class Test extends Vue {
         'Public Services',
         'Transportation'
     ]
-
+    WORKFORCE_COUNT = [
+        '1 - 10',
+        '11 - 25',
+        '26 - 50',
+        '51 - 100',
+        '101 - 500',
+        '501 - 1000',
+        '1000 + '
+    ]
+    public CLASSROOM_COUNT = [
+        "1 Classroom", 
+        "2 Classrooms", 
+        "3 Classrooms", 
+        "4 Classrooms", 
+        "5 Classrooms", 
+        "6 Classrooms", 
+        "7 Classrooms", 
+        "8 Classrooms", 
+        "9 Classrooms", 
+        "10 Classrooms"
+    ]
     programdetails_externship_contribution_options = [
         'Donation',
         'Loan',
         'Purchase'
     ]
+    private contributionOther: string = '';
+    private internother: string = ``;
 
     programdetails_project_engagement_type_options = [
         'In-person',
@@ -703,8 +1249,7 @@ export default class Test extends Vue {
         'Specialty Training',
         'Community College',
         'Bachelors',
-        'Doctorate',
-        'Energy, Environment, and Utilities'
+        'Doctorate'
     ]
     internship_talent_options = [
         'Worker',
@@ -728,6 +1273,41 @@ export default class Test extends Vue {
         'Contractor',
         'None'
     ]
+    HOST_SCHED = [
+        "5 Days / Week",
+        "4 Days / Week",
+        "3 Days / Week",
+        "2 Days / Week",
+        "1 Days / Week",
+        "None"
+    ]
+    HOST_FREQ = [
+        "8 Hours / Day",
+        "7 Hours / Day",
+        "6 Hours / Day",
+        "5 Hours / Day",
+        "4 Hours / Day",
+        "3 Hours / Day",
+        "2 Hours / Day",
+        "1 Hours / Day",
+        "None"
+    ]
+    EOR = [
+        "Our own organization",
+        "PilotCity"
+    ]
+    INTERN_COMP = [
+        "Salary",
+        "Hourly",
+        "Stipend",
+        "Unpaid"
+    ]
+    public addDept(){
+        this.organization.department.push("")
+    }
+    private addOption(from: string, to: string[]): void{
+        to.push(from)
+    }
     public syncStorageOrganization() {
         localStorage.organization_division = this.organization.department
         localStorage.organization_location_text
@@ -771,7 +1351,7 @@ export default class Test extends Vue {
             localStorage.internships_education = tableToDecimal(this.internship_education_options,this.internship.education_level)
             localStorage.internships_education_other = this.internship.education_level.slice(-1)[0]
             localStorage.internships_talent = tableToDecimal(this.internship_talent_options, this.internship.talent)
-            localStorage.internships_hours_week =this.internship.hours_week
+            localStorage.internships_days_week =this.internship.days_week
             localStorage.internships_hours_day= this.internship.hours_day
             localStorage.internships_employer_of_record = tableToDecimal(this.internship_employer_of_record_options, [
                 this.internship.employer_of_record

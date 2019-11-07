@@ -1,11 +1,18 @@
 <template>
   <div>
-    <h2>Your Address</h2>
+    <label
+      class="pc-input__label"
+    > 
+      <h4 class="text-uppercase">
+        {{ `Your Address` }}
+      </h4>
+    </label>
     <vuetify-google-autocomplete
       id="map"
       ref="address"
       :enable-geolocation="true"
       types=""
+      class="pc-input__autocomplete"
       classname="form-control"
       placeholder="Please type your address"
       @placechanged="getAddressData"

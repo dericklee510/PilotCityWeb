@@ -55,3 +55,27 @@
 .pc-badge h3{
     justify-content: center
 }
+
+/* PC textfield input component */
+.pc-input__autocomplete{
+    border: 1px solid #C7C8CA;
+    color: #C7C8CA;
+    border-radius: 4px;
+    padding: 0px 12px; 
+    height: 70px;
+    .v-input__control{
+        border: none;
+    }
+    ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+        color: #fff;
+    }
+    :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        color: #fff;
+    }
+    ::-moz-placeholder { /* Mozilla Firefox 19+ */
+        color: #fff;
+    }
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: #fff;
+    }
+}
