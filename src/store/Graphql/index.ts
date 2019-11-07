@@ -1,8 +1,8 @@
 import { IEmployerQuery } from './types';
 import { EMPLOYER_QUERY } from './const';
 import { Module, VuexModule, Action, Mutation } from "vuex-module-decorators"
-import {every} from "lodash"
 import {GraphQLClient} from 'graphql-request'
+import { validateQuery } from './validation';
 
 @Module({ namespaced: true, name: "Graphql" })
 export default class Storage extends VuexModule {
@@ -55,7 +55,7 @@ export default class Storage extends VuexModule {
         }
     }
     get EmployerQueryisValid():boolean{
-       return every(this.EmployerQueryData, (field => field !== undefined))
+       return validateQuery(this.EmployerQueryData)
     }
     @Action
     async SubmitEmployerQuery(){

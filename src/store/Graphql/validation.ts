@@ -55,9 +55,10 @@ function ezvalidate(value:any,type:string){
     else
         return (typeof value) === type
 }
-export function validateQuery(obj:IEmployerQuery & {[key: string]: string}):boolean{
-    for (let key in obj){
-        if(!ezvalidate(obj[key],rules_hash1[key]))
+export function validateQuery(obj:IEmployerQuery):boolean{
+    var obj1 = obj as IEmployerQuery & {[key: string]: string}
+    for (let key in obj1){
+        if(!ezvalidate(obj1[key],rules_hash1[key]))
             throw(`${key} is not ${rules_hash1[key]}`)
     }
     return true
