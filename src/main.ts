@@ -11,6 +11,7 @@ import { SET_USER } from './store/Auth/mutation-types'
 
 
 import vuetify from './plugins/vuetify' // used to fix sass errors
+import Vuetify from 'vuetify'
 // import 'vuetify/src/stylus/app.styl' ---->  VUETIFY IS MIGRATING TO SASS! :)))
 import { authState } from 'rxfire/auth'
 
@@ -23,7 +24,7 @@ import VuetifyGoogleAutocomplete from 'vuetify-google-autocomplete'
 import VueRx from 'vue-rx'
 
 Vue.use(VueRx)
-Vue.use(vuetify)
+Vue.use(Vuetify)
 Vue.use(VuetifyGoogleAutocomplete, {
     apiKey: MAPS_API_KEY
 })

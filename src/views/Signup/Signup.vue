@@ -182,12 +182,15 @@ import { ValidationProvider } from './validation'
 import {ValidationObserver} from 'vee-validate'
 import {ObserverInstance} from "@/utilities/validation"
 
+import { AutoComplete } from '@/components/GoogleMaps'
+
 @Component({
     components:{
         pcSelect: PCselect,
         pcTextfield: PCtextfield,
         ValidationObserver,
-        ValidationProvider
+        ValidationProvider,
+        AutoComplete
     }
 })
 export default class Signup extends Vue {

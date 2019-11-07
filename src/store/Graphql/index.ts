@@ -6,7 +6,8 @@ import {
     Action, 
     Mutation 
 } from "vuex-module-decorators"
-import {every} from "lodash"
+
+import {validateQuery} from "./validation"
 import {GraphQLClient} from 'graphql-request'
 import { IEmployerQuery } from './types'
 @Module({ namespaced: true, name: "Graphql" })
