@@ -60,7 +60,7 @@ export default class Storage extends VuexModule {
         }
     }
     get EmployerQueryisValid():boolean{
-       return every(this.EmployerQueryData, (field => field !== undefined))
+       return validateQuery(this.EmployerQueryData)
     }
     @Action
     async SubmitEmployerQuery(){
