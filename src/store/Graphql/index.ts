@@ -1,3 +1,4 @@
+import { IEmployerQuery } from './types';
 import { EMPLOYER_QUERY } from './const';
 import { Module, VuexModule, Action, Mutation } from "vuex-module-decorators"
 import {every} from "lodash"
@@ -30,9 +31,9 @@ export default class Storage extends VuexModule {
             projects_max:localStorage.projects_max,
             projects_engagement:localStorage.projects_engagement,
             projects_engagement_2:localStorage.projects_engagement_2,
-            projects_requests:localStorage.projects_requests,
-            projects_missions:localStorage.projects_missions,
-            projects_specifications:localStorage.projects_specifications,
+            // projects_requests:localStorage.projects_requests,
+            // projects_missions:localStorage.projects_missions,
+            // projects_specifications:localStorage.projects_specifications,
             internships_project:localStorage.internships_project,
             internships_project_other:localStorage.internships_project_other,
             internships_hiring_adult:localStorage.internships_hiring_adult,

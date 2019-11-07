@@ -225,6 +225,9 @@ import Vue from "vue"
 import PCselect from "@/components/inputs/PCselect.vue"
 import PCtextfield from "@/components/inputs/PCtextfield.vue"
 import Component from "vue-class-component"
+import * as Employer from "./types"
+import { tableToDecimal } from "./helpers"
+
 
 @Component({
   components: {
@@ -232,8 +235,7 @@ import Component from "vue-class-component"
     pcTextfield: PCtextfield
   }
 })
-  import * as Employer from "./types"
-import { tableToDecimal } from "./helpers"
+
 export default class Test extends Vue {
   public citizenType: string = "Teacher";
 
@@ -291,6 +293,52 @@ export default class Test extends Vue {
     'Loan',
     'Purchase'
   ]
+
+  programdetails_project_engagement_type_options = [
+    'In-person',
+    'Digital',
+    'Either',
+  ]
+  programdetails_project_engagement_radius_options = [
+    '5 Miles',
+    '10 Miles',
+    '25 Miles',
+    '50 Miles',
+  ]
+  internship_project_type=[
+    'Further development of project started in the classroom',
+    'Work on newly assigned projects and tasks',
+  ]
+  internship_education_options = [
+    'High School',
+    'Specialty Training',
+    'Community College',
+    'Bachelors',
+    'Doctorate',
+    'Energy, Environment, and Utilities',
+  ]
+  internship_talent_options = [
+    'Worker',
+    'Intern',
+    'Innovator',
+    'Entrepreneur',
+  ]
+  internship_employer_of_record_options = [
+    'Our own organization',
+    'PilotCity'
+  ]
+  internship_compensation_options = [
+    'Salary',
+    'Hourly',
+    'Stipend',
+    'Unpaid',
+  ]
+  internship_position_type_options = [
+    'Part-Time',
+    'Full-Time',
+    'Contractor',
+    'None',
+  ]
   public syncStorageOrganization() {
     localStorage.organization_division = this.organization.department
     localStorage.organization_location_text
@@ -302,7 +350,6 @@ export default class Test extends Vue {
     localStorage.organization_product_employee_count = this.organization.employee_count
   }
   syncStorageProgramDetails() {
-    var programdetails = this.programdetails as Employer.ProgramDetails
     if (this.programdetails) {
       localStorage.program_externship_time_first = this.programdetails.externship.prefered_date.primary
       localStorage.program_externship_time_second = this.programdetails.externship.prefered_date.secondary
@@ -311,7 +358,40 @@ export default class Test extends Vue {
       localStorage.program_externship_options_other = this.programdetails.externship.contribution[this.programdetails.externship.contribution.length - 1]
     }
   }
-
+  syncStorageProject() {
+    if (this.programdetails) {
+      localStorage.projects_min = this.programdetails.project.capacity.minimum
+      localStorage.projects_max = this.programdetails.project.capacity.maximum
+      localStorage.projects_engagement = tableToDecimal(this.programdetails_project_engagement_type_options, [this.programdetails.project.engagement.type])
+      localStorage.projects_engagement_2 = tableToDecimal(this.programdetails_project_engagement_radius_options, [this.programdetails.project.engagement.radius])
+      // localStorage.projects_requests = this.programdetails.project.
+      // localStorage.projects_missions = this.programdetails.project.
+      // localStorage.projects_specifications = this.programdetails.project.
+    }
+  }
+    syncStorageInternship(){
+      if(this.internship){
+      localStorage.internships_project = tableToDecimal(this.internship_project_type,this.internship.project)
+        localStorage.internships_project_other = this.internship.project[this.internship.project.length - 1]
+        localStorage.internships_hiring_adult = this.internship.hiring_adult
+        // localStorage.internships_travel
+        localStorage.internships_education = tableToDecimal(this.internship_education_options,this.internship.education_level)
+        localStorage.internships_education_other = this.internship.education_level.slice(-1)[0]
+        localStorage.internships_talent = tableToDecimal(this.internship_talent_options, this.internship.talent)
+        localStorage.internships_hours_week =this.internship.hours_week
+        localStorage.internships_hours_day= this.internship.hours_day
+        localStorage.internships_employer_of_record = tableToDecimal(this.internship_employer_of_record_options, [this.internship.employer_of_record])
+        localStorage.internships_compensation = tableToDecimal(this.internship_compensation_options,this.internship.compensation)
+        localStorage.internships_budget_min = this.internship.budget_min
+        localStorage.internships_budget_max = this.internship.budget_max
+        localStorage.internships_interview_option1 = this.internship.interview_1
+        localStorage.internships_interview_option2 = this.internship.interview_2
+        localStorage.internships_interview_option3 = this.internship.interview_3
+        localStorage.internships_employment = this.internship.employment
+        localStorage.internships_position = tableToDecimal(this.internship_position_type_options,this.internship.position_type)
+      }
+    }
+  }
 
 }
 </script>

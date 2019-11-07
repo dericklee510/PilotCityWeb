@@ -60,19 +60,19 @@ export interface Internship {
     project: string[]
     hiring_adult: boolean,
     travel: string,
-    education_level: string,
+    education_level: string[],
     talent: string[]
-    hours_week: string
-    hours_day: string
+    hours_week: number
+    hours_day: number
     employer_of_record: string,
-    compensation: string,
+    compensation: string[],
     budget_min: number
     budget_max: number
     interview_1: string
     interview_2: string
     interview_3: string
     employment: boolean
-    position_type: string
+    position_type: string[]
 
 }
 
