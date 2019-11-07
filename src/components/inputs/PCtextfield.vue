@@ -47,7 +47,7 @@ export default class PCtextfield extends Vue {
     @Prop()
     public  type!: string
     @Prop()
-    public errorMessages: string | string [] = ""
+    public errorMessages?: string | string [] 
     public xcontent: string = '';
     get content(){
         return this.xcontent
@@ -61,7 +61,7 @@ export default class PCtextfield extends Vue {
     get errorMessage() {
         return this.errorMessages
     }
-    get error(): string{
+    get error(): string | undefined{
         if (Array.isArray(this.errorMessage))
             return this.errorMessage.length?this.errorMessage[0]:""
         else {
