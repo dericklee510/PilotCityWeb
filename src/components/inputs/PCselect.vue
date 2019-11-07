@@ -49,7 +49,13 @@ export default class PCselect extends Vue {
     @Prop({type: String, required: true})
     public placeholder!: string;
 
-    public content: string = this.value;
+    public xcontent: string = '';
+    get content(){
+        return this.xcontent
+    }
+    set content(value: string){
+        this.xcontent = value
+    }
     public handleInput(){
         this.$emit('input', this.content)
     }

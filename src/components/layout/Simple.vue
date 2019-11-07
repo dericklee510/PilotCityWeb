@@ -17,7 +17,7 @@ import Component from "vue-class-component"
 import DefaultFooter from "@/components/layout/footer/Simple.vue"
 @Component({
     components: {
-        footer: DefaultFooter,
+        PCfooter: DefaultFooter,
         PCHeader: DefaultHeader
     }
 })

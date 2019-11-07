@@ -143,8 +143,16 @@ h6{
       max-width: 2.5em;
     }
 }
-.pc-dropdown__menu.v-list{
+.pc-menu .v-list{
     padding: 0;
+}
+#pc-app .pc-menu{
+    background-color: #414042;
+    border: 1px solid #BFBFBF;
+    color: white !important;
+    &--active{
+        background-color:   #4D4D4F
+    }
 }
 #pc-app .pc-button{
     color: #fff;
@@ -196,7 +204,6 @@ h6{
         border-color: #C7C8CA;
     }
 }
-
 /* Media Queries */
 @media only screen and (min-width : 1900px){
 }

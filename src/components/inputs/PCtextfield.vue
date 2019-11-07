@@ -36,8 +36,8 @@ import {Component, Prop} from "vue-property-decorator"
 
 @Component
 export default class PCtextfield extends Vue {
-    @Prop()
-    public value?: string;
+    @Prop({required: true})
+    public value!: string;
     @Prop({ default: false})
     public darkMode?: boolean;
     @Prop({ required: true})
@@ -45,21 +45,28 @@ export default class PCtextfield extends Vue {
     @Prop({ required: true})
     public placeholder!: string;
     @Prop()
-    public  type!:string
+    public  type!: string
     @Prop()
-    public errorMessages:string | string [] = ""
-
-    public content?: string = this.value;
+    public errorMessages: string | string [] = ""
+    public xcontent: string = '';
+    get content(){
+        return this.xcontent
+    }
+    set content(value: string){
+        this.xcontent = value
+    }
     public handleInput(){
         this.$emit('input', this.content)
     }
-    get error():string{
-      var error_prop = this.errorMessages
-      if (Array.isArray(error_prop))
-        return error_prop.length?error_prop[0]:""
-      else {
-        return error_prop
-      }
+    get errorMessage() {
+        return this.errorMessages
+    }
+    get error(): string{
+        if (Array.isArray(this.errorMessage))
+            return this.errorMessage.length?this.errorMessage[0]:""
+        else {
+            return this.errorMessage
+        }
     }
 }
 
