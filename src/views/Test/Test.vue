@@ -60,7 +60,7 @@
             >
               <v-row justify="start">
                 <v-col cols="12">
-                  <h1>{{ `${citizen.first_name} ${citizen.last_name}` }}</h1>
+                  <h1>{{ Name }}</h1>
                 </v-col>
                 <v-col
                   cols="12"
@@ -266,6 +266,7 @@
                               :key="index"
                               :label="industry"
                               :value="industry"
+                              v-model="organization.industry"
                             />
                           </ValidationProvider>
                         </v-col>
@@ -1094,7 +1095,9 @@ export default class Test extends CONST {
     }
 
     public citizen: Employer.Citizen = {} as Employer.Citizen
-    public organization: Employer.Organization = {} as Employer.Organization
+    public organization: Employer.Organization = {
+      industry: [] as string[]
+    } as Employer.Organization
     public programdetails: Employer.ProgramDetails = {
         externship: { prefered_date: {}}, 
         project: { capacity: {}, engagement: {}}
@@ -1194,9 +1197,12 @@ export default class Test extends CONST {
         }
         this.loading = false
     }
+    get Name(){
+      return `${this.citizen.first_name} ${this.citizen.last_name}`
+    }
     created(){
-        this.citizen.first_name = localStorage.first_name?localStorage.first_name:"Your"
-        this.citizen.last_name = localStorage.last_name?localStorage.last_name:"Name"
+        this.$set(this.citizen,'first_name',localStorage.first_name?localStorage.first_name:"Your")
+        this.$set(this.citizen,'last_name',localStorage.last_name?localStorage.last_name:"Name")
     }
 }
 </script>
