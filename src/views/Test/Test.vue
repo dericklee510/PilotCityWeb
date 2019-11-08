@@ -286,7 +286,7 @@
                             xl="5"
                           >
                           <ValidationProvider rules="required" v-slot="{errors}">
-                            <autoComplete :error-messages="{errors}" v-model="organization.location" />
+                            <autoComplete :error-messages="errors" v-model="organization.location" />
                           </ValidationProvider>
                             
                           </v-col>
@@ -312,7 +312,7 @@
                             xl="5"
                           >
                             <ValidationProvider
-                              v-slot="{error}"
+                              v-slot="{errors}"
                               rules="required"
                             >
                               <pcTextfield
@@ -951,6 +951,7 @@
                               cols="12"
                               md="4"
                             >
+                            <ValidationProvider rules="required|min:0" v-slot="{errors}">
                               <pcTextfield
                               :error-messages="errors"
                                 v-model="program_details_internship.budget_min"
@@ -958,11 +959,14 @@
                                 placeholder="Minimum"
                                 title=""
                               />
+                            </ValidationProvider>
+                              
                             </v-col>
                             <v-col
                               cols="12"
                               md="4"
                             >
+                            <ValidationProvider rules="required|min:0" v-slot="{errors}">
                               <pcTextfield
                               :error-messages="errors"
                                 v-model="program_details_internship.budget_max"
@@ -970,6 +974,8 @@
                                 placeholder="Maximum"
                                 title=""
                               />
+                            </ValidationProvider>
+                              
                             </v-col>
                           </v-row>
                         </v-col>
