@@ -1,11 +1,25 @@
 <template>
-  <span class="pc-checkbox">
-    <v-checkbox v-for="(option,index) in options" :key="option+index" v-model="selected" :value="option" :label="option" />
+  <div class="pc-checkbox">
+    <v-checkbox
+      v-for="(option,index) in options"
+      :key="option+index"
+      v-model="selected"
+      :value="option"
+      :label="option"
+    />
     <!-- <v-row align="center"> -->
-      <v-checkbox v-model="otherChecked"></v-checkbox>
-      <v-text-field :disabled="!otherChecked" v-model="otherInput" label="Other"></v-text-field>
+    <v-checkbox
+      :id="'other'"
+      v-model="otherChecked"
+    />
+    <v-text-field
+      v-model="otherInput"
+      :disabled="!otherChecked"
+      label="Other"
+    />
+
     <!-- </v-row> -->
-  </span>
+  </div>
 </template>
 
 <script lang="ts">
@@ -17,7 +31,7 @@ import { Component, Prop, Watch } from 'vue-property-decorator'
 @Component
 export default class PCcheckbox extends Vue {
   @Prop()
-  public checked!: string[]
+    public checked!: string[]
   @Prop()
   public options!: any[]
   @Prop({ default: false })
@@ -26,13 +40,13 @@ export default class PCcheckbox extends Vue {
   public otherInput: string = ""
   public selected: any[] = []
   get checkedOptions() {
-    if (this.other && this.otherChecked)
-      return [...this.selected, this.otherInput]
-    return this.selected
+      if (this.other && this.otherChecked)
+          return [...this.selected, this.otherInput]
+      return this.selected
   }
   @Watch('checkedOptions')
   onCheckedOptionsChanged(newval: any[]) {
-    this.$emit('input', newval)
+      this.$emit('input', newval)
   }
 }
 </script>
