@@ -622,7 +622,7 @@
                                 :value="internOther"
                               >
                                 <template v-slot:label>
-                                  <v-textfield
+                                  <v-text-field
                                     v-model="internOther"
                                     placeholder="other"
                                   />
