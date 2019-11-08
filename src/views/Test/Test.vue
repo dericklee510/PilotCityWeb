@@ -250,25 +250,38 @@
                             />
                           </ValidationProvider>
                         </v-col>
-                        <v-col
-                          
-                          cols="12"
-                          md="8"
-                          lg="6"
-                          xl="5"
+                        <ValidationProvider
+                          v-slot="{errors}"
+                          rules="required"
                         >
-                          <ValidationProvider
-                            v-slot="{error}"
-                            rules="required"
+                          <v-col cols="12">
+                            <v-row>
+                              <h4
+                                style="color:#C7C8CA"
+                                class="text-uppercase"
+                              >
+                                Industry
+                              </h4>
+                              <h4 style="color:#EA6763">
+                                {{ errors[0]?'*':'' }}
+                              </h4>
+                            </v-row>
+                          </v-col>  
+                          <v-col
+                            cols="12"
+                            md="8"
+                            lg="6"
+                            xl="5"
                           >
                             <v-checkbox
                               v-for="(industry, index) in ORGANIZATION_INDUSTRY_OPTIONS"
                               :key="index"
+                              v-model="organization.industry"
                               :label="industry"
                               :value="industry"
                             />
-                          </ValidationProvider>
-                        </v-col>
+                          </v-col>
+                        </ValidationProvider>
                         <v-col
                           cols="12"
                           md="8"
@@ -311,7 +324,7 @@
                           xl="5"
                         >
                           <ValidationProvider
-                            v-slot="{error}"
+                            v-slot="{errors}"
                             rules="required"
                           >
                             <pcSelect
@@ -413,22 +426,27 @@
                             </ValidationProvider>
                           </v-col>
                         </v-col>
-                        <v-col cols="12">
-                          <h4
-                            style="color:#C7C8CA"
-                            class="text-uppercase"
-                          >
-                            WILL YOU BE ABLE TO PROVIDE CLASSROOMS ACCESS TO YOUR PRODUCT OR SERVICE WITH ANY OF THE FOLLOWING?
-                          </h4>
-                        </v-col>
-                        <v-col cols="12">
-                          <v-col
+                        <ValidationProvider
+                          v-slot="{errors}"
+                          rules="required"
+                        >
+                          <v-col cols="12">
+                            <v-row>
+                              <h4
+                                style="color:#C7C8CA"
+                                class="text-uppercase"
+                              >
+                                WILL YOU BE ABLE TO PROVIDE CLASSROOMS ACCESS TO YOUR PRODUCT OR SERVICE WITH ANY OF THE FOLLOWING?
+                              </h4>
+                              <h4 style="color:#EA6763">
+                                {{ errors[0]?'*':'' }}
+                              </h4>
+                            </v-row>
+                          </v-col>
+                          <v-col cols="12">
+                            <v-col
                             
-                            cols="12"
-                          >
-                            <ValidationProvider
-                              v-slot="{errors}"
-                              rules="required"
+                              cols="12"
                             >
                               <v-checkbox
                                 v-for="(contribution, index) in PROGRAMDETAILS_EXTERNSHIP_CONTRIBUTION_OPTIONS"
@@ -436,14 +454,8 @@
                                 v-model="programdetails.externship.contribution"
                                 :label="contribution"
                                 :value="contribution"
+                                hide-details
                               />
-                            </ValidationProvider>
-                          </v-col>
-                          <v-col cols="12">
-                            <ValidationProvider
-                              v-slot="{errors}"
-                              rules="required"
-                            >
                               <v-checkbox
                                 v-model="programdetails.externship.contribution"
                                 :value="contributionOther"
@@ -455,9 +467,9 @@
                                   />
                                 </template>
                               </v-checkbox>
-                            </ValidationProvider>
+                            </v-col>
                           </v-col>
-                        </v-col>
+                        </ValidationProvider>
                       </v-row>
                       <v-row>
                         <v-col cols="12">
@@ -575,23 +587,28 @@
                             Internships
                           </h3>
                         </v-col>
-                        <v-col cols="12">
-                          <h4
-                            style="color:#C7C8CA"
-                            class="text-uppercase"
-                          >
-                            What would be the primary focus of their internship program
-                          </h4>
-                        </v-col>
-                        <v-col cols="12">
-                          <v-col
+                        <ValidationProvider
+                          v-slot="{errors}"
+                          rules="required"
+                        >
+                          <v-col cols="12">
+                            <v-row>
+                              <h4
+                                style="color:#C7C8CA"
+                                class="text-uppercase"
+                              >
+                                What would be the primary focus of their internship program
+                              </h4>
+                              <h4 style="color:#EA6763">
+                                {{ errors[0]?'*':'' }}
+                              </h4>
+                            </v-row>
+                          </v-col>
+                          <v-col cols="12">
+                            <v-col
                             
-                            cols="12"
-                            md="6"
-                          >
-                            <ValidationProvider
-                              v-slot="{errors}"
-                              rules="required"
+                              cols="12"
+                              md="6"
                             >
                               <v-checkbox
                                 v-for="(op, index) in INTERNSHIP_PROJECT_TYPE "
@@ -600,28 +617,20 @@
                                 :value="op"
                                 :label="op"
                               />
-                            </ValidationProvider>
-                          </v-col>
-                          <v-col
-                            cols="12"
-                            md="6"
-                          >
-                            <ValidationProvider
-                              v-slot="{errors}"
-                              rules="required"
-                            >
                               <v-checkbox
                                 v-model="internship.project"
                                 :value="internOther"
                               >
-                                <v-textfield
-                                  v-model="internOther"
-                                  placeholder="other"
-                                />
+                                <template v-slot:label>
+                                  <v-textfield
+                                    v-model="internOther"
+                                    placeholder="other"
+                                  />
+                                </template>
                               </v-checkbox>
-                            </ValidationProvider>
+                            </v-col>
                           </v-col>
-                        </v-col>
+                        </ValidationProvider>
                         <v-col cols="12">
                           <h4
                             style="color:#C7C8CA"
@@ -636,7 +645,7 @@
                             md="6"
                           >
                             <ValidationProvider
-                              v-slot="{error}"
+                              v-slot="{errors}"
                               rules="required"
                             >
                               <v-radio-group v-model="internship.hiring_adult">
@@ -666,7 +675,7 @@
                             md="6"
                           >
                             <ValidationProvider
-                              v-slot="{error}"
+                              v-slot="{errors}"
                               rules="required"
                             >
                               <v-radio-group v-model="internship.travel">
@@ -700,7 +709,7 @@
                             md="6"
                           >
                             <ValidationProvider
-                              v-slot="{error}"
+                              v-slot="{errors}"
                               rules="required"
                             >
                               <v-checkbox
@@ -745,7 +754,7 @@
                             md="4"
                           >
                             <ValidationProvider
-                              v-slot="{error}"
+                              v-slot="{errors}"
                               rules="required"
                             >
                               <v-checkbox
@@ -772,7 +781,7 @@
                             md="4"
                           >
                             <ValidationProvider
-                              v-slot="{error}"
+                              v-slot="{errors}"
                               rules="required"
                             >
                               <v-radio-group v-model="internship.hours_week">
@@ -800,7 +809,7 @@
                             md="4"
                           >
                             <ValidationProvider
-                              v-slot="{error}"
+                              v-slot="{errors}"
                               rules="required"
                             >
                               <v-radio-group v-model="internship.hours_day">
@@ -828,7 +837,7 @@
                             md="4"
                           >
                             <ValidationProvider
-                              v-slot="{error}"
+                              v-slot="{errors}"
                               rules="required"
                             >
                               <v-radio-group v-model="internship.employer_of_record">
@@ -856,7 +865,7 @@
                             md="4"
                           >
                             <ValidationProvider
-                              v-slot="{error}"
+                              v-slot="{errors}"
                               rules="required"
                             >
                               <v-checkbox
@@ -988,7 +997,7 @@
                             md="6"
                           >
                             <ValidationProvider
-                              v-slot="{error}"
+                              v-slot="{errors}"
                               rules="required"
                             >
                               <v-radio-group v-model="internship.employment">
@@ -1016,7 +1025,7 @@
                             md="4"
                           >
                             <ValidationProvider
-                              v-slot="{error}"
+                              v-slot="{errors}"
                               rules="required"
                             >
                               <v-checkbox
