@@ -15,3 +15,7 @@ function getDecimal(arr:binary[]):number {
 export const tableToDecimal=(table:any[],confirmed:any[]): number => {
     return getDecimal(getBitHash(table,confirmed))
 }
+
+export const findOther = (table:any[], confirm:any[]):string => {
+  return confirm.find((entry) => !includes(table,entry))
+}

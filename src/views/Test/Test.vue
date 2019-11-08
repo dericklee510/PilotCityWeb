@@ -1139,7 +1139,7 @@ import Component from "vue-class-component"
 import * as Employer from "./types"
 import {ValidationProvider, ValidationObserver} from 'vee-validate'
 import {ObserverInstance} from "@/utilities/validation"
-import { tableToDecimal } from "./helpers"
+import { tableToDecimal, findOther } from "./helpers"
 
 @Component({
     components:{
@@ -1352,7 +1352,7 @@ export default class Test extends Vue {
         localStorage.organization_location_lng = this.organization.location.longitude
         localStorage.organization_location_lat = this.organization.location.latitude
         localStorage.organization_industry = tableToDecimal(this.organization_industry_options, this.organization.industry)
-        localStorage.organization_industry_other = this.organization.industry[this.organization.industry.length - 1]
+        localStorage.organization_industry_other = findOther(this.organization_industry_options, this.organization.industry)
         localStorage.organization_product_list = this.organization.products_services
         localStorage.organization_product_employee_count = this.organization.employee_count
         }
@@ -1363,7 +1363,7 @@ export default class Test extends Vue {
             localStorage.program_externship_time_second = this.programdetails.externship.prefered_date.secondary
             localStorage.program_externship_time_third = this.programdetails.externship.prefered_date.final
             localStorage.program_externship_options = tableToDecimal(this.programdetails_externship_contribution_options, this.programdetails.externship.contribution)
-            localStorage.program_externship_options_other = this.programdetails.externship.contribution[this.programdetails.externship.contribution.length - 1]
+            localStorage.program_externship_options_other = findOther(this.programdetails_externship_contribution_options, this.programdetails.externship.contribution)
         }
     }
     syncStorageProject() {
@@ -1384,11 +1384,11 @@ export default class Test extends Vue {
     syncStorageInternship(){
         if(this.internship){
             localStorage.internships_project = tableToDecimal(this.internship_project_type,this.internship.project)
-            localStorage.internships_project_other = this.internship.project[this.internship.project.length - 1]
+            localStorage.internships_project_other = findOther(this.internship_project_type,this.internship.project)
             localStorage.internships_hiring_adult = this.internship.hiring_adult
             // localStorage.internships_travel
             localStorage.internships_education = tableToDecimal(this.internship_education_options,this.internship.education_level)
-            localStorage.internships_education_other = this.internship.education_level.slice(-1)[0]
+            localStorage.internships_education_other = findOther(this.internship_education_options,this.internship.education_level)
             localStorage.internships_talent = tableToDecimal(this.internship_talent_options, this.internship.talent)
             localStorage.internships_days_week =this.internship.days_week
             localStorage.internships_hours_day= this.internship.hours_day
