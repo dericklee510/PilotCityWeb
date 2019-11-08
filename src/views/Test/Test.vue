@@ -311,12 +311,7 @@
                           lg="6"
                           xl="5"
                         >
-                          <v-btn
-                            :block="true"
-                            @click="addOption('',organization.products_services)"
-                          >
-                            +
-                          </v-btn>
+                          <pcMultiInput v-model="organization.products_services" />
                         </v-col>
                         <v-col
                           cols="12"
@@ -1091,6 +1086,7 @@ import Vue from "vue"
 import PCselect from "@/components/inputs/PCselect.vue"
 import PCtextfield from "@/components/inputs/PCtextfield.vue"
 import PCdropdown from "@/components/inputs/PCdropdown.vue"
+import pcMultiInput from "@/components/inputs/PCmultiinput.vue"
 import autoComplete from "@/components/GoogleMaps/Autocomplete/AutoComplete.vue"
 import Component from "vue-class-component"
 import * as Employer from "./types"
@@ -1106,7 +1102,8 @@ import {CONST} from './const'
         pcDropdown: PCdropdown,
         autoComplete,
         ValidationProvider,
-        ValidationObserver
+        ValidationObserver,
+        pcMultiInput
     }
 })
 
