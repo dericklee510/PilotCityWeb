@@ -151,9 +151,10 @@
                     </v-col>
                   </v-row>
                 </template>
-
                 <v-list-item>
-                  <v-list-item-content>
+
+                   
+ <v-list-item-content>
                     <v-col
                       cols="12"
                       class="pt-0"
@@ -378,6 +379,7 @@
                   </v-row>
                 </template>
                 <v-list-item>
+                  <ValidationObserver ref="observer">
                   <v-list-item-content>
                     <v-col cols="12">
                       <v-row justify="start">
@@ -1093,9 +1095,23 @@
                             </div>
                           </v-col>
                         </v-col>
+                         <v-btn
+              id="signup-button"
+              block
+              :loading="loading"
+              :disabled="loading"
+              class="mb-6"
+              @click="syncStorage"
+            >
+              <h3 class="text-uppercase">
+                Complete Profile
+              </h3>
+            </v-btn>
                       </v-row>
                     </v-col>
                   </v-list-item-content>
+
+                 </ValidationObserver>
                 </v-list-item>
               </v-list-group>
             </v-list>
@@ -1115,7 +1131,8 @@ import PCdropdown from "@/components/inputs/PCdropdown.vue"
 import autoComplete from "@/components/GoogleMaps/Autocomplete/AutoComplete.vue"
 import Component from "vue-class-component"
 import * as Employer from "./types"
-import {ValidationProvider} from 'vee-validate'
+import {ValidationProvider, ValidationObserver} from 'vee-validate'
+import {ObserverInstance} from "@/utilities/validation"
 import { tableToDecimal } from "./helpers"
 
 @Component({
@@ -1124,7 +1141,8 @@ import { tableToDecimal } from "./helpers"
         pcTextfield: PCtextfield,
         pcDropdown: PCdropdown,
         autoComplete,
-        ValidationProvider
+        ValidationProvider,
+        ValidationObserver
     }
 })
 
@@ -1148,13 +1166,12 @@ export default class Test extends Vue {
         position: "",
         organization: ""
     }
-    public organization?: Employer.Organization 
+    public organization: Employer.Organization = {} as Employer.Organization
+    public programdetails: Employer.ProgramDetails = {} as Employer.ProgramDetails
+    public internship: Employer.Internship = {} as Employer.Internship
     minStudents: string = "";
     maxStudents: string = "";
-    public programdetails?: Employer.ProgramDetails
-    public internship?: Employer.Internship
-
-    public syncStorage(): void {}
+    private loading:boolean = false
     public syncStorageCitizen() {
         localStorage.citizen_first_name = this.citizen.first_name
         localStorage.citizen_last_name = this.citizen.last_name
@@ -1321,6 +1338,7 @@ export default class Test extends Vue {
         to.push(from)
     }
     public syncStorageOrganization() {
+        
         if(this.organization){
         let location = this.organization.location
         localStorage.organization_division = this.organization.department
@@ -1380,6 +1398,17 @@ export default class Test extends Vue {
             localStorage.internships_employment = this.internship.employment
             localStorage.internships_position = tableToDecimal(this.internship_position_type_options,this.internship.position_type)
         }
+    }
+    async syncStorage(){
+      this.loading = true
+      if(await (this.$refs.observer as ObserverInstance).validate()){
+        this.syncStorageCitizen()
+        this.syncStorageOrganization()
+        this.syncStorageProgramDetails()
+        this.syncStorageProject()
+        this.syncStorageInternship()
+      }
+      this.loading = false
     }
     created(){
       this.citizen.first_name = localStorage.first_name?localStorage.first_name:"Your"
