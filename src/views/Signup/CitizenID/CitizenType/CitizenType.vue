@@ -45,7 +45,7 @@
               block
               @click="selectCitizenType(type)"
             >
-             <!-- @click="$router.push({name:`signup.data`, props: {citizenType: type}})" -->
+              <!-- @click="$router.push({name:`signup.data`, props: {citizenType: type}})" -->
               <h2 class="text-capitalize">
                 {{ type }}
               </h2>
@@ -70,10 +70,13 @@ export default class CitizenType extends Vue {
         Student: "citizen-id__type--student"
     }
     private AVAILABLETYPES: string[] = ["Employer"]
-    selectCitizenType(citizen_key:string){
-      localStorage.citizen_type = citizen_key
-      this.$router.push({name:`signup.data`, params: {citizenType: citizen_key}})
-      this.$router.push
+    selectCitizenType(citizen_key: string){
+        localStorage.citizen_type = citizen_key
+        this.$router.push({
+            name:`signup.data`, 
+            params: {citizenType: citizen_key}
+        })
+        this.$router.push
     }
 }
 </script>
