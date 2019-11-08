@@ -289,28 +289,6 @@
                           lg="6"
                           xl="5"
                         >
-                          <ValidationProvider
-                            v-slot="{errors}"
-                            rules="required"
-                          >
-                            <pcTextfield
-                              v-for="(product_service, index) in organization.products_services"
-                              :key="product_service+index"
-                              v-model="organization.products_services[index]"
-                              :error-messages="errors"
-                              :dark-mode="true"
-                              title="LIST YOUR PRODUCT OR SERVICE"
-                              placeholder="Name of Product"
-                              @keyup.enter="addOption('',organization.products_services)"
-                            />
-                          </ValidationProvider>
-                        </v-col>
-                        <v-col
-                          cols="12"
-                          md="8"
-                          lg="6"
-                          xl="5"
-                        >
                           <pcMultiInput v-model="organization.products_services" />
                         </v-col>
                         <v-col
@@ -607,26 +585,11 @@
                               cols="12"
                               md="6"
                             >
-                              <v-checkbox
-                                v-for="(op, index) in INTERNSHIP_PROJECT_TYPE "
-                                :key="op+index"
+                              <pcCheckbox
                                 v-model="internship.project"
-                                :value="op"
-                                :label="op"
-                                hide-details
+                                :option="INTERNSHIP_PROJECT_TYPE"
+                                
                               />
-                              <v-checkbox
-                                v-model="internship.project"
-                                :value="internOther"
-                                hide-details
-                              >
-                                <template v-slot:label>
-                                  <v-text-field
-                                    v-model="internOther"
-                                    placeholder="other"
-                                  />
-                                </template>
-                              </v-checkbox>
                             </v-col>
                           </v-col>
                         </ValidationProvider>
@@ -1085,8 +1048,8 @@
 import Vue from "vue"
 import PCselect from "@/components/inputs/PCselect.vue"
 import PCtextfield from "@/components/inputs/PCtextfield.vue"
-import PCdropdown from "@/components/inputs/PCdropdown.vue"
 import pcMultiInput from "@/components/inputs/PCmultiinput.vue"
+import pcCheckbox from "@/components/inputs/PCcheckbox.vue"
 import autoComplete from "@/components/GoogleMaps/Autocomplete/AutoComplete.vue"
 import Component from "vue-class-component"
 import * as Employer from "./types"
@@ -1099,11 +1062,11 @@ import {CONST} from './const'
     components:{
         pcSelect: PCselect,
         pcTextfield: PCtextfield,
-        pcDropdown: PCdropdown,
         autoComplete,
         ValidationProvider,
         ValidationObserver,
-        pcMultiInput
+        pcMultiInput,
+        pcCheckbox
     }
 })
 

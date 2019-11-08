@@ -40,7 +40,7 @@ export default class PCtextfield extends Vue {
     public value!: string;
     @Prop({ default: false})
     public darkMode?: boolean;
-    @Prop({ required: true})
+    @Prop({ required: false})
     public title!: string;
     @Prop({ required: true})
     public placeholder!: string;

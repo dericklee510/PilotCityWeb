@@ -1,10 +1,26 @@
-<template >
-    <div class="pc-radio">
-        <v-checkbox v-for="(option,index) in options" :key="index" v-model="selected" :value="option" :label="option" />
-        <v-checkbox v-if="other" v-model="otherChecked" />
-        <v-text-field v-if="other" :disabled="otherChecked" v-model="otherInput"></v-text-field>
-        
-    </div>
+<template>
+  <div class="pc-checkbox">
+    <v-checkbox
+      v-for="(option,index) in options"
+      :key="option+index"
+      v-model="selected"
+      :value="option"
+      :label="option"
+    />
+    <v-checkbox
+      v-if="other"
+      v-model="otherChecked"
+      :value="otherInput"
+    >
+      <template v-slot:label>
+        <v-text-field
+          v-if="other"
+          v-model="otherInput"
+          :disabled="otherChecked"
+        />
+      </template>
+    </v-checkbox>
+  </div>
 </template>
 
 <script lang="ts">
@@ -14,23 +30,23 @@ import 'reflect-metadata'
 import {Component, Prop, Watch} from 'vue-property-decorator'
 
 @Component
-export default class PCcheckbox extends Vue{
+export default class  extends Vue{
     @Prop()
-    public value!:string
+    public checked!: string[]
     @Prop()
-    public options!:any[]
+    public options!: any[]
     @Prop()
-    public other!:boolean
-    public otherChecked:boolean = false
-    public otherInput:string = ""
-    public selected:any[] = []
+    public other!: boolean
+    public otherChecked: boolean = false
+    public otherInput: string = ""
+    public selected: any[] = []
     get checkedOptions(){
         if(this.other && this.otherChecked)
             return [...this.selected,this.otherInput]
         return this.selected
     }
     @Watch('checkedOptions')
-    onCheckedOptionsChanged(newval:any[]){
+    onCheckedOptionsChanged(newval: any[]){
         this.$emit('input',newval)
     }
 }
