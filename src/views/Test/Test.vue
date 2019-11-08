@@ -279,6 +279,7 @@
                               v-model="organization.industry"
                               :label="industry"
                               :value="industry"
+                              hide-details
                             />
                           </v-col>
                         </ValidationProvider>
@@ -459,6 +460,7 @@
                               <v-checkbox
                                 v-model="programdetails.externship.contribution"
                                 :value="contributionOther"
+                                hide-details
                               >
                                 <template v-slot:label>
                                   <v-text-field
@@ -515,6 +517,7 @@
                               >
                                 <pcSelect
                                   v-model="programdetails.project.capacity.maximum"
+                                  :dark-mode="true"
                                   :items="CLASSROOM_COUNT"
                                   title=""
                                   placeholder="Select Maximum"
@@ -606,7 +609,6 @@
                           </v-col>
                           <v-col cols="12">
                             <v-col
-                            
                               cols="12"
                               md="6"
                             >
@@ -616,13 +618,15 @@
                                 v-model="internship.project"
                                 :value="op"
                                 :label="op"
+                                hide-details
                               />
                               <v-checkbox
                                 v-model="internship.project"
                                 :value="internOther"
+                                hide-details
                               >
                                 <template v-slot:label>
-                                  <v-textfield
+                                  <v-text-field
                                     v-model="internOther"
                                     placeholder="other"
                                   />
@@ -716,26 +720,31 @@
                                 v-model="internship.education_level"
                                 label="Highschool"
                                 value="High school"
+                                hide-details
                               />
                               <v-checkbox
                                 v-model="internship.education_level"
                                 label="Specialty Training"
                                 value="Specialty Training"
+                                hide-details
                               />
                               <v-checkbox
                                 v-model="internship.education_level"
                                 label="Community College"
                                 value="Community College"
+                                hide-details
                               />
                               <v-checkbox
                                 v-model="internship.education_level"
                                 label="Bachelors"
                                 value="Bachelors"
+                                hide-details
                               />
                               <v-checkbox
                                 v-model="internship.education_level"
                                 label="Doctorate"
                                 value="Doctorate"
+                                hide-details
                               />
                             </ValidationProvider>
                           </v-col>
@@ -763,6 +772,7 @@
                                 v-model="internship.talent"
                                 :label="tal"
                                 :value="tal"
+                                hide-details
                               />
                             </ValidationProvider>
                           </v-col>
@@ -874,6 +884,7 @@
                                 v-model="internship.compensation"
                                 :label="comp"
                                 :value="comp" 
+                                hide-details
                               />
                             </ValidationProvider>
                           </v-col>
@@ -923,6 +934,14 @@
                               </ValidationProvider>
                             </v-col>
                           </v-row>
+                        </v-col>
+                        <v-col cols="12">
+                          <h4
+                            class="text-uppercase"
+                            style="color:#C7C8CA"
+                          >
+                            SELECT THREE DATE OPTIONS FOR INTERVIEWING CANDIDATES BETWEEN APRIL 15 - MAY 15 FROM 4PM - 6PM
+                          </h4>
                         </v-col>
                         <v-col cols="12">
                           <v-col
@@ -988,7 +1007,7 @@
                             class="text-uppercase"
                             style="color:#C7C8CA"
                           >
-                            SELECT THREE DATE OPTIONS FOR INTERVIEWING CANDIDATES BETWEEN APRIL 15 - MAY 15 FROM 4PM - 6PM
+                            IF SATISFIED AFTER SUMMER PROGRAM, WILL YOU CONSIDER CONTINUED EMPLOYMENT OF INTERN OR FELLOW?
                           </h4>
                         </v-col>
                         <v-col cols="12">
@@ -1013,12 +1032,14 @@
                             </ValidationProvider>
                           </v-col>
                         </v-col>
-                        <h4
-                          class="text-uppercase"
-                          style="color:#C7C8CA"
-                        >
-                          WHAT POSITIONS WOULD YOU HAVE AVAILABLE FOR CONTINUED EMPLOYMENT OF IN-SCHOOL OR GRADUATED HIGH SCHOOL TALENT?
-                        </h4>
+                        <v-col cols="12">
+                          <h4
+                            class="text-uppercase"
+                            style="color:#C7C8CA"
+                          >
+                            WHAT POSITIONS WOULD YOU HAVE AVAILABLE FOR CONTINUED EMPLOYMENT OF IN-SCHOOL OR GRADUATED HIGH SCHOOL TALENT?
+                          </h4>
+                        </v-col>
                         <v-col cols="12">
                           <v-col
                             cols="12"
@@ -1034,6 +1055,7 @@
                                 v-model="internship.position_type"
                                 :label="pos"
                                 :value="pos" 
+                                hide-details
                               />
                             </ValidationProvider>
                           </v-col>
@@ -1104,13 +1126,18 @@ export default class Test extends CONST {
 
     public citizen: Employer.Citizen = {} as Employer.Citizen
     public organization: Employer.Organization = {
-      industry: [] as string[]
+        industry: [] as string[]
     } as Employer.Organization
     public programdetails: Employer.ProgramDetails = {
-        externship: { prefered_date: {}}, 
+        externship: { prefered_date: {}, contribution: [] as string[]}, 
         project: { capacity: {}, engagement: {}}
     } as Employer.ProgramDetails
-    public internship: Employer.Internship = {} as Employer.Internship
+    public internship: Employer.Internship = {
+        talent: []  as string[],
+        project: [] as string[],
+        compensation: [] as string[],
+        position_type: []  as string[]
+    } as Employer.Internship
 
     contributionOther: string = '';
     internOther: string  = '';
@@ -1206,7 +1233,7 @@ export default class Test extends CONST {
         this.loading = false
     }
     get Name(){
-      return `${this.citizen.first_name} ${this.citizen.last_name}`
+        return `${this.citizen.first_name} ${this.citizen.last_name}`
     }
     created(){
         this.$set(this.citizen,'first_name',localStorage.first_name?localStorage.first_name:"Your")
