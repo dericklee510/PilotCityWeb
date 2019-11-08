@@ -36,7 +36,7 @@
           <v-text-field
             v-model="input_email"
             name="email"
-            outline
+            outlined
             placeholder="Enter your email"
             required
             single-line

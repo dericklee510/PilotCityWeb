@@ -23,7 +23,7 @@ const routes: RouteConfig[] = [
             {
                 name: "signup.data",
                 path: `data`,
-                component: EmployerSignup,
+                component: EmployerSignup
                 // props: {citizenType: `Teacher`}
             }
         ],

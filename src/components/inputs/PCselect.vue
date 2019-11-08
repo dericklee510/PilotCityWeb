@@ -57,7 +57,7 @@ export default class PCselect extends Vue {
         this.xcontent = value
     }
     public handleInput(){
-        this.$emit('input', this.content)
+        this.$emit('change', this.content)
     }
 }
 </script>

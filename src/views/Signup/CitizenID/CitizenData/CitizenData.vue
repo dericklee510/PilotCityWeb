@@ -158,7 +158,7 @@ export default class CitizenData extends Vue {
         Employer: "citizen-id__type--employer", 
         Student: "citizen-id__type--student"
     }
-    private AVAILABLETYPES: string[] = ["Teacher", "Employer", "Student",]
+    private AVAILABLETYPES: string[] = ["Teacher", "Employer", "Student"]
     
     private changeCitizenType(intype: string): void {
         this.citizenType = intype

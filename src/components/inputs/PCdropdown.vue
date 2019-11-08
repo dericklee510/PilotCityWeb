@@ -6,7 +6,7 @@
   >
     <template v-slot:activator="{ on }">
       <v-btn
-        outline
+        outlined
         elevation="0"
         color="transparent"
         dark

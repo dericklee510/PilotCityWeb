@@ -60,7 +60,7 @@
             >
               <v-row justify="start">
                 <v-col cols="12">
-                  <h1>{{`${citizen.first_name} ${citizen.last_name}`}}</h1>
+                  <h1>{{ `${citizen.first_name} ${citizen.last_name}` }}</h1>
                 </v-col>
                 <v-col
                   cols="12"
@@ -133,36 +133,90 @@
               class="pc-profile-page--dark"
               text
             >
-              <v-list-group
-                no-action
-                :ripple="false"
-                :value="true"
-              >
-                <template v-slot:activator>
-                  <v-row>
-                    <v-col
-                      cols="12"
-                      lg="2"
+              <v-list-item-title
+                style="max-width: fit-content"
+                v-text="'Citizen'"
+              />
+              <v-list-item>
+                <v-list-item-content>
+                  <v-col
+                    cols="12"
+                    class="pt-0"
+                  >
+                    <v-row
+                      id="citizen-id__base-questions"
+                      justify="start"
                     >
-                      <v-list-item-title
-                        style="max-width: fit-content"
-                        v-text="'Citizen'"
-                      />
-                    </v-col>
-                  </v-row>
-                </template>
-                <v-list-item>
-
-                   
- <v-list-item-content>
-                    <v-col
-                      cols="12"
-                      class="pt-0"
-                    >
-                      <v-row
-                        id="citizen-id__base-questions"
-                        justify="start"
+                      <v-col
+                        cols="12"
+                        md="8"
+                        lg="6"
+                        xl="5"
                       >
+                        <ValidationProvider
+                          v-slot="{errors}"
+                          rules="required"
+                        >
+                          <pcTextfield
+                            v-model="citizen.first_name"
+                            :dark-mode="true"
+                            title="FIRST NAME"
+                            placeholder="First Name"
+                            :error-messages="errors"
+                          />
+                        </ValidationProvider>
+                        <ValidationProvider
+                          v-slot="{errors}"
+                          rules="required"
+                        >
+                          <pcTextfield
+                            v-model="citizen.last_name"
+                            :error-messages="errors"
+                            :dark-mode="true"
+                            title="LAST NAME"
+                            placeholder="Last Name"
+                          />
+                        </ValidationProvider>
+                        <ValidationProvider
+                          v-slot="{errors}"
+                          rules="required"
+                        >
+                          <pcTextfield
+                            v-model="citizen.position"
+                            :error-messages="errors"
+                            :dark-mode="true"
+                            title="POSITION"
+                            placeholder="Role"
+                          />
+                        </ValidationProvider>
+                        <ValidationProvider
+                          v-slot="{errors}"
+                          rules="required"
+                        >
+                          <pcTextfield
+                            v-model="citizen.organization"
+                            :error-messages="errors"
+                            :dark-mode="true"
+                            title="ORGANIZATION"
+                            placeholder="Company Name"
+                          />
+                        </ValidationProvider>
+                      </v-col>
+                    </v-row>
+                  </v-col>
+                </v-list-item-content>
+              </v-list-item>
+              
+              
+              <v-list-item-title
+                style="max-width: fit-content"
+                v-text="'Organization'"
+              />
+              <v-list-item>
+                <v-list-item-content>
+                  <v-col cols="12">
+                    <v-row justify="start">
+                      <v-col cols="12">
                         <v-col
                           cols="12"
                           md="8"
@@ -174,99 +228,15 @@
                             rules="required"
                           >
                             <pcTextfield
-                              v-model="citizen.first_name"
-                              :dark-mode="true"
-                              title="FIRST NAME"
-                              placeholder="First Name"
+                              v-model="organization.department[0]"
                               :error-messages="errors"
-                            />
-                          </ValidationProvider>
-                          <ValidationProvider
-                            v-slot="{errors}"
-                            rules="required"
-                          >
-                            <pcTextfield
-                            :error-messages="errors"
-                              v-model="citizen.last_name"
                               :dark-mode="true"
-                              title="LAST NAME"
-                              placeholder="Last Name"
-                            />
-                          </ValidationProvider>
-                          <ValidationProvider
-                            v-slot="{errors}"
-                            rules="required"
-                          >
-                            <pcTextfield
-                            :error-messages="errors"
-                              v-model="citizen.position"
-                              :dark-mode="true"
-                              title="POSITION"
-                              placeholder="Role"
-                            />
-                          </ValidationProvider>
-                          <ValidationProvider
-                            v-slot="{errors}"
-                            rules="required"
-                          >
-                            <pcTextfield
-                            :error-messages="errors"
-                              v-model="citizen.organization"
-                              :dark-mode="true"
-                              title="ORGANIZATION"
-                              placeholder="Company Name"
+                              title="Your Department"
+                              placeholder="Enter Department Name"
                             />
                           </ValidationProvider>
                         </v-col>
-                      </v-row>
-                    </v-col>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list-group>
-              <v-list-group
-                no-action
-                :ripple="false"
-              >
-                <template v-slot:activator>
-                  <v-row>
-                    <v-col
-                      cols="12"
-                      md="8"
-                      lg="6"
-                      xl="5"
-                    >
-                      <v-list-item-title
-                        style="max-width: fit-content"
-                        v-text="'Organization'"
-                      />
-                    </v-col>
-                  </v-row>
-                </template>
-                <v-list-item>
-                  <v-list-item-content>
-                    <v-col cols="12">
-                      <v-row justify="start">
-                        <v-col cols="12">
-                          <v-col
-                            cols="12"
-                            md="8"
-                            lg="6"
-                            xl="5"
-                          >
-                            <ValidationProvider
-                              v-slot="{errors}"
-                              rules="required"
-                            >
-                              <pcTextfield
-                              :error-messages="errors"
-                                v-model="organization.department[0]"
-                                :dark-mode="true"
-                                title="Your Department"
-                                placeholder="Enter Department Name"
-                              />
-                            </ValidationProvider>
-                          </v-col>
-                          <!-- <v-col
+                        <!-- <v-col
                             cols="12"
                             md="8"
                             lg="6"
@@ -279,107 +249,97 @@
                               +
                             </v-btn>
                           </v-col> -->
-                          <v-col
-                            cols="12"
-                            md="8"
-                            lg="6"
-                            xl="5"
+                        <v-col
+                          cols="12"
+                          md="8"
+                          lg="6"
+                          xl="5"
+                        >
+                          <ValidationProvider
+                            v-slot="{errors}"
+                            rules="required"
                           >
-                          <ValidationProvider rules="required" v-slot="{errors}">
-                            <autoComplete :error-messages="errors" v-model="organization.location" />
+                            <autoComplete
+                              v-model="organization.location"
+                              :error-messages="{errors}"
+                            />
                           </ValidationProvider>
-                            
-                          </v-col>
-                          <v-col
-                            v-for="(industry, index) in organization_industry_options"
-                            :key="index"
-                            cols="12"
-                            md="8"
-                            lg="6"
-                            xl="5"
-                          >
-                            <ValidationProvider
-                              v-slot="{error}"
-                              rules="required"
-                            >
-                              <v-checkbox :label="industry" />
-                            </ValidationProvider>
-                          </v-col>
-                          <v-col
-                            cols="12"
-                            md="8"
-                            lg="6"
-                            xl="5"
-                          >
-                            <ValidationProvider
-                              v-slot="{errors}"
-                              rules="required"
-                            >
-                              <pcTextfield
-                              :error-messages="errors"
-                                v-model="program_details_organization.products_services" 
-                                :dark-mode="true"
-                                title="LIST YOUR PRODUCT OR SERVICE"
-                                placeholder="Name of Product"
-                              />
-                            </ValidationProvider>
-                          </v-col>
-                          <v-col
-                            cols="12"
-                            md="8"
-                            lg="6"
-                            xl="5"
-                          >
-                            <v-btn :block="true">
-                              +
-                            </v-btn>
-                          </v-col>
-                          <v-col
-                            cols="12"
-                            md="8"
-                            lg="6"
-                            xl="5"
-                          >
-                            <ValidationProvider
-                              v-slot="{error}"
-                              rules="required"
-                            >
-                              <pcSelect
-                                v-model="organization.employee_count"
-                                :items="WORKFORCE_COUNT"
-                                :dark-mode="true"
-                                title="EMPLOYEE COUNT"
-                                placeholder="Select Number of Employees"
-                              />
-                            </ValidationProvider>
-                          </v-col>
                         </v-col>
-                      </v-row>
-                    </v-col>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list-group>
-              <v-list-group
-                no-action
-                :ripple="false"
-              >
-                <template v-slot:activator>
-                  <v-row>
-                    <v-col
-                      cols="12"
-                      md="8"
-                      lg="6"
-                      xl="5"
-                    >
-                      <v-list-item-title
-                        style="max-width: fit-content"
-                        v-text="'Program Details'"
-                      />
-                    </v-col>
-                  </v-row>
-                </template>
-                <v-list-item>
-                  <ValidationObserver ref="observer">
+                        <v-col
+                          v-for="(industry, index) in organization_industry_options"
+                          :key="index"
+                          cols="12"
+                          md="8"
+                          lg="6"
+                          xl="5"
+                        >
+                          <ValidationProvider
+                            v-slot="{error}"
+                            rules="required"
+                          >
+                            <v-checkbox :label="industry" />
+                          </ValidationProvider>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          md="8"
+                          lg="6"
+                          xl="5"
+                        >
+                          <ValidationProvider
+                            v-slot="{error}"
+                            rules="required"
+                          >
+                            <pcTextfield
+                              v-model="program_details_organization.products_services"
+                              :error-messages="errors" 
+                              :dark-mode="true"
+                              title="LIST YOUR PRODUCT OR SERVICE"
+                              placeholder="Name of Product"
+                            />
+                          </ValidationProvider>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          md="8"
+                          lg="6"
+                          xl="5"
+                        >
+                          <v-btn :block="true">
+                            +
+                          </v-btn>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          md="8"
+                          lg="6"
+                          xl="5"
+                        >
+                          <ValidationProvider
+                            v-slot="{error}"
+                            rules="required"
+                          >
+                            <pcSelect
+                              v-model="organization.employee_count"
+                              :items="WORKFORCE_COUNT"
+                              :dark-mode="true"
+                              title="EMPLOYEE COUNT"
+                              placeholder="Select Number of Employees"
+                            />
+                          </ValidationProvider>
+                        </v-col>
+                      </v-col>
+                    </v-row>
+                  </v-col>
+                </v-list-item-content>
+              </v-list-item>
+              
+              <v-list-item-title
+                style="max-width: fit-content"
+                v-text="'Program Details'"
+              />
+              <v-list-item>
+                <ValidationObserver ref="observer">
                   <v-list-item-content>
                     <v-col cols="12">
                       <v-row justify="start">
@@ -411,8 +371,8 @@
                               rules="required"
                             >
                               <pcTextfield
-                              :error-messages="errors"
                                 v-model="program_details_externship.prefered_date.primary"
+                                :error-messages="errors"
                                 :dark-mode="true"
                                 placeholder="Primary option"
                                 title="First Choice"
@@ -430,8 +390,8 @@
                               rules="required"
                             >
                               <pcTextfield
-                              :error-messages="errors"
                                 v-model="program_details_externship.prefered_date.primary"
+                                :error-messages="errors"
                                 :dark-mode="true"
                                 placeholder="Secondary option"
                                 title="Second Choice"
@@ -449,8 +409,8 @@
                               rules="required"
                             >
                               <pcTextfield
-                              :error-messages="errors"
                                 v-model="program_details_externship.prefered_date.primary"
+                                :error-messages="errors"
                                 :dark-mode="true"
                                 placeholder="Final option"
                                 title="Third Choice"
@@ -953,8 +913,8 @@
                             >
                             <ValidationProvider rules="required|min:0" v-slot="{errors}">
                               <pcTextfield
-                              :error-messages="errors"
                                 v-model="program_details_internship.budget_min"
+                                :error-messages="errors"
                                 :dark-mode="true"
                                 placeholder="Minimum"
                                 title=""
@@ -968,8 +928,8 @@
                             >
                             <ValidationProvider rules="required|min:0" v-slot="{errors}">
                               <pcTextfield
-                              :error-messages="errors"
                                 v-model="program_details_internship.budget_max"
+                                :error-messages="errors"
                                 :dark-mode="true"
                                 placeholder="Maximum"
                                 title=""
@@ -991,8 +951,8 @@
                               rules="required"
                             >
                               <pcTextfield
-                              :error-messages="errors"
                                 v-model="program_details_internship.interview_1"
+                                :error-messages="errors"
                                 :dark-mode="true"
                                 placeholder="Primary option"
                                 title="First Choice"
@@ -1010,8 +970,8 @@
                               rules="required"
                             >
                               <pcTextfield
-                              :error-messages="errors"
                                 v-model="program_details_internship.interview_2"
+                                :error-messages="errors"
                                 :dark-mode="true"
                                 placeholder="Secondary option"
                                 title="Second Choice"
@@ -1029,8 +989,8 @@
                               rules="required"
                             >
                               <pcTextfield
-                              :error-messages="errors"
                                 v-model="program_details_internship.interview_3"
+                                :error-messages="errors"
                                 :dark-mode="true"
                                 placeholder="Final option"
                                 title="Third Choice"
@@ -1074,11 +1034,11 @@
                           </v-col>
                         </v-col>
                         <h4
-                            class="text-uppercase"
-                            style="color:#C7C8CA"
-                          >
-                            WHAT POSITIONS WOULD YOU HAVE AVAILABLE FOR CONTINUED EMPLOYMENT OF IN-SCHOOL OR GRADUATED HIGH SCHOOL TALENT?
-                          </h4>
+                          class="text-uppercase"
+                          style="color:#C7C8CA"
+                        >
+                          WHAT POSITIONS WOULD YOU HAVE AVAILABLE FOR CONTINUED EMPLOYMENT OF IN-SCHOOL OR GRADUATED HIGH SCHOOL TALENT?
+                        </h4>
                         <v-col cols="12">
                           <v-col
                             cols="12"
@@ -1101,25 +1061,23 @@
                             </div>
                           </v-col>
                         </v-col>
-                         <v-btn
-              id="signup-button"
-              block
-              :loading="loading"
-              :disabled="loading"
-              class="mb-6"
-              @click="syncStorage"
-            >
-              <h3 class="text-uppercase">
-                Complete Profile
-              </h3>
-            </v-btn>
+                        <v-btn
+                          id="signup-button"
+                          block
+                          :loading="loading"
+                          :disabled="loading"
+                          class="mb-6"
+                          @click="syncStorage"
+                        >
+                          <h3 class="text-uppercase">
+                            Complete Profile
+                          </h3>
+                        </v-btn>
                       </v-row>
                     </v-col>
                   </v-list-item-content>
-
-                 </ValidationObserver>
-                </v-list-item>
-              </v-list-group>
+                </ValidationObserver>
+              </v-list-item>
             </v-list>
           </v-container>
         </v-container>
@@ -1177,7 +1135,7 @@ export default class Test extends Vue {
     public internship: Employer.Internship = {} as Employer.Internship
     minStudents: string = "";
     maxStudents: string = "";
-    private loading:boolean = false
+    private loading: boolean = false
     public syncStorageCitizen() {
         localStorage.citizen_first_name = this.citizen.first_name
         localStorage.citizen_last_name = this.citizen.last_name
@@ -1337,8 +1295,8 @@ export default class Test extends Vue {
         "Unpaid"
     ]
     public addDept(){
-      if(this.organization)
-        this.organization.department.push("")
+        if(this.organization)
+            this.organization.department.push("")
     }
     private addOption(from: string, to: string[]): void{
         to.push(from)
@@ -1406,19 +1364,19 @@ export default class Test extends Vue {
         }
     }
     async syncStorage(){
-      this.loading = true
-      if(await (this.$refs.observer as ObserverInstance).validate()){
-        this.syncStorageCitizen()
-        this.syncStorageOrganization()
-        this.syncStorageProgramDetails()
-        this.syncStorageProject()
-        this.syncStorageInternship()
-      }
-      this.loading = false
+        this.loading = true
+        if(await (this.$refs.observer as ObserverInstance).validate()){
+            this.syncStorageCitizen()
+            this.syncStorageOrganization()
+            this.syncStorageProgramDetails()
+            this.syncStorageProject()
+            this.syncStorageInternship()
+        }
+        this.loading = false
     }
     created(){
-      this.citizen.first_name = localStorage.first_name?localStorage.first_name:"Your"
-      this.citizen.last_name = localStorage.last_name?localStorage.last_name:"Name"
+        this.citizen.first_name = localStorage.first_name?localStorage.first_name:"Your"
+        this.citizen.last_name = localStorage.last_name?localStorage.last_name:"Name"
     }
 }
 </script>

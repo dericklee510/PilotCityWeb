@@ -41,7 +41,7 @@
               v-model="email"
               :error-messages="errors"
               name="email"
-              outline
+              outlined
               placeholder="Enter your email"
               required
               single-line
