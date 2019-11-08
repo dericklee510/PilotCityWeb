@@ -27,7 +27,7 @@
     
 import Vue from 'vue'
 import 'reflect-metadata'
-import {Component, Prop, Watch} from 'vue-property-decorator'
+import {Component, Prop, Watch} from 'vue-property-decorator' 
 
 @Component
 export default class  extends Vue{

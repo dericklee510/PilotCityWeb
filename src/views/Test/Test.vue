@@ -289,8 +289,19 @@
                           lg="6"
                           xl="5"
                         >
-                          <pcMultiInput v-model="organization.products_services" />
+                          <ValidationProvider
+                            v-slot="{errors}"
+                            rules="required"
+                          >
+                            <pcMultiInput v-model="organization.products_services" />
+                          </ValidationProvider>
                         </v-col>
+                        <v-col
+                          cols="12"
+                          md="8"
+                          lg="6"
+                          xl="5"
+                        />
                         <v-col
                           cols="12"
                           md="8"
@@ -588,7 +599,6 @@
                               <pcCheckbox
                                 v-model="internship.project"
                                 :option="INTERNSHIP_PROJECT_TYPE"
-                                
                               />
                             </v-col>
                           </v-col>
@@ -1046,10 +1056,12 @@
 
 <script lang="ts">
 import Vue from "vue"
-import PCselect from "@/components/inputs/PCselect.vue"
-import PCtextfield from "@/components/inputs/PCtextfield.vue"
-import pcMultiInput from "@/components/inputs/PCmultiinput.vue"
-import pcCheckbox from "@/components/inputs/PCcheckbox.vue"
+import {
+    PCselect,
+    PCtextfield, 
+    PCcheckbox,
+    PCmultiinput
+} from "@/components/inputs"
 import autoComplete from "@/components/GoogleMaps/Autocomplete/AutoComplete.vue"
 import Component from "vue-class-component"
 import * as Employer from "./types"
@@ -1065,8 +1077,8 @@ import {CONST} from './const'
         autoComplete,
         ValidationProvider,
         ValidationObserver,
-        pcMultiInput,
-        pcCheckbox
+        pcMultiInput: PCmultiinput,
+        pcCheckbox: PCcheckbox
     }
 })
 
@@ -1086,7 +1098,8 @@ export default class Test extends CONST {
 
     public citizen: Employer.Citizen = {} as Employer.Citizen
     public organization: Employer.Organization = {
-        industry: [] as string[]
+        industry: [] as string[],
+        products_services: [] as string[]
     } as Employer.Organization
     public programdetails: Employer.ProgramDetails = {
         externship: { prefered_date: {}, contribution: [] as string[]}, 

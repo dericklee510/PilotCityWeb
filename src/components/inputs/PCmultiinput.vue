@@ -7,8 +7,9 @@
       <PCtextfield
         v-model="entry.value"
         placeholder="Enter you product or Service"
+        :key="entry.id + 'textfield'"
       />
-      <h1>
+      <h1 :key="entry.id+'icon'">
         <i
           class="mdi mdi-delete"
           @click="deleteEntry(entry.id)"
@@ -42,14 +43,16 @@ export default class PCmultiinput extends Vue{
     value!: string[];
     entries = [{value:"",id:0}]
     newEntry(){
+      console.log(this.entries.slice(-1)[0].id+1)
         this.entries.push({value:"",id:this.entries.slice(-1)[0].id+1})
     }
     deleteEntry(id: number){
         this.entries.splice(this.entries.findIndex((entry) => entry.id == id),1)
 
     }
-    @Watch('entries')
+    @Watch('entries',{deep:true})
     onEntriesChanged(newVal: {value: string; id: number} []){
+      console.log('change detected')
         this.$emit('input', newVal.map(entree => entree.value))
     }
 }
