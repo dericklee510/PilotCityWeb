@@ -31,22 +31,23 @@
 
 <script lang="ts">
 import Vue from "vue"
+import 'reflect-metadata'
 import {Component, Prop} from "vue-property-decorator"
 
 
 @Component
 export default class PCselect extends Vue {
-    @Prop({type: String, required: true})
+    @Prop({required: true})
     public value!: string;
-    @Prop({type: Boolean, default: false})
+    @Prop({default: false})
     public darkMode!: boolean;
-    @Prop({type: Boolean, default: false})
+    @Prop({default: false})
     public multiselect!: boolean;
-    @Prop({type: String, required: true})
+    @Prop({required: true})
     public title!: string;
-    @Prop({type: Array, required: true})
+    @Prop({required: true})
     public items!: string[];
-    @Prop({type: String, required: true})
+    @Prop({required: true})
     public placeholder!: string;
 
     public xcontent: string = '';
@@ -57,7 +58,7 @@ export default class PCselect extends Vue {
         this.xcontent = value
     }
     public handleInput(){
-        this.$emit('change', this.content)
+        this.$emit('input', this.content)
     }
 }
 </script>

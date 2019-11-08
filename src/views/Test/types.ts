@@ -36,26 +36,6 @@ export interface ProgramDetails {
             radius: string;
         };
     };
-    internship: {
-        type: string;
-        travel_distance: string;
-        education: string;
-        hosting: {
-            frequency: string;
-            duration: string;
-        };
-        official_employer: string;
-        compensation: string[];
-        prefered_interview_date: {
-            primary: string;
-            secondary: string;
-            final: string;
-        };
-        employment: {
-            continued: boolean;
-            positions: string[];
-        };
-    }
 }
 export interface Internship {
     project: string[];

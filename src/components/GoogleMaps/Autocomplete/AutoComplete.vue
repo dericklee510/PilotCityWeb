@@ -44,9 +44,9 @@ export default class AutoComplete extends Vue {
   get errorMessage() {
       return (this.errorMessages as {errors: string[]}).errors
   }
-  get error(): string | undefined {
+  get error(): string[] | undefined {
       if (Array.isArray(this.errorMessage))
-          return this.errorMessage.length ? this.errorMessage[0] : ""
+          return this.errorMessage.length ? this.errorMessage : [""]
       else {
           return this.errorMessage
       }

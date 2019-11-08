@@ -228,7 +228,7 @@
                             rules="required"
                           >
                             <pcTextfield
-                              v-model="organization.department[0]"
+                              v-model="organization.department"
                               :error-messages="errors"
                               :dark-mode="true"
                               title="Your Department"
@@ -287,7 +287,7 @@
                           xl="5"
                         >
                           <ValidationProvider
-                            v-slot="{error}"
+                            v-slot="{errors}"
                             rules="required"
                           >
                             <pcTextfield
