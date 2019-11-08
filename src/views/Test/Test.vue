@@ -609,15 +609,13 @@
                             </v-row>
                           </v-col>
                           <v-col cols="12">
-                            <v-col
-                              cols="12"
-                              md="6"
-                            >
+
                               <pcCheckbox
                                 v-model="internship.project"
-                                :option="INTERNSHIP_PROJECT_TYPE"
+                                :options="INTERNSHIP_PROJECT_TYPE"
+                                :other="true"
                               />
-                            </v-col>
+
                           </v-col>
                         </ValidationProvider>
                         <v-col cols="12">
