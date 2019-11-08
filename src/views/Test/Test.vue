@@ -911,6 +911,7 @@
                               cols="12"
                               md="4"
                             >
+                            <ValidationProvider rules="required|min:0" v-slot="{errors}">
                               <pcTextfield
                                 v-model="program_details_internship.budget_min"
                                 :error-messages="errors"
@@ -918,11 +919,14 @@
                                 placeholder="Minimum"
                                 title=""
                               />
+                            </ValidationProvider>
+                              
                             </v-col>
                             <v-col
                               cols="12"
                               md="4"
                             >
+                            <ValidationProvider rules="required|min:0" v-slot="{errors}">
                               <pcTextfield
                                 v-model="program_details_internship.budget_max"
                                 :error-messages="errors"
@@ -930,6 +934,8 @@
                                 placeholder="Maximum"
                                 title=""
                               />
+                            </ValidationProvider>
+                              
                             </v-col>
                           </v-row>
                         </v-col>
