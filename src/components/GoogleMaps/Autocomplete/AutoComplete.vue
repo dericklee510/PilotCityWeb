@@ -45,11 +45,7 @@ export default class AutoComplete extends Vue {
       return (this.errorMessages as {errors: string[]}).errors
   }
   get error(): string[] | undefined {
-      if (Array.isArray(this.errorMessage))
-          return this.errorMessage.length ? this.errorMessage : [""]
-      else {
-          return this.errorMessage
-      }
+      return this.errorMessage
   }
   address: string | Record<string, any> = ""
   /* eslint-disable-next-line */

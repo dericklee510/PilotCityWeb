@@ -12,7 +12,7 @@
       </h5>
     </label>
     <v-select
-      v-model="content"
+      @input="handleInput"
       :multiple="multiselect"
       append-icon="mdi-chevron-down"
       flat
@@ -50,15 +50,8 @@ export default class PCselect extends Vue {
     @Prop({required: true})
     public placeholder!: string;
 
-    public xcontent: string = '';
-    get content(){
-        return this.xcontent
-    }
-    set content(value: string){
-        this.xcontent = value
-    }
-    public handleInput(){
-        this.$emit('input', this.content)
+    public handleInput(event:any){
+        this.$emit('input', event)
     }
 }
 </script>

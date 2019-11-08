@@ -266,7 +266,7 @@
                           </ValidationProvider>
                         </v-col>
                         <v-col
-                          v-for="(industry, index) in organization_industry_options"
+                          v-for="(industry, index) in ORGANIZATION_INDUSTRY_OPTIONS"
                           :key="index"
                           cols="12"
                           md="8"
@@ -428,7 +428,7 @@
                         </v-col>
                         <v-col cols="12">
                           <v-col
-                            v-for="(contribution, index) in programdetails_externship_contribution_options"
+                            v-for="(contribution, index) in PROGRAMDETAILS_EXTERNSHIP_CONTRIBUTION_OPTIONS"
                             :key="contribution+index"
                             cols="12"
                           >
@@ -444,7 +444,7 @@
                               v-slot="{errors}"
                               rules="required"
                             >
-                              <v-checkbox @change="addOption(contributionOther, programdetails_externship_contribution_options)">
+                              <v-checkbox @change="addOption(contributionOther, PROGRAMDETAILS_EXTERNSHIP_CONTRIBUTION_OPTIONS)">
                                 <template v-slot:label>
                                   <v-text-field
                                     v-model="contributionOther"
@@ -518,7 +518,7 @@
                         </v-col>
                         <v-col cols="12">
                           <v-col
-                            v-for="(eng, index) in programdetails_project_engagement_type_options "
+                            v-for="(eng, index) in PROGRAMDETAILS_PROJECT_ENGAGEMENT_TYPE_OPTIONS "
                             :key="eng+index"
                             cols="12"
                             md="6"
@@ -541,7 +541,7 @@
                         </v-col>
                         <v-col cols="12">
                           <v-col
-                            v-for="(rad, index) in programdetails_project_engagement_radius_options "
+                            v-for="(rad, index) in PROGRAMDETAILS_PROJECT_ENGAGEMENT_RADIUS_OPTIONS "
                             :key="rad+index"
                             cols="12"
                             md="6"
@@ -571,7 +571,7 @@
                         </v-col>
                         <v-col cols="12">
                           <v-col
-                            v-for="(op, index) in internship_project_type "
+                            v-for="(op, index) in INTERNSHIP_PROJECT_TYPE "
                             :key="op+index"
                             cols="12"
                             md="6"
@@ -591,7 +591,7 @@
                               v-slot="{errors}"
                               rules="required"
                             >
-                              <v-checkbox @change="addOption(internother, internship_project_type)">
+                              <v-checkbox @change="addOption(internother, INTERNSHIP_PROJECT_TYPE)">
                                 <v-textfield
                                   v-model="internother"
                                   placeholder="other"
@@ -613,7 +613,7 @@
                             cols="12"
                             md="6"
                           >
-                            <v-radio-group v-model="program_details_internship.hiring_adult">
+                            <v-radio-group v-model="internship.hiring_adult">
                               <ValidationProvider
                                 v-slot="{error}"
                                 rules="required"
@@ -648,7 +648,7 @@
                             cols="12"
                             md="6"
                           >
-                            <v-radio-group v-model="program_details_internship.travel">
+                            <v-radio-group v-model="internship.travel">
                               <ValidationProvider
                                 v-slot="{error}"
                                 rules="required"
@@ -697,7 +697,7 @@
                               rules="required"
                             >
                               <v-checkbox
-                                v-model="program_details_internship.education_level"
+                                v-model="internship.education_level"
                                 label="Highschool"
                                 value="High school"
                               />
@@ -707,7 +707,7 @@
                               rules="required"
                             >
                               <v-checkbox
-                                v-model="program_details_internship.education_level"
+                                v-model="internship.education_level"
                                 label="Specialty Training"
                                 value="Specialty Training"
                               />
@@ -717,7 +717,7 @@
                               rules="required"
                             >
                               <v-checkbox
-                                v-model="program_details_internship.education_level"
+                                v-model="internship.education_level"
                                 label="Community College"
                                 value="Community College"
                               />
@@ -727,7 +727,7 @@
                               rules="required"
                             >
                               <v-checkbox
-                                v-model="program_details_internship.education_level"
+                                v-model="internship.education_level"
                                 label="Bachelors"
                                 value="Bachelors"
                               />
@@ -737,7 +737,7 @@
                               rules="required"
                             >
                               <v-checkbox
-                                v-model="program_details_internship.education_level"
+                                v-model="internship.education_level"
                                 label="Doctorate"
                                 value="Doctorate"
                               />
@@ -758,7 +758,7 @@
                             md="4"
                           >
                             <div
-                              v-for="(tal, index) in internship_talent_options"
+                              v-for="(tal, index) in INTERNSHIP_TALENT_OPTIONS"
                               :key="tal+index"
                             >
                               <ValidationProvider
@@ -766,7 +766,7 @@
                                 rules="required"
                               >
                                 <v-checkbox
-                                  v-model="program_details_internship.talent"
+                                  v-model="internship.talent"
                                   :label="tal"
                                   :value="tal" 
                                 />
@@ -787,7 +787,7 @@
                             cols="12"
                             md="4"
                           >
-                            <v-radio-group v-model="program_details_internship.days_week">
+                            <v-radio-group v-model="internship.days_week">
                               <div
                                 v-for="(sched, index) in HOST_SCHED"
                                 :key="sched+index"
@@ -818,7 +818,7 @@
                             cols="12"
                             md="4"
                           >
-                            <v-radio-group v-model="program_details_internship.hours_day">
+                            <v-radio-group v-model="internship.hours_day">
                               <div
                                 v-for="(freq, index) in HOST_FREQ"
                                 :key="freq+index"
@@ -849,7 +849,7 @@
                             cols="12"
                             md="4"
                           >
-                            <v-radio-group v-model="program_details_internship.employer_of_record">
+                            <v-radio-group v-model="internship.employer_of_record">
                               <div
                                 v-for="(option, index) in EOR"
                                 :key="option+index"
@@ -889,7 +889,7 @@
                                 rules="required"
                               >
                                 <v-checkbox
-                                  v-model="program_details_internship.compensation"
+                                  v-model="internship.compensation"
                                   :label="comp"
                                   :value="comp" 
                                 />
@@ -913,7 +913,7 @@
                             >
                             <ValidationProvider rules="required|min:0" v-slot="{errors}">
                               <pcTextfield
-                                v-model="program_details_internship.budget_min"
+                                v-model="internship.budget_min"
                                 :error-messages="errors"
                                 :dark-mode="true"
                                 placeholder="Minimum"
@@ -928,7 +928,7 @@
                             >
                             <ValidationProvider rules="required|min:0" v-slot="{errors}">
                               <pcTextfield
-                                v-model="program_details_internship.budget_max"
+                                v-model="internship.budget_max"
                                 :error-messages="errors"
                                 :dark-mode="true"
                                 placeholder="Maximum"
@@ -951,7 +951,7 @@
                               rules="required"
                             >
                               <pcTextfield
-                                v-model="program_details_internship.interview_1"
+                                v-model="internship.interview_1"
                                 :error-messages="errors"
                                 :dark-mode="true"
                                 placeholder="Primary option"
@@ -970,7 +970,7 @@
                               rules="required"
                             >
                               <pcTextfield
-                                v-model="program_details_internship.interview_2"
+                                v-model="internship.interview_2"
                                 :error-messages="errors"
                                 :dark-mode="true"
                                 placeholder="Secondary option"
@@ -989,7 +989,7 @@
                               rules="required"
                             >
                               <pcTextfield
-                                v-model="program_details_internship.interview_3"
+                                v-model="internship.interview_3"
                                 :error-messages="errors"
                                 :dark-mode="true"
                                 placeholder="Final option"
@@ -1011,7 +1011,7 @@
                             cols="12"
                             md="6"
                           >
-                            <v-radio-group v-model="program_details_internship.employment">
+                            <v-radio-group v-model="internship.employment">
                               <ValidationProvider
                                 v-slot="{error}"
                                 rules="required"
@@ -1045,7 +1045,7 @@
                             md="4"
                           >
                             <div
-                              v-for="(pos, index) in internship_position_type_options"
+                              v-for="(pos, index) in INTERNSHIP_POSITION_TYPE_OPTIONS"
                               :key="pos+index"
                             > 
                               <ValidationProvider
@@ -1053,7 +1053,7 @@
                                 rules="required"
                               >
                                 <v-checkbox
-                                  v-model="program_details_internship.position_type"
+                                  v-model="internship.position_type"
                                   :label="pos"
                                   :value="pos" 
                                 />
@@ -1098,6 +1098,7 @@ import * as Employer from "./types"
 import {ValidationProvider, ValidationObserver} from 'vee-validate'
 import {ObserverInstance} from "@/utilities/validation"
 import { tableToDecimal, findOther } from "./helpers"
+import {CONST} from './const'
 
 @Component({
     components:{
@@ -1110,7 +1111,7 @@ import { tableToDecimal, findOther } from "./helpers"
     }
 })
 
-export default class Test extends Vue {
+export default class Test extends CONST {
     public citizenType: string = "Teacher";
 
     private CITIZENSTYLES = {
@@ -1133,167 +1134,20 @@ export default class Test extends Vue {
     public organization: Employer.Organization = {} as Employer.Organization
     public programdetails: Employer.ProgramDetails = {} as Employer.ProgramDetails
     public internship: Employer.Internship = {} as Employer.Internship
-    minStudents: string = "";
-    maxStudents: string = "";
     private loading: boolean = false
+
+     
+
     public syncStorageCitizen() {
         localStorage.citizen_first_name = this.citizen.first_name
         localStorage.citizen_last_name = this.citizen.last_name
         localStorage.citizen_position = this.citizen.position
         localStorage.citizen_organization = this.citizen.organization
     }
-    private program_details_internship =  {
-        project: [],
-        hiring_adult: '',
-        travel: '',
-        education_level:[],
-        talent: [],
-        days_week: ``,
-        hours_day: ``,
-        employer_of_record: '',
-        compensation: [],
-        budget_min: ``,
-        budget_max: ``,
-        interview_1: '',
-        interview_2: '',
-        interview_3: '',
-        employment: ``,
-        position_type: []
-    }
-    private program_details_externship = {
-        prefered_date: {
-            primary: ``,
-            secondary: ``,
-            final: ``
-        },
-        contribution: []
-    }
-    private program_details_organization = {
-        department: [],
-        location: '',
-        industry: [],
-        products_services: [], 
-        employee_count: ''
-    }
-    organization_industry_options = [
-        'Agriculture and Natural Resources', 
-        'Arts, Media, and Entertainment', 
-        'Building and Construction Trades', 
-        'Business and Finance',
-        'Education, Child Development, and Family Services', 
-        'Energy, Environment, and Utilities',
-        'Engineering and Architecture',
-        'Fashion and Interior Design',
-        'Health Science and Medical Technology',
-        'Hospitality, Tourism, and Recreation',
-        'Information and Communication Technologies',
-        'Manufacturing and Product Development',
-        'Marketing Sales and Service',
-        'Public Services',
-        'Transportation'
-    ]
-    WORKFORCE_COUNT = [
-        '1 - 10',
-        '11 - 25',
-        '26 - 50',
-        '51 - 100',
-        '101 - 500',
-        '501 - 1000',
-        '1000 + '
-    ]
-    public CLASSROOM_COUNT = [
-        "1 Classroom", 
-        "2 Classrooms", 
-        "3 Classrooms", 
-        "4 Classrooms", 
-        "5 Classrooms", 
-        "6 Classrooms", 
-        "7 Classrooms", 
-        "8 Classrooms", 
-        "9 Classrooms", 
-        "10 Classrooms"
-    ]
-    programdetails_externship_contribution_options = [
-        'Donation',
-        'Loan',
-        'Purchase'
-    ]
+    
     private contributionOther: string = '';
     private internother: string = ``;
-
-    programdetails_project_engagement_type_options = [
-        'In-person',
-        'Digital',
-        'Either'
-    ]
-    programdetails_project_engagement_radius_options = [
-        '5 Miles',
-        '10 Miles',
-        '25 Miles',
-        '50 Miles'
-    ]
-    internship_project_type=[
-        'Further development of project started in the classroom',
-        'Work on newly assigned projects and tasks'
-    ]
-    internship_education_options = [
-        'High School',
-        'Specialty Training',
-        'Community College',
-        'Bachelors',
-        'Doctorate'
-    ]
-    internship_talent_options = [
-        'Worker',
-        'Intern',
-        'Innovator',
-        'Entrepreneur'
-    ]
-    internship_employer_of_record_options = [
-        'Our own organization',
-        'PilotCity'
-    ]
-    internship_compensation_options = [
-        'Salary',
-        'Hourly',
-        'Stipend',
-        'Unpaid'
-    ]
-    internship_position_type_options = [
-        'Part-Time',
-        'Full-Time',
-        'Contractor',
-        'None'
-    ]
-    HOST_SCHED = [
-        "5 Days / Week",
-        "4 Days / Week",
-        "3 Days / Week",
-        "2 Days / Week",
-        "1 Days / Week",
-        "None"
-    ]
-    HOST_FREQ = [
-        "8 Hours / Day",
-        "7 Hours / Day",
-        "6 Hours / Day",
-        "5 Hours / Day",
-        "4 Hours / Day",
-        "3 Hours / Day",
-        "2 Hours / Day",
-        "1 Hours / Day",
-        "None"
-    ]
-    EOR = [
-        "Our own organization",
-        "PilotCity"
-    ]
-    INTERN_COMP = [
-        "Salary",
-        "Hourly",
-        "Stipend",
-        "Unpaid"
-    ]
+   
     public addDept(){
         if(this.organization)
             this.organization.department.push("")
@@ -1309,8 +1163,8 @@ export default class Test extends Vue {
         localStorage.organization_location_text = `${location.name} ${location.street_number} ${location.route}, ${location.locality}, ${location.administrative_area_level_1} ${location.postal_code}, ${location.country}`
         localStorage.organization_location_lng = this.organization.location.longitude
         localStorage.organization_location_lat = this.organization.location.latitude
-        localStorage.organization_industry = tableToDecimal(this.organization_industry_options, this.organization.industry)
-        localStorage.organization_industry_other = findOther(this.organization_industry_options, this.organization.industry)
+        localStorage.organization_industry = tableToDecimal(this.ORGANIZATION_INDUSTRY_OPTIONS, this.organization.industry)
+        localStorage.organization_industry_other = findOther(this.ORGANIZATION_INDUSTRY_OPTIONS, this.organization.industry)
         localStorage.organization_product_list = this.organization.products_services
         localStorage.organization_product_employee_count = this.organization.employee_count
         }
@@ -1320,18 +1174,18 @@ export default class Test extends Vue {
             localStorage.program_externship_time_first = this.programdetails.externship.prefered_date.primary
             localStorage.program_externship_time_second = this.programdetails.externship.prefered_date.secondary
             localStorage.program_externship_time_third = this.programdetails.externship.prefered_date.final
-            localStorage.program_externship_options = tableToDecimal(this.programdetails_externship_contribution_options, this.programdetails.externship.contribution)
-            localStorage.program_externship_options_other = findOther(this.programdetails_externship_contribution_options, this.programdetails.externship.contribution)
+            localStorage.program_externship_options = tableToDecimal(this.PROGRAMDETAILS_EXTERNSHIP_CONTRIBUTION_OPTIONS, this.programdetails.externship.contribution)
+            localStorage.program_externship_options_other = findOther(this.PROGRAMDETAILS_EXTERNSHIP_CONTRIBUTION_OPTIONS, this.programdetails.externship.contribution)
         }
     }
     syncStorageProject() {
         if (this.programdetails) {
             localStorage.projects_min = this.programdetails.project.capacity.minimum
             localStorage.projects_max = this.programdetails.project.capacity.maximum
-            localStorage.projects_engagement = tableToDecimal(this.programdetails_project_engagement_type_options, [
+            localStorage.projects_engagement = tableToDecimal(this.PROGRAMDETAILS_PROJECT_ENGAGEMENT_TYPE_OPTIONS, [
                 this.programdetails.project.engagement.type
             ])
-            localStorage.projects_engagement_2 = tableToDecimal(this.programdetails_project_engagement_radius_options, [
+            localStorage.projects_engagement_2 = tableToDecimal(this.PROGRAMDETAILS_PROJECT_ENGAGEMENT_RADIUS_OPTIONS, [
                 this.programdetails.project.engagement.radius
             ])
             // localStorage.projects_requests = this.programdetails.project.
@@ -1341,26 +1195,26 @@ export default class Test extends Vue {
     }
     syncStorageInternship(){
         if(this.internship){
-            localStorage.internships_project = tableToDecimal(this.internship_project_type,this.internship.project)
-            localStorage.internships_project_other = findOther(this.internship_project_type,this.internship.project)
+            localStorage.internships_project = tableToDecimal(this.INTERNSHIP_PROJECT_TYPE,this.internship.project)
+            localStorage.internships_project_other = findOther(this.INTERNSHIP_PROJECT_TYPE,this.internship.project)
             localStorage.internships_hiring_adult = this.internship.hiring_adult
             // localStorage.internships_travel
-            localStorage.internships_education = tableToDecimal(this.internship_education_options,this.internship.education_level)
-            localStorage.internships_education_other = findOther(this.internship_education_options,this.internship.education_level)
-            localStorage.internships_talent = tableToDecimal(this.internship_talent_options, this.internship.talent)
+            localStorage.internships_education = tableToDecimal(this.INTERNSHIP_EDUCATION_OPTIONS,this.internship.education_level)
+            localStorage.internships_education_other = findOther(this.INTERNSHIP_EDUCATION_OPTIONS,this.internship.education_level)
+            localStorage.internships_talent = tableToDecimal(this.INTERNSHIP_TALENT_OPTIONS, this.internship.talent)
             localStorage.internships_days_week =this.internship.days_week
             localStorage.internships_hours_day= this.internship.hours_day
-            localStorage.internships_employer_of_record = tableToDecimal(this.internship_employer_of_record_options, [
+            localStorage.internships_employer_of_record = tableToDecimal(this.INTERNSHIP_EMPLOYER_OF_RECORD_OPTIONS, [
                 this.internship.employer_of_record
             ])
-            localStorage.internships_compensation = tableToDecimal(this.internship_compensation_options,this.internship.compensation)
+            localStorage.internships_compensation = tableToDecimal(this.INTERNSHIP_COMPENSATION_OPTIONS,this.internship.compensation)
             localStorage.internships_budget_min = this.internship.budget_min
             localStorage.internships_budget_max = this.internship.budget_max
             localStorage.internships_interview_option1 = this.internship.interview_1
             localStorage.internships_interview_option2 = this.internship.interview_2
             localStorage.internships_interview_option3 = this.internship.interview_3
             localStorage.internships_employment = this.internship.employment
-            localStorage.internships_position = tableToDecimal(this.internship_position_type_options,this.internship.position_type)
+            localStorage.internships_position = tableToDecimal(this.INTERNSHIP_POSITION_TYPE_OPTIONS,this.internship.position_type)
         }
     }
     async syncStorage(){
