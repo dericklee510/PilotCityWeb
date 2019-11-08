@@ -147,60 +147,62 @@
                       id="citizen-id__base-questions"
                       justify="start"
                     >
-                      <v-col
-                        cols="12"
-                        md="8"
-                        lg="6"
-                        xl="5"
-                      >
-                        <ValidationProvider
-                          v-slot="{errors}"
-                          rules="required"
+                      <v-col cols="12">
+                        <v-col
+                          cols="12"
+                          md="8"
+                          lg="6"
+                          xl="5"
                         >
-                          <pcTextfield
-                            v-model="citizen.first_name"
-                            :dark-mode="true"
-                            title="FIRST NAME"
-                            placeholder="First Name"
-                            :error-messages="errors"
-                          />
-                        </ValidationProvider>
-                        <ValidationProvider
-                          v-slot="{errors}"
-                          rules="required"
-                        >
-                          <pcTextfield
-                            v-model="citizen.last_name"
-                            :error-messages="errors"
-                            :dark-mode="true"
-                            title="LAST NAME"
-                            placeholder="Last Name"
-                          />
-                        </ValidationProvider>
-                        <ValidationProvider
-                          v-slot="{errors}"
-                          rules="required"
-                        >
-                          <pcTextfield
-                            v-model="citizen.position"
-                            :error-messages="errors"
-                            :dark-mode="true"
-                            title="POSITION"
-                            placeholder="Role"
-                          />
-                        </ValidationProvider>
-                        <ValidationProvider
-                          v-slot="{errors}"
-                          rules="required"
-                        >
-                          <pcTextfield
-                            v-model="citizen.organization"
-                            :error-messages="errors"
-                            :dark-mode="true"
-                            title="ORGANIZATION"
-                            placeholder="Company Name"
-                          />
-                        </ValidationProvider>
+                          <ValidationProvider
+                            v-slot="{errors}"
+                            rules="required"
+                          >
+                            <pcTextfield
+                              v-model="citizen.first_name"
+                              :dark-mode="true"
+                              title="FIRST NAME"
+                              placeholder="First Name"
+                              :error-messages="errors"
+                            />
+                          </ValidationProvider>
+                          <ValidationProvider
+                            v-slot="{errors}"
+                            rules="required"
+                          >
+                            <pcTextfield
+                              v-model="citizen.last_name"
+                              :error-messages="errors"
+                              :dark-mode="true"
+                              title="LAST NAME"
+                              placeholder="Last Name"
+                            />
+                          </ValidationProvider>
+                          <ValidationProvider
+                            v-slot="{errors}"
+                            rules="required"
+                          >
+                            <pcTextfield
+                              v-model="citizen.position"
+                              :error-messages="errors"
+                              :dark-mode="true"
+                              title="POSITION"
+                              placeholder="Role"
+                            />
+                          </ValidationProvider>
+                          <ValidationProvider
+                            v-slot="{errors}"
+                            rules="required"
+                          >
+                            <pcTextfield
+                              v-model="citizen.organization"
+                              :error-messages="errors"
+                              :dark-mode="true"
+                              title="ORGANIZATION"
+                              placeholder="Company Name"
+                            />
+                          </ValidationProvider>
+                        </v-col>
                       </v-col>
                     </v-row>
                   </v-col>
@@ -255,53 +257,60 @@
                           rules="required"
                         >
                           <v-col cols="12">
-                            <v-row>
-                              <h4
-                                style="color:#C7C8CA"
-                                class="text-uppercase"
-                              >
-                                Industry
-                              </h4>
-                              <h4 style="color:#EA6763">
-                                {{ errors[0]?'*':'' }}
-                              </h4>
-                            </v-row>
-                          </v-col>  
+                            <v-col cols="12">
+                              <v-row>
+                                <h4
+                                  style="color:#C7C8CA"
+                                  class="text-uppercase"
+                                >
+                                  Industry
+                                </h4>
+                                <h4 style="color:#EA6763">
+                                  {{ errors[0]?'*':'' }}
+                                </h4>
+                              </v-row>
+                            </v-col>  
+                            <v-col
+                              cols="12"
+                              md="8"
+                              lg="6"
+                              xl="5"
+                            >
+                              <v-checkbox
+                                v-for="(industry, index) in ORGANIZATION_INDUSTRY_OPTIONS"
+                                :key="index"
+                                v-model="organization.industry"
+                                :label="industry"
+                                :value="industry"
+                                hide-details
+                              />
+                            </v-col>
+                          </v-col>
+                        </ValidationProvider>
+                        <ValidationProvider
+                          v-slot="{errors}"
+                          rules="required"
+                        >
+                          <v-col cols="12">
+                            <h4
+                              style="color:#C7C8CA"
+                              class="text-uppercase"
+                            >
+                              LIST YOUR PRODUCT / SERVICE
+                            </h4>
+                            <h4 style="color:#EA6763">
+                              {{ errors[0]?'*':'' }}
+                            </h4>
+                          </v-col>
                           <v-col
                             cols="12"
                             md="8"
                             lg="6"
                             xl="5"
                           >
-                            <v-checkbox
-                              v-for="(industry, index) in ORGANIZATION_INDUSTRY_OPTIONS"
-                              :key="index"
-                              v-model="organization.industry"
-                              :label="industry"
-                              :value="industry"
-                              hide-details
-                            />
+                            <pcMultiInput v-model="organization.products_services" />
                           </v-col>
                         </ValidationProvider>
-                        <v-col
-                          cols="12"
-                          md="8"
-                          lg="6"
-                          xl="5"
-                        >
-                          <ValidationProvider
-                            v-slot="{errors}"
-                            rules="required"
-                          >
-                            <pcMultiInput v-model="organization.products_services" />
-                          </ValidationProvider>
-                        </v-col>
-                        <v-col
-                          cols="12"
-                          md="8"
-                          lg="6"
-                          xl="5"
-                        />
                         <v-col
                           cols="12"
                           md="8"
@@ -341,18 +350,18 @@
                             Externship
                           </h3>
                         </v-col>
-                        <v-col cols="12">
-                          <h4
-                            style="color:#C7C8CA"
-                            class="text-uppercase"
-                          >
-                            SELECT THREE DATE OPTIONS FOR YOUR FULL DAY TEACHER EXTERNSHIP DAY AT YOUR WORKPLACE BETWEEN JAN 1 - FEB 1
-                          </h4>
-                        </v-col>
                         <v-col
                           cols="12"
                           style="color:#C7C8CA"
                         >
+                          <v-col cols="12">
+                            <h4
+                              style="color:#C7C8CA"
+                              class="text-uppercase"
+                            >
+                              SELECT THREE DATE OPTIONS FOR YOUR FULL DAY TEACHER EXTERNSHIP DAY AT YOUR WORKPLACE BETWEEN JAN 1 - FEB 1
+                            </h4>
+                          </v-col>
                           <v-col
                             cols="12"
                             md="8"
@@ -411,150 +420,158 @@
                             </ValidationProvider>
                           </v-col>
                         </v-col>
-                        <ValidationProvider
-                          v-slot="{errors}"
-                          rules="required"
-                        >
-                          <v-col cols="12">
-                            <v-row>
-                              <h4
-                                style="color:#C7C8CA"
-                                class="text-uppercase"
-                              >
-                                WILL YOU BE ABLE TO PROVIDE CLASSROOMS ACCESS TO YOUR PRODUCT OR SERVICE WITH ANY OF THE FOLLOWING?
-                              </h4>
-                              <h4 style="color:#EA6763">
-                                {{ errors[0]?'*':'' }}
-                              </h4>
-                            </v-row>
-                          </v-col>
-                          <v-col cols="12">
-                            <v-col
+                        <v-col cols="12">
+                          <ValidationProvider
+                            v-slot="{errors}"
+                            rules="required"
+                          >
+                            <v-col cols="12">
+                              <v-col cols="12">
+                                <v-row>
+                                  <h4
+                                    style="color:#C7C8CA"
+                                    class="text-uppercase"
+                                  >
+                                    WILL YOU BE ABLE TO PROVIDE CLASSROOMS ACCESS TO YOUR PRODUCT OR SERVICE WITH ANY OF THE FOLLOWING?
+                                  </h4>
+                                  <h4 style="color:#EA6763">
+                                    {{ errors[0]?'*':'' }}
+                                  </h4>
+                                </v-row>
+                              </v-col>
                             
-                              cols="12"
-                            >
-                              <v-checkbox
-                                v-for="(contribution, index) in PROGRAMDETAILS_EXTERNSHIP_CONTRIBUTION_OPTIONS"
-                                :key="contribution+index"
-                                v-model="programdetails.externship.contribution"
-                                :label="contribution"
-                                :value="contribution"
-                                hide-details
-                              />
-                              <v-checkbox
-                                v-model="programdetails.externship.contribution"
-                                :value="contributionOther"
-                                hide-details
+                              <v-col
+                              
+                                cols="12"
                               >
-                                <template v-slot:label>
-                                  <v-text-field
-                                    v-model="contributionOther"
-                                    placeholder="Other"
-                                  />
-                                </template>
-                              </v-checkbox>
+                                <v-checkbox
+                                  v-for="(contribution, index) in PROGRAMDETAILS_EXTERNSHIP_CONTRIBUTION_OPTIONS"
+                                  :key="contribution+index"
+                                  v-model="programdetails.externship.contribution"
+                                  :label="contribution"
+                                  :value="contribution"
+                                  hide-details
+                                />
+                                <v-checkbox
+                                  v-model="programdetails.externship.contribution"
+                                  :value="contributionOther"
+                                  hide-details
+                                >
+                                  <template v-slot:label>
+                                    <v-text-field
+                                      v-model="contributionOther"
+                                      placeholder="Other"
+                                    />
+                                  </template>
+                                </v-checkbox>
+                              </v-col>
                             </v-col>
-                          </v-col>
-                        </ValidationProvider>
+                          </ValidationProvider>
+                        </v-col>
                       </v-row>
                       <v-row>
                         <v-col cols="12">
                           <h3 style="color:#AE90B0">
                             Project
                           </h3>
-                        </v-col>
+                        </v-col>  
                         <v-col cols="12">
-                          <h4
-                            id="text-uppercase"
-                            style="color:#c7c8ca"
+                          <v-col cols="12">
+                            <h4
+                              id="text-uppercase"
+                              style="color:#c7c8ca"
+                            >
+                              WHAT IS THE MINIMUM AND MAXIMUM NUMBER OF CLASSROOMS YOU’D LIKE IN YOUR PROGRAM?
+                            </h4>
+                          </v-col>
+                          <v-col
+                            cols="12"
                           >
-                            WHAT IS THE MINIMUM AND MAXIMUM NUMBER OF CLASSROOMS YOU’D LIKE IN YOUR PROGRAM?
-                          </h4>
-                        </v-col>
-                        <v-col
-                          cols="12"
-                        >
-                          <v-row>
+                            <v-row>
+                              <v-col
+                                cols="12"
+                                md="4"
+                              >
+                                <ValidationProvider
+                                  v-slot="{errors}"
+                                  rules="required"
+                                >
+                                  <pcSelect
+                                    v-model="programdetails.project.capacity.minimum"
+                                    :dark-mode="true"
+                                    :items="CLASSROOM_COUNT"
+                                    title=""
+                                    placeholder="Select Minimum"
+                                  />
+                                </ValidationProvider>
+                              </v-col>
+                              <v-col
+                                cols="4"
+                              >
+                                <ValidationProvider
+                                  v-slot="{errors}"
+                                  rules="required"
+                                >
+                                  <pcSelect
+                                    v-model="programdetails.project.capacity.maximum"
+                                    :dark-mode="true"
+                                    :items="CLASSROOM_COUNT"
+                                    title=""
+                                    placeholder="Select Maximum"
+                                  />
+                                </ValidationProvider>
+                              </v-col>
+                            </v-row>
+                          </v-col>
+                          <ValidationProvider
+                            v-slot="{errors}"
+                            rules="required"
+                          >
+                            <v-col cols="12">
+                              <h4
+                                style="color:#C7C8CA"
+                                class="text-uppercase"
+                              >
+                                How do you prefer to engage with the classroom?
+                              </h4>
+                              <h4 style="color:#EA6763">
+                                {{ errors[0]?'*':'' }}
+                              </h4>
+                            </v-col>
+                            <v-col cols="12">
+                              <v-col
+                                cols="12"
+                                md="6"
+                              >
+                                <v-radio-group v-model="programdetails.project.engagement.type">
+                                  <v-radio
+                                    v-for="(eng, index) in PROGRAMDETAILS_PROJECT_ENGAGEMENT_TYPE_OPTIONS "
+                                    :key="eng+index"
+                                    :label="eng"
+                                    :value="eng"
+                                  />
+                                </v-radio-group>
+                              </v-col>
+                            </v-col>  
+                          </ValidationProvider>
+                          <ValidationProvider
+                            v-slot="{errors}"
+                            rules="required"
+                          >
+                            <v-col cols="12">
+                              <h4
+                                style="color:#C7C8CA"
+                                class="text-uppercase"
+                              >
+                                How far would you travel to engage with a classroom in person?
+                              </h4>
+                              <h4 style="color:#EA6763">
+                                {{ errors[0]?'*':'' }}
+                              </h4>
+                            </v-col>
                             <v-col
                               cols="12"
-                              md="4"
-                            >
-                              <ValidationProvider
-                                v-slot="{errors}"
-                                rules="required"
-                              >
-                                <pcSelect
-                                  v-model="programdetails.project.capacity.minimum"
-                                  :dark-mode="true"
-                                  :items="CLASSROOM_COUNT"
-                                  title=""
-                                  placeholder="Select Minimum"
-                                />
-                              </ValidationProvider>
-                            </v-col>
-                            <v-col
-                              cols="4"
-                            >
-                              <ValidationProvider
-                                v-slot="{errors}"
-                                rules="required"
-                              >
-                                <pcSelect
-                                  v-model="programdetails.project.capacity.maximum"
-                                  :dark-mode="true"
-                                  :items="CLASSROOM_COUNT"
-                                  title=""
-                                  placeholder="Select Maximum"
-                                />
-                              </ValidationProvider>
-                            </v-col>
-                          </v-row>
-                        </v-col>
-                        <v-col cols="12">
-                          <h4
-                            style="color:#C7C8CA"
-                            class="text-uppercase"
-                          >
-                            How do you prefer to engage with the classroom?
-                          </h4>
-                        </v-col>
-                        <v-col cols="12">
-                          <v-col
-                            cols="12"
-                            md="6"
-                          >
-                            <ValidationProvider
-                              v-slot="{errors}"
-                              rules="required"
-                            >
-                              <v-radio-group v-model="programdetails.project.engagement.type">
-                                <v-radio
-                                  v-for="(eng, index) in PROGRAMDETAILS_PROJECT_ENGAGEMENT_TYPE_OPTIONS "
-                                  :key="eng+index"
-                                  :label="eng"
-                                  :value="eng"
-                                />
-                              </v-radio-group>
-                            </ValidationProvider>
-                          </v-col>
-                        </v-col>
-                        <v-col cols="12">
-                          <h4
-                            style="color:#C7C8CA"
-                            class="text-uppercase"
-                          >
-                            How far would you travel to engage with a classroom in person?
-                          </h4>
-                        </v-col>
-                        <v-col cols="12">
-                          <v-col
-                            
-                            cols="12"
-                            md="6"
-                          >
-                            <ValidationProvider
-                              v-slot="{errors}"
-                              rules="required"
+                              md="6"
                             >
                               <v-radio-group v-model="programdetails.project.engagement.radius">
                                 <v-radio
@@ -564,8 +581,8 @@
                                   :label="rad"
                                 />
                               </v-radio-group>
-                            </ValidationProvider>
-                          </v-col>
+                            </v-col>
+                          </ValidationProvider>
                         </v-col>
                       </v-row>
                       <v-row>

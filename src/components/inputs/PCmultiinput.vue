@@ -1,22 +1,34 @@
 <template>
   <div>
-    <span
+    <v-row
       v-for="(entry) in entries"
       :key="entry.id"
     >
-      <PCtextfield
-        v-model="entry.value"
-        placeholder="Enter you product or Service"
-        :key="entry.id + 'textfield'"
-      />
-      <h1 :key="entry.id+'icon'">
-        <i
-          class="mdi mdi-delete"
-          @click="deleteEntry(entry.id)"
+      <v-col :cols="entries.length>1?11:12">
+        <PCtextfield
+          :key="entry.id + 'textfield'"
+          v-model="entry.value"
+          placeholder="Enter you product or Service"
         />
-      </h1>
-    </span>
-    <v-btn @click="newEntry" />
+      </v-col>
+      <v-col cols="1">
+        <h3
+          v-if="entries.length > 1"
+          key="entry.id+'icon'"
+        >
+          <i
+            class="mdi mdi-delete"
+            @click="deleteEntry(entry.id)"
+          />
+        </h3>
+      </v-col>
+    </v-row>
+    <v-btn
+      block
+      @click="newEntry"
+    >
+      +
+    </v-btn>
   </div>
 </template>
 
@@ -43,7 +55,6 @@ export default class PCmultiinput extends Vue{
     value!: string[];
     entries = [{value:"",id:0}]
     newEntry(){
-      console.log(this.entries.slice(-1)[0].id+1)
         this.entries.push({value:"",id:this.entries.slice(-1)[0].id+1})
     }
     deleteEntry(id: number){
@@ -52,7 +63,6 @@ export default class PCmultiinput extends Vue{
     }
     @Watch('entries',{deep:true})
     onEntriesChanged(newVal: {value: string; id: number} []){
-      console.log('change detected')
         this.$emit('input', newVal.map(entree => entree.value))
     }
 }
