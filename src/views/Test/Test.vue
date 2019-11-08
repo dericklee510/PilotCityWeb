@@ -1066,9 +1066,7 @@
 
 <script lang="ts">
 import Vue from "vue"
-import PCselect from "@/components/inputs/PCselect.vue"
-import PCtextfield from "@/components/inputs/PCtextfield.vue"
-import PCdropdown from "@/components/inputs/PCdropdown.vue"
+import {PCselect,PCtextfield,PCdropdown,PCcheckbox,PCmultiinput} from "@/components/inputs"
 import autoComplete from "@/components/GoogleMaps/Autocomplete/AutoComplete.vue"
 import Component from "vue-class-component"
 import * as Employer from "./types"
