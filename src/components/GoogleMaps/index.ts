@@ -7,3 +7,4 @@ export const googleMapsClient = googleMaps.createClient({
 
 import AutoComplete from "./Autocomplete/AutoComplete.vue"
 export {AutoComplete}
+export {AutoCompleteAddress} from "./Autocomplete/types"

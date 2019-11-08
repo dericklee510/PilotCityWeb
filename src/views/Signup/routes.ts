@@ -1,7 +1,7 @@
 import { AuthStore } from './../../store/index'
 import * as Signup from "../Signup"
 import { RouteConfig } from 'vue-router'
-
+import EmployerSignup from '@/views/Test/Test.vue'
 const routes: RouteConfig[] = [
     {
         name: "signup",
@@ -23,8 +23,8 @@ const routes: RouteConfig[] = [
             {
                 name: "signup.data",
                 path: `data`,
-                component: Signup.children.CitizenData,
-                props: {citizenType: `Teacher`}
+                component: EmployerSignup,
+                // props: {citizenType: `Teacher`}
             }
         ],
         beforeEnter(to,from,next): void{

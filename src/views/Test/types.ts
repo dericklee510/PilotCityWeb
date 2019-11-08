@@ -1,5 +1,6 @@
 export {IEmployerQuery} from "@/store/Graphql/types"
 import { ProgramDetails } from './types'
+import {AutoCompleteAddress} from "@/components/GoogleMaps"
 export interface Citizen {
     first_name: string;
     last_name: string;
@@ -9,7 +10,7 @@ export interface Citizen {
 
 export interface Organization {
     department: string[];
-    location: string;
+    location: AutoCompleteAddress;
     industry: string[];
     products_services: string[];
     employee_count: string;

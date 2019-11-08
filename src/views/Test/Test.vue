@@ -60,7 +60,7 @@
             >
               <v-row justify="start">
                 <v-col cols="12">
-                  <h1>Hiro Ishikawa</h1>
+                  <h1>{{`${citizen.first_name} ${citizen.last_name}`}}</h1>
                 </v-col>
                 <v-col
                   cols="12"
@@ -177,6 +177,7 @@
                               :dark-mode="true"
                               title="FIRST NAME"
                               placeholder="First Name"
+                              :error-messages="errors"
                             />
                           </ValidationProvider>
                           <ValidationProvider
@@ -184,6 +185,7 @@
                             rules="required"
                           >
                             <pcTextfield
+                            :error-messages="errors"
                               v-model="citizen.last_name"
                               :dark-mode="true"
                               title="LAST NAME"
@@ -195,6 +197,7 @@
                             rules="required"
                           >
                             <pcTextfield
+                            :error-messages="errors"
                               v-model="citizen.position"
                               :dark-mode="true"
                               title="POSITION"
@@ -206,6 +209,7 @@
                             rules="required"
                           >
                             <pcTextfield
+                            :error-messages="errors"
                               v-model="citizen.organization"
                               :dark-mode="true"
                               title="ORGANIZATION"
@@ -253,6 +257,7 @@
                               rules="required"
                             >
                               <pcTextfield
+                              :error-messages="errors"
                                 v-model="organization.department[0]"
                                 :dark-mode="true"
                                 title="Your Department"
@@ -279,7 +284,10 @@
                             lg="6"
                             xl="5"
                           >
-                            <autoComplete />
+                          <ValidationProvider rules="required" v-slot="{errors}">
+                            <autoComplete :error-messages="{errors}" v-model="organization.location" />
+                          </ValidationProvider>
+                            
                           </v-col>
                           <v-col
                             v-for="(industry, index) in organization_industry_options"
@@ -307,6 +315,7 @@
                               rules="required"
                             >
                               <pcTextfield
+                              :error-messages="errors"
                                 v-model="program_details_organization.products_services" 
                                 :dark-mode="true"
                                 title="LIST YOUR PRODUCT OR SERVICE"
@@ -400,6 +409,7 @@
                               rules="required"
                             >
                               <pcTextfield
+                              :error-messages="errors"
                                 v-model="program_details_externship.prefered_date.primary"
                                 :dark-mode="true"
                                 placeholder="Primary option"
@@ -418,6 +428,7 @@
                               rules="required"
                             >
                               <pcTextfield
+                              :error-messages="errors"
                                 v-model="program_details_externship.prefered_date.primary"
                                 :dark-mode="true"
                                 placeholder="Secondary option"
@@ -436,6 +447,7 @@
                               rules="required"
                             >
                               <pcTextfield
+                              :error-messages="errors"
                                 v-model="program_details_externship.prefered_date.primary"
                                 :dark-mode="true"
                                 placeholder="Final option"
@@ -938,6 +950,7 @@
                               md="4"
                             >
                               <pcTextfield
+                              :error-messages="errors"
                                 v-model="program_details_internship.budget_min"
                                 :dark-mode="true"
                                 placeholder="Minimum"
@@ -949,6 +962,7 @@
                               md="4"
                             >
                               <pcTextfield
+                              :error-messages="errors"
                                 v-model="program_details_internship.budget_max"
                                 :dark-mode="true"
                                 placeholder="Maximum"
@@ -969,6 +983,7 @@
                               rules="required"
                             >
                               <pcTextfield
+                              :error-messages="errors"
                                 v-model="program_details_internship.interview_1"
                                 :dark-mode="true"
                                 placeholder="Primary option"
@@ -987,6 +1002,7 @@
                               rules="required"
                             >
                               <pcTextfield
+                              :error-messages="errors"
                                 v-model="program_details_internship.interview_2"
                                 :dark-mode="true"
                                 placeholder="Secondary option"
@@ -1005,6 +1021,7 @@
                               rules="required"
                             >
                               <pcTextfield
+                              :error-messages="errors"
                                 v-model="program_details_internship.interview_3"
                                 :dark-mode="true"
                                 placeholder="Final option"
@@ -1131,13 +1148,7 @@ export default class Test extends Vue {
         position: "",
         organization: ""
     }
-    public organization: Employer.Organization = {
-        department: [],
-        location: "",
-        industry: [],
-        products_services: [],
-        employee_count: ``
-    }
+    public organization?: Employer.Organization 
     minStudents: string = "";
     maxStudents: string = "";
     public programdetails?: Employer.ProgramDetails
@@ -1303,20 +1314,24 @@ export default class Test extends Vue {
         "Unpaid"
     ]
     public addDept(){
+      if(this.organization)
         this.organization.department.push("")
     }
     private addOption(from: string, to: string[]): void{
         to.push(from)
     }
     public syncStorageOrganization() {
+        if(this.organization){
+        let location = this.organization.location
         localStorage.organization_division = this.organization.department
-        localStorage.organization_location_text
-        localStorage.organization_location_lng
-        localStorage.organization_location_lat
+        localStorage.organization_location_text = `${location.name} ${location.street_number} ${location.route}, ${location.locality}, ${location.administrative_area_level_1} ${location.postal_code}, ${location.country}`
+        localStorage.organization_location_lng = this.organization.location.longitude
+        localStorage.organization_location_lat = this.organization.location.latitude
         localStorage.organization_industry = tableToDecimal(this.organization_industry_options, this.organization.industry)
         localStorage.organization_industry_other = this.organization.industry[this.organization.industry.length - 1]
         localStorage.organization_product_list = this.organization.products_services
         localStorage.organization_product_employee_count = this.organization.employee_count
+        }
     }
     syncStorageProgramDetails() {
         if (this.programdetails) {
@@ -1365,6 +1380,10 @@ export default class Test extends Vue {
             localStorage.internships_employment = this.internship.employment
             localStorage.internships_position = tableToDecimal(this.internship_position_type_options,this.internship.position_type)
         }
+    }
+    created(){
+      this.citizen.first_name = localStorage.first_name?localStorage.first_name:"Your"
+      this.citizen.last_name = localStorage.last_name?localStorage.last_name:"Name"
     }
 }
 </script>

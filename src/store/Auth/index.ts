@@ -23,6 +23,7 @@ import {
     customResetPasswordResponse
 } from './helpers'
 import {lowerCase} from 'lodash'
+
 @Module({ namespaced: true, name: 'Auth' })
 export default class Auth extends VuexModule {
     public user: FirebaseUser | null = null
@@ -68,6 +69,8 @@ export default class Auth extends VuexModule {
                 await this.user.updateProfile({ 
                     displayName: `${lowerCase(firstName)} ${lowerCase(lastName)}` 
                 })
+                localStorage.first_name = firstName
+                localStorage.last_name = lastName
                 await this.context.rootState.Fb.firestore.collection('users').doc(this.user.uid).set({
                     firstName,
                     lastName
@@ -84,8 +87,8 @@ export default class Auth extends VuexModule {
     public async login({ email, password }: UserCredentials): Promise<string> {
         try {
             try{
-                await firebase.auth().signInWithEmailAndPassword(email, password)
-                this.context.commit(SET_USER, await firebase.auth().signInWithEmailAndPassword(email, password))
+                let resp = await firebase.auth().signInWithEmailAndPassword(email, password)
+                this.context.commit(SET_USER, resp)
             }
             catch(err){
                 throw(err)
