@@ -594,7 +594,7 @@
                               rules="required"
                             >
                               <v-checkbox
-                                v-for="(op, index) in INTERNSHIP_PROJECT_TYPE "
+                                v-for="(op, index) in internship_project_type "
                                 :key="op+index"
                                 v-model="internship.project"
                                 :value="op"
