@@ -279,7 +279,6 @@
                               v-model="organization.industry"
                               :label="industry"
                               :value="industry"
-                              v-model="organization.industry"
                             />
                           </v-col>
                         </ValidationProvider>
