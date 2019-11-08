@@ -52,7 +52,7 @@
                         placeholder="Enter your phone number"
                         mask="(###)-###-####"
                         color="#7B5D7D"
-                        outline
+                        outlined
                         text
                       />
                     </v-layout>
