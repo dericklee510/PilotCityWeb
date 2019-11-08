@@ -486,7 +486,7 @@
                                 rules="required"
                               >
                                 <pcSelect
-                                  v-model="minStudents"
+                                  v-model="programdetails.project.capacity.minimum"
                                   :dark-mode="true"
                                   :items="CLASSROOM_COUNT"
                                   title=""
@@ -502,7 +502,7 @@
                                 rules="required"
                               >
                                 <pcSelect
-                                  v-model="maxStudents"
+                                  v-model="programdetails.project.capacity.maximum"
                                   :items="CLASSROOM_COUNT"
                                   title=""
                                   placeholder="Select Maximum"
@@ -612,10 +612,10 @@
                             >
                               <v-checkbox
                                 v-model="internship.project"
-                                :value="internother"
+                                :value="internOther"
                               >
                                 <v-textfield
-                                  v-model="internother"
+                                  v-model="internOther"
                                   placeholder="other"
                                 />
                               </v-checkbox>
@@ -648,7 +648,6 @@
                                   label="No"
                                   value="no" 
                                 />
-                              </v-radio-group>
                               </v-radio-group>
                             </ValidationProvider>
                           </v-col>
@@ -828,22 +827,19 @@
                             cols="12"
                             md="4"
                           >
-                            <v-radio-group v-model="program_details_internship.employer_of_record">
-                              <div
-                                v-for="(option, index) in EOR"
-                                :key="option+index"
-                              >
-                                <ValidationProvider
-                                  v-slot="{error}"
-                                  rules="required"
-                                >
-                                  <v-radio
-                                    :label="option"
-                                    :value="option"
-                                  />
-                                </ValidationProvider>
-                              </div>
-                            </v-radio-group>
+                            <ValidationProvider
+                              v-slot="{error}"
+                              rules="required"
+                            >
+                              <v-radio-group v-model="internship.employer_of_record">
+                                <v-radio
+                                  v-for="(option, index) in EOR"
+                                  :key="option+index"
+                                  :label="option"
+                                  :value="option"
+                                />
+                              </v-radio-group>
+                            </ValidationProvider>
                           </v-col>
                         </v-col>
                         <v-col cols="12">
@@ -859,21 +855,18 @@
                             cols="12"
                             md="4"
                           >
-                            <div
-                              v-for="(comp, index) in INTERN_COMP"
-                              :key="comp+index"
+                            <ValidationProvider
+                              v-slot="{error}"
+                              rules="required"
                             >
-                              <ValidationProvider
-                                v-slot="{error}"
-                                rules="required"
-                              >
-                                <v-checkbox
-                                  v-model="program_details_internship.compensation"
-                                  :label="comp"
-                                  :value="comp" 
-                                />
-                              </ValidationProvider>
-                            </div>
+                              <v-checkbox
+                                v-for="(comp, index) in INTERN_COMP"
+                                :key="comp+index"
+                                v-model="internship.compensation"
+                                :label="comp"
+                                :value="comp" 
+                              />
+                            </ValidationProvider>
                           </v-col>
                         </v-col>
                         <v-col cols="12">
@@ -895,7 +888,7 @@
                                 rules="required|min:0"
                               >
                                 <pcTextfield
-                                  v-model="program_details_internship.budget_min"
+                                  v-model="internship.budget_min"
                                   :error-messages="errors"
                                   :dark-mode="true"
                                   placeholder="Minimum"
@@ -912,7 +905,7 @@
                                 rules="required|min:0"
                               >
                                 <pcTextfield
-                                  v-model="program_details_internship.budget_max"
+                                  v-model="internship.budget_max"
                                   :error-messages="errors"
                                   :dark-mode="true"
                                   placeholder="Maximum"
@@ -934,7 +927,7 @@
                               rules="required"
                             >
                               <pcTextfield
-                                v-model="program_details_internship.interview_1"
+                                v-model="internship.interview_1"
                                 :error-messages="errors"
                                 :dark-mode="true"
                                 placeholder="Primary option"
@@ -953,7 +946,7 @@
                               rules="required"
                             >
                               <pcTextfield
-                                v-model="program_details_internship.interview_2"
+                                v-model="internship.interview_2"
                                 :error-messages="errors"
                                 :dark-mode="true"
                                 placeholder="Secondary option"
@@ -972,7 +965,7 @@
                               rules="required"
                             >
                               <pcTextfield
-                                v-model="program_details_internship.interview_3"
+                                v-model="internship.interview_3"
                                 :error-messages="errors"
                                 :dark-mode="true"
                                 placeholder="Final option"
@@ -994,26 +987,21 @@
                             cols="12"
                             md="6"
                           >
-                            <v-radio-group v-model="program_details_internship.employment">
-                              <ValidationProvider
-                                v-slot="{error}"
-                                rules="required"
-                              >
+                            <ValidationProvider
+                              v-slot="{error}"
+                              rules="required"
+                            >
+                              <v-radio-group v-model="internship.employment">
                                 <v-radio
                                   label="Yes"
                                   value="yes" 
                                 />
-                              </ValidationProvider>
-                              <ValidationProvider
-                                v-slot="{error}"
-                                rules="required"
-                              >
                                 <v-radio
                                   label="No"
                                   value="no" 
                                 />
-                              </ValidationProvider>
-                            </v-radio-group>
+                              </v-radio-group>
+                            </ValidationProvider>
                           </v-col>
                         </v-col>
                         <h4
@@ -1027,21 +1015,18 @@
                             cols="12"
                             md="4"
                           >
-                            <div
-                              v-for="(pos, index) in internship_position_type_options"
-                              :key="pos+index"
-                            > 
-                              <ValidationProvider
-                                v-slot="{error}"
-                                rules="required"
-                              >
-                                <v-checkbox
-                                  v-model="program_details_internship.position_type"
-                                  :label="pos"
-                                  :value="pos" 
-                                />
-                              </ValidationProvider>
-                            </div>
+                            <ValidationProvider
+                              v-slot="{error}"
+                              rules="required"
+                            >
+                              <v-checkbox
+                                v-for="(pos, index) in internship_position_type_options"
+                                :key="pos+index"
+                                v-model="internship.position_type"
+                                :label="pos"
+                                :value="pos" 
+                              />
+                            </ValidationProvider>
                           </v-col>
                         </v-col>
                         <v-btn
@@ -1109,10 +1094,15 @@ export default class Test extends Vue {
 
     public citizen: Employer.Citizen = {} as Employer.Citizen
     public organization: Employer.Organization = {} as Employer.Organization
-    public programdetails: Employer.ProgramDetails = {} as Employer.ProgramDetails
+    public programdetails: Employer.ProgramDetails = {
+        externship: { prefered_date: {}}, 
+        project: { capacity: {}, engagement: {}}
+    } as Employer.ProgramDetails
     public internship: Employer.Internship = {} as Employer.Internship
     minStudents: string = "";
     maxStudents: string = "";
+    contributionOther: string = '';
+    internOther: string  = '';
     private loading: boolean = false
     public syncStorageCitizen() {
         localStorage.citizen_first_name = this.citizen.first_name
@@ -1246,15 +1236,15 @@ export default class Test extends Vue {
     public syncStorageOrganization() {
         
         if(this.organization){
-        let location = this.organization.location
-        localStorage.organization_division = this.organization.department
-        localStorage.organization_location_text = `${location.name} ${location.street_number} ${location.route}, ${location.locality}, ${location.administrative_area_level_1} ${location.postal_code}, ${location.country}`
-        localStorage.organization_location_lng = this.organization.location.longitude
-        localStorage.organization_location_lat = this.organization.location.latitude
-        localStorage.organization_industry = tableToDecimal(this.organization_industry_options, this.organization.industry)
-        localStorage.organization_industry_other = findOther(this.organization_industry_options, this.organization.industry)
-        localStorage.organization_product_list = this.organization.products_services
-        localStorage.organization_product_employee_count = this.organization.employee_count
+            let location = this.organization.location
+            localStorage.organization_division = this.organization.department
+            localStorage.organization_location_text = `${location.name} ${location.street_number} ${location.route}, ${location.locality}, ${location.administrative_area_level_1} ${location.postal_code}, ${location.country}`
+            localStorage.organization_location_lng = this.organization.location.longitude
+            localStorage.organization_location_lat = this.organization.location.latitude
+            localStorage.organization_industry = tableToDecimal(this.organization_industry_options, this.organization.industry)
+            localStorage.organization_industry_other = findOther(this.organization_industry_options, this.organization.industry)
+            localStorage.organization_product_list = this.organization.products_services
+            localStorage.organization_product_employee_count = this.organization.employee_count
         }
     }
     syncStorageProgramDetails() {
