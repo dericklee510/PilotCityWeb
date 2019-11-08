@@ -276,13 +276,10 @@
                               lg="6"
                               xl="5"
                             >
-                              <v-checkbox
-                                v-for="(industry, index) in ORGANIZATION_INDUSTRY_OPTIONS"
-                                :key="index"
+                              <pcCheckbox
                                 v-model="organization.industry"
-                                :label="industry"
-                                :value="industry"
-                                hide-details
+                                :options="ORGANIZATION_INDUSTRY_OPTIONS"
+                                :other="false"
                               />
                             </v-col>
                           </v-col>
@@ -444,26 +441,11 @@
                               
                                 cols="12"
                               >
-                                <v-checkbox
-                                  v-for="(contribution, index) in PROGRAMDETAILS_EXTERNSHIP_CONTRIBUTION_OPTIONS"
-                                  :key="contribution+index"
+                                <pcCheckbox
                                   v-model="programdetails.externship.contribution"
-                                  :label="contribution"
-                                  :value="contribution"
-                                  hide-details
+                                  :options="PROGRAMDETAILS_EXTERNSHIP_CONTRIBUTION_OPTIONS"
+                                  :other="true"
                                 />
-                                <v-checkbox
-                                  v-model="programdetails.externship.contribution"
-                                  :value="contributionOther"
-                                  hide-details
-                                >
-                                  <template v-slot:label>
-                                    <v-text-field
-                                      v-model="contributionOther"
-                                      placeholder="Other"
-                                    />
-                                  </template>
-                                </v-checkbox>
                               </v-col>
                             </v-col>
                           </ValidationProvider>
@@ -776,13 +758,10 @@
                           cols="12"
                           md="4"
                         >
-                          <v-checkbox
-                            v-for="(tal, index) in INTERNSHIP_TALENT_OPTIONS"
-                            :key="tal+index"
+                          <pcCheckbox
                             v-model="internship.talent"
-                            :label="tal"
-                            :value="tal"
-                            hide-details
+                            :options="INTERNSHIP_TALENT_OPTIONS"
+                            :other="false"
                           />
                         </v-col>
                       </v-col>
@@ -909,13 +888,10 @@
                           cols="12"
                           md="4"
                         >
-                          <v-checkbox
-                            v-for="(comp, index) in INTERN_COMP"
-                            :key="comp+index"
+                          <pcCheckbox
                             v-model="internship.compensation"
-                            :label="comp"
-                            :value="comp" 
-                            hide-details
+                            :options="INTERN_COMP"
+                            :other="false"
                           />
                         </v-col>
                       </v-col>
@@ -1092,13 +1068,10 @@
                           cols="12"
                           md="4"
                         >
-                          <v-checkbox
-                            v-for="(pos, index) in INTERNSHIP_POSITION_TYPE_OPTIONS"
-                            :key="pos+index"
+                          <pcCheckbox
                             v-model="internship.position_type"
-                            :label="pos"
-                            :value="pos" 
-                            hide-details
+                            :options="INTERNSHIP_POSITION_TYPE_OPTIONS"
+                            :other="false"
                           />
                         </v-col>
                       </v-col>

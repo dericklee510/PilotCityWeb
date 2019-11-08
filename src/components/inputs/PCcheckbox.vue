@@ -6,11 +6,13 @@
       v-model="selected"
       :value="option"
       :label="option"
+      hide-details
     />
     <!-- <v-row align="center"> -->
     <v-checkbox
       :id="'other'"
       v-model="otherChecked"
+      hide-details
     />
     <v-text-field
       v-model="otherInput"
