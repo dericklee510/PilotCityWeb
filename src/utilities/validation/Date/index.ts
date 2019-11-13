@@ -10,6 +10,6 @@ export const Date: ValidationRule = {
  * @returns {boolean}
  */
 validate:async (value, args ): Promise<boolean> => {
-        return (await validate(value,'regex:^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$')).valid
+        return (await validate(value,'regex:/^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/g')).valid
     }
 }

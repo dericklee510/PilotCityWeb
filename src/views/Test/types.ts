@@ -9,7 +9,7 @@ export interface Citizen {
 }
 
 export interface Organization {
-    department: string[];
+    department: string;
     location: AutoCompleteAddress;
     industry: string[];
     products_services: string[];
@@ -17,7 +17,6 @@ export interface Organization {
 }
 
 export interface ProgramDetails {
-    year: string;
     externship: {
         prefered_date: {
             primary: string;
@@ -28,8 +27,8 @@ export interface ProgramDetails {
     };
     project: {
         capacity: {
-            maximum: number;
-            minimum: number;
+            maximum: string;
+            minimum: string;
         };
         engagement: {
             type: string;
@@ -39,12 +38,12 @@ export interface ProgramDetails {
 }
 export interface Internship {
     project: string[];
-    hiring_adult: string;
+    hiring_adult: boolean;
     travel: string;
     education_level: string[];
     talent: string[];
-    days_week: number;
-    hours_day: number;
+    days_week: string;
+    hours_day: string;
     employer_of_record: string;
     compensation: string[];
     budget_min: number;

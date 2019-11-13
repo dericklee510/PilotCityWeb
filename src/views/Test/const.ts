@@ -116,4 +116,9 @@ export class CONST extends Vue{
         "Stipend",
         "Unpaid"
     ]
+    ΙΝΤΕRN_TRAVEL_OPTIONS = [
+        'No',
+        'both',
+        'license'
+    ]
 }

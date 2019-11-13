@@ -12,10 +12,10 @@ import {GraphQLClient} from 'graphql-request'
 import { IEmployerQuery } from './types'
 @Module({ namespaced: true, name: "Graphql" })
 export default class Storage extends VuexModule {
-    private client = new GraphQLClient("http://localhost:8080/graphql")
+    private client = new GraphQLClient("https://pilotcity-firestore.appspot.com/graphql")
     get EmployerQueryData(): IEmployerQuery & object {
         return {
-            id_token: this.context.rootState.Auth.idToken,
+            id_token: this.context.rootState.Auth.user.uid,
             citizen_first_name: localStorage.citizen_first_name,
             citizen_last_name:localStorage.citizen_last_name,
             citizen_position:localStorage.citizen_position,
@@ -65,7 +65,7 @@ export default class Storage extends VuexModule {
     }
     @Action
     async SubmitEmployerQuery(){
-        let data;
+    let data;
         try {
             data = await this.client.request(EMPLOYER_QUERY, this.EmployerQueryData);
           } catch(err) {
