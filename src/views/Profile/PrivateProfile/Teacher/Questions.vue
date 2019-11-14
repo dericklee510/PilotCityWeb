@@ -269,6 +269,7 @@
                       <pcTextfield
                         :dark-mode="true"
                         title="ROOM"
+                        type="time"
                         placeholder="Enter your room number"
                       />
                     </v-col>
@@ -487,7 +488,7 @@ export default class Test extends Vue {
     private loading: boolean = false
 
     created() {
-        GraphqlStore.EmployerQueryisValid
+
     }
 }
 </script> 
