@@ -1,9 +1,6 @@
-import PublicProfile from "./PublicProfile"
-import PrivateProfile from "./PrivateProfile"
+import Profile from "./Profile.vue"
 
-export {
-    PublicProfile as Public,
-    PrivateProfile as Private
-}
-
+export {Profile as Main}
+export {Public} from "./PublicProfile"
+export {Private} from "./PrivateProfile"
 export {default as routes} from "./routes"

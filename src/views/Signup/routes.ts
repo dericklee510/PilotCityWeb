@@ -23,8 +23,7 @@ const routes: RouteConfig[] = [
             {
                 name: "signup.data",
                 path: `data`,
-                component: EmployerSignup
-                // props: {citizenType: `Teacher`}
+                component: Signup.children.CitizenData
             }
         ],
         beforeEnter(to,from,next): void{

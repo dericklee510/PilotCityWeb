@@ -9,7 +9,6 @@ import {
     email
 } from "@/views/Login"
 import test from "@/views/Test"
-import profile from "@/views/Profile/Profile.vue"
 import {routes as ProfileRoutes} from "@/views/Profile"
 import {routes as SignupRoutes} from "@/views/Signup"
 import {routes as LoginRoutes} from "@/views/Login"
@@ -34,7 +33,10 @@ let routes: RouteConfig [] = [
     {
         path: `/test`,
         name: `test-page`,
-        component: profile
+        component: test
+    },
+    {
+        path: `/*`
     }
 ]
 

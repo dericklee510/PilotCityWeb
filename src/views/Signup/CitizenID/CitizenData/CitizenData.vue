@@ -23,6 +23,7 @@
                 >
                   <v-btn
                     :id="CITIZENSTYLES[citizenType]"
+                    style="display: block"
                     v-bind="attrs"
                     rounded
                     v-on="on"
@@ -128,9 +129,11 @@
             text
             outlined
           >
-            <h3 class="text-center">
-              NEXT
-            </h3>
+            <router-link :to="{name: 'profile.private', params: {citizenType: citizenType}}">
+              <h3 class="text-center">
+                NEXT
+              </h3>
+            </router-link>
           </v-btn>
         </v-col>
       </v-row>
@@ -152,7 +155,6 @@ import {Component, Prop} from "vue-property-decorator"
 })
 export default class CitizenData extends Vue {
     @Prop({type: String, required: true})
-    public citizenType!: string;
     private CITIZENSTYLES = {
         Teacher: "citizen-id__type--teacher", 
         Employer: "citizen-id__type--employer", 
@@ -160,8 +162,8 @@ export default class CitizenData extends Vue {
     }
     private AVAILABLETYPES: string[] = ["Teacher", "Employer", "Student"]
     
-    private changeCitizenType(intype: string): void {
-        this.citizenType = intype
+    get citizenType(){
+        return this.$route.params.citizenType
     }
 }
 </script>

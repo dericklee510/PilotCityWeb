@@ -70,11 +70,11 @@ export default class CitizenType extends Vue {
         Student: "citizen-id__type--student"
     }
     private AVAILABLETYPES: string[] = ["Employer","Teacher", "Student"]
-    selectCitizenType(citizen_key: string){
-        localStorage.citizen_type = citizen_key
+    selectCitizenType(citizenKey: string){
+        localStorage.citizenType = citizenKey
         this.$router.push({
             name:`signup.data`, 
-            params: {citizenType: citizen_key}
+            params: {citizenType: citizenKey}
         })
         this.$router.push
     }

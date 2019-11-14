@@ -1,4 +1,8 @@
 // export profile from "./Profile.vue"
 import PublicProfile from "./Profile.vue"
 
-export default PublicProfile
+export {PublicProfile}
+
+export const Public = {
+    PublicProfile
+}
