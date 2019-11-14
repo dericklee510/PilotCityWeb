@@ -26,6 +26,7 @@ export interface ProgramDetails {
         contribution: string[];
     };
     project: {
+        solutions:string[]
         capacity: {
             maximum: string;
             minimum: string;
@@ -62,7 +63,3 @@ export interface EmployerPage{
     ProgramDetails:ProgramDetails
     Internship:Internship
 }
-
-
-
-

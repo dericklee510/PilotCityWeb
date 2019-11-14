@@ -17,5 +17,6 @@ export const tableToDecimal=(table: any[],confirmed: any[]): number => {
 }
 
 export const findOther = (table: any[], confirm: any[]): string => {
-    return confirm.find((entry) => !includes(table,entry))
+    let other = confirm.find((entry) => !includes(table,entry))
+    return other?other:""
 }

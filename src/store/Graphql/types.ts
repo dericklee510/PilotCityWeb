@@ -4,7 +4,7 @@ export interface IEmployerQuery {
     citizen_last_name: string;
     citizen_position: string;
     citizen_organization: string;
-    organization_division: string [];
+    organization_division: string;
     organization_location_text: string;
     organization_location_lng: number; //float
     organization_location_lat: number; //float
@@ -21,9 +21,10 @@ export interface IEmployerQuery {
     projects_max: number;
     projects_engagement: number;
     projects_engagement_2: number;
-    projects_requests: string []; //BROKEN FIX THIS
-    projects_missions: string []; //BROKEN FIX THIS
-    projects_specifications: string []; //BROKEN FIX THIS
+    projects_solutions:string[]
+    // projects_requests: string []; //BROKEN 
+    // projects_missions: string []; //BROKEN 
+    // projects_specifications: string []; //BROKEN 
     internships_project: number;
     internships_project_other: string;
     internships_hiring_adult: boolean;
