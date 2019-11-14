@@ -216,6 +216,23 @@
                       />
                     </v-col>
                   </v-row>
+                  <v-row>
+                    <v-col
+                      cols="12"
+                      md="8"
+                      lg="6"
+                      xl="5"
+                    >
+                      <ValidationProvider
+                        v-slot="{errors}"
+                        rules="required"
+                      >
+                        <autoComplete
+                          :error-messages="{errors}"
+                        />
+                      </ValidationProvider>
+                    </v-col>
+                  </v-row>
                 </v-col>
               </v-list-item-content>
             </v-list-item>
@@ -416,3 +433,61 @@
     </v-container>
   </v-card>
 </template>
+
+<script lang="ts">
+import Vue from 'vue'
+import {
+    PCselect,
+    PCtextfield,
+    PCcheckbox,
+    PCmultiinput
+} from "@/components/inputs"
+import autoComplete from "@/components/GoogleMaps/Autocomplete/AutoComplete.vue"
+import Component from "vue-class-component"
+// import * as Employer from "./types"
+import { ValidationProvider, ValidationObserver, extend } from 'vee-validate'
+import { ObserverInstance } from "@/utilities/validation"
+// import { tableToDecimal, findOther } from "./helpers"
+// import { CONST } from './const'
+import { mask } from 'vue-the-mask'
+import { min_value } from 'vee-validate/dist/rules'
+import { GraphqlStore } from '@/store'
+
+extend('min_value', {
+    ...min_value,
+    message: "This field cannot be less than {min}"
+})
+
+@Component({
+    components: {
+        pcSelect: PCselect,
+        pcTextfield: PCtextfield,
+        autoComplete,
+        ValidationProvider,
+        ValidationObserver,
+        pcMultiInput: PCmultiinput,
+        pcCheckbox: PCcheckbox
+    },
+    directives: {
+        mask
+    }
+})
+
+export default class Test extends Vue {
+    get citizenType(){
+        return this.$route.params.citizenType
+    }
+    private CITIZENSTYLES = {
+        Teacher: "citizen-id__type--teacher",
+        Employer: "citizen-id__type--employer",
+        Student: "citizen-id__type--student"
+    }
+    private AVAILABLETYPES: string[] = ["Teacher", "Employer", "Student"]
+    private ispublic: boolean = true;
+    private loading: boolean = false
+
+    created() {
+        GraphqlStore.EmployerQueryisValid
+    }
+}
+</script> 
