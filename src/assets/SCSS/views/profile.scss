@@ -99,7 +99,12 @@
         color: #c7c8ca;
     }
 }
-
+#profileFields .v-list-item__title{
+    border-bottom: 1px solid darken($color: #C7C8CA, $amount: 20);
+}
+#profileFields .item-subheaders{
+    border-bottom: 1px solid #AE90B0;
+}
 /* Media Queries */
 @media only screen and (min-width : 1900px){
     #profileContainer .pc-profile-picture{

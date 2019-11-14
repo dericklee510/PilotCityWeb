@@ -62,14 +62,14 @@ import Vue from "vue"
 import Component from "vue-class-component"
 
 
-@Component
+@Component  
 export default class CitizenType extends Vue {
     private CITIZENSTYLES = {
         Teacher: "citizen-id__type--teacher", 
         Employer: "citizen-id__type--employer", 
         Student: "citizen-id__type--student"
     }
-    private AVAILABLETYPES: string[] = ["Employer"]
+    private AVAILABLETYPES: string[] = ["Employer","Teacher", "Student"]
     selectCitizenType(citizen_key: string){
         localStorage.citizen_type = citizen_key
         this.$router.push({

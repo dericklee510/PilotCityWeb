@@ -1,4 +1,5 @@
 @import './radio.scss';
+@import './checkbox.scss';
 
 /* PICTURE - COMPONENT */
 .pc-profile-picture{
@@ -56,7 +57,7 @@
     justify-content: center
 }
 
-/* PC textfield input component */
+/* PC TEXTFIELD - COMPONENT*/
 .pc-input__autocomplete{
     border: 1px solid #C7C8CA;
     color: #C7C8CA;
@@ -66,16 +67,33 @@
     .v-input__control{
         border: none;
     }
-    ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    input#map{
+        font-family: Raleway;
+        font-style: normal;
+        font-weight: 800;
+        font-size: 1.09em;
+        line-height: 1.28em;
+        letter-spacing: 0.055em;
         color: #fff;
+        ::placeholder{
+            color: #C7C8CA !important;
+        }
+        ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+            color: #C7C8CA;
+        }
+        :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+            color: #C7C8CA;
+        }
+        ::-moz-placeholder { /* Mozilla Firefox 19+ */
+            color: #C7C8CA;
+        }
+        :-ms-input-placeholder { /* Internet Explorer 10-11 */
+            color: #C7C8CA;
+        }
     }
-    :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-        color: #fff;
-    }
-    ::-moz-placeholder { /* Mozilla Firefox 19+ */
-        color: #fff;
-    }
-    :-ms-input-placeholder { /* Internet Explorer 10-11 */
-        color: #fff;
-    }
+}
+
+/* PC btn - COMPONENT*/
+#pc-app .pc-button{
+    
 }

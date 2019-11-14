@@ -59,9 +59,9 @@
       </v-btn>
     </v-toolbar-items>
     <!-- in need of doka component -->
-    <v-list-item-avatar size="50">
+    <!-- <v-list-item-avatar size="50">
       <div class="pc-profile-picture pc-profile-picture--icon" />
-    </v-list-item-avatar>
+    </v-list-item-avatar> -->
   </v-toolbar>
 </template>
 

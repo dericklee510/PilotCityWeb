@@ -1,34 +1,48 @@
 <template>
   <div>
-    <v-row
-      v-for="(entry) in entries"
-      :key="entry.id"
-    >
-      <v-col :cols="entries.length>1?11:12">
-        <PCtextfield
-          :key="entry.id + 'textfield'"
-          v-model="entry.value"
-          placeholder="Enter you product or Service"
-        />
-      </v-col>
-      <v-col cols="1">
-        <h3
-          v-if="entries.length > 1"
-          key="entry.id+'icon'"
+    <v-row>
+      <v-col>
+        <v-row
+          v-for="(entry) in entries"
+          :key="entry.id"
+          no-gutters
+          cols="12"
         >
-          <i
-            class="mdi mdi-delete"
-            @click="deleteEntry(entry.id)"
-          />
-        </h3>
+          <v-col :cols="entries.length>1?11:12">
+            <PCtextfield
+              :key="entry.id + 'textfield'"
+              v-model="entry.value"
+              :dark-mode="true"
+              placeholder="Enter your product or Service"
+            />
+          </v-col>
+          <v-col
+            v-if="entries.length > 1"
+            cols="1"
+            style="position: relative"
+          >
+            <h3
+              key="entry.id+'icon'"
+              style="position:absolute; top: 25%; color: #B73430;"
+              class="pc-vh-center"
+            >
+              <i
+                class="mdi mdi-trash-can-outline"
+                @click="deleteEntry(entry.id)"
+              />
+            </h3>
+          </v-col>
+        </v-row>
+      </v-col>
+      <v-col cols="12">
+        <v-btn
+          block
+          @click="newEntry"
+        >
+          +
+        </v-btn>
       </v-col>
     </v-row>
-    <v-btn
-      block
-      @click="newEntry"
-    >
-      +
-    </v-btn>
   </div>
 </template>
 

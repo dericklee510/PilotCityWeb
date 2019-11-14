@@ -12,7 +12,7 @@ body {
   font-family: Raleway;
   word-wrap: break-word;
 }
-p{
+p {
     font-family: Raleway;
     font-style: italic;
     font-weight: 500;
@@ -83,6 +83,7 @@ h6{
     letter-spacing: 0.025em;
 }
 
+
 /* APPLICATION STYLES */
 #pc-app{
     .primary--text{
@@ -90,6 +91,7 @@ h6{
         caret-color: #000 !important;
     }
 }
+#pc-app
 .pc-vh-center{
     left: 50% !important;
     transform: translate(-50%, -50%) !important;

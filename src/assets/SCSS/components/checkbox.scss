@@ -1,4 +1,4 @@
-#pc-app.v-application .pc-radio{
+#pc-app.v-application .pc-checkbox{
     .accent--text{
         color: #C7C8CA !important;
         caret-color: #C7C8CA !important;
@@ -9,4 +9,7 @@
     .theme--light.v-label{
         color: #C7C8CA;
     }
-}
+    .v-application--is-ltr .v-input__append-outer{
+        margin: 0;
+    }
+} 

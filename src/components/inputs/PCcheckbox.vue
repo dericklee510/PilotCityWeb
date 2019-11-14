@@ -13,13 +13,20 @@
       :id="'other'"
       v-model="otherChecked"
       hide-details
-    />
-    <v-text-field
-      v-model="otherInput"
-      :disabled="!otherChecked"
-      label="Other"
-    />
-
+    >
+      <template v-slot:append>
+        <v-text-field
+          v-model="otherInput"
+          style="padding: 0; margin: 0"
+          class="pc-input__textfield"
+          background-color="transparent"
+          :disabled="!otherChecked"
+          dark
+          placeholder="Other"
+          title=""
+        />
+      </template>
+    </v-checkbox>
     <!-- </v-row> -->
   </div>
 </template>
