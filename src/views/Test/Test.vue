@@ -584,6 +584,30 @@
                               </v-col>
                             </v-col>
                           </ValidationProvider>
+
+                        <ValidationProvider v-slot="{errors}" rules="required">
+                            <v-col cols="12">
+                              <v-row>
+                                <h4
+                                  style="color:#C7C8CA"
+                                  class="text-uppercase"
+                                >
+                                  What problem(s) would you like students to develop project solutions for?
+                                </h4>
+                                <h4 style="color:#EA6763">
+                                  {{ errors?'*':'' }}
+                                </h4>
+                              </v-row>
+                            </v-col>
+                            <v-col
+                              cols="12"
+                              md="8"
+                              lg="6"
+                              xl="5"
+                            >
+                              <pcMultiInput v-model="programdetails.project.solutions" />
+                            </v-col>
+                        </ValidationProvider >
                           <ValidationProvider
                             v-slot="{errors}"
                             rules="required"
@@ -687,11 +711,11 @@
                                 >
                                   <v-radio
                                     label="Yes"
-                                    value="yes"
+                                    :value="true"
                                   />
                                   <v-radio
                                     label="No"
-                                    value="no"
+                                    :value="false"
                                   />
                                 </v-radio-group>
                               </v-col>
@@ -1094,11 +1118,11 @@
                             >
                               <v-radio
                                 label="Yes"
-                                value="yes"
+                                :value="true"
                               />
                               <v-radio
                                 label="No"
-                                value="no"
+                                :value="false"
                               />
                             </v-radio-group>
                           </v-col>
@@ -1219,7 +1243,7 @@ export default class Test extends CONST {
     } as Employer.Organization
     public programdetails: Employer.ProgramDetails = {
         externship: { prefered_date: {}, contribution: [] as string[] },
-        project: { capacity: {}, engagement: {} }
+        project: { solutions:[] as string[],capacity: {}, engagement: {} }
     } as Employer.ProgramDetails
     public internship: Employer.Internship = {
         talent: [] as string[],
@@ -1248,12 +1272,12 @@ export default class Test extends CONST {
         if (this.organization) {
             let location = this.organization.location
             localStorage.organization_division = this.organization.department
-            localStorage.organization_location_text = `${location.name} ${location.street_number} ${location.route}, ${location.locality}, ${location.administrative_area_level_1} ${location.postal_code}, ${location.country}`
-            localStorage.organization_location_lng = this.organization.location.longitude
+            localStorage.organization_location_text = `${location.street_number} ${location.route}, ${location.locality}, ${location.administrative_area_level_1} ${location.postal_code}, ${location.country}`
+            localStorage.organization_location_lng = (this.organization.location.longitude)
             localStorage.organization_location_lat = this.organization.location.latitude
             localStorage.organization_industry = tableToDecimal(this.ORGANIZATION_INDUSTRY_OPTIONS, this.organization.industry)
             localStorage.organization_industry_other = findOther(this.ORGANIZATION_INDUSTRY_OPTIONS, this.organization.industry)
-            localStorage.organization_product_list = this.organization.products_services
+            localStorage.organization_product_list = JSON.stringify(this.organization.products_services)
             localStorage.organization_product_employee_count = this.organization.employee_count
         }
     }
@@ -1268,14 +1292,15 @@ export default class Test extends CONST {
     }
     syncStorageProject() {
         if (this.programdetails) {
-            localStorage.projects_min = Number.parseInt(this.programdetails.project.capacity.minimum)
-            localStorage.projects_max = Number.parseInt(this.programdetails.project.capacity.maximum)
+            localStorage.projects_min = (this.programdetails.project.capacity.minimum)
+            localStorage.projects_max = (this.programdetails.project.capacity.maximum)
             localStorage.projects_engagement = tableToDecimal(this.PROGRAMDETAILS_PROJECT_ENGAGEMENT_TYPE_OPTIONS, [
                 this.programdetails.project.engagement.type
             ])
             localStorage.projects_engagement_2 = tableToDecimal(this.PROGRAMDETAILS_PROJECT_ENGAGEMENT_RADIUS_OPTIONS, [
                 this.programdetails.project.engagement.radius
             ])
+            localStorage.projects_solutions = JSON.stringify(this.programdetails.project.solutions)
             // localStorage.projects_requests = this.programdetails.project.
             // localStorage.projects_missions = this.programdetails.project.
             // localStorage.projects_specifications = this.programdetails.project.
@@ -1293,8 +1318,8 @@ export default class Test extends CONST {
             localStorage.internships_education = tableToDecimal(this.INTERNSHIP_EDUCATION_OPTIONS, this.internship.education_level)
             localStorage.internships_education_other = findOther(this.INTERNSHIP_EDUCATION_OPTIONS, this.internship.education_level)
             localStorage.internships_talent = tableToDecimal(this.INTERNSHIP_TALENT_OPTIONS, this.internship.talent)
-            localStorage.internships_days_week = Number.parseInt(this.internship.days_week.charAt(0))?Number.parseInt(this.internship.days_week.charAt(0)):0
-            localStorage.internships_hours_day = Number.parseInt(this.internship.hours_day.charAt(0))?Number.parseInt(this.internship.hours_day.charAt(0)):0
+            localStorage.internships_hours_week = (this.internship.days_week.charAt(0))
+            localStorage.internships_hours_day = (this.internship.hours_day.charAt(0))
             localStorage.internships_employer_of_record = tableToDecimal(this.INTERNSHIP_EMPLOYER_OF_RECORD_OPTIONS, [
                 this.internship.employer_of_record
             ])
@@ -1310,190 +1335,34 @@ export default class Test extends CONST {
     }
     async syncStorage() {
         this.loading = true
-        try{
+        console.log("syncing")
             if (await (this.$refs.observer as ObserverInstance).validate()) {
+              console.log("ALL INPUTS VALID")
                 this.syncStorageCitizen()
                 this.syncStorageOrganization()
                 this.syncStorageProgramDetails()
                 this.syncStorageProject()
                 this.syncStorageInternship()
+                await GraphqlStore.fetchQueryData()
+                // console.log(GraphqlStore.EmployerQueryisValid)
+                // await GraphqlStore.SubmitEmployerQuery()
             }
-        }
-        catch(err){
-            console.log(err)
-        }
         this.loading = false
     }
     get Name() {
         return `${this.citizen.first_name} ${this.citizen.last_name}`
     }
-    /*
-    get testData() {
-        this.citizen = {
-            first_name: 'test',
-            last_name: 'test',
-            position: 'test',
-            organization: 'test'
-        }
-        this.organization = {
-            location: { 
-                "street_number": "101", 
-                "route": "Estudillo Avenue", 
-                "locality": "San Leandro", 
-                "administrative_area_level_1": "CA", 
-                "country": "United States", 
-                "postal_code": "94577", 
-                "latitude": 37.72492039999999, 
-                "longitude": -122.1553988, 
-                "name": "PilotCity", 
-                "photos": [{ 
-                    "height": 1470, 
-                    "html_attributions": [
-                        "<a href=\"https://maps.google.com/maps/contrib/104152033260779671835/photos\">PilotCity</a>"
-                    ], 
-                    "width": 2048, 
-                    "getUrl": { 
-                        "_custom": { 
-                            "type": "function", 
-                            "display": "<span>ƒ</span> (g)" 
-                        } 
-                    } 
-                }, { 
-                    "height": 1126, 
-                    "html_attributions": [
-                        "<a href=\"https://maps.google.com/maps/contrib/104152033260779671835/photos\">PilotCity</a>"
-                    ], 
-                    "width": 2150, 
-                    "getUrl": { 
-                        "_custom": { 
-                            "type": "function", 
-                            "display": "<span>ƒ</span> (g)" 
-                        } 
-                    } 
-                }, { 
-                    "height": 1283, 
-                    "html_attributions": [
-                        "<a href=\"https://maps.google.com/maps/contrib/104152033260779671835/photos\">PilotCity</a>"
-                    ], 
-                    "width": 2452, 
-                    "getUrl": { 
-                        "_custom": { 
-                            "type": "function", 
-                            "display": "<span>ƒ</span> (g)" 
-                        } 
-                    } 
-                }, { 
-                    "height": 3024, 
-                    "html_attributions": [
-                        "<a href=\"https://maps.google.com/maps/contrib/114013528308167523915/photos\">Stephen Cassidy</a>"
-                    ], 
-                    "width": 4032, 
-                    "getUrl": { 
-                        "_custom": { 
-                            "type": "function", 
-                            "display": "<span>ƒ</span> (g)" 
-                        } 
-                    } 
-                }, { 
-                    "height": 1535, 
-                    "html_attributions": [
-                        "<a href=\"https://maps.google.com/maps/contrib/104152033260779671835/photos\">PilotCity</a>"
-                    ], 
-                    "width": 2049, 
-                    "getUrl": { 
-                        "_custom": { 
-                            "type": "function", 
-                            "display": "<span>ƒ</span> (g)" 
-                        } 
-                    } 
-                }, { 
-                    "height": 2790, 
-                    "html_attributions": [
-                        "<a href=\"https://maps.google.com/maps/contrib/114013528308167523915/photos\">Stephen Cassidy</a>"
-                    ], 
-                    "width": 3868, 
-                    "getUrl": { 
-                        "_custom": { 
-                            "type": "function", 
-                            "display": "<span>ƒ</span> (g)" 
-                        } 
-                    } 
-                }, { 
-                    "height": 1920, 
-                    "html_attributions": [
-                        "<a href=\"https://maps.google.com/maps/contrib/104128811893657618456/photos\">L G</a>"
-                    ], 
-                    "width": 1080, 
-                    "getUrl": { 
-                        "_custom": { 
-                            "type": "function", 
-                            "display": "<span>ƒ</span> (g)" 
-                        } 
-                    } 
-                }, { 
-                    "height": 384, 
-                    "html_attributions": [
-                        "<a href=\"https://maps.google.com/maps/contrib/104152033260779671835/photos\">PilotCity</a>"
-                    ], 
-                    "width": 384, 
-                    "getUrl": { 
-                        "_custom": { 
-                            "type": "function", 
-                            "display": "<span>ƒ</span> (g)" 
-                        } 
-                    } 
-                }], 
-                "place_id": "ChIJQ64IjpaPj4ARSzL0-FVHw-s" 
-            },
-            department: ['test'],
-            industry: this.ORGANIZATION_INDUSTRY_OPTIONS.slice(1, 3),
-            products_services: ['test', 'test'],
-            employee_count: 'test'
-        }
-        this.programdetails = {
-            externship: {
-                prefered_date: {
-                    primary: '2020-01-10',
-                    secondary: '2020-01-10',
-                    final: '2020-01-10'
-                },
-                contribution: this.PROGRAMDETAILS_EXTERNSHIP_CONTRIBUTION_OPTIONS.slice(0, 1)
-            },
-            project: {
-                capacity: {
-                    minimum: '0',
-                    maximum: '1'
-                },
-                engagement: {
-                    type: this.PROGRAMDETAILS_PROJECT_ENGAGEMENT_TYPE_OPTIONS[1],
-                    radius: this.PROGRAMDETAILS_PROJECT_ENGAGEMENT_RADIUS_OPTIONS[1]
-                }
-            }
-        }
-        this.internship = {
-            project: this.INTERNSHIP_PROJECT_TYPE.slice(1),
-            hiring_adult: this.internship.hiring_adult,
-            travel: this.ΙΝΤΕRN_TRAVEL_OPTION[0],
-            education_level: this.INTERNSHIP_EDUCATION_OPTIONS.slice(0, 1),
-            talent: this.INTERNSHIP_TALENT_OPTIONS.slice(0, 1),
-            days_week: this.internship.days_week,
-            hours_day: this.internship.hours_day,
-            employer_of_record: this.INTERNSHIP_EMPLOYER_OF_RECORD_OPTIONS[0],
-            compensation: this.INTERNSHIP_COMPENSATION_OPTIONS.slice(0, 1),
-            budget_min: 0,
-            budget_max: 10,
-            interview_1: '2020-01-10',
-            interview_2: '2020-01-10',
-            interview_3: '2020-01-10',
-            employment: true,
-            position_type: this.INTERNSHIP_POSITION_TYPE_OPTIONS.slice(0, 1)
-        }
+    private async fetchQueryData(){
+      await GraphqlStore.fetchQueryData()
+    } 
+    private async Mutate(){
+      await GraphqlStore.SubmitEmployerQuery()
     }
-    */
-    created() {
+    async created() {
+await GraphqlStore.fetchQueryData()
+                console.log(GraphqlStore.EmployerQueryisValid,"QUERY STATUS")
     // this.$set(this.citizen, 'first_name', localStorage.first_name ? localStorage.first_name : "Your")
     // this.$set(this.citizen, 'last_name', localStorage.last_name ? localStorage.last_name : "Name")
-        GraphqlStore.EmployerQueryisValid
     }
 }
 </script> 
