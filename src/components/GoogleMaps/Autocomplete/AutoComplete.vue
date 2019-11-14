@@ -38,7 +38,9 @@ export default class AutoComplete extends Vue {
         address: any;
     }
   @Prop()
-    public value?: string
+    public title?: string;
+  @Prop()
+  public value?: string
   @Prop()
   public errorMessages?: string | string[] | {errors: string[]}
   get errorMessage() {
