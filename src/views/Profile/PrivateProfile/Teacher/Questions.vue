@@ -141,181 +141,6 @@
                     lg="6"
                     xl="5"
                   >
-<<<<<<< HEAD
-                    <v-col
-                      cols="12"
-                      md="8"
-                      lg="6"
-                      xl="5"
-                    >
-                      <pcSelect
-                        :dark-mode="true"
-                        title="TITLE"
-                        :items="['Mr.', 'Mrs.', 'Ms.', 'no preference']" 
-                        placeholder="How may we address you?"
-                      />
-                      <pcTextfield
-                        :dark-mode="true"
-                        title="FIRST NAME"
-                        placeholder="First Name"
-                      />
-                      <pcTextfield
-                        :dark-mode="true"
-                        title="LAST NAME"
-                        placeholder="Last Name"
-                      />
-                    </v-col>
-                  </v-row>
-                </v-col>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list-group>
-          <v-list-group
-            no-action
-            :ripple="false"
-          >
-            <template v-slot:activator>
-              <v-row>
-                <v-col
-                  cols="12"
-                  lg="2"
-                >
-                  <v-list-item-title
-                    style="max-width: fit-content"
-                    v-text="'School'"
-                  />
-                </v-col>
-              </v-row>
-            </template>
-            <v-list-item>
-              <v-list-item-content>
-                <v-col cols="12">
-                  <v-row justify="start">
-                    <v-col
-                      cols="12"
-                      md="8"
-                      lg="6"
-                      xl="5"
-                    >
-                      <pcSelect
-                        :dark-mode="true"
-                        title="SCHOOL DISTRICT"
-                        placeholder="Select school district"
-                      />
-                      <pcSelect
-                        :dark-mode="true"
-                        title="SCHOOL NAME"
-                        placeholder="Select school name"
-                      />
-                    </v-col>
-                  </v-row>
-                  <v-row>
-                    <v-col
-                      cols="12"
-                      md="8"
-                      lg="6"
-                      xl="5"
-                    >
-                      <ValidationProvider
-                        v-slot="{errors}"
-                        rules="required"
-                      >
-                        <autoComplete
-                          :error-messages="{errors}"
-                        />
-                      </ValidationProvider>
-                    </v-col>
-                  </v-row>
-                </v-col>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list-group>
-          <v-list-group
-            no-action
-            :ripple="false"
-          >
-            <template v-slot:activator>
-              <v-row>
-                <v-col
-                  cols="12"
-                  md="8"
-                  lg="6"
-                  xl="5"
-                >
-                  <v-list-item-title
-                    style="max-width: fit-content"
-                    v-text="'Classroom'"
-                  />
-                </v-col>
-              </v-row>
-            </template>
-            <v-list-item>
-              <v-list-item-content>
-                <v-col cols="12">
-                  <v-row justify="start">
-                    <v-col
-                      cols="12"
-                      md="8"
-                      lg="6"
-                      xl="5"
-                    >
-                      <pcTextfield
-                        :dark-mode="true"
-                        title="ROOM"
-                        type="time"
-                        placeholder="Enter your room number"
-                      />
-                    </v-col>
-                  </v-row>
-                  <v-row>
-                    <v-col
-                      cols="12"
-                      md="3"
-                    >
-                      <pcSelect
-                        :dark-mode="true"
-                        title="SCHOOL YEAR"
-                        placeholder="Select School Year"
-                      />
-                    </v-col>
-                    <v-col
-                      cols="12"
-                      md="5"
-                    >
-                      <pcTextfield
-                        :dark-mode="true"
-                        title="CLASS NAME"
-                        placeholder="Enter class name"
-                      />
-                    </v-col>
-                    <v-col
-                      cols="12"
-                      md="2"
-                    >
-                      <pcSelect
-                        :dark-mode="true"
-                        title="SEMESTER"
-                        placeholder="Select semester(s)"
-                        :items="['Fall', 'Spring', 'All-Year', 'Summer', 'Winter']"
-                      />
-                    </v-col>
-                    <v-col
-                      cols="12"
-                      md="2"
-                    >
-                      <!-- create multi-select component -->
-                      <pcSelect
-                        :dark-mode="true"
-                        title="GRADES"
-                        :multiselect="true"
-                        placeholder="Select class grade level"
-                        :items="['9','10','11','12']"
-                      />
-                    </v-col>
-                    <v-col
-                      cols="12"
-                      md="2"
-=======
                     <pcSelect
                       :dark-mode="true"
                       title="TITLE"
@@ -364,7 +189,6 @@
                     <ValidationProvider
                       v-slot="{errors}"
                       rules="required"
->>>>>>> 20c74b0e793607d4f60607ce394e82dc6167d9d2
                     >
                       <autoComplete
                         :error-messages="{errors}"
@@ -482,74 +306,7 @@
             style="max-width: fit-content"
             v-text="'Schedule'"
           />
-          <v-list-item>
-            <v-list-item-content>
-              <v-row>
-                <v-col
-                  cols="12"
-                  md="2"
-                >
-                  <pcSelect
-                    :dark-mode="true"
-                    :items="['prep','0','1','2','3','lunch','4','5','6','7','8']"
-                    title="PERIOD"
-                    placeholder="Class period"
-                  />
-                </v-col>
-                <v-col
-                  cols="12"
-                  md="3"
-                >
-                  <pcSelect
-                    :dark-mode="true"
-                    title="COURSE"
-                    placeholder="Which Course"
-                  />
-                </v-col>
-                <v-col
-                  cols="12"
-                  md="3"
-                >
-                  <pcSelect
-                    :dark-mode="true"
-                    :items="['M','T','W','Th','F','Sa','S']"
-                    title="SCHEDULE"
-                    :multiselect="true"
-                    placeholder="What days"
-                  />
-                </v-col>
-                <v-col
-                  cols="12"
-                  md="2"
-                >
-                  <pcSelect
-                    :dark-mode="true"
-                    :items="[]"
-                    title="START TIME"
-                    placeholder="Start Time"
-                  />
-                </v-col>
-                <v-col
-                  cols="12"
-                  md="2"
-                >
-                  <pcSelect
-                    :dark-mode="true"
-                    :items="[]"
-                    title="END TIME"
-                    placeholder="End Time"
-                  />
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col cols="12">
-                  <v-btn block>
-                    +
-                  </v-btn>
-                </v-col>
-              </v-row>
-            </v-list-item-content>
-          </v-list-item>
+          <BellScheduleInput  v-model="teacherProfile.classSchedules"/>
         </v-list>
       </v-container>
     </v-container>
@@ -574,7 +331,8 @@ import { ObserverInstance } from "@/utilities/validation"
 import { mask } from 'vue-the-mask'
 import { min_value } from 'vee-validate/dist/rules'
 import { GraphqlStore } from '@/store'
-
+import {BellScheduleInput} from "./components"
+import {TeacherProfile} from "./types"
 extend('min_value', {
     ...min_value,
     message: "This field cannot be less than {min}"
@@ -584,6 +342,7 @@ extend('min_value', {
     components: {
         pcSelect: PCselect,
         pcTextfield: PCtextfield,
+        BellScheduleInput,
         autoComplete,
         ValidationProvider,
         ValidationObserver,
@@ -607,7 +366,9 @@ export default class Test extends Vue {
     private AVAILABLETYPES: string[] = ["Teacher", "Employer", "Student"]
     private ispublic: boolean = true;
     private loading: boolean = false
-
+    public teacherProfile:TeacherProfile = {
+      classSchedules:[]
+    }
     created() {
 
     }

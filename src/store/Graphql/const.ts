@@ -21,9 +21,7 @@ export const EMPLOYER_QUERY = `mutation createEmployerProfile(
     $projects_max: Int!,
     $projects_engagement: Int!,
     $projects_engagement_2: Int!,
-    $projects_requests: String!,
-    $projects_missions: String!,
-    $projects_specifications: String!,
+    $projects_solutions: [String]!,
     $internships_project: Int!,
     $internships_project_other: String!,
     $internships_hiring_adult: Boolean!,
@@ -42,8 +40,8 @@ export const EMPLOYER_QUERY = `mutation createEmployerProfile(
     $internships_interview_option3: String!,
     $internships_employment: Boolean!,
     $internships_position: Int!
-  ) {
-    createEmployerProfile(
+ ) {
+    createEmployerProfile{
       id_token: $id_token
       citizen_first_name: $citizen_first_name
       citizen_last_name: $citizen_last_name
@@ -66,9 +64,7 @@ export const EMPLOYER_QUERY = `mutation createEmployerProfile(
       projects_max: $projects_max
       projects_engagement: $projects_engagement
       projects_engagement_2: $projects_engagement_2
-      projects_requests: $projects_requests
-      projects_missions: $projects_missions
-      projects_specifications: $projects_specifications
+      projects_solutions: $projects_solutions
       internships_project: $internships_project
       internships_project_other: $internships_project_other
       internships_hiring_adult: $internships_hiring_adult
@@ -87,5 +83,5 @@ export const EMPLOYER_QUERY = `mutation createEmployerProfile(
       internships_interview_option3: $internships_interview_option3
       internships_employment: $internships_employment
       internships_position: $internships_position
-    )
+    }
   }`

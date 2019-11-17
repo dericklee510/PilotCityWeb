@@ -1203,6 +1203,9 @@ export default class Test extends CONST {
     get citizenType(){
         return this.$route.params.citizenType
     }
+    set citizenType(type:string){
+      this.citizenType = type
+    }
 
     private CITIZENSTYLES = {
         Teacher: "citizen-id__type--teacher",
@@ -1329,6 +1332,12 @@ export default class Test extends CONST {
     }
     get Name() {
         return `${this.citizen.first_name} ${this.citizen.last_name}`
+    }
+    async fetchQueryData(){
+      await GraphqlStore.fetchQueryData()
+    }
+    async query(){
+      await GraphqlStore.SubmitEmployerQuery()
     }
     created() {
         GraphqlStore.EmployerQueryisValid

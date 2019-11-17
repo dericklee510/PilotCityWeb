@@ -20,7 +20,8 @@ export default class Graphql extends VuexModule {
     async fetchQueryData(){
         let currentUser = firebase.auth().currentUser
         console.log(currentUser,"USER")
-        if(currentUser)
+        if(currentUser){
+            console.log("truuuu")
             return {
                 employerQueryData:{
                 id_token: await currentUser.getIdToken(),
@@ -65,6 +66,7 @@ export default class Graphql extends VuexModule {
                 internships_employment:JSON.parse(localStorage.internships_employment),
                 internships_position:Number.parseInt(localStorage.internships_position),
             }}
+        }
         else
             return {
                 employerQueryData:null
