@@ -1,17 +1,17 @@
 import { ICourses } from './../CourseInput/types';
 export interface ICoursePrograms {
-    period: string
-    course: string
-    grades: string[]
-    semester: string
+    period: string;
+    course: string;
+    grades: string[];
+    semester: string;
 }
 
 export class CoursePrograms implements ICoursePrograms {
-    period: string = ""
-    course: string = ""
-    grades: string[] = []
-    semester: string = ""
-    constructor(coursePrograms: ICourses, optional_args?: { grades: string[], semester: string }) {
+    public period: string = "";
+    public course: string = "";
+    public grades: string[] = [];
+    public semester: string = "";
+    private constructor(coursePrograms: ICourses, optional_args?: { grades: string[], semester: string }) {
         this.period = coursePrograms.period
         this.course = coursePrograms.course
         if (optional_args) {

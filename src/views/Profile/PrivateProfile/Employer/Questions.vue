@@ -115,222 +115,27 @@
         </v-col>
       </v-row>
       <v-container>
-        <v-list
-          id="profileFields"
-          class="pc-profile-page--dark"
-          text
-        >
-          <v-list-item-title
-            style="max-width: fit-content"
-            v-text="'Citizen'"
-          />
-          <v-list-item>
-            <v-list-item-content>
-              <v-col
-                cols="12"
-                class="pt-0"
-              >
-                <v-row
-                  id="citizen-id__base-questions"
-                  justify="start"
+        <ValidationObserver ref="observer">
+          <v-list
+            id="profileFields"
+            class="pc-profile-page--dark"
+            text
+          >
+            <v-list-item-title
+              style="max-width: fit-content"
+              v-text="'Citizen'"
+            />
+            <v-list-item>
+              <v-list-item-content>
+                <v-col
+                  cols="12"
+                  class="pt-0"
                 >
-                  <v-col cols="12">
-                    <v-col
-                      cols="12"
-                      md="8"
-                      lg="6"
-                      xl="5"
-                    >
-                      <ValidationProvider
-                        v-slot="{errors}"
-                        rules="required"
-                      >
-                        <pcTextfield
-                          v-model="citizen.first_name"
-                          :dark-mode="true"
-                          title="FIRST NAME"
-                          placeholder="First Name"
-                          :error-messages="errors"
-                        />
-                      </ValidationProvider>
-                      <ValidationProvider
-                        v-slot="{errors}"
-                        rules="required"
-                      >
-                        <pcTextfield
-                          v-model="citizen.last_name"
-                          :error-messages="errors"
-                          :dark-mode="true"
-                          title="LAST NAME"
-                          placeholder="Last Name"
-                        />
-                      </ValidationProvider>
-                      <ValidationProvider
-                        v-slot="{errors}"
-                        rules="required"
-                      >
-                        <pcTextfield
-                          v-model="citizen.position"
-                          :error-messages="errors"
-                          :dark-mode="true"
-                          title="POSITION"
-                          placeholder="Role"
-                        />
-                      </ValidationProvider>
-                      <ValidationProvider
-                        v-slot="{errors}"
-                        rules="required"
-                      >
-                        <pcTextfield
-                          v-model="citizen.organization"
-                          :error-messages="errors"
-                          :dark-mode="true"
-                          title="ORGANIZATION"
-                          placeholder="Company Name"
-                        />
-                      </ValidationProvider>
-                    </v-col>
-                  </v-col>
-                </v-row>
-              </v-col>
-            </v-list-item-content>
-          </v-list-item>
-          <v-list-item-title
-            style="max-width: fit-content"
-            v-text="'Organization'"
-          />
-          <v-list-item>
-            <v-list-item-content>
-              <v-col cols="12">
-                <v-row justify="start">
-                  <v-col cols="12">
-                    <v-col
-                      cols="12"
-                      md="8"
-                      lg="6"
-                      xl="5"
-                    >
-                      <ValidationProvider
-                        v-slot="{errors}"
-                        rules="required"
-                      >
-                        <pcTextfield
-                          v-model="organization.department"
-                          :error-messages="errors"
-                          :dark-mode="true"
-                          title="Your Department"
-                          placeholder="Enter Department Name"
-                        />
-                      </ValidationProvider>
-                    </v-col>
-                    <v-col
-                      cols="12"
-                      md="8"
-                      lg="6"
-                      xl="5"
-                    >
-                      <ValidationProvider
-                        v-slot="{errors}"
-                        rules="required"
-                      >
-                        <autoComplete
-                          v-model="organization.location"
-                          :error-messages="{errors}"
-                        />
-                      </ValidationProvider>
-                    </v-col>
-                    <v-col>
-                      <ValidationProvider
-                        v-slot="{errors}"
-                        rules="required"
-                      >
-                        <v-col cols="12">
-                          <v-row>
-                            <h4
-                              id="text-uppercase"
-                              style="color:#C7C8CA"
-                            >
-                              WHAT TYPE OF HIGH SCHOOL TALENT WOULD YOU LIKE TO HIRE?
-                            </h4>
-                            <h4 style="color:#EA6763">
-                              {{ errors?'*':'' }}
-                            </h4>
-                          </v-row>
-                        </v-col>
-                        <v-col cols="12">
-                          <v-col
-                            cols="12"
-                            md="4"
-                          >
-                            <pcCheckbox
-                              v-model="internship.talent"
-                              :options="INTERNSHIP_TALENT_OPTIONS"
-                              :other="false"
-                            />
-                          </v-col>
-                        </v-col>
-                      </ValidationProvider>
-                      <ValidationProvider
-                        v-slot="{errors}"
-                        rules="required"
-                      >
-                        <v-col cols="12">
-                          <v-col cols="12">
-                            <v-row>
-                              <h4
-                                style="color:#C7C8CA"
-                                class="text-uppercase"
-                              >
-                                Industry
-                              </h4>
-                              <h4 style="color:#EA6763">
-                                {{ errors?'*':'' }}
-                              </h4>
-                            </v-row>
-                          </v-col>
-                          <v-col
-                            cols="12"
-                            md="8"
-                            lg="6"
-                            xl="5"
-                          >
-                            <pcCheckbox
-                              v-model="organization.industry"
-                              :options="ORGANIZATION_INDUSTRY_OPTIONS"
-                              :other="true"
-                            />
-                          </v-col>
-                        </v-col>
-                      </ValidationProvider>
-                      <ValidationProvider
-                        v-slot="{errors}"
-                        rules="required"
-                      >
-                        <v-col
-                          cols="12"
-                          md="8"
-                          lg="6"
-                          xl="5"
-                        >
-                          <v-col cols="12">
-                            <v-row>
-                              <h4
-                                style="color:#C7C8CA"
-                                class="text-uppercase"
-                              >
-                                LIST YOUR PRODUCT / SERVICE
-                              </h4>
-                              <h4 style="color:#EA6763">
-                                {{ errors?'*':'' }}
-                              </h4>
-                            </v-row>
-                          </v-col>
-                          <pcMultiInput
-                            v-model="organization.products_services"
-                            placeholder="Enter your product or Service"
-                          />
-                        </v-col>
-                      </ValidationProvider>
+                  <v-row
+                    id="citizen-id__base-questions"
+                    justify="start"
+                  >
+                    <v-col cols="12">
                       <v-col
                         cols="12"
                         md="8"
@@ -341,28 +146,223 @@
                           v-slot="{errors}"
                           rules="required"
                         >
-                          <pcSelect
-                            v-model="organization.employee_count"
-                            :items="WORKFORCE_COUNT"
+                          <pcTextfield
+                            v-model="citizen.first_name"
                             :dark-mode="true"
-                            title="EMPLOYEE COUNT"
-                            placeholder="Select Number of Employees"
+                            title="FIRST NAME"
+                            placeholder="First Name"
+                            :error-messages="errors"
+                          />
+                        </ValidationProvider>
+                        <ValidationProvider
+                          v-slot="{errors}"
+                          rules="required"
+                        >
+                          <pcTextfield
+                            v-model="citizen.last_name"
+                            :error-messages="errors"
+                            :dark-mode="true"
+                            title="LAST NAME"
+                            placeholder="Last Name"
+                          />
+                        </ValidationProvider>
+                        <ValidationProvider
+                          v-slot="{errors}"
+                          rules="required"
+                        >
+                          <pcTextfield
+                            v-model="citizen.position"
+                            :error-messages="errors"
+                            :dark-mode="true"
+                            title="POSITION"
+                            placeholder="Role"
+                          />
+                        </ValidationProvider>
+                        <ValidationProvider
+                          v-slot="{errors}"
+                          rules="required"
+                        >
+                          <pcTextfield
+                            v-model="citizen.organization"
+                            :error-messages="errors"
+                            :dark-mode="true"
+                            title="ORGANIZATION"
+                            placeholder="Company Name"
                           />
                         </ValidationProvider>
                       </v-col>
                     </v-col>
-                  </v-col>
-                </v-row>
-              </v-col>
-            </v-list-item-content>
-          </v-list-item>
+                  </v-row>
+                </v-col>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item-title
+              style="max-width: fit-content"
+              v-text="'Organization'"
+            />
+            <v-list-item>
+              <v-list-item-content>
+                <v-col cols="12">
+                  <v-row justify="start">
+                    <v-col cols="12">
+                      <v-col
+                        cols="12"
+                        md="8"
+                        lg="6"
+                        xl="5"
+                      >
+                        <ValidationProvider
+                          v-slot="{errors}"
+                          rules="required"
+                        >
+                          <pcTextfield
+                            v-model="organization.department"
+                            :error-messages="errors"
+                            :dark-mode="true"
+                            title="Your Department"
+                            placeholder="Enter Department Name"
+                          />
+                        </ValidationProvider>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        md="8"
+                        lg="6"
+                        xl="5"
+                      >
+                        <ValidationProvider
+                          v-slot="{errors}"
+                          rules="required"
+                        >
+                          <autoComplete
+                            v-model="organization.location"
+                            :error-messages="{errors}"
+                          />
+                        </ValidationProvider>
+                      </v-col>
+                      <v-col>
+                        <ValidationProvider
+                          v-slot="{errors}"
+                          rules="required"
+                        >
+                          <v-col cols="12">
+                            <v-row>
+                              <h4
+                                id="text-uppercase"
+                                style="color:#C7C8CA"
+                              >
+                                WHAT TYPE OF HIGH SCHOOL TALENT WOULD YOU LIKE TO HIRE?
+                              </h4>
+                              <h4 style="color:#EA6763">
+                                {{ errors[0]?'*':'' }}
+                              </h4>
+                            </v-row>
+                          </v-col>
+                          <v-col cols="12">
+                            <v-col
+                              cols="12"
+                              md="4"
+                            >
+                              <pcCheckbox
+                                v-model="internship.talent"
+                                :options="INTERNSHIP_TALENT_OPTIONS"
+                                :other="false"
+                              />
+                            </v-col>
+                          </v-col>
+                        </ValidationProvider>
+                        <ValidationProvider
+                          v-slot="{errors}"
+                          rules="required"
+                        >
+                          <v-col cols="12">
+                            <v-col cols="12">
+                              <v-row>
+                                <h4
+                                  style="color:#C7C8CA"
+                                  class="text-uppercase"
+                                >
+                                  Industry
+                                </h4>
+                                <h4 style="color:#EA6763">
+                                  {{ errors[0]?'*':'' }}
+                                </h4>
+                              </v-row>
+                            </v-col>
+                            <v-col
+                              cols="12"
+                              md="8"
+                              lg="6"
+                              xl="5"
+                            >
+                              <pcCheckbox
+                                v-model="organization.industry"
+                                :options="ORGANIZATION_INDUSTRY_OPTIONS"
+                                :other="true"
+                              />
+                            </v-col>
+                          </v-col>
+                        </ValidationProvider>
+                        <ValidationProvider
+                          v-slot="{errors}"
+                          rules="required"
+                        >
+                          <v-col
+                            cols="12"
+                            md="8"
+                            lg="6"
+                            xl="5"
+                          >
+                            <v-col cols="12">
+                              <v-row>
+                                <h4
+                                  style="color:#C7C8CA"
+                                  class="text-uppercase"
+                                >
+                                  LIST YOUR PRODUCT / SERVICE
+                                </h4>
+                                <h4 style="color:#EA6763">
+                                  {{ errors[0]?'*':'' }}
+                                </h4>
+                              </v-row>
+                            </v-col>
+                            <pcMultiInput
+                              v-model="organization.products_services"
+                              placeholder="Enter your product or Service"
+                            />
+                          </v-col>
+                        </ValidationProvider>
+                        <v-col
+                          cols="12"
+                          md="8"
+                          lg="6"
+                          xl="5"
+                        >
+                          <ValidationProvider
+                            v-slot="{errors}"
+                            rules="required"
+                          >
+                            <pcSelect
+                              v-model="organization.employee_count"
+                              :items="WORKFORCE_COUNT"
+                              :dark-mode="true"
+                              title="EMPLOYEE COUNT"
+                              placeholder="Select Number of Employees"
+                            />
+                          </ValidationProvider>
+                        </v-col>
+                      </v-col>
+                    </v-col>
+                  </v-row>
+                </v-col>
+              </v-list-item-content>
+            </v-list-item>
 
-          <v-list-item-title
-            style="max-width: fit-content"
-            v-text="'Program Details'"
-          />
-          <v-list-item>
-            <ValidationObserver ref="observer">
+            <v-list-item-title
+              style="max-width: fit-content"
+              v-text="'Program Details'"
+            />
+            <v-list-item>
               <v-list-item-content>
                 <v-col cols="12">
                   <v-row justify="start">
@@ -468,7 +468,7 @@
                                   WILL YOU BE ABLE TO PROVIDE CLASSROOMS ACCESS TO YOUR PRODUCT OR SERVICE WITH ANY OF THE FOLLOWING?
                                 </h4>
                                 <h4 style="color:#EA6763">
-                                  {{ errors?'*':'' }}
+                                  {{ errors[0]?'*':'' }}
                                 </h4>
                               </v-row>
                             </v-col>
@@ -559,7 +559,7 @@
                                 How do you prefer to engage with the classroom?
                               </h4>
                               <h4 style="color:#EA6763">
-                                {{ errors?'*':'' }}
+                                {{ errors[0]?'*':'' }}
                               </h4>
                             </v-row>
                           </v-col>
@@ -597,7 +597,7 @@
                                 How far would you travel to engage with a classroom in person?
                               </h4>
                               <h4 style="color:#EA6763">
-                                {{ errors?'*':'' }}
+                                {{ errors[0]?'*':'' }}
                               </h4>
                             </v-row>
                           </v-col>
@@ -647,7 +647,7 @@
                                 What would be the primary focus of their internship program
                               </h4>
                               <h4 style="color:#EA6763">
-                                {{ errors?'*':'' }}
+                                {{ errors[0]?'*':'' }}
                               </h4>
                             </v-row>
                           </v-col>
@@ -675,7 +675,7 @@
                                 Do you require hiring adults 18 years or older?
                               </h4>
                               <h4 style="color:#EA6763">
-                                {{ errors?'*':'' }}
+                                {{ errors[0]?'*':'' }}
                               </h4>
                             </v-row>
                           </v-col>
@@ -715,7 +715,7 @@
                                 Would you need the student(s) to have either a drivers license or a vehicle?
                               </h4>
                               <h4 style="color:#EA6763">
-                                {{ errors?'*':'' }}
+                                {{ errors[0]?'*':'' }}
                               </h4>
                             </v-row>
                           </v-col>
@@ -753,7 +753,7 @@
                                 What level of education do you typically hire from?
                               </h4>
                               <h4 style="color:#EA6763">
-                                {{ errors?'*':'' }}
+                                {{ errors[0]?'*':'' }}
                               </h4>
                             </v-row>
                           </v-col>
@@ -785,7 +785,7 @@
                                 WHAT TYPE OF HIGH SCHOOL TALENT WOULD YOU LIKE TO HIRE?
                               </h4>
                               <h4 style="color:#EA6763">
-                                {{ errors?'*':'' }}
+                                {{ errors[0]?'*':'' }}
                               </h4>
                             </v-row>
                           </v-col>
@@ -817,7 +817,7 @@
                                 HOW MANY DAYS PER WEEK WILL YOU BE ABLE TO HOST INTERNS & FELLOWS BETWEEN JUNE 29 - AUGUST 7?
                               </h4>
                               <h4 style="color:#EA6763">
-                                {{ errors?'*':'' }}
+                                {{ errors[0]?'*':'' }}
                               </h4>
                             </v-row>
                           </v-col>
@@ -855,7 +855,7 @@
                                 HOW MANY HOURS PER DAY WILL YOU BE ABLE TO HOST INTERNS & FELLOWS BETWEEN JUNE 29 - AUGUST 7?
                               </h4>
                               <h4 style="color:#EA6763">
-                                {{ errors?'*':'' }}
+                                {{ errors[0]?'*':'' }}
                               </h4>
                             </v-row>
                           </v-col>
@@ -894,7 +894,7 @@
                                 WHO DO YOU PREFER TO BE THE EMPLOYER-OF-RECORD?
                               </h4>
                               <h4 style="color:#EA6763">
-                                {{ errors?'*':'' }}
+                                {{ errors[0]?'*':'' }}
                               </h4>
                             </v-row>
                           </v-col>
@@ -932,7 +932,7 @@
                                 WHAT COMPENSATION TYPES WOULD YOU CONSIDER FOR OUR INTERNSHIP PROGRAM?
                               </h4>
                               <h4 style="color:#EA6763">
-                                {{ errors?'*':'' }}
+                                {{ errors[0]?'*':'' }}
                               </h4>
                             </v-row>
                           </v-col>
@@ -1082,7 +1082,7 @@
                                 IF SATISFIED AFTER SUMMER PROGRAM, WILL YOU CONSIDER CONTINUED EMPLOYMENT OF INTERN OR FELLOW?
                               </h4>
                               <h4 style="color:#EA6763">
-                                {{ errors?'*':'' }}
+                                {{ errors[0]?'*':'' }}
                               </h4>
                             </v-row>
                           </v-col>
@@ -1121,7 +1121,7 @@
                                 WHAT POSITIONS WOULD YOU HAVE AVAILABLE FOR CONTINUED EMPLOYMENT OF IN-SCHOOL OR GRADUATED HIGH SCHOOL TALENT?
                               </h4>
                               <h4 style="color:#EA6763">
-                                {{ errors?'*':'' }}
+                                {{ errors[0]?'*':'' }}
                               </h4>
                             </v-row>
                           </v-col>
@@ -1156,9 +1156,9 @@
                   </h3>
                 </v-btn>
               </v-list-item-content>
-            </ValidationObserver>
-          </v-list-item>
-        </v-list>
+            </v-list-item>
+          </v-list>
+        </ValidationObserver>
       </v-container>
     </v-container>
   </v-card>
