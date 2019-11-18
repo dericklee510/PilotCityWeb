@@ -11,7 +11,7 @@
       <v-row>
         <!-- insert Doka-profile-picture-component -->
         <v-col id="profileContainer">
-          <profile-upload class="pc-profile-picture pc-profile-picture--page pc-vh-center" />
+          <profile-upload class="pc-profile-picture pc-profile-picture--page pc-vh-center" v-model="profile_img_url" />
         </v-col>
         <v-col
           cols="12"
@@ -617,6 +617,7 @@ import {sortBy} from 'lodash'
 export default class Test extends CONST {
     DISTRICT_NAMES: string [] = []
     SCHOOL_NAMES: string [] = []
+    profile_img_url:string = ""
     get citizenType(){
         return this.$route.params.citizenType
     }

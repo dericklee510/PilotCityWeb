@@ -11,7 +11,7 @@
       <v-row>
         <!-- insert Doka-profile-picture-component -->
         <v-col id="profileContainer">
-          <profile-upload />
+          <profile-upload v-model="profile_img_url"/>
           <!-- <div class="pc-profile-picture pc-profile-picture--page pc-vh-center" /> -->
         </v-col>
         <v-col
@@ -1211,7 +1211,7 @@ export default class Test extends CONST {
     set citizenType(type: string){
         this.citizenType = type
     }
-
+    profile_img_url:string = ""
     private CITIZENSTYLES = {
         Teacher: "citizen-id__type--teacher",
         Employer: "citizen-id__type--employer",

@@ -14,6 +14,8 @@
     :server="{process, load}"
     :files="ProfilePicture"
     :image-edit-editor="Doka.create({cropMask:mask})"
+    @processfiles="emitLink"
+    @updatefiles="emitLink"
   />
 </template>
 
@@ -34,6 +36,7 @@ import { process, load } from './wrapper'
 import { getDownloadURL } from 'rxfire/storage/'
 import { switchMap, map, tap } from 'rxjs/operators'
 import { from, empty } from 'rxjs'
+import { Prop } from 'vue-property-decorator'
 
 
 
@@ -44,6 +47,15 @@ import { from, empty } from 'rxjs'
     }
 })
 export default class ProfileUpload extends Vue {
+    @Prop()
+    value!:string 
+    
+    emitLink(){
+      if(AuthStore.user){
+        console.log("working",AuthStore.user.photoURL)
+        this.$emit('input',AuthStore.user.photoURL)}
+    }
+
     get ProfilePicture(): filepond.ServerFileReference[] {
         if (!AuthStore.user)
             throw ("not logged in!")
