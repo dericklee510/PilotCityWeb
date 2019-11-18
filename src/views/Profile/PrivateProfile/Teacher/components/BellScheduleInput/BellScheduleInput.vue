@@ -92,6 +92,7 @@
         +
       </v-btn>
     </v-col>
+    <slot name="error_text"></slot>
   </v-row>
 </template>
 <script lang="ts">
