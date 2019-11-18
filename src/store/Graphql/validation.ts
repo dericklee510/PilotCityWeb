@@ -69,7 +69,7 @@ var teacher_hash1 = teacher_hash as ((typeof teacher_hash) & {[key: string]: str
 function isNonEmptyArrayOfStrings(value: any): boolean {
     return !!(Array.isArray(value) && value.length && value.every(item => typeof item === "string"));
 }
-function ezvalidate(value:any,type:string){    if(type === "string[]" && isNonEmptyArrayOfStrings(value))
+function ezvalidate(value:any,type:string){    if(type === "string[]" && isNonEmptyArrayOfStrings(JSON.parse((value as string).replace("{","[").replace("}","]"))))
         return true
     else
         return (typeof value) === type

@@ -10,6 +10,7 @@
           md="3"
         >
           <pcSelect
+            :error="error"
             v-model="entry.value.period"
             :dark-mode="true"
             :items="['prep','0','1','2','3','lunch','4','5','6','7','8']"
@@ -22,6 +23,7 @@
           md="4"
         >
           <pcSelect
+            :error="error"
             v-model="entry.value.weeklySchedule"
             :dark-mode="true"
             :items="['M','T','W','Th','F','Sa','S']"
@@ -36,6 +38,7 @@
           xl="1"
         >
           <pc-textfield
+          :error="error"
             v-model="entry.value.startTime"
             :dark-mode="true"
             :items="[]"
@@ -50,6 +53,7 @@
           xl="1"
         >
           <pc-textfield
+          :error="error"
             v-model="entry.value.endTime"
             :dark-mode="true"
             :items="[]"
@@ -106,7 +110,8 @@ import {maxBy} from 'lodash'
 export default class BellScheduleInput extends Vue{
 @Prop()
     value!: IBellSchedule[]
-
+@Prop({required:false})
+    error!:boolean
 classEntries: {value: IBellSchedule; id: number}[] = [
     {
         value:{
