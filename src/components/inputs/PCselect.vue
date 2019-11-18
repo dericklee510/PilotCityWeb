@@ -7,13 +7,15 @@
       for="citizen-title"
       class="pc-input__label"
     > 
-      <h5 v-if="title" class="text-uppercase">
+      <h5
+        v-if="title"
+        class="text-uppercase"
+      >
         {{ title }}
       </h5>
-      <slot v-else></slot>
+      <slot v-else />
     </label>
     <v-select
-      @input="handleInput"
       :multiple="multiselect"
       append-icon="mdi-chevron-down"
       flat
@@ -24,8 +26,9 @@
       class="pc-input__select"
       background-color="transparent"
       :hide-selected="!multiselect"
-      :items="items" 
-      :dark="darkMode"
+      :items="items"
+      :dark="darkMode" 
+      @input="handleInput"
     />
   </div>
 </template>
@@ -51,7 +54,7 @@ export default class PCselect extends Vue {
     @Prop({required: true})
     public placeholder!: string;
 
-    public handleInput(event:any){
+    public handleInput(event: any){
         this.$emit('input', event)
     }
 }

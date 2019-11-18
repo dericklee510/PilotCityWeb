@@ -10,8 +10,10 @@
       >
         <pcTextfield
           v-model="entry.value.period"
+          :dark-mode="true"
           title="PERIOD"
           :disabled="true"
+          class="pc-input--disabled"
         />
       </v-col>
       <v-col
@@ -20,8 +22,10 @@
       >
         <pcTextfield
           v-model="entry.value.course"
+          :dark-mode="true"
           title="COURSES I TEACH"
           :disabled="true"
+          class="pc-input--disabled"
         />
       </v-col>
       <v-col

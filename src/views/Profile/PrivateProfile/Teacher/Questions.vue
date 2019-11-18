@@ -147,7 +147,7 @@
                         rules="required"
                       >
                         <pcSelect
-                        v-model="teacherProfile.citizen.title"
+                          v-model="teacherProfile.citizen.title"
                           :dark-mode="true"
                           title="TITLE"
                           :items="['Mr.', 'Mrs.', 'Ms.', 'no preference']" 
@@ -171,7 +171,7 @@
                         rules="required"
                       >
                         <pcTextfield
-                        v-model="teacherProfile.citizen.last_name"
+                          v-model="teacherProfile.citizen.last_name"
                           :dark-mode="true"
                           title="LAST NAME"
                           placeholder="Last Name"
@@ -206,6 +206,7 @@
                           :dark-mode="true"
                           title="SCHOOL DISTRICT"
                           placeholder="Select school district"
+                          :items="DISTRICT_NAMES"
                         />
                       </ValidationProvider>
                       <ValidationProvider
@@ -217,6 +218,7 @@
                           :dark-mode="true"
                           title="SCHOOL NAME"
                           placeholder="Select school name"
+                          :items="SCHOOL_NAMES"
                         />
                       </ValidationProvider>
                       <ValidationProvider
@@ -224,7 +226,7 @@
                         rules="required"
                       >
                         <autoComplete
-                        v-model="teacherProfile.school.location"
+                          v-model="teacherProfile.school.location"
                           :error-messages="{errors}"
                         />
                       </ValidationProvider>
@@ -235,21 +237,17 @@
                         rules="required"
                       >
                         <v-row>
-                          <v-col>
-                            <h4
-                              class="text-uppercase"
-                              style="color:#ECA0BE"
-                            >
-                              BELL SCHEDULE
-                            </h4>
-                          </v-col>
-                          <v-col>
-                            <h4 style="color:#EA6763">
-                              {{ errors[0]?'*':'' }}
-                            </h4>
-                          </v-col>
+                          <h4
+                            class="text-uppercase"
+                            style="color:#ECA0BE"
+                          >
+                            BELL SCHEDULE
+                          </h4>
+                          <h4 style="color:#EA6763">
+                            {{ errors[0]?'*':'' }}
+                          </h4>
                         </v-row>
-                        <BellScheduleInput v-model="teacherProfile.classSchedules" />
+                        <BellScheduleInput v-model="teacherProfile.school.bellSchedules" />
                       </ValidationProvider>
                     </v-col>
                   </v-row>
@@ -271,58 +269,91 @@
                       lg="6"
                       xl="5"
                     >
-                    <ValidationProvider
+                      <ValidationProvider
                         v-slot="{errors}"
                         rules="required"
                       >
-                      <pcTextfield
-                        v-mask="'Room XXX'"
-                        :dark-mode="true"
-                        title="ROOM NUMBER"
-                        placeholder="Enter your room number"
-                        :error-messages="{errors}"
-                      />
-                    </ValidationProvider>
-                    <ValidationProvider
+                        <pcTextfield
+                          v-model="teacherProfile.classroom.location"
+                          v-mask="'Room XXX'"
+                          :dark-mode="true"
+                          title="ROOM NUMBER"
+                          placeholder="Enter your room number"
+                          :error-messages="{errors}"
+                        />
+                      </ValidationProvider>
+                      <ValidationProvider
                         v-slot="{errors}"
                         rules="required"
                       >
-                      <v-row no-gutters>
-                        <v-col
-                          cols="12"
-                          lg="9"
-                        >
-                          <pcTextfield
-                            :dark-mode="true"
-                            title="ROOM PHONE NUMBER"
-                            placeholder="Enter your rooms phone number"
-                          />
-                        </v-col>
-                        <v-spacer />
-                        <v-col
-                          cols="12"
-                          lg="2"
-                        >
-                          <pcTextfield
-                            :dark-mode="true"
-                            title="Extension"
-                            placeholder="EXT."
-                          />
-                        </v-col>
-                      </v-row>
-                    </ValidationProvider>
+                        <v-row no-gutters>
+                          <v-col
+                            cols="12"
+                            lg="9"
+                          >
+                            <pcTextfield
+                              v-model="teacherProfile.classroom.phone_number"
+                              :dark-mode="true"
+                              title="ROOM PHONE NUMBER"
+                              placeholder="Enter your rooms phone number"
+                            />
+                          </v-col>
+                          <v-spacer />
+                          <v-col
+                            cols="12"
+                            lg="2"
+                          >
+                            <pcTextfield
+                              v-model="teacherProfile.classroom.extension"
+                              :dark-mode="true"
+                              title="Extension"
+                              placeholder="EXT."
+                            />
+                          </v-col>
+                        </v-row>
+                      </ValidationProvider>
                     </v-col>
+                  </v-row>
+                  <v-row>
                     <v-col>
                       <ValidationProvider
                         v-slot="{errors}"
                         rules="required"
                       >
+                        <v-col cols="12">
+                          <h4
+                            class="text-uppercase"
+                            style="color:#C7C8CA"
+                          >
+                            WHEN IS YOUR PREFERRED TIME FOR COMMUNICATION ABOUT OUR PROGRAMS?
+                          </h4>
+                          <h4 style="color:#EA6763">
+                            {{ errors[0]?'*':'' }}
+                          </h4>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                        >
+                          <pcCheckbox
+                            v-model="teacherProfile.classroom.preferredCommunication"
+                            :options="CLASSROOM_COMMUNICATION"
+                            :other="true"
+                          />
+                        </v-col>
+                      </ValidationProvider>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <ValidationProvider
+                      v-slot="{errors}"
+                      rules="required"
+                    >
                       <v-col cols="12">
                         <h4
                           class="text-uppercase"
                           style="color:#C7C8CA"
                         >
-                          WHEN IS YOUR PREFERRED TIME FOR COMMUNICATION ABOUT OUR PROGRAMS?
+                          TOOLS, TECHNOLOGIES AND EQUIPMENT YOU HAVE IN YOUR CLASSROOM
                         </h4>
                         <h4 style="color:#EA6763">
                           {{ errors[0]?'*':'' }}
@@ -330,38 +361,14 @@
                       </v-col>
                       <v-col
                         cols="12"
+                        md="8"
                       >
-                        <pcCheckbox
-                          :options="CLASSROOM_COMMUNICATION"
-                          :other="true"
+                        <pcMultiInput
+                          v-model="teacherProfile.classroom.available_equipment"
+                          placeholder="Enter any already available in class"
                         />
                       </v-col>
-                      </ValidationProvider>
-                    </v-col>
-                    <ValidationProvider
-                        v-slot="{errors}"
-                        rules="required"
-                      >
-                    <v-col cols="12">
-                      <h4
-                        class="text-uppercase"
-                        style="color:#C7C8CA"
-                      >
-                        TOOLS, TECHNOLOGIES AND EQUIPMENT YOU HAVE IN YOUR CLASSROOM
-                      </h4>
-                      <h4 style="color:#EA6763">
-                        {{ errors[0]?'*':'' }}
-                      </h4>
-                    </v-col>
-                    <v-col
-                      cols="12"
-                      md="8"
-                      lg="7"
-                      xl="5"
-                    >
-                      <pcMultiInput placeholder="Enter any already available in class" />
-                    </v-col>
-                    </ValidationProvider>
+                    </ValidationProvider> 
                   </v-row>
                 </v-col>
               </v-list-item-content>
@@ -380,35 +387,37 @@
                       lg="3"
                       xl="2"
                     >
-                    <ValidationProvider
+                      <ValidationProvider
                         v-slot="{errors}"
                         rules="required"
                       >
-                      <pcSelect
-                        :dark-mode="true"
-                        placeholder="Select School Year"
-                        :items="COURSES_AVAILABLE_SCHOOLYEARS"
-                        title="SCHOOL YEAR"
-                      />
-                    </ValidationProvider>
-                    <ValidationProvider
+                        <pcSelect
+                          v-model="teacherProfile.courses.schoolYear"
+                          :dark-mode="true"
+                          placeholder="Select School Year"
+                          :items="COURSES_AVAILABLE_SCHOOLYEARS"
+                          title="SCHOOL YEAR"
+                        />
+                      </ValidationProvider>
+                      <ValidationProvider
                         v-slot="{errors}"
                         rules="required"
                       >
-                      <pcSelect
-                        :dark-mode="true"
-                        title="WHEN IS YOUR PREP PERIOD?"
-                        :items="COURSES_PREP_PERIODS"
-                        placeholder="Prep Period"
-                      />
-                    </ValidationProvider>
+                        <pcSelect
+                          v-model="teacherProfile.courses.prepPeriod"
+                          :dark-mode="true"
+                          title="WHEN IS YOUR PREP PERIOD?"
+                          :items="COURSES_PREP_PERIODS"
+                          placeholder="Prep Period"
+                        />
+                      </ValidationProvider>
                     </v-col>
                     <v-col cols="12">
                       <ValidationProvider
                         v-slot="{errors}"
                         rules="required"
                       >
-                      <CourseInput v-model="teacherProfile.enrolledClasses" />
+                        <CourseInput v-model="teacherProfile.classSchedules" />
                       </ValidationProvider>
                     </v-col>
                   </v-row>
@@ -425,116 +434,87 @@
                 <v-col cols="12">
                   <v-row>
                     <v-col cols="12">
-                      <v-row>
-                        <v-col>
+                      <ValidationProvider
+                        v-slot="{errors}"
+                        rules="required"
+                      >
+                        <v-row>
                           <h4
                             class="text-uppercase"
                             style="color:#ECA0BE"
                           >
                             Enrolled Courses
                           </h4>
+                          <h4 style="color:#EA6763">
+                            {{ errors[0]?'*':'' }}
+                          </h4>
+                        </v-row>
+                        <v-row>
+                          <course-programs />
+                        </v-row>
+                      </ValidationProvider>
+                    </v-col>
+                    <v-col>
+                      <ValidationProvider
+                        v-slot="{errors}"
+                        rules="required"
+                      >
+                        <v-col cols="12">
+                          <v-row>
+                            <h4
+                              class="text-uppercase"
+                              style="color:#C7C8CA"
+                            >
+                              WOULD YOU BE OKAY WITH DIGITAL CLASSROOM ENGAGEMENT AS AN ALTERNATIVE TO IN-PERSON?
+                            </h4>
+                            <h4 style="color:#EA6763">
+                              {{ errors[0]?'*':'' }}
+                            </h4>
+                          </v-row>
                         </v-col>
-                        <v-col>
+                        <v-col cols="12">
+                          <v-radio-group
+                            v-model="teacherProfile.programDetails.engagement_alternative"
+                            class="pc-radio"
+                          >
+                            <v-radio
+                              v-for="(rad, index) in PROGRAM_ENGAGEMENT"
+                              :key="rad+index"
+                              :value="rad"
+                              :label="rad"
+                            />
+                          </v-radio-group>
+                        </v-col>
+                      </ValidationProvider>
+                      <ValidationProvider
+                        v-slot="{errors}"
+                        rules="required"
+                      >
+                        <v-col cols="12">
+                          <h4
+                            class="text-uppercase"
+                            style="color:#C7C8CA"
+                          >
+                            WOULD YOU BE IN THE POSITION TO PURCHASE THE EMPLOYER’S PRODUCT OR SERVICE IF DONATION OR LOAN IS NOT AN OPTION?
+                          </h4>
                           <h4 style="color:#EA6763">
                             {{ errors[0]?'*':'' }}
                           </h4>
                         </v-col>
-                      </v-row>
-                      <v-row>
-                        <v-col
-                          cols="12"
-                          md="1"
-                        >
-                          <pcTextfield
-                            :dark-mode="true"
-                            title="PERIOD"
-                            :disabled="true"
-                            class="pc-input--disabled"
-                          />
+                        <v-col cols="12">
+                          <v-radio-group
+                            v-model="teacherProfile.programDetails.purchase_emp_product"
+                            class="pc-radio"
+                          >
+                            <v-radio
+                              v-for="(rad, index) in PROGRAM_PURCHASE"
+                              :key="rad+index"
+                              :value="rad"
+                              :label="rad"
+                            />
+                          </v-radio-group>
                         </v-col>
-                        <v-col
-                          cols="12"
-                          md="4"
-                        >
-                          <pcTextfield
-                            :dark-mode="true"
-                            title="COURSES I TEACH"
-                            :disabled="true"
-                            class="pc-input--disabled"
-                          />
-                        </v-col>
-                        <v-col
-                          cols="12"
-                          md="3"
-                        >
-                          <pcSelect
-                            :dark-mode="true"
-                            title="SEMESTER"
-                            placeholder="Select semester(s)"
-                            :items="PROGRAM_SEMS"
-                          />
-                        </v-col>
-                        <v-col
-                          cols="12"
-                          md="3"
-                        >
-                          <pcSelect
-                            :dark-mode="true"
-                            title="GRADES"
-                            :multiselect="true"
-                            placeholder="Select class grade level"
-                            :items="PROGRAM_GRADES"
-                          />
-                        </v-col>
-                      </v-row>
-                    </v-col>
-                    <v-col>
-                      <v-col cols="12">
-                        <h4
-                          class="text-uppercase"
-                          style="color:#C7C8CA"
-                        >
-                          WOULD YOU BE OKAY WITH DIGITAL CLASSROOM ENGAGEMENT AS AN ALTERNATIVE TO IN-PERSON?
-                        </h4>
-                        <h4 style="color:#EA6763">
-                          {{ errors[0]?'*':'' }}
-                        </h4>
-                      </v-col>
-                      <v-col cols="12">
-                        <v-radio-group
-                          class="pc-radio"
-                        >
-                          <v-radio
-                            v-for="(rad, index) in PROGRAM_ENGAGEMENT"
-                            :key="rad+index"
-                            :value="rad"
-                            :label="rad"
-                          />
-                        </v-radio-group>
-                      </v-col>
-                      <v-col cols="12">
-                        <h4
-                          class="text-uppercase"
-                          style="color:#C7C8CA"
-                        >
-                          WOULD YOU BE IN THE POSITION TO PURCHASE THE EMPLOYER’S PRODUCT OR SERVICE IF DONATION OR LOAN IS NOT AN OPTION?
-                        </h4>
-                        <h4 style="color:#EA6763">
-                          {{ errors[0]?'*':'' }}
-                        </h4>
-                      </v-col>
-                      <v-col cols="12">
-                        <v-radio-group
-                          class="pc-radio"
-                        >
-                          <v-radio
-                            v-for="(rad, index) in PROGRAM_PURCHASE"
-                            :key="rad+index"
-                            :value="rad"
-                            :label="rad"
-                          />
-                        </v-radio-group>
-                      </v-col>
+                      </ValidationProvider>
                     </v-col>
                   </v-row>  
                 </v-col>
@@ -542,6 +522,18 @@
             </v-list-item>
           </v-list>
         </ValidationObserver>
+        <v-btn
+          id="signup-button"
+          block
+          :loading="loading"
+          :disabled="loading"
+          class="mb-6"
+          @click="savePage"
+        >
+          <h3 class="text-uppercase">
+            Complete Profile
+          </h3>
+        </v-btn>
       </v-container>
     </v-container>
   </v-card>
@@ -570,6 +562,7 @@ import {TeacherProfile} from "./types"
 import { ITeacherQuery } from '../../../../store/Graphql/types'
 import { tableToDecimal, findOther } from '../../../../store/Graphql'
 import { AutoCompleteAddress } from '../../../../components/GoogleMaps'
+import { coursePrograms } from './components/CoursePrograms'
 extend('min_value', {
     ...min_value,
     message: "This field cannot be less than {min}"
@@ -584,6 +577,7 @@ extend('min_value', {
         autoComplete,
         ValidationProvider,
         ValidationObserver,
+        'course-programs': coursePrograms,
         pcMultiInput: PCmultiinput,
         pcCheckbox: PCcheckbox
     },
@@ -595,6 +589,12 @@ extend('min_value', {
 export default class Test extends CONST {
     get citizenType(){
         return this.$route.params.citizenType
+    }
+    get DISTRICT_NAMES() {
+        return []
+    }
+    get SCHOOL_NAMES() {
+        return[]
     }
     private CITIZENSTYLES = {
         Teacher: "citizen-id__type--teacher",
@@ -634,27 +634,33 @@ export default class Test extends CONST {
             purchase_emp_product: ''
         }
     }
-    teacherQuery(teacherPage:TeacherProfile):ITeacherQuery{
-      return {
-        id_token:"",
-        school_district:this.teacherProfile.school.district,
-        school_name:this.teacherProfile.school.name,
-        school_location:JSON.stringify(this.teacherProfile.school.location),
-        bell_schedule:JSON.stringify(this.teacherProfile.school.bellSchedules),
-        classroom_room_location:this.teacherProfile.classroom.location,
-        classroom_room_phone:this.teacherProfile.classroom.phone_number,
-        extension:this.teacherProfile.classroom.extension,
-        preferred:tableToDecimal( this.CLASSROOM_COMMUNICATION,this.teacherProfile.classroom.preferredCommunication),
-        preferred_other:findOther(this.CLASSROOM_COMMUNICATION,this.teacherProfile.classroom.preferredCommunication),
-        tool_equipment:this.teacherProfile.classroom.available_equipment,
-        courses_school_year:this.teacherProfile.courses.schoolYear,
-        prep_period:Number.parseInt(this.teacherProfile.courses.prepPeriod.charAt(1)),
-        course_information:JSON.stringify(this.teacherProfile.courses.classSchedules),
-        enrolled_courses:JSON.stringify(this.teacherProfile.programDetails.coursePrograms),
-        enagement_alternative:this.teacherProfile.programDetails.engagement_alternative,
-        purchase_emp_product:tableToDecimal(this.PROGRAM_PURCHASE,[this.teacherProfile.programDetails.purchase_emp_product])
-      }
+    teacherQuery(teacherPage: TeacherProfile): ITeacherQuery{
+        return {
+            id_token:"",
+            school_district:this.teacherProfile.school.district,
+            school_name:this.teacherProfile.school.name,
+            school_location:JSON.stringify(this.teacherProfile.school.location),
+            bell_schedule:JSON.stringify(this.teacherProfile.school.bellSchedules),
+            classroom_room_location:this.teacherProfile.classroom.location,
+            classroom_room_phone:this.teacherProfile.classroom.phone_number,
+            extension:this.teacherProfile.classroom.extension,
+            preferred:tableToDecimal( this.CLASSROOM_COMMUNICATION,this.teacherProfile.classroom.preferredCommunication),
+            preferred_other:findOther(this.CLASSROOM_COMMUNICATION,this.teacherProfile.classroom.preferredCommunication),
+            tool_equipment:this.teacherProfile.classroom.available_equipment,
+            courses_school_year:this.teacherProfile.courses.schoolYear,
+            prep_period:Number.parseInt(this.teacherProfile.courses.prepPeriod.charAt(1)),
+            course_information:JSON.stringify(this.teacherProfile.courses.classSchedules),
+            enrolled_courses:JSON.stringify(this.teacherProfile.programDetails.coursePrograms),
+            enagement_alternative:this.teacherProfile.programDetails.engagement_alternative,
+            purchase_emp_product:tableToDecimal(this.PROGRAM_PURCHASE,[
+                this.teacherProfile.programDetails.purchase_emp_product
+            ])
+        }
     }
+    public async savePage() {
+        await (this.$refs.observer as ObserverInstance).validate()
+    }
+    
     created() {}
 }
 </script> 
