@@ -18,7 +18,7 @@ export interface TeacherProfile{
         location: string;
         phone_number: string;
         extension: string;
-        preferredCommunication: string;
+        preferredCommunication: [];
         available_equipment: string[];
     };
     courses: {

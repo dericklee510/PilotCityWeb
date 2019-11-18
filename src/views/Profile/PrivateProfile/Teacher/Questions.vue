@@ -370,13 +370,23 @@
                         cols="12"
                         md="1"
                       >
-                        <pcTextfield title="PERIOD" />
+                        <pcTextfield
+                          :dark-mode="true"
+                          title="PERIOD"
+                          :disabled="true"
+                          class="pc-input--disabled"
+                        />
                       </v-col>
                       <v-col
                         cols="12"
                         md="4"
                       >
-                        <pcTextfield title="COURSES I TEACH" />
+                        <pcTextfield
+                          :dark-mode="true"
+                          title="COURSES I TEACH"
+                          :disabled="true"
+                          class="pc-input--disabled"
+                        />
                       </v-col>
                       <v-col
                         cols="12"
@@ -490,7 +500,8 @@ import { GraphqlStore } from '@/store'
 import {BellScheduleInput, CourseInput} from "./components"
 import {TeacherProfile} from "./types"
 import { ITeacherQuery } from '../../../../store/Graphql/types'
-import { tableToDecimal } from '../../../../store/Graphql'
+import { tableToDecimal, findOther } from '../../../../store/Graphql'
+import { AutoCompleteAddress } from '../../../../components/GoogleMaps'
 extend('min_value', {
     ...min_value,
     message: "This field cannot be less than {min}"
@@ -522,17 +533,59 @@ export default class Test extends CONST {
         Employer: "citizen-id__type--employer",
         Student: "citizen-id__type--student"
     }
-    private AVAILABLETYPES: string[] = ["Teacher", "Employer", "Student"]
+    private AVAILABLETYPES: string[] = ['Teacher', 'Employer', 'Student']
     private ispublic: boolean = true;
     private loading: boolean = false;
     public teacherProfile: TeacherProfile = {
-        classSchedules: [],
-        enrolledClasses: []
+        citizen: {
+            title: '',
+            first_name: '',
+            last_name: ''
+        },
+        school: {
+            district: '',
+            name: '',
+            location: {} as AutoCompleteAddress,
+            bellSchedules: []
+        },
+        classroom: {
+            location: '',
+            phone_number: '',
+            extension: '',
+            preferredCommunication: [],
+            available_equipment:[]
+        },
+        courses: {
+            schoolYear: '',
+            prepPeriod: '',
+            classSchedules: []
+        },
+        programDetails: {
+            coursePrograms: [],
+            engagement_alternative: false,
+            purchase_emp_product: ''
+        }
     }
-    function teacherQuery(teacherPage:TeacherProfile):ITeacherQuery{
+    teacherQuery(teacherPage:TeacherProfile):ITeacherQuery{
       return {
         id_token:"",
-        school_district:this.
+        school_district:this.teacherProfile.school.district,
+        school_name:this.teacherProfile.school.name,
+        school_location:JSON.stringify(this.teacherProfile.school.location),
+        bell_schedule:JSON.stringify(this.teacherProfile.school.bellSchedules),
+        classroom_room_location:this.teacherProfile.classroom.location,
+        classroom_room_phone:this.teacherProfile.classroom.phone_number,
+        extension:this.teacherProfile.classroom.extension,
+        preferred:tableToDecimal( this.CLASSROOM_COMMUNICATION,this.teacherProfile.classroom.preferredCommunication),
+        preferred_other:findOther(this.CLASSROOM_COMMUNICATION,this.teacherProfile.classroom.preferredCommunication),
+        tool_equipment:this.teacherProfile.classroom.available_equipment,
+        courses_school_year:this.teacherProfile.courses.schoolYear,
+        prep_period:Number.parseInt(this.teacherProfile.courses.prepPeriod.charAt(1)),
+        course_information:JSON.stringify(this.teacherProfile.courses.classSchedules),
+        enrolled_courses:JSON.stringify(this.teacherProfile.programDetails.coursePrograms),
+        enagement_alternative:this.teacherProfile.programDetails.engagement_alternative,
+        purchase_emp_product:tableToDecimal(this.)
+        
       }
     }
     created() {}
