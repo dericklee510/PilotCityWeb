@@ -589,24 +589,18 @@ import {uniq} from 'lodash'
         mask
     },
     subscriptions(){
-      return ({
-        DISTRICTS:from(axios.get<string []>("https://pilotcity-firestore.appspot.com/getdistrict")).pipe(pluck<AxiosResponse,string[]>('data')),
-        SCHOOL_NAMES: from(axios.get<string []>("https://pilotcity-firestore.appspot.com/getschool_name")).pipe(pluck<AxiosResponse,string[]>('data'))
-    })
+        return ({
+            DISTRICT_NAMES: from(axios.get<string []>("https://pilotcity-firestore.appspot.com/getdistrict")).pipe(pluck<AxiosResponse,string[]>('data')),
+            SCHOOL_NAMES: from(axios.get<string []>("https://pilotcity-firestore.appspot.com/getschool_name")).pipe(pluck<AxiosResponse,string[]>('data'))
+        })
     }
 })
 
 export default class Test extends CONST {
-    DISTRICT_NAMES:string [] = []
-    SCHOOL_NAMES:string [] = []
+    DISTRICT_NAMES: string [] = []
+    SCHOOL_NAMES: string [] = []
     get citizenType(){
         return this.$route.params.citizenType
-    }
-    get DISTRICT_NAMES() {
-        return []
-    }
-    get SCHOOL_NAMES() {
-        return[]
     }
     private CITIZENSTYLES = {
         Teacher: "citizen-id__type--teacher",
