@@ -7,9 +7,10 @@
       for="citizen-title"
       class="pc-input__label"
     > 
-      <h5 class="text-uppercase">
+      <h5 v-if="title" class="text-uppercase">
         {{ title }}
       </h5>
+      <slot v-else></slot>
     </label>
     <v-select
       @input="handleInput"

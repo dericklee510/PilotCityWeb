@@ -652,8 +652,7 @@ export default class Test extends CONST {
         course_information:JSON.stringify(this.teacherProfile.courses.classSchedules),
         enrolled_courses:JSON.stringify(this.teacherProfile.programDetails.coursePrograms),
         enagement_alternative:this.teacherProfile.programDetails.engagement_alternative,
-        purchase_emp_product:tableToDecimal(this.)
-        
+        purchase_emp_product:tableToDecimal(this.PROGRAM_PURCHASE,[this.teacherProfile.programDetails.purchase_emp_product])
       }
     }
     created() {}
