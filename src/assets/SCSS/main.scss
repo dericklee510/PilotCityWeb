@@ -178,6 +178,9 @@ h6{
     letter-spacing: 0.25em;
     color: #C7C8CA;
     background-color: transparent;
+    &.pc-input--disabled .v-input__slot{
+        background-color: #282829 !important;
+    }
     .v-input{
         font-size: inherit;
     }

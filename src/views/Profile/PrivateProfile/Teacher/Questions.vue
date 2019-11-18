@@ -489,6 +489,8 @@ import { min_value } from 'vee-validate/dist/rules'
 import { GraphqlStore } from '@/store'
 import {BellScheduleInput, CourseInput} from "./components"
 import {TeacherProfile} from "./types"
+import { ITeacherQuery } from '../../../../store/Graphql/types'
+import { tableToDecimal } from '../../../../store/Graphql'
 extend('min_value', {
     ...min_value,
     message: "This field cannot be less than {min}"
@@ -526,6 +528,12 @@ export default class Test extends CONST {
     public teacherProfile: TeacherProfile = {
         classSchedules: [],
         enrolledClasses: []
+    }
+    function teacherQuery(teacherPage:TeacherProfile):ITeacherQuery{
+      return {
+        id_token:"",
+        school_district:this.
+      }
     }
     created() {}
 }

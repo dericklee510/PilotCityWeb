@@ -23,6 +23,7 @@
       :dark="darkMode"
       hide-selected
       :error-messages="error"
+      :disabled="disabled"
       @input="handleInput"
     />
   </div>
@@ -47,7 +48,9 @@ export default class PCtextfield extends Vue {
     @Prop()
     public  type!: string
     @Prop()
-    public errorMessages?: string | string [] 
+    public errorMessages?: string | string []
+    @Prop({default: false})
+    public disabled?: boolean [] 
     public xcontent: string = '';
     get content(){
         return this.xcontent

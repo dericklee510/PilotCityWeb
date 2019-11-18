@@ -3,5 +3,5 @@ export interface ICourses{
     course: string;
     pathway: string;
     classSize: string;
-    enrolled: boolean;
+    // enrolled: boolean;
 }

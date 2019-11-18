@@ -33,7 +33,7 @@
         <v-col
           cols="6"
           md="2"
-          lg="1"
+          xl="1"
         >
           <pc-textfield
             v-model="entry.value.startTime"
@@ -47,7 +47,7 @@
         <v-col
           cols="6"
           md="2"
-          lg="1"
+          xl="1"
         >
           <pc-textfield
             v-model="entry.value.endTime"

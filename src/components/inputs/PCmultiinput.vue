@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <v-row>
+  <div class="pc-multi_input">
+    <v-row no-gutters>
       <v-col>
         <v-row
           v-for="(entry) in entries"
@@ -36,7 +36,9 @@
       </v-col>
       <v-col cols="12">
         <v-btn
+          class="pc-button"
           block
+          depressed
           @click="newEntry"
         >
           +

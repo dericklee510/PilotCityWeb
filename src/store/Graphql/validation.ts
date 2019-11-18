@@ -1,4 +1,4 @@
-import { IEmployerQuery } from './types';
+import { IEmployerQuery, ITeacherQuery } from './types';
 
 var rules_hash = {
 id_token: 'string',
@@ -43,20 +43,49 @@ internships_interview_option3: 'string' ,
 internships_employment: 'boolean',
 internships_position: 'number' ,
 }
+
+var teacher_hash = {
+    id_token: "string",
+    school_district: "string", // int
+    school_name: "string",
+    school_location: "string",
+    bell_schedule: "string",
+    classroom_room_location: "string",
+    classroom_room_phone: "string",
+    extension: "string",
+    preferred: "number", // int
+    preferred_other: "string",
+    tool_equipment: "string[]",
+    courses_school_year: "string",
+    prep_period: "number", // int
+    course_information: "string",
+    enrolled_courses: "string",
+    enagement_alternative: "boolean",
+    purchase_emp_product: "number" // int,
+}
+
 var rules_hash1 = rules_hash as ((typeof rules_hash) & {[key: string]: string})
+var teacher_hash1 = teacher_hash as ((typeof teacher_hash) & {[key: string]: string})
 function isNonEmptyArrayOfStrings(value: any): boolean {
     return !!(Array.isArray(value) && value.length && value.every(item => typeof item === "string"));
 }
-function ezvalidate(value:any,type:string){
-    if(type === "string[]" && isNonEmptyArrayOfStrings(value))
+function ezvalidate(value:any,type:string){    if(type === "string[]" && isNonEmptyArrayOfStrings(value))
         return true
     else
         return (typeof value) === type
 }
-export function validateQuery(obj:IEmployerQuery):boolean{
+export function validateEmployerQuery(obj:IEmployerQuery):boolean{
     var obj1 = obj as IEmployerQuery & {[key: string]: string}
     for (let key in obj1){
         if(!ezvalidate(obj1[key],rules_hash1[key]))
+            throw(`${key} is not ${rules_hash1[key]}`)
+    }
+    return true
+}
+export function validateTeacherQuery(obj:ITeacherQuery):boolean{
+    var obj1 = obj as ITeacherQuery & {[key: string]: string}
+    for (let key in obj1){
+        if(!ezvalidate(obj1[key],teacher_hash1[key]))
             throw(`${key} is not ${rules_hash1[key]}`)
     }
     return true
