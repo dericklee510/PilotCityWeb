@@ -111,7 +111,6 @@ classEntries: {value: IBellSchedule; id: number}[] = [
     {
         value:{
             period:[],
-            // course:"",
             weeklySchedule:[],
             startTime:"",
             endTime:""
@@ -126,7 +125,6 @@ pushNewSchedule(){
     this.classEntries.push({
         value:{
             period:[],
-            course:"",
             weeklySchedule:[],
             startTime:"",
             endTime:""

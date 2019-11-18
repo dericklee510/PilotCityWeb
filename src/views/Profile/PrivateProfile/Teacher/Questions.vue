@@ -348,44 +348,117 @@
           <v-list-item>
             <v-list-item-content>
               <v-col cols="12">
-                <v-row no-gutters="true">
-                  <v-row no-gutters>
-                    <v-col
-                      cols="12"
-                      md="1"
-                    >
-                      <pcTextfield />
+                <v-row>
+                  <v-col cols="12">
+                    <v-row>
+                      <v-col>
+                        <h4
+                          class="text-uppercase"
+                          style="color:#ECA0BE"
+                        >
+                          Enrolled Courses
+                        </h4>
+                      </v-col>
+                      <v-col>
+                        <h4 style="color:#EA6763">
+                          {{ errors?'*':'' }}
+                        </h4>
+                      </v-col>
+                    </v-row>
+                    <v-row>
+                      <v-col
+                        cols="12"
+                        md="1"
+                      >
+                        <pcTextfield title="PERIOD" />
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        md="4"
+                      >
+                        <pcTextfield title="COURSES I TEACH" />
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        md="3"
+                      >
+                        <pcSelect
+                          :dark-mode="true"
+                          title="SEMESTER"
+                          placeholder="Select semester(s)"
+                          :items="PROGRAM_SEMS"
+                        />
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        md="3"
+                      >
+                        <pcSelect
+                          :dark-mode="true"
+                          title="GRADES"
+                          :multiselect="true"
+                          placeholder="Select class grade level"
+                          :items="PROGRAM_GRADES"
+                        />
+                      </v-col>
+                    </v-row>
+                  </v-col>
+                  <v-col>
+                    <v-col cols="12">
+                      <h4
+                        class="text-uppercase"
+                        style="color:#C7C8CA"
+                      >
+                        WOULD YOU BE OKAY WITH DIGITAL CLASSROOM ENGAGEMENT AS AN ALTERNATIVE TO IN-PERSON?
+                      </h4>
+                      <h4 style="color:#EA6763">
+                        {{ errors?'*':'' }}
+                      </h4>
                     </v-col>
-                    <v-col
-                      cols="12"
-                      md="4"
-                    >
-                      <pcTextfield />
+                    <v-col cols="12">
+                      <v-radio-group
+                        class="pc-radio"
+                      >
+                        <v-radio
+                          value="Yes, I’m okay with digital engagement as an alternative"
+                          label="Yes, I’m okay with digital engagement as an alternative"
+                        />
+                        <v-radio
+                          value="No, I prefer in-person engagement"
+                          label="No, I prefer in-person engagement"
+                        />
+                      </v-radio-group>
                     </v-col>
-                    <v-col
-                      cols="12"
-                      md="3"
-                    >
-                      <pcSelect
-                        :dark-mode="true"
-                        title="SEMESTER"
-                        placeholder="Select semester(s)"
-                        :items="['Fall', 'Spring', 'All-Year', 'Summer', 'Winter']"
-                      />
+                    <v-col cols="12">
+                      <h4
+                        class="text-uppercase"
+                        style="color:#C7C8CA"
+                      >
+                        WOULD YOU BE IN THE POSITION TO PURCHASE THE EMPLOYER’S PRODUCT OR SERVICE IF DONATION OR LOAN IS NOT AN OPTION?
+                      </h4>
+                      <h4 style="color:#EA6763">
+                        {{ errors?'*':'' }}
+                      </h4>
                     </v-col>
-                    <v-col
-                      cols="12"
-                      md="3"
-                    >
-                      <pcSelect
-                        :dark-mode="true"
-                        title="GRADES"
-                        :multiselect="true"
-                        placeholder="Select class grade level"
-                        :items="['9','10','11','12']"
-                      />
+                    <v-col cols="12">
+                      <v-radio-group
+                        class="pc-radio"
+                      >
+                        <v-radio
+                          value="Yes, I can purchase"
+                          label="Yes, I can purchase"
+                        />
+                        <v-radio
+                          value="No, I cannot purchase"
+                          label="No, I cannot purchase"
+                        />
+                        <v-radio
+                          value="It is possible, but not guaranteed"
+                          label="It is possible, but not guaranteed"
+                        />
+                      </v-radio-group>
                     </v-col>
-                  </v-row>
+                  </v-col>
                 </v-row>  
               </v-col>
             </v-list-item-content>

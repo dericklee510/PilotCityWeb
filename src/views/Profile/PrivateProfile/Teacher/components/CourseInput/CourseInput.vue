@@ -23,7 +23,7 @@
         <pc-textfield
           v-model="entry.value.course"
           :dark-mode="true"
-          title="COURSE"
+          title="COURSES I TEACH"
           placeholder="Course Name"
         />
       </v-col>
