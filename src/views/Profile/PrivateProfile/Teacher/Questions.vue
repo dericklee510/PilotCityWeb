@@ -11,7 +11,7 @@
       <v-row>
         <!-- insert Doka-profile-picture-component -->
         <v-col id="profileContainer">
-          <profile-upload class="pc-profile-picture pc-profile-picture--page pc-vh-center" />
+          <profileUpload class="pc-profile-picture pc-profile-picture--page pc-vh-center" />
         </v-col>
         <v-col
           cols="12"
@@ -431,7 +431,7 @@
                         v-slot="{errors}"
                         rules="required"
                       >
-                        <CourseInput v-model="teacherProfile.classSchedules" />
+                        <CourseInput v-model="teacherProfile.courses.classSchedules" />
                       </ValidationProvider>
                     </v-col>
                   </v-row>
@@ -464,7 +464,10 @@
                           </h4>
                         </v-row>
                         <v-row>
-                          <course-programs />
+                          <coursePrograms
+                            v-model="teacherProfile.courses.coursePrograms"
+                            :courseinput="teacherProfile.courses.classSchedules"
+                          />
                         </v-row>
                       </ValidationProvider>
                     </v-col>
@@ -596,8 +599,8 @@ import {sortBy} from 'lodash'
         autoComplete,
         ValidationProvider,
         ValidationObserver,
-        'profile-upload': ProfileUpload,
-        'course-programs': coursePrograms,
+        profileUpload: ProfileUpload,
+        coursePrograms: coursePrograms,
         pcMultiInput: PCmultiinput,
         pcCheckbox: PCcheckbox
     },
@@ -614,7 +617,7 @@ import {sortBy} from 'lodash'
     }
 })
 
-export default class Test extends CONST {
+export default class TeacherProfile extends CONST {
     DISTRICT_NAMES: string [] = []
     SCHOOL_NAMES: string [] = []
     get citizenType(){
@@ -683,6 +686,9 @@ export default class Test extends CONST {
     }
     public async savePage() {
         await (this.$refs.observer as ObserverInstance).validate()
+    }
+    get Name() {
+        return `${this.teacherProfile.citizen.first_name} ${this.teacherProfile.citizen.last_name}`
     }
     
     created() {}

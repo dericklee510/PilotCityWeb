@@ -1,7 +1,8 @@
 <template>
   <div>
+    im broken
     <v-row
-      v-for="entry in courseinput"
+      v-for="entry in classEntries"
       :key="entry.id"
     >
       <v-col
@@ -89,14 +90,24 @@ export default class CourseProgramsInput extends CONST {
   }
   
   @Watch('courseinput',{deep:true})
-  oncourseinputChanged(newVal: ICourses){
+  oncourseinputChanged(newVal: ICourses[]){
+    console.log("new")
       let index = 0
-      this.classEntries = this.courseinput.map((course) => {
+      this.classEntries = newVal.map((course) => {
+        if(this.classEntries[index])
           return {        
               value: new CoursePrograms(course,this.classEntries[index].value),
               id: index++      
           }
+          else 
+            return {
+              value:new CoursePrograms(course),
+              id:index++
+            }
       })
+  }
+  created(){
+    console.log("rendered")
   }
 }
 </script>

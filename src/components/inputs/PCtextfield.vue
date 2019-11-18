@@ -12,7 +12,7 @@
       </h5>
     </label>
     <v-text-field
-      v-model="content"
+      :value="value"
       flat
       height="70px"
       outlined
@@ -23,7 +23,7 @@
       :dark="darkMode"
       hide-selected
       :error-messages="error"
-      :disabled="disabled"
+      :readonly="disabled"
       @input="handleInput"
     />
   </div>
@@ -32,7 +32,7 @@
 <script lang="ts">
 import Vue from "vue"
 import 'reflect-metadata'
-import {Component, Prop} from "vue-property-decorator"
+import {Component, Prop, Watch, PropSync} from "vue-property-decorator"
 
 
 @Component
@@ -46,20 +46,14 @@ export default class PCtextfield extends Vue {
     @Prop()
     public placeholder!: string;
     @Prop()
-    public  type!: string
+    public  type!: string;
     @Prop()
     public errorMessages?: string | string []
     @Prop({default: false})
-    public disabled?: boolean [] 
-    public xcontent: string = '';
-    get content(){
-        return this.xcontent
-    }
-    set content(value: string){
-        this.xcontent = value
-    }
-    public handleInput(){
-        this.$emit('input', this.content)
+    public disabled!: boolean;
+
+    public handleInput(new_input:string){
+        this.$emit('input', new_input)
     }
     get errorMessage() {
         return this.errorMessages
