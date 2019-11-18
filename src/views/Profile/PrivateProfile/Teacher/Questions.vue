@@ -147,6 +147,7 @@
                         rules="required"
                       >
                         <pcSelect
+                        v-model="teacherProfile.citizen.title"
                           :dark-mode="true"
                           title="TITLE"
                           :items="['Mr.', 'Mrs.', 'Ms.', 'no preference']" 
@@ -158,6 +159,7 @@
                         rules="required"
                       >
                         <pcTextfield
+                          v-model="teacherProfile.citizen.first_name"
                           :dark-mode="true"
                           title="FIRST NAME"
                           placeholder="First Name"
@@ -169,6 +171,7 @@
                         rules="required"
                       >
                         <pcTextfield
+                        v-model="teacherProfile.citizen.last_name"
                           :dark-mode="true"
                           title="LAST NAME"
                           placeholder="Last Name"
@@ -199,6 +202,7 @@
                         rules="required"
                       >
                         <pcSelect
+                          v-model="teacherProfile.school.district"
                           :dark-mode="true"
                           title="SCHOOL DISTRICT"
                           placeholder="Select school district"
@@ -209,6 +213,7 @@
                         rules="required"
                       >
                         <pcSelect
+                          v-model="teacherProfile.school.name"
                           :dark-mode="true"
                           title="SCHOOL NAME"
                           placeholder="Select school name"
@@ -219,6 +224,7 @@
                         rules="required"
                       >
                         <autoComplete
+                        v-model="teacherProfile.school.location"
                           :error-messages="{errors}"
                         />
                       </ValidationProvider>
@@ -239,7 +245,7 @@
                           </v-col>
                           <v-col>
                             <h4 style="color:#EA6763">
-                              {{ errors?'*':'' }}
+                              {{ errors[0]?'*':'' }}
                             </h4>
                           </v-col>
                         </v-row>
@@ -265,13 +271,22 @@
                       lg="6"
                       xl="5"
                     >
+                    <ValidationProvider
+                        v-slot="{errors}"
+                        rules="required"
+                      >
                       <pcTextfield
                         v-mask="'Room XXX'"
                         :dark-mode="true"
                         title="ROOM NUMBER"
                         placeholder="Enter your room number"
+                        :error-messages="{errors}"
                       />
-                    
+                    </ValidationProvider>
+                    <ValidationProvider
+                        v-slot="{errors}"
+                        rules="required"
+                      >
                       <v-row no-gutters>
                         <v-col
                           cols="12"
@@ -295,26 +310,38 @@
                           />
                         </v-col>
                       </v-row>
+                    </ValidationProvider>
                     </v-col>
-                    <v-col cols="12">
-                      <h4
-                        class="text-uppercase"
-                        style="color:#C7C8CA"
+                    <v-col>
+                      <ValidationProvider
+                        v-slot="{errors}"
+                        rules="required"
                       >
-                        WHEN IS YOUR PREFERRED TIME FOR COMMUNICATION ABOUT OUR PROGRAMS?
-                      </h4>
-                      <h4 style="color:#EA6763">
-                        {{ errors?'*':'' }}
-                      </h4>
+                      <v-col cols="12">
+                        <h4
+                          class="text-uppercase"
+                          style="color:#C7C8CA"
+                        >
+                          WHEN IS YOUR PREFERRED TIME FOR COMMUNICATION ABOUT OUR PROGRAMS?
+                        </h4>
+                        <h4 style="color:#EA6763">
+                          {{ errors[0]?'*':'' }}
+                        </h4>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                      >
+                        <pcCheckbox
+                          :options="CLASSROOM_COMMUNICATION"
+                          :other="true"
+                        />
+                      </v-col>
+                      </ValidationProvider>
                     </v-col>
-                    <v-col
-                      cols="12"
-                    >
-                      <pcCheckbox
-                        :options="CLASSROOM_COMMUNICATION"
-                        :other="true"
-                      />
-                    </v-col>
+                    <ValidationProvider
+                        v-slot="{errors}"
+                        rules="required"
+                      >
                     <v-col cols="12">
                       <h4
                         class="text-uppercase"
@@ -323,7 +350,7 @@
                         TOOLS, TECHNOLOGIES AND EQUIPMENT YOU HAVE IN YOUR CLASSROOM
                       </h4>
                       <h4 style="color:#EA6763">
-                        {{ errors?'*':'' }}
+                        {{ errors[0]?'*':'' }}
                       </h4>
                     </v-col>
                     <v-col
@@ -334,6 +361,7 @@
                     >
                       <pcMultiInput placeholder="Enter any already available in class" />
                     </v-col>
+                    </ValidationProvider>
                   </v-row>
                 </v-col>
               </v-list-item-content>
@@ -352,21 +380,36 @@
                       lg="3"
                       xl="2"
                     >
+                    <ValidationProvider
+                        v-slot="{errors}"
+                        rules="required"
+                      >
                       <pcSelect
                         :dark-mode="true"
                         placeholder="Select School Year"
                         :items="COURSES_AVAILABLE_SCHOOLYEARS"
                         title="SCHOOL YEAR"
                       />
+                    </ValidationProvider>
+                    <ValidationProvider
+                        v-slot="{errors}"
+                        rules="required"
+                      >
                       <pcSelect
                         :dark-mode="true"
                         title="WHEN IS YOUR PREP PERIOD?"
                         :items="COURSES_PREP_PERIODS"
                         placeholder="Prep Period"
                       />
+                    </ValidationProvider>
                     </v-col>
                     <v-col cols="12">
+                      <ValidationProvider
+                        v-slot="{errors}"
+                        rules="required"
+                      >
                       <CourseInput v-model="teacherProfile.enrolledClasses" />
+                      </ValidationProvider>
                     </v-col>
                   </v-row>
                 </v-col>
@@ -393,7 +436,7 @@
                         </v-col>
                         <v-col>
                           <h4 style="color:#EA6763">
-                            {{ errors?'*':'' }}
+                            {{ errors[0]?'*':'' }}
                           </h4>
                         </v-col>
                       </v-row>
@@ -454,7 +497,7 @@
                           WOULD YOU BE OKAY WITH DIGITAL CLASSROOM ENGAGEMENT AS AN ALTERNATIVE TO IN-PERSON?
                         </h4>
                         <h4 style="color:#EA6763">
-                          {{ errors?'*':'' }}
+                          {{ errors[0]?'*':'' }}
                         </h4>
                       </v-col>
                       <v-col cols="12">
@@ -477,7 +520,7 @@
                           WOULD YOU BE IN THE POSITION TO PURCHASE THE EMPLOYER’S PRODUCT OR SERVICE IF DONATION OR LOAN IS NOT AN OPTION?
                         </h4>
                         <h4 style="color:#EA6763">
-                          {{ errors?'*':'' }}
+                          {{ errors[0]?'*':'' }}
                         </h4>
                       </v-col>
                       <v-col cols="12">
