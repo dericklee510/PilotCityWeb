@@ -115,365 +115,390 @@
         </v-col>
       </v-row>
       <v-container>
-        <v-list
-          id="profileFields"
-          class="pc-profile-page--dark"
-          text
-        >
-          <v-list-item-title
-            style="max-width: fit-content"
-            v-text="'Citizen'"
-          />
+        <ValidationObserver ref="observer">
+          <v-list
+            id="profileFields"
+            class="pc-profile-page--dark"
+            text
+          >
+            <v-list-item-title
+              style="max-width: fit-content"
+              v-text="'Citizen'"
+            />
             
-          <v-list-item>
-            <v-list-item-content>
-              <v-col
-                cols="12"
-                class="pt-0"
-              >
-                <v-row
-                  id="citizen-id__base-questions"
-                  justify="start"
+            <v-list-item>
+              <v-list-item-content>
+                <v-col
+                  cols="12"
+                  class="pt-0"
                 >
-                  <v-col
-                    cols="12"
-                    md="8"
-                    lg="6"
-                    xl="5"
+                  <v-row
+                    id="citizen-id__base-questions"
+                    justify="start"
                   >
-                    <pcSelect
-                      :dark-mode="true"
-                      title="TITLE"
-                      :items="['Mr.', 'Mrs.', 'Ms.', 'no preference']" 
-                      placeholder="How may we address you?"
-                    />
-                    <pcTextfield
-                      :dark-mode="true"
-                      title="FIRST NAME"
-                      placeholder="First Name"
-                    />
-                    <pcTextfield
-                      :dark-mode="true"
-                      title="LAST NAME"
-                      placeholder="Last Name"
-                    />
-                  </v-col>
-                </v-row>
-              </v-col>
-            </v-list-item-content>
-          </v-list-item>
-          <v-list-item-title
-            style="max-width: fit-content"
-            v-text="'School'"
-          />
-          <v-list-item>
-            <v-list-item-content>
-              <v-col cols="12">
-                <v-row justify="start">
-                  <v-col
-                    cols="12"
-                    md="8"
-                    lg="6"
-                    xl="5"
-                  >
-                    <ValidationProvider
-                      v-slot="{errors}"
-                      rules="required"
+                    <v-col
+                      cols="12"
+                      md="8"
+                      lg="6"
+                      xl="5"
                     >
-                      <pcSelect
-                        :dark-mode="true"
-                        title="SCHOOL DISTRICT"
-                        placeholder="Select school district"
-                      />
-                      <pcSelect
-                        :dark-mode="true"
-                        title="SCHOOL NAME"
-                        placeholder="Select school name"
-                      />
-                    
-                      <autoComplete
-                        :error-messages="{errors}"
-                      />
-                    </ValidationProvider>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-row>
-                      <v-col>
-                        <h4
-                          class="text-uppercase"
-                          style="color:#ECA0BE"
-                        >
-                          BELL SCHEDULE
-                        </h4>
-                      </v-col>
-                      <v-col>
-                        <h4 style="color:#EA6763">
-                          {{ errors?'*':'' }}
-                        </h4>
-                      </v-col>
-                    </v-row>
-                    <BellScheduleInput v-model="teacherProfile.classSchedules" />
-                  </v-col>
-                </v-row>
-              </v-col>
-            </v-list-item-content>
-          </v-list-item>
+                      <ValidationProvider
+                        v-slot="{errors}"
+                        rules="required"
+                      >
+                        <pcSelect
+                          :dark-mode="true"
+                          title="TITLE"
+                          :items="['Mr.', 'Mrs.', 'Ms.', 'no preference']" 
+                          placeholder="How may we address you?"
+                        />
+                      </ValidationProvider>
+                      <ValidationProvider
+                        v-slot="{errors}"
+                        rules="required"
+                      >
+                        <pcTextfield
+                          :dark-mode="true"
+                          title="FIRST NAME"
+                          placeholder="First Name"
+                          :error-messages="errors"
+                        />
+                      </ValidationProvider>
+                      <ValidationProvider
+                        v-slot="{errors}"
+                        rules="required"
+                      >
+                        <pcTextfield
+                          :dark-mode="true"
+                          title="LAST NAME"
+                          placeholder="Last Name"
+                          :error-messages="errors"
+                        />
+                      </ValidationProvider>
+                    </v-col>
+                  </v-row>
+                </v-col>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item-title
+              style="max-width: fit-content"
+              v-text="'School'"
+            />
+            <v-list-item>
+              <v-list-item-content>
+                <v-col cols="12">
+                  <v-row justify="start">
+                    <v-col
+                      cols="12"
+                      md="8"
+                      lg="6"
+                      xl="5"
+                    >
+                      <ValidationProvider
+                        v-slot="{errors}"
+                        rules="required"
+                      >
+                        <pcSelect
+                          :dark-mode="true"
+                          title="SCHOOL DISTRICT"
+                          placeholder="Select school district"
+                        />
+                      </ValidationProvider>
+                      <ValidationProvider
+                        v-slot="{errors}"
+                        rules="required"
+                      >
+                        <pcSelect
+                          :dark-mode="true"
+                          title="SCHOOL NAME"
+                          placeholder="Select school name"
+                        />
+                      </ValidationProvider>
+                      <ValidationProvider
+                        v-slot="{errors}"
+                        rules="required"
+                      >
+                        <autoComplete
+                          :error-messages="{errors}"
+                        />
+                      </ValidationProvider>
+                    </v-col>
+                    <v-col cols="12">
+                      <ValidationProvider
+                        v-slot="{errors}"
+                        rules="required"
+                      >
+                        <v-row>
+                          <v-col>
+                            <h4
+                              class="text-uppercase"
+                              style="color:#ECA0BE"
+                            >
+                              BELL SCHEDULE
+                            </h4>
+                          </v-col>
+                          <v-col>
+                            <h4 style="color:#EA6763">
+                              {{ errors?'*':'' }}
+                            </h4>
+                          </v-col>
+                        </v-row>
+                        <BellScheduleInput v-model="teacherProfile.classSchedules" />
+                      </ValidationProvider>
+                    </v-col>
+                  </v-row>
+                </v-col>
+              </v-list-item-content>
+            </v-list-item>
 
-          <v-list-item-title
-            style="max-width: fit-content"
-            v-text="'Classroom'"
-          />
-          <v-list-item>
-            <v-list-item-content>
-              <v-col cols="12">
-                <v-row justify="start">
-                  <v-col
-                    cols="12"
-                    md="8"
-                    lg="6"
-                    xl="5"
-                  >
-                    <pcTextfield
-                      v-mask="'Room XXX'"
-                      :dark-mode="true"
-                      title="ROOM NUMBER"
-                      placeholder="Enter your room number"
-                    />
+            <v-list-item-title
+              style="max-width: fit-content"
+              v-text="'Classroom'"
+            />
+            <v-list-item>
+              <v-list-item-content>
+                <v-col cols="12">
+                  <v-row justify="start">
+                    <v-col
+                      cols="12"
+                      md="8"
+                      lg="6"
+                      xl="5"
+                    >
+                      <pcTextfield
+                        v-mask="'Room XXX'"
+                        :dark-mode="true"
+                        title="ROOM NUMBER"
+                        placeholder="Enter your room number"
+                      />
                     
-                    <v-row no-gutters>
-                      <v-col
-                        cols="12"
-                        lg="9"
+                      <v-row no-gutters>
+                        <v-col
+                          cols="12"
+                          lg="9"
+                        >
+                          <pcTextfield
+                            :dark-mode="true"
+                            title="ROOM PHONE NUMBER"
+                            placeholder="Enter your rooms phone number"
+                          />
+                        </v-col>
+                        <v-spacer />
+                        <v-col
+                          cols="12"
+                          lg="2"
+                        >
+                          <pcTextfield
+                            :dark-mode="true"
+                            title="Extension"
+                            placeholder="EXT."
+                          />
+                        </v-col>
+                      </v-row>
+                    </v-col>
+                    <v-col cols="12">
+                      <h4
+                        class="text-uppercase"
+                        style="color:#C7C8CA"
                       >
-                        <pcTextfield
-                          :dark-mode="true"
-                          title="ROOM PHONE NUMBER"
-                          placeholder="Enter your rooms phone number"
-                        />
-                      </v-col>
-                      <v-spacer />
-                      <v-col
-                        cols="12"
-                        lg="2"
+                        WHEN IS YOUR PREFERRED TIME FOR COMMUNICATION ABOUT OUR PROGRAMS?
+                      </h4>
+                      <h4 style="color:#EA6763">
+                        {{ errors?'*':'' }}
+                      </h4>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                    >
+                      <pcCheckbox
+                        :options="CLASSROOM_COMMUNICATION"
+                        :other="true"
+                      />
+                    </v-col>
+                    <v-col cols="12">
+                      <h4
+                        class="text-uppercase"
+                        style="color:#C7C8CA"
                       >
-                        <pcTextfield
-                          :dark-mode="true"
-                          title="Extension"
-                          placeholder="EXT."
-                        />
-                      </v-col>
-                    </v-row>
-                  </v-col>
-                  <v-col cols="12">
-                    <h4
-                      class="text-uppercase"
-                      style="color:#C7C8CA"
+                        TOOLS, TECHNOLOGIES AND EQUIPMENT YOU HAVE IN YOUR CLASSROOM
+                      </h4>
+                      <h4 style="color:#EA6763">
+                        {{ errors?'*':'' }}
+                      </h4>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      md="8"
+                      lg="7"
+                      xl="5"
                     >
-                      WHEN IS YOUR PREFERRED TIME FOR COMMUNICATION ABOUT OUR PROGRAMS?
-                    </h4>
-                    <h4 style="color:#EA6763">
-                      {{ errors?'*':'' }}
-                    </h4>
-                  </v-col>
-                  <v-col
-                    cols="12"
-                  >
-                    <pcCheckbox
-                      :options="CLASSROOM_COMMUNICATION"
-                      :other="true"
-                    />
-                  </v-col>
-                  <v-col cols="12">
-                    <h4
-                      class="text-uppercase"
-                      style="color:#C7C8CA"
+                      <pcMultiInput placeholder="Enter any already available in class" />
+                    </v-col>
+                  </v-row>
+                </v-col>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item-title
+              style="max-width: fit-content"
+              v-text="'Courses'"
+            />
+            <v-list-item>
+              <v-list-item-content>
+                <v-col cols="12">
+                  <v-row>
+                    <v-col
+                      cols="6"
+                      md="5"
+                      lg="3"
+                      xl="2"
                     >
-                      TOOLS, TECHNOLOGIES AND EQUIPMENT YOU HAVE IN YOUR CLASSROOM
-                    </h4>
-                    <h4 style="color:#EA6763">
-                      {{ errors?'*':'' }}
-                    </h4>
-                  </v-col>
-                  <v-col
-                    cols="12"
-                    md="8"
-                    lg="7"
-                    xl="5"
-                  >
-                    <pcMultiInput placeholder="Enter any already available in class" />
-                  </v-col>
-                </v-row>
-              </v-col>
-            </v-list-item-content>
-          </v-list-item>
-          <v-list-item-title
-            style="max-width: fit-content"
-            v-text="'Courses'"
-          />
-          <v-list-item>
-            <v-list-item-content>
-              <v-col cols="12">
-                <v-row>
-                  <v-col
-                    cols="6"
-                    md="5"
-                    lg="3"
-                    xl="2"
-                  >
-                    <pcSelect
-                      :dark-mode="true"
-                      placeholder="Select School Year"
-                      :items="COURSES_AVAILABLE_SCHOOLYEARS"
-                      title="SCHOOL YEAR"
-                    />
-                    <pcSelect
-                      :dark-mode="true"
-                      title="WHEN IS YOUR PREP PERIOD?"
-                      :items="COURSES_PREP_PERIODS"
-                      placeholder="Prep Period"
-                    />
-                  </v-col>
-                  <v-col cols="12">
-                    <CourseInput v-model="teacherProfile.enrolledClasses" />
-                  </v-col>
-                </v-row>
-              </v-col>
-            </v-list-item-content>
-          </v-list-item>
-          <!-- make this dynamic based on selected school year? -->
-          <v-list-item-title
-            style="max-width: fit-content"
-            v-text="'Program Details'" 
-          />
-          <v-list-item>
-            <v-list-item-content>
-              <v-col cols="12">
-                <v-row>
-                  <v-col cols="12">
-                    <v-row>
-                      <v-col>
+                      <pcSelect
+                        :dark-mode="true"
+                        placeholder="Select School Year"
+                        :items="COURSES_AVAILABLE_SCHOOLYEARS"
+                        title="SCHOOL YEAR"
+                      />
+                      <pcSelect
+                        :dark-mode="true"
+                        title="WHEN IS YOUR PREP PERIOD?"
+                        :items="COURSES_PREP_PERIODS"
+                        placeholder="Prep Period"
+                      />
+                    </v-col>
+                    <v-col cols="12">
+                      <CourseInput v-model="teacherProfile.enrolledClasses" />
+                    </v-col>
+                  </v-row>
+                </v-col>
+              </v-list-item-content>
+            </v-list-item>
+            <!-- make this dynamic based on selected school year? -->
+            <v-list-item-title
+              style="max-width: fit-content"
+              v-text="'Program Details'" 
+            />
+            <v-list-item>
+              <v-list-item-content>
+                <v-col cols="12">
+                  <v-row>
+                    <v-col cols="12">
+                      <v-row>
+                        <v-col>
+                          <h4
+                            class="text-uppercase"
+                            style="color:#ECA0BE"
+                          >
+                            Enrolled Courses
+                          </h4>
+                        </v-col>
+                        <v-col>
+                          <h4 style="color:#EA6763">
+                            {{ errors?'*':'' }}
+                          </h4>
+                        </v-col>
+                      </v-row>
+                      <v-row>
+                        <v-col
+                          cols="12"
+                          md="1"
+                        >
+                          <pcTextfield
+                            :dark-mode="true"
+                            title="PERIOD"
+                            :disabled="true"
+                            class="pc-input--disabled"
+                          />
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          md="4"
+                        >
+                          <pcTextfield
+                            :dark-mode="true"
+                            title="COURSES I TEACH"
+                            :disabled="true"
+                            class="pc-input--disabled"
+                          />
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          md="3"
+                        >
+                          <pcSelect
+                            :dark-mode="true"
+                            title="SEMESTER"
+                            placeholder="Select semester(s)"
+                            :items="PROGRAM_SEMS"
+                          />
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          md="3"
+                        >
+                          <pcSelect
+                            :dark-mode="true"
+                            title="GRADES"
+                            :multiselect="true"
+                            placeholder="Select class grade level"
+                            :items="PROGRAM_GRADES"
+                          />
+                        </v-col>
+                      </v-row>
+                    </v-col>
+                    <v-col>
+                      <v-col cols="12">
                         <h4
                           class="text-uppercase"
-                          style="color:#ECA0BE"
+                          style="color:#C7C8CA"
                         >
-                          Enrolled Courses
+                          WOULD YOU BE OKAY WITH DIGITAL CLASSROOM ENGAGEMENT AS AN ALTERNATIVE TO IN-PERSON?
                         </h4>
-                      </v-col>
-                      <v-col>
                         <h4 style="color:#EA6763">
                           {{ errors?'*':'' }}
                         </h4>
                       </v-col>
-                    </v-row>
-                    <v-row>
-                      <v-col
-                        cols="12"
-                        md="1"
-                      >
-                        <pcTextfield
-                          :dark-mode="true"
-                          title="PERIOD"
-                          :disabled="true"
-                          class="pc-input--disabled"
-                        />
+                      <v-col cols="12">
+                        <v-radio-group
+                          class="pc-radio"
+                        >
+                          <v-radio
+                            v-for="(rad, index) in PROGRAM_ENGAGEMENT"
+                            :key="rad+index"
+                            :value="rad"
+                            :label="rad"
+                          />
+                        </v-radio-group>
                       </v-col>
-                      <v-col
-                        cols="12"
-                        md="4"
-                      >
-                        <pcTextfield
-                          :dark-mode="true"
-                          title="COURSES I TEACH"
-                          :disabled="true"
-                          class="pc-input--disabled"
-                        />
+                      <v-col cols="12">
+                        <h4
+                          class="text-uppercase"
+                          style="color:#C7C8CA"
+                        >
+                          WOULD YOU BE IN THE POSITION TO PURCHASE THE EMPLOYER’S PRODUCT OR SERVICE IF DONATION OR LOAN IS NOT AN OPTION?
+                        </h4>
+                        <h4 style="color:#EA6763">
+                          {{ errors?'*':'' }}
+                        </h4>
                       </v-col>
-                      <v-col
-                        cols="12"
-                        md="3"
-                      >
-                        <pcSelect
-                          :dark-mode="true"
-                          title="SEMESTER"
-                          placeholder="Select semester(s)"
-                          :items="PROGRAM_SEMS"
-                        />
+                      <v-col cols="12">
+                        <v-radio-group
+                          class="pc-radio"
+                        >
+                          <v-radio
+                            v-for="(rad, index) in PROGRAM_PURCHASE"
+                            :key="rad+index"
+                            :value="rad"
+                            :label="rad"
+                          />
+                        </v-radio-group>
                       </v-col>
-                      <v-col
-                        cols="12"
-                        md="3"
-                      >
-                        <pcSelect
-                          :dark-mode="true"
-                          title="GRADES"
-                          :multiselect="true"
-                          placeholder="Select class grade level"
-                          :items="PROGRAM_GRADES"
-                        />
-                      </v-col>
-                    </v-row>
-                  </v-col>
-                  <v-col>
-                    <v-col cols="12">
-                      <h4
-                        class="text-uppercase"
-                        style="color:#C7C8CA"
-                      >
-                        WOULD YOU BE OKAY WITH DIGITAL CLASSROOM ENGAGEMENT AS AN ALTERNATIVE TO IN-PERSON?
-                      </h4>
-                      <h4 style="color:#EA6763">
-                        {{ errors?'*':'' }}
-                      </h4>
                     </v-col>
-                    <v-col cols="12">
-                      <v-radio-group
-                        class="pc-radio"
-                      >
-                        <v-radio
-                          value="Yes, I’m okay with digital engagement as an alternative"
-                          label="Yes, I’m okay with digital engagement as an alternative"
-                        />
-                        <v-radio
-                          value="No, I prefer in-person engagement"
-                          label="No, I prefer in-person engagement"
-                        />
-                      </v-radio-group>
-                    </v-col>
-                    <v-col cols="12">
-                      <h4
-                        class="text-uppercase"
-                        style="color:#C7C8CA"
-                      >
-                        WOULD YOU BE IN THE POSITION TO PURCHASE THE EMPLOYER’S PRODUCT OR SERVICE IF DONATION OR LOAN IS NOT AN OPTION?
-                      </h4>
-                      <h4 style="color:#EA6763">
-                        {{ errors?'*':'' }}
-                      </h4>
-                    </v-col>
-                    <v-col cols="12">
-                      <v-radio-group
-                        class="pc-radio"
-                      >
-                        <v-radio
-                          value="Yes, I can purchase"
-                          label="Yes, I can purchase"
-                        />
-                        <v-radio
-                          value="No, I cannot purchase"
-                          label="No, I cannot purchase"
-                        />
-                        <v-radio
-                          value="It is possible, but not guaranteed"
-                          label="It is possible, but not guaranteed"
-                        />
-                      </v-radio-group>
-                    </v-col>
-                  </v-col>
-                </v-row>  
-              </v-col>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
+                  </v-row>  
+                </v-col>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+        </ValidationObserver>
       </v-container>
     </v-container>
   </v-card>

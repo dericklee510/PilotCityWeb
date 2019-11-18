@@ -57,7 +57,6 @@
                       </v-col>
                     </v-row>
                   </template>
-                  
                   <v-list style="padding: 0">
                     <v-list-item
                       v-for="(type, index) in AVAILABLETYPES"
@@ -254,7 +253,7 @@
                                 WHAT TYPE OF HIGH SCHOOL TALENT WOULD YOU LIKE TO HIRE?
                               </h4>
                               <h4 style="color:#EA6763">
-                                {{ errors[0]?'*':'' }}
+                                {{ errors?'*':'' }}
                               </h4>
                             </v-row>
                           </v-col>
@@ -285,7 +284,7 @@
                                   Industry
                                 </h4>
                                 <h4 style="color:#EA6763">
-                                  {{ errors[0]?'*':'' }}
+                                  {{ errors?'*':'' }}
                                 </h4>
                               </v-row>
                             </v-col>
@@ -322,7 +321,7 @@
                                   LIST YOUR PRODUCT / SERVICE
                                 </h4>
                                 <h4 style="color:#EA6763">
-                                  {{ errors[0]?'*':'' }}
+                                  {{ errors?'*':'' }}
                                 </h4>
                               </v-row>
                             </v-col>
@@ -468,7 +467,7 @@
                                   WILL YOU BE ABLE TO PROVIDE CLASSROOMS ACCESS TO YOUR PRODUCT OR SERVICE WITH ANY OF THE FOLLOWING?
                                 </h4>
                                 <h4 style="color:#EA6763">
-                                  {{ errors[0]?'*':'' }}
+                                  {{ errors?'*':'' }}
                                 </h4>
                               </v-row>
                             </v-col>
@@ -559,7 +558,7 @@
                                 How do you prefer to engage with the classroom?
                               </h4>
                               <h4 style="color:#EA6763">
-                                {{ errors[0]?'*':'' }}
+                                {{ errors?'*':'' }}
                               </h4>
                             </v-row>
                           </v-col>
@@ -597,7 +596,7 @@
                                 How far would you travel to engage with a classroom in person?
                               </h4>
                               <h4 style="color:#EA6763">
-                                {{ errors[0]?'*':'' }}
+                                {{ errors?'*':'' }}
                               </h4>
                             </v-row>
                           </v-col>
@@ -647,7 +646,7 @@
                                 What would be the primary focus of their internship program
                               </h4>
                               <h4 style="color:#EA6763">
-                                {{ errors[0]?'*':'' }}
+                                {{ errors?'*':'' }}
                               </h4>
                             </v-row>
                           </v-col>
@@ -675,7 +674,7 @@
                                 Do you require hiring adults 18 years or older?
                               </h4>
                               <h4 style="color:#EA6763">
-                                {{ errors[0]?'*':'' }}
+                                {{ errors?'*':'' }}
                               </h4>
                             </v-row>
                           </v-col>
@@ -715,7 +714,7 @@
                                 Would you need the student(s) to have either a drivers license or a vehicle?
                               </h4>
                               <h4 style="color:#EA6763">
-                                {{ errors[0]?'*':'' }}
+                                {{ errors?'*':'' }}
                               </h4>
                             </v-row>
                           </v-col>
@@ -753,7 +752,7 @@
                                 What level of education do you typically hire from?
                               </h4>
                               <h4 style="color:#EA6763">
-                                {{ errors[0]?'*':'' }}
+                                {{ errors?'*':'' }}
                               </h4>
                             </v-row>
                           </v-col>
@@ -785,7 +784,7 @@
                                 WHAT TYPE OF HIGH SCHOOL TALENT WOULD YOU LIKE TO HIRE?
                               </h4>
                               <h4 style="color:#EA6763">
-                                {{ errors[0]?'*':'' }}
+                                {{ errors?'*':'' }}
                               </h4>
                             </v-row>
                           </v-col>
@@ -817,7 +816,7 @@
                                 HOW MANY DAYS PER WEEK WILL YOU BE ABLE TO HOST INTERNS & FELLOWS BETWEEN JUNE 29 - AUGUST 7?
                               </h4>
                               <h4 style="color:#EA6763">
-                                {{ errors[0]?'*':'' }}
+                                {{ errors?'*':'' }}
                               </h4>
                             </v-row>
                           </v-col>
@@ -855,7 +854,7 @@
                                 HOW MANY HOURS PER DAY WILL YOU BE ABLE TO HOST INTERNS & FELLOWS BETWEEN JUNE 29 - AUGUST 7?
                               </h4>
                               <h4 style="color:#EA6763">
-                                {{ errors[0]?'*':'' }}
+                                {{ errors?'*':'' }}
                               </h4>
                             </v-row>
                           </v-col>
@@ -894,7 +893,7 @@
                                 WHO DO YOU PREFER TO BE THE EMPLOYER-OF-RECORD?
                               </h4>
                               <h4 style="color:#EA6763">
-                                {{ errors[0]?'*':'' }}
+                                {{ errors?'*':'' }}
                               </h4>
                             </v-row>
                           </v-col>
@@ -932,7 +931,7 @@
                                 WHAT COMPENSATION TYPES WOULD YOU CONSIDER FOR OUR INTERNSHIP PROGRAM?
                               </h4>
                               <h4 style="color:#EA6763">
-                                {{ errors[0]?'*':'' }}
+                                {{ errors?'*':'' }}
                               </h4>
                             </v-row>
                           </v-col>
@@ -1082,7 +1081,7 @@
                                 IF SATISFIED AFTER SUMMER PROGRAM, WILL YOU CONSIDER CONTINUED EMPLOYMENT OF INTERN OR FELLOW?
                               </h4>
                               <h4 style="color:#EA6763">
-                                {{ errors[0]?'*':'' }}
+                                {{ errors?'*':'' }}
                               </h4>
                             </v-row>
                           </v-col>
@@ -1121,7 +1120,7 @@
                                 WHAT POSITIONS WOULD YOU HAVE AVAILABLE FOR CONTINUED EMPLOYMENT OF IN-SCHOOL OR GRADUATED HIGH SCHOOL TALENT?
                               </h4>
                               <h4 style="color:#EA6763">
-                                {{ errors[0]?'*':'' }}
+                                {{ errors?'*':'' }}
                               </h4>
                             </v-row>
                           </v-col>
