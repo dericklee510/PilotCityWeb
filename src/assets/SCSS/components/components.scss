@@ -94,6 +94,9 @@
 }
 
 /* PC btn - COMPONENT*/
-#pc-app .pc-button{
-    
+#pc-app .pc-multi_input .pc-button{
+    border: 0.75px dashed #C7C8CA;
+    box-sizing: border-box;
+    background-color: transparent;
+    color: #C7C8CA;
 }

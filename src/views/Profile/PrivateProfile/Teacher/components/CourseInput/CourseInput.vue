@@ -29,7 +29,7 @@
       </v-col>
       <v-col
         cols="12"
-        md="3"
+        :md="classEntries.length > 1?'4':'5'"
       >
         <pcSelect
           v-model="entry.value.pathway"
@@ -69,22 +69,13 @@
         />
       </v-col>
       <v-col
-        cols="12"
-        md="2"
-      >
-        <v-checkbox
-          v-model="entry.value.enrolled"
-          class="pc-checkbox"
-        />
-      </v-col>
-      <v-col
         v-if="classEntries.length > 1"
         cols="1"
         style="position: relative"
       >
         <h3
           key="entry.id+'icon'"
-          style="position:absolute; top: 25%; color: #B73430;"
+          style="position:absolute; top: 40%; color: #B73430;"
           class="pc-vh-center"
         >
           <i
@@ -133,8 +124,7 @@ export default class CourseInput extends Vue{
                 period: '',
                 course: '',
                 pathway: '',
-                classSize: '',
-                enrolled: false
+                classSize: ''
             },
             id:0
         }
@@ -148,8 +138,7 @@ export default class CourseInput extends Vue{
                 period: '',
                 course: '',
                 pathway: '',
-                classSize: '',
-                enrolled: false
+                classSize: ''
             },
             id: (maxBy(this.classEntries, entry => entry.id) as {value: ICourses; id: number}).id+1
         })

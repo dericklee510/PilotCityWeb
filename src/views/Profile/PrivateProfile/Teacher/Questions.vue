@@ -370,13 +370,23 @@
                         cols="12"
                         md="1"
                       >
-                        <pcTextfield title="PERIOD" />
+                        <pcTextfield
+                          :dark-mode="true"
+                          title="PERIOD"
+                          :disabled="true"
+                          class="pc-input--disabled"
+                        />
                       </v-col>
                       <v-col
                         cols="12"
                         md="4"
                       >
-                        <pcTextfield title="COURSES I TEACH" />
+                        <pcTextfield
+                          :dark-mode="true"
+                          title="COURSES I TEACH"
+                          :disabled="true"
+                          class="pc-input--disabled"
+                        />
                       </v-col>
                       <v-col
                         cols="12"
@@ -489,6 +499,7 @@ import { min_value } from 'vee-validate/dist/rules'
 import { GraphqlStore } from '@/store'
 import {BellScheduleInput, CourseInput} from "./components"
 import {TeacherProfile} from "./types"
+import { AutoCompleteAddress } from '../../../../components/GoogleMaps'
 extend('min_value', {
     ...min_value,
     message: "This field cannot be less than {min}"
@@ -520,13 +531,40 @@ export default class Test extends CONST {
         Employer: "citizen-id__type--employer",
         Student: "citizen-id__type--student"
     }
-    private AVAILABLETYPES: string[] = ["Teacher", "Employer", "Student"]
+    private AVAILABLETYPES: string[] = ['Teacher', 'Employer', 'Student']
     private ispublic: boolean = true;
     private loading: boolean = false;
     public teacherProfile: TeacherProfile = {
-        classSchedules: [],
-        enrolledClasses: []
+        citizen: {
+            title: '',
+            first_name: '',
+            last_name: ''
+        },
+        school: {
+            district: '',
+            name: '',
+            location: {} as AutoCompleteAddress,
+            bellSchedules: []
+        },
+        classroom: {
+            location: '',
+            phone_number: '',
+            extension: '',
+            preferredCommunication: '',
+            available_equipment:[]
+        },
+        courses: {
+            schoolYear: '',
+            prepPeriod: '',
+            classSchedules: []
+        },
+        programDetails: {
+            coursePrograms: [],
+            engagement_alternative: false,
+            purchase_emp_product: ''
+        }
     }
+    
     created() {}
 }
 </script> 
