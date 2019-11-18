@@ -565,13 +565,13 @@ import { AutoCompleteAddress } from '../../../../components/GoogleMaps'
 import { coursePrograms } from './components/CoursePrograms'
 import { from } from 'rxjs'
 import axios,{AxiosResponse} from 'axios'
-import { distinct, map, pluck } from 'rxjs/operators'
+import { map, pluck } from 'rxjs/operators'
 extend('min_value', {
     ...min_value,
     message: "This field cannot be less than {min}"
 })
 
-import {uniq} from 'lodash'
+import {sortBy} from 'lodash'
 @Component({
     components: {
         pcSelect: PCselect,
@@ -590,8 +590,8 @@ import {uniq} from 'lodash'
     },
     subscriptions(){
       return ({
-        DISTRICTS:from(axios.get<string []>("https://pilotcity-firestore.appspot.com/getdistrict")).pipe(pluck<AxiosResponse,string[]>('data')),
-        SCHOOL_NAMES: from(axios.get<string []>("https://pilotcity-firestore.appspot.com/getschool_name")).pipe(pluck<AxiosResponse,string[]>('data'))
+        DISTRICT_NAMES:from(axios.get<string []>("https://pilotcity-firestore.appspot.com/getdistrict")).pipe(pluck<AxiosResponse,string[]>('data'),map(arr => sortBy(arr))),
+        SCHOOL_NAMES: from(axios.get<string []>("https://pilotcity-firestore.appspot.com/getschool_name")).pipe(pluck<AxiosResponse,string[]>('data'),map(arr => sortBy(arr)))
     })
     }
 })
@@ -601,12 +601,6 @@ export default class Test extends CONST {
     SCHOOL_NAMES:string [] = []
     get citizenType(){
         return this.$route.params.citizenType
-    }
-    get DISTRICT_NAMES() {
-        return []
-    }
-    get SCHOOL_NAMES() {
-        return[]
     }
     private CITIZENSTYLES = {
         Teacher: "citizen-id__type--teacher",
