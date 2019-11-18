@@ -570,11 +570,15 @@ import {TeacherProfile} from "./types"
 import { ITeacherQuery } from '../../../../store/Graphql/types'
 import { tableToDecimal, findOther } from '../../../../store/Graphql'
 import { AutoCompleteAddress } from '../../../../components/GoogleMaps'
+import { from } from 'rxjs'
+import axios,{AxiosResponse} from 'axios'
+import { distinct, map, pluck } from 'rxjs/operators'
 extend('min_value', {
     ...min_value,
     message: "This field cannot be less than {min}"
 })
 
+import {uniq} from 'lodash'
 @Component({
     components: {
         pcSelect: PCselect,
@@ -589,10 +593,18 @@ extend('min_value', {
     },
     directives: {
         mask
+    },
+    subscriptions(){
+      return ({
+        DISTRICTS:from(axios.get<string []>("https://pilotcity-firestore.appspot.com/getdistrict")).pipe(pluck<AxiosResponse,string[]>('data')),
+        SCHOOL_NAMES: from(axios.get<string []>("https://pilotcity-firestore.appspot.com/getschool_name")).pipe(pluck<AxiosResponse,string[]>('data'))
+    })
     }
 })
 
 export default class Test extends CONST {
+    DISTRICT_NAMES:string [] = []
+    SCHOOL_NAMES:string [] = []
     get citizenType(){
         return this.$route.params.citizenType
     }
