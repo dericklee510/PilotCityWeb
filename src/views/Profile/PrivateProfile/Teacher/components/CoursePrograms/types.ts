@@ -11,7 +11,7 @@ export class CoursePrograms implements ICoursePrograms {
     public course: string = "";
     public grades: string[] = [];
     public semester: string = "";
-    private constructor(coursePrograms: ICourses, optional_args?: { grades: string[], semester: string }) {
+    public constructor(coursePrograms: ICourses, optional_args?: { grades: string[], semester: string }) {
         this.period = coursePrograms.period
         this.course = coursePrograms.course
         if (optional_args) {
