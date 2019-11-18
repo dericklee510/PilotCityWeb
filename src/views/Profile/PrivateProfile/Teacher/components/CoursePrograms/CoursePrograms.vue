@@ -43,17 +43,18 @@ export default class CourseProgramsInput extends CONST {
 
   classEntries: { value: CoursePrograms; id: number }[] = []
 
-  created() {
-    let index = 0
-    this.classEntries = this.courseinput.map((course) => {
-      return {        value: new CoursePrograms(course),
-        id: index++      }
-    })
-  }
-
   @Watch('classEntries', { deep: true })
   onSchedulesChanged(newVal: { value: ICourses; id: number }[]) {
     this.$emit('input', newVal.map(entree => entree.value))
+  }
+  
+  @Watch('courseinput',{deep:true})
+  oncourseinputChanged(newVal:ICourses){
+      let index = 0
+      this.classEntries = this.courseinput.map((course) => {
+      return {        value: new CoursePrograms(course,this.classEntries[index].value),
+        id: index++      }
+    })
   }
 }
 </script>
