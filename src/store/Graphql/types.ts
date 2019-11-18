@@ -44,3 +44,23 @@ export interface IEmployerQuery {
     internships_employment: boolean;
     internships_position: number;
 }
+
+export interface ITeacherQuery{
+    id_token: string
+    school_district: number // int
+    school_name: string
+    school_location: string
+    bell_schedule: string
+    classroom_room_location: string
+    classroom_room_phone: string
+    extension: string
+    preferred: number // int
+    preferred_other: string
+    tool_equipment: string[]
+    courses_school_year: string
+    prep_period: number // int
+    course_information: string
+    enrolled_courses: string
+    enagement_alternative: boolean
+    purchase_emp_product: number // int
+}
