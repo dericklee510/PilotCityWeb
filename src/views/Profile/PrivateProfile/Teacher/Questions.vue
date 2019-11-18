@@ -606,8 +606,10 @@ import {sortBy} from 'lodash'
     },
     subscriptions(){
         return ({
-            DISTRICT_NAMES:from(axios.get<string []>("https://pilotcity-firestore.appspot.com/getdistrict")).pipe(pluck<AxiosResponse,string[]>('data'),map(arr => sortBy(arr))),
-            SCHOOL_NAMES: from(axios.get<string []>("https://pilotcity-firestore.appspot.com/getschool_name")).pipe(pluck<AxiosResponse,string[]>('data'),map(arr => sortBy(arr)))
+            DISTRICT_NAMES:from(axios.get<string []>("https://pilotcity-firestore.appspot.com/getdistrict")).pipe(pluck<AxiosResponse,string[]>('data'),
+                map(arr => sortBy(arr).map(district_name => district_name+" District"))),
+            SCHOOL_NAMES: from(axios.get<string []>("https://pilotcity-firestore.appspot.com/getschool_name")).pipe(pluck<AxiosResponse,string[]>('data'),
+                map(arr => sortBy(arr).map(school_name => school_name + " School")))
         })
     }
 })
