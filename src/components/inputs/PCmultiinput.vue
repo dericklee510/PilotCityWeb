@@ -14,6 +14,7 @@
               v-model="entry.value"
               :dark-mode="true"
               :placeholder="placeholder"
+              :error-messages="errorMessages"
             />
           </v-col>
           <v-col
@@ -71,6 +72,8 @@ export default class PCmultiinput extends Vue{
     placeholder?: string;
     @Prop()
     value!: string[];
+    @Prop()
+    errorMessages?: string | string[];
     entries = [{value:"",id:0}]
     newEntry(){
         this.entries.push({value:"",id:this.entries.slice(-1)[0].id+1})

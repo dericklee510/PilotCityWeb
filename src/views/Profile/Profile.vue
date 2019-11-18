@@ -37,7 +37,7 @@
       </v-col>
     </v-row>
     <v-container fluid>
-      <router-view :name="this.$route.params.citizenType" />
+      <router-view :name="'Teacher'" />
     </v-container>
   </v-container>
 </template>
@@ -46,7 +46,7 @@
 <script lang="ts">
 import Vue from "vue"
 import Component from "vue-class-component"
-
+// this.$route.params.citizenType
 @Component
 export default class Profile extends Vue {
 }

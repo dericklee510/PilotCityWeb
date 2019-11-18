@@ -8,12 +8,10 @@
       class="pc-input__label"
     > 
       <h5
-        v-if="title"
         class="text-uppercase"
       >
         {{ title }}
       </h5>
-      <slot v-else />
     </label>
     <v-select
       :multiple="multiselect"
@@ -27,6 +25,7 @@
       background-color="transparent"
       :hide-selected="!multiselect"
       :items="items"
+      :error-messages="error"
       :dark="darkMode" 
       @input="handleInput"
     />
@@ -53,9 +52,22 @@ export default class PCselect extends Vue {
     public items!: string[];
     @Prop({required: true})
     public placeholder!: string;
+    @Prop()
+    public errorMessages?: string | string []
 
     public handleInput(event: any){
         this.$emit('input', event)
+    }
+
+    get errorMessage() {
+        return this.errorMessages
+    }
+    get error(): string | undefined{
+        if (Array.isArray(this.errorMessage))
+            return this.errorMessage.length?this.errorMessage[0]:""
+        else {
+            return this.errorMessage
+        }
     }
 }
 </script>

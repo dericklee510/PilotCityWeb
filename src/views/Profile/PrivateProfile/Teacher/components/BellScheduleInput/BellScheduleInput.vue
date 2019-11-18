@@ -106,7 +106,6 @@ import {maxBy} from 'lodash'
 export default class BellScheduleInput extends Vue{
 @Prop()
     value!: IBellSchedule[]
-
 classEntries: {value: IBellSchedule; id: number}[] = [
     {
         value:{

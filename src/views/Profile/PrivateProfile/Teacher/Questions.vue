@@ -11,7 +11,7 @@
       <v-row>
         <!-- insert Doka-profile-picture-component -->
         <v-col id="profileContainer">
-          <div class="pc-profile-picture pc-profile-picture--page pc-vh-center" />
+          <profile-upload class="pc-profile-picture pc-profile-picture--page pc-vh-center" />
         </v-col>
         <v-col
           cols="12"
@@ -152,6 +152,7 @@
                           title="TITLE"
                           :items="['Mr.', 'Mrs.', 'Ms.', 'no preference']" 
                           placeholder="How may we address you?"
+                          :error-messages="errors"
                         />
                       </ValidationProvider>
                       <ValidationProvider
@@ -207,6 +208,7 @@
                           title="SCHOOL DISTRICT"
                           placeholder="Select school district"
                           :items="DISTRICT_NAMES"
+                          :error-messages="errors"
                         />
                       </ValidationProvider>
                       <ValidationProvider
@@ -219,6 +221,7 @@
                           title="SCHOOL NAME"
                           placeholder="Select school name"
                           :items="SCHOOL_NAMES"
+                          :error-messages="errors"
                         />
                       </ValidationProvider>
                       <ValidationProvider
@@ -279,7 +282,7 @@
                           :dark-mode="true"
                           title="ROOM NUMBER"
                           placeholder="Enter your room number"
-                          :error-messages="{errors}"
+                          :error-messages="errors"
                         />
                       </ValidationProvider>
                       <ValidationProvider
@@ -296,6 +299,7 @@
                               :dark-mode="true"
                               title="ROOM PHONE NUMBER"
                               placeholder="Enter your rooms phone number"
+                              :error-messages="errors"
                             />
                           </v-col>
                           <v-spacer />
@@ -308,6 +312,7 @@
                               :dark-mode="true"
                               title="Extension"
                               placeholder="EXT."
+                              :error-messages="errors"
                             />
                           </v-col>
                         </v-row>
@@ -315,21 +320,23 @@
                     </v-col>
                   </v-row>
                   <v-row>
-                    <v-col>
+                    <v-col cols="12">
                       <ValidationProvider
                         v-slot="{errors}"
                         rules="required"
                       >
                         <v-col cols="12">
-                          <h4
-                            class="text-uppercase"
-                            style="color:#C7C8CA"
-                          >
-                            WHEN IS YOUR PREFERRED TIME FOR COMMUNICATION ABOUT OUR PROGRAMS?
-                          </h4>
-                          <h4 style="color:#EA6763">
-                            {{ errors[0]?'*':'' }}
-                          </h4>
+                          <v-row>
+                            <h4
+                              class="text-uppercase"
+                              style="color:#C7C8CA"
+                            >
+                              WHEN IS YOUR PREFERRED TIME FOR COMMUNICATION ABOUT OUR PROGRAMS?
+                            </h4>
+                            <h4 style="color:#EA6763">
+                              {{ errors[0]?'*':'' }}
+                            </h4>
+                          </v-row>
                         </v-col>
                         <v-col
                           cols="12"
@@ -344,31 +351,36 @@
                     </v-col>
                   </v-row>
                   <v-row>
-                    <ValidationProvider
-                      v-slot="{errors}"
-                      rules="required"
-                    >
-                      <v-col cols="12">
-                        <h4
-                          class="text-uppercase"
-                          style="color:#C7C8CA"
-                        >
-                          TOOLS, TECHNOLOGIES AND EQUIPMENT YOU HAVE IN YOUR CLASSROOM
-                        </h4>
-                        <h4 style="color:#EA6763">
-                          {{ errors[0]?'*':'' }}
-                        </h4>
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        md="8"
+                    <v-col cols="12">
+                      <ValidationProvider
+                        v-slot="{errors}"
+                        rules="required"
                       >
-                        <pcMultiInput
-                          v-model="teacherProfile.classroom.available_equipment"
-                          placeholder="Enter any already available in class"
-                        />
-                      </v-col>
-                    </ValidationProvider> 
+                        <v-col cols="12">
+                          <v-row>
+                            <h4
+                              class="text-uppercase"
+                              style="color:#C7C8CA"
+                            >
+                              TOOLS, TECHNOLOGIES AND EQUIPMENT YOU HAVE IN YOUR CLASSROOM
+                            </h4>
+                            <h4 style="color:#EA6763">
+                              {{ errors[0]?'*':'' }}
+                            </h4>
+                          </v-row>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          md="8"
+                        >
+                          <pcMultiInput
+                            v-model="teacherProfile.classroom.available_equipment"
+                            placeholder="Enter any already available in class"
+                            :error-messages="errors"
+                          />
+                        </v-col>
+                      </ValidationProvider> 
+                    </v-col>
                   </v-row>
                 </v-col>
               </v-list-item-content>
@@ -394,6 +406,7 @@
                         <pcSelect
                           v-model="teacherProfile.courses.schoolYear"
                           :dark-mode="true"
+                          :error-messages="errors"
                           placeholder="Select School Year"
                           :items="COURSES_AVAILABLE_SCHOOLYEARS"
                           title="SCHOOL YEAR"
@@ -406,6 +419,7 @@
                         <pcSelect
                           v-model="teacherProfile.courses.prepPeriod"
                           :dark-mode="true"
+                          :error-messages="errors"
                           title="WHEN IS YOUR PREP PERIOD?"
                           :items="COURSES_PREP_PERIODS"
                           placeholder="Prep Period"
@@ -565,13 +579,14 @@ import { AutoCompleteAddress } from '../../../../components/GoogleMaps'
 import { coursePrograms } from './components/CoursePrograms'
 import { from } from 'rxjs'
 import axios,{AxiosResponse} from 'axios'
-import { distinct, map, pluck } from 'rxjs/operators'
+import {ProfileUpload} from '@/components/Doka'
+import { map, pluck } from 'rxjs/operators'
 extend('min_value', {
     ...min_value,
     message: "This field cannot be less than {min}"
 })
 
-import {uniq} from 'lodash'
+import {sortBy} from 'lodash'
 @Component({
     components: {
         pcSelect: PCselect,
@@ -581,6 +596,7 @@ import {uniq} from 'lodash'
         autoComplete,
         ValidationProvider,
         ValidationObserver,
+        'profile-upload': ProfileUpload,
         'course-programs': coursePrograms,
         pcMultiInput: PCmultiinput,
         pcCheckbox: PCcheckbox
@@ -590,8 +606,8 @@ import {uniq} from 'lodash'
     },
     subscriptions(){
         return ({
-            DISTRICT_NAMES: from(axios.get<string []>("https://pilotcity-firestore.appspot.com/getdistrict")).pipe(pluck<AxiosResponse,string[]>('data')),
-            SCHOOL_NAMES: from(axios.get<string []>("https://pilotcity-firestore.appspot.com/getschool_name")).pipe(pluck<AxiosResponse,string[]>('data'))
+            DISTRICT_NAMES:from(axios.get<string []>("https://pilotcity-firestore.appspot.com/getdistrict")).pipe(pluck<AxiosResponse,string[]>('data'),map(arr => sortBy(arr))),
+            SCHOOL_NAMES: from(axios.get<string []>("https://pilotcity-firestore.appspot.com/getschool_name")).pipe(pluck<AxiosResponse,string[]>('data'),map(arr => sortBy(arr)))
         })
     }
 })

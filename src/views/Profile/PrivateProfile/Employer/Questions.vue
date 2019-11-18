@@ -11,7 +11,8 @@
       <v-row>
         <!-- insert Doka-profile-picture-component -->
         <v-col id="profileContainer">
-          <div class="pc-profile-picture pc-profile-picture--page pc-vh-center" />
+          <profile-upload />
+          <!-- <div class="pc-profile-picture pc-profile-picture--page pc-vh-center" /> -->
         </v-col>
         <v-col
           cols="12"
@@ -1179,6 +1180,7 @@ import { tableToDecimal, findOther } from "@/store/Graphql"
 import { CONST } from './const'
 import { mask } from 'vue-the-mask'
 import { min_value } from 'vee-validate/dist/rules'
+import {ProfileUpload} from '@/components/Doka'
 import { GraphqlStore } from '@/store'
 
 extend('min_value', {
@@ -1193,6 +1195,7 @@ extend('min_value', {
         autoComplete,
         ValidationProvider,
         ValidationObserver,
+        'profile-upload': ProfileUpload,
         pcMultiInput: PCmultiinput,
         pcCheckbox: PCcheckbox
     },
