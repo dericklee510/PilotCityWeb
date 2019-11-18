@@ -1,95 +1,94 @@
 <template>
-<v-list-item>
-            <v-list-item-content>
-              <v-row v-for="entry in classEntries" :key="entry.id">
-                <v-col
-                  cols="12"
-                  md="2"
-                >
-                  <pcSelect
-                    :dark-mode="true"
-                    :items="['prep','0','1','2','3','lunch','4','5','6','7','8']"
-                    title="PERIOD"
-                    placeholder="Class period"
-                    v-model="entry.value.period"
-                  />
-                </v-col>
-                <v-col
-                  cols="12"
-                  md="3"
-                >
-                  <pc-textfield
-                    :dark-mode="true"
-                    title="COURSE"
-                    placeholder="Course Name"
-                    v-model="entry.value.course"
-                  />
-                </v-col>
-                <v-col
-                  cols="12"
-                  md="3"
-                >
-                  <pcSelect
-                    :dark-mode="true"
-                    :items="['M','T','W','Th','F','Sa','S']"
-                    title="SCHEDULE"
-                    :multiselect="true"
-                    placeholder="What days"
-                    v-model="entry.value.weeklySchedule"
-                  />
-                </v-col>
-                <v-col
-                  cols="12"
-                  md="2"
-                >
-                  <pc-textfield
-                    :dark-mode="true"
-                    :items="[]"
-                    title="START TIME"
-                    placeholder="Start Time"
-                    type="time"
-                    v-model="entry.value.startTime"
-                  />
-                </v-col>
-                <v-col
-                  cols="12"
-                  md="2"
-                >
-                  <pc-textfield
-                    :dark-mode="true"
-                    :items="[]"
-                    title="END TIME"
-                    placeholder="End Time"
-                    type="time"
-                    v-model="entry.value.endTime"
-                  />
-                </v-col>
-                <v-col
-            v-if="classEntries.length > 1"
-            cols="1"
-            style="position: relative"
+  <v-row no-gutters>
+    <v-col cols="12">
+      <v-row
+        v-for="entry in classEntries"
+        :key="entry.id"
+      >
+        <v-col
+          cols="12"
+          md="3"
+        >
+          <pcSelect
+            v-model="entry.value.period"
+            :dark-mode="true"
+            :items="['prep','0','1','2','3','lunch','4','5','6','7','8']"
+            title="PERIOD"
+            placeholder="Class period"
+          />
+        </v-col>
+        <v-col
+          cols="12"
+          md="4"
+        >
+          <pcSelect
+            v-model="entry.value.weeklySchedule"
+            :dark-mode="true"
+            :items="['M','T','W','Th','F','Sa','S']"
+            title="MONDAY - FRIDAY"
+            :multiselect="true"
+            placeholder="What days"
+          />
+        </v-col>
+        <v-col
+          cols="6"
+          md="2"
+          lg="1"
+        >
+          <pc-textfield
+            v-model="entry.value.startTime"
+            :dark-mode="true"
+            :items="[]"
+            title="START TIME"
+            placeholder="Start Time"
+            type="time"
+          />
+        </v-col>
+        <v-col
+          cols="6"
+          md="2"
+          lg="1"
+        >
+          <pc-textfield
+            v-model="entry.value.endTime"
+            :dark-mode="true"
+            :items="[]"
+            title="END TIME"
+            placeholder="End Time"
+            type="time"
+          />
+        </v-col>
+        <v-col
+          v-if="classEntries.length > 1"
+          cols="12"
+          md="1"
+          style="position: relative"
+        >
+          <h3
+            key="entry.id+'icon'"
+            style="position:absolute; top: 25%; color: #B73430;"
+            class="pc-vh-center"
           >
-            <h3
-              key="entry.id+'icon'"
-              style="position:absolute; top: 25%; color: #B73430;"
-              class="pc-vh-center"
-            >
-              <i
-                class="mdi mdi-trash-can-outline"
-                @click="removeSchedule(entry.id)"
-              />
-            </h3>
-          </v-col>
-              </v-row>
-              <v-row>
-                <v-col cols="12">
-                  <v-btn block @click="pushNewSchedule()">
-                    +
-                  </v-btn>
-                </v-col>
-              </v-row>
-            </v-list-item-content>
-          </v-list-item>
+            <i
+              class="mdi mdi-trash-can-outline"
+              @click="removeSchedule(entry.id)"
+            />
+          </h3>
+        </v-col>
+      </v-row>
+    </v-col>
+    <v-col
+      cols="12"
+      md="11"
+    >
+      <v-btn
+        block
+        @click="pushNewSchedule()"
+      >
+        +
+      </v-btn>
+    </v-col>
+  </v-row>
 </template>
 <script lang="ts">
 import {PCselect, PCtextfield} from '@/components/inputs'
@@ -106,34 +105,38 @@ import {maxBy} from 'lodash'
 })
 export default class BellScheduleInput extends Vue{
 @Prop()
-value!: IBellSchedule[]
+    value!: IBellSchedule[]
 
-classEntries: {value:IBellSchedule, id:number}[] = [
-  {
-    value:{period:[],
-    course:"",
-    weeklySchedule:[],
-    startTime:"",
-    endTime:""},
-    id:0
-  }
+classEntries: {value: IBellSchedule; id: number}[] = [
+    {
+        value:{
+            period:[],
+            // course:"",
+            weeklySchedule:[],
+            startTime:"",
+            endTime:""
+        },
+        id:0
+    }
 ]
-removeSchedule(id:number){
-  this.classEntries.splice(this.classEntries.findIndex((entry => entry.id ==id)),1)
+removeSchedule(id: number){
+    this.classEntries.splice(this.classEntries.findIndex((entry => entry.id ==id)),1)
 }
 pushNewSchedule(){
-  this.classEntries.push({
-      value:{period:[],
-    course:"",
-    weeklySchedule:[],
-    startTime:"",
-    endTime:""},
-      id: (maxBy(this.classEntries, entry => entry.id) as {value:IBellSchedule, id:number}).id+1
-  })
+    this.classEntries.push({
+        value:{
+            period:[],
+            course:"",
+            weeklySchedule:[],
+            startTime:"",
+            endTime:""
+        },
+        id: (maxBy(this.classEntries, entry => entry.id) as {value: IBellSchedule; id: number}).id+1
+    })
 }
 @Watch('classEntries',{deep:true})
-onSchedulesChanged(newVal:{value:IBellSchedule, id:number}[]){
-  this.$emit('input', newVal.map(entree => entree.value))
+onSchedulesChanged(newVal: {value: IBellSchedule; id: number}[]){
+    this.$emit('input', newVal.map(entree => entree.value))
 }
 }
 </script>

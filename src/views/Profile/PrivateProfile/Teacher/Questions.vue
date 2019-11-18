@@ -176,24 +176,43 @@
                     lg="6"
                     xl="5"
                   >
-                    <pcSelect
-                      :dark-mode="true"
-                      title="SCHOOL DISTRICT"
-                      placeholder="Select school district"
-                    />
-                    <pcSelect
-                      :dark-mode="true"
-                      title="SCHOOL NAME"
-                      placeholder="Select school name"
-                    />
                     <ValidationProvider
                       v-slot="{errors}"
                       rules="required"
                     >
+                      <pcSelect
+                        :dark-mode="true"
+                        title="SCHOOL DISTRICT"
+                        placeholder="Select school district"
+                      />
+                      <pcSelect
+                        :dark-mode="true"
+                        title="SCHOOL NAME"
+                        placeholder="Select school name"
+                      />
+                    
                       <autoComplete
                         :error-messages="{errors}"
                       />
                     </ValidationProvider>
+                  </v-col>
+                  <v-col cols="12">
+                    <v-row>
+                      <v-col>
+                        <h4
+                          class="text-uppercase"
+                          style="color:#ECA0BE"
+                        >
+                          BELL SCHEDULE
+                        </h4>
+                      </v-col>
+                      <v-col>
+                        <h4 style="color:#EA6763">
+                          {{ errors?'*':'' }}
+                        </h4>
+                      </v-col>
+                    </v-row>
+                    <BellScheduleInput v-model="teacherProfile.classSchedules" />
                   </v-col>
                 </v-row>
               </v-col>
@@ -215,98 +234,162 @@
                     xl="5"
                   >
                     <pcTextfield
+                      v-mask="'Room XXX'"
                       :dark-mode="true"
-                      title="ROOM"
+                      title="ROOM NUMBER"
                       placeholder="Enter your room number"
                     />
+                    
                     <v-row no-gutters>
-                      <v-col cols="10">
+                      <v-col
+                        cols="12"
+                        lg="9"
+                      >
                         <pcTextfield
                           :dark-mode="true"
                           title="ROOM PHONE NUMBER"
                           placeholder="Enter your rooms phone number"
                         />
                       </v-col>
-                      <v-col cols="2">
+                      <v-spacer />
+                      <v-col
+                        cols="12"
+                        lg="2"
+                      >
                         <pcTextfield
                           :dark-mode="true"
-                          title="ROOM EXTENSION"
+                          title="Extension"
                           placeholder="EXT."
                         />
                       </v-col>
                     </v-row>
                   </v-col>
-                </v-row>
-                <!-- <v-row>
-                  <v-col
-                    cols="12"
-                    md="3"
-                  >
-                    <pcSelect
-                      :dark-mode="true"
-                      title="SCHOOL YEAR"
-                      placeholder="Select School Year"
-                    />
-                  </v-col>
-                  <v-col
-                    cols="12"
-                    md="5"
-                  >
-                    <pcTextfield
-                      :dark-mode="true"
-                      title="CLASS NAME"
-                      placeholder="Enter class name"
-                    />
-                  </v-col>
-                  <v-col
-                    cols="12"
-                    md="2"
-                  >
-                    <pcSelect
-                      :dark-mode="true"
-                      title="SEMESTER"
-                      placeholder="Select semester(s)"
-                      :items="['Fall', 'Spring', 'All-Year', 'Summer', 'Winter']"
-                    />
-                  </v-col>
-                  <v-col
-                    cols="12"
-                    md="2"
-                  >
-                    <pcSelect
-                      :dark-mode="true"
-                      title="GRADES"
-                      :multiselect="true"
-                      placeholder="Select class grade level"
-                      :items="['9','10','11','12']"
-                    />
-                  </v-col>
-                  <v-col
-                    cols="12"
-                    md="2"
-                  >
-                    <pcTextField
-                      :dark-mode="true"
-                      title="CLASS SIZE"
-                      placeholder="Enter class size"
-                    />
-                  </v-col>
-                </v-row> -->
-                <!-- <v-row>
                   <v-col cols="12">
-                    <v-btn block>
-                      +
-                    </v-btn>
+                    <h4
+                      class="text-uppercase"
+                      style="color:#C7C8CA"
+                    >
+                      WHEN IS YOUR PREFERRED TIME FOR COMMUNICATION ABOUT OUR PROGRAMS?
+                    </h4>
+                    <h4 style="color:#EA6763">
+                      {{ errors?'*':'' }}
+                    </h4>
                   </v-col>
-                </v-row> -->
+                  <v-col
+                    cols="12"
+                  >
+                    <pcCheckbox
+                      :options="CLASSROOM_COMMUNICATION"
+                      :other="true"
+                    />
+                  </v-col>
+                  <v-col cols="12">
+                    <h4
+                      class="text-uppercase"
+                      style="color:#C7C8CA"
+                    >
+                      TOOLS, TECHNOLOGIES AND EQUIPMENT YOU HAVE IN YOUR CLASSROOM
+                    </h4>
+                    <h4 style="color:#EA6763">
+                      {{ errors?'*':'' }}
+                    </h4>
+                  </v-col>
+                  <v-col
+                    cols="12"
+                    md="8"
+                    lg="7"
+                    xl="5"
+                  >
+                    <pcMultiInput placeholder="Enter any already available in class" />
+                  </v-col>
+                </v-row>
               </v-col>
             </v-list-item-content>
           </v-list-item>
           <v-list-item-title
             style="max-width: fit-content"
-            v-text="'Schedule'"
+            v-text="'Courses'"
           />
-          <BellScheduleInput  v-model="teacherProfile.classSchedules"/>
+          <v-list-item>
+            <v-list-item-content>
+              <v-col cols="12">
+                <v-row>
+                  <v-col
+                    cols="6"
+                    md="5"
+                    lg="3"
+                    xl="2"
+                  >
+                    <pcSelect
+                      :dark-mode="true"
+                      placeholder="Select School Year"
+                      :items="COURSES_AVAILABLE_SCHOOLYEARS"
+                      title="SCHOOL YEAR"
+                    />
+                    <pcSelect
+                      :dark-mode="true"
+                      title="WHEN IS YOUR PREP PERIOD?"
+                      :items="COURSES_PREP_PERIODS"
+                      placeholder="Prep Period"
+                    />
+                  </v-col>
+                  <v-col cols="12">
+                    <CourseInput v-model="teacherProfile.enrolledClasses" />
+                  </v-col>
+                </v-row>
+              </v-col>
+            </v-list-item-content>
+          </v-list-item>
+          <!-- make this dynamic based on selected school year? -->
+          <v-list-item-title
+            style="max-width: fit-content"
+            v-text="'Program Details'" 
+          />
+          <v-list-item>
+            <v-list-item-content>
+              <v-col cols="12">
+                <v-row no-gutters="true">
+                  <v-row no-gutters>
+                    <v-col
+                      cols="12"
+                      md="1"
+                    >
+                      <pcTextfield />
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      md="4"
+                    >
+                      <pcTextfield />
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      md="3"
+                    >
+                      <pcSelect
+                        :dark-mode="true"
+                        title="SEMESTER"
+                        placeholder="Select semester(s)"
+                        :items="['Fall', 'Spring', 'All-Year', 'Summer', 'Winter']"
+                      />
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      md="3"
+                    >
+                      <pcSelect
+                        :dark-mode="true"
+                        title="GRADES"
+                        :multiselect="true"
+                        placeholder="Select class grade level"
+                        :items="['9','10','11','12']"
+                      />
+                    </v-col>
+                  </v-row>
+                </v-row>  
+              </v-col>
+            </v-list-item-content>
+          </v-list-item>
         </v-list>
       </v-container>
     </v-container>
@@ -327,11 +410,11 @@ import Component from "vue-class-component"
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate'
 import { ObserverInstance } from "@/utilities/validation"
 // import { tableToDecimal, findOther } from "./helpers"
-// import { CONST } from './const'
+import { CONST } from './const'
 import { mask } from 'vue-the-mask'
 import { min_value } from 'vee-validate/dist/rules'
 import { GraphqlStore } from '@/store'
-import {BellScheduleInput} from "./components"
+import {BellScheduleInput, CourseInput} from "./components"
 import {TeacherProfile} from "./types"
 extend('min_value', {
     ...min_value,
@@ -343,6 +426,7 @@ extend('min_value', {
         pcSelect: PCselect,
         pcTextfield: PCtextfield,
         BellScheduleInput,
+        CourseInput,
         autoComplete,
         ValidationProvider,
         ValidationObserver,
@@ -354,7 +438,7 @@ extend('min_value', {
     }
 })
 
-export default class Test extends Vue {
+export default class Test extends CONST {
     get citizenType(){
         return this.$route.params.citizenType
     }
@@ -365,12 +449,11 @@ export default class Test extends Vue {
     }
     private AVAILABLETYPES: string[] = ["Teacher", "Employer", "Student"]
     private ispublic: boolean = true;
-    private loading: boolean = false
-    public teacherProfile:TeacherProfile = {
-      classSchedules:[]
+    private loading: boolean = false;
+    public teacherProfile: TeacherProfile = {
+        classSchedules: [],
+        enrolledClasses: []
     }
-    created() {
-
-    }
+    created() {}
 }
 </script> 

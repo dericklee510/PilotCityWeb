@@ -325,7 +325,10 @@
                               </h4>
                             </v-row>
                           </v-col>
-                          <pcMultiInput v-model="organization.products_services" />
+                          <pcMultiInput
+                            v-model="organization.products_services"
+                            placeholder="Enter your product or Service"
+                          />
                         </v-col>
                       </ValidationProvider>
                       <v-col
@@ -1203,8 +1206,8 @@ export default class Test extends CONST {
     get citizenType(){
         return this.$route.params.citizenType
     }
-    set citizenType(type:string){
-      this.citizenType = type
+    set citizenType(type: string){
+        this.citizenType = type
     }
 
     private CITIZENSTYLES = {
@@ -1334,10 +1337,10 @@ export default class Test extends CONST {
         return `${this.citizen.first_name} ${this.citizen.last_name}`
     }
     async fetchQueryData(){
-      await GraphqlStore.fetchQueryData()
+        await GraphqlStore.fetchQueryData()
     }
     async query(){
-      await GraphqlStore.SubmitEmployerQuery()
+        await GraphqlStore.SubmitEmployerQuery()
     }
     created() {
         GraphqlStore.EmployerQueryisValid

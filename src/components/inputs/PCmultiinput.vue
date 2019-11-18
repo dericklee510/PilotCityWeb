@@ -13,7 +13,7 @@
               :key="entry.id + 'textfield'"
               v-model="entry.value"
               :dark-mode="true"
-              placeholder="Enter your product or Service"
+              :placeholder="placeholder"
             />
           </v-col>
           <v-col
@@ -65,6 +65,8 @@ interface VueEvent {
     }
 })
 export default class PCmultiinput extends Vue{
+    @Prop()
+    placeholder?: string;
     @Prop()
     value!: string[];
     entries = [{value:"",id:0}]

@@ -128,12 +128,11 @@
             class="pc-button"
             text
             outlined
+            :to="{name: 'profile.private', params: {citizenType: citizenType}}"
           >
-            <router-link :to="{name: 'profile.private', params: {citizenType: citizenType}}">
-              <h3 class="text-center">
-                NEXT
-              </h3>
-            </router-link>
+            <h3 class="text-center">
+              NEXT
+            </h3>
           </v-btn>
         </v-col>
       </v-row>
@@ -154,7 +153,6 @@ import {Component, Prop} from "vue-property-decorator"
     }
 })
 export default class CitizenData extends Vue {
-    @Prop({type: String, required: true})
     private CITIZENSTYLES = {
         Teacher: "citizen-id__type--teacher", 
         Employer: "citizen-id__type--employer", 
