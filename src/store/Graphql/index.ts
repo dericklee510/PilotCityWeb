@@ -1,3 +1,5 @@
+import { TeacherProfile } from './../../views/Profile/PrivateProfile/Teacher/types';
+import { ITeacherQuery } from './types';
 /* eslint-disable */
 import { EMPLOYER_QUERY } from './const';
 import { 
@@ -8,14 +10,15 @@ import {
     MutationAction
 } from "vuex-module-decorators"
 import * as firebase from 'firebase/app'
-import {validateQuery} from "./validation"
+import {validateEmployerQuery, validateTeacherQuery} from "./validation"
 import {GraphQLClient} from 'graphql-request'
 import { IEmployerQuery } from './types'
+export {tableToDecimal, findOther} from "./helpers"
 @Module({ namespaced: true, name: "Graphql" })
 export default class Graphql extends VuexModule {
     private client = new GraphQLClient("https://pilotcity-firestore.appspot.com/graphql")
     public employerQueryData :IEmployerQuery | null = null
-
+    public teacherQueryData :ITeacherQuery | null = null
     @MutationAction({mutate:['employerQueryData']})
     async fetchQueryData(){
         let currentUser = firebase.auth().currentUser
@@ -74,7 +77,7 @@ export default class Graphql extends VuexModule {
     }
 
     get EmployerQueryisValid():boolean{
-       return (this.employerQueryData)?validateQuery(this.employerQueryData):false
+       return (this.employerQueryData)?validateEmployerQuery(this.employerQueryData):false
     }
     @Action({rawError:true})
     async SubmitEmployerQuery(){
@@ -87,5 +90,33 @@ export default class Graphql extends VuexModule {
             } catch(err) {
                 console.error(err.response.errors)
             }
+    }
+    get TeacherQueryisValid():boolean{
+        return this.teacherQueryData?validateTeacherQuery(this.teacherQueryData):false
+    }
+    @Action({mutate:['teacherQueryData']})
+    async submitTeacherQuery(teacherPage:TeacherProfile):ITeacherQuery|null{
+        let currentUser = firebase.auth().currentUser
+        if(currentUser){
+            return {
+                id_token: await currentUser.getIdToken(),
+                school_district: teacherPage.school.district,
+                school_name: teacherPage.school.name,
+                school_location: JSON.stringify(teacherPage.school.location),
+                bell_schedule: JSON.stringify(teacherPage.school.bellSchedules
+                classroom_room_location: teacherPage.classroom.location,
+                classroom_room_phone: teacherPage.classroom.phone_number,
+                extension: teacherPage.classroom.extension,
+                preferred: teacherPage.classroom.preferredCommunication // int
+                preferred_other: string
+    tool_equipment: string[]
+    courses_school_year: string
+    prep_period: number // int
+    course_information: string
+    enrolled_courses: string
+    enagement_alternative: boolean
+    purchase_emp_product: number // int
+            } as ITeacherQuery
+        }
     }
 }

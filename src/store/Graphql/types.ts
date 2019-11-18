@@ -47,7 +47,7 @@ export interface IEmployerQuery {
 
 export interface ITeacherQuery{
     id_token: string
-    school_district: number // int
+    school_district: string
     school_name: string
     school_location: string
     bell_schedule: string

@@ -524,6 +524,8 @@ import { min_value } from 'vee-validate/dist/rules'
 import { GraphqlStore } from '@/store'
 import {BellScheduleInput, CourseInput} from "./components"
 import {TeacherProfile} from "./types"
+import { ITeacherQuery } from '../../../../store/Graphql/types'
+import { tableToDecimal, findOther } from '../../../../store/Graphql'
 import { AutoCompleteAddress } from '../../../../components/GoogleMaps'
 extend('min_value', {
     ...min_value,
@@ -575,7 +577,7 @@ export default class Test extends CONST {
             location: '',
             phone_number: '',
             extension: '',
-            preferredCommunication: '',
+            preferredCommunication: [],
             available_equipment:[]
         },
         courses: {
@@ -589,7 +591,28 @@ export default class Test extends CONST {
             purchase_emp_product: ''
         }
     }
-    
+    teacherQuery(teacherPage:TeacherProfile):ITeacherQuery{
+      return {
+        id_token:"",
+        school_district:this.teacherProfile.school.district,
+        school_name:this.teacherProfile.school.name,
+        school_location:JSON.stringify(this.teacherProfile.school.location),
+        bell_schedule:JSON.stringify(this.teacherProfile.school.bellSchedules),
+        classroom_room_location:this.teacherProfile.classroom.location,
+        classroom_room_phone:this.teacherProfile.classroom.phone_number,
+        extension:this.teacherProfile.classroom.extension,
+        preferred:tableToDecimal( this.CLASSROOM_COMMUNICATION,this.teacherProfile.classroom.preferredCommunication),
+        preferred_other:findOther(this.CLASSROOM_COMMUNICATION,this.teacherProfile.classroom.preferredCommunication),
+        tool_equipment:this.teacherProfile.classroom.available_equipment,
+        courses_school_year:this.teacherProfile.courses.schoolYear,
+        prep_period:Number.parseInt(this.teacherProfile.courses.prepPeriod.charAt(1)),
+        course_information:JSON.stringify(this.teacherProfile.courses.classSchedules),
+        enrolled_courses:JSON.stringify(this.teacherProfile.programDetails.coursePrograms),
+        enagement_alternative:this.teacherProfile.programDetails.engagement_alternative,
+        purchase_emp_product:tableToDecimal(this.)
+        
+      }
+    }
     created() {}
 }
 </script> 

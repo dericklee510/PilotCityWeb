@@ -1175,7 +1175,7 @@ import Component from "vue-class-component"
 import * as Employer from "./types"
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate'
 import { ObserverInstance } from "@/utilities/validation"
-import { tableToDecimal, findOther } from "./helpers"
+import { tableToDecimal, findOther } from "@/store/Graphql"
 import { CONST } from './const'
 import { mask } from 'vue-the-mask'
 import { min_value } from 'vee-validate/dist/rules'
