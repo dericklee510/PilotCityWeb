@@ -11,7 +11,7 @@
       <v-row>
         <!-- insert Doka-profile-picture-component -->
         <v-col id="profileContainer">
-          <profile-upload v-model="citizeBase.profilePicture" />
+          <profile-upload v-model="citizenBase.profilePicture" />
           <!-- <div class="pc-profile-picture pc-profile-picture--page pc-vh-center" /> -->
         </v-col>
         <v-col
@@ -1229,7 +1229,7 @@ extend('min_value', {
     }
 })
 
-export default class Test extends CONST {
+export default class EmployerProfile extends CONST {
     get citizenType(){
         return this.$route.params.citizenType
     }
