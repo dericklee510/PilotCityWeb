@@ -11,7 +11,7 @@
       <v-row>
         <!-- insert Doka-profile-picture-component -->
         <v-col id="profileContainer">
-          <profile-upload v-model="profile_img_url" />
+          <profile-upload v-model="citizeBase.profilePicture" />
           <!-- <div class="pc-profile-picture pc-profile-picture--page pc-vh-center" /> -->
         </v-col>
         <v-col
@@ -160,7 +160,8 @@
                           rules="required"
                         >
                           <pcTextfield
-                            v-model="citizenBase.first_name"
+                            v-model="citizen.first_name"
+                            :value.sync="citizenBase.firstName"
                             :dark-mode="true"
                             title="FIRST NAME"
                             placeholder="First Name"
@@ -172,24 +173,12 @@
                           rules="required"
                         >
                           <pcTextfield
-                            v-model="citizenBase.last_name"
+                            v-model="citizenBase.lastName"
+                            :value.sync="citizen.last_name"
                             :error-messages="errors"
                             :dark-mode="true"
                             title="LAST NAME"
                             placeholder="Last Name"
-                          />
-                        </ValidationProvider>
-                        <ValidationProvider
-                          v-slot="{errors}"
-                          rules="required"
-                        >
-                          <pcTextfield
-                            v-model="citizenBase.phone"
-                            v-mask="'{###} ###-####'"
-                            :error-messages="errors"
-                            :dark-mode="true"
-                            title="PHONE NUMBER"
-                            placeholder="(###) ###-####"
                           />
                         </ValidationProvider>
                         <ValidationProvider
@@ -1218,7 +1207,7 @@ import { mask } from 'vue-the-mask'
 import { min_value } from 'vee-validate/dist/rules'
 import {ProfileUpload} from '@/components/Doka'
 import { GraphqlStore } from '@/store'
-
+import {citizenBaseToProfile} from "./helpers"
 extend('min_value', {
     ...min_value,
     message: "This field cannot be less than {min}"
@@ -1258,7 +1247,13 @@ export default class Test extends CONST {
     private changeCitizenType(intype: string): void {
         this.citizenType = intype
     }
-    public citizenBase: Employer.ICitizenBase = {} as Employer.ICitizenBase;
+    public citizenBase: Employer.ICitizenBase = {
+      honorific:"",
+      firstName:"",
+      lastName:"",
+      profilePicture:"",
+      citizenType:this.$route.params.citizenType
+    }
     public citizen: Employer.Citizen = {} as Employer.Citizen
     public organization: Employer.Organization = {
         industry: [] as string[],
@@ -1357,8 +1352,10 @@ export default class Test extends CONST {
     }
     async syncStorage() {
         this.loading = true
+
         try{
             if (await (this.$refs.observer as ObserverInstance).validate()) { 
+                GraphqlStore.fetchCitizenProfile(citizenBaseToProfile(this.citizenBase))
                 this.syncStorageCitizen()
                 this.syncStorageOrganization()
                 this.syncStorageProgramDetails()
@@ -1370,6 +1367,9 @@ export default class Test extends CONST {
             console.log(err)
         }
         this.loading = false
+    }
+    submitPublicProfile(){
+      // GraphqlStore.
     }
     get Name() {
         return `${this.citizen.first_name} ${this.citizen.last_name}`

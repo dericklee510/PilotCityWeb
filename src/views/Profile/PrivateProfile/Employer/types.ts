@@ -58,3 +58,9 @@ export interface Internship {
 
 }
 
+export interface EmployerPage{
+    Citizen:Citizen
+    Organization:Organization
+    ProgramDetails:ProgramDetails
+    Internship:Internship
+}

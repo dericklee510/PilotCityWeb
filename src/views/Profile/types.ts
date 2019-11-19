@@ -2,7 +2,6 @@ export interface ICitizenBase{
     honorific: string;
     firstName: string;
     lastName: string;
-    phone: string;
-    profilePicture: any;
+    profilePicture: string;
     citizenType: string;
 }
