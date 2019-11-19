@@ -10,6 +10,7 @@
       ref="address"
       :enable-geolocation="true"
       types=""
+      :hide-details="true"
       class="pc-input__autocomplete"
       :error-messages="error"
       classname="form-control"

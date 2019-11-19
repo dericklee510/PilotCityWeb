@@ -11,7 +11,7 @@
       <v-row>
         <!-- insert Doka-profile-picture-component -->
         <v-col id="profileContainer">
-          <profile-upload v-model="profile_img_url"/>
+          <profile-upload v-model="profile_img_url" />
           <!-- <div class="pc-profile-picture pc-profile-picture--page pc-vh-center" /> -->
         </v-col>
         <v-col
@@ -146,8 +146,21 @@
                           v-slot="{errors}"
                           rules="required"
                         >
+                          <pcSelect
+                            v-model="citizenBase.honorific"
+                            :dark-mode="true"
+                            title="TITLE"
+                            :items="['Mr.', 'Mrs.', 'Ms.', 'no preference']" 
+                            placeholder="How may we address you?"
+                            :error-messages="errors"
+                          />
+                        </ValidationProvider>
+                        <ValidationProvider
+                          v-slot="{errors}"
+                          rules="required"
+                        >
                           <pcTextfield
-                            v-model="citizen.first_name"
+                            v-model="citizenBase.first_name"
                             :dark-mode="true"
                             title="FIRST NAME"
                             placeholder="First Name"
@@ -159,7 +172,7 @@
                           rules="required"
                         >
                           <pcTextfield
-                            v-model="citizen.last_name"
+                            v-model="citizenBase.last_name"
                             :error-messages="errors"
                             :dark-mode="true"
                             title="LAST NAME"
@@ -171,11 +184,12 @@
                           rules="required"
                         >
                           <pcTextfield
-                            v-model="citizen.position"
+                            v-model="citizenBase.phone"
+                            v-mask="'{###} ###-####'"
                             :error-messages="errors"
                             :dark-mode="true"
-                            title="POSITION"
-                            placeholder="Role"
+                            title="PHONE NUMBER"
+                            placeholder="(###) ###-####"
                           />
                         </ValidationProvider>
                         <ValidationProvider
@@ -188,6 +202,18 @@
                             :dark-mode="true"
                             title="ORGANIZATION"
                             placeholder="Company Name"
+                          />
+                        </ValidationProvider>
+                        <ValidationProvider
+                          v-slot="{errors}"
+                          rules="required"
+                        >
+                          <pcTextfield
+                            v-model="citizen.position"
+                            :error-messages="errors"
+                            :dark-mode="true"
+                            title="POSITION"
+                            placeholder="Role"
                           />
                         </ValidationProvider>
                       </v-col>
@@ -1211,7 +1237,7 @@ export default class Test extends CONST {
     set citizenType(type: string){
         this.citizenType = type
     }
-    profile_img_url:string = ""
+    profile_img_url: string = ""
     private CITIZENSTYLES = {
         Teacher: "citizen-id__type--teacher",
         Employer: "citizen-id__type--employer",
@@ -1222,7 +1248,7 @@ export default class Test extends CONST {
     private changeCitizenType(intype: string): void {
         this.citizenType = intype
     }
-
+    public citizenBase: Employer.ICitizenBase = {} as Employer.ICitizenBase;
     public citizen: Employer.Citizen = {} as Employer.Citizen
     public organization: Employer.Organization = {
         industry: [] as string[],
@@ -1322,7 +1348,7 @@ export default class Test extends CONST {
     async syncStorage() {
         this.loading = true
         try{
-            if (await (this.$refs.observer as ObserverInstance).validate()) {
+            if (await (this.$refs.observer as ObserverInstance).validate()) { 
                 this.syncStorageCitizen()
                 this.syncStorageOrganization()
                 this.syncStorageProgramDetails()

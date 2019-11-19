@@ -24,7 +24,8 @@
         >
           <pcSelect
             v-model="entry.value.weeklySchedule"
-            :error="error"
+            :rules="rules.required"
+            error
             :dark-mode="true"
             :items="['M','T','W','Th','F','Sa','S']"
             title="MONDAY - FRIDAY"
@@ -124,6 +125,11 @@ classEntries: {value: IBellSchedule; id: number}[] = [
         id:0
     }
 ]
+public rules = {
+    required: value => !!value || 'Required.',
+    min: v => v.length >= 8 || 'Min 8 characters',
+    emailMatch: () => ('The email and password you entered don\'t match')
+};
 removeSchedule(id: number){
     this.classEntries.splice(this.classEntries.findIndex((entry => entry.id ==id)),1)
 }

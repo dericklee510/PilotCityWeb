@@ -11,7 +11,10 @@
       <v-row>
         <!-- insert Doka-profile-picture-component -->
         <v-col id="profileContainer">
-          <profile-upload class="pc-profile-picture pc-profile-picture--page pc-vh-center" v-model="profile_img_url" />
+          <profile-upload
+            v-model="profile_img_url"
+            class="pc-profile-picture pc-profile-picture--page pc-vh-center"
+          />
         </v-col>
         <v-col
           cols="12"
@@ -250,7 +253,7 @@
                             {{ errors[0]?'*':'' }}
                           </h4>
                         </v-row>
-                        <BellScheduleInput v-model="teacherProfile.school.bellSchedules" />
+                        <BellScheduleInput :error="true" v-model="teacherProfile.school.bellSchedules" />
                       </ValidationProvider>
                     </v-col>
                   </v-row>
@@ -620,7 +623,7 @@ import {sortBy} from 'lodash'
 export default class TeacherProfile extends CONST {
     DISTRICT_NAMES: string [] = []
     SCHOOL_NAMES: string [] = []
-    profile_img_url:string = ""
+    profile_img_url: string = ""
     get citizenType(){
         return this.$route.params.citizenType
     }
