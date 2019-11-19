@@ -37,7 +37,7 @@
       </v-col>
     </v-row>
     <v-container fluid>
-      <router-view :name="'Teacher'" />
+      <router-view :name="this.$route.params.citizenType" />
     </v-container>
   </v-container>
 </template>

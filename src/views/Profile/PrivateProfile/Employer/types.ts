@@ -63,3 +63,10 @@ export interface EmployerPage{
     ProgramDetails:ProgramDetails
     Internship:Internship
 }
+
+export interface ICitizenBase{
+    honorific: string;
+    firstName: string;
+    lastName: string;
+    phone: number;
+}
