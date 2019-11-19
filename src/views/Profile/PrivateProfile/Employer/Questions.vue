@@ -1335,6 +1335,9 @@ export default class Test extends CONST {
         }
         this.loading = false
     }
+    submitPublicProfile(){
+      // GraphqlStore.
+    }
     get Name() {
         return `${this.citizen.first_name} ${this.citizen.last_name}`
     }

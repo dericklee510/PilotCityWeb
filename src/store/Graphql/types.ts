@@ -10,7 +10,7 @@ export interface IEmployerQuery {
     organization_location_lat: number; //float
     organization_industry: number;
     organization_industry_other: string;
-    organization_product_list: string [];
+    organization_product_list: string[];
     organization_product_employee_count: string;
     program_externship_time_first: string; //date YYYY-MM-DD
     program_externship_time_second: string; //date YYYY-MM-DD
@@ -21,7 +21,7 @@ export interface IEmployerQuery {
     projects_max: number;
     projects_engagement: number;
     projects_engagement_2: number;
-    projects_solutions:string[]
+    projects_solutions: string[]
     // projects_requests: string []; //BROKEN 
     // projects_missions: string []; //BROKEN 
     // projects_specifications: string []; //BROKEN 
@@ -45,7 +45,7 @@ export interface IEmployerQuery {
     internships_position: number;
 }
 
-export interface ITeacherQuery{
+export interface ITeacherQuery {
     id_token: string
     school_district: string
     school_name: string
@@ -63,4 +63,16 @@ export interface ITeacherQuery{
     enrolled_courses: string
     enagement_alternative: boolean
     purchase_emp_product: number // int
+}
+
+export interface publicCitizenProfile {
+    id_token: string,
+    creation_date: string,
+    last_update: string,
+    first_name: string,
+    last_name: string,
+    citizen_type: string,
+    citizen_description: string | null,
+    title: string,
+    profile_img_url: string | null
 }
