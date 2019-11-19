@@ -1,6 +1,5 @@
 <template>
-  <div>
-    im broken
+  <div class="profile__schedule">
     <v-row
       v-for="entry in classEntries"
       :key="entry.id"

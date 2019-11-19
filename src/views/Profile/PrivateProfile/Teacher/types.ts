@@ -2,6 +2,7 @@ import { CoursePrograms } from './components/CoursePrograms/types'
 import { ICourses } from './components/CourseInput/types'
 import { AutoCompleteAddress } from '@/components/GoogleMaps'
 import { IBellSchedule } from './components/BellScheduleInput/types'
+export { ICitizenBase } from '../../types'
 export interface TeacherProfile{
     citizen: {
         title: string;

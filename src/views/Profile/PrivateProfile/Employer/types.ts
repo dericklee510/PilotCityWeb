@@ -1,6 +1,7 @@
 export {IEmployerQuery} from "@/store/Graphql/types"
 import { ProgramDetails } from './types'
 import {AutoCompleteAddress} from "@/components/GoogleMaps"
+export { ICitizenBase }  from '../../types'
 export interface Citizen {
     first_name: string;
     last_name: string;
@@ -57,16 +58,3 @@ export interface Internship {
 
 }
 
-export interface EmployerPage{
-    Citizen:Citizen
-    Organization:Organization
-    ProgramDetails:ProgramDetails
-    Internship:Internship
-}
-
-export interface ICitizenBase{
-    honorific: string;
-    firstName: string;
-    lastName: string;
-    phone: number;
-}

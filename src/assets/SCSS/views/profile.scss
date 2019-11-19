@@ -82,7 +82,11 @@
     object-fit: cover;
     width: 100%;
 }
-
+#save_profile-button{
+    border: 0.75px dashed #C7C8CA;
+    color: #fff;
+    height: 75px;
+}
 .profile__switch{
     font-family: Raleway;
     font-style: normal;
@@ -105,6 +109,7 @@
 #profileFields .item-subheaders{
     border-bottom: 1px solid #AE90B0;
 }
+
 /* Media Queries */
 @media only screen and (min-width : 1900px){
     #profileContainer .pc-profile-picture{
