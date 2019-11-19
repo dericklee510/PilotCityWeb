@@ -68,5 +68,6 @@ export interface ICitizenBase{
     honorific: string;
     firstName: string;
     lastName: string;
-    phone: number;
+    profilePicture:string
+    citizenType:string
 }

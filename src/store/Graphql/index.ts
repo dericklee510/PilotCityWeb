@@ -1,5 +1,5 @@
 import { TeacherProfile } from './../../views/Profile/PrivateProfile/Teacher/types';
-import { ITeacherQuery, publicCitizenProfile } from './types';
+import { ITeacherQuery, IPublicCitizenProfile } from './types';
 /* eslint-disable */
 import { EMPLOYER_QUERY } from './const';
 import {
@@ -18,10 +18,10 @@ export { tableToDecimal, findOther } from "./helpers"
 export default class Graphql extends VuexModule {
     private client = new GraphQLClient("https://pilotcity-firestore.appspot.com/graphql")
     
-    public citizenProfileData: publicCitizenProfile | null = null
+    public citizenProfileData: IPublicCitizenProfile | null = null
 
     @MutationAction({mutate:['citizenProfileData']})
-    async fetchCitizenProfile(publicProfile:publicCitizenProfile){
+    async fetchCitizenProfile(publicProfile:IPublicCitizenProfile){
         let {id_token , ...rest} = publicProfile
         let currentUser = firebase.auth().currentUser
         if(!currentUser)

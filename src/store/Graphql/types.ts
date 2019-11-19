@@ -65,10 +65,10 @@ export interface ITeacherQuery {
     purchase_emp_product: number // int
 }
 
-export interface publicCitizenProfile {
+export interface IPublicCitizenProfile {
     id_token: string,
-    creation_date: string,
-    last_update: string,
+    // creation_date: string,
+    // last_update: string,
     first_name: string,
     last_name: string,
     citizen_type: string,
