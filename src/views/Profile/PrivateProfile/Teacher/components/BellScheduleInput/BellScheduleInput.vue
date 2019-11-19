@@ -71,7 +71,7 @@
         >
           <h3
             key="entry.id+'icon'"
-            style="position:absolute; top: 25%; color: #B73430;"
+            style="position:absolute; top: 40%; color: #B73430;"
             class="pc-vh-center"
           >
             <i
@@ -84,8 +84,8 @@
     </v-col>
     <v-col
       cols="12"
-      :md="classEntries.length > 1? '10' : '11'"
-      :xl="classEntries.length > 1? '9' : '10'"
+      :md="classEntries.length > 1? '12' : '11'"
+      :xl="classEntries.length > 1? '10' : '9'"
     >
       <v-btn
         depressed
