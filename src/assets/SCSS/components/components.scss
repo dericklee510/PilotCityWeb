@@ -100,10 +100,76 @@
     background-color: transparent;
     color: #C7C8CA;
 }
+
 #pc-app .profile__schedule .pc-button{
     border: 0.75px dashed #C7C8CA;
     box-sizing: border-box;
     background-color: transparent;
     color: #C7C8CA;
+}
+
+#pc-app .pc-button{
+    &--dark{
+        color: #fff;
+        background-color: #404142;
+    }
+    &--light{
+        color: #000;
+        background-color: #BFBFBF;
+    }
+    &--round{
+        border-radius: 50%;
+    }
+    &.elongated{
+        padding: 0 50px;
+    }
+    &__teacher{
+        background-color: $pc-pink;
+        color: #fff;
+        &--inverted{
+            background-color: #fff;
+            color: $pc-pink;
+        }
+    }
+    &__employer{
+        background-color: $pc-purple;
+        color: #fff;
+        &--inverted{
+            background-color: #fff;
+            color: $pc-purple;
+        }
+    }
+    &__student{
+        background-color: $pc-green;
+        color: #fff;
+        &--inverted{
+            background-color: #fff;
+            color: $pc-green;
+        }
+    }
+    font-weight: 900;
+    line-height: 2.9em;
+    text-align: center;
+    letter-spacing: 0.125em;
+}
+#pc-app .pc-button.theme--light{
+    &.v-btn.v-btn--outlined{
+        border: 1px solid #BFBFBF;
+    }
+    
+}
+
+/* PC-HEADER - COMPONENT */
+#pc-app .pc-header{
+    button{
+        color: #fff !important;
+    }
+}
+.v-toolbar.pc-header.v-sheet{
+    background-color: #414042;
+    flex: 0 1 auto;
+}
+.pc-header .v-toolbar__content{
+    margin: .5em 0em;
 }
 

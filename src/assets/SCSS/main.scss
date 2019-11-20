@@ -13,6 +13,9 @@ body {
   word-wrap: break-word;
 }
 p {
+    &.dark{
+        color: #fff;
+    }
     font-family: Raleway;
     font-style: italic;
     font-weight: 500;
@@ -22,7 +25,10 @@ p {
     align-items: center;
     letter-spacing: 0.039em;
 }
-h1 { 
+h1 {
+    &.dark{
+        color: #fff;
+    }
     font-family: Raleway;
     font-style: normal;
     font-weight: 800;
@@ -33,6 +39,9 @@ h1 {
     letter-spacing: 0.025em;
 }
 h2{
+    &.dark{
+        color: #fff;
+    }
     font-family: Raleway;
     font-style: normal;
     font-weight: 800;
@@ -43,6 +52,9 @@ h2{
     letter-spacing: 0.025em;
 }
 h3{
+    &.dark{
+        color: #fff;
+    }
     font-family: Raleway;
     font-style: normal;
     font-weight: 800;
@@ -53,6 +65,9 @@ h3{
     letter-spacing: 0.025em;
 }
 h4{
+    &.dark{
+        color: #fff;
+    }
     font-family: Raleway;
     font-style: normal;
     font-weight: 800;
@@ -63,6 +78,9 @@ h4{
     letter-spacing: 0.025em;
 }
 h5{
+    &.dark{
+        color: #fff;
+    }
     font-family: Raleway;
     font-style: normal;
     font-weight: 800;
@@ -73,6 +91,9 @@ h5{
     letter-spacing: 0.025em;
 }
 h6{
+    &.dark{
+        color: #fff;
+    }
     font-family: Raleway;
     font-style: normal;
     font-weight: 800;
@@ -91,7 +112,6 @@ h6{
         caret-color: #000 !important;
     }
 }
-#pc-app
 .pc-vh-center{
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
@@ -100,8 +120,8 @@ h6{
     left: 50% !important;
     transform: translate(-50%, 0%) !important;
 }
-.pc-container{
-    margin: 0 2.5%;
+#pc-app .container.pc-container{
+    padding: 0 2.5%;
 }
 .pc-background{
     width: 100%;
@@ -122,19 +142,6 @@ h6{
 }
 
 /* COMOPNENT STYLES */
-
-#pc-app .pc-header{
-    button{
-        color: #fff !important;
-    }
-}
-.v-toolbar.pc-header.v-sheet{
-    background-color: #414042;
-    flex: 0 1 auto;
-}
-.pc-header .v-toolbar__content{
-    margin: .5em 0em;
-}
 .pc-title {
     &--header{
         padding: 0px 16px;
@@ -145,6 +152,7 @@ h6{
       max-width: 2.5em;
     }
 }
+
 .pc-menu .v-list{
     padding: 0;
 }
@@ -156,19 +164,7 @@ h6{
         background-color:   #4D4D4F
     }
 }
-#pc-app .pc-button{
-    color: #fff;
-    font-weight: 900;
-    line-height: 2.9em;
-    text-align: center;
-    letter-spacing: 0.125em;
-}
-#pc-app .pc-button.theme--light{
-    &.v-btn.v-btn--outlined{
-        border: 1px solid #BFBFBF;
-    }
-    
-}
+
 #pc-app .pc-input{
     font-family: Raleway;
     font-style: normal;
