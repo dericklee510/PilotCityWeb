@@ -644,8 +644,11 @@ export default class TeacherProfile extends CONST {
     DISTRICT_NAMES: string [] = []
     SCHOOL_NAMES: string [] = []
     profile_img_url: string = ""
-    get citizenType(){
-        return this.$route.params.citizenType
+    get citizenType() {
+        if (!localStorage.citizenType){
+            return this.$route.params.citizenType
+        }
+        else return localStorage.citizenType
     }
     private CITIZENSTYLES = {
         Teacher: "citizen-id__type--teacher",

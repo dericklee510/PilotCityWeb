@@ -1248,11 +1248,11 @@ export default class EmployerProfile extends CONST {
         this.citizenType = intype
     }
     public citizenBase: Employer.ICitizenBase = {
-      honorific:"",
-      firstName:"",
-      lastName:"",
-      profilePicture:"",
-      citizenType:this.$route.params.citizenType
+        honorific:"",
+        firstName:"",
+        lastName:"",
+        profilePicture:"",
+        citizenType:this.$route.params.citizenType
     }
     public citizen: Employer.Citizen = {} as Employer.Citizen
     public organization: Employer.Organization = {
@@ -1369,7 +1369,7 @@ export default class EmployerProfile extends CONST {
         this.loading = false
     }
     submitPublicProfile(){
-      // GraphqlStore.
+        // GraphqlStore.
     }
     get Name() {
         return `${this.citizen.first_name} ${this.citizen.last_name}`

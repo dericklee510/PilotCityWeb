@@ -18,9 +18,11 @@
           id="profileSwitch"
           style="display: flex"
         >
-          <v-switch
+        <!-- disabled until my progams is developed -->
+          <!-- <v-switch
             text
             readonly
+            @click="switchProfile"
           >
             <template v-slot:label>
               <label class="profile__switch profile__switch--active">
@@ -32,7 +34,7 @@
                 private
               </label>
             </template>
-          </v-switch>
+          </v-switch> -->
         </div>
       </v-col>
     </v-row>
@@ -50,7 +52,13 @@ import Component from "vue-class-component"
 @Component
 export default class Profile extends Vue {
     get citizenType() {
-        return this.$route.params.citizenType
+        if (!localStorage.citizenType){
+            return this.$route.params.citizenType
+        }
+        else return localStorage.citizenType
+    }
+    public switchProfile(){
+        this.$router.push({name: 'profile.public'})
     }
 }
 </script>

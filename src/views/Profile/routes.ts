@@ -18,8 +18,13 @@ const routes: RouteConfig[] = [
     },
     {
         name: "profile.public",
-        path: `/profile/:id`,
-        component: Profile.Public.PublicProfile,
+        path: `/profile/public`,
+        component: Profile.Public.PublicProfile
     }
+    // {
+    //     name: "profile.public",
+    //     path: `/profile/:id`, view public profile(s)
+    //     component: Profile.Public.PublicProfile
+    // }
 ]
 export default routes
