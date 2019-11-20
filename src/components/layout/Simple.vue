@@ -21,5 +21,5 @@ import DefaultFooter from "@/components/layout/footer/Simple.vue"
         PCHeader: DefaultHeader
     }
 })
-export default class App extends Vue { }
+export default class Simple extends Vue { }
 </script>

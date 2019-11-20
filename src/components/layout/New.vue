@@ -12,14 +12,14 @@
 <script lang="ts">
 import "@/assets/SCSS/main.scss"
 import Vue from "vue"
-import DefaultHeader from "@/components/layout/header/Default.vue"
+import DefaultHeader from "@/components/layout/header/New.vue"
 import Component from "vue-class-component"
-import DefaultFooter from "@/components/layout/footer/Default.vue"
+import DefaultFooter from "@/components/layout/footer/Simple.vue"
 @Component({
     components: {
-        PCFooter: DefaultFooter,
+        PCfooter: DefaultFooter,
         PCHeader: DefaultHeader
     }
 })
-export default class Default extends Vue { }
+export default class New extends Vue { }
 </script>

@@ -18,6 +18,7 @@ import { authState } from 'rxfire/auth'
 
 import Default from "@/components/layout/Default.vue"
 import Simple from "@/components/layout/Simple.vue"
+import New from "@/components/layout/New.vue"
 
 import VuetifyGoogleAutocomplete from 'vuetify-google-autocomplete'
 
@@ -30,6 +31,7 @@ Vue.use(VuetifyGoogleAutocomplete, {
 })
 Vue.component('default-layout', Default)
 Vue.component('simple-layout', Simple)
+Vue.component('new-layout', New )
 Vue.config.productionTip = false
 firestore // enables firebaseApp and firestore
 
