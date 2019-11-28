@@ -1,8 +1,7 @@
 import { IPublicCitizenProfile } from './../../../../store/Graphql/types';
 import { ICitizenBase } from './types';
-export const citizenBaseToProfile = (base:ICitizenBase):IPublicCitizenProfile => {
+export const citizenBaseToProfile = (base:ICitizenBase):Omit<IPublicCitizenProfile,'id_token'> => {
     return {
-        id_token:"",
 // creation_date
 // last_update
 first_name:base.firstName,

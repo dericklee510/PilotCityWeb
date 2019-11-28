@@ -1,7 +1,7 @@
 import { TeacherProfile } from './../../views/Profile/PrivateProfile/Teacher/types';
 import { ITeacherQuery, IPublicCitizenProfile } from './types';
 /* eslint-disable */
-import { EMPLOYER_QUERY } from './const';
+import { EMPLOYER_QUERY, PUBLIC_PROFILE_MUTATION } from './const';
 import {
     Module,
     VuexModule,
@@ -16,21 +16,33 @@ import { IEmployerQuery } from './types'
 export { tableToDecimal, findOther } from "./helpers"
 @Module({ namespaced: true, name: "Graphql" })
 export default class Graphql extends VuexModule {
-    private client = new GraphQLClient("https://pilotcity-firestore.appspot.com/graphql")
+    public client = new GraphQLClient("https://20191119t140110-dot-pilotcity-firestore.appspot.com/graphql")
     
     public citizenProfileData: IPublicCitizenProfile | null = null
 
     @MutationAction({mutate:['citizenProfileData']})
-    async fetchCitizenProfile(publicProfile:IPublicCitizenProfile){
-        let {id_token , ...rest} = publicProfile
+    async fetchCitizenProfile(publicProfile:(Omit<IPublicCitizenProfile,'id_token'>)){
         let currentUser = firebase.auth().currentUser
         if(!currentUser)
             throw("not logged in")
         return {
             citizenProfileData:{
-                id_token:await currentUser.getIdToken,
-                ...rest
+                id_token:await currentUser.getIdToken(),
+                ...publicProfile
             }
+        }
+    }
+    @Action({})
+    async createCitizenProfile(){
+        if(!this.citizenProfileData)
+            throw("citizenProfileData is undefined")
+        let data;
+        try {
+            console.log(PUBLIC_PROFILE_MUTATION, this.citizenProfileData.id_token)
+            data = await this.client.request(PUBLIC_PROFILE_MUTATION, this.citizenProfileData);
+            console.log(data)
+        } catch (err) {
+            console.error(err.response.errors)
         }
     }
     public employerQueryData: IEmployerQuery | null = null
@@ -97,15 +109,13 @@ export default class Graphql extends VuexModule {
     }
     @Action({ rawError: true })
     async SubmitEmployerQuery() {
-        if (!this.EmployerQueryisValid)
-            throw ("employerQueryData is not valid")
-        // this.EmployerQueryisValid
+        if (this.employerQueryData && validateEmployerQuery(this.employerQueryData)){
         let data;
         try {
             data = await this.client.request(EMPLOYER_QUERY, this.employerQueryData as IEmployerQuery);
         } catch (err) {
             console.error(err.response.errors)
-        }
+        }}
     }
     get TeacherQueryisValid(): boolean {
         return this.teacherQueryData ? validateTeacherQuery(this.teacherQueryData) : false

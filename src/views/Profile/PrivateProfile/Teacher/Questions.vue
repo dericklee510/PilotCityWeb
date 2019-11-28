@@ -620,7 +620,7 @@ import {sortBy} from 'lodash'
     }
 })
 
-export default class TeacherProfile extends CONST {
+export default class TeacherProfilePage extends CONST {
     DISTRICT_NAMES: string [] = []
     SCHOOL_NAMES: string [] = []
     profile_img_url: string = ""

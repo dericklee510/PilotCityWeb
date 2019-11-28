@@ -11,7 +11,7 @@
       <v-row>
         <!-- insert Doka-profile-picture-component -->
         <v-col id="profileContainer">
-          <profile-upload v-model="citizeBase.profilePicture" />
+          <profile-upload v-model="citizenBase.profilePicture" />
           <!-- <div class="pc-profile-picture pc-profile-picture--page pc-vh-center" /> -->
         </v-col>
         <v-col
@@ -46,13 +46,13 @@
                         md="12"
                       >
                         <v-btn
-                          :id="CITIZENSTYLES[citizenType]"
+                          :id="CITIZENSTYLES[citizenBase.citizenType]"
                           v-bind="attrs"
                           rounded
                           v-on="on"
                         >
                           <h2 class="text-capitalize pr-5 pl-5">
-                            {{ citizenType }}
+                            {{ citizenBase.citizenType }}
                           </h2>
                         </v-btn>
                       </v-col>
@@ -1196,8 +1196,10 @@ import { CONST } from './const'
 import { mask } from 'vue-the-mask'
 import { min_value } from 'vee-validate/dist/rules'
 import {ProfileUpload} from '@/components/Doka'
-import { GraphqlStore } from '@/store'
+import { GraphqlStore, AuthStore } from '@/store'
 import {citizenBaseToProfile} from "./helpers"
+import { IPublicCitizenProfile } from '../../../../store/Graphql/types'
+import {EmployerFetch} from "./gql"
 extend('min_value', {
     ...min_value,
     message: "This field cannot be less than {min}"
@@ -1220,12 +1222,6 @@ extend('min_value', {
 })
 
 export default class Test extends CONST {
-    get citizenType(){
-        return this.$route.params.citizenType
-    }
-    set citizenType(type: string){
-        this.citizenType = type
-    }
     profile_img_url: string = ""
     private CITIZENSTYLES = {
         Teacher: "citizen-id__type--teacher",
@@ -1234,15 +1230,12 @@ export default class Test extends CONST {
     }
     private AVAILABLETYPES: string[] = ["Teacher", "Employer", "Student"]
     private ispublic: boolean = true;
-    private changeCitizenType(intype: string): void {
-        this.citizenType = intype
-    }
     public citizenBase: Employer.ICitizenBase = {
       honorific:"",
       firstName:"",
       lastName:"",
       profilePicture:"",
-      citizenType:this.$route.params.citizenType
+      citizenType:""
     }
     public citizen: Employer.Citizen = {} as Employer.Citizen
     public organization: Employer.Organization = {
@@ -1345,7 +1338,6 @@ export default class Test extends CONST {
 
         try{
             if (await (this.$refs.observer as ObserverInstance).validate()) { 
-                GraphqlStore.fetchCitizenProfile(citizenBaseToProfile(this.citizenBase))
                 this.syncStorageCitizen()
                 this.syncStorageOrganization()
                 this.syncStorageProgramDetails()
@@ -1358,20 +1350,23 @@ export default class Test extends CONST {
         }
         this.loading = false
     }
-    submitPublicProfile(){
-      // GraphqlStore.
+    async submitPublicProfile(){
+      await GraphqlStore.fetchCitizenProfile(citizenBaseToProfile(this.citizenBase))
+      await GraphqlStore.createCitizenProfile()
     }
     get Name() {
         return `${this.citizen.first_name} ${this.citizen.last_name}`
     }
-    async fetchQueryData(){
-        await GraphqlStore.fetchQueryData()
+    async submitProfile(){
+      await this.submitPublicProfile()
+      await GraphqlStore.fetchQueryData()
+      await GraphqlStore.SubmitEmployerQuery()
     }
-    async query(){
-        await GraphqlStore.SubmitEmployerQuery()
-    }
-    created() {
-        GraphqlStore.EmployerQueryisValid
+    async created() {
+      this.citizenBase.citizenType = this.$route.params.citizenType
+      if(AuthStore.user){
+        console.log(await GraphqlStore.client.request(EmployerFetch,{user_id:AuthStore.user.uid}))
+        }
     }
 }
 </script> 

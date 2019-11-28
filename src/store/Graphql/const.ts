@@ -1,4 +1,5 @@
-export const EMPLOYER_QUERY = `mutation createEmployerProfile(
+import gql from 'graphql-tag';
+export const EMPLOYER_QUERY = gql`mutation createEmployerProfile(
   $id_token: String!,
   $citizen_first_name: String!,
   $citizen_last_name: String!,
@@ -85,3 +86,22 @@ export const EMPLOYER_QUERY = `mutation createEmployerProfile(
     internships_position: $internships_position
   ) {user_id}
 }`
+
+export const PUBLIC_PROFILE_MUTATION = `mutation createPublicCitizenProfile(
+$id_token: String!,
+$first_name: String!,
+$last_name: String!,
+$citizen_type: String!,
+$title: String,
+$profile_img_url: String! ,
+) {
+  createPublicCitizenProfile(
+    id_token:$id_token
+    first_name:$first_name
+    last_name:$last_name
+    citizen_type:$citizen_type
+    title:$title
+    profile_img_url:$profile_img_url
+  ){user_id}
+}
+`
