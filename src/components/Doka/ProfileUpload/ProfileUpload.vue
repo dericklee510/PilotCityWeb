@@ -48,12 +48,13 @@ import { Prop } from 'vue-property-decorator'
 })
 export default class ProfileUpload extends Vue {
     @Prop()
-    value!:string 
+    value!: string 
     
     emitLink(){
-      if(AuthStore.user){
-        console.log("working",AuthStore.user.photoURL)
-        this.$emit('input',AuthStore.user.photoURL)}
+        if(AuthStore.user){
+            console.log("working",AuthStore.user.photoURL)
+            this.$emit('input', AuthStore.user.photoURL)
+        }
     }
 
     get ProfilePicture(): filepond.ServerFileReference[] {

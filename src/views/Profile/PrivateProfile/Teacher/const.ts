@@ -42,8 +42,8 @@ export class CONST extends Vue{
         'No, I strongly prefer in-person engagement'
     ]  
     public PROGRAM_PURCHASE = [
-        'Yes, I can purchase',
-        'No, I cannot purchase',
+        'Yes, our school can purchase',
+        'No, our school cannot purchase',
         'It is possible, but not guaranteed'
     ]
 

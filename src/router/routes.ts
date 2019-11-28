@@ -9,6 +9,7 @@ import {
     email
 } from "@/views/Login"
 import test from "@/views/Test"
+import Home from "@/views/Home.vue"
 import {routes as ProfileRoutes} from "@/views/Profile"
 import {routes as SignupRoutes} from "@/views/Signup"
 import {routes as LoginRoutes} from "@/views/Login"
@@ -36,7 +37,17 @@ let routes: RouteConfig [] = [
         component: test
     },
     {
-        path: `/*`
+        path: "/",
+        name: 'home',
+        component: Home
+    },
+    {
+        path: "",
+        redirect: '/'
+    },
+    {
+        path: `*`,
+        redirect: '/'
     }
 ]
 

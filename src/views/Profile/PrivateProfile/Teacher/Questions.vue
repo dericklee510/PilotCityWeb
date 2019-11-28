@@ -151,6 +151,7 @@
                       >
                         <pcSelect
                           v-model="teacherProfile.citizen.title"
+                          :value.sync="citizenBase.honorific"
                           :dark-mode="true"
                           title="TITLE"
                           :items="['Mr.', 'Mrs.', 'Ms.', 'no preference']" 
@@ -164,6 +165,7 @@
                       >
                         <pcTextfield
                           v-model="teacherProfile.citizen.first_name"
+                          :value.sync="citizenBase.firstName"
                           :dark-mode="true"
                           title="FIRST NAME"
                           placeholder="First Name"
@@ -176,10 +178,24 @@
                       >
                         <pcTextfield
                           v-model="teacherProfile.citizen.last_name"
+                          :value.sync="citizenBase.lastName"
                           :dark-mode="true"
                           title="LAST NAME"
                           placeholder="Last Name"
                           :error-messages="errors"
+                        />
+                      </ValidationProvider>
+                      <ValidationProvider
+                        v-slot="{errors}"
+                        rules="required"
+                      >
+                        <pcTextfield
+                          v-model="citizenBase.phone"
+                          v-mask="'{###} ###-####'"
+                          :error-messages="errors"
+                          :dark-mode="true"
+                          title="PHONE NUMBER"
+                          placeholder="(###) ###-####"
                         />
                       </ValidationProvider>
                     </v-col>
@@ -253,7 +269,10 @@
                             {{ errors[0]?'*':'' }}
                           </h4>
                         </v-row>
-                        <BellScheduleInput :error="true" v-model="teacherProfile.school.bellSchedules" />
+                        <BellScheduleInput
+                          v-model="teacherProfile.school.bellSchedules"
+                          :error="true"
+                        />
                       </ValidationProvider>
                     </v-col>
                   </v-row>
@@ -593,6 +612,7 @@ extend('min_value', {
 })
 
 import {sortBy} from 'lodash'
+import { ICitizenBase } from '../../types'
 @Component({
     components: {
         pcSelect: PCselect,
@@ -624,8 +644,11 @@ export default class TeacherProfilePage extends CONST {
     DISTRICT_NAMES: string [] = []
     SCHOOL_NAMES: string [] = []
     profile_img_url: string = ""
-    get citizenType(){
-        return this.$route.params.citizenType
+    get citizenType() {
+        if (!localStorage.citizenType){
+            return this.$route.params.citizenType
+        }
+        else return localStorage.citizenType
     }
     private CITIZENSTYLES = {
         Teacher: "citizen-id__type--teacher",
@@ -635,6 +658,14 @@ export default class TeacherProfilePage extends CONST {
     private AVAILABLETYPES: string[] = ['Teacher', 'Employer', 'Student']
     private ispublic: boolean = true;
     private loading: boolean = false;
+    public citizenBase: ICitizenBase = {
+        honorific: '',
+        firstName: '',
+        lastName: '',
+        profilePicture: '',
+        citizenType: ''
+
+    }
     public teacherProfile: TeacherProfile = {
         citizen: {
             title: '',

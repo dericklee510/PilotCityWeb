@@ -1158,18 +1158,28 @@
                   </v-row>
                 </v-col>
                    
-                <v-btn
-                  id="signup-button"
-                  block
-                  :loading="loading"
-                  :disabled="loading"
-                  class="mb-6"
-                  @click="syncStorage"
-                >
-                  <h3 class="text-uppercase">
-                    Complete Profile
-                  </h3>
-                </v-btn>
+                <v-row justify="start">
+                  <v-col
+                    cols="12"
+                    md="4"
+                    lg="2"
+                  >
+                    <v-btn
+                      id="save_profile-button"
+                      block
+                      background-color="transparent"
+                      flat
+                      :loading="loading"
+                      :disabled="loading"
+                      class="mb-6 pc-button"
+                      @click="syncStorage"
+                    >
+                      <h3 class="text-uppercase">
+                        save
+                      </h3>
+                    </v-btn>
+                  </v-col>
+                </v-row>
               </v-list-item-content>
             </v-list-item>
           </v-list>
@@ -1221,7 +1231,7 @@ extend('min_value', {
     }
 })
 
-export default class Test extends CONST {
+export default class EmployerProfile extends CONST {
     profile_img_url: string = ""
     private CITIZENSTYLES = {
         Teacher: "citizen-id__type--teacher",

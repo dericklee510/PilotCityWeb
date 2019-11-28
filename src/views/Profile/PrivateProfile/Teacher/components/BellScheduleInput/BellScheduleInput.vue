@@ -1,5 +1,5 @@
 <template>
-  <v-row no-gutters>
+  <v-row no-gutters class="profile__schedule">
     <v-col cols="12">
       <v-row
         v-for="entry in classEntries"
@@ -71,7 +71,7 @@
         >
           <h3
             key="entry.id+'icon'"
-            style="position:absolute; top: 25%; color: #B73430;"
+            style="position:absolute; top: 40%; color: #B73430;"
             class="pc-vh-center"
           >
             <i
@@ -84,9 +84,12 @@
     </v-col>
     <v-col
       cols="12"
-      md="11"
+      :md="classEntries.length > 1? '12' : '11'"
+      :xl="classEntries.length > 1? '10' : '9'"
     >
       <v-btn
+        depressed
+        class="pc-button"
         block
         @click="pushNewSchedule()"
       >
