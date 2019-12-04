@@ -87,7 +87,7 @@ export const EMPLOYER_QUERY = gql`mutation createEmployerProfile(
   ) {user_id}
 }`
 
-export const PUBLIC_PROFILE_MUTATION = `mutation createPublicCitizenProfile(
+export const PUBLIC_PROFILE_MUTATION = gql`mutation createPublicCitizenProfile(
 $id_token: String!,
 $first_name: String!,
 $last_name: String!,
