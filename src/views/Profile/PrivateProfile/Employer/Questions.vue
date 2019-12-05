@@ -849,7 +849,7 @@
                                   v-for="(sched, index) in HOST_SCHED"
                                   :key="sched+index"
                                   :label="sched"
-                                  :value="sched"
+                                  :value="(HOST_SCHED.length - 1) - index"
                                 />
                               </v-radio-group>
                             </v-col>
@@ -887,7 +887,7 @@
                                   v-for="(freq, index) in HOST_FREQ"
                                   :key="freq+index"
                                   :label="freq"
-                                  :value="freq"
+                                  :value="(HOST_FREQ.length-1) - index"
                                 />
                               </v-radio-group>
                             </v-col>
@@ -1210,10 +1210,17 @@ import { GraphqlStore, AuthStore } from '@/store'
 import {citizenBaseToProfile} from "./helpers"
 import { IPublicCitizenProfile } from '../../../../store/Graphql/types'
 import {EmployerFetch} from "./gql"
+import { applyMixins } from '../../../../utilities/classes'
+import Vue from 'vue'
 extend('min_value', {
     ...min_value,
     message: "This field cannot be less than {min}"
 })
+
+class app extends Vue{}
+interface app extends Vue, CONST{}
+
+applyMixins(CONST,[Vue,CONST])
 
 @Component({
     components: {
@@ -1231,7 +1238,7 @@ extend('min_value', {
     }
 })
 
-export default class EmployerProfile extends CONST {
+export default class EmployerProfile extends app {
     profile_img_url: string = ""
     private CITIZENSTYLES = {
         Teacher: "citizen-id__type--teacher",

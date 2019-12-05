@@ -22,9 +22,6 @@ export interface IEmployerQuery {
     projects_engagement: number;
     projects_engagement_2: number;
     projects_solutions: string[]
-    // projects_requests: string []; //BROKEN 
-    // projects_missions: string []; //BROKEN 
-    // projects_specifications: string []; //BROKEN 
     internships_project: number;
     internships_project_other: string;
     internships_hiring_adult: boolean;

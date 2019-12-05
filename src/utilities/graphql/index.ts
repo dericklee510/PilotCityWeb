@@ -1,3 +1,4 @@
+export {arr2Gql} from './toGql'
 import {includes} from 'lodash'
 
 declare type binary = 1 | 0;

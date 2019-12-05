@@ -1,6 +1,5 @@
-import Vue from "vue"
-export class CONST extends Vue{
-    public ORGANIZATION_INDUSTRY_OPTIONS = [
+export class CONST{
+    ORGANIZATION_INDUSTRY_OPTIONS = [
         'Agriculture and Natural Resources', 
         'Arts, Media, and Entertainment', 
         'Building and Construction Trades', 
@@ -121,4 +120,7 @@ export class CONST extends Vue{
         'both',
         'license'
     ]
+   
 }
+
+

@@ -13,7 +13,7 @@ import * as firebase from 'firebase/app'
 import { validateEmployerQuery, validateTeacherQuery } from "./validation"
 import { GraphQLClient } from 'graphql-request'
 import { IEmployerQuery } from './types'
-export { tableToDecimal, findOther } from "./helpers"
+export { tableToDecimal, findOther } from "../../utilities/graphql"
 @Module({ namespaced: true, name: "Graphql" })
 export default class Graphql extends VuexModule {
     public client = new GraphQLClient("https://20191119t140110-dot-pilotcity-firestore.appspot.com/graphql")
