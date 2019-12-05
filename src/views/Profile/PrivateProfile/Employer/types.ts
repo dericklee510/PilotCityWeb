@@ -8,6 +8,7 @@ import { IEmployerQuery } from '@/store/Graphql/types'
 export { ICitizenBase }  from '../../types'
 import {CONST} from './const'
 import query from './query.gql'
+
 export interface Citizen {
     first_name: string;
     last_name: string;

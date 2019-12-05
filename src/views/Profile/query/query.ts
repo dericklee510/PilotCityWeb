@@ -1,15 +1,16 @@
+import gql from 'graphql-tag';
 
-#Fetch functions
-query publicProfileFetch($user_id:String!){
+//Fetch functions
+export const publiceProfileFetch = gql`query publicProfileFetch($user_id:String!){
     PublicCitizenProfile(user_id:$user_id){
         first_name,
         last_name,
         title,
         profile_img_url
     }
-}
+}`
 
-query publicEmployerFetch($user_id:String!){
+export const publicEmployerFetch = gql`query publicEmployerFetch($user_id:String!){
     EmployerProfile(user_id:$user_id){
         citizen_first_name
         citizen_last_name
@@ -52,10 +53,10 @@ query publicEmployerFetch($user_id:String!){
         internships_employment
         internships_position
     }
-}
+}`
 
-#Update Functions
-mutation updatePublicProfile(
+//Update Functions
+export const updatePublicProfile = gql`mutation updatePublicProfile(
     id_token: String
     creation_date: String
     last_update: String
@@ -76,9 +77,9 @@ mutation updatePublicProfile(
             title: $title ,
             profile_img_url: $profile_img_url ,
         )
-} 
+} `
 
-mutation updateEmployerProfile(
+export const updateEmployerProfile = gql`mutation updateEmployerProfile(
     id_token: String!
     citizen_first_name: String!
     citizen_last_name: String!
@@ -164,10 +165,10 @@ mutation updateEmployerProfile(
             internships_employment: $internships_employment,
             internships_position: $internships_position,
         )
-    }
+    }`
 
-# Create Functions
-mutation createPublicCitizenProfile(
+// Create Functions
+export const createPublicCitizenProfile = gql`mutation createPublicCitizenProfile(
     $id_token: String!,
     $first_name: String!,
     $last_name: String!,
@@ -183,9 +184,9 @@ mutation createPublicCitizenProfile(
     title:$title
     profile_img_url:$profile_img_url
     ){user_id}
-    }
+    }`
 
-mutation createEmployerProfile(
+export const createEmployerProfile = gql`mutation createEmployerProfile(
   $id_token: String!,
   $citizen_first_name: String!,
   $citizen_last_name: String!,
@@ -271,5 +272,5 @@ mutation createEmployerProfile(
         internships_employment: $internships_employment
         internships_position: $internships_position
         ) {user_id}
-    }
+    }`
 

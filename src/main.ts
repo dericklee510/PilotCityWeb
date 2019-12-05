@@ -23,6 +23,7 @@ import New from "@/components/layout/New.vue"
 import VuetifyGoogleAutocomplete from 'vuetify-google-autocomplete'
 
 import VueRx from 'vue-rx'
+import { createProvider } from './vue-apollo'
 
 Vue.use(VueRx)
 Vue.use(Vuetify)
@@ -42,6 +43,9 @@ function createVueInstance() {
         router,
         store,
         vuetify,
+        apolloProvider: createProvider({
+            httpEndpoint:'https://20191119t140110-dot-pilotcity-firestore.appspot.com/graphql'
+        }),
         render: h => h(App)
     }).$mount("#app")
 }
