@@ -12,7 +12,7 @@
         <!-- insert Doka-profile-picture-component -->
         <v-col id="profileContainer">
           <profile-upload
-            v-model="profile_img_url"
+            v-model="profilePicture"
             class="pc-profile-picture pc-profile-picture--page pc-vh-center"
           />
         </v-col>
@@ -613,6 +613,10 @@ extend('min_value', {
 
 import {sortBy} from 'lodash'
 import { ICitizenBase } from '../../types'
+import { 
+    PublicProfileFetchQuery, 
+    Public_Citizen_Profile 
+} from '../../../../store/Graphql/global_types'
 @Component({
     components: {
         pcSelect: PCselect,
@@ -630,12 +634,16 @@ import { ICitizenBase } from '../../types'
     directives: {
         mask
     },
+    apollo:{
+
+    },
     subscriptions(){
         return ({
             DISTRICT_NAMES:from(axios.get<string []>("https://pilotcity-firestore.appspot.com/getdistrict")).pipe(pluck<AxiosResponse,string[]>('data'),
                 map(arr => sortBy(arr).map(district_name => district_name+" District"))),
             SCHOOL_NAMES: from(axios.get<string []>("https://pilotcity-firestore.appspot.com/getschool_name")).pipe(pluck<AxiosResponse,string[]>('data'),
-                map(arr => sortBy(arr).map(school_name => school_name + " School")))
+                map(arr => sortBy(arr).map(school_name => school_name + " School"))),
+            PUBLIC_PROFILE: from(GraphqlStore.getPublicProfile()).pipe(pluck<PublicProfileFetchQuery,Public_Citizen_Profile>('PublicCitizenProfile'))
         })
     }
 })
@@ -643,7 +651,6 @@ import { ICitizenBase } from '../../types'
 export default class TeacherProfilePage extends CONST {
     DISTRICT_NAMES: string [] = []
     SCHOOL_NAMES: string [] = []
-    profile_img_url: string = ""
     get citizenType() {
         if (!localStorage.citizenType){
             return this.$route.params.citizenType

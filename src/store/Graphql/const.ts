@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 export const EMPLOYER_QUERY = gql`mutation createEmployerProfile(
   $id_token: String!,
   $citizen_first_name: String!,

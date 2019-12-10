@@ -21,7 +21,7 @@ export interface IEmployerQuery {
     projects_max: number;
     projects_engagement: number;
     projects_engagement_2: number;
-    projects_solutions: string[]
+    projects_solutions: string[];
     internships_project: number;
     internships_project_other: string;
     internships_hiring_adult: boolean;
@@ -43,33 +43,33 @@ export interface IEmployerQuery {
 }
 
 export interface ITeacherQuery {
-    id_token: string
-    school_district: string
-    school_name: string
-    school_location: string
-    bell_schedule: string
-    classroom_room_location: string
-    classroom_room_phone: string
-    extension: string
-    preferred: number // int
-    preferred_other: string
-    tool_equipment: string[]
-    courses_school_year: string
-    prep_period: number // int
-    course_information: string
-    enrolled_courses: string
-    enagement_alternative: boolean
-    purchase_emp_product: number // int
+    id_token: string;
+    school_district: string;
+    school_name: string;
+    school_location: string;
+    bell_schedule: string;
+    classroom_room_location: string;
+    classroom_room_phone: string;
+    extension: string;
+    preferred: number; // int
+    preferred_other: string;
+    tool_equipment: string[];
+    courses_school_year: string;
+    prep_period: number; // int
+    course_information: string;
+    enrolled_courses: string;
+    enagement_alternative: boolean;
+    purchase_emp_product: number; // int
 }
 
 export interface IPublicCitizenProfile {
-    id_token: string,
+    id_token: string;
     // creation_date: string,
     // last_update: string,
-    first_name: string,
-    last_name: string,
-    citizen_type: string,
-    citizen_description: string | null,
-    title: string,
-    profile_img_url: string | null
+    first_name: string;
+    last_name: string;
+    citizen_type: string;
+    citizen_description: string | null;
+    title: string;
+    profile_img_url: string | null;
 }

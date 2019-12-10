@@ -1212,6 +1212,7 @@ import { IPublicCitizenProfile } from '../../../../store/Graphql/types'
 import {EmployerFetch} from "./gql"
 import { applyMixins } from '../../../../utilities/classes'
 import Vue from 'vue'
+import { ICitizenBase } from '../../types'
 extend('min_value', {
     ...min_value,
     message: "This field cannot be less than {min}"
@@ -1247,12 +1248,12 @@ export default class EmployerProfile extends app {
     }
     private AVAILABLETYPES: string[] = ["Teacher", "Employer", "Student"]
     private ispublic: boolean = true;
-    public citizenBase: Employer.ICitizenBase = {
-      honorific:"",
-      firstName:"",
-      lastName:"",
-      profilePicture:"",
-      citizenType:""
+    public citizenBase: ICitizenBase = {
+        honorific:"",
+        firstName:"",
+        lastName:"",
+        profilePicture:"",
+        citizenType:""
     }
     public citizen: Employer.Citizen = {} as Employer.Citizen
     public organization: Employer.Organization = {
@@ -1368,21 +1369,23 @@ export default class EmployerProfile extends app {
         this.loading = false
     }
     async submitPublicProfile(){
-      await GraphqlStore.fetchCitizenProfile(citizenBaseToProfile(this.citizenBase))
-      await GraphqlStore.createCitizenProfile()
+        await GraphqlStore.fetchCitizenProfile(citizenBaseToProfile(this.citizenBase))
+        await GraphqlStore.createCitizenProfile()
     }
     get Name() {
         return `${this.citizen.first_name} ${this.citizen.last_name}`
     }
     async submitProfile(){
-      await this.submitPublicProfile()
-      await GraphqlStore.fetchQueryData()
-      await GraphqlStore.SubmitEmployerQuery()
+        await this.submitPublicProfile()
+        await GraphqlStore.fetchQueryData()
+        await GraphqlStore.SubmitEmployerQuery()
     }
     async created() {
-      this.citizenBase.citizenType = this.$route.params.citizenType
-      if(AuthStore.user){
-        console.log(await GraphqlStore.client.request(EmployerFetch,{user_id:AuthStore.user.uid}))
+        this.citizenBase.citizenType = this.$route.params.citizenType
+        if(AuthStore.user){
+            console.log(await GraphqlStore.client.request(EmployerFetch,{
+                user_id:AuthStore.user.uid
+            }))
         }
     }
 }

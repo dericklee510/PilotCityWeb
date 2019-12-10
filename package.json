@@ -10,13 +10,17 @@
     "serve": "vue-cli-service serve",
     "test:e2e": "vue-cli-service test:e2e",
     "test:unit": "vue-cli-service test:unit",
-    "test": "jest"
+    "test": "jest",
+    "prestart": "npm run generate",
+    "predev": "npm run generate"
   },
   "dependencies": {
     "@google/maps": "^0.5.5",
     "@graphql-codegen/cli": "^1.9.1",
     "@graphql-codegen/typescript": "^1.9.1",
     "@graphql-codegen/typescript-graphql-files-modules": "^1.9.1",
+    "@graphql-codegen/typescript-graphql-request": "^1.9.1",
+    "@graphql-codegen/typescript-operations": "^1.9.1",
     "@types/axios": "^0.14.0",
     "@types/google__maps": "^0.5.7",
     "@types/lodash": "^4.14.136",
