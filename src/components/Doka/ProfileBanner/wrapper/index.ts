@@ -1,10 +1,10 @@
 import filepond from "filepond"
-import { StorageStore, AuthStore } from '@/store';
+import { StorageStore, AuthStore } from '@/store'
 
 
-import { getDownloadURL, put } from 'rxfire/storage';
-import { switchMap, map, tap } from 'rxjs/operators';
-var updateUserBanner:(imgPath:string) => Promise<string>
+import { getDownloadURL, put } from 'rxfire/storage'
+import { switchMap, map, tap } from 'rxjs/operators'
+var updateUserBanner: (imgPath: string) => Promise<string>
 // Need to save image filepath into database
 // Retrieve filepath from database
 export const process: filepond.server.process = (fieldName, file, metadata, load, error, progress, abort) => {
@@ -16,21 +16,21 @@ export const process: filepond.server.process = (fieldName, file, metadata, load
     uploadTask.subscribe(snap => {
         progress(true, snap.bytesTransferred, snap.totalBytes)
     },
-        err => {
+    err => {
+        console.log(err)
+        error(`Couldn't upload photo`)
+    },
+    () => {
+        updateUserBanner(imgPath).then(() => {
+            getDownloadURL(imgRef).subscribe(url => {
+                load(url)
+            })
+        }).catch(err => {
             console.log(err)
             error(`Couldn't upload photo`)
-        },
-        () => {
-                updateUserBanner(imgPath).then(() => {
-                    getDownloadURL(imgRef).subscribe(url => {
-                        load(url)
-                    })
-                }).catch(err => {
-                    console.log(err)
-                    error(`Couldn't upload photo`)
-                })
+        })
                 
-        }
+    }
     )
     return {
         abort: () => {

@@ -1,13 +1,20 @@
-import { jsToSQL } from '@/utilities/graphql';
-import { tableToDecimal, findOther } from '../../../../utilities/graphql';
-import { AuthStore, GraphqlStore } from './../../../../store/index';
-export {IEmployerQuery} from "@/store/Graphql/types"
+import { 
+    CreateEmployerProfileMutationVariables 
+} from './../../../../store/Graphql/global_types'
+import { jsToSQL } from '@/utilities/graphql'
+import { tableToDecimal, findOther } from '../../../../utilities/graphql'
+import { AuthStore, GraphqlStore } from './../../../../store/index'
+export { IEmployerQuery } from "@/store/Graphql/types"
 import { ProgramDetails } from './types'
-import {AutoCompleteAddress} from "@/components/GoogleMaps"
-import { IEmployerQuery } from '@/store/Graphql/types'
-export { ICitizenBase }  from '../../types'
-import {CONST} from './const'
-import query from './query.gql'
+import { AutoCompleteAddress } from "@/components/GoogleMaps"
+import { ICitizenBase } from '../../types'
+import { CONST } from './const'
+import { 
+    Employer_Profile_V1, 
+    Public_Citizen_Profile, 
+    MutationCreatePublicCitizenProfileArgs 
+} from '@/store/Graphql/global_types'
+import {omitBy, isUndefined} from 'lodash'
 
 export interface Citizen {
     first_name: string;
@@ -34,7 +41,7 @@ export interface ProgramDetails {
         contribution: string[];
     };
     project: {
-        solutions:string[]
+        solutions: string[];
         capacity: {
             maximum: string;
             minimum: string;
@@ -65,15 +72,22 @@ export interface Internship {
 
 }
 
-export interface EmployerPage{
-    Citizen:Citizen
-    Organization:Organization
-    ProgramDetails:ProgramDetails
-    Internship:Internship
+export interface EmployerPage {
+    Base: ICitizenBase;
+    Citizen: Citizen;
+    Organization: Organization;
+    ProgramDetails: ProgramDetails;
+    Internship: Internship;
 }
 
-class EmployerQueryForm extends CONST implements IEmployerQuery{
+export class EmployerQueryForm extends CONST implements Employer_Profile_V1, MutationCreatePublicCitizenProfileArgs {
     id_token!: string; // initially undefined
+    //Base properties
+    first_name: string
+    last_name: string
+    title: string
+    profile_img_url?: string
+    citizen_type: string
     citizen_first_name: string;
     citizen_last_name: string;
     citizen_position: string;
@@ -95,11 +109,11 @@ class EmployerQueryForm extends CONST implements IEmployerQuery{
     projects_max: number;
     projects_engagement: number;
     projects_engagement_2: number;
-    projects_solutions!: string[] // CURRENTLY UNDEFINED
+    projects_solutions!: string[] // CURRENTLY UNDEFINED JEROLD FIX THIS
     internships_project: number;
     internships_project_other: string;
     internships_hiring_adult: boolean;
-    internships_travel: number; 
+    internships_travel: number;
     internships_education: number;
     internships_education_other: string;
     internships_talent: number;
@@ -114,22 +128,60 @@ class EmployerQueryForm extends CONST implements IEmployerQuery{
     internships_interview_option3: string; //date YYYY-MM-DD
     internships_employment: boolean;
     internships_position: number;
+    [key: string]: any,
     /**
      * Loads the id_token and converts array to gql type. 
      * Must be called after constructor.
      */
-    init = async() => {
-        if(!AuthStore.user)
-            throw("Not logged in")
+    init = async () => {
+        if (!AuthStore.user)
+            throw ("Not logged in")
         this.id_token = await AuthStore.user.getIdToken()
         jsToSQL(this)
-    } 
-    
-    async submitQuery(){
-        // GraphqlStore.client()
     }
-    constructor(EmployerForm:EmployerPage){
-        super();
+
+    
+
+    async submitQuery() {
+        if (await GraphqlStore.sdk.publicEmployerFetch({ 
+            user_id: this.id_token 
+        })) { // if public citizen request is true then use create system
+            await GraphqlStore.sdk.createPublicCitizenProfile({
+                id_token: this.id_token,
+                first_name: this.citizen_first_name,
+                last_name: this.citizen_last_name,
+                citizen_type:this.citizen_type,
+                title:this.title,
+                ...(this.profile_img_url && {
+                    profile_img_url:this.profile_img_url
+                })
+            })
+            // GraphqlStore.sdk.updateEmployerProfile({user_id:this.id_token})
+        }
+        else {
+            await GraphqlStore.sdk.updatePublicProfile({
+                id_token: this.id_token,
+                first_name: this.citizen_first_name,
+                last_name: this.citizen_last_name,
+                citizen_type:this.citizen_type,
+                title:this.title,
+                ...(this.profile_img_url && {
+                    profile_img_url:this.profile_img_url
+                })
+            })
+            await GraphqlStore.sdk.createEmployerProfile(omitBy(this,isUndefined) as CreateEmployerProfileMutationVariables) // removes undefined properties from object
+        }
+    }
+    constructor(EmployerForm: EmployerPage) {
+        super()
+
+        /* #region  Syncs Base */
+        this.first_name = EmployerForm.Base.firstName
+        this.last_name = EmployerForm.Base.lastName
+        this.citizen_type = EmployerForm.Base.citizenType
+        this.title = EmployerForm.Base.honorific
+        this.profile_img_url = EmployerForm.Base.profilePicture
+        /* #endregion */
 
         /* #region  Syncs Citizen */
         this.citizen_first_name = EmployerForm.Citizen.first_name
@@ -149,8 +201,8 @@ class EmployerQueryForm extends CONST implements IEmployerQuery{
         this.organization_industry_other = findOther(this.ORGANIZATION_INDUSTRY_OPTIONS, EmployerForm.Organization.industry)
         this.organization_product_list = (EmployerForm.Organization.products_services)
         this.organization_product_employee_count = EmployerForm.Organization.employee_count
-         /* #endregion */
-       
+        /* #endregion */
+
         /* #region Syncs ProgramDetails   */
         this.program_externship_time_first = EmployerForm.ProgramDetails.externship.prefered_date.primary
         this.program_externship_time_second = EmployerForm.ProgramDetails.externship.prefered_date.secondary
@@ -162,8 +214,12 @@ class EmployerQueryForm extends CONST implements IEmployerQuery{
         /* #region Syncs Project  */
         this.projects_min = Number.parseInt(EmployerForm.ProgramDetails.project.capacity.minimum)
         this.projects_max = Number.parseInt(EmployerForm.ProgramDetails.project.capacity.maximum)
-        this.projects_engagement = tableToDecimal(this.PROGRAMDETAILS_PROJECT_ENGAGEMENT_TYPE_OPTIONS, [EmployerForm.ProgramDetails.project.engagement.type])
-        this.projects_engagement_2 = tableToDecimal(this.PROGRAMDETAILS_PROJECT_ENGAGEMENT_RADIUS_OPTIONS, [EmployerForm.ProgramDetails.project.engagement.radius])
+        this.projects_engagement = tableToDecimal(this.PROGRAMDETAILS_PROJECT_ENGAGEMENT_TYPE_OPTIONS, [
+            EmployerForm.ProgramDetails.project.engagement.type
+        ])
+        this.projects_engagement_2 = tableToDecimal(this.PROGRAMDETAILS_PROJECT_ENGAGEMENT_RADIUS_OPTIONS, [
+            EmployerForm.ProgramDetails.project.engagement.radius
+        ])
         /* #endregion */
 
         /* #region Syncs Internship */
@@ -171,13 +227,17 @@ class EmployerQueryForm extends CONST implements IEmployerQuery{
         this.internships_project = tableToDecimal(this.INTERNSHIP_PROJECT_TYPE, EmployerForm.Internship.project)
         this.internships_project_other = findOther(this.INTERNSHIP_PROJECT_TYPE, EmployerForm.Internship.project)
         this.internships_hiring_adult = EmployerForm.Internship.hiring_adult
-        this.internships_travel = tableToDecimal(this.ΙΝΤΕRN_TRAVEL_OPTIONS, [EmployerForm.Internship.education_level])
+        this.internships_travel = tableToDecimal(this.ΙΝΤΕRN_TRAVEL_OPTIONS, [
+            EmployerForm.Internship.education_level
+        ])
         this.internships_education = tableToDecimal(this.INTERNSHIP_EDUCATION_OPTIONS, EmployerForm.Internship.education_level)
         this.internships_education_other = findOther(this.INTERNSHIP_EDUCATION_OPTIONS, EmployerForm.Internship.education_level)
         this.internships_talent = tableToDecimal(this.INTERNSHIP_TALENT_OPTIONS, EmployerForm.Internship.talent)
         this.internships_hours_week = Number.parseInt(EmployerForm.Internship.days_week)
         this.internships_hours_day = Number.parseInt(EmployerForm.Internship.hours_day)
-        this.internships_employer_of_record = tableToDecimal(this.INTERNSHIP_EMPLOYER_OF_RECORD_OPTIONS, [EmployerForm.Internship.employer_of_record])
+        this.internships_employer_of_record = tableToDecimal(this.INTERNSHIP_EMPLOYER_OF_RECORD_OPTIONS, [
+            EmployerForm.Internship.employer_of_record
+        ])
         this.internships_compensation = tableToDecimal(this.INTERNSHIP_COMPENSATION_OPTIONS, EmployerForm.Internship.compensation)
         this.internships_budget_min = EmployerForm.Internship.budget_min
         this.internships_budget_max = EmployerForm.Internship.budget_max
@@ -186,6 +246,8 @@ class EmployerQueryForm extends CONST implements IEmployerQuery{
         this.internships_interview_option3 = EmployerForm.Internship.interview_3
         this.internships_employment = EmployerForm.Internship.employment
         this.internships_position = tableToDecimal(this.INTERNSHIP_POSITION_TYPE_OPTIONS, EmployerForm.Internship.position_type)
-       /* #endregion */
+        /* #endregion */
+
+
     }
 }

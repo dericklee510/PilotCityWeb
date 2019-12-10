@@ -1,5 +1,8 @@
 <template>
-  <v-row no-gutters class="profile__schedule">
+  <v-row
+    no-gutters
+    class="profile__schedule"
+  >
     <v-col cols="12">
       <v-row
         v-for="entry in classEntries"
@@ -129,8 +132,8 @@ classEntries: {value: IBellSchedule; id: number}[] = [
     }
 ]
 public rules = {
-    required: (value:any) => !!value || 'Required.',
-    min: (v:any) => v.length >= 8 || 'Min 8 characters',
+    required: (value: any) => !!value || 'Required.',
+    min: (v: any) => v.length >= 8 || 'Min 8 characters',
     emailMatch: () => ('The email and password you entered don\'t match')
 };
 removeSchedule(id: number){

@@ -3,7 +3,7 @@ import {validate, extend} from "vee-validate"
 import {between} from 'vee-validate/dist/rules'
 extend('between', between)
 interface paramaters{
-    bits:BigInt
+    bits: BigInt;
 }
 
 export const Int: ValidationRule = {
@@ -13,7 +13,7 @@ export const Int: ValidationRule = {
  * @param {*} args = {bits}
  * @returns {boolean}
  */
-validate:async (value, args ): Promise<boolean> => {
+    validate:async (value, args ): Promise<boolean> => {
         var {bits} = <paramaters>args
         return (await validate(value,`between:${0},${Math.pow(2,Number(bits))-1}`)).valid
     }

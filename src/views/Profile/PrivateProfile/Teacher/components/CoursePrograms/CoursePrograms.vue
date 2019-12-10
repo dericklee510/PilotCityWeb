@@ -90,23 +90,23 @@ export default class CourseProgramsInput extends CONST {
   
   @Watch('courseinput',{deep:true})
   oncourseinputChanged(newVal: ICourses[]){
-    console.log("new")
+      console.log("new")
       let index = 0
       this.classEntries = newVal.map((course) => {
-        if(this.classEntries[index])
-          return {        
-              value: new CoursePrograms(course,this.classEntries[index].value),
-              id: index++      
-          }
+          if(this.classEntries[index])
+              return {        
+                  value: new CoursePrograms(course,this.classEntries[index].value),
+                  id: index++      
+              }
           else 
-            return {
-              value:new CoursePrograms(course),
-              id:index++
-            }
+              return {
+                  value:new CoursePrograms(course),
+                  id:index++
+              }
       })
   }
   created(){
-    console.log("rendered")
+      console.log("rendered")
   }
 }
 </script>

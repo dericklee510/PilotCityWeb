@@ -1,9 +1,7 @@
-<template >
-    <div class="pc-radio">
-        <v-radio>
-
-        </v-radio>
-    </div>
+<template>
+  <div class="pc-radio">
+    <v-radio />
+  </div>
 </template>
 
 <script lang="ts">

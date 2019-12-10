@@ -55,11 +55,11 @@ const TRAVEL_RADIUS = [
     '5 miles',
     '10 miles',
     '25 miles',
-    '50 miles',
+    '50 miles'
 ]
 const INTERN_FOCUS = [
     "Further development of their project from the classroom",
-    "Work on a newly assigned project or task",
+    "Work on a newly assigned project or task"
 ]
 const ADULT_REQ = [
     "Yes",

@@ -1,4 +1,4 @@
-import { MAPS_API_KEY } from '@/keys';
+import { MAPS_API_KEY } from '@/keys'
 import googleMaps from "@google/maps"
 
 export const googleMapsClient = googleMaps.createClient({

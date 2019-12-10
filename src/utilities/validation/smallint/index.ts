@@ -6,8 +6,8 @@ extend('between',between)
 
 export const smallint: ValidationRule = {
     validate:async (value): Promise<boolean> => {
-           return (await validate(value,`between:${Math.pow(-2,15)},${Math.pow(2,15)}`)).valid
-        }
+        return (await validate(value,`between:${Math.pow(-2,15)},${Math.pow(2,15)}`)).valid
     }
+}
     
     

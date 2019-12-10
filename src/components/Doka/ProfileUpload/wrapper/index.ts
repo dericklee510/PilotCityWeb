@@ -1,9 +1,9 @@
 import filepond from "filepond"
-import { StorageStore, AuthStore } from '@/store';
-import { updateUserPhotoUrl } from './helpers';
+import { StorageStore, AuthStore } from '@/store'
+import { updateUserPhotoUrl } from './helpers'
 
-import { getDownloadURL, put } from 'rxfire/storage';
-import { switchMap, map, tap } from 'rxjs/operators';
+import { getDownloadURL, put } from 'rxfire/storage'
+import { switchMap, map, tap } from 'rxjs/operators'
 
 
 
@@ -16,21 +16,21 @@ export const process: filepond.server.process = (fieldName, file, metadata, load
     uploadTask.subscribe(snap => {
         progress(true, snap.bytesTransferred, snap.totalBytes)
     },
-        err => {
+    err => {
+        console.log(err)
+        error(`Couldn't upload photo`)
+    },
+    () => {
+        updateUserPhotoUrl(imgPath).then(() => {
+            getDownloadURL(imgRef).subscribe(url => {
+                load(url)
+            })
+        }).catch(err => {
             console.log(err)
             error(`Couldn't upload photo`)
-        },
-        () => {
-                updateUserPhotoUrl(imgPath).then(() => {
-                    getDownloadURL(imgRef).subscribe(url => {
-                        load(url)
-                    })
-                }).catch(err => {
-                    console.log(err)
-                    error(`Couldn't upload photo`)
-                })
+        })
                 
-        }
+    }
     )
     return {
         abort: () => {

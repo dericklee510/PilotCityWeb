@@ -1,5 +1,4 @@
-import { TeacherProfile } from './../../views/Profile/PrivateProfile/Teacher/types';
-import { ITeacherQuery, IPublicCitizenProfile } from './types';
+import { ITeacherQuery, IPublicCitizenProfile } from './types'
 /* eslint-disable */
 import { EMPLOYER_QUERY, PUBLIC_PROFILE_MUTATION } from './const';
 import {
@@ -14,11 +13,22 @@ import { validateEmployerQuery, validateTeacherQuery } from "./validation"
 import { GraphQLClient } from 'graphql-request'
 import { IEmployerQuery } from './types'
 export { tableToDecimal, findOther } from "../../utilities/graphql"
+import {getSdk} from './global_types'
+import { idToken } from 'rxfire/auth/dist/auth';
 @Module({ namespaced: true, name: "Graphql" })
 export default class Graphql extends VuexModule {
     public client = new GraphQLClient("https://20191119t140110-dot-pilotcity-firestore.appspot.com/graphql")
     
+    public sdk = getSdk(this.client)
+
     public citizenProfileData: IPublicCitizenProfile | null = null
+
+    async getPublicProfile(){
+        let currentUser = firebase.auth().currentUser
+        if(!currentUser)
+            throw("not logged in")
+        return this.sdk.publicProfileFetch({user_id:await currentUser.getIdToken()})
+    }
 
     @MutationAction({mutate:['citizenProfileData']})
     async fetchCitizenProfile(publicProfile:(Omit<IPublicCitizenProfile,'id_token'>)){

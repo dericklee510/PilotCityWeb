@@ -32,7 +32,12 @@
 <script lang="ts">
 import Vue from "vue"
 import 'reflect-metadata'
-import {Component, Prop, Watch, PropSync} from "vue-property-decorator"
+import {
+    Component, 
+    Prop, 
+    Watch, 
+    PropSync
+} from "vue-property-decorator"
 
 
 @Component
@@ -52,7 +57,7 @@ export default class PCtextfield extends Vue {
     @Prop({default: false})
     public disabled!: boolean;
 
-    public handleInput(new_input:string){
+    public handleInput(new_input: string){
         this.$emit('input', new_input)
     }
     get errorMessage() {

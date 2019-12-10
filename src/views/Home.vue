@@ -1,14 +1,27 @@
 <template>
   <div id="pc-home">
-    <v-container fluid class="pc-container" style="height: 100%">
+    <v-container
+      fluid
+      class="pc-container"
+      style="height: 100%"
+    >
       <v-row style="height:100%">
-        <v-col cols="12" align-self="center" class="pc-home__content">
+        <v-col
+          cols="12"
+          align-self="center"
+          class="pc-home__content"
+        >
           <h1 class="pc-home__header dark">
             Connecting classrooms to the big bad world
           </h1>
           <v-col cols="6">
             <v-row class="pc-home__buttons">
-              <v-btn class="text-uppercase pc-button pc-button--dark elongated" :to="{name: 'signup.type'}">Sign Up</v-btn>
+              <v-btn
+                class="text-uppercase pc-button pc-button--dark elongated"
+                :to="{name: 'signup.type'}"
+              >
+                Sign Up
+              </v-btn>
             </v-row>
           </v-col>
         </v-col>

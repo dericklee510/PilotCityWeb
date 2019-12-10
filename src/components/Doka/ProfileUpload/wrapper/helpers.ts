@@ -1,7 +1,7 @@
-import { first, refCount } from 'rxjs/operators';
-import { FbStore } from '@/store/index';
-import { AuthStore } from '@/store/index';
-import { StorageStore } from '@/store/index';
+import { first, refCount } from 'rxjs/operators'
+import { FbStore } from '@/store/index'
+import { AuthStore } from '@/store/index'
+import { StorageStore } from '@/store/index'
 import { getDownloadURL } from "rxfire/storage"
 
 export function updateUserPhotoUrl(filepath: string): Promise<void> {
@@ -11,7 +11,7 @@ export function updateUserPhotoUrl(filepath: string): Promise<void> {
     const AuthStoreUser = AuthStore.user as firebase.User
     const FbStoreUserDoc = FbStore.userDoc as firebase.firestore.DocumentReference
     const ref = StorageStore.bucketRef.child(filepath)
-    return ref.getDownloadURL().then((photoURL:string) => {
+    return ref.getDownloadURL().then((photoURL: string) => {
         AuthStoreUser.updateProfile({
             photoURL
         }).catch(err => {
