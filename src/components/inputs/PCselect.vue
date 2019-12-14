@@ -6,7 +6,7 @@
     <label
       for="citizen-title"
       class="pc-input__label"
-    > 
+    >
       <h5
         class="text-uppercase"
       >
@@ -26,49 +26,53 @@
       :hide-selected="!multiselect"
       :items="items"
       :error-messages="error"
-      :dark="darkMode" 
+      :dark="darkMode"
       @input="handleInput"
     />
   </div>
 </template>
 
 <script lang="ts">
-import Vue from "vue"
+import Vue from 'vue'
 import 'reflect-metadata'
-import {Component, Prop} from "vue-property-decorator"
+import { Component, Prop } from 'vue-property-decorator'
 
 
 @Component
 export default class PCselect extends Vue {
-    @Prop({required: true})
+    @Prop({ required: true })
     public value!: string;
-    @Prop({default: false})
+
+    @Prop({ default: false })
     public darkMode!: boolean;
-    @Prop({default: false})
+
+    @Prop({ default: false })
     public multiselect!: boolean;
-    @Prop({required: true})
+
+    @Prop({ required: true })
     public title!: string;
-    @Prop({required: true})
+
+    @Prop({ required: true })
     public items!: string[];
-    @Prop({required: true})
+
+    @Prop({ required: true })
     public placeholder!: string;
+
     @Prop()
     public errorMessages?: string | string []
 
-    public handleInput(event: any){
+    public handleInput(event: any) {
         this.$emit('input', event)
     }
 
     get errorMessage() {
         return this.errorMessages
     }
-    get error(): string | undefined{
-        if (Array.isArray(this.errorMessage))
-            return this.errorMessage.length?this.errorMessage[0]:""
-        else {
-            return this.errorMessage
-        }
+
+    get error(): string | undefined {
+      if (Array.isArray(this.errorMessage)) return this.errorMessage.length ? this.errorMessage[0] : ''
+
+      return this.errorMessage
     }
 }
 </script>
-

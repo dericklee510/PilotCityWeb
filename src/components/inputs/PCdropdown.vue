@@ -61,36 +61,41 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import {Prop, Component} from "vue-property-decorator"
+import { Prop, Component } from 'vue-property-decorator'
 
 @Component
 export default class PCdropdown extends Vue {
-    @Prop({type: String, required: true})
+    @Prop({ type: String, required: true })
     public value!: string;
-    @Prop({required: true})
+
+    @Prop({ required: true })
     public items?: {
-        title: string; 
+        title: string;
         action: () => void;
     }[]
-    @Prop({type: String}) //string button
+
+    @Prop({ type: String }) // string button
     public placeholder!: string;
-    @Prop({type: String}) //icon button
+
+    @Prop({ type: String }) // icon button
     private icon!: string;
-    get content(){
+
+    get content() {
         return this.xcontent
     }
-    set content(value: string){
+
+    set content(value: string) {
         this.xcontent = value
     }
+
     public xcontent: string = '';
     /* eslint-disable-next-line */
     public handleInput(e: any){
-        this.content =  e.target.dataset.content
+        this.content = e.target.dataset.content
         /* eslint-disable-next-line */
         console.log(e.target)
         this.$emit('input', this.content)
     }
-
 }
 </script>
 

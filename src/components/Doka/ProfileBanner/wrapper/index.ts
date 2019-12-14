@@ -1,40 +1,38 @@
-import filepond from "filepond"
-import { StorageStore, AuthStore } from '@/store'
+import filepond from 'filepond'
 
 
 import { getDownloadURL, put } from 'rxfire/storage'
 import { switchMap, map, tap } from 'rxjs/operators'
-var updateUserBanner: (imgPath: string) => Promise<string>
+import { StorageStore, AuthStore } from '@/store'
+
+let updateUserBanner: (imgPath: string) => Promise<string>
 // Need to save image filepath into database
 // Retrieve filepath from database
 export const process: filepond.server.process = (fieldName, file, metadata, load, error, progress, abort) => {
-    if (!AuthStore.user)
-        throw ("User not defined")
+    if (!AuthStore.user) throw ('User not defined')
     let imgPath = `user/${AuthStore.user.uid}/banner_img/${file.name}`
     let imgRef = StorageStore.bucketRef.child(imgPath)
     let uploadTask = put(imgRef, file)
-    uploadTask.subscribe(snap => {
+    uploadTask.subscribe((snap) => {
         progress(true, snap.bytesTransferred, snap.totalBytes)
     },
     err => {
         console.log(err)
-        error(`Couldn't upload photo`)
+        error('Couldn\'t upload photo')
     },
     () => {
         updateUserBanner(imgPath).then(() => {
-            getDownloadURL(imgRef).subscribe(url => {
+            getDownloadURL(imgRef).subscribe((url) => {
                 load(url)
             })
-        }).catch(err => {
+        }).catch((err) => {
             console.log(err)
-            error(`Couldn't upload photo`)
+            error('Couldn\'t upload photo')
         })
-                
-    }
-    )
+  })
     return {
         abort: () => {
-            uploadTask.subscribe(snap => {
+            uploadTask.subscribe((snap) => {
                 snap.task.cancel()
                 abort()
             })
@@ -44,8 +42,8 @@ export const process: filepond.server.process = (fieldName, file, metadata, load
 
 export const load: filepond.server.load = (source, load, error, progress, abort, headers) => {
     getDownloadURL(StorageStore.bucket.refFromURL(source)).pipe(
-        switchMap(url => fetch(new Request(url)))
-        , switchMap(response => response.blob())
+        switchMap(url => fetch(new Request(url))),
+    switchMap(response => response.blob())
     ).subscribe(blob => load(blob),
         err => {
             error(`Could not fetch Profile Picture ${JSON.stringify(err)}`)

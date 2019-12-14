@@ -1,11 +1,10 @@
 import { first, refCount } from 'rxjs/operators'
-import { FbStore } from '@/store/index'
-import { AuthStore } from '@/store/index'
-import { StorageStore } from '@/store/index'
-import { getDownloadURL } from "rxfire/storage"
+import { getDownloadURL } from 'rxfire/storage'
+import { FbStore, AuthStore, StorageStore } from '@/store/index'
+
 
 export function updateUserPhotoUrl(filepath: string): Promise<void> {
-    if (!AuthStore.user || !FbStore.userDoc){
+    if (!AuthStore.user || !FbStore.userDoc) {
         throw ('Not logged in!')
     }
     const AuthStoreUser = AuthStore.user as firebase.User
@@ -14,13 +13,13 @@ export function updateUserPhotoUrl(filepath: string): Promise<void> {
     return ref.getDownloadURL().then((photoURL: string) => {
         AuthStoreUser.updateProfile({
             photoURL
-        }).catch(err => {
-            throw(`Couldn't update photoURL on AuthUser${err}`)
+        }).catch((err) => {
+            throw (`Couldn't update photoURL on AuthUser${err}`)
         })
-        FbStoreUserDoc.update({ photoURL }).catch(err => {
-            throw(`Couldn't update photoURL in DB ${err}`)
+        FbStoreUserDoc.update({ photoURL }).catch((err) => {
+            throw (`Couldn't update photoURL in DB ${err}`)
         })
-    }).catch(err => {
+    }).catch((err) => {
         throw (`Could not fetch new photoURL ${err}`)
     })
 }

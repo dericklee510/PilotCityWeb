@@ -112,18 +112,18 @@
 
 
 <script lang="ts">
-import Vue from "vue"
-import { AuthStore } from "@/store"
-import Component from "vue-class-component"
-import {
-    /* eslint-disable-next-line */
-    SUCCESSFUL_SIGNUP_RESP,
-    SUCCESSFUL_LOGIN_RESP
-} from '../../store/Auth/const'
-import PCselect from "@/components/inputs/PCselect.vue"
-import PCtextfield from "@/components/inputs/PCtextfield.vue"
+import Vue from 'vue'
+import Component from 'vue-class-component'
 import { ValidationProvider, ValidationObserver } from 'vee-validate'
-import { ObserverInstance } from "@/utilities/validation"
+import { AuthStore } from '@/store'
+import {
+  /* eslint-disable-next-line */
+    SUCCESSFUL_SIGNUP_RESP,
+  SUCCESSFUL_LOGIN_RESP
+} from '../../store/Auth/const'
+import PCselect from '@/components/inputs/PCselect.vue'
+import PCtextfield from '@/components/inputs/PCtextfield.vue'
+import { ObserverInstance } from '@/utilities/validation'
 
 @Component({
     components: {
@@ -134,22 +134,27 @@ import { ObserverInstance } from "@/utilities/validation"
     }
 })
 export default class Login extends Vue {
+    private password: string = '';
 
-    private password: string = ``;
-    public email: string = ``;
+    public email: string = '';
+
     public loading: boolean = false;
-    public authResponse: string = ``;
+
+    public authResponse: string = '';
 
     public async process(): Promise<void> {
         this.loading = true
-        if(await (this.$refs.Observer as ObserverInstance).validate()){
+        if (await (this.$refs.Observer as ObserverInstance).validate()) {
             this.authResponse = await AuthStore.login({
                 email: this.email,
                 password: this.password
             })
         }
-        if (this.authResponse == SUCCESSFUL_LOGIN_RESP && AuthStore.user && !AuthStore.user.photoURL)
-            this.$router.push({ name: `signup.type` })
+        if (this.authResponse == SUCCESSFUL_LOGIN_RESP && AuthStore.user && !AuthStore.user.photoURL) {
+            this.$router.push({
+                name: 'signup.type'
+            })
+        }
         this.loading = false
     }
 }

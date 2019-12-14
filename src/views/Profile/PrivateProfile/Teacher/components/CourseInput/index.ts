@@ -1,1 +1,1 @@
-export {default as CourseInput} from "./CourseInput.vue"
+export { default as CourseInput } from './CourseInput.vue'

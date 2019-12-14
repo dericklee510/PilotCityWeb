@@ -38,26 +38,33 @@ export default class AutoComplete extends Vue {
         elements: HTMLInputElement[];
         address: any;
     }
+
   @Prop()
     public title?: string;
+
   @Prop()
   public value?: string
+
   @Prop()
   public errorMessages?: string | string[] | {errors: string[]}
+
   get errorMessage() {
       return (this.errorMessages as {errors: string[]}).errors
   }
+
   get error(): string[] | undefined {
       return this.errorMessage
   }
-  address: string | Record<string, any> = ""
+
+  address: string | Record<string, any> = ''
   /* eslint-disable-next-line */
   getAddressData(addressData: Record<string, any>, placeResultData: Record<string, any>, id: string) {
       this.address = addressData
       this.$emit('input', this.address)
   }
+
   created() {
-      console.log(this.$refs.address, "OVER HERE")
+      console.log(this.$refs.address, 'OVER HERE')
   }
 }
 </script>

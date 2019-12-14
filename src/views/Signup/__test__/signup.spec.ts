@@ -1,4 +1,4 @@
-import * as SignupTests from "./signup/tests"
+import * as SignupTests from './signup/tests'
 
 // describe("Signup.vue", (): void => {
 //     describe("How to signup", (): void => {

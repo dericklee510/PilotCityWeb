@@ -35,16 +35,16 @@ const CLASSROOM_SUPPORT = [
     'Purchase'
 ]
 const CLASSROOM_COUNT = [
-    {title: "1 Classroom"}, 
-    {title: "2 Classrooms"}, 
-    {title: "3 Classrooms"}, 
-    {title: "4 Classrooms"}, 
-    {title: "5 Classrooms"}, 
-    {title: "6 Classrooms"}, 
-    {title: "7 Classrooms"}, 
-    {title: "8 Classrooms"}, 
-    {title: "9 Classrooms"}, 
-    {title: "10 Classrooms"}
+    { title: '1 Classroom' },
+    { title: '2 Classrooms' },
+    { title: '3 Classrooms' },
+    { title: '4 Classrooms' },
+    { title: '5 Classrooms' },
+    { title: '6 Classrooms' },
+    { title: '7 Classrooms' },
+    { title: '8 Classrooms' },
+    { title: '9 Classrooms' },
+    { title: '10 Classrooms' }
 ]
 const CLASSROOM_ENGAGEMENT = [
     'In-person',

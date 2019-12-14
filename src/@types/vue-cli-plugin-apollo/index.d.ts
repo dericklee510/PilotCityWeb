@@ -1,14 +1,14 @@
 declare module 'vue-cli-plugin-apollo/graphql-client' {
-    import { 
-        ApolloClient, 
-        ApolloClientOptions, 
-        Resolvers 
+    import {
+        ApolloClient,
+        ApolloClientOptions,
+        Resolvers
     } from 'apollo-client'
     import { DocumentNode } from 'apollo-link'
     import { SubscriptionClient } from 'subscriptions-transport-ws'
     import { ClientStateConfig } from 'apollo-link-state'
     import { InMemoryCacheConfig } from 'apollo-cache-inmemory'
-  
+
     export interface ApolloClientClientConfig<TCacheShape> {
         // URL to the HTTP API
         httpEndpoint?: string;
@@ -47,7 +47,7 @@ declare module 'vue-cli-plugin-apollo/graphql-client' {
         // Hook called when you should write local state in the cache
         onCacheInit?: (cache: any) => void;
     }
-  
+
     export function createApolloClient<TCacheShape>(
         config: ApolloClientClientConfig<TCacheShape>
     ): {
@@ -55,10 +55,10 @@ declare module 'vue-cli-plugin-apollo/graphql-client' {
         wsClient: SubscriptionClient;
         // stateLink: withClientState
     }
-  
+
     export function restartWebsockets(wsClient: SubscriptionClient): void
 }
-  
+
 declare module 'vue-cli-plugin-apollo/graphql-server' {
     // eslint-disable-next-line import/no-duplicates
     import { Resolvers } from 'apollo-client'
@@ -73,7 +73,7 @@ declare module 'vue-cli-plugin-apollo/graphql-server' {
     import { DocumentNode } from 'apollo-link'
     import { PubSubEngine } from 'graphql-subscriptions'
     import { Express } from 'express'
-  
+
     export interface ApolloServerOption<TContext = Record<string, any>> {
         host?: string;
         port: number;
@@ -108,12 +108,11 @@ declare module 'vue-cli-plugin-apollo/graphql-server' {
             dataSources?: () => DataSources<TContext>;
         };
     }
-  
+
     function ApolloServer<TContext>(
         options: ApolloServerOption<TContext>,
         cb?: () => void
     ): string | string[] | DocumentNode | DocumentNode[]
-  
+
     export default ApolloServer
 }
-  

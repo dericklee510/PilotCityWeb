@@ -46,20 +46,20 @@
 
 
 <script lang="ts">
-import Vue from "vue"
-import Component from "vue-class-component"
+import Vue from 'vue'
+import Component from 'vue-class-component'
 
 @Component
 export default class Profile extends Vue {
     get citizenType() {
-        if (!localStorage.citizenType){
-            return this.$route.params.citizenType
-        }
-        else return localStorage.citizenType
+    if (!localStorage.citizenType) {
+      return this.$route.params.citizenType
     }
-    public switchProfile(){
-        this.$router.push({name: 'profile.public'})
+    return localStorage.citizenType
+  }
+
+    public switchProfile() {
+        this.$router.push({ name: 'profile.public' })
     }
 }
 </script>
-

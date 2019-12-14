@@ -10,11 +10,11 @@
 
 
 <script lang="ts">
-import "@/assets/SCSS/main.scss"
-import Vue from "vue"
-import DefaultHeader from "@/components/layout/header/New.vue"
-import Component from "vue-class-component"
-import DefaultFooter from "@/components/layout/footer/Simple.vue"
+import '@/assets/SCSS/main.scss'
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import DefaultHeader from '@/components/layout/header/New.vue'
+import DefaultFooter from '@/components/layout/footer/Simple.vue'
 @Component({
     components: {
         PCfooter: DefaultFooter,

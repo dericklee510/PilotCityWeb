@@ -41,18 +41,29 @@ import { Component, Prop, Watch } from 'vue-property-decorator'
 export default class PCcheckbox extends Vue {
   @Prop()
     public checked!: string[]
+
   @Prop()
   public options!: any[]
+
   @Prop({ default: false })
   public other!: boolean
+
   public otherChecked: boolean = false
-  public otherInput: string = ""
+
+  public otherInput: string = ''
+
   public selected: any[] = []
+
   get checkedOptions() {
-      if (this.other && this.otherChecked)
-          return [...this.selected, this.otherInput]
+      if (this.other && this.otherChecked) {
+          return [
+        ...this.selected,
+              this.otherInput
+          ]
+      }
       return this.selected
   }
+
   @Watch('checkedOptions')
   onCheckedOptionsChanged(newval: any[]) {
       this.$emit('input', newval)

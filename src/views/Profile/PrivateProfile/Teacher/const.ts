@@ -1,14 +1,17 @@
-import Vue from "vue"
-export class CONST extends Vue{
+import Vue from 'vue'
+
+export class CONST extends Vue {
     public CLASSROOM_COMMUNICATION = [
         'Before School',
         'Prep Period',
         'Lunch',
         'After School'
     ]
+
     public COURSES_AVAILABLE_SCHOOLYEARS = [
         '2018-2019'
     ]
+
     public COURSES_PREP_PERIODS = [
         'P0',
         'P1',
@@ -20,12 +23,13 @@ export class CONST extends Vue{
         'P7',
         'P8'
     ]
+
     public COURSES_PATHWAYS = [
-        'Agriculture and Natural Resources', 
-        'Arts, Media, and Entertainment', 
-        'Building and Construction Trades', 
+        'Agriculture and Natural Resources',
+        'Arts, Media, and Entertainment',
+        'Building and Construction Trades',
         'Business and Finance',
-        'Education, Child Development, and Family Services', 
+        'Education, Child Development, and Family Services',
         'Energy, Environment, and Utilities',
         'Engineering and Architecture',
         'Fashion and Interior Design',
@@ -37,14 +41,15 @@ export class CONST extends Vue{
         'Public Services',
         'Transportation'
     ]
+
     public PROGRAM_ENGAGEMENT = [
         'Yes, I am okay with digital engagement as an alternative',
         'No, I strongly prefer in-person engagement'
-    ]  
+    ]
+
     public PROGRAM_PURCHASE = [
         'Yes, our school can purchase',
         'No, our school cannot purchase',
         'It is possible, but not guaranteed'
     ]
-
 }

@@ -6,47 +6,48 @@ import { RouterOptions, RouteConfig } from 'vue-router' //routeroptions unused
 import {
     forgotPassword,
     code,
-    email
-} from "@/views/Login"
-import test from "@/views/Test"
-import Home from "@/views/Home.vue"
-import {routes as ProfileRoutes} from "@/views/Profile"
-import {routes as SignupRoutes} from "@/views/Signup"
-import {routes as LoginRoutes} from "@/views/Login"
-let routes: RouteConfig [] = [
+    email,
+  routes as LoginRoutes
+} from '@/views/Login'
+import test from '@/views/Test'
+import Home from '@/views/Home.vue'
+import { routes as ProfileRoutes } from '@/views/Profile'
+import { routes as SignupRoutes } from '@/views/Signup'
+
+const routes: RouteConfig [] = [
     ...SignupRoutes,
     ...LoginRoutes,
     ...ProfileRoutes,
     {
-        path: `/reset_password`,
+        path: '/reset_password',
         component: forgotPassword,
         children: [{
-            path: "",
-            name: "reset-email",
+            path: '',
+            name: 'reset-email',
             component: email
         },
         {
-            path: "1",
-            name: "reset-code",
+            path: '1',
+            name: 'reset-code',
             component: code
         }]
     },
     {
-        path: `/test`,
-        name: `test-page`,
+        path: '/test',
+        name: 'test-page',
         component: test
     },
     {
-        path: "/",
+        path: '/',
         name: 'home',
         component: Home
     },
     {
-        path: "",
+        path: '',
         redirect: '/'
     },
     {
-        path: `*`,
+        path: '*',
         redirect: '/'
     }
 ]

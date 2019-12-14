@@ -60,7 +60,7 @@
                       </v-col>
                     </v-row>
                   </template>
-                  
+
                   <v-list style="padding: 0">
                     <v-list-item
                       v-for="(type, index) in AVAILABLETYPES"
@@ -128,7 +128,7 @@
               style="max-width: fit-content"
               v-text="'Citizen'"
             />
-            
+
             <v-list-item>
               <v-list-item-content>
                 <v-col
@@ -154,7 +154,7 @@
                           :value.sync="citizenBase.honorific"
                           :dark-mode="true"
                           title="TITLE"
-                          :items="['Mr.', 'Mrs.', 'Ms.', 'no preference']" 
+                          :items="['Mr.', 'Mrs.', 'Ms.', 'no preference']"
                           placeholder="How may we address you?"
                           :error-messages="errors"
                         />
@@ -401,7 +401,7 @@
                             :error-messages="errors"
                           />
                         </v-col>
-                      </ValidationProvider> 
+                      </ValidationProvider>
                     </v-col>
                   </v-row>
                 </v-col>
@@ -463,7 +463,7 @@
             <!-- make this dynamic based on selected school year? -->
             <v-list-item-title
               style="max-width: fit-content"
-              v-text="'Program Details'" 
+              v-text="'Program Details'"
             />
             <v-list-item>
               <v-list-item-content>
@@ -555,7 +555,7 @@
                         </v-col>
                       </ValidationProvider>
                     </v-col>
-                  </v-row>  
+                  </v-row>
                 </v-col>
               </v-list-item-content>
             </v-list-item>
@@ -580,43 +580,44 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import {
-    PCselect,
-    PCtextfield,
-    PCcheckbox,
-    PCmultiinput
-} from "@/components/inputs"
-import autoComplete from "@/components/GoogleMaps/Autocomplete/AutoComplete.vue"
-import Component from "vue-class-component"
-// import * as Employer from "./types"
+import Component from 'vue-class-component'
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate'
-import { ObserverInstance } from "@/utilities/validation"
-// import { tableToDecimal, findOther } from "./helpers"
-import { CONST } from './const'
 import { mask } from 'vue-the-mask'
 import { min_value } from 'vee-validate/dist/rules'
+import { from } from 'rxjs'
+import axios, { AxiosResponse } from 'axios'
+import { map, pluck } from 'rxjs/operators'
+import { sortBy } from 'lodash'
+import {
+  PCselect,
+  PCtextfield,
+  PCcheckbox,
+  PCmultiinput
+} from '@/components/inputs'
+import autoComplete from '@/components/GoogleMaps/Autocomplete/AutoComplete.vue'
+// import * as Employer from "./types"
+import { ObserverInstance } from '@/utilities/validation'
+// import { tableToDecimal, findOther } from "./helpers"
+import { CONST } from './const'
 import { GraphqlStore } from '@/store'
-import {BellScheduleInput, CourseInput} from "./components"
-import {TeacherProfile} from "./types"
+import { BellScheduleInput, CourseInput } from './components'
+import { TeacherProfile } from './types'
 import { ITeacherQuery } from '../../../../store/Graphql/types'
 import { tableToDecimal, findOther } from '../../../../store/Graphql'
 import { AutoCompleteAddress } from '../../../../components/GoogleMaps'
 import { coursePrograms } from './components/CoursePrograms'
-import { from } from 'rxjs'
-import axios,{AxiosResponse} from 'axios'
-import {ProfileUpload} from '@/components/Doka'
-import { map, pluck } from 'rxjs/operators'
-extend('min_value', {
-    ...min_value,
-    message: "This field cannot be less than {min}"
-})
+import { ProfileUpload } from '@/components/Doka'
 
-import {sortBy} from 'lodash'
 import { ICitizenBase } from '../../types'
-import { 
-    PublicProfileFetchQuery, 
-    Public_Citizen_Profile 
+import {
+  PublicProfileFetchQuery,
+  Public_Citizen_Profile
 } from '../../../../store/Graphql/global_types'
+
+extend('min_value', {
+  ...min_value,
+  message: 'This field cannot be less than {min}'
+})
 @Component({
     components: {
         pcSelect: PCselect,
@@ -634,37 +635,44 @@ import {
     directives: {
         mask
     },
-    apollo:{
+    apollo: {
 
     },
-    subscriptions(){
+    subscriptions() {
         return ({
-            DISTRICT_NAMES:from(axios.get<string []>("https://pilotcity-firestore.appspot.com/getdistrict")).pipe(pluck<AxiosResponse,string[]>('data'),
-                map(arr => sortBy(arr).map(district_name => district_name+" District"))),
-            SCHOOL_NAMES: from(axios.get<string []>("https://pilotcity-firestore.appspot.com/getschool_name")).pipe(pluck<AxiosResponse,string[]>('data'),
-                map(arr => sortBy(arr).map(school_name => school_name + " School"))),
-            PUBLIC_PROFILE: from(GraphqlStore.getPublicProfile()).pipe(pluck<PublicProfileFetchQuery,Public_Citizen_Profile>('PublicCitizenProfile'))
+            DISTRICT_NAMES: from(axios.get<string []>('https://pilotcity-firestore.appspot.com/getdistrict')).pipe(pluck<AxiosResponse, string[]>('data'),
+                map(arr => sortBy(arr).map(district_name => `${district_name} District`))),
+            SCHOOL_NAMES: from(axios.get<string []>('https://pilotcity-firestore.appspot.com/getschool_name')).pipe(pluck<AxiosResponse, string[]>('data'),
+                map(arr => sortBy(arr).map(school_name => `${school_name} School`))),
+            PUBLIC_PROFILE: from(GraphqlStore.getPublicProfile()).pipe(pluck<PublicProfileFetchQuery, Public_Citizen_Profile>('PublicCitizenProfile'))
         })
     }
 })
 
 export default class TeacherProfilePage extends CONST {
     DISTRICT_NAMES: string [] = []
+
     SCHOOL_NAMES: string [] = []
+
     get citizenType() {
-        if (!localStorage.citizenType){
-            return this.$route.params.citizenType
-        }
-        else return localStorage.citizenType
+      if (!localStorage.citizenType) {
+        return this.$route.params.citizenType
+      }
+      return localStorage.citizenType
     }
+
     private CITIZENSTYLES = {
-        Teacher: "citizen-id__type--teacher",
-        Employer: "citizen-id__type--employer",
-        Student: "citizen-id__type--student"
+        Teacher: 'citizen-id__type--teacher',
+        Employer: 'citizen-id__type--employer',
+        Student: 'citizen-id__type--student'
     }
+
     private AVAILABLETYPES: string[] = ['Teacher', 'Employer', 'Student']
+
     private ispublic: boolean = true;
+
     private loading: boolean = false;
+
     public citizenBase: ICitizenBase = {
         honorific: '',
         firstName: '',
@@ -673,6 +681,7 @@ export default class TeacherProfilePage extends CONST {
         citizenType: ''
 
     }
+
     public teacherProfile: TeacherProfile = {
         citizen: {
             title: '',
@@ -690,7 +699,7 @@ export default class TeacherProfilePage extends CONST {
             phone_number: '',
             extension: '',
             preferredCommunication: [],
-            available_equipment:[]
+            available_equipment: []
         },
         courses: {
             schoolYear: '',
@@ -703,36 +712,39 @@ export default class TeacherProfilePage extends CONST {
             purchase_emp_product: ''
         }
     }
-    teacherQuery(teacherPage: TeacherProfile): ITeacherQuery{
+
+    teacherQuery(teacherPage: TeacherProfile): ITeacherQuery {
         return {
-            id_token:"",
-            school_district:this.teacherProfile.school.district,
-            school_name:this.teacherProfile.school.name,
-            school_location:JSON.stringify(this.teacherProfile.school.location),
-            bell_schedule:JSON.stringify(this.teacherProfile.school.bellSchedules),
-            classroom_room_location:this.teacherProfile.classroom.location,
-            classroom_room_phone:this.teacherProfile.classroom.phone_number,
-            extension:this.teacherProfile.classroom.extension,
-            preferred:tableToDecimal( this.CLASSROOM_COMMUNICATION,this.teacherProfile.classroom.preferredCommunication),
-            preferred_other:findOther(this.CLASSROOM_COMMUNICATION,this.teacherProfile.classroom.preferredCommunication),
-            tool_equipment:this.teacherProfile.classroom.available_equipment,
-            courses_school_year:this.teacherProfile.courses.schoolYear,
-            prep_period:Number.parseInt(this.teacherProfile.courses.prepPeriod.charAt(1)),
-            course_information:JSON.stringify(this.teacherProfile.courses.classSchedules),
-            enrolled_courses:JSON.stringify(this.teacherProfile.programDetails.coursePrograms),
-            enagement_alternative:this.teacherProfile.programDetails.engagement_alternative,
-            purchase_emp_product:tableToDecimal(this.PROGRAM_PURCHASE,[
+            id_token: '',
+            school_district: this.teacherProfile.school.district,
+            school_name: this.teacherProfile.school.name,
+            school_location: JSON.stringify(this.teacherProfile.school.location),
+            bell_schedule: JSON.stringify(this.teacherProfile.school.bellSchedules),
+            classroom_room_location: this.teacherProfile.classroom.location,
+            classroom_room_phone: this.teacherProfile.classroom.phone_number,
+            extension: this.teacherProfile.classroom.extension,
+            preferred: tableToDecimal(this.CLASSROOM_COMMUNICATION, this.teacherProfile.classroom.preferredCommunication),
+            preferred_other: findOther(this.CLASSROOM_COMMUNICATION, this.teacherProfile.classroom.preferredCommunication),
+            tool_equipment: this.teacherProfile.classroom.available_equipment,
+            courses_school_year: this.teacherProfile.courses.schoolYear,
+            prep_period: Number.parseInt(this.teacherProfile.courses.prepPeriod.charAt(1)),
+            course_information: JSON.stringify(this.teacherProfile.courses.classSchedules),
+            enrolled_courses: JSON.stringify(this.teacherProfile.programDetails.coursePrograms),
+            enagement_alternative: this.teacherProfile.programDetails.engagement_alternative,
+            purchase_emp_product: tableToDecimal(this.PROGRAM_PURCHASE, [
                 this.teacherProfile.programDetails.purchase_emp_product
             ])
         }
     }
+
     public async savePage() {
         await (this.$refs.observer as ObserverInstance).validate()
     }
+
     get Name() {
         return `${this.teacherProfile.citizen.first_name} ${this.teacherProfile.citizen.last_name}`
     }
-    
+
     created() {}
 }
-</script> 
+</script>

@@ -1,6 +1,5 @@
-import { AuthStore } from '@/store/index'
-import { GraphqlStore } from '@/store/index'
 import gql from 'graphql-tag'
+import { AuthStore, GraphqlStore } from '@/store/index'
 
 
 export const EmployerFetch = `

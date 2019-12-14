@@ -1,7 +1,7 @@
 <template>
   <div />
-  <!-- <v-container 
-    fill-height 
+  <!-- <v-container
+    fill-height
     class="recoverPassword__container"
   >
     <v-layout
@@ -63,14 +63,12 @@
 </template>
 
 
-
 <script lang="ts">
-import Vue from "vue"
-import Component from "vue-class-component"
+import Vue from 'vue'
+import Component from 'vue-class-component'
 
 @Component
 export default class PasswordRecoveryCode extends Vue {
     public input_email: string | undefined
 }
 </script>
-

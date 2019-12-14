@@ -1,9 +1,9 @@
 export interface AutoCompleteAddress {
     administrative_area_level_1: string;
     country: string;
-    latitude: string; //number
+    latitude: string; // number
     locality: string;
-    longitude: string; //number
+    longitude: string; // number
     name: string;
     photos: any;
     place_id: string;

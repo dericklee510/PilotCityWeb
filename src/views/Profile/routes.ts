@@ -1,24 +1,25 @@
-import { AuthStore } from './../../store/index'
-import * as Profile from "../Profile"
 import { RouteConfig } from 'vue-router'
+import { AuthStore } from '../../store/index'
+import * as Profile from '.'
+
 const routes: RouteConfig[] = [
     {
-        path: "/profile",
+        path: '/profile',
         component: Profile.Main,
         children: [
             {
-                name: "profile.private",
-                path: "/profile",
+                name: 'profile.private',
+                path: '/profile',
                 components: {
                     Employer: Profile.Private.EmployerQuestions,
-                    Teacher: Profile.Private.TeacherQuestions 
+                    Teacher: Profile.Private.TeacherQuestions
                 }
             }
         ]
     },
     {
-        name: "profile.public",
-        path: `/profile/public`,
+        name: 'profile.public',
+        path: '/profile/public',
         component: Profile.Public.PublicProfile
     }
     // {

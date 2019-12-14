@@ -1,8 +1,8 @@
 /* eslint-disable-next-line */
 import { Module, VuexModule, Action } from "vuex-module-decorators" //Action unsed
-import { firebaseApp } from "@/firebase/init"
+import { firebaseApp } from '@/firebase/init'
 
-@Module({ namespaced: true, name: "Storage" })
+@Module({ namespaced: true, name: 'Storage' })
 export default class Storage extends VuexModule {
     public bucket: firebase.storage.Storage = firebaseApp.storage()
 

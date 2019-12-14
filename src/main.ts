@@ -1,5 +1,5 @@
+import Vue from 'vue'
 import { MAPS_API_KEY } from '@/keys'
-import Vue from "vue"
 /* eslint-disable */
 import App from "./App.vue"
 import router from "@/router"

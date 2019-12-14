@@ -1,4 +1,4 @@
-import { ITeacherQuery, IPublicCitizenProfile } from './types'
+import { ITeacherQuery, IPublicCitizenProfile, IEmployerQuery } from './types'
 /* eslint-disable */
 import { EMPLOYER_QUERY, PUBLIC_PROFILE_MUTATION } from './const';
 import {
@@ -11,10 +11,10 @@ import {
 import * as firebase from 'firebase/app'
 import { validateEmployerQuery, validateTeacherQuery } from "./validation"
 import { GraphQLClient } from 'graphql-request'
-import { IEmployerQuery } from './types'
+
 export { tableToDecimal, findOther } from "../../utilities/graphql"
-import {getSdk} from './global_types'
 import { idToken } from 'rxfire/auth/dist/auth';
+import { getSdk } from './global_types';
 @Module({ namespaced: true, name: "Graphql" })
 export default class Graphql extends VuexModule {
     public client = new GraphQLClient("https://20191119t140110-dot-pilotcity-firestore.appspot.com/graphql")

@@ -1,2 +1,2 @@
-export {BellScheduleInput} from "./BellScheduleInput"
-export {CourseInput} from "./CourseInput"
+export { BellScheduleInput } from './BellScheduleInput'
+export { CourseInput } from './CourseInput'
