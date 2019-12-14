@@ -12,7 +12,7 @@
     "test:e2e": "vue-cli-service test:e2e",
     "test:unit": "vue-cli-service test:unit",
     "hide": "git secret hide -d",
-    "reveal":"git secret reveal"
+    "reveal": "git secret reveal"
   },
   "dependencies": {
     "@google/maps": "^0.5.5",
@@ -44,7 +44,6 @@
     "graphql": "^14.5.8",
     "graphql-request": "^1.8.2",
     "graphql-tag": "^2.10.1",
-    "pre-commit": "^1.2.2",
     "reflect-metadata": "^0.1.13",
     "rxfire": "^3.6.11",
     "rxjs": "^6.5.2",
@@ -84,7 +83,7 @@
     "eslint-loader": "^2.1.2",
     "eslint-plugin-es-beautifier": "^1.0.1",
     "eslint-plugin-vue": "^5.0.0",
-    "post-commit": "0.0.1",
+    "husky": "^3.1.0",
     "sass": "^1.18.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
@@ -221,14 +220,10 @@
       }
     }
   },
-  "pre-commit": {
-    "run": [
-      "hide"
-    ]
-  },
-  "post-commit":{
-    "run":[
-      "reveal"
-    ]
+  "husky": {
+    "hooks":{
+      "pre-commit":"npm run hide",
+      "post-commit":"npm run reveal"
+    }
   }
 }
