@@ -4,10 +4,10 @@ import { SET_USER } from './../store/Auth/mutation-types' //unsed
 import { RouterOptions, RouteConfig } from 'vue-router' //routeroptions unused
 
 import {
-    forgotPassword,
     code,
     email,
-  routes as LoginRoutes
+  routes as LoginRoutes,
+  ForgotPassword
 } from '@/views/Login'
 import test from '@/views/Test'
 import Home from '@/views/Home.vue'
@@ -20,7 +20,7 @@ const routes: RouteConfig [] = [
     ...ProfileRoutes,
     {
         path: '/reset_password',
-        component: forgotPassword,
+        component: ForgotPassword,
         children: [{
             path: '',
             name: 'reset-email',
