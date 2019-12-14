@@ -81,7 +81,6 @@
     "eslint-loader": "^2.1.2",
     "eslint-plugin-es-beautifier": "^1.0.1",
     "eslint-plugin-vue": "^5.0.0",
-    "pre-commit": "^1.2.2",
     "sass": "^1.18.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
@@ -218,6 +217,5 @@
       }
     }
   },
-  "pre-commit": {
-  }
+  "pre-commit": {}
 }
