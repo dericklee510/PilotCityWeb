@@ -21,24 +21,22 @@
 
 <script lang="ts">
 //
-import FilePondProfileInstance from "../utilities/FilePondInstance"
-import * as Doka from "../esm/lib/doka.esm.min.js"
-import "../esm/lib/doka.min.css"
+import FilePondProfileInstance from '../utilities/FilePondInstance'
+import * as Doka from '../esm/lib/doka.esm.min.js'
+import '../esm/lib/doka.min.css'
 
-import Vue from "vue"
+import Vue from 'vue'
 import Component from 'vue-class-component'
 
 
-import filepond from "filepond"
-import * as CONST from "./const"
-import { StorageStore, AuthStore } from '@/store'
-import { process, load } from './wrapper'
+import filepond from 'filepond'
 import { getDownloadURL } from 'rxfire/storage/'
 import { switchMap, map, tap } from 'rxjs/operators'
 import { from, empty } from 'rxjs'
 import { Prop } from 'vue-property-decorator'
-
-
+import { process, load } from './wrapper'
+import { StorageStore, AuthStore } from '@/store'
+import * as CONST from './const'
 
 
 @Component({
@@ -48,27 +46,30 @@ import { Prop } from 'vue-property-decorator'
 })
 export default class ProfileUpload extends Vue {
     @Prop()
-    value!: string 
-    
-    emitLink(){
-        if(AuthStore.user){
-            console.log("working",AuthStore.user.photoURL)
+    value!: string
+
+    emitLink() {
+        if (AuthStore.user) {
+            console.log('working', AuthStore.user.photoURL)
             this.$emit('input', AuthStore.user.photoURL)
         }
     }
 
     get ProfilePicture(): filepond.ServerFileReference[] {
-        if (!AuthStore.user)
-            throw ("not logged in!")
-        if (AuthStore.user.photoURL)
+        if (!AuthStore.user) throw ('not logged in!')
+        if (AuthStore.user.photoURL) {
             return [{
                 source: AuthStore.user.photoURL,
                 options: { type: 'local' }
-            }]
+        }]
+        }
         return []
     }
+
     html: string = CONST.ACTION_HTML
+
     Doka = Doka
+
     mask = (root: Record<string, any>, setInnerHTML: (root: Record<string, any>, html: string) => Record<string, any>) => {
     // https://pqina.nl/doka/docs/patterns/api/doka-instance/#setting-the-crop-mask
         setInnerHTML(
@@ -76,7 +77,9 @@ export default class ProfileUpload extends Vue {
             CONST.MASK_HTML
         )
     }
+
     process: filepond.server.process = process
+
     load: filepond.server.load = load
 }
 </script>

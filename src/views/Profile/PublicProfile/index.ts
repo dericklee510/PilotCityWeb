@@ -1,7 +1,7 @@
 // export profile from "./Profile.vue"
-import PublicProfile from "./Profile.vue"
+import PublicProfile from './Profile.vue'
 
-export {PublicProfile}
+export { PublicProfile }
 
 export const Public = {
     PublicProfile

@@ -103,55 +103,61 @@
   </v-row>
 </template>
 <script lang="ts">
-import {PCselect, PCtextfield} from '@/components/inputs'
 import Vue from 'vue'
-import Component from "vue-class-component"
+import Component from 'vue-class-component'
 import { Prop, Watch } from 'vue-property-decorator'
+import { maxBy } from 'lodash'
 import { IBellSchedule } from './types'
-import {maxBy} from 'lodash'
+import { PCselect, PCtextfield } from '@/components/inputs'
 @Component({
-    components:{
-        pcSelect:PCselect,
-        pcTextfield:PCtextfield
+    components: {
+        pcSelect: PCselect,
+        pcTextfield: PCtextfield
     }
 })
-export default class BellScheduleInput extends Vue{
+export default class BellScheduleInput extends Vue {
 @Prop()
     value!: IBellSchedule[]
-@Prop({required:false})
+
+@Prop({ required: false })
 error!: boolean
+
 classEntries: {value: IBellSchedule; id: number}[] = [
     {
-        value:{
-            period:[],
-            weeklySchedule:[],
-            startTime:"",
-            endTime:""
+        value: {
+            period: [],
+            weeklySchedule: [],
+            startTime: '',
+            endTime: ''
         },
-        id:0
+        id: 0
     }
 ]
+
 public rules = {
     required: (value: any) => !!value || 'Required.',
     min: (v: any) => v.length >= 8 || 'Min 8 characters',
     emailMatch: () => ('The email and password you entered don\'t match')
 };
-removeSchedule(id: number){
-    this.classEntries.splice(this.classEntries.findIndex((entry => entry.id ==id)),1)
+
+removeSchedule(id: number) {
+    this.classEntries.splice(this.classEntries.findIndex((entry => entry.id == id)), 1)
 }
-pushNewSchedule(){
+
+pushNewSchedule() {
     this.classEntries.push({
-        value:{
-            period:[],
-            weeklySchedule:[],
-            startTime:"",
-            endTime:""
+        value: {
+            period: [],
+            weeklySchedule: [],
+            startTime: '',
+            endTime: ''
         },
-        id: (maxBy(this.classEntries, entry => entry.id) as {value: IBellSchedule; id: number}).id+1
+        id: (maxBy(this.classEntries, entry => entry.id) as {value: IBellSchedule; id: number}).id + 1
     })
 }
-@Watch('classEntries',{deep:true})
-onSchedulesChanged(newVal: {value: IBellSchedule; id: number}[]){
+
+@Watch('classEntries', { deep: true })
+onSchedulesChanged(newVal: {value: IBellSchedule; id: number}[]) {
     this.$emit('input', newVal.map(entree => entree.value))
 }
 }

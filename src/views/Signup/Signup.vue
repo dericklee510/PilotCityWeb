@@ -57,7 +57,7 @@
                   required
                 />
               </ValidationProvider>
-            </v-col> 
+            </v-col>
             <v-col
               cols="12"
             >
@@ -75,7 +75,7 @@
                   required
                 />
               </ValidationProvider>
-            </v-col> 
+            </v-col>
             <v-col
               cols="12"
             >
@@ -113,7 +113,7 @@
                   required
                 />
               </ValidationProvider>
-            </v-col> 
+            </v-col>
             <v-col
               cols="12"
             >
@@ -130,7 +130,7 @@
                   placeholder="Confirm your password"
                   :error-messages="errors"
                   @keyup.enter="process"
-                />  
+                />
               </ValidationProvider>
             </v-col>
           </ValidationObserver>
@@ -171,21 +171,21 @@
 </template>
 
 <script lang="ts">
-import { AuthStore } from "@/store"
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import { ValidationObserver } from 'vee-validate'
+import { AuthStore } from '@/store'
 /* eslint-disable-next-line */
 import _ from "lodash"
-import Vue from "vue"
-import PCselect from "@/components/inputs/PCselect.vue"
-import PCtextfield from "@/components/inputs/PCtextfield.vue"
-import Component from "vue-class-component"
+import PCselect from '@/components/inputs/PCselect.vue'
+import PCtextfield from '@/components/inputs/PCtextfield.vue'
 import { ValidationProvider } from './validation'
-import {ValidationObserver} from 'vee-validate'
-import {ObserverInstance} from "@/utilities/validation"
+import { ObserverInstance } from '@/utilities/validation'
 
 import { AutoComplete } from '@/components/GoogleMaps'
 
 @Component({
-    components:{
+    components: {
         pcSelect: PCselect,
         pcTextfield: PCtextfield,
         ValidationObserver,
@@ -194,30 +194,37 @@ import { AutoComplete } from '@/components/GoogleMaps'
     }
 })
 export default class Signup extends Vue {
-    private confirmPassword: string = "";
-    private password: string = ""
-    public email: string = "";
-    public firstName: string = "";
-    public lastName: string = "";
+    private confirmPassword: string = '';
+
+    private password: string = ''
+
+    public email: string = '';
+
+    public firstName: string = '';
+
+    public lastName: string = '';
+
     public loading: boolean = false;
-    public authResponse: string = ""
+
+    public authResponse: string = ''
+
     public async process(): Promise<void> {
         this.loading = true
-        if(await (this.$refs.Observer as ObserverInstance).validate()){
+        if (await (this.$refs.Observer as ObserverInstance).validate()) {
             this.authResponse = await AuthStore.createAccount({
                 email: this.email,
                 password: this.password,
-                firstName:this.firstName,
-                lastName:this.lastName
+                firstName: this.firstName,
+                lastName: this.lastName
             })
         }
         this.loading = false
     }
-    public syncLocalStorage(){
+
+    public syncLocalStorage() {
         localStorage.citizenFirstName = this.firstName
         localStorage.citizenLastName = this.lastName
     }
-    
 }
 </script>
 

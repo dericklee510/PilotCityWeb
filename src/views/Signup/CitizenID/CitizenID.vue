@@ -3,7 +3,7 @@
     class="citizen-id"
     fluid
   >
-    <v-container  
+    <v-container
       fluid
       style="margin-top: 80px;"
     >
@@ -34,8 +34,8 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue"
-import Component from "vue-class-component"
+import Vue from 'vue'
+import Component from 'vue-class-component'
 
 @Component
 export default class CitizenID extends Vue {

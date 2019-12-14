@@ -1,1 +1,1 @@
-export {default as BellScheduleInput} from "./BellScheduleInput.vue"
+export { default as BellScheduleInput } from './BellScheduleInput.vue'

@@ -1,6 +1,6 @@
 <template>
-  <v-container 
-    fill-height 
+  <v-container
+    fill-height
     class="recoverPassword__container"
   >
     <v-layout
@@ -80,21 +80,22 @@
 </template>
 
 
-
 <script lang="ts">
-import Vue from "vue"
-import Component from "vue-class-component" 
-import { AuthStore } from "@/store"
-import ValidationProvider from "@/utilities/validation"
-import {ProviderInstance} from "vee-validate/dist/types/types"
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import { ProviderInstance } from 'vee-validate/dist/types/types'
+import { AuthStore } from '@/store'
+import ValidationProvider from '@/utilities/validation'
 @Component({
-    components:{
+    components: {
         ValidationProvider
     }
 })
 export default class PasswordRecoveryEmail extends Vue {
-    public email: string = ``;
-    public authResponse: string = ``;
+    public email: string = '';
+
+    public authResponse: string = '';
+
     public loading: boolean = false;
 
     private async process(): Promise<void> {
@@ -106,6 +107,5 @@ export default class PasswordRecoveryEmail extends Vue {
         }
         this.loading = false
     }
-    
 }
 </script>

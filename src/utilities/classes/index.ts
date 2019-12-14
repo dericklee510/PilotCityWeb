@@ -1,1 +1,1 @@
-export {applyMixins} from "./applyMixins"
+export { applyMixins } from './applyMixins'

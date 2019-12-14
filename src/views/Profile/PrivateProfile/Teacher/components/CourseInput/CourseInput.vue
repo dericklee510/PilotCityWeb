@@ -34,11 +34,11 @@
         <pcSelect
           v-model="entry.value.pathway"
           :dark-mode="true"
-          :items="['Agriculture and Natural Resources', 
-                   'Arts, Media, and Entertainment', 
-                   'Building and Construction Trades', 
+          :items="['Agriculture and Natural Resources',
+                   'Arts, Media, and Entertainment',
+                   'Building and Construction Trades',
                    'Business and Finance',
-                   'Education, Child Development, and Family Services', 
+                   'Education, Child Development, and Family Services',
                    'Energy, Environment, and Utilities',
                    'Engineering and Architecture',
                    'Fashion and Interior Design',
@@ -98,53 +98,56 @@
   </div>
 </template>
 <script lang="ts">
-import {PCselect, PCtextfield} from '@/components/inputs'
 import Vue from 'vue'
-import Component from "vue-class-component"
+import Component from 'vue-class-component'
 import { Prop, Watch } from 'vue-property-decorator'
-import { ICourses } from './types'
-import {maxBy} from 'lodash'
+import { maxBy } from 'lodash'
 import { mask } from 'vue-the-mask'
+import { ICourses } from './types'
+import { PCselect, PCtextfield } from '@/components/inputs'
 @Component({
-    components:{
-        pcSelect:PCselect,
-        pcTextfield:PCtextfield
+    components: {
+        pcSelect: PCselect,
+        pcTextfield: PCtextfield
     },
     directives: {
         mask
     }
 })
-export default class CourseInput extends Vue{
+export default class CourseInput extends Vue {
     @Prop()
     value!: ICourses[]
 
     classEntries: {value: ICourses; id: number}[] = [
         {
-            value:{
+            value: {
                 period: '',
                 course: '',
                 pathway: '',
                 classSize: ''
             },
-            id:0
+            id: 0
         }
     ]
-    removeSchedule(id: number){
-        this.classEntries.splice(this.classEntries.findIndex((entry => entry.id ==id)),1)
+
+    removeSchedule(id: number) {
+        this.classEntries.splice(this.classEntries.findIndex((entry => entry.id == id)), 1)
     }
-    pushNewSchedule(){
+
+    pushNewSchedule() {
         this.classEntries.push({
-            value:{
+            value: {
                 period: '',
                 course: '',
                 pathway: '',
                 classSize: ''
             },
-            id: (maxBy(this.classEntries, entry => entry.id) as {value: ICourses; id: number}).id+1
+            id: (maxBy(this.classEntries, entry => entry.id) as {value: ICourses; id: number}).id + 1
         })
     }
-    @Watch('classEntries',{deep:true})
-    onSchedulesChanged(newVal: {value: ICourses; id: number}[]){
+
+    @Watch('classEntries', { deep: true })
+    onSchedulesChanged(newVal: {value: ICourses; id: number}[]) {
         this.$emit('input', newVal.map(entree => entree.value))
     }
 }

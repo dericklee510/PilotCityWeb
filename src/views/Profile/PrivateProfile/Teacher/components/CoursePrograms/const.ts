@@ -1,4 +1,5 @@
-import Vue from "vue"
+import Vue from 'vue'
+
 export class CONST extends Vue {
     public PROGRAM_GRADES = [
         '9',

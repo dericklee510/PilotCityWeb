@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueApollo from 'vue-apollo'
-import { 
-    createApolloClient, 
-    restartWebsockets 
+import {
+    createApolloClient,
+    restartWebsockets
 } from 'vue-cli-plugin-apollo/graphql-client'
 
 // Install the vue plugin
@@ -50,7 +50,7 @@ const defaultOptions = {
 }
 
 // Call this in the Vue app file
-export function createProvider (options = {}) {
+export function createProvider(options = {}) {
     // Create apollo client
  type optionType = typeof defaultOptions & typeof options
  const { apolloClient, wsClient } = createApolloClient<optionType>({
@@ -67,8 +67,8 @@ export function createProvider (options = {}) {
              // fetchPolicy: 'cache-and-network',
          }
      },
-     errorHandler (error) {
-         // eslint-disable-next-line no-console
+     errorHandler(error) {
+     // eslint-disable-next-line no-console
          console.log('%cError', 'background: red; color: white; padding: 2px 4px; border-radius: 3px; font-weight: bold;', error.message)
      }
  })
@@ -77,7 +77,7 @@ export function createProvider (options = {}) {
 }
 
 // Manually call this when user log in
-export async function onLogin (apolloClient: any, token: any) {
+export async function onLogin(apolloClient: any, token: any) {
     if (typeof localStorage !== 'undefined' && token) {
         localStorage.setItem(AUTH_TOKEN, token)
     }
@@ -91,7 +91,7 @@ export async function onLogin (apolloClient: any, token: any) {
 }
 
 // Manually call this when user log out
-export async function onLogout (apolloClient: any) {
+export async function onLogout(apolloClient: any) {
     if (typeof localStorage !== 'undefined') {
         localStorage.removeItem(AUTH_TOKEN)
     }

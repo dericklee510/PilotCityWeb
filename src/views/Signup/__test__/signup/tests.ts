@@ -1,7 +1,8 @@
-import { AuthStore } from '@/store'
-import { wrapper} from "./const"
 import flushPromises from 'flush-promises'
-import {COMPLEXPASSWORD} from "./const"
+import { AuthStore } from '@/store'
+import { wrapper, COMPLEXPASSWORD } from './const'
+
+
 jest.mock('@/store')
 
 // export const invalidInputFields = async (): Promise<void>  => {

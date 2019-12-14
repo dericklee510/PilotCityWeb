@@ -38,7 +38,7 @@
               </v-row>
             </v-col>
           </template>
-  
+
           <v-list style="padding: 0 ">
             <v-list-item
               v-for="(type, index) in AVAILABLETYPES"
@@ -88,7 +88,7 @@
             <pcSelect
               :dark-mode="true"
               title="TITLE"
-              :items="['Mr.', 'Mrs.', 'Ms.', 'no preference']" 
+              :items="['Mr.', 'Mrs.', 'Ms.', 'no preference']"
               placeholder="How may we address you?"
             />
           </v-col>
@@ -141,26 +141,27 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue"
-import PCselect from "@/components/inputs/PCselect.vue"
-import PCtextfield from "@/components/inputs/PCtextfield.vue"
-import {Component, Prop} from "vue-property-decorator"
+import Vue from 'vue'
+import { Component, Prop } from 'vue-property-decorator'
+import PCselect from '@/components/inputs/PCselect.vue'
+import PCtextfield from '@/components/inputs/PCtextfield.vue'
 
 @Component({
-    components:{
+    components: {
         pcSelect: PCselect,
         pcTextfield: PCtextfield
     }
 })
 export default class CitizenData extends Vue {
     private CITIZENSTYLES = {
-        Teacher: "citizen-id__type--teacher", 
-        Employer: "citizen-id__type--employer", 
-        Student: "citizen-id__type--student"
+        Teacher: 'citizen-id__type--teacher',
+        Employer: 'citizen-id__type--employer',
+        Student: 'citizen-id__type--student'
     }
-    private AVAILABLETYPES: string[] = ["Teacher", "Employer", "Student"]
-    
-    get citizenType(){
+
+    private AVAILABLETYPES: string[] = ['Teacher', 'Employer', 'Student']
+
+    get citizenType() {
         return this.$route.params.citizenType
     }
 }

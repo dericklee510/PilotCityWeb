@@ -150,7 +150,7 @@
                             v-model="citizenBase.honorific"
                             :dark-mode="true"
                             title="TITLE"
-                            :items="['Mr.', 'Mrs.', 'Ms.', 'no preference']" 
+                            :items="['Mr.', 'Mrs.', 'Ms.', 'no preference']"
                             placeholder="How may we address you?"
                             :error-messages="errors"
                           />
@@ -1157,7 +1157,7 @@
                     </v-col>
                   </v-row>
                 </v-col>
-                   
+
                 <v-row justify="start">
                   <v-col
                     cols="12"
@@ -1190,38 +1190,39 @@
 </template>
 
 <script lang="ts">
-import {
-    PCselect,
-    PCtextfield,
-    PCcheckbox,
-    PCmultiinput
-} from "@/components/inputs"
-import autoComplete from "@/components/GoogleMaps/Autocomplete/AutoComplete.vue"
-import Component from "vue-class-component"
-import * as Employer from "./types"
+import Component from 'vue-class-component'
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate'
-import { ObserverInstance } from "@/utilities/validation"
-import { tableToDecimal, findOther } from "@/store/Graphql"
-import { CONST } from './const'
 import { mask } from 'vue-the-mask'
 import { min_value } from 'vee-validate/dist/rules'
-import {ProfileUpload} from '@/components/Doka'
-import { GraphqlStore, AuthStore } from '@/store'
-import {citizenBaseToProfile} from "./helpers"
-import { IPublicCitizenProfile } from '../../../../store/Graphql/types'
-import {EmployerFetch} from "./gql"
-import { applyMixins } from '../../../../utilities/classes'
 import Vue from 'vue'
+import {
+  PCselect,
+  PCtextfield,
+  PCcheckbox,
+  PCmultiinput
+} from '@/components/inputs'
+import autoComplete from '@/components/GoogleMaps/Autocomplete/AutoComplete.vue'
+import * as Employer from './types'
+import { ObserverInstance } from '@/utilities/validation'
+import { tableToDecimal, findOther } from '@/store/Graphql'
+import { CONST } from './const'
+import { ProfileUpload } from '@/components/Doka'
+import { GraphqlStore, AuthStore } from '@/store'
+import { citizenBaseToProfile } from './helpers'
+import { IPublicCitizenProfile } from '../../../../store/Graphql/types'
+import { EmployerFetch } from './gql'
+import { applyMixins } from '../../../../utilities/classes'
 import { ICitizenBase } from '../../types'
+
 extend('min_value', {
     ...min_value,
-    message: "This field cannot be less than {min}"
+    message: 'This field cannot be less than {min}'
 })
 
-class app extends Vue{}
+class app extends Vue {}
 interface app extends Vue, CONST{}
 
-applyMixins(CONST,[Vue,CONST])
+applyMixins(CONST, [Vue, CONST])
 
 @Component({
     components: {
@@ -1240,30 +1241,38 @@ applyMixins(CONST,[Vue,CONST])
 })
 
 export default class EmployerProfile extends app {
-    profile_img_url: string = ""
+    profile_img_url: string = ''
+
     private CITIZENSTYLES = {
-        Teacher: "citizen-id__type--teacher",
-        Employer: "citizen-id__type--employer",
-        Student: "citizen-id__type--student"
+        Teacher: 'citizen-id__type--teacher',
+        Employer: 'citizen-id__type--employer',
+        Student: 'citizen-id__type--student'
     }
-    private AVAILABLETYPES: string[] = ["Teacher", "Employer", "Student"]
+
+    private AVAILABLETYPES: string[] = ['Teacher', 'Employer', 'Student']
+
     private ispublic: boolean = true;
+
     public citizenBase: ICitizenBase = {
-        honorific:"",
-        firstName:"",
-        lastName:"",
-        profilePicture:"",
-        citizenType:""
+        honorific: '',
+        firstName: '',
+        lastName: '',
+        profilePicture: '',
+        citizenType: ''
     }
+
     public citizen: Employer.Citizen = {} as Employer.Citizen
+
     public organization: Employer.Organization = {
         industry: [] as string[],
         products_services: [] as string[]
     } as Employer.Organization
+
     public programdetails: Employer.ProgramDetails = {
         externship: { prefered_date: {}, contribution: [] as string[] },
         project: { capacity: {}, engagement: {} }
     } as Employer.ProgramDetails
+
     public internship: Employer.Internship = {
         talent: [] as string[],
         project: [] as string[],
@@ -1272,9 +1281,10 @@ export default class EmployerProfile extends app {
     } as Employer.Internship
 
     contributionOther: string = '';
-    internOther: string = '';
-    private loading: boolean = false
 
+    internOther: string = '';
+
+    private loading: boolean = false
 
 
     public syncStorageCitizen() {
@@ -1283,13 +1293,14 @@ export default class EmployerProfile extends app {
         localStorage.citizen_position = this.citizen.position
         localStorage.citizen_organization = this.citizen.organization
     }
+
     private addOption(from: string, to: string[]): void {
         to.push(from)
     }
-    public syncStorageOrganization() {
 
-        if (this.organization) {
-            let location = this.organization.location
+    public syncStorageOrganization() {
+      if (this.organization) {
+            let { location } = this.organization
             localStorage.organization_division = this.organization.department
             localStorage.organization_location_text = `${location.name} ${location.street_number} ${location.route}, ${location.locality}, ${location.administrative_area_level_1} ${location.postal_code}, ${location.country}`
             localStorage.organization_location_lng = this.organization.location.longitude
@@ -1300,6 +1311,7 @@ export default class EmployerProfile extends app {
             localStorage.organization_product_employee_count = this.organization.employee_count
         }
     }
+
     syncStorageProgramDetails() {
         if (this.programdetails) {
             localStorage.program_externship_time_first = this.programdetails.externship.prefered_date.primary
@@ -1309,6 +1321,7 @@ export default class EmployerProfile extends app {
             localStorage.program_externship_options_other = findOther(this.PROGRAMDETAILS_EXTERNSHIP_CONTRIBUTION_OPTIONS, this.programdetails.externship.contribution)
         }
     }
+
     syncStorageProject() {
         if (this.programdetails) {
             localStorage.projects_min = Number.parseInt(this.programdetails.project.capacity.minimum)
@@ -1319,11 +1332,12 @@ export default class EmployerProfile extends app {
             localStorage.projects_engagement_2 = tableToDecimal(this.PROGRAMDETAILS_PROJECT_ENGAGEMENT_RADIUS_OPTIONS, [
                 this.programdetails.project.engagement.radius
             ])
-            // localStorage.projects_requests = this.programdetails.project.
-            // localStorage.projects_missions = this.programdetails.project.
-            // localStorage.projects_specifications = this.programdetails.project.
+        // localStorage.projects_requests = this.programdetails.project.
+        // localStorage.projects_missions = this.programdetails.project.
+        // localStorage.projects_specifications = this.programdetails.project.
         }
     }
+
     /* eslint-disable max-lines-per-function */
     syncStorageInternship() {
         if (this.internship) {
@@ -1336,8 +1350,8 @@ export default class EmployerProfile extends app {
             localStorage.internships_education = tableToDecimal(this.INTERNSHIP_EDUCATION_OPTIONS, this.internship.education_level)
             localStorage.internships_education_other = findOther(this.INTERNSHIP_EDUCATION_OPTIONS, this.internship.education_level)
             localStorage.internships_talent = tableToDecimal(this.INTERNSHIP_TALENT_OPTIONS, this.internship.talent)
-            localStorage.internships_days_week = Number.parseInt(this.internship.days_week.charAt(0))?Number.parseInt(this.internship.days_week.charAt(0)):0
-            localStorage.internships_hours_day = Number.parseInt(this.internship.hours_day.charAt(0))?Number.parseInt(this.internship.hours_day.charAt(0)):0
+            localStorage.internships_days_week = Number.parseInt(this.internship.days_week.charAt(0)) ? Number.parseInt(this.internship.days_week.charAt(0)) : 0
+            localStorage.internships_hours_day = Number.parseInt(this.internship.hours_day.charAt(0)) ? Number.parseInt(this.internship.hours_day.charAt(0)) : 0
             localStorage.internships_employer_of_record = tableToDecimal(this.INTERNSHIP_EMPLOYER_OF_RECORD_OPTIONS, [
                 this.internship.employer_of_record
             ])
@@ -1351,42 +1365,46 @@ export default class EmployerProfile extends app {
             localStorage.internships_position = tableToDecimal(this.INTERNSHIP_POSITION_TYPE_OPTIONS, this.internship.position_type)
         }
     }
+
     async syncStorage() {
         this.loading = true
 
-        try{
-            if (await (this.$refs.observer as ObserverInstance).validate()) { 
+        try {
+            if (await (this.$refs.observer as ObserverInstance).validate()) {
                 this.syncStorageCitizen()
                 this.syncStorageOrganization()
                 this.syncStorageProgramDetails()
                 this.syncStorageProject()
                 this.syncStorageInternship()
             }
-        }
-        catch(err){
+        } catch (err) {
             console.log(err)
         }
         this.loading = false
     }
-    async submitPublicProfile(){
+
+    async submitPublicProfile() {
         await GraphqlStore.fetchCitizenProfile(citizenBaseToProfile(this.citizenBase))
         await GraphqlStore.createCitizenProfile()
     }
+
     get Name() {
         return `${this.citizen.first_name} ${this.citizen.last_name}`
     }
-    async submitProfile(){
+
+    async submitProfile() {
         await this.submitPublicProfile()
         await GraphqlStore.fetchQueryData()
         await GraphqlStore.SubmitEmployerQuery()
     }
+
     async created() {
         this.citizenBase.citizenType = this.$route.params.citizenType
-        if(AuthStore.user){
-            console.log(await GraphqlStore.client.request(EmployerFetch,{
-                user_id:AuthStore.user.uid
+        if (AuthStore.user) {
+            console.log(await GraphqlStore.client.request(EmployerFetch, {
+                user_id: AuthStore.user.uid
             }))
         }
     }
 }
-</script> 
+</script>

@@ -3,17 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "beautify": "eslint --fix .",
-    "build": "vue-cli-service build",
-    "generate": "graphql-codegen --config src/codegen.json",
-    "lint": "vue-cli-service lint",
-    "preserve": "npm run generate",
     "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "test": "jest",
+    "lint": "vue-cli-service lint",
+    "generate": "graphql-codegen --config src/codegen.json",
+    "preserve": "npm run generate",
     "test:e2e": "vue-cli-service test:e2e",
-    "test:unit": "vue-cli-service test:unit",
-    "test": "jest"
+    "test:unit": "vue-cli-service test:unit"
   },
-  "pre-commit":["beautify"],
   "dependencies": {
     "@google/maps": "^0.5.5",
     "@graphql-codegen/cli": "^1.9.1",
@@ -27,6 +25,7 @@
     "@types/node-fetch": "^2.5.4",
     "@types/vue-the-mask": "^0.11.0",
     "@types/zxcvbn": "^4.4.0",
+    "@typescript-eslint/parser": "^2.11.0",
     "axios": "^0.19.0",
     "babel-plugin-transform-decorators": "^6.24.1",
     "core-js": "^2.6.5",
@@ -67,10 +66,11 @@
     "@typescript-eslint/eslint-plugin": "^1.13.0",
     "@vue/cli-plugin-babel": "^3.8.0",
     "@vue/cli-plugin-e2e-cypress": "^3.8.0",
-    "@vue/cli-plugin-eslint": "^3.8.0",
+    "@vue/cli-plugin-eslint": "^3.12.1",
     "@vue/cli-plugin-typescript": "^3.8.1",
     "@vue/cli-plugin-unit-jest": "^3.9.0",
     "@vue/cli-service": "^3.8.0",
+    "@vue/eslint-config-airbnb": "^4.0.0",
     "@vue/eslint-config-prettier": "^4.0.1",
     "@vue/eslint-config-typescript": "^4.0.0",
     "@vue/test-utils": "1.0.0-beta.29",
@@ -81,7 +81,6 @@
     "eslint-loader": "^2.1.2",
     "eslint-plugin-es-beautifier": "^1.0.1",
     "eslint-plugin-vue": "^5.0.0",
-    "pre-commit": "^1.2.2",
     "sass": "^1.18.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
@@ -114,7 +113,8 @@
       "plugin:@typescript-eslint/recommended",
       "@vue/typescript",
       "eslint:recommended",
-      "plugin:vue/recommended"
+      "plugin:vue/recommended",
+      "@vue/airbnb"
     ],
     "rules": {
       "no-object-literal-type-assertion": [
@@ -146,6 +146,9 @@
           "ignoreRestSiblings": false
         }
       ]
+    },
+    "parserOptions": {
+      "parser": "@typescript-eslint/parser"
     }
   },
   "postcss": {
@@ -213,5 +216,6 @@
         "babelConfig": true
       }
     }
-  }
+  },
+  "pre-commit": {}
 }

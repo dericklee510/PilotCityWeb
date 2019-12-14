@@ -82,7 +82,7 @@
                   class="footer__acoe"
                 >
               </v-flex>
-            </v-layout> 
+            </v-layout>
           </v-card-title>
         </v-card>
       </v-flex>
@@ -96,8 +96,8 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue"
-import Component from "vue-class-component"
+import Vue from 'vue'
+import Component from 'vue-class-component'
 @Component
 export default class FooterMain extends Vue {
     icons: string[] = [

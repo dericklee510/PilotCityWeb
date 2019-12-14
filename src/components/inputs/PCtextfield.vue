@@ -6,7 +6,7 @@
     <label
       for="citizen-title"
       class="pc-input__label"
-    > 
+    >
       <h5 class="text-uppercase">
         {{ title }}
       </h5>
@@ -30,47 +30,52 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue"
+import Vue from 'vue'
 import 'reflect-metadata'
 import {
-    Component, 
-    Prop, 
-    Watch, 
+    Component,
+    Prop,
+    Watch,
     PropSync
-} from "vue-property-decorator"
+} from 'vue-property-decorator'
 
 
 @Component
 export default class PCtextfield extends Vue {
-    @Prop({required: true})
+    @Prop({ required: true })
     public value!: string;
-    @Prop({ default: false})
+
+    @Prop({ default: false })
     public darkMode?: boolean;
-    @Prop({ required: false})
+
+    @Prop({ required: false })
     public title!: string;
+
     @Prop()
     public placeholder!: string;
+
     @Prop()
-    public  type!: string;
+    public type!: string;
+
     @Prop()
     public errorMessages?: string | string []
-    @Prop({default: false})
+
+    @Prop({ default: false })
     public disabled!: boolean;
 
-    public handleInput(new_input: string){
+    public handleInput(new_input: string) {
         this.$emit('input', new_input)
     }
+
     get errorMessage() {
         return this.errorMessages
     }
-    get error(): string | undefined{
-        if (Array.isArray(this.errorMessage))
-            return this.errorMessage.length?this.errorMessage[0]:""
-        else {
-            return this.errorMessage
-        }
+
+    get error(): string | undefined {
+      if (Array.isArray(this.errorMessage)) return this.errorMessage.length ? this.errorMessage[0] : ''
+
+      return this.errorMessage
     }
 }
 
 </script>
-

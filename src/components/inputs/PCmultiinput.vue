@@ -52,8 +52,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
+import { Watch, Prop } from 'vue-property-decorator'
 import PCtextfield from './PCtextfield.vue'
-import { Watch, Prop} from 'vue-property-decorator'
 
 interface VueEvent {
     name: string;
@@ -63,27 +63,32 @@ interface VueEvent {
 }
 
 @Component({
-    components:{
+    components: {
         PCtextfield
     }
 })
-export default class PCmultiinput extends Vue{
+export default class PCmultiinput extends Vue {
     @Prop()
     placeholder?: string;
+
     @Prop()
     value!: string[];
+
     @Prop()
     errorMessages?: string | string[];
-    entries = [{value:"",id:0}]
-    newEntry(){
-        this.entries.push({value:"",id:this.entries.slice(-1)[0].id+1})
-    }
-    deleteEntry(id: number){
-        this.entries.splice(this.entries.findIndex((entry) => entry.id == id),1)
 
+    entries = [{ value: '', id: 0 }]
+
+    newEntry() {
+        this.entries.push({ value: '', id: this.entries.slice(-1)[0].id + 1 })
     }
-    @Watch('entries',{deep:true})
-    onEntriesChanged(newVal: {value: string; id: number} []){
+
+    deleteEntry(id: number) {
+        this.entries.splice(this.entries.findIndex(entry => entry.id == id), 1)
+    }
+
+    @Watch('entries', { deep: true })
+    onEntriesChanged(newVal: {value: string; id: number} []) {
         this.$emit('input', newVal.map(entree => entree.value))
     }
 }

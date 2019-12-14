@@ -57,15 +57,15 @@
   </div>
 </template>
 <script lang="ts">
-import { PCselect, PCtextfield } from '@/components/inputs'
 
-import Component from "vue-class-component"
+import Component from 'vue-class-component'
 import { Prop, Watch } from 'vue-property-decorator'
 import { maxBy } from 'lodash'
 import { mask } from 'vue-the-mask'
+import { PCselect, PCtextfield } from '@/components/inputs'
 import { ICourses } from '../CourseInput/types'
-import { CoursePrograms } from "./types"
-import {CONST} from "./const"
+import { CoursePrograms } from './types'
+import { CONST } from './const'
 @Component({
     components: {
         pcSelect: PCselect,
@@ -78,6 +78,7 @@ import {CONST} from "./const"
 export default class CourseProgramsInput extends CONST {
   @Prop()
     value!: CoursePrograms[]
+
   @Prop({ required: true })
   courseinput!: ICourses[]
 
@@ -87,26 +88,27 @@ export default class CourseProgramsInput extends CONST {
   onSchedulesChanged(newVal: { value: ICourses; id: number }[]) {
       this.$emit('input', newVal.map(entree => entree.value))
   }
-  
-  @Watch('courseinput',{deep:true})
-  oncourseinputChanged(newVal: ICourses[]){
-      console.log("new")
+
+  @Watch('courseinput', { deep: true })
+  oncourseinputChanged(newVal: ICourses[]) {
+      console.log('new')
       let index = 0
       this.classEntries = newVal.map((course) => {
-          if(this.classEntries[index])
-              return {        
-                  value: new CoursePrograms(course,this.classEntries[index].value),
-                  id: index++      
-              }
-          else 
+      if (this.classEntries[index]) {
               return {
-                  value:new CoursePrograms(course),
-                  id:index++
+                  value: new CoursePrograms(course, this.classEntries[index].value),
+                  id: index++
               }
-      })
+      }
+      return {
+              value: new CoursePrograms(course),
+        id: index++
+          }
+    })
   }
-  created(){
-      console.log("rendered")
+
+  created() {
+      console.log('rendered')
   }
 }
 </script>

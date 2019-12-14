@@ -6,7 +6,7 @@
     <v-row
       justify="end"
     >
-      <!-- <div > --> 
+      <!-- <div > -->
       <v-spacer />
       <v-col
         xl="2"
@@ -52,7 +52,7 @@
           id="profileBanner"
           src="@/assets/PC_user_banner.png"
           alt=""
-        > 
+        >
         <v-container>
           <!-- make tag component -- backlog -->
           <v-row>
@@ -103,7 +103,7 @@
             <v-card id="profileDescription">
               <v-container>
                 <p>
-                  I’m a teacher of 10 years and I’m on a mission to make all student outcomes better. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod dolore eu fugiat nulla pariatur. 
+                  I’m a teacher of 10 years and I’m on a mission to make all student outcomes better. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod dolore eu fugiat nulla pariatur.
                   Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                 </p>
               </v-container>
@@ -139,7 +139,7 @@
                     </v-col>
                   </v-row>
                 </template>
-            
+
                 <v-list-item>
                   <v-list-item-content>
                     <v-row class="ml-auto mr-auto">
@@ -159,7 +159,7 @@
                         cols="8"
                         lg="10"
                         xl="11"
-                      > 
+                      >
                         <v-list-item-avatar size="50">
                           <div class="pc-profile-picture pc-profile-picture--icon" />
                         </v-list-item-avatar>
@@ -186,7 +186,7 @@
                         cols="8"
                         lg="10"
                         xl="11"
-                      > 
+                      >
                         <v-list-item-avatar size="50">
                           <div class="pc-profile-picture pc-profile-picture--icon" />
                         </v-list-item-avatar>
@@ -266,24 +266,27 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue"
-import Component from "vue-class-component"
+import Vue from 'vue'
+import Component from 'vue-class-component'
 
 @Component
 export default class Profile extends Vue {
     public CITIZENSTYLES = {
-        Teacher: "citizen-id__type--teacher",
-        Employer: "citizen-id__type--employer",
-        Student: "citizen-id__type--student"
+        Teacher: 'citizen-id__type--teacher',
+        Employer: 'citizen-id__type--employer',
+        Student: 'citizen-id__type--student'
     }
-    get citizenType(){
+
+    get citizenType() {
         return localStorage.citizenType
     }
-    set citizenType(type: string){
+
+    set citizenType(type: string) {
         this.citizenType = type
     }
-    public switchProfile(){
-        this.$router.push({name: 'profile.private'})
+
+    public switchProfile() {
+        this.$router.push({ name: 'profile.private' })
     }
 }
 </script>
