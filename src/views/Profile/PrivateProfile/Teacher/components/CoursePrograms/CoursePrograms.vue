@@ -91,7 +91,6 @@ export default class CourseProgramsInput extends CONST {
 
   @Watch('courseinput', { deep: true })
   oncourseinputChanged(newVal: ICourses[]) {
-      console.log('new')
       let index = 0
       this.classEntries = newVal.map((course) => {
       if (this.classEntries[index]) {
@@ -108,7 +107,6 @@ export default class CourseProgramsInput extends CONST {
   }
 
   created() {
-      console.log('rendered')
   }
 }
 </script>

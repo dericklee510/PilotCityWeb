@@ -50,7 +50,6 @@ export default class ProfileUpload extends Vue {
 
     emitLink() {
         if (AuthStore.user) {
-            console.log('working', AuthStore.user.photoURL)
             this.$emit('input', AuthStore.user.photoURL)
         }
     }

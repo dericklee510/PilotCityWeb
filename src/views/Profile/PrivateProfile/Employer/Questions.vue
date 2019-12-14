@@ -1378,7 +1378,8 @@ export default class EmployerProfile extends app {
                 this.syncStorageInternship()
             }
         } catch (err) {
-            console.log(err)
+            // eslint-disable-next-line no-console
+            console.error(err)
         }
         this.loading = false
     }
