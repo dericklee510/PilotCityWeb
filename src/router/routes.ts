@@ -9,7 +9,7 @@ import {
   routes as LoginRoutes,
   ForgotPassword
 } from '@/views/Login'
-import programbrief from "@/views/ProgramGuide/Brief/ProgramBrief.vue"
+import programbrief from "@/views/ProgramGuide/Brief/Brief.vue"
 import test from '@/views/Test'
 import Home from '@/views/Home.vue'
 import { routes as ProfileRoutes } from '@/views/Profile'

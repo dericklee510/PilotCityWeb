@@ -7,9 +7,9 @@
       </v-col>
       <v-col>
           <v-col cols="12">
-              <h1 class="briefcard__header">REquest for Pilot (RFP)</h1>
+              <div class="briefcard__header">REquest for Pilot (RFP)</div>
               <span><input type="checkbox">I acknowledgeI have fully read and understand the included document</span>
-              <button class="text-uppercase">confirm</button>
+              <v-col style="padding:0"><button class="text-uppercase">confirm</button></v-col>
           </v-col>
       </v-col>
     </v-row>
