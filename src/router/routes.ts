@@ -7,6 +7,7 @@ import {
     email
 } from "@/views/Login"
 import test from "@/views/Test"
+import programbrief from "@/views/ProgramGuide/Brief/ProgramBrief.vue"
 import {routes as ProfileRoutes} from "@/views/Profile"
 import {routes as SignupRoutes} from "@/views/Signup"
 import {routes as LoginRoutes} from "@/views/Login"
@@ -33,7 +34,12 @@ let routes: RouteConfig [] = [
         path: `/test`,
         name: `test-page`,
         component: test
-    }
+    },
+    {
+        path: `/programbrief`,
+        name: `program-brief`,
+        component: programbrief
+    },
 ]
 
 // import { AutoComplete } from '@/components/GoogleMaps/'
