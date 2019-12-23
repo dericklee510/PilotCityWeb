@@ -1,0 +1,15 @@
+#pc-app.v-application .pc-checkbox{
+    .accent--text{
+        color: #C7C8CA !important;
+        caret-color: #C7C8CA !important;
+    }
+    .theme--light.v-icon{
+        color: #C7C8CA;
+    }
+    .theme--light.v-label{
+        color: #fff;
+    }
+    .v-application--is-ltr .v-input__append-outer{
+        margin: 0;
+    }
+} 

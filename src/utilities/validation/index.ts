@@ -1,6 +1,11 @@
 
-import * as validators from "./validators"
-import VeeValidate from 'vee-validate'
+import { ValidationProvider, ValidationObserver, extend } from 'vee-validate'
+import * as validators from './validators'
 
-VeeValidate.Validator.extend('complex-password',validators.complexPassword)
-export default VeeValidate
+extend('complex-password', validators.complexPassword)
+extend('DECIMAL', validators.DECIMAL)
+// extend('dateYYYYMMDD',validators.DateYYYYMMDD)
+
+export declare type ProviderInstance = InstanceType<typeof ValidationProvider>
+export declare type ObserverInstance = InstanceType<typeof ValidationObserver>
+export default ValidationProvider

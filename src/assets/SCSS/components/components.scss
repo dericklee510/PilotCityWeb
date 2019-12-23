@@ -1,3 +1,5 @@
+@import './radio.scss';
+@import './checkbox.scss';
 
 /* PICTURE - COMPONENT */
 .pc-profile-picture{
@@ -54,3 +56,120 @@
 .pc-badge h3{
     justify-content: center
 }
+
+/* PC TEXTFIELD - COMPONENT*/
+.pc-input__autocomplete{
+    border: 1px solid #C7C8CA;
+    color: #C7C8CA;
+    border-radius: 4px;
+    padding: 0px 12px; 
+    height: 70px;
+    .v-input__control{
+        border: none;
+    }
+    input#map{
+        font-family: Raleway;
+        font-style: normal;
+        font-weight: 800;
+        font-size: 1.09em;
+        line-height: 1.28em;
+        letter-spacing: 0.055em;
+        color: #fff;
+        ::placeholder{
+            color: #C7C8CA !important;
+        }
+        ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+            color: #C7C8CA;
+        }
+        :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+            color: #C7C8CA;
+        }
+        ::-moz-placeholder { /* Mozilla Firefox 19+ */
+            color: #C7C8CA;
+        }
+        :-ms-input-placeholder { /* Internet Explorer 10-11 */
+            color: #C7C8CA;
+        }
+    }
+}
+
+/* PC btn - COMPONENT*/
+#pc-app .pc-multi_input .pc-button{
+    border: 0.75px dashed #C7C8CA;
+    box-sizing: border-box;
+    background-color: transparent;
+    color: #C7C8CA;
+}
+
+#pc-app .profile__schedule .pc-button{
+    border: 0.75px dashed #C7C8CA;
+    box-sizing: border-box;
+    background-color: transparent;
+    color: #C7C8CA;
+}
+
+#pc-app .pc-button{
+    &--dark{
+        color: #fff;
+        background-color: #404142;
+    }
+    &--light{
+        color: #000;
+        background-color: #BFBFBF;
+    }
+    &--round{
+        border-radius: 50%;
+    }
+    &.elongated{
+        padding: 0 50px;
+    }
+    &__teacher{
+        background-color: $pc-pink;
+        color: #fff;
+        &--inverted{
+            background-color: #fff;
+            color: $pc-pink;
+        }
+    }
+    &__employer{
+        background-color: $pc-purple;
+        color: #fff;
+        &--inverted{
+            background-color: #fff;
+            color: $pc-purple;
+        }
+    }
+    &__student{
+        background-color: $pc-green;
+        color: #fff;
+        &--inverted{
+            background-color: #fff;
+            color: $pc-green;
+        }
+    }
+    font-weight: 900;
+    line-height: 2.9em;
+    text-align: center;
+    letter-spacing: 0.125em;
+}
+#pc-app .pc-button.theme--light{
+    &.v-btn.v-btn--outlined{
+        border: 1px solid #BFBFBF;
+    }
+    
+}
+
+/* PC-HEADER - COMPONENT */
+#pc-app .pc-header{
+    button{
+        color: #fff !important;
+    }
+}
+.v-toolbar.pc-header.v-sheet{
+    background-color: #414042;
+    flex: 0 1 auto;
+}
+.pc-header .v-toolbar__content{
+    margin: .5em 0em;
+}
+

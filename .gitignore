@@ -23,3 +23,5 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+.gitsecret/keys/random_seed
+!*.secret

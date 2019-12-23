@@ -30,6 +30,7 @@
     height: 200px;
     margin: 0 auto;
     bottom: -20%;
+    position: relative;
 }
 #citizen-id__type-select{
     background-color: #58595B !important;
@@ -56,7 +57,7 @@
         text-align: center;
         letter-spacing: .0625em;
         color: #fff;
-        display: block;
+        // display: block;
         margin: 0 auto;
     }
     &--teacher{
@@ -69,7 +70,9 @@
         background-color: $pc-green !important;
     }
 }
-
+.pc-profile-page .theme--light.v-btn.v-btn--disabled{
+    color: #fff !important;
+}
 
 
 /* Media Queries */

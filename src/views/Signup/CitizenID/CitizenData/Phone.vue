@@ -4,7 +4,7 @@
       <v-flex>
         <v-layout justify-start>
           <h4 class="signup-phone__back">
-            <i class="fas fa-angle-left" /> 
+            <i class="fas fa-angle-left" />
             &nbsp;
             <router-link
               :to="{name:`signup-upload`}"
@@ -19,7 +19,7 @@
             row
             wrap
           >
-            <v-flex xs12> 
+            <v-flex xs12>
               <div class="signup-phone__card">
                 <v-layout
                   justify-center
@@ -42,8 +42,8 @@
                     </v-layout>
                     <v-layout>
                       <p>
-                        Please Enter your phone number. 
-                        This is required so we have an easy way of contacting you about other opportunities or ways to support you. 
+                        Please Enter your phone number.
+                        This is required so we have an easy way of contacting you about other opportunities or ways to support you.
                         This information will not be sold and is only for the use of the PilotCity program
                       </p>
                     </v-layout>
@@ -52,7 +52,7 @@
                         placeholder="Enter your phone number"
                         mask="(###)-###-####"
                         color="#7B5D7D"
-                        outline
+                        outlined
                         text
                       />
                     </v-layout>
@@ -62,7 +62,7 @@
                   <v-flex
                     align-self-end
                     class="signup-phone__action"
-                  > 
+                  >
                     <v-layout
                       justify-center
                     >
@@ -82,8 +82,8 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue"
-import Component from "vue-class-component"
+import Vue from 'vue'
+import Component from 'vue-class-component'
 // import { AuthStore } from "@/store"
 
 
@@ -171,5 +171,3 @@ export default class Phone extends Vue {
 }
 
 </style>
-
-

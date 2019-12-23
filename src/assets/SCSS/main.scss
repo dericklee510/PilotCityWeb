@@ -1,7 +1,6 @@
 @import "@/assets/SCSS/variables.scss";
 @import "@/assets/SCSS/components/components.scss";
 @import "@/assets/SCSS/views/views.scss";
-@import "@/assets/SCSS/views/programguide/programguide.scss";
 
 /* GLOBAL STYLES*/
 html,
@@ -13,7 +12,10 @@ body {
   font-family: Raleway;
   word-wrap: break-word;
 }
-p{
+p {
+    &.dark{
+        color: #fff;
+    }
     font-family: Raleway;
     font-style: italic;
     font-weight: 500;
@@ -23,7 +25,10 @@ p{
     align-items: center;
     letter-spacing: 0.039em;
 }
-h1 { 
+h1 {
+    &.dark{
+        color: #fff;
+    }
     font-family: Raleway;
     font-style: normal;
     font-weight: 800;
@@ -34,6 +39,9 @@ h1 {
     letter-spacing: 0.025em;
 }
 h2{
+    &.dark{
+        color: #fff;
+    }
     font-family: Raleway;
     font-style: normal;
     font-weight: 800;
@@ -44,6 +52,9 @@ h2{
     letter-spacing: 0.025em;
 }
 h3{
+    &.dark{
+        color: #fff;
+    }
     font-family: Raleway;
     font-style: normal;
     font-weight: 800;
@@ -54,6 +65,9 @@ h3{
     letter-spacing: 0.025em;
 }
 h4{
+    &.dark{
+        color: #fff;
+    }
     font-family: Raleway;
     font-style: normal;
     font-weight: 800;
@@ -63,6 +77,33 @@ h4{
     align-items: center;
     letter-spacing: 0.025em;
 }
+h5{
+    &.dark{
+        color: #fff;
+    }
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 800;
+    font-size: .83em;
+    line-height: 1em;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.025em;
+}
+h6{
+    &.dark{
+        color: #fff;
+    }
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 800;
+    font-size: .65em;
+    line-height: 1em;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.025em;
+}
+
 
 /* APPLICATION STYLES */
 #pc-app{
@@ -71,36 +112,59 @@ h4{
         caret-color: #000 !important;
     }
 }
-.pc-h-center{
-    position: relative;
-    left: 50%;
-    transform: translate(-50%, -50%)
+.pc-vh-center{
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
 }
-.pc-container{
-    margin: 0 5%;
+.pc-v-center{
+    left: 50% !important;
+    transform: translate(-50%, 0%) !important;
+}
+#pc-app .container.pc-container{
+    padding: 0 2.5%;
 }
 .pc-background{
     width: 100%;
     height: 100%;
     position: relative;
-}
-.pc-icon{
-    
+    &--dark{
+        width: 100%;
+        height: 100%;
+        color: #fff;
+        background-color: #404142;
+    }
+    &--light{
+        width: 100%;
+        height: 100%;
+        color: #000;
+        background-color: #fff;
+    }
 }
 
-#pc-app .pc-button{
-    color: #fff;
-    font-weight: 900;
-    line-height: 2.9em;
-    text-align: center;
-    letter-spacing: 0.125em;
-}
-#pc-app .pc-button.theme--light{
-    &.v-btn.v-btn--outlined{
-        border: 1px solid #BFBFBF;
+/* COMOPNENT STYLES */
+.pc-title {
+    &--header{
+        padding: 0px 16px;
     }
-    
 }
+.pc-logo {
+    &--header{
+      max-width: 2.5em;
+    }
+}
+
+.pc-menu .v-list{
+    padding: 0;
+}
+#pc-app .pc-menu{
+    background-color: #414042;
+    border: 1px solid #BFBFBF;
+    color: white !important;
+    &--active{
+        background-color:   #4D4D4F
+    }
+}
+
 #pc-app .pc-input{
     font-family: Raleway;
     font-style: normal;
@@ -110,6 +174,9 @@ h4{
     letter-spacing: 0.25em;
     color: #C7C8CA;
     background-color: transparent;
+    &.pc-input--disabled .v-input__slot{
+        background-color: #282829 !important;
+    }
     .v-input{
         font-size: inherit;
     }
@@ -138,13 +205,24 @@ h4{
         border-color: #C7C8CA;
     }
 }
-
 /* Media Queries */
 @media only screen and (min-width : 1900px){
 }
 @media only screen and (min-width : 1500px){
 }
 @media only screen and (max-width : 1240px){
+    ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+        font-size: 1em;
+    }
+    :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        font-size: 1em;
+    }
+    ::-moz-placeholder { /* Mozilla Firefox 19+ */
+        font-size: 1em;
+    }
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+        font-size: 1em;
+    }
 }
 @media only screen and (max-width :950px){
     p{
@@ -161,6 +239,12 @@ h4{
     }
     h4{
         font-size: 0.65em
+    }
+    h5{
+        font-size: .55em;
+    }
+    h6{
+        font-size: .44em;
     }
 }
 

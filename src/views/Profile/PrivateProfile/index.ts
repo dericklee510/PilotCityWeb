@@ -1,5 +1,10 @@
-// export profile from "./Profile.vue"
-import PrivateProfile from "./Profile.vue"
+import TeacherQuestions from './Teacher'
+import EmployerQuestions from './Employer'
 
+export { TeacherQuestions }
+export { EmployerQuestions }
 
-export default PrivateProfile
+export const Private = {
+    TeacherQuestions,
+    EmployerQuestions
+}

@@ -1,0 +1,13 @@
+{
+    "schema": "https://20191119t140110-dot-pilotcity-firestore.appspot.com/graphql",
+    "documents":"src/**/*.gql",
+    "generates": {
+      "./src/store/Graphql/global_types.ts": {
+        "plugins": [
+          "typescript",
+          "typescript-operations",
+          "typescript-graphql-request"
+        ]
+      }
+    }
+  }

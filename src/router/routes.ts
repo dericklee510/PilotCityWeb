@@ -1,38 +1,41 @@
-import { SET_USER } from './../store/Auth/mutation-types'
-import { RouterOptions, RouteConfig } from 'vue-router'
+/* eslint-disable-next-line */
+import { SET_USER } from './../store/Auth/mutation-types' //unsed
+/* eslint-disable-next-line */
+import { RouterOptions, RouteConfig } from 'vue-router' //routeroptions unused
 
 import {
-    forgotPassword,
     code,
-    email
-} from "@/views/Login"
-import test from "@/views/Test"
+    email,
+  routes as LoginRoutes,
+  ForgotPassword
+} from '@/views/Login'
 import programbrief from "@/views/ProgramGuide/Brief/ProgramBrief.vue"
-import {routes as ProfileRoutes} from "@/views/Profile"
-import {routes as SignupRoutes} from "@/views/Signup"
-import {routes as LoginRoutes} from "@/views/Login"
-let routes: RouteConfig [] = [
+import test from '@/views/Test'
+import Home from '@/views/Home.vue'
+import { routes as ProfileRoutes } from '@/views/Profile'
+import { routes as SignupRoutes } from '@/views/Signup'
+
+const routes: RouteConfig [] = [
     ...SignupRoutes,
     ...LoginRoutes,
     ...ProfileRoutes,
     {
-        path: `/reset_password`,
-        name: "recover-pass-container",
-        component: forgotPassword,
+        path: '/reset_password',
+        component: ForgotPassword,
         children: [{
-            path: "",
-            name: "reset-email",
+            path: '',
+            name: 'reset-email',
             component: email
         },
         {
-            path: "1",
-            name: "reset-code",
+            path: '1',
+            name: 'reset-code',
             component: code
         }]
     },
     {
-        path: `/test`,
-        name: `test-page`,
+        path: '/test',
+        name: 'test-page',
         component: test
     },
     {
@@ -40,6 +43,19 @@ let routes: RouteConfig [] = [
         name: `program-brief`,
         component: programbrief
     },
+    {
+        path: '/',
+        name: 'home',
+        component: Home
+    },
+    {
+        path: '',
+        redirect: '/'
+    },
+    {
+        path: '*',
+        redirect: '/'
+    }
 ]
 
 // import { AutoComplete } from '@/components/GoogleMaps/'

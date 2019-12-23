@@ -1,29 +1,29 @@
 <template>
-  <v-app id="pc-app">
+  <div>
     <link
       href="https://fonts.googleapis.com/css?family=Raleway&display=swap"
       rel="stylesheet"
     >
-    <HeaderMain />
-    <v-content>
+    <component :is="layout">
       <router-view />
-    </v-content>
-    <FooterMain />
-  </v-app>
+    </component>
+  </div>
 </template>
 
 
 <script lang="ts">
-import "@/assets/SCSS/main.scss"
-import Vue from "vue"
-import HeaderMain from "@/components/layout/header/header.vue"
-import Component from "vue-class-component"
-import FooterMain from "./components/layout/footer.vue"
-@Component({
-    components: {
-        FooterMain,
-        HeaderMain
-    }
-})
-export default class App extends Vue { }
+import '@/assets/SCSS/main.scss'
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import { AuthStore } from '@/store'
+
+const DEFAULT_LAYOUT = 'default'
+const NORMAL_LAYOUT = 'new'
+@Component
+export default class App extends Vue {
+    get layout() {
+    if (!AuthStore.user) return `${this.$route.meta.layout ? this.$route.meta.layout : NORMAL_LAYOUT}-layout`
+    return `${this.$route.meta.layout ? this.$route.meta.layout : DEFAULT_LAYOUT}-layout`
+  }
+}
 </script>

@@ -43,8 +43,9 @@
             <v-btn
               :id="CITIZENSTYLES[type]"
               block
-              @click="$router.push({name:`signup.data`, props: {citizenType: type}})"
+              @click="selectCitizenType(type)"
             >
+              <!-- @click="$router.push({name:`signup.data`, props: {citizenType: type}})" -->
               <h2 class="text-capitalize">
                 {{ type }}
               </h2>
@@ -57,17 +58,27 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue"
-import Component from "vue-class-component"
+import Vue from 'vue'
+import Component from 'vue-class-component'
 
 
 @Component
 export default class CitizenType extends Vue {
     private CITIZENSTYLES = {
-        Teacher: "citizen-id__type--teacher", 
-        Employer: "citizen-id__type--employer", 
-        Student: "citizen-id__type--student"
+        Teacher: 'citizen-id__type--teacher',
+        Employer: 'citizen-id__type--employer',
+        Student: 'citizen-id__type--student'
     }
-    private AVAILABLETYPES: string[] = ["Teacher", "Employer", "Student"]
+
+    private AVAILABLETYPES: string[] = ['Employer', 'Teacher', 'Student']
+
+    selectCitizenType(citizenKey: string) {
+        localStorage.citizenType = citizenKey
+        this.$router.push({
+            name: 'profile.private',
+            params: { citizenType: citizenKey }
+        })
+        this.$router.push
+    }
 }
 </script>

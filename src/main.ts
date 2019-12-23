@@ -1,6 +1,6 @@
+import Vue from 'vue'
 import { MAPS_API_KEY } from '@/keys'
-import Vue from "vue"
-// import './plugins/vuetify'
+/* eslint-disable */
 import App from "./App.vue"
 import router from "@/router"
 import store from "./store"
@@ -11,24 +11,28 @@ import { SET_USER } from './store/Auth/mutation-types'
 
 
 import vuetify from './plugins/vuetify' // used to fix sass errors
+import Vuetify from 'vuetify'
 // import 'vuetify/src/stylus/app.styl' ---->  VUETIFY IS MIGRATING TO SASS! :)))
 import { authState } from 'rxfire/auth'
 
 
-
-
-import VeeValidate from '@/utilities/validation'
+import Default from "@/components/layout/Default.vue"
+import Simple from "@/components/layout/Simple.vue"
+import New from "@/components/layout/New.vue"
 
 import VuetifyGoogleAutocomplete from 'vuetify-google-autocomplete'
 
 import VueRx from 'vue-rx'
+import { createProvider } from './vue-apollo'
 
 Vue.use(VueRx)
-Vue.use(VeeValidate)
-Vue.use(vuetify)
+Vue.use(Vuetify)
 Vue.use(VuetifyGoogleAutocomplete, {
     apiKey: MAPS_API_KEY
 })
+Vue.component('default-layout', Default)
+Vue.component('simple-layout', Simple)
+Vue.component('new-layout', New )
 Vue.config.productionTip = false
 firestore // enables firebaseApp and firestore
 
@@ -39,6 +43,9 @@ function createVueInstance() {
         router,
         store,
         vuetify,
+        apolloProvider: createProvider({
+            httpEndpoint:'https://20191119t140110-dot-pilotcity-firestore.appspot.com/graphql'
+        }),
         render: h => h(App)
     }).$mount("#app")
 }
