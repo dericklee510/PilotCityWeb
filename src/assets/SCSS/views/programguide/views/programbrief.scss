@@ -1,27 +1,25 @@
-.programbrief__container
-{
-    height: 44px;
-    
-    
-}
 .programbrief{
+
     &__title{
         padding-left: 0px;
         font-size: 2.35rem;
         // base font-size is 16px;
     }
+
+    &__container{
+        height: 44px;
+    }
+
 }
 
-.briefcard{
-    &__container{
-        :hover{
+.briefcard__container{
+        width: 1091.5px;
+    &:hover{ 
             border-style: dashed;
             border-width: 1px;
             //  border-color: #FFFFFF;   
             border-color: black;  //need to chnage it to white after designing the whole page
-            width: 1091.5px;
         }
-    }
 }
 #briefcard__cover
 {
