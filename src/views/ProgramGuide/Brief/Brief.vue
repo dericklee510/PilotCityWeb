@@ -1,16 +1,24 @@
 <template>
-    <div>
+<div class="programbrief__dark">
+<v-container >
         <v-row class="programbrief__container">
             <v-col cols="12">
-                <v-col>Program Brief</v-col>
+                <v-col class="programbrief__tile">Program Brief</v-col>
                 <v-col></v-col>
             </v-col>
             <v-col>
                 <BriefCard />
             </v-col>
+
+            <v-col>
+                <BriefCard />
+            </v-col>
         </v-row>
-    </div>
+    </v-container>
+</div>
 </template>
+
+    
 
 <script lang="ts">
 import Vue from 'vue'
