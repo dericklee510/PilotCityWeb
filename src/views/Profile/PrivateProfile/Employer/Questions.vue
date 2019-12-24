@@ -1219,10 +1219,9 @@ extend('min_value', {
     message: 'This field cannot be less than {min}'
 })
 
-class app extends Vue {}
-interface app extends Vue, CONST{}
 
-applyMixins(CONST, [Vue, CONST])
+
+const app = CONST.addConst(Vue)
 
 @Component({
     components: {
@@ -1298,84 +1297,25 @@ export default class EmployerProfile extends app {
         to.push(from)
     }
 
-    public syncStorageOrganization() {
-      if (this.organization) {
-            let { location } = this.organization
-            localStorage.organization_division = this.organization.department
-            localStorage.organization_location_text = `${location.name} ${location.street_number} ${location.route}, ${location.locality}, ${location.administrative_area_level_1} ${location.postal_code}, ${location.country}`
-            localStorage.organization_location_lng = this.organization.location.longitude
-            localStorage.organization_location_lat = this.organization.location.latitude
-            localStorage.organization_industry = tableToDecimal(this.ORGANIZATION_INDUSTRY_OPTIONS, this.organization.industry)
-            localStorage.organization_industry_other = findOther(this.ORGANIZATION_INDUSTRY_OPTIONS, this.organization.industry)
-            localStorage.organization_product_list = this.organization.products_services
-            localStorage.organization_product_employee_count = this.organization.employee_count
-        }
+    getUpdate(){
+      if(!AuthStore.user)
+        throw("Not logged in")
+      GraphqlStore.sdk.publicProfileFetch({user_id:AuthStore.user.uid})
+      
     }
-
-    syncStorageProgramDetails() {
-        if (this.programdetails) {
-            localStorage.program_externship_time_first = this.programdetails.externship.prefered_date.primary
-            localStorage.program_externship_time_second = this.programdetails.externship.prefered_date.secondary
-            localStorage.program_externship_time_third = this.programdetails.externship.prefered_date.final
-            localStorage.program_externship_options = tableToDecimal(this.PROGRAMDETAILS_EXTERNSHIP_CONTRIBUTION_OPTIONS, this.programdetails.externship.contribution)
-            localStorage.program_externship_options_other = findOther(this.PROGRAMDETAILS_EXTERNSHIP_CONTRIBUTION_OPTIONS, this.programdetails.externship.contribution)
-        }
-    }
-
-    syncStorageProject() {
-        if (this.programdetails) {
-            localStorage.projects_min = Number.parseInt(this.programdetails.project.capacity.minimum)
-            localStorage.projects_max = Number.parseInt(this.programdetails.project.capacity.maximum)
-            localStorage.projects_engagement = tableToDecimal(this.PROGRAMDETAILS_PROJECT_ENGAGEMENT_TYPE_OPTIONS, [
-                this.programdetails.project.engagement.type
-            ])
-            localStorage.projects_engagement_2 = tableToDecimal(this.PROGRAMDETAILS_PROJECT_ENGAGEMENT_RADIUS_OPTIONS, [
-                this.programdetails.project.engagement.radius
-            ])
-        // localStorage.projects_requests = this.programdetails.project.
-        // localStorage.projects_missions = this.programdetails.project.
-        // localStorage.projects_specifications = this.programdetails.project.
-        }
-    }
-
-    /* eslint-disable max-lines-per-function */
-    syncStorageInternship() {
-        if (this.internship) {
-            localStorage.internships_project = tableToDecimal(this.INTERNSHIP_PROJECT_TYPE, this.internship.project)
-            localStorage.internships_project_other = findOther(this.INTERNSHIP_PROJECT_TYPE, this.internship.project)
-            localStorage.internships_hiring_adult = this.internship.hiring_adult
-            localStorage.internships_travel = tableToDecimal(this.ΙΝΤΕRN_TRAVEL_OPTIONS, [
-                this.internship.travel
-            ])
-            localStorage.internships_education = tableToDecimal(this.INTERNSHIP_EDUCATION_OPTIONS, this.internship.education_level)
-            localStorage.internships_education_other = findOther(this.INTERNSHIP_EDUCATION_OPTIONS, this.internship.education_level)
-            localStorage.internships_talent = tableToDecimal(this.INTERNSHIP_TALENT_OPTIONS, this.internship.talent)
-            localStorage.internships_days_week = Number.parseInt(this.internship.days_week.charAt(0)) ? Number.parseInt(this.internship.days_week.charAt(0)) : 0
-            localStorage.internships_hours_day = Number.parseInt(this.internship.hours_day.charAt(0)) ? Number.parseInt(this.internship.hours_day.charAt(0)) : 0
-            localStorage.internships_employer_of_record = tableToDecimal(this.INTERNSHIP_EMPLOYER_OF_RECORD_OPTIONS, [
-                this.internship.employer_of_record
-            ])
-            localStorage.internships_compensation = tableToDecimal(this.INTERNSHIP_COMPENSATION_OPTIONS, this.internship.compensation)
-            localStorage.internships_budget_min = this.internship.budget_min
-            localStorage.internships_budget_max = this.internship.budget_max
-            localStorage.internships_interview_option1 = this.internship.interview_1
-            localStorage.internships_interview_option2 = this.internship.interview_2
-            localStorage.internships_interview_option3 = this.internship.interview_3
-            localStorage.internships_employment = this.internship.employment
-            localStorage.internships_position = tableToDecimal(this.INTERNSHIP_POSITION_TYPE_OPTIONS, this.internship.position_type)
-        }
-    }
-
     async syncStorage() {
         this.loading = true
-
         try {
             if (await (this.$refs.observer as ObserverInstance).validate()) {
-                this.syncStorageCitizen()
-                this.syncStorageOrganization()
-                this.syncStorageProgramDetails()
-                this.syncStorageProject()
-                this.syncStorageInternship()
+                let query = new Employer.EmployerQueryForm({
+                  Base:this.citizenBase,
+                  Citizen:this.citizen,
+                  Organization:this.organization,
+                  ProgramDetails:this.programdetails,
+                  Internship:this.internship
+                })
+                await query.init()
+                await query.submitQuery()
             }
         } catch (err) {
             console.log(err)
@@ -1383,28 +1323,18 @@ export default class EmployerProfile extends app {
         this.loading = false
     }
 
-    async submitPublicProfile() {
-        await GraphqlStore.fetchCitizenProfile(citizenBaseToProfile(this.citizenBase))
-        await GraphqlStore.createCitizenProfile()
-    }
 
     get Name() {
         return `${this.citizen.first_name} ${this.citizen.last_name}`
     }
-
-    async submitProfile() {
-        await this.submitPublicProfile()
-        await GraphqlStore.fetchQueryData()
-        await GraphqlStore.SubmitEmployerQuery()
+    beforeCreate(){
+      
     }
-
     async created() {
         this.citizenBase.citizenType = this.$route.params.citizenType
-        if (AuthStore.user) {
-            console.log(await GraphqlStore.client.request(EmployerFetch, {
-                user_id: AuthStore.user.uid
-            }))
-        }
+        
+        let arr:string[] = []
+        console.log(typeof arr)
     }
 }
 </script>
