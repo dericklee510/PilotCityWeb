@@ -1,3 +1,6 @@
+import { tableToDecimal } from './../../../../utilities/graphql/index';
+import { assert } from './../../../../utilities/types/index.d';
+import { Test } from './../../../../utilities/types/index';
 import { omitBy, isUndefined } from 'lodash'
 import {
     CreateEmployerProfileMutationVariables
@@ -80,7 +83,15 @@ export interface EmployerPage {
     ProgramDetails: ProgramDetails;
     Internship: Internship;
 }
-
+/**
+ * Used to initialize properties for connecting to GraphQL
+ *
+ * @export
+ * @class EmployerQueryForm
+ * @extends {CONST}
+ * @implements {Employer_Profile_V1}
+ * @implements {MutationCreatePublicCitizenProfileArgs}
+ */
 export class EmployerQueryForm extends CONST implements Employer_Profile_V1, MutationCreatePublicCitizenProfileArgs {
     id_token!: string;
 
@@ -304,4 +315,101 @@ export class EmployerQueryForm extends CONST implements Employer_Profile_V1, Mut
         this.internships_position = tableToDecimal(this.INTERNSHIP_POSITION_TYPE_OPTIONS, EmployerForm.Internship.position_type)
         /* #endregion */
     }
+}
+let ref = new CONST()
+let hashmap = {
+    internships_compensation: {
+        key:'Intership.compensation',
+        ref:ref.INTERNSHIP_COMPENSATION_OPTIONS
+    }
+}
+/**
+ *This map is used to define conversions from query to page
+ *
+ * @interface SqlMap
+ * @function conversionFunc
+ * Used to convert key to key.to
+ */
+interface SqlMap{
+    [key:string]: {
+        to:string,
+        ref?:string[]
+        conversionFunc?: (<T1,T2>(from:T1,to:T2,ref_table:any[]) => T2 )
+    }
+}
+
+function flipMap(hashMap:SqlMap):SqlMap {
+    let map:SqlMap = {}
+    Object.keys(hashMap).forEach(prop => {
+        map[hashMap[prop].to] = {
+            to:prop,
+            ref:hashMap[prop].ref
+        }
+    })
+    Object.assign(map,hashMap)
+    return map
+}
+
+
+class SQLConversion<Query extends Record<string,any>,Page extends Record<string,any>>{
+    toQuery(EmployerPage:Page) {
+        let query:Record<string,any> = {}
+        
+        Object.keys(this.toQueryMap).forEach(prop => {
+            type propType = typeof prop
+            type queryType = Query[propType];
+            let pageProp = EmployerPage[this.toQueryMap[prop].to]
+            type pageType =  typeof pageProp;
+            let conversionRef = this.toQueryMap[prop].ref
+            if(conversionRef){
+                if(Array.isArray(pageProp)){
+                    try{
+                        type T1 = Test<queryType,string>; // assume conversion from string[] to string
+                        query[prop] = findOther(conversionRef,pageProp)
+                    }catch { // only other case is conversoin from string[] to int
+                        query[prop] = tableToDecimal(conversionRef,pageProp)
+                    }
+                }
+            }
+            else { // if conversionRef
+
+            }
+            try{ //if types are equal perform a direct assignment
+                type T1 = Test<pageType,queryType>;
+                query[prop] = pageProp
+            } catch{ // will throw error if types are not equal
+                try{
+                    type T2 = Test<queryType,number>;   //Assume queryType is of type number
+                let conversionRef = this.toQueryMap[prop].ref
+                    if (conversionRef) // if conversion table is defined use it to convert
+                        query[prop] = tableToDecimal(conversionRef,(Array.isArray(pageProp))?pageProp:[pageProp])
+                    else {//if conversion table is not defined assume conversion of type string to number
+                        query[prop] = Number.parseFloat(pageProp)
+                    }
+                } catch {
+                    type T3 = Test<queryType,string>; // assume queryType is a string. Only case is string arr to string conversion
+                    
+                    
+                }
+                
+            }
+        })
+        
+    }
+    flipMap(hashMap:SqlMap):SqlMap {
+        let map:SqlMap = {}
+        Object.keys(hashMap).forEach(prop => {
+            map[hashMap[prop].key] = {
+                key:prop,
+                ref:hashMap[prop].ref
+            }
+        })
+        Object.assign(map,hashMap)
+        return map
+    }
+    get toQueryMap(){
+        return flipMap(this.toPageMap)
+    }
+    
+    constructor (private toPageMap:SqlMap){}
 }
