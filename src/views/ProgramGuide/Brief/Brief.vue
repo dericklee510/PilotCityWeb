@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <v-container>
         <v-row class="programbrief__container">
             <v-col cols="12">
                 <v-col>Program Brief</v-col>
@@ -9,7 +9,7 @@
                 <BriefCard />
             </v-col>
         </v-row>
-    </div>
+    </v-container>
 </template>
 
 <script lang="ts">
