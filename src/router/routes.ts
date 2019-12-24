@@ -10,6 +10,7 @@ import {
   ForgotPassword
 } from '@/views/Login'
 import programbrief from "@/views/ProgramGuide/Brief/Brief.vue"
+import introvideo from "@/views/ProgramGuide/Introvideo/Introvideo.vue"
 import test from '@/views/Test'
 import Home from '@/views/Home.vue'
 import { routes as ProfileRoutes } from '@/views/Profile'
@@ -42,6 +43,11 @@ const routes: RouteConfig [] = [
         path: `/programbrief`,
         name: `program-brief`,
         component: programbrief
+    },
+    {
+        path: `/introvideo`,
+        name: `intro-video`,
+        component: introvideo
     },
     {
         path: '/',
