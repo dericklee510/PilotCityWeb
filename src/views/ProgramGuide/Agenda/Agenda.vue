@@ -1,0 +1,116 @@
+<template>
+
+<v-row justify="center" >
+
+    <img class="agenda__image" id="agenda__icon" src="@/assets/agenda.png">
+
+    <v-col cols="7" id="agenda__contain">
+
+        <!-- TITLE -->
+
+        <v-row justify="center" class="mr-auto ml-auto agenda__title">AGENDA</v-row>
+
+        <!-- BORDERLINE -->
+
+        <v-col cols="12" class="agenda__borderline"></v-col>
+
+        <!-- DESCRIPTION -->
+
+        <!-- <v-row 
+            justify="center" 
+            class="mr-auto ml-auto agenda__description">As you practice, use and apply the employer's product or service, log how many minutes you use it each time.
+        </v-row> -->
+
+
+
+<!-- AGENDA LOGISTICS -->
+
+<v-row class="agenda__logistics col-8 mr-auto ml-auto mt-10 pr-auto pl-auto pt-0 pb-0">
+
+
+        <v-column class="agenda__poop">
+
+            <v-row id="agenda__borderline" class="agenda__logisticslabel pl-4 pt-4 pb-4">DATE:<input placeholder="Enter date here" class="ml-4 agenda__item-input"></v-row>
+
+            <v-row id="agenda__borderline" class="agenda__logisticslabel pl-4 pt-4 pb-4">TIME:<input placeholder="Enter time here" class="ml-4 agenda__item-input"></v-row>
+
+            <v-row class="agenda__logisticslabel pl-4 pb-4 pt-4">LOCATION:<input placeholder="Enter location here" class="ml-4 agenda__item-input"></v-row>
+        
+        </v-column>
+
+        </v-row>
+
+<!-- AGENDA ITEM -->
+
+<v-row class="agenda__item col-8 mr-auto ml-auto mt-10 pt-0 pb-0">
+
+    <v-column class="agenda__item-box">
+
+        <v-row id="agenda__borderline"><input placeholder="Item" class="agenda__item-input__header pt-3 pb-3 pl-4 pr-4"></v-row>
+        <v-row id="agenda__borderline"><input placeholder="Duration" class="agenda__item-input__duration pt-2 pb-2 pl-4 pr-4"></v-row>
+        <v-row><input placeholder="Description" class="agenda__item-input__description pt-3 pb-12 pl-4 pr-4"></v-row>
+
+    </v-column>
+
+</v-row>
+
+<!-- AGENDA ITEM -->
+
+<v-row class="agenda__item col-8 mr-auto ml-auto mt-10 pt-0 pb-0">
+
+    <v-column class="agenda__item-box">
+
+        <v-row id="agenda__borderline"><input placeholder="Item" class="agenda__item-input__header pt-3 pb-3 pl-4 pr-4"></v-row>
+        <v-row id="agenda__borderline"><input placeholder="Duration" class="agenda__item-input__duration pt-2 pb-2 pl-4 pr-4"></v-row>
+        <v-row><input placeholder="Description" class="agenda__item-input__description pt-3 pb-12 pl-4 pr-4"></v-row>
+
+    </v-column>
+
+</v-row>
+
+<!-- ADD AGENDA ITEM -->
+
+<v-row justify="center" class="agenda__item-add col-8 mr-auto ml-auto mt-10 pt-2 pb-2 mb-10">
+
++
+
+</v-row>
+
+
+
+
+
+
+
+
+
+
+
+<!-- LOG TIME / COULD DELETE -->
+
+        <!-- <v-row justify="center" class="mr-auto ml-auto mt-10 mb-5"><input class="agenda__input" placeholder="0m"></v-row>
+
+        <v-row justify="center" class="mr-auto ml-auto mt-5 mb-5"><button class="agenda__button">LOG TIME</button></v-row>
+
+        <v-row justify="center" class="mr-auto ml-auto mt-10 agenda__label">LOGGED TIME</v-row>
+
+        <v-row justify="center" class="mr-auto ml-auto mt-2 mb-7 agenda__calculated">1h 30m</v-row> -->
+
+
+    </v-col>
+
+</v-row>
+</template>
+
+
+
+
+
+<script lang="ts">
+import Vue from 'vue'
+import Component from 'vue-class-component'
+@Component
+export default class agenda extends Vue{
+    
+}
+</script>
