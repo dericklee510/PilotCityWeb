@@ -3,7 +3,7 @@
 <v-container >
         <v-row class="programbrief__container">
             <v-col cols="12">
-                <v-col class="programbrief__tile">Program Brief</v-col>
+                <v-col class="programbrief__tile">Program Briefs</v-col>
                 <v-col></v-col>
             </v-col>
             <v-col>
@@ -17,7 +17,7 @@
     </v-container>
 </div>
 </template>
-
+ 
     
     
 

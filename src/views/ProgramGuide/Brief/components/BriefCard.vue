@@ -10,7 +10,7 @@
       <v-col>
           <v-col cols="12">
               <div class="briefcard__header">Request for Pilot (RFP)</div>
-              <span class="briefcard__check"><input type="checkbox"> I acknowledgeI have fully read and understand the included document</span>
+              <span class="briefcard__check"><input class="checkbox_itself" type="checkbox">I acknowledge I have fully read and understand the included document</span>
               <v-col style="padding:0"><button class="briefcard__buton">CONFIRM</button></v-col>
           </v-col>
       </v-col>
@@ -29,3 +29,7 @@ export default class BriefCard extends Vue{
     
 }
 </script>
+
+<style scoped>
+
+</style>

@@ -97,7 +97,7 @@
                 {{ authResponse }}
               </h4>
               <h4
-                class="text-center pc-background--dark"
+                class="text-center pc-background--dark label_annotate"
                 style="display: block"
               >
                 Don't have an account yet? Sign-up here
@@ -106,7 +106,7 @@
           </v-col>
         </v-col>
       </v-row>
-    </v-container>
+    </v-container> 
   </div>
 </template>
 
