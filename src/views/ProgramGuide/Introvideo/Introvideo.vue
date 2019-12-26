@@ -13,7 +13,7 @@
         <v-row justify="center" class="mr-auto ml-auto introvideo__line1">Watch the following introduction video by your employer to get warmed up on what we’re doing. </v-row>
 
         <!-- <v-row justify="center" class="introvideo__line2"></v-row> -->
-
+        <v-row justify="center" class="mr-auto ml-auto videolink"></v-row>
 
 
         <v-row justify="center" class="ml-auto mr-auto introvideo__check" ><input type="checkbox" class="introvideo__checkbox"> I have finished watching the video</v-row>
