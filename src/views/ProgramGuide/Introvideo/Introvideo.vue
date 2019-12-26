@@ -1,12 +1,28 @@
 <template>
-<v-card class="introvideo__maincontain">
-<v-row class="introvideo__container">
-    <v-col>
-        <div class="introvideo__header"></div>
-    
+
+<v-row justify="center" >
+
+    <img class="introvideo__image" id="introvideo__playbutton" src="@/assets/Greenplaybutton.png">
+
+    <v-col cols="8" class="introvideo__contain" id="introvideo__app">
+
+        <v-row justify="center" class="introvideo__watchintro">WATCH INTRODUCTION VIDEO</v-row>
+
+        <v-col cols="12" class="introvideo__borderline" id="introvideo__borderline"></v-col>
+
+        <v-row justify="center" class="introvideo__line1">Watch the following introduction video by your employer to get </v-row>
+
+        <v-row justify="center" class="introvideo__line2">warmed up on what we’re doing. </v-row>
+
+
+
+        <v-row justify="center" class="introvideo__check" ><input type="checkbox" class="introvideo__checkbox"> I have finished watching the video</v-row>
+
+        <v-col style="padding:0"><button class="introvideo__button">NEXT</button></v-col>
+
     </v-col>
+
 </v-row>
-</v-card>
 </template>
 
 

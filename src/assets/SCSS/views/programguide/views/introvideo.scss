@@ -1,27 +1,119 @@
 .introvideo{
-    &__container{
-    width: 899.55px;
+
+
     
-    position: relative;
-    left: 20.14%;
-    right: 17.39%;
-    top: 16.21%;
-    bottom: 4.14%;
+    &__contain{
+
+    height: 815.58px;
     border: 0.75px solid #000000;
+    margin-top: 69.29px;
+    margin-bottom: 49.29px;
     
     }
-    &__header{
-        height: 815.58px;
-        left: 39.79%;
-        right: 36.94%;
-        top: 21.76%;
-        bottom: 75.7%;
 
+    &__watchintro{
+
+    margin-top:56.78px ;
+
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 1.41rem;
+    line-height: 26px;
+    color: #000000;
+
+    }
+
+    &__borderline{
+
+        border-spacing: 0px;
+        position: relative;
+        margin-top: 27.07px;
+        border: 0.75px solid #000000;
+        border-top-color: transparent;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        
+    }
+
+    &__line1{
+
+    margin-top: 5%;
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.41rem;
+    line-height: 26px;
+    color: #949598;
+
+    }
+
+    &__line2{
+
+        margin-top: 2%;
         font-family: Raleway;
         font-style: normal;
-        font-weight: 900;
-        font-size: 22.5px;
+        font-weight: 500;
+        font-size: 1.41rem;
         line-height: 26px;
-        color: black;
+        color: #949598;
+    
+        }
+
+    &__check{
+
+    margin-top: 38%;
+    margin-bottom: 3%;
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.41rem;
+    line-height: 26px;
+    color: #949598;
+    }
+
+    &__checkbox{
+        width: 18px;
+        height: 18px;
+        margin-top: .5%;
+        margin-right: 2%;
+        border: 1.5px;
+        border-color: #C7C8CA;
+    }
+
+    &__button{
+    margin-left: 30.33%;
+    margin-top: 2%;
+    width: 374.25px;
+    height: 73.5px;
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 1.88rem;
+    line-height: 35px;
+    color: #BCBEC0;
+    background-color: #E6E7E8;
+    
+
+    }
+
+
+
+}
+
+
+#introvideo{
+    &__playbutton{
+        width: 112px;
+        height: 84.36px;
+    }
+
+    &__app{
+        padding-left: 0%;
+        padding-right: 0%;
+    }
+
+    &__borderline{
+        padding-top: 0%;
     }
 }
