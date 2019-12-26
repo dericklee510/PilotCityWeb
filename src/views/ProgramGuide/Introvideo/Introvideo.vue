@@ -2,18 +2,17 @@
 
 <v-row justify="center" >
 
-    <img class="introvideo__image" id="introvideo__playbutton" src="@/assets/Greenplaybutton.png">
+    <img id="introvideo__icon" src="@/assets/watchintrovideo.png">
 
-    <v-col cols="7" class="introvideo__contain" id="introvideo__app">
+    <v-col cols="7" id="introvideo__contain">
 
         <v-row justify="center" class="mr-auto ml-auto introvideo__watchintro">WATCH INTRODUCTION VIDEO</v-row>
 
-        <v-col cols="12" class="introvideo__borderline" id="introvideo__borderline"></v-col>
+        <v-col cols="12" id="introvideo__borderline"></v-col>
 
-        <v-row justify="center" class="mr-auto ml-auto introvideo__line1">Watch the following introduction video by your employer to get warmed up on what we’re doing. </v-row>
+        <v-row justify="center" class="mr-auto ml-auto introvideo__description">Watch the following introduction video by your employer to get warmed up on what we’re doing. </v-row>
 
-        <!-- <v-row justify="center" class="introvideo__line2"></v-row> -->
-        <v-row justify="center" class="mr-auto ml-auto videolink"></v-row>
+        <v-row justify="center" class="mr-auto ml-auto introvideo__video"></v-row>
 
 
         <v-row justify="center" class="ml-auto mr-auto introvideo__check" ><input type="checkbox" class="introvideo__checkbox"> I have finished watching the video</v-row>

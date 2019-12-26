@@ -1,13 +1,42 @@
+#introvideo{
+    &__icon{
+        width: 112px;
+        height: 84.36px;
+        position: absolute;
+        margin-top:27px;
+    }
+
+    &__contain{
+        
+        height: 100%;
+        border: 0.75px solid #000000;
+        margin-top: 69.29px;
+        margin-bottom: 49.29px;
+        padding-left: 0%;
+        padding-right: 0%;
+    }
+
+    &__borderline{
+        padding-top: 0%;
+        border-spacing: 0px;
+        position: relative;
+        margin-top: 27.07px;
+        border: 0.75px solid #000000;
+        border-top-color: transparent;
+        border-left-color: transparent;
+        border-right-color: transparent;
+    }
+
+
+}
+
 .introvideo{
-    
-    &__contain{ 
 
-    height: 100%;
-    border: 0.75px solid #000000;
-    margin-top: 69.29px;
-    margin-bottom: 49.29px;
-
-    
+    &__video{
+        height: 500px;
+        background-color: #414042;
+        margin-top:5%;
+        width: 100%;
     }
 
     
@@ -27,19 +56,7 @@
 
     }
 
-    &__borderline{
-
-        border-spacing: 0px;
-        position: relative;
-        margin-top: 27.07px;
-        border: 0.75px solid #000000;
-        border-top-color: transparent;
-        border-left-color: transparent;
-        border-right-color: transparent;
-        
-    }
-
-    &__line1{
+    &__description{
 
     margin-top: 5%;
     font-family: Raleway;
@@ -52,18 +69,6 @@
     line-height: unset;
 
     }
-
-    &__line2{
-
-        margin-top: 2%;
-        font-family: Raleway;
-        font-style: normal;
-        font-weight: 500;
-        font-size: 1.41rem;
-        line-height: 26px;
-        color: #949598;
-    
-        }
 
     &__check{
 
@@ -117,30 +122,6 @@
 
 }
 
-.videolink{
-    height: 500px;
-    background-color: #414042;
-    margin-top:5%;
-    width: 100%;
-}
 
 
-#introvideo{
-    &__playbutton{
-        width: 112px;
-        height: 84.36px;
-        position: absolute;
-        margin-top:27px;
-    }
 
-    &__app{
-        padding-left: 0%;
-        padding-right: 0%;
-    }
-
-    &__borderline{
-        padding-top: 0%;
-    }
-
-
-}
