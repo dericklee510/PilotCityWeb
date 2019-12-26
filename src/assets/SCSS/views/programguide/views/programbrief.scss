@@ -15,8 +15,7 @@
 
     &__tile{
         font-family: "Raleway";
-        font-weight: 900;
-        letter-spacing:1px;
+        font-weight: 800;
     }
     
 
@@ -33,19 +32,19 @@
         
     
         &__container{
-            width: 1091.5px;
+            // width: 1091.5px;
+            width: 100vw;
             box-shadow: none;
             
 
         }
         
         &__container:hover { 
-            width: 1091.5px;
+            width: 100vw;
             border-radius: 0px;
-            border-style: dashed;
-            border-width: 1px;
+            
+            border: 1px dashed #ffffff;
             //  border-color: #FFFFFF;   
-            border-color: white;  //need to chnage it to white after designing the whole page
         }
 
 
@@ -54,6 +53,7 @@
 
 .checkbox_itself {
     margin-right:10px;
+    line-height: unset;
 }
 
 .briefcard
@@ -65,7 +65,7 @@
     {
         font-family: "Raleway";
         font-style: normal;
-        font-weight: 900;
+        font-weight: 800;
         line-height: 29px;
         font-size: 1.56rem;
         color: white;
@@ -76,26 +76,45 @@
     &__check{
         font-family: Raleway;
         font-style: normal;
-        font-weight: 800;
-        line-height: 18px;
-        font-size: .94rem;
+        font-weight: 600;
+        line-height: unset;
+        font-size: .8rem;
         color: white;
         position: relative;
+
     }
 
     &__buton{
         font-family: "Raleway";
         font-style: normal;
-        font-weight: 900;
+        font-weight: 800;
         line-height: 18px;
-        font-size: .94rem;
+        font-size: .8rem;
         width: 149.62px;
         height: 36.75px;
         background-color: #BCBEC0;
         color: white;
         border-width: 5px;
         position: relative;
+        letter-spacing: .05rem;
 
+        top: 75%;
+        
+    }
+
+    &__buton:hover{
+        font-family: "Raleway";
+        font-style: normal;
+        font-weight: 800;
+        line-height: 18px;
+        font-size: .8rem;
+        width: 149.62px;
+        height: 36.75px;
+        background-color: #414042;
+        color: white;
+        border-width: 5px;
+        position: relative;
+        letter-spacing: .05rem;
         top: 75%;
         
     }
@@ -105,6 +124,15 @@
         width: 153px;
         height: 198px;
         background-color:white;
+        color: white;
+        position: relative;
+    }
+
+    &__cover:hover{
+        margin-left: 9px;
+        width: 153px;
+        height: 198px;
+        background-color:#414042;
         color: white;
         position: relative;
     }
