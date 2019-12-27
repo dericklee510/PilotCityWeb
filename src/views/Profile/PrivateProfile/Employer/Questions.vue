@@ -1000,10 +1000,9 @@ extend("min_value", {
   message: "This field cannot be less than {min}"
 });
 
-class app extends Vue {}
-interface app extends Vue, CONST {}
 
-applyMixins(CONST, [Vue, CONST]);
+
+const app = CONST.addConst(Vue)
 
 @Component({
   components: {
@@ -1060,55 +1059,57 @@ export default class EmployerProfile extends app {
     position_type: [] as string[]
   } as Employer.Internship;
 
-  contributionOther: string = "";
+    public syncStorageCitizen() {
+        localStorage.citizen_first_name = this.citizen.first_name
+        localStorage.citizen_last_name = this.citizen.last_name
+        localStorage.citizen_position = this.citizen.position
+        localStorage.citizen_organization = this.citizen.organization
+    }
 
-  internOther: string = "";
+    private addOption(from: string, to: string[]): void {
+        to.push(from)
+    }
 
-  private loading: boolean = false;
-
-  async syncStorage() {
-    this.loading = true;
-
-    try {
-      if (await (this.$refs.observer as ObserverInstance).validate()) {
-        this.syncStorageCitizen();
-        this.syncStorageOrganization();
-        this.syncStorageProgramDetails();
-        this.syncStorageProject();
-        this.syncStorageInternship();
-      }
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error(err);
+    getUpdate(){
+      if(!AuthStore.user)
+        throw("Not logged in")
+      GraphqlStore.sdk.publicProfileFetch({user_id:AuthStore.user.uid})
+      
+    }
+    async syncStorage() {
+        this.loading = true
+        try {
+            if (await (this.$refs.observer as ObserverInstance).validate()) {
+                let query = new Employer.EmployerQueryForm({
+                  Base:this.citizenBase,
+                  Citizen:this.citizen,
+                  Organization:this.organization,
+                  ProgramDetails:this.programdetails,
+                  Internship:this.internship
+                })
+                await query.init()
+                await query.submitQuery()
+            }
+        } catch (err) {
+            console.log(err)
+        }
+        this.loading = false
     }
     this.loading = false;
   }
 
-  async submitPublicProfile() {
-    await GraphqlStore.fetchCitizenProfile(
-      citizenBaseToProfile(this.citizenBase)
-    );
-    await GraphqlStore.createCitizenProfile();
-  }
 
-  get Name() {
-    return `${this.citizen.first_name} ${this.citizen.last_name}`;
-  }
-
-  async submitProfile() {
-    await this.submitPublicProfile();
-    await GraphqlStore.fetchQueryData();
-    await GraphqlStore.SubmitEmployerQuery();
-  }
-
-  async created() {
-    this.citizenBase.citizenType = this.$route.params.citizenType;
-    if (AuthStore.user) {
-      console.log(
-        await GraphqlStore.client.request(EmployerFetch, {
-          user_id: AuthStore.user.uid
-        })
-      );
+    get Name() {
+        return `${this.citizen.first_name} ${this.citizen.last_name}`
+    }
+    beforeCreate(){
+      
+    }
+    async created() {
+        this.citizenBase.citizenType = this.$route.params.citizenType
+        
+        let arr:string[] = []
+        console.log(typeof arr)
     }
   }
 }

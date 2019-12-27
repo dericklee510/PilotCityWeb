@@ -4,6 +4,7 @@ import {
     createApolloClient,
     restartWebsockets
 } from 'vue-cli-plugin-apollo/graphql-client'
+import ApolloClient from 'apollo-client'
 
 // Install the vue plugin
 Vue.use(VueApollo)
@@ -56,8 +57,15 @@ export function createProvider(options = {}) {
  const { apolloClient, wsClient } = createApolloClient<optionType>({
      ...defaultOptions,
      ...options
- })
- apolloClient.wsClient = wsClient
+ });
+( apolloClient as (ApolloClient<{
+    httpEndpoint: string;
+    wsEndpoint: string;
+    tokenName: string;
+    persisting: boolean;
+    websocketsOnly: boolean;
+    ssr: boolean;
+}> & {wsClient:any})).wsClient = wsClient
 
  // Create vue apollo provider
  const apolloProvider = new VueApollo({
