@@ -1,4 +1,11 @@
-#agenda{
+#agenda_view{
+
+    &__checkbox{
+
+        text-align: right;
+        margin-top:4px;
+
+    }
     &__icon{
         width: 75px;
         height: 80px;
@@ -20,14 +27,18 @@
 
     &__borderline{
 
-        border-bottom: 1px solid #A7A9AC;
+        border-bottom: 1px solid transparent;
 
     }
 
 
 }
 
-.agenda{
+.agenda_view{
+
+
+
+    
 
     &__trashicon{
 
@@ -135,7 +146,7 @@
 }
 
 &__item{
-    border:1px solid #000000;
+    border:1px solid transparent;
 }
 
 &__item-add{

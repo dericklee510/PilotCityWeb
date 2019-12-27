@@ -1,9 +1,9 @@
-#elevator_view2{
+#businessmodelcanvas_view2{
     &__icon{
-        width: 78px;
-        height: 91px;
+        width: 94px;
+        height: 79px;
         position: absolute;
-        margin-top:22px;
+        margin-top:25px;
     }
 
     &__backbuttonicon{
@@ -41,7 +41,7 @@
 
 }
 
-.elevator_view2{
+.businessmodelcanvas_view2{
 
     &__backbutton{
         position: absolute;
@@ -94,7 +94,7 @@
 
     &__paragraph{
         height: 240px;
-        border: 1px solid #CCCCCC;
+        // border: 1px solid #CCCCCC;
         // border: 1px solid transparent;
         width: 75%;
         font-size: 18px;

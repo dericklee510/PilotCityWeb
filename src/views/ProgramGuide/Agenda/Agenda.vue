@@ -1,6 +1,6 @@
 <template>
 
-<v-row justify="center" >
+<v-row justify="center">
 
     <img class="agenda__image" id="agenda__icon" src="@/assets/agenda.png">
 
@@ -14,6 +14,8 @@
 
         <v-col cols="12" class="agenda__borderline"></v-col>
 
+        <v-row justify="center" class="mr-auto ml-auto businessmodelcanvas_view2__description">Enter your agenda for the event or activity.</v-row>
+
         <!-- DESCRIPTION -->
 
         <!-- <v-row 
@@ -23,7 +25,7 @@
 
 
 
-<!-- AGENDA LOGISTICS -->
+<!-- AGENDA LOGISTICS
 
 <v-row class="agenda__logistics col-8 mr-auto ml-auto mt-10 pr-auto pl-auto pt-0 pb-0">
 
@@ -38,41 +40,86 @@
         
         </v-column>
 
-        </v-row>
+        </v-row> -->
 
 <!-- AGENDA ITEM -->
 
-<v-row class="agenda__item col-8 mr-auto ml-auto mt-10 pt-0 pb-0">
+<v-row class="mt-10 pt-0 pb-0">        
 
-    <v-column class="agenda__item-box">
+    <v-col class="agenda__item-box" cols="2"></v-col>
+
+    <v-col cols="8" class="agenda__item mr-auto ml-auto ">
 
         <v-row id="agenda__borderline"><input placeholder="Item" class="agenda__item-input__header pt-3 pb-3 pl-4 pr-4"></v-row>
         <v-row id="agenda__borderline"><input placeholder="Duration" class="agenda__item-input__duration pt-2 pb-2 pl-4 pr-4"></v-row>
         <v-row><input placeholder="Description" class="agenda__item-input__description pt-3 pb-12 pl-4 pr-4"></v-row>
 
-    </v-column>
+    </v-col>
+
+    <v-col cols="2"><i class="mt-2 ml-3 far fa-trash-alt agenda__trashicon"></i></v-col>
+
 
 </v-row>
 
+
+
+
+
+
 <!-- AGENDA ITEM -->
 
-<v-row class="agenda__item col-8 mr-auto ml-auto mt-10 pt-0 pb-0">
+<v-row class="mt-10 pt-0 pb-0">        
 
-    <v-column class="agenda__item-box">
+    <v-col class="agenda__item-box" cols="2"></v-col>
+
+    <v-col cols="8" class="agenda__item mr-auto ml-auto ">
 
         <v-row id="agenda__borderline"><input placeholder="Item" class="agenda__item-input__header pt-3 pb-3 pl-4 pr-4"></v-row>
         <v-row id="agenda__borderline"><input placeholder="Duration" class="agenda__item-input__duration pt-2 pb-2 pl-4 pr-4"></v-row>
         <v-row><input placeholder="Description" class="agenda__item-input__description pt-3 pb-12 pl-4 pr-4"></v-row>
 
-    </v-column>
+    </v-col>
+
+    <v-col cols="2"><i class="mt-2 ml-3 far fa-trash-alt agenda__trashicon"></i></v-col>
+
 
 </v-row>
+
+
+<!-- AGENDA ITEM -->
+
+<v-row class="mt-10 pt-0 pb-0">        
+
+    <v-col class="agenda__item-box" cols="2"></v-col>
+
+    <v-col cols="8" class="agenda__item mr-auto ml-auto ">
+
+        <v-row id="agenda__borderline"><input placeholder="Item" class="agenda__item-input__header pt-3 pb-3 pl-4 pr-4"></v-row>
+        <v-row id="agenda__borderline"><input placeholder="Duration" class="agenda__item-input__duration pt-2 pb-2 pl-4 pr-4"></v-row>
+        <v-row><input placeholder="Description" class="agenda__item-input__description pt-3 pb-12 pl-4 pr-4"></v-row>
+
+    </v-col>
+
+    <v-col cols="2"><i class="mt-2 ml-3 far fa-trash-alt agenda__trashicon"></i></v-col>
+
+
+</v-row>
+
 
 <!-- ADD AGENDA ITEM -->
 
-<v-row justify="center" class="agenda__item-add col-8 mr-auto ml-auto mt-10 pt-2 pb-2 mb-10">
+<v-row class="mt-10 pt-0 pb-0">        
 
-+
+    <v-col class="agenda__item-box" cols="2"></v-col>
+
+    <v-col cols="8" class="agenda__item-add mr-auto ml-auto mb-12">+
+
+        <v-row></v-row>
+
+    </v-col>
+
+    <v-col cols="2"></v-col>
+
 
 </v-row>
 
