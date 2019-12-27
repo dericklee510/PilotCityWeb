@@ -15,6 +15,21 @@
         padding-left: 0%;
         padding-right: 0%;
     }
+
+    &__check{
+        
+        width: 18px;
+        height: 18px;
+        border: 0.75px solid #231F20;
+        margin-left: 30%;
+    }
+
+    &__exporticon{
+        width: 18.71px;
+        height: 18.76px;
+
+    }
+
 }
 
 
@@ -61,5 +76,50 @@
         text-align: center;
         line-height: unset;
     
+    }
+
+    &__firstcheck{
+        margin-top: 5%;
+        margin-bottom: 0%;
+
+    }
+
+    &__description1{
+        width: 262px;
+        height: 18px;
+
+        font-family: Raleway;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 15px;
+        line-height: 18px;
+        color: #231F20;
+
+        margin-left: 24%;
+        margin-top: -1.4%;
+    }
+
+    &__secondcheck{
+        margin-top: 1.4%;
+    }
+
+    &__acknowledgebutton{
+        width: 187.12px;
+        height: 36.75px;
+
+        border: 0.375px solid #231F20;
+
+
+        /* ACKNOWLEDGE */
+
+        font-family: Raleway;
+        font-style: normal;
+        font-weight: 900;
+        font-size: 15px;
+        line-height: 18px;
+        color: #231F20;
+
+        margin-left: 40%;
+        margin-top: 8.5%
     }
 }
