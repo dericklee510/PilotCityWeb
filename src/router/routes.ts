@@ -10,11 +10,10 @@ import {
   ForgotPassword
 } from '@/views/Login'
 import programbrief from "@/views/ProgramGuide/Brief/Brief.vue"
+import programbrief_edit from "@/views/ProgramGuide/Brief/programbrief_edit.vue"
 import introvideo from "@/views/ProgramGuide/Introvideo/Introvideo.vue"
 import introvideo_edit from "@/views/ProgramGuide/Introvideo/Introvideo_edit.vue"
 import practicelog from "@/views/ProgramGuide/Practicelog/Practicelog.vue"
-import agenda from "@/views/ProgramGuide/Agenda/agenda.vue"
-import agenda_view from "@/views/ProgramGuide/Agenda/agenda_view.vue"
 import presentation_enter from "@/views/ProgramGuide/Presentation/presentation_enter.vue"
 import presentation_view from "@/views/ProgramGuide/Presentation/presentation_view.vue"
 import demovideo_view from "@/views/ProgramGuide/Demovideo/demovideo_view.vue"
@@ -26,6 +25,14 @@ import elevator_view from "@/views/ProgramGuide/Elevator/elevator_view.vue"
 import elevator_view2 from "@/views/ProgramGuide/Elevator/elevator_view2.vue"
 import businessmodelcanvas_enter from "@/views/ProgramGuide/Businessmodelcanvas/businessmodelcanvas_enter.vue"
 import businessmodelcanvas_view2 from "@/views/ProgramGuide/Businessmodelcanvas/businessmodelcanvas_view2.vue"
+import agenda from "@/views/ProgramGuide/Agenda/agenda.vue"
+import agenda_view from "@/views/ProgramGuide/Agenda/agenda_view.vue"
+import externshipagenda_edit from "@/views/ProgramGuide/Externship/externshipagenda_edit.vue"
+import externshipagenda_view from "@/views/ProgramGuide/Externship/externshipagenda_view.vue"
+import hackagenda_edit from "@/views/ProgramGuide/Hack/hackagenda_edit.vue"
+import hackagenda_view from "@/views/ProgramGuide/Hack/hackagenda_view.vue"
+import demoagenda_edit from "@/views/ProgramGuide/Demo/demoagenda_edit.vue"
+import demoagenda_view from "@/views/ProgramGuide/Demo/demoagenda_view.vue"
 import test from '@/views/Test'
 import Home from '@/views/Home.vue'
 import { routes as ProfileRoutes } from '@/views/Profile'
@@ -58,6 +65,12 @@ const routes: RouteConfig [] = [
         path: `/programbrief`,
         name: `program-brief`,
         component: programbrief
+    },
+
+    {
+        path: `/programbrief_edit`,
+        name: `programbrief-edit`,
+        component: programbrief_edit
     },
 
     {
@@ -154,6 +167,42 @@ const routes: RouteConfig [] = [
         path: `/agenda_view`,
         name: `agenda-view`,
         component: agenda_view
+    },
+
+    {
+        path: `/externshipagenda_edit`,
+        name: `externshipagenda-edit`,
+        component: externshipagenda_edit
+    },
+
+    {
+        path: `/externshipagenda_view`,
+        name: `externshipagenda-view`,
+        component: externshipagenda_view
+    },
+
+    {
+        path: `/hackagenda_edit`,
+        name: `hackagenda-edit`,
+        component: hackagenda_edit
+    },
+
+    {
+        path: `/hackagenda_view`,
+        name: `hackagenda-view`,
+        component: hackagenda_view
+    },
+
+    {
+        path: `/demoagenda_edit`,
+        name: `demoagenda-edit`,
+        component: demoagenda_edit
+    },
+
+    {
+        path: `/demoagenda_view`,
+        name: `demoagenda-view`,
+        component: demoagenda_view
     },
 
     {

@@ -287,11 +287,13 @@
             &__button{
                 width: 275px;
                 height: 50px;
-                border: 1px solid #000000;
+                // border: 1px solid #000000;
                 font-family: 'Raleway';
                 font-size: 1rem;
                 font-weight: 900;
                 letter-spacing: 1px;
+                background-color: #BCBEC0;
+                color: #ffffff;
             
                 &:hover{
             
@@ -300,9 +302,9 @@
                     font-family: 'Raleway';
                     font-size: 1rem;
                     color: #ffffff;
-                    border: 1px solid #6FBA7F;
+                    border: 1px solid #EDA1BF;
                     font-weight: 900;
-                    background-color:#6FBA7F;
+                    background-color:#EDA1BF;
                     letter-spacing: 1px;
             
                 }

@@ -8,7 +8,7 @@
 
         <!-- TITLE -->
 
-        <v-row justify="center" class="mr-auto ml-auto agenda_view__title">AGENDA</v-row>
+        <v-row justify="center" class="mr-auto ml-auto agenda_view__title">EXTERNSHIP DAY AGENDA</v-row>
 
         <!-- BORDERLINE -->
 

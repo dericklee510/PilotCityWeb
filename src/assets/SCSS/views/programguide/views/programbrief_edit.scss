@@ -1,4 +1,17 @@
 .programbrief{
+
+    &__addbrief{
+        width: 100%;
+        border: 1px dashed #ffffff;
+        height: 70px;
+
+        &:hover{
+            width: 100%;
+            border: 1px dashed transparent;
+            background-color: #404142;
+            height: 70px;
+        }
+    }
     
     &__container{
         height: 100%;
@@ -98,6 +111,7 @@
         position: relative;
         letter-spacing: .05rem;
         font-weight: 900;
+
         top: 75%;
         
     }
