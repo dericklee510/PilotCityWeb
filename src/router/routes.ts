@@ -10,6 +10,7 @@ import {
   ForgotPassword
 } from '@/views/Login'
 import programbrief from "@/views/ProgramGuide/Brief/Brief.vue"
+import posthack from "@/views/ProgramGuide/Posthack/Posthack.vue"
 import test from '@/views/Test'
 import Home from '@/views/Home.vue'
 import { routes as ProfileRoutes } from '@/views/Profile'
@@ -42,6 +43,11 @@ const routes: RouteConfig [] = [
         path: `/programbrief`,
         name: `program-brief`,
         component: programbrief
+    },
+    {
+        path: `/posthack`,
+        name: `post-hack`,
+        component: posthack
     },
     {
         path: '/',
