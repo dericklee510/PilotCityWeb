@@ -18,6 +18,11 @@ import presentation_enter from "@/views/ProgramGuide/Presentation/presentation_e
 import presentation_view from "@/views/ProgramGuide/Presentation/presentation_view.vue"
 import demovideo_view from "@/views/ProgramGuide/Demovideo/demovideo_view.vue"
 import demovideo_enter from "@/views/ProgramGuide/Demovideo/demovideo_enter.vue"
+import pitch_enter from "@/views/ProgramGuide/Pitch/pitch_enter.vue"
+import pitch_view from "@/views/ProgramGuide/Pitch/pitch_view.vue"
+import elevator_enter from "@/views/ProgramGuide/Elevator/elevator_enter.vue"
+import elevator_view from "@/views/ProgramGuide/Elevator/elevator_view.vue"
+import elevator_view2 from "@/views/ProgramGuide/Elevator/elevator_view2.vue"
 import test from '@/views/Test'
 import Home from '@/views/Home.vue'
 import { routes as ProfileRoutes } from '@/views/Profile'
@@ -92,6 +97,36 @@ const routes: RouteConfig [] = [
         path: `/demovideo_enter`,
         name: `demovideo-enter`,
         component: demovideo_enter
+    },
+
+    {
+        path: `/pitch_enter`,
+        name: `pitch-enter`,
+        component: pitch_enter
+    },
+
+    {
+        path: `/pitch_view`,
+        name: `pitch-view`,
+        component: pitch_view
+    },
+
+    {
+        path: `/elevator_enter`,
+        name: `elevator-enter`,
+        component: elevator_enter
+    },
+
+    {
+        path: `/elevator_view`,
+        name: `elevator-view`,
+        component: elevator_view
+    },
+
+    {
+        path: `/elevator_view2`,
+        name: `elevator-view2`,
+        component: elevator_view2
     },
 
     {
