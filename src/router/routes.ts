@@ -35,6 +35,8 @@ import hackagenda_view from "@/views/ProgramGuide/Hack/hackagenda_view.vue"
 import demoagenda_edit from "@/views/ProgramGuide/Demo/demoagenda_edit.vue"
 import demoagenda_view from "@/views/ProgramGuide/Demo/demoagenda_view.vue"
 import processlog from "@/views/ProgramGuide/Process/processlog.vue"
+import login2 from "@/views/Login/Login2.vue"
+import signup2 from "@/views/Signup/Signup2.vue"
 import test from '@/views/Test'
 import Home from '@/views/Home.vue'
 import { routes as ProfileRoutes } from '@/views/Profile'
@@ -217,6 +219,18 @@ const routes: RouteConfig [] = [
         path: `/demoagenda_view`,
         name: `demoagenda-view`,
         component: demoagenda_view
+    },
+
+    {
+        path: `/login2`,
+        name: `login2`,
+        component: login2
+    },
+
+    {
+        path: `/signup2`,
+        name: `signup2`,
+        component: signup2
     },
 
     {
