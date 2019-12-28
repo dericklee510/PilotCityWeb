@@ -1,71 +1,77 @@
-import { Date } from './../../../utilities/validation/Date/index';
+import { AgendaTemplate, generalUser, ReviewedLink, PostHackReflection, DesignLog, Timelog, NamedLink } from './utilities';
 
-//#region 
-// interfaces not stored on firebase
-interface NamedLink {
-    link: string
-    name: string
-}
-
-interface Event {
-    eventName: string
-    duration: number
-    description: string
-    checked: boolean
-}
-
-interface Agenda {
-    date: Date
-    time: number
-    location: string
-    events: Event[]
-}
-
-interface PostHackReflection {
-    feedback: string
-    checked: boolean
-}
-
-interface DesignLog { 
-    description: string
-    date: Date
-    time: number
-    link: string
-}
-//#endregion
-
-interface Classroom {
+export interface Classroom {
     id: string
-    hackAgenda: Agenda
+    teacherKey: string
+    teacherProgramKey: string
+    employerProgramKey: string
+    className: string
+    shareCode: string // create hash code
 }
-
-interface EmployerProgram {
+export interface EmployerProgram {
     id: string
-    pdfLink: string
-    introLink?: string
-    introLinkAck?: boolean
-    caseStudies: NamedLink[]
-    projectKeys: string[]
+    externshipDayAgenda:AgendaTemplate
+    programBrief?:NamedLink[]
+    masterHackDayAgenda: AgendaTemplate  // Employer cannot modify this
+    projectKeys?: string[]
+    introVideo?: string
+    caseStudies?: NamedLink[] 
 }
-
-interface StudentProject {
+export interface TeacherProgramData{
+    id: string 
+    teacherKey: string
+    employerProgramKey: string
+    trainingDayAgenda: AgendaTemplate
+    hackDayAgenda: AgendaTemplate  // Modified version of HackDayAgenda Master Template
+}
+export interface Student extends generalUser{
+    classroomKey: string[]
+}
+export interface StudentProject {
     id: string
+    classroomKey: string
     teamName: string
-    problemStatement: string
-    problemSolution: string
-    presentationLink: string
-    oneSentencePitch: string
-    elevatorPitch: string
-    oneMinDemoLink: string
+    createdByTeacher:boolean
+    lastTimestamp: firebase.firestore.Timestamp
+    teacherName: string
+    period: string
+    teamMembers: string[]
+    caseStudies: ReviewedLink
+    practiceLog: {
+        [uid:string]:Timelog[]
+    }
+    problem: string
+    solution: string
     innovation: string
+    customer: string 
+    SentencePitch: string
+    elevatorPitch: string    
+    demoLink: string
+    presentationLink: string
     postHackReflection: PostHackReflection[]
     designLog: DesignLog[]
-    employerRating: number
-    teacherRating: number
+    problemRatingT: number
+    solutionRatingT: number
+    innovationRatingT: number
+    customerRatingT: number
+    sentencePitchRatingT: number
+    elevatorPitchRatingT: number
+    demoRatingT: number
+    presentationRatingT: number
+    problemRatingE: number
+    solutionRatingE: number
+    innovationRatingE: number
+    customerRatingE: number
+    sentencePitchRatingE: number
+    elevatorPitchRatingE: number
+    demoRatingE: number
+    presentationRatingE: number
+}
+export interface Employer extends generalUser {
+    programKeys: string[]   
 }
 
-interface Employer {
-    id:string
-    programKeys: string[]   
-
+export interface Teacher extends generalUser {
+    classroomKeys: string []
+    programKeys: string[]
 }

@@ -1,12 +1,11 @@
 import { NamedLink } from './types';
 
-
 class EmployerProgram implements EmployerProgram {
     id:string
     programBriefName?:string
     programBriefUrl?:string
 
-    getProgramInfo():EmployerProgram{
+    getProgramInfo():EmploåyerProgram{
 
     }
     constructor(uid:string){
@@ -46,4 +45,5 @@ const uploadVideo = async (url:string):void => {
     // upload video
 }
 
-const uploadCaseStudies = async (link:NamedLink)
+const uploadCaseStudies = async (link:NamedLink):
+
