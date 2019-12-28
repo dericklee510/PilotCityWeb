@@ -12,21 +12,21 @@
 
             <v-row justify="center" class="mr-auto ml-auto posthack__description">Now that you’ve received feedback from your employer, it is time to evolve, iterate or pivot your project if necessary. </v-row>
 
-            <v-row class="posthack__firstcheck"> 
-            <v-col cols="8" ><input class="posthack__check" id="posthack__check" type="checkbox">LIDAR FOR AUTONOMOUS CAMPUS SHUTTLES</v-col>
-            <v-col cols="1"><img class="posthack__requiredbutton" src="@/assets/requiredsymbol.png"></v-col>
-            <v-col cols="1"><button><img class="posthack__exportimage" id="posthack__exporticon" src="@/assets/greenexport.png"></button></v-col>
+
+            <v-row justify="left" class="posthack__firstcheck"> 
+            <div class="posthack__line1"><input class="posthack__check" id="posthack__check" type="checkbox">Update Business Model Canvas <img id="posthack__requiredbutton" src="@/assets/requiredsymbol.png"> </div>
+            <div><button><img class="posthack__exportimage" id="posthack__exporticon" src="@/assets/greenexport.png"></button></div>
             </v-row>
 
             <v-row>
                 <div class="posthack__description1">Description of business model canvas</div>
             </v-row>
 
-        
-            <v-row class="posthack__secondcheck"> 
-            <v-col cols="8" ><input class="posthack__check" id="posthack__check" type="checkbox">Update One Sentence Pitch</v-col>
-            <v-col cols="1"><img class="posthack__requiredbutton" src="@/assets/requiredsymbol.png"></v-col>
-            <v-col cols="1"><button><img class="posthack__exportimage" id="posthack__exporticon" src="@/assets/greenexport.png"></button></v-col>
+
+
+            <v-row justify="left" class="posthack__secondcheck"> 
+            <div class="posthack__line1"><input class="posthack__check" id="posthack__check" type="checkbox">Update One Sentence Pitch<img id="posthack__requiredbutton" src="@/assets/requiredsymbol.png"> </div>
+            <div><button><img class="posthack__exportimage" id="posthack__exporticon2" src="@/assets/greenexport.png"></button></div>
             </v-row>
 
             <v-row>
@@ -34,17 +34,17 @@
             </v-row>
 
 
-            <v-row class="posthack__secondcheck"> 
-            <v-col cols="8" ><input class="posthack__check" id="posthack__check" type="checkbox">Update Written Elevator Pitch </v-col>
-            <v-col cols="1"><img class="posthack__requiredbutton" src="@/assets/requiredsymbol.png"></v-col>
-            <v-col cols="1"><button><img class="posthack__exportimage" id="posthack__exporticon" src="@/assets/greenexport.png"></button></v-col>
+            <v-row justify="left" class="posthack__secondcheck"> 
+            <div class="posthack__line1"><input class="posthack__check" id="posthack__check" type="checkbox">Update Written Elevator Pitch <img id="posthack__requiredbutton" src="@/assets/requiredsymbol.png"> </div>
+            <div><button><img class="posthack__exportimage" id="posthack__exporticon" src="@/assets/greenexport.png"></button></div>
             </v-row>
 
             <v-row>
                 <div class="posthack__description1">Description of written elevator pitch</div>
             </v-row>
 
-            <v-row class="posthack__acknowledgebuttonrow">
+        
+            <v-row>
                 <button class="posthack__acknowledgebutton">ACKNOWLEDGE</button>
             </v-row>
 
