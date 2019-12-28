@@ -14,6 +14,7 @@ import programbrief_edit from "@/views/ProgramGuide/Brief/programbrief_edit.vue"
 import introvideo from "@/views/ProgramGuide/Introvideo/Introvideo.vue"
 import introvideo_edit from "@/views/ProgramGuide/Introvideo/Introvideo_edit.vue"
 import practicelog from "@/views/ProgramGuide/Practicelog/Practicelog.vue"
+import practicelog_manage from "@/views/ProgramGuide/Practicelog/Practicelog_manage.vue"
 import presentation_enter from "@/views/ProgramGuide/Presentation/presentation_enter.vue"
 import presentation_view from "@/views/ProgramGuide/Presentation/presentation_view.vue"
 import demovideo_view from "@/views/ProgramGuide/Demovideo/demovideo_view.vue"
@@ -33,6 +34,7 @@ import hackagenda_edit from "@/views/ProgramGuide/Hack/hackagenda_edit.vue"
 import hackagenda_view from "@/views/ProgramGuide/Hack/hackagenda_view.vue"
 import demoagenda_edit from "@/views/ProgramGuide/Demo/demoagenda_edit.vue"
 import demoagenda_view from "@/views/ProgramGuide/Demo/demoagenda_view.vue"
+import processlog from "@/views/ProgramGuide/Process/processlog.vue"
 import test from '@/views/Test'
 import Home from '@/views/Home.vue'
 import { routes as ProfileRoutes } from '@/views/Profile'
@@ -89,6 +91,18 @@ const routes: RouteConfig [] = [
         path: `/practicelog`,
         name: `practice-log`,
         component: practicelog
+    },
+
+    {
+        path: `/practicelog_manage`,
+        name: `practicelog-manage`,
+        component: practicelog_manage
+    },
+
+    {
+        path: `/processlog`,
+        name: `processlog`,
+        component: processlog
     },
 
     {
