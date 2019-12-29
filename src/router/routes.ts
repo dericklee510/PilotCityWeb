@@ -37,6 +37,9 @@ import demoagenda_view from "@/views/ProgramGuide/Demo/demoagenda_view.vue"
 import processlog from "@/views/ProgramGuide/Process/processlog.vue"
 import login2 from "@/views/Login/Login2.vue"
 import signup2 from "@/views/Signup/Signup2.vue"
+import myprograms from "@/views/Myprograms/myprograms.vue"
+import launcher from "@/views/Myprograms/launcher.vue"
+import guide from "@/views/ProgramGuide/Guide.vue"
 import test from '@/views/Test'
 import Home from '@/views/Home.vue'
 import { routes as ProfileRoutes } from '@/views/Profile'
@@ -231,6 +234,24 @@ const routes: RouteConfig [] = [
         path: `/signup2`,
         name: `signup2`,
         component: signup2
+    },
+
+    {
+        path: `/myprograms`,
+        name: `my-programs`,
+        component: myprograms
+    },
+
+    {
+        path: `/launcher`,
+        name: `launcher`,
+        component: launcher
+    },
+
+    {
+        path: `/guide`,
+        name: `guide`,
+        component: guide
     },
 
     {
