@@ -34,5 +34,6 @@ import Component from 'vue-class-component'
 @Component
 export default class signup2 extends Vue{
     
+    
 }
 </script>
