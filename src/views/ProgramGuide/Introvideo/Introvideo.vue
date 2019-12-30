@@ -32,7 +32,10 @@
         justify="center"
         class="mr-auto ml-auto introvideo__video"
       />
-
+      <video-player
+        :options="playerOptions"
+        @ended="canBeAcknowldged = true"
+      />
 
       <v-row
         justify="center"
@@ -40,6 +43,7 @@
       >
         <input
           v-model="acknowledged"
+          :disabled="!canBeAcknowldged"
           type="checkbox"
           class="introvideo__checkbox"
         > I have finished watching the video
@@ -67,8 +71,32 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-@Component
-export default class Introvideo extends Vue{
-    acknowledged:false = false
+import 'video.js/dist/video-js.css'
+
+import { videoPlayer } from 'vue-video-player'
+
+@Component({
+  components: {
+    videoPlayer
+  }
+})
+export default class Introvideo extends Vue {
+  canBeAcknowldged:boolean = false
+  acknowledged: boolean = false
+  playerOptions = {
+    responsive:true,
+    language: 'en',
+    controlBar:{
+      progressControl:false
+    },
+    sources: [{
+      type: "video/mp4",
+      // mp4
+      src: "http://vjs.zencdn.net/v/oceans.mp4",
+      // webm
+      // src: "https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm"
+    }],
+    poster: "https://surmon-china.github.io/vue-quill-editor/static/images/surmon-1.jpg",
+  }
 }
 </script>
