@@ -26,7 +26,6 @@ export const process: filepond.server.process = (fieldName, file, metadata, load
                 load(url)
             })
         }).catch((err) => {
-            console.log(err)
             error('Couldn\'t upload photo')
         })
   })
