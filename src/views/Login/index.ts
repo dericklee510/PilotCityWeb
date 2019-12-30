@@ -1,5 +1,5 @@
 import Login from './Login.vue'
-import { ForgotPassword, code, email } from './forgotPassword'
+import { ForgotPassword, code, email } from './ForgotPassword'
 
 export {
     Login,
