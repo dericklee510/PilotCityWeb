@@ -56,6 +56,7 @@
     "vue-router": "^3.0.3",
     "vue-rx": "^6.2.0",
     "vue-the-mask": "^0.11.1",
+    "vue-video-player": "^5.0.2",
     "vuetify": "^2.0.15",
     "vuetify-google-autocomplete": "^2.0.0-beta.6",
     "vuex": "^3.0.1",
