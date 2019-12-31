@@ -53,7 +53,8 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { Watch, Prop } from 'vue-property-decorator'
-import PCtextfield from './PCtextfield.vue'
+import PCtextfield from '../PCtextfield.vue'
+import { Constructable } from '../../../utilities/classes';
 
 interface VueEvent {
     name: string;
