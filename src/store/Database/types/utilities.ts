@@ -10,7 +10,7 @@ export interface ReviewedLink extends NamedLink {
 }
 export interface Event {
     name: string
-    duration: number
+    duration: string
     description: string
     completed: boolean
 }

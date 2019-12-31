@@ -5,7 +5,11 @@
       class="briefcard__container"
     >
       <!-- <img src="" alt="" id="programbrief__cover"> -->
-      <v-row id="briefcard__rowcontain">
+      <v-row
+        v-for="entry in entries"
+        id="briefcard__rowcontain"
+        :key="entry.id"
+      >
         <v-col
           class="mr-5"
           cols="12"
@@ -24,17 +28,27 @@
             cols="12"
           >
             <div class="briefcard__header">
-              Request for Pilot (RFP)
+              {{ entry.file?entry.file.name:"Emptry Program Brief" }}
             </div>
 
-            <v-row class="mt-5 pl-3">
-              <button class="briefcard__buton mr-3">
-                VIEW
+            <v-row
+              
+              class="mt-5 pl-3"
+            >
+              <button
+                v-if="entry.link"
+                class="briefcard__buton mr-3"
+              >
+                <a :href="link">VIEW </a>
               </button>
               <button class="briefcard__buton mr-3">
-                RE-UPLOAD
+                {{ entry.link?"RE-UPLOAD":"UPlOAD" }}
               </button>
-              <button class="briefcard__buton mr-3">
+              <button
+                v-if="entries.length>1"
+                class="briefcard__buton mr-3"
+                @click="deleteEntry(entry.id)"
+              >
                 DELETE
               </button>
 
@@ -61,9 +75,20 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from "vue-class-component"
+import { PCmultiinput } from '../../../../components/inputs'
 
+
+interface ProgramBrief {
+  file?:File
+  link:string
+}
+const emptyBrief = {
+  file:undefined,
+  link:""
+}
+const app = PCmultiinput.createMultiInput(emptyBrief)
 @Component
-export default class BriefCard extends Vue{
+export default class BriefCard extends app{
     
 }
 </script>

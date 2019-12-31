@@ -62,12 +62,19 @@
 
       <!-- AGENDA ITEM -->
 
-      <v-row class="mt-10 pt-0 pb-0">
+      <v-row
+        v-for="(item,index) in agendaItems"
+        :key="index"
+        class="mt-10 pt-0 pb-0"
+      >
         <v-col
           id="agenda_view__checkbox"
           cols="2"
         >
-          <input type="checkbox">
+          <input
+            v-model="item.completed"
+            type="checkbox"
+          >
         </v-col>
 
         <v-col
@@ -76,6 +83,7 @@
         >
           <v-row id="agenda_view__borderline">
             <input
+              v-model="item.name"
               disabled="true"
               placeholder="Item"
               class="agenda_view__item-input__header pt-3 pb-3 pl-4 pr-4"
@@ -83,6 +91,7 @@
           </v-row>
           <v-row id="agenda_view__borderline">
             <input
+              v-model="item.duration"
               disabled="true"
               placeholder="Duration"
               class="agenda_view__item-input__duration pt-2 pb-2 pl-4 pr-4"
@@ -90,6 +99,7 @@
           </v-row>
           <v-row>
             <input
+              v-model="item.description"
               disabled="true"
               placeholder="Description"
               class="agenda_view__item-input__description pt-3 pb-12 pl-4 pr-4"
@@ -102,94 +112,6 @@
         <!-- <v-col cols="2"><i class="mt-2 ml-3 far fa-trash-alt agenda_view__trashicon"></i></v-col> -->
       </v-row>
 
-
-
-
-
-      <!-- AGENDA ITEM -->
-
-      <v-row class="mt-10 pt-0 pb-0">
-        <v-col
-          id="agenda_view__checkbox"
-          cols="2"
-        >
-          <input type="checkbox">
-        </v-col>
-
-        <v-col
-          cols="8"
-          class="agenda_view__item mr-auto ml-auto "
-        >
-          <v-row id="agenda_view__borderline">
-            <input
-              disabled="true"
-              placeholder="Item"
-              class="agenda_view__item-input__header pt-3 pb-3 pl-4 pr-4"
-            >
-          </v-row>
-          <v-row id="agenda_view__borderline">
-            <input
-              disabled="true"
-              placeholder="Duration"
-              class="agenda_view__item-input__duration pt-2 pb-2 pl-4 pr-4"
-            >
-          </v-row>
-          <v-row>
-            <input
-              disabled="true"
-              placeholder="Description"
-              class="agenda_view__item-input__description pt-3 pb-12 pl-4 pr-4"
-            >
-          </v-row>
-        </v-col>
-
-        <v-col cols="2" />
-
-        <!-- <v-col cols="2"><i class="mt-2 ml-3 far fa-trash-alt agenda_view__trashicon"></i></v-col> -->
-      </v-row>
-
-
-      <!-- AGENDA ITEM -->
-
-      <v-row class="mt-10 pt-0 pb-0">
-        <v-col
-          id="agenda_view__checkbox"
-          cols="2"
-        >
-          <input type="checkbox">
-        </v-col>
-
-        <v-col
-          cols="8"
-          class="agenda_view__item mr-auto ml-auto "
-        >
-          <v-row id="agenda_view__borderline">
-            <input
-              disabled="true"
-              placeholder="Item"
-              class="agenda_view__item-input__header pt-3 pb-3 pl-4 pr-4"
-            >
-          </v-row>
-          <v-row id="agenda_view__borderline">
-            <input
-              disabled="true"
-              placeholder="Duration"
-              class="agenda_view__item-input__duration pt-2 pb-2 pl-4 pr-4"
-            >
-          </v-row>
-          <v-row>
-            <input
-              disabled="true"
-              placeholder="Description"
-              class="agenda_view__item-input__description pt-3 pb-12 pl-4 pr-4"
-            >
-          </v-row>
-        </v-col>
-
-        <v-col cols="2" />
-
-        <!-- <v-col cols="2"><i class="mt-2 ml-3 far fa-trash-alt agenda_view__trashicon"></i></v-col> -->
-      </v-row>
 
 
       <!-- ADD AGENDA ITEM
@@ -214,9 +136,12 @@
         class="mr-auto ml-auto"
         cols="5"
       >
-        <button class="agenda_view__button mb-10">
+        <v-btn
+          class="agenda_view__button mb-10"
+          :disabled="!isAgendaComplete"
+        >
           FINISH
-        </button>
+        </v-btn>
       </v-col>
 
 
@@ -249,8 +174,17 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
+import { Event } from '../../../store/Database/types/utilities'
 @Component
 export default class agenda extends Vue{
-    
+  agendaItems:Event[] = [{
+  name:"",
+  duration:"",
+  description:"",
+  completed:false
+}]
+  get isAgendaComplete(){
+    return this.agendaItems.map(item => item.completed).every(isTrue => isTrue)
+  }
 }
 </script>
