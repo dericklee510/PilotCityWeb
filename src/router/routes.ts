@@ -10,6 +10,8 @@ import {
   ForgotPassword
 } from '@/views/Login'
 import programbrief from "@/views/ProgramGuide/Brief/Brief.vue"
+import viewcasestudies from "@/views/ProgramGuide/Viewcasestudies/Viewcasestudies.vue"
+import editcasestudies from "@/views/ProgramGuide/Editcasestudies/Editcasestudies.vue"
 import programbrief_edit from "@/views/ProgramGuide/Brief/programbrief_edit.vue"
 import introvideo from "@/views/ProgramGuide/Introvideo/Introvideo.vue"
 import introvideo_edit from "@/views/ProgramGuide/Introvideo/Introvideo_edit.vue"
@@ -254,6 +256,16 @@ const routes: RouteConfig [] = [
         component: guide
     },
 
+    {
+        path: `/viewcasestudies`,
+        name: `view-case-studies`,
+        component: viewcasestudies
+    },
+    {
+        path: `/editcasestudies`,
+        name: `edit-case-studies`,
+        component: editcasestudies
+    },
     {
         path: '/',
         name: 'home',

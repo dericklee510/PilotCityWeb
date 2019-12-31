@@ -18,7 +18,6 @@ import {
     MutationCreatePublicCitizenProfileArgs
 } from '@/store/Graphql/global_types'
 
-export { IEmployerQuery } from '@/store/Graphql/types'
 
 export interface Citizen {
     first_name: string;
@@ -235,7 +234,7 @@ export class EmployerQueryForm extends CONST implements Employer_Profile_V1, Mut
                     profile_img_url: this.profile_img_url
                 })
             })
-            await GraphqlStore.sdk.createEmployerProfile(omitBy(this, isUndefined) as CreateEmployerProfileMutationVariables) // removes undefined properties from object
+            await GraphqlStore.sdk.createEmployerProfile(this)
         }
     }
 

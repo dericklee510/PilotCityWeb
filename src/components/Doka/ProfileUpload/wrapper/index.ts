@@ -14,7 +14,6 @@ export const process: filepond.server.process = (fieldName, file, metadata, load
         progress(true, snap.bytesTransferred, snap.totalBytes)
     },
     err => {
-        console.log(err)
         error('Couldn\'t upload photo')
     },
     () => {
@@ -23,7 +22,6 @@ export const process: filepond.server.process = (fieldName, file, metadata, load
                 load(url)
             })
         }).catch((err) => {
-            console.log(err)
             error('Couldn\'t upload photo')
         })
   })

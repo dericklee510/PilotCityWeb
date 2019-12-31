@@ -1,8 +1,15 @@
 <template>
   <div>
+<<<<<<< HEAD
 <link 
   href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" 
   rel="stylesheet">
+=======
+    <link 
+      href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" 
+      rel="stylesheet"
+    >
+>>>>>>> ed681a17aed7af38550abf46d5771bb71e9abf0c
     <component :is="layout">
       <router-view />
     </component>
