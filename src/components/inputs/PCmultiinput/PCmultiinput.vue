@@ -57,40 +57,80 @@ import PCtextfield from '../PCtextfield.vue'
 import { Constructable } from '../../../utilities/classes';
 
 interface VueEvent {
-    name: string;
-    type: string;
-    source: string;
-    payload: any[];
+  name: string;
+  type: string;
+  source: string;
+  payload: any[];
 }
 
 @Component({
-    components: {
-        PCtextfield
-    }
+  components: {
+    PCtextfield
+  }
 })
 export default class PCmultiinput extends Vue {
-    @Prop()
-    placeholder?: string;
+  @Prop()
+  placeholder?: string;
 
-    @Prop()
-    value!: string[];
+  @Prop()
+  value!: string[];
 
-    @Prop()
-    errorMessages?: string | string[];
+  @Prop()
+  errorMessages?: string | string[];
 
-    entries = [{ value: '', id: 0 }]
+  entries = [{ value: '', id: 0 }]
 
-    newEntry() {
-        this.entries.push({ value: '', id: this.entries.slice(-1)[0].id + 1 })
+  newEntry() {
+    this.entries.push({ value: '', id: this.entries.slice(-1)[0].id + 1 })
+  }
+
+  deleteEntry(id: number) {
+    this.entries.splice(this.entries.findIndex(entry => entry.id == id), 1)
+  }
+
+  @Watch('entries', { deep: true })
+  onEntriesChanged(newVal: { value: string; id: number }[]) {
+    this.$emit('input', newVal.map(entree => entree.value))
+  }
+
+  static createMultiInput<EntryClass extends Record<string,any>>(emptyEntry:(EntryClass),initialEntry?:EntryClass[], ) {
+    interface ID{
+      id:number
     }
+    type EntryClassID =  ID & EntryClass;
+    @Component({})
+    class MultiInput extends Vue {
 
-    deleteEntry(id: number) {
+      entries:EntryClassID[] = [{...emptyEntry,id:0}]
+
+      newEntry() {
+          this.entries.push({...emptyEntry, id: this.entries.slice(-1)[0].id + 1})
+      }
+      deleteEntry(id: number) {
         this.entries.splice(this.entries.findIndex(entry => entry.id == id), 1)
-    }
+      }
 
-    @Watch('entries', { deep: true })
-    onEntriesChanged(newVal: {value: string; id: number} []) {
-        this.$emit('input', newVal.map(entree => entree.value))
+      @Watch('entries', { deep: true })
+      onEntriesChanged(newVal:EntryClassID[]){
+          this.$emit('input',newVal.map((entree:EntryClassID) => {
+            let obj ={}
+            Object.keys(emptyEntry).forEach(key => {
+              obj = {[key]:entree[key]}
+              return obj
+            })
+          } ))
+        }
+      constructor(){
+        super()
+        if(initialEntry){
+          let counter = 0
+          this.entries = initialEntry.map(entry => {
+            return {...entry, id:counter++}
+          })
+        }
+      }
     }
+    return MultiInput
+  }
 }
 </script>
