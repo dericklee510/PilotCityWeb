@@ -50,145 +50,167 @@
             <div class="businessmodelcanvas_enter__ratinglabel pt-2 pr-3">
               Rating
             </div>
-            <i class="fas fa-star businessmodelcanvas_enter__ratedstar" />
-            <i class="fas fa-star businessmodelcanvas_enter__ratedstar" />
-            <i class="fas fa-star businessmodelcanvas_enter__ratedstar" />
-            <i class="fas fa-star businessmodelcanvas_enter__ratedstar" />
-            <i class="far fa-star businessmodelcanvas_enter__unratedstar" />
+            <v-rating />
           </v-row>
         </v-col>
       </v-row>
 
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto mb-12"
-      >
-        <input
-          placeholder="My pitch is..."
-          class="pt-1 pb-12 pl-5 pr-4 businessmodelcanvas_enter__paragraph"
+      <ValidationObserver v-slot="{invalid}">
+        <v-row
+          justify="center"
+          class="mr-auto ml-auto mb-12"
         >
-      </v-row>
+          <ValidationProvider
+            v-slot="{errors,failedRules}"
+            name="Problem"
+            class="pt-1 pb-12 pl-5 pr-4 businessmodelcanvas_enter__paragraph"
+            rules="required|max:255"
+          >
+            <v-textarea
+              v-model="problem"
+              :error-messages="failedRules.max?`Must not be longer than 280 Characters`:errors"
+              counter
+              placeholder="My pitch is..."
+            />
+          </ValidationProvider>
+        </v-row>
+  
+  
+        <!-- COMPONENT -->
+        <v-row
+          justify="center"
+          class="businessmodelcanvas_enter__description__label mt-12 mr-auto ml-auto pl-2 mb-1"
+        >
+          <v-col
+            cols="8"
+            class=""
+          >
+            Solution
+          </v-col>
+   
+          <v-col cols="4">     
+            <v-row class="">
+              <div class="businessmodelcanvas_enter__ratinglabel pt-2 pr-3">
+                Rating
+              </div>
+              <v-rating />
+            </v-row>
+          </v-col>
+        </v-row>
+  
+        <v-row
+          justify="center"
+          class="mr-auto ml-auto mb-12"
+        >
+          <ValidationProvider
+            v-slot="{errors,failedRules}"
+            class="pt-1 pb-12 pl-5 pr-4 businessmodelcanvas_enter__paragraph"
+            rules="required|max:255"
+          >
+            <v-textarea
+              v-model="solution"
+              :error-messages="failedRules.max?`Must not be longer than 280 Characters`:errors"
+              counter
+              placeholder="My pitch is..."
+            />
+          </ValidationProvider>
+        </v-row>
+  
+  
+        <!-- COMPONENT -->
+        <v-row
+          justify="center"
+          class="businessmodelcanvas_enter__description__label mt-12 mr-auto ml-auto pl-2 mb-1"
+        >
+          <v-col
+            cols="8"
+            class=""
+          >
+            Innovation
+          </v-col>
+   
+          <v-col cols="4">     
+            <v-row class="">
+              <div class="businessmodelcanvas_enter__ratinglabel pt-2 pr-3">
+                Rating
+              </div>
+              <v-rating />
+            </v-row>
+          </v-col>
+        </v-row>
+  
+        <v-row
+          justify="center"
+          class="mr-auto ml-auto mb-12"
+        >
+          <ValidationProvider
+            v-slot="{errors,failedRules}"
+            class="pt-1 pb-12 pl-5 pr-4 businessmodelcanvas_enter__paragraph"
+            rules="required|max:255"
+          >
+            <v-textarea
+              v-model="innovation"
+              :error-messages="failedRules.max?`Must not be longer than 280 Characters`:errors"
+              counter
+              placeholder="My pitch is..."
+            />
+          </ValidationProvider>
+        </v-row>
+  
+        <!-- COMPONENT -->
+        <v-row
+          justify="center"
+          class="businessmodelcanvas_enter__description__label mt-12 mr-auto ml-auto pl-2 mb-1"
+        >
+          <v-col
+            cols="8"
+            class=""
+          >
+            Cost
+          </v-col>
+   
+          <v-col cols="4">     
+            <v-row class="">
+              <div class="businessmodelcanvas_enter__ratinglabel pt-2 pr-3">
+                Rating
+              </div>
+              <v-rating />
+            </v-row>
+          </v-col>
+        </v-row>
+  
+        <v-row
+          justify="center"
+          class="mr-auto ml-auto mb-12"
+        >
+          <ValidationProvider
+            v-slot="{errors,failedRules}"
+            rules="required|max:255"
+            class="pt-1 pb-12 pl-5 pr-4 businessmodelcanvas_enter__paragraph"
+          >
+            <v-textarea
+              v-model="cost"
+              :error-messages="failedRules.max?`Must not be longer than 280 Characters`:errors"
+              counter
+              placeholder="My pitch is..."
+            />
+          </ValidationProvider>
+        </v-row>
+     
 
 
-      <!-- COMPONENT -->
-      <v-row
-        justify="center"
-        class="businessmodelcanvas_enter__description__label mt-12 mr-auto ml-auto pl-2 mb-1"
-      >
         <v-col
-          cols="8"
-          class=""
+          class="mr-auto ml-auto"
+          cols="5"
         >
-          Solution
+          <v-btn
+            class="businessmodelcanvas_enter__button mb-10"
+            :disabled="invalid"
+          >
+            SAVE
+          </v-btn>
         </v-col>
- 
-        <v-col cols="4">     
-          <v-row class="">
-            <div class="businessmodelcanvas_enter__ratinglabel pt-2 pr-3">
-              Rating
-            </div>
-            <i class="fas fa-star businessmodelcanvas_enter__ratedstar" />
-            <i class="fas fa-star businessmodelcanvas_enter__ratedstar" />
-            <i class="fas fa-star businessmodelcanvas_enter__ratedstar" />
-            <i class="fas fa-star businessmodelcanvas_enter__ratedstar" />
-            <i class="far fa-star businessmodelcanvas_enter__unratedstar" />
-          </v-row>
-        </v-col>
-      </v-row>
-
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto mb-12"
-      >
-        <input
-          placeholder="My pitch is..."
-          class="pt-1 pb-12 pl-5 pr-4 businessmodelcanvas_enter__paragraph"
-        >
-      </v-row>
-
-
-      <!-- COMPONENT -->
-      <v-row
-        justify="center"
-        class="businessmodelcanvas_enter__description__label mt-12 mr-auto ml-auto pl-2 mb-1"
-      >
-        <v-col
-          cols="8"
-          class=""
-        >
-          Innovation
-        </v-col>
- 
-        <v-col cols="4">     
-          <v-row class="">
-            <div class="businessmodelcanvas_enter__ratinglabel pt-2 pr-3">
-              Rating
-            </div>
-            <i class="fas fa-star businessmodelcanvas_enter__ratedstar" />
-            <i class="fas fa-star businessmodelcanvas_enter__ratedstar" />
-            <i class="fas fa-star businessmodelcanvas_enter__ratedstar" />
-            <i class="fas fa-star businessmodelcanvas_enter__ratedstar" />
-            <i class="far fa-star businessmodelcanvas_enter__unratedstar" />
-          </v-row>
-        </v-col>
-      </v-row>
-
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto mb-12"
-      >
-        <input
-          placeholder="My pitch is..."
-          class="pt-1 pb-12 pl-5 pr-4 businessmodelcanvas_enter__paragraph"
-        >
-      </v-row>
-
-      <!-- COMPONENT -->
-      <v-row
-        justify="center"
-        class="businessmodelcanvas_enter__description__label mt-12 mr-auto ml-auto pl-2 mb-1"
-      >
-        <v-col
-          cols="8"
-          class=""
-        >
-          Cost
-        </v-col>
- 
-        <v-col cols="4">     
-          <v-row class="">
-            <div class="businessmodelcanvas_enter__ratinglabel pt-2 pr-3">
-              Rating
-            </div>
-            <i class="fas fa-star businessmodelcanvas_enter__ratedstar" />
-            <i class="fas fa-star businessmodelcanvas_enter__ratedstar" />
-            <i class="fas fa-star businessmodelcanvas_enter__ratedstar" />
-            <i class="fas fa-star businessmodelcanvas_enter__ratedstar" />
-            <i class="far fa-star businessmodelcanvas_enter__unratedstar" />
-          </v-row>
-        </v-col>
-      </v-row>
-
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto mb-12"
-      >
-        <input
-          placeholder="My pitch is..."
-          class="pt-1 pb-12 pl-5 pr-4 businessmodelcanvas_enter__paragraph"
-        >
-      </v-row>
-
-
-
-      <v-col
-        class="mr-auto ml-auto"
-        cols="5"
-      >
-        <button class="businessmodelcanvas_enter__button mb-10">
-          SAVE
-        </button>
-      </v-col>
+      </ValidationObserver>
     </v-col>
   </v-row>
 </template>
@@ -200,8 +222,17 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-@Component
+import { ValidationProvider, ValidationObserver } from 'vee-validate'
+@Component({
+  components:{
+    ValidationProvider,
+    ValidationObserver
+  }
+})
 export default class businessmodelcanvas_enter extends Vue{
-    
+    problem:string = ""
+    solution:string = ""
+    innovation:string = ""
+    cost:string = ""
 }
 </script>
