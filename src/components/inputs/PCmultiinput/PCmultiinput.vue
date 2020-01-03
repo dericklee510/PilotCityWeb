@@ -101,10 +101,14 @@ export default class PCmultiinput extends Vue {
     @Component({})
     class MultiInput extends Vue {
 
+      @Prop()
+      value!: string[];
+
       entries:EntryClassID[] = [{...emptyEntry,id:0}]
 
       newEntry() {
-          this.entries.push({...emptyEntry, id: this.entries.slice(-1)[0].id + 1})
+            this.entries.push({...emptyEntry, id: this.entries.length?(this.entries.slice(-1)[0].id + 1):0})
+
       }
       deleteEntry(id: number) {
         this.entries.splice(this.entries.findIndex(entry => entry.id == id), 1)
