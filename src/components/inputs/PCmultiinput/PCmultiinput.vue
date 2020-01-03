@@ -117,11 +117,11 @@ export default class PCmultiinput extends Vue {
       @Watch('entries', { deep: true })
       onEntriesChanged(newVal:EntryClassID[]){
           this.$emit('input',newVal.map((entree:EntryClassID) => {
-            let obj ={}
+            let obj:Record<string,string> ={}
             Object.keys(emptyEntry).forEach(key => {
-              obj = {[key]:entree[key]}
-              return obj
+              obj[key] = entree[key]
             })
+            return obj
           } ))
         }
       constructor(){
