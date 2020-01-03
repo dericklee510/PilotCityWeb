@@ -18,32 +18,37 @@
         >
           <div class="briefcard__cover" />
         </v-col>
-      
+
         <v-col
-          class=""
-          cols=""
+          class
+          cols
         >
           <v-col
-            class=""
+            class
             cols="12"
           >
             <div class="briefcard__header">
               {{ entry.file?entry.file.name:"Emptry Program Brief" }}
             </div>
 
-            <v-row
-              
-              class="mt-5 pl-3"
-            >
+            <v-row class="mt-5 pl-3">
               <button
                 v-if="entry.link"
                 class="briefcard__buton mr-3"
               >
-                <a :href="link">VIEW </a>
+                <a :href="link">VIEW</a>
               </button>
-              <button class="briefcard__buton mr-3">
-                {{ entry.link?"RE-UPLOAD":"UPlOAD" }}
+              <button
+                class="briefcard__buton mr-3"
+                @click="triggerFileInput(entry.id)"
+              >
+                {{ entry.file?"RE-UPLOAD":"UPlOAD" }}
               </button>
+              <v-file-input
+                :ref=" `fileInput${entry.id}`"
+                v-model="entry.file"
+                style="display: none;"
+              />
               <button
                 v-if="entries.length>1"
                 class="briefcard__buton mr-3"
@@ -73,26 +78,30 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import Component from "vue-class-component"
-import { PCmultiinput } from '../../../../components/inputs'
-
+import Vue, {Component as VueComponent} from "vue";
+import Component from "vue-class-component";
+import { PCmultiinput } from "../../../../components/inputs";
+import { VFileInput } from 'vuetify/lib';
 
 interface ProgramBrief {
-  file?:File
-  link:string
+  file?: File;
+  link: string;
 }
 const emptyBrief = {
-  file:undefined,
-  link:""
-}
-const app = PCmultiinput.createMultiInput(emptyBrief)
-@Component
-export default class BriefCard extends app{
+  file: undefined,
+  link: ""
+};
+const app = PCmultiinput.createMultiInput(emptyBrief);
+@Component({})
+export default class BriefCard extends app {
+  triggerFileInput(index: number) {
+    let ref = `fileInput${index}`;
+    let input = (this.$refs[ref] as typeof VFileInput[])[0];
+    (((input as Vue).$el.getElementsByClassName("v-file-input__text")[0]) as HTMLDivElement).click()
     
+  }
 }
 </script>
 
 <style scoped>
-
 </style>
