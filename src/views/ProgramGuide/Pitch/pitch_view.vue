@@ -43,24 +43,9 @@
 
       <!-- TEAM -->
 
-      <v-row
-        v-for="(team,index) in teams"
-        :key="index"
-        justify="center"
-      >
-        <!-- <v-col class="pitch_view__externallink" cols="1"><i class="fas fa-external-link-alt"></i></v-col> -->
-        <v-col cols="8">
-          <v-row class="pitch_view__teamtitle ml-auto">
-            {{ team.name }}
-          </v-row>
-          <v-row class="pitch_view__teampitch ml-auto">
-            {{ team.pitch }}
-          </v-row>
-        </v-col>
-        <v-col cols="2">
-          <v-rating v-model="team.rating" />
-        </v-col>
-      </v-row>
+      <Rating
+        v-model="teams"
+      />
     </v-col>
   </v-row>
 </template>
@@ -72,21 +57,26 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-@Component
+import { Rating } from '../components'
+import { team_snippet } from '../components/Rating.vue'
+
+@Component({
+  components:{
+    Rating
+  }
+})
 export default class pitch_view extends Vue{
-    teams:{
-      name:string
-      pitch:string
-      rating:number
-    }[] = [
+    teams:team_snippet[] = [
       {
+        id:"0",
         name:"Data Analysis for the Alameda Library",
-        pitch:" An autonomous residential vehicle (RV) for the homeless in the San Francisco Bay Area",
+        item_preview:" An autonomous residential vehicle (RV) for the homeless in the San Francisco Bay Area",
         rating:0
       },
       {
+        id:"1",
         name:"Data Analysis for the Alameda Library",
-        pitch:" An autonomous residential vehicle (RV) for the homeless in the San Francisco Bay Area",
+        item_preview:" An autonomous residential vehicle (RV) for the homeless in the San Francisco Bay Area",
         rating:0
       }
     ]
