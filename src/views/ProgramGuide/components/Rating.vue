@@ -69,10 +69,6 @@ export default class Rating extends Vue{
     @PropSync("value")
     syncedSnippet!:team_snippet[]
 
-    @Watch("syncedSnippet",{deep:true})
-    onNewRating(newVal:team_snippet){
-        this.$emit("input",newVal)
-    }
     
 }
 </script>
