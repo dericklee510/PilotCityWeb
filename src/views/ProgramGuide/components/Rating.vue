@@ -10,7 +10,14 @@
         class="demovideo_view__externallink"
         cols="1"
       >
-        <i class="fas fa-external-link-alt" />
+        <slot name="link">
+          <router-link
+            v-if="team.router_params"
+            :to="team.router_params"
+          >
+            <i class="fas fa-external-link-alt" />
+          </router-link>
+        </slot>
       </v-col>
       <!-- <v-col class="pitch_view__externallink" cols="1"><i class="fas fa-external-link-alt"></i></v-col> -->
       <v-col cols="8">
@@ -56,7 +63,7 @@ export default class Rating extends Vue{
    
 
     @PropSync("value")
-    syncedSnippet!:team_snippet
+    syncedSnippet!:team_snippet[]
 
     @Watch("syncedSnippet",{deep:true})
     onNewRating(newVal:team_snippet){

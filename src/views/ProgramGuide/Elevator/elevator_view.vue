@@ -44,147 +44,14 @@
         </v-col>
       </v-row>
 
-      <!-- TEAM -->
-
-      <v-row justify="center">
-        <v-col
-          class=""
-          cols="1"
-        >
-          <button class="elevator_view__viewbutton">
-            VIEW
-          </button>
-        </v-col>
-
-        <v-col
-          class="elevator_view__teamtitle"
-          cols="7"
-        >
-          Autonomous Campus Shuttle
-        </v-col>
-
-        <v-col cols="2">
-          <i class="fas fa-star elevator_view__rated" />
-          <i class="fas fa-star elevator_view__rated" />
-          <i class="far fa-star elevator_view__unrated" />
-          <i class="far fa-star elevator_view__unrated" />
-          <i class="far fa-star elevator_view__unrated" />
-        </v-col>
-      </v-row>
-
-      <!-- TEAM -->
-
-      <v-row justify="center">
-        <v-col
-          class=""
-          cols="1"
-        >
-          <button class="elevator_view__viewbutton">
-            VIEW
-          </button>
-        </v-col>
-
-        <v-col
-          class="elevator_view__teamtitle"
-          cols="7"
-        >
-          Autonomous Home the Homeless
-        </v-col>
-
-        <v-col cols="2">
-          <i class="fas fa-star elevator_view__rated" />
-          <i class="fas fa-star elevator_view__rated" />
-          <i class="far fa-star elevator_view__unrated" />
-          <i class="far fa-star elevator_view__unrated" />
-          <i class="far fa-star elevator_view__unrated" />
-        </v-col>
-      </v-row>
-
-
-      <!-- TEAM -->
-
-      <v-row justify="center">
-        <v-col
-          class=""
-          cols="1"
-        >
-          <button class="elevator_view__viewbutton">
-            VIEW
-          </button>
-        </v-col>
-
-        <v-col
-          class="elevator_view__teamtitle"
-          cols="7"
-        >
-          Bart Fare Evasion Detection
-        </v-col>
-
-        <v-col cols="2">
-          <i class="fas fa-star elevator_view__rated" />
-          <i class="fas fa-star elevator_view__rated" />
-          <i class="far fa-star elevator_view__unrated" />
-          <i class="far fa-star elevator_view__unrated" />
-          <i class="far fa-star elevator_view__unrated" />
-        </v-col>
-      </v-row>
-
-      <!-- TEAM -->
-
-      <v-row justify="center">
-        <v-col
-          class=""
-          cols="1"
-        >
-          <button class="elevator_view__viewbutton">
-            VIEW
-          </button>
-        </v-col>
-
-        <v-col
-          class="elevator_view__teamtitle"
-          cols="7"
-        >
-          Clean Water Assessment for Cities
-        </v-col>
-
-        <v-col cols="2">
-          <i class="fas fa-star elevator_view__rated" />
-          <i class="fas fa-star elevator_view__rated" />
-          <i class="far fa-star elevator_view__unrated" />
-          <i class="far fa-star elevator_view__unrated" />
-          <i class="far fa-star elevator_view__unrated" />
-        </v-col>
-      </v-row>
-
-
-      <!-- TEAM -->
-
-      <v-row justify="center">
-        <v-col
-          class=""
-          cols="1"
-        >
-          <button class="elevator_view__viewbutton">
-            VIEW
-          </button>
-        </v-col>
-
-        <v-col
-          class="elevator_view__teamtitle"
-          cols="7"
-        >
-          Data Analysis for the Alameda Library
-        </v-col>
-
-        <v-col cols="2">
-          <i class="fas fa-star elevator_view__rated" />
-          <i class="fas fa-star elevator_view__rated" />
-          <i class="far fa-star elevator_view__unrated" />
-          <i class="far fa-star elevator_view__unrated" />
-          <i class="far fa-star elevator_view__unrated" />
-        </v-col>
-      </v-row>
+      <Rating
+        v-model="teams"
+        v-slot:link
+      >
+        <button class="elevator_view__viewbutton">
+          VIEW
+        </button>
+      </Rating>
     </v-col>
   </v-row>
 </template>
@@ -196,8 +63,27 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-@Component
+import { Rating } from '../components'
+import { team_snippet } from '../components/Rating.vue'
+@Component({
+  components:{
+    Rating
+  }
+})
 export default class elevator_view extends Vue{
-    
+     teams:team_snippet[] = [
+      {
+        id:"0",
+        name:"Data Analysis for the Alameda Library",
+        item_preview:" An autonomous residential vehicle (RV) for the homeless in the San Francisco Bay Area",
+        rating:0
+      },
+      {
+        id:"1",
+        name:"Data Analysis for the Alameda Library",
+        item_preview:" An autonomous residential vehicle (RV) for the homeless in the San Francisco Bay Area",
+        rating:0
+      }
+    ]
 }
 </script>

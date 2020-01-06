@@ -46,123 +46,7 @@
 
       <!-- TEAM -->
 
-      <v-row justify="center">
-        <v-col
-          class="presentation_view__externallink"
-          cols="1"
-        >
-          <i class="fas fa-external-link-alt" />
-        </v-col>
-        <v-col
-          class="presentation_view__teamtitle"
-          cols="6"
-        >
-          Autonomous Campus Shuttle
-        </v-col>
-        <v-col cols="3">
-          <i class="fas fa-star presentation_view__rated" />
-          <i class="fas fa-star presentation_view__rated" />
-          <i class="far fa-star presentation_view__unrated" />
-          <i class="far fa-star presentation_view__unrated" />
-          <i class="far fa-star presentation_view__unrated" />
-        </v-col>
-      </v-row>
-
-      <!-- TEAM -->
-
-      <v-row justify="center">
-        <v-col
-          class="presentation_view__externallink"
-          cols="1"
-        >
-          <i class="fas fa-external-link-alt" />
-        </v-col>
-        <v-col
-          class="presentation_view__teamtitle"
-          cols="6"
-        >
-          Autonomous Home the Homeless
-        </v-col>
-        <v-col cols="3">
-          <i class="fas fa-star presentation_view__rated" />
-          <i class="fas fa-star presentation_view__rated" />
-          <i class="fas fa-star presentation_view__rated" />
-          <i class="fas fa-star presentation_view__rated" />
-          <i class="far fa-star presentation_view__unrated" />
-        </v-col>
-      </v-row>
-
-      <!-- TEAM -->
-
-      <v-row justify="center">
-        <v-col
-          class="presentation_view__externallink"
-          cols="1"
-        >
-          <i class="fas fa-external-link-alt" />
-        </v-col>
-        <v-col
-          class="presentation_view__teamtitle"
-          cols="6"
-        >
-          Bart Fare Evasion Detection
-        </v-col>
-        <v-col cols="3">
-          <i class="fas fa-star presentation_view__rated" />
-          <i class="far fa-star presentation_view__unrated" />
-          <i class="far fa-star presentation_view__unrated" />
-          <i class="far fa-star presentation_view__unrated" />
-          <i class="far fa-star presentation_view__unrated" />
-        </v-col>
-      </v-row>
-
-      <!-- TEAM -->
-
-      <v-row justify="center">
-        <v-col
-          class="presentation_view__externallink"
-          cols="1"
-        >
-          <i class="fas fa-external-link-alt" />
-        </v-col>
-        <v-col
-          class="presentation_view__teamtitle"
-          cols="6"
-        >
-          Clean Water Assessment for Cities
-        </v-col>
-        <v-col cols="3">
-          <i class="fas fa-star presentation_view__rated" />
-          <i class="fas fa-star presentation_view__rated" />
-          <i class="far fa-star presentation_view__unrated" />
-          <i class="far fa-star presentation_view__unrated" />
-          <i class="far fa-star presentation_view__unrated" />
-        </v-col>
-      </v-row>
-
-      <!-- TEAM -->
-
-      <v-row justify="center">
-        <v-col
-          class="presentation_view__externallink"
-          cols="1"
-        >
-          <i class="fas fa-external-link-alt" />
-        </v-col>
-        <v-col
-          class="presentation_view__teamtitle"
-          cols="6"
-        >
-          Data Analysis for the Alameda Library
-        </v-col>
-        <v-col cols="3">
-          <i class="fas fa-star presentation_view__rated" />
-          <i class="fas fa-star presentation_view__rated" />
-          <i class="fas fa-star presentation_view__rated" />
-          <i class="far fa-star presentation_view__unrated" />
-          <i class="far fa-star presentation_view__unrated" />
-        </v-col>
-      </v-row>
+      <Rating v-model="team" />
     </v-col>
   </v-row>
 </template>
@@ -174,8 +58,25 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-@Component
+import { Rating } from '../components'
+import { team_snippet } from '../components/Rating.vue'
+@Component({
+  components:{
+    Rating
+  }
+})
 export default class presentation_view extends Vue{
-    
+    team:team_snippet[] = [{
+      id:'0',
+      name:"Data Analysis for the Alameda Library",
+      rating:2,
+      router_params:"idk"
+    },
+    {
+      id:'0',
+      name:"Data Analysis for the Alameda Library",
+      rating:3,
+      router_params:"idk"
+    }]
 }
 </script>

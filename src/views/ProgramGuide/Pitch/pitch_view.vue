@@ -45,6 +45,7 @@
 
       <Rating
         v-model="teams"
+        preview
       />
     </v-col>
   </v-row>
