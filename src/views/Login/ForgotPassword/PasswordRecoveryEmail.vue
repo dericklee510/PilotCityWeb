@@ -85,7 +85,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { ProviderInstance } from 'vee-validate/dist/types/types'
 import { AuthStore } from '@/store'
-import ValidationProvider from '@/utilities/validation'
+import { ValidationProvider } from 'vee-validate'
 @Component({
     components: {
         ValidationProvider

@@ -27,26 +27,37 @@
       >
         In a tweet or less, describe what your solution is so it is clearly and concisely defined for others to quickly understand.
       </v-row>
-
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto mt-12 mb-12"
-      >
-        <input
-          placeholder=""
-          class="pt-1 pb-12 pl-5 pr-4 pitch_enter__onesentence"
+      <ValidationObserver v-slot="{invalid, validate}">
+        <v-row
+          justify="center"
+          class="mr-auto ml-auto mt-12 mb-12"
         >
-      </v-row>
-
-      <v-col
-        class="mr-auto ml-auto"
-        cols="5"
-      >
-        <button class="pitch_enter__button">
-          SAVE
-        </button>
-      </v-col>
-
+          <ValidationProvider
+            v-slot="{errors}"
+            class="pt-1 pb-12 pl-5 pr-4 pitch_enter__onesentence"
+            rules="required|max:255"
+          >
+            <v-textarea
+              v-model="pitch"
+              :error-messages="errors"
+              placeholder="My pitch is..."
+            />
+          </ValidationProvider>
+        </v-row>
+  
+        <v-col
+          class="mr-auto ml-auto"
+          cols="5"
+        >
+          <v-btn
+            class="pitch_enter__button"
+            :loading="loading"
+            @click="validate().then(valid => {if(valid) submit()})"
+          >
+            SAVE
+          </v-btn>
+        </v-col>
+      </ValidationObserver>
       <!-- NO RATING YET -->
 
       <v-row
@@ -97,8 +108,30 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-@Component
+import {ValidationObserver, ValidationProvider, extend } from 'vee-validate'
+import {max} from 'vee-validate/dist/rules';
+extend('max',{
+    ...max,
+    message: "Must not be greater than {length} characters"
+})
+
+@Component({
+  components:{
+    ValidationObserver,
+    ValidationProvider
+  }
+})
 export default class pitch_enter extends Vue{
-    
+    pitch:string = ""
+    loading:boolean = false
+    async submit(){
+      this.loading = true
+      await new Promise((resolve) => {
+        setTimeout(() => {
+          resolve()
+        },2000)
+      })
+      this.loading = false
+    }
 }
 </script>

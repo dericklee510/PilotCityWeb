@@ -43,106 +43,22 @@
 
       <!-- TEAM -->
 
-      <v-row justify="center">
+      <v-row
+        v-for="(team,index) in teams"
+        :key="index"
+        justify="center"
+      >
         <!-- <v-col class="pitch_view__externallink" cols="1"><i class="fas fa-external-link-alt"></i></v-col> -->
         <v-col cols="8">
           <v-row class="pitch_view__teamtitle ml-auto">
-            Autonomous Campus Shuttle
+            {{ team.name }}
           </v-row>
           <v-row class="pitch_view__teampitch ml-auto">
-            An autonomous residential vehicle (RV) for the homeless in the San Francisco Bay Area
+            {{ team.pitch }}
           </v-row>
         </v-col>
         <v-col cols="2">
-          <i class="fas fa-star pitch_view__rated" />
-          <i class="fas fa-star pitch_view__rated" />
-          <i class="far fa-star pitch_view__unrated" />
-          <i class="far fa-star pitch_view__unrated" />
-          <i class="far fa-star pitch_view__unrated" />
-        </v-col>
-      </v-row>
-
-      <!-- TEAM -->
-
-      <v-row justify="center">
-        <!-- <v-col class="pitch_view__externallink" cols="1"><i class="fas fa-external-link-alt"></i></v-col> -->
-        <v-col cols="8">
-          <v-row class="pitch_view__teamtitle ml-auto">
-            Autonomous Home the Homeless
-          </v-row>
-          <v-row class="pitch_view__teampitch ml-auto">
-            An autonomous residential vehicle (RV) for the homeless in the San Francisco Bay Area
-          </v-row>
-        </v-col>
-        <v-col cols="2">
-          <i class="fas fa-star pitch_view__rated" />
-          <i class="fas fa-star pitch_view__rated" />
-          <i class="fas fa-star pitch_view__rated" />
-          <i class="fas fa-star pitch_view__rated" />
-          <i class="far fa-star pitch_view__unrated" />
-        </v-col>
-      </v-row>
-
-      <!-- TEAM -->
-
-      <v-row justify="center">
-        <!-- <v-col class="pitch_view__externallink" cols="1"><i class="fas fa-external-link-alt"></i></v-col> -->
-        <v-col cols="8">
-          <v-row class="pitch_view__teamtitle ml-auto">
-            Bart Fare Evasion Detection
-          </v-row>
-          <v-row class="pitch_view__teampitch ml-auto">
-            An autonomous residential vehicle (RV) for the homeless in the San Francisco Bay Area
-          </v-row>
-        </v-col>
-        <v-col cols="2">
-          <i class="fas fa-star pitch_view__rated" />
-          <i class="fas fa-star pitch_view__rated" />
-          <i class="fas fa-star pitch_view__rated" />
-          <i class="far fa-star pitch_view__unrated" />
-          <i class="far fa-star pitch_view__unrated" />
-        </v-col>
-      </v-row>
-
-      <!-- TEAM -->
-
-      <v-row justify="center">
-        <!-- <v-col class="pitch_view__externallink" cols="1"><i class="fas fa-external-link-alt"></i></v-col> -->
-        <v-col cols="8">
-          <v-row class="pitch_view__teamtitle ml-auto">
-            Clean Water Assessment for Cities
-          </v-row>
-          <v-row class="pitch_view__teampitch ml-auto">
-            An autonomous residential vehicle (RV) for the homeless in the San Francisco Bay Area
-          </v-row>
-        </v-col>
-        <v-col cols="2">
-          <i class="fas fa-star pitch_view__rated" />
-          <i class="far fa-star pitch_view__unrated" />
-          <i class="far fa-star pitch_view__unrated" />
-          <i class="far fa-star pitch_view__unrated" />
-          <i class="far fa-star pitch_view__unrated" />
-        </v-col>
-      </v-row>
-
-      <!-- TEAM -->
-
-      <v-row justify="center">
-        <!-- <v-col class="pitch_view__externallink" cols="1"><i class="fas fa-external-link-alt"></i></v-col> -->
-        <v-col cols="8">
-          <v-row class="pitch_view__teamtitle ml-auto">
-            Data Analysis for the Alameda Library
-          </v-row>
-          <v-row class="pitch_view__teampitch ml-auto">
-            An autonomous residential vehicle (RV) for the homeless in the San Francisco Bay Area
-          </v-row>
-        </v-col>
-        <v-col cols="2">
-          <i class="far fa-star pitch_view__unrated" />
-          <i class="far fa-star pitch_view__unrated" />
-          <i class="far fa-star pitch_view__unrated" />
-          <i class="far fa-star pitch_view__unrated" />
-          <i class="far fa-star pitch_view__unrated" />
+          <v-rating v-model="team.rating" />
         </v-col>
       </v-row>
     </v-col>
@@ -158,6 +74,21 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 @Component
 export default class pitch_view extends Vue{
-    
+    teams:{
+      name:string
+      pitch:string
+      rating:number
+    }[] = [
+      {
+        name:"Data Analysis for the Alameda Library",
+        pitch:" An autonomous residential vehicle (RV) for the homeless in the San Francisco Bay Area",
+        rating:0
+      },
+      {
+        name:"Data Analysis for the Alameda Library",
+        pitch:" An autonomous residential vehicle (RV) for the homeless in the San Francisco Bay Area",
+        rating:0
+      }
+    ]
 }
 </script>

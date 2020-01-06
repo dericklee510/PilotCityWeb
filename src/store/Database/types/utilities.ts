@@ -47,4 +47,10 @@ export interface generalUser{
     dob: Date
     address: AutoCompleteAddress
 }
+export interface BusinessModelCanvas {
+    problem:string
+    solution:string
+    innovation:string
+    cost:string
+} 
 //#endregion
