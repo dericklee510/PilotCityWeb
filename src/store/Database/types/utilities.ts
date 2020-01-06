@@ -1,50 +1,68 @@
-import { AutoCompleteAddress } from './../../../components/GoogleMaps/Autocomplete/types';
+import { AutoComplete, AutoCompleteAddress } from '@/components/GoogleMaps';
+
 //#region 
 // interfaces not stored on firebase
 export interface NamedLink {
-    name: string
+    namedLinkId: string
+    userId: string
+    linkName: string
     link: string
 }
 export interface ReviewedLink extends NamedLink {
+    reviewedLinkId: string
+    namedLinkId: string
+    userId: string
     reviewed:boolean
+    lastUpdate: firebase.firestore.Timestamp
 }
-export interface Event {
+export interface EventItem {
     name: string
-    duration: string
+    duration: number
     description: string
     completed: boolean
 }
 export interface AgendaTemplate {
-    id: string
-    authorKey: string
-    name: string
+    agendaId: string
+    userId: string
+    agendaTitle: string
     date: Date
-    time: number
-    location: string
+    startTime: number
+    address: AutoCompleteAddress
     events: Event[]
+    lastUpdate: firebase.firestore.Timestamp
+    eventTimestamp: firebase.firestore.Timestamp[]
 }
 export interface PostHackReflection {
+    projectId: string
     feedback: string
     checked: boolean
 } 
 export interface DesignLog { 
-    description: string
-    date: Date
-    time: number
-    link: string
-}
-export interface Timelog {
-    minutes: number
+    designLogId: string
     projectId: string
-    timestamp: firebase.firestore.Timestamp
+    userId: string
+    description: string
+    link: string
+    lastUpdate: firebase.firestore.Timestamp
 }
-export interface generalUser{
-    id:string 
+export interface TimeLog {
+    timeLogId: string
+    projectId: string
+    userId: string
+    minutes: number
+    lastUpdate: firebase.firestore.Timestamp
+}
+export interface GeneralUser{
+    userId:string
+    classroomIds: string[] 
+    employerProgramIds: string[]
     firstName:string
     lastName:string
-    profilePicture:string
-    phoneNumber:string
+    citizenType: string
     dob: Date
     address: AutoCompleteAddress
+    phoneNumber:string
+    profilePicture:string
+    lastUpdate: firebase.firestore.Timestamp
 }
 //#endregion
