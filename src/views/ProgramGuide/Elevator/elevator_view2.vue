@@ -36,45 +36,31 @@
       </v-row>
 
       <!-- <v-row class="mt-12 mr-auto ml-auto pl-5 mb-4 elevator_view2__description__label">Elevator Pitch</v-row> -->
-
-      <v-row
-        justify="center"
-        class="elevator_view2__description__label mt-12 mr-auto ml-auto pl-2 mb-1"
+      <rating
+        v-model="pitch"
+        preview
       >
-        <v-col
-          cols="8"
-          class=""
-        >
-          Elevator Pitch
-        </v-col>
- 
-        <v-col cols="4">     
-          <v-row class="">
-            <div class="elevator_view2__ratinglabel pt-2 pr-3">
-              Rate
-            </div>
-            <i class="fas fa-star elevator_view2__ratedstar" />
-            <i class="fas fa-star elevator_view2__ratedstar" />
-            <i class="fas fa-star elevator_view2__ratedstar" />
-            <i class="fas fa-star elevator_view2__ratedstar" />
-            <i class="far fa-star elevator_view2__unratedstar" />
-          </v-row>
-        </v-col>
-      </v-row>
-
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto mb-12"
-      >
-        <input
-          placeholder="My pitch is..."
-          disabled="true"
-          class="pt-1 pb-12 pl-5 pr-4 elevator_view2__paragraph"
-        >
-      </v-row>
-
-      <!-- <v-col class="mr-auto ml-auto" cols="5"><button class="elevator_view2__button mb-10">SAVE</button></v-col> -->
+        <template v-slot:header>
+          <span
+            class="elevator_view2__description__label"
+          >
+            Elevator Pitch
+          </span>
+        </template>
+        
+        <template v-slot:body>
+          <v-textarea
+            placeholder="My pitch is..."
+            :disabled="true"
+            class="pt-1 pb-12 pl-5 pr-4 elevator_view2__paragraph"
+          />
+        </template>
+      </rating>
     </v-col>
+  </v-row>
+
+  <!-- <v-col class="mr-auto ml-auto" cols="5"><button class="elevator_view2__button mb-10">SAVE</button></v-col> -->
+  </v-col>
   </v-row>
 </template>
 
@@ -85,8 +71,18 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-@Component
+import { Rating } from '../components'
+import { team_snippet } from '../components/Rating.vue'
+@Component({
+  components:{
+    Rating
+  }
+})
 export default class elevator_view2 extends Vue{
-    
+   pitch= [{
+     name:"HEASDER",
+     item_preview: " My pitch is ...",
+     rating:0
+   }]
 }
 </script>
