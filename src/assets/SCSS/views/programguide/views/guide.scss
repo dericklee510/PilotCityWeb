@@ -1,13 +1,18 @@
 .guide{
     
     &__bar{
-        height: 91vh;
+        height: 100%;
         background-color: transparent;
         border-right: 1px solid #404142;
         border-bottom: 1px dashed #404142;
         overflow: auto;
         min-width: max-content;
         max-width: max-content;
+    }
+
+    &__bar > .col{
+        padding-top: 0px;
+        padding-bottom: 0px;
     }
 
     &__bar2{
@@ -40,12 +45,10 @@
         font-size: 15px;
         color: #939598;
         padding-top: 5px;
-        padding-left:23px;
         // margin: 15px 0px 15px 0px;
-    }
-
-    &__activemaintext{
-        color: #404142;
+        &--active{
+            color: #404142;
+        }
     }
 
     &__subtext{
@@ -72,12 +75,10 @@
         border: 1px solid #939598;
         border-radius: 50%;
         display: inline-block;
-        margin-left:-8px;
-        margin-right:19px;
+        margin-left: -8px;
+        margin-top: 5px;
         // Makes it so that dot stays put
         position: absolute;
-
-
     }
 
     &__smalldotfilled{
@@ -86,11 +87,9 @@
         background-color: #ffffff;
         border-radius: 50%;
         display: inline-block;
-        margin-left:-5px;
-        margin-right:19px;
-        margin-top: 3px;
-
-
+        position: relative;
+        left:-5px;
+        top: 1px;
     }
 
     &__smalldotunfilled{
@@ -99,11 +98,9 @@
         background-color: transparent;
         border-radius: 50%;
         display: inline-block;
-        margin-left:-5px;
-        margin-right:19px;
-        margin-top: 3px;
-
-
+        position: relative;
+        left:-5px;
+        top: -5px;
     }
 
 
@@ -115,12 +112,11 @@
         display: inline-block;
         margin-left: -16px;
         margin-right:10px;
-        // Makes it so that dot stays put
-        position: absolute;
-    }
-
-    &__activebigdot{
-        border: 1px solid transparent;
+        // Makes it so that dot stays put | BAD
+        // position: absolute;
+        &--active{
+            border: 1px solid transparent
+        }
     }
 
     &__programicon{
