@@ -3,7 +3,7 @@
     <img
       id="agenda__icon"
       class="agenda__image"
-      src="@/assets/agenda.png"
+      src="@/assets/icons/agenda.png"
     >
 
     <v-col
@@ -16,7 +16,7 @@
         justify="center"
         class="mr-auto ml-auto agenda__title"
       >
-        AGENDA
+        TRAINING DAY AGENDA
       </v-row>
 
       <!-- BORDERLINE -->
@@ -25,7 +25,6 @@
         cols="12"
         class="agenda__borderline"
       />
-
       <v-row
         justify="center"
         class="mr-auto ml-auto businessmodelcanvas_view2__description"
@@ -60,89 +59,10 @@
         </v-row> -->
 
       <!-- AGENDA ITEM -->
-      <v-row
-        v-for="entry in entries"
-        :key="entry.id"
-        class="mt-10 pt-0 pb-0"
-      >
-        <v-col
-          class="agenda__item-box"
-          cols="2"
-        />
-
-        <v-col
-          cols="8"
-          class="agenda__item mr-auto ml-auto "
-        >
-          <v-row id="agenda__borderline">
-            <input
-              v-model="entry.name"
-              placeholder="Item"
-              class="agenda__item-input__header pt-3 pb-3 pl-4 pr-4"
-            >
-          </v-row>
-          <v-row id="agenda__borderline">
-            <input
-              v-model="entry.duration"
-              placeholder="Duration"
-              class="agenda__item-input__duration pt-2 pb-2 pl-4 pr-4"
-            >
-          </v-row>
-          <v-row>
-            <input
-              v-model="entry.description"
-              placeholder="Description"
-              class="agenda__item-input__description pt-3 pb-12 pl-4 pr-4"
-            >
-          </v-row>
-        </v-col>
-
-        <v-col cols="2">
-          <i
-            v-if="entries.length>1"
-            class="mt-2 ml-3 far fa-trash-alt agenda__trashicon"
-            @click="deleteEntry(entry.id)"
-          />
-        </v-col>
-      </v-row>
-
-
-
-
-
-     
-
-      <!-- ADD AGENDA ITEM -->
-
-      <v-row class="mt-10 pt-0 pb-0">
-        <v-col
-          class="agenda__item-box"
-          cols="2"
-        />
-
-        <v-col
-          cols="8"
-          class="agenda__item-add mr-auto ml-auto mb-12"
-          @click="newEntry"
-        >
-          +
-
-          <v-row />
-        </v-col>
-
-        <v-col cols="2" />
-      </v-row>
-
-
-
-
-
-
-
-
-
-
-
+      <Agenda v-if="getRole == 'Student'" />
+      <!-- require getRole Utility -->
+      
+      <AgendaView v-else />
       <!-- LOG TIME / COULD DELETE -->
 
       <!-- <v-row justify="center" class="mr-auto ml-auto mt-10 mb-5"><input class="agenda__input" placeholder="0m"></v-row>
@@ -163,16 +83,17 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import {Event} from "@/store/Database/types/utilities"
+import { EventItem } from "@/store/Database/types/utilities"
 import { PCmultiinput } from '../../../components/inputs'
-const emptyAgenda:Omit<Event,'completed'> = {
-  name:"",
-  duration:"",
-  description:""
-}
-const app = PCmultiinput.createMultiInput(emptyAgenda)
-@Component
-export default class Agenda extends Vue{
+
+import {Agenda, AgendaView} from '../components'
+@Component({
+  components: {
+    Agenda,
+    AgendaView,
+  }
+})
+export default class TrainingDay extends Vue{
     
 }
 </script>
