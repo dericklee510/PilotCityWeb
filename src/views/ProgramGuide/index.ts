@@ -1,4 +1,7 @@
-import Brief from "@/views/ProgramGuide/views/Brief/Brief.vue"
+
+import externshipagenda_edit from "@/views/ProgramGuide/Externship/externshipagenda_edit.vue"
+import externshipagenda_view from "@/views/ProgramGuide/Externship/externshipagenda_view.vue"
+import Brief from "@/views/ProgramGuide/views/Externship/Brief/Brief.vue"
 import TrainingDay from "@/views/ProgramGuide/TrainingDay/TrainingDay.vue"
 import ManageTeams from "./Manageteam/Manageteam.vue"
 import ManageClass from "./Manageclass/Manageclass.vue"
@@ -22,12 +25,12 @@ import businessmodelcanvas_enter from "@/views/ProgramGuide/Businessmodelcanvas/
 import businessmodelcanvas_view2 from "@/views/ProgramGuide/Businessmodelcanvas/businessmodelcanvas_view2.vue"
 import agenda from "@/views/ProgramGuide/Agenda/Agenda.vue"
 import agenda_view from "@/views/ProgramGuide/Agenda/agenda_view.vue"
-import externshipagenda_edit from "@/views/ProgramGuide/Externship/externshipagenda_edit.vue"
-import externshipagenda_view from "@/views/ProgramGuide/Externship/externshipagenda_view.vue"
 import hackagenda_edit from "@/views/ProgramGuide/Hack/hackagenda_edit.vue"
 import hackagenda_view from "@/views/ProgramGuide/Hack/hackagenda_view.vue"
 import demoagenda_edit from "@/views/ProgramGuide/Demo/demoagenda_edit.vue"
 import demoagenda_view from "@/views/ProgramGuide/Demo/demoagenda_view.vue"
+import programbrief from "@/views/ProgramGuide/Brief/Brief.vue"
+import editcasestudies from "@/views/ProgramGuide/Editcasestudies/Editcasestudies.vue"
 import processlog from "@/views/ProgramGuide/Process/processlog.vue"
 import launcher from "@/views/Myprograms/launcher.vue"
 import Guide from './Guide.vue'
@@ -35,21 +38,24 @@ import Guide from './Guide.vue'
 export { default as routes } from './routes'
 export { Guide as Main } from './Guide.vue'
 
-export const Program = {
+export const Externship = {
+    Agenda,
     Brief,
-    TrainingDay,
-    ManageTeams,
-    ManageClass,
-    CaseStudy,
+    Manage
+}
+
+export const Project = [
     IntroVid,
-    Practice,
+    TrainingDay,
+    PracticeLog,
+    CaseStudy,
     Presentation,
     DemoVid,
     Pitch,
     Elevator,
     Canvas,
-    Externship,
     Hack,
     Demo,
     Process,
 }
+]

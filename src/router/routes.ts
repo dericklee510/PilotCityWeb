@@ -237,6 +237,11 @@ const routes: RouteConfig [] = [
     //     component: editcasestudies
     // },
     {
+        path: `/editcasestudies`,
+        name: `edit-case-studies`,
+        component: editcasestudies
+    },
+    {
         path: '/',
         name: 'home',
         component: Home
