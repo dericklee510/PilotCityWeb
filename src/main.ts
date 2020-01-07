@@ -24,7 +24,7 @@ import VuetifyGoogleAutocomplete from 'vuetify-google-autocomplete'
 
 import VueRx from 'vue-rx'
 import { createProvider } from './vue-apollo'
-
+import "@/utilities/validation/index.ts"
 Vue.use(VueRx)
 Vue.use(Vuetify)
 Vue.use(VuetifyGoogleAutocomplete, {
