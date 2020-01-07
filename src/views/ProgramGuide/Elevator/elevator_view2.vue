@@ -60,8 +60,6 @@
   </v-row>
 
   <!-- <v-col class="mr-auto ml-auto" cols="5"><button class="elevator_view2__button mb-10">SAVE</button></v-col> -->
-  </v-col>
-  </v-row>
 </template>
 
 
