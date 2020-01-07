@@ -47,7 +47,7 @@
            class="viewcasestudies__check"
            type="checkbox"
          >
-          {{ namedLink.name }}
+          {{ namedLink.linkName }}
           <a :ref="namedLink.link"><button class="viewcasestudies__exporticon"><img src="@/assets/exportbox.png"></button></a>
 
         </span>
@@ -76,12 +76,12 @@ import { NamedLink, ReviewedLink } from '../../../store/Database/types/utilities
 @Component
 export default class ViewCaseStudies extends Vue{
     namedLinks:ReviewedLink[] = [{
-      name:"LIDAR FOR AUTONOMOUS CAMPUS SHUTTLES",
+      linkName:"LIDAR FOR AUTONOMOUS CAMPUS SHUTTLES",
       link: "pilotcity.com",
       reviewed:false
     },
     {
-        name:"lidar for drones",
+        linkName:"lidar for drones",
         link:"pilotcity.com",
         reviewed:false
       },
