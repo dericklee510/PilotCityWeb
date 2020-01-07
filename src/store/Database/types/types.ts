@@ -1,50 +1,51 @@
-import { AgendaTemplate, generalUser, ReviewedLink, PostHackReflection, DesignLog, Timelog, NamedLink } from './utilities';
+import { AgendaTemplate, GeneralUser, ReviewedLink, PostHackReflection, DesignLog, TimeLog, NamedLink } from './utilities';
 
 export interface Classroom {
-    id: string
-    teacherKey: string
-    teacherProgramKey: string
-    employerProgramKey: string
+    classroomId: string
+    teacherId: string
+    teacherProgramId: string
+    employerProgramId: string
     className: string
     shareCode: string // create hash code
+    lastUpdate: firebase.firestore.Timestamp
 }
 export interface EmployerProgram {
-    id: string
+    employerProgramId: string
+    employerId: string
     externshipDayAgenda:AgendaTemplate
     programBrief?:NamedLink[]
     masterHackDayAgenda: AgendaTemplate  // Employer cannot modify this
-    projectKeys?: string[]
     introVideo?: string
     caseStudies?: NamedLink[] 
+    projectIds?: string[]
+    lastUpdate: firebase.firestore.Timestamp
 }
 export interface TeacherProgramData{
-    id: string 
-    teacherKey: string
-    employerProgramKey: string
+    teacherProgramId: string 
+    classroomId: string
+    employerProgramId: string
+    caseStudies: NamedLink[]
     trainingDayAgenda: AgendaTemplate
     hackDayAgenda: AgendaTemplate  // Modified version of HackDayAgenda Master Template
 }
-export interface Student extends generalUser{
-    classroomKey: string[]
-}
-export interface StudentProject {
-    id: string
-    classroomKey: string
+// StudentProject should be an extension of a Team
+export interface Project {
+    projectId: string
+    classroomId: string
+    teamMembersIds: string[]
     teamName: string
     createdByTeacher:boolean
-    lastTimestamp: firebase.firestore.Timestamp
     teacherName: string
     period: string
-    teamMembers: string[]
     caseStudies: ReviewedLink
     practiceLog: {
-        [uid:string]:Timelog[]
+        [userId:string]:TimeLog[]
     }
     problem: string
     solution: string
     innovation: string
     customer: string 
-    SentencePitch: string
+    sentencePitch: string
     elevatorPitch: string    
     demoLink: string
     presentationLink: string
@@ -66,12 +67,7 @@ export interface StudentProject {
     elevatorPitchRatingE: number
     demoRatingE: number
     presentationRatingE: number
-}
-export interface Employer extends generalUser {
-    programKeys: string[]   
+    lastUpdate: firebase.firestore.Timestamp
 }
 
-export interface Teacher extends generalUser {
-    classroomKeys: string []
-    programKeys: string[]
-}
+

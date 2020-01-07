@@ -7,7 +7,7 @@ export interface NamedLink {
     name: string
     link: string
 }
-interface Event {
+interface EventItem {
     name: string
     duration: number
     description: string
@@ -18,7 +18,7 @@ interface AgendaTemplate {
     date: Date
     time: number
     location: string
-    events: Event[]
+    events: EventItem[]
 }
 interface PostHackReflection {
     feedback: string

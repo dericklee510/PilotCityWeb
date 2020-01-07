@@ -1,6 +1,5 @@
 import { NamedLink } from './types';
 
-
 class EmployerProgram implements EmployerProgram {
     id:string
     programBriefName?:string
@@ -19,8 +18,6 @@ class EmployerProgram implements EmployerProgram {
     }
 }
 
-let program = new EmployerProgram("er3wq894yaeib")
-await program.init()
 
 const createProgramBrief = async (file:File):EmployerProgram => {
     // File name
@@ -46,4 +43,5 @@ const uploadVideo = async (url:string):void => {
     // upload video
 }
 
-const uploadCaseStudies = async (link:NamedLink)
+const uploadCaseStudies = async (link:NamedLink, uid):
+
