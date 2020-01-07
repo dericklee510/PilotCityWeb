@@ -39,6 +39,7 @@
     "filepond-plugin-image-preview": "^4.2.1",
     "filepond-plugin-image-resize": "^2.0.4",
     "filepond-plugin-image-transform": "^3.3.3",
+    "filter-async-rxjs-pipe": "^0.1.5",
     "firebase": "^6.2.1",
     "flush-promises": "^1.0.2",
     "graphql": "^14.5.8",
