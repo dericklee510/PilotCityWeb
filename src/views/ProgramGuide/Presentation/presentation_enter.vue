@@ -27,37 +27,55 @@
       >
         Develop a final presentation and enter the link. You can use it to present to employers, customers or who you wish.
       </v-row>
-
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto mt-12 mb-12"
-      >
-        <input
-          placeholder="https://"
-          class="presentation_enter__videolink"
+      <ValidationObserver v-slot="{invalid, validate}">
+        <v-row
+          justify="center"
+          class="mr-auto ml-auto mt-12 mb-12"
         >
-      </v-row>
-
-
-      <v-row
-        justify="center"
-        class="ml-auto mr-auto presentation_enter__check"
-      >
-        <input
-          type="checkbox"
-          class="presentation_enter__checkbox"
-        >I acknowledge this link is set for the public to view
-      </v-row>
-
-      <v-col
-        class="mr-auto ml-auto"
-        cols="5"
-      >
-        <button class="presentation_enter__button">
-          SAVE
-        </button>
-      </v-col>
-
+          <ValidationProvider
+            ref="inputValidation"
+            v-slot="{errors}"
+            class="presentation_enter__videolink"
+            rules="required|url"
+          >
+            <v-text-field
+              id="urlInput"
+              v-model="inputUrl"
+              v-stream:input="inputChange$"
+              :error-messages="errors"
+              placeholder="https://"
+            />
+          </ValidationProvider>
+        </v-row>
+  
+        <v-row
+          justify="center"
+          class="ml-auto mr-auto presentation_enter__check"
+        >
+          <v-checkbox
+            v-model="checkbox"
+            :disabled="invalid"
+            type="checkbox"
+            class="presentation_enter__checkbox"
+          />
+       
+          <span>I acknowledge this link is set for the public to view</span>
+        </v-row>
+  
+        <v-col
+          class="mr-auto ml-auto"
+          cols="5"
+        >
+          <v-btn
+            class="presentation_enter__button"
+            :disabled="!checkbox"
+            :loading="loading"
+            @click="validate().then(valid => {if(valid) submit()})"
+          >
+            SAVE
+          </v-btn>
+        </v-col>
+      </ValidationObserver>
       <!-- NO RATING YET -->
 
       <v-row
@@ -106,10 +124,72 @@
 
 
 <script lang="ts">
-import Vue from 'vue'
-import Component from 'vue-class-component'
-@Component
-export default class presentation_enter extends Vue{
-    
+import Vue from "vue";
+import Component from "vue-class-component";
+import { pluck, switchMap, debounceTime } from "rxjs/operators";
+import { Subject, from } from "rxjs";
+import { ValidationObserver, ValidationProvider } from 'vee-validate';
+import { TextEnter } from '../components';
+interface nativeEvent {
+  data: undefined;
+  event: {
+    msg: string;
+    name: string;
+  };
+}@Component<PresentationEnter>({
+  domStreams: ["inputChange$"],
+  subscriptions() {
+    return {
+      // result: this.inputChange$.pipe(
+      //   debounceTime(300),
+      //   pluck<nativeEvent,string>("event","msg"),
+      //   switchMap(value => from(this.checkUrl(value)))
+      //   )
+      result:this.inputChange$.pipe(
+        pluck<nativeEvent,string>("event","msg")
+      )
+    };
+  },
+  components:{
+    ValidationObserver,
+    ValidationProvider
+  }
+})
+export default class PresentationEnter extends TextEnter {
+  checkbox:boolean = false
+  inputChange$!: Subject<nativeEvent>;
+  result!: string;
+  inputUrl:string = ""
+  url: string = "";
+  success?:boolean
+  async checkUrl(URL: string) {
+    this.loading = true;
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        reject("Could not verify URL, server timeout");
+      },2000);
+      try {
+      var request
+      if (window.XMLHttpRequest) request = new XMLHttpRequest();
+      else request = new ActiveXObject("Microsoft.XMLHTTP");
+      request.open("GET", URL, false);
+      request.setRequestHeader(
+    'X-Custom-Header', 'value');
+      request.send(); // there will be a 'pause' here until the response to come.
+      // the object request will be actually modified
+      if (request.status === 404) {
+        reject("URL does not exist");
+      } else resolve("Link Exists");
+      }catch{
+        reject("Could not verify URL, exception occured")
+      }
+    }).then(value => {
+      this.success = true
+      return value
+    }).catch(error => {
+      this.success= false
+      return error
+    })
+  }
 }
 </script>

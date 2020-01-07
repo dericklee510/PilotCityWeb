@@ -21,16 +21,20 @@
       </v-col>
       <!-- <v-col class="pitch_view__externallink" cols="1"><i class="fas fa-external-link-alt"></i></v-col> -->
       <v-col cols="8">
-        <v-row class="pitch_view__teamtitle ml-auto">
-          {{ team.name }}
-        </v-row>
-        <v-row
-          
-          v-if="preview !== undefined"
-          class="pitch_view__teampitch ml-auto"
-        >
-          {{ team.item_preview }}
-        </v-row>
+        <slot name="header">
+          <v-row class="pitch_view__teamtitle ml-auto">
+            {{ team.name }}
+          </v-row>
+        </slot>
+        <slot name="body">
+          <v-row
+            
+            v-if="preview !== undefined"
+            class="pitch_view__teampitch ml-auto"
+          >
+            {{ team.item_preview }}
+          </v-row>
+        </slot>
       </v-col>
       <v-col cols="2">
         <v-rating v-model="team.rating" />
@@ -65,10 +69,6 @@ export default class Rating extends Vue{
     @PropSync("value")
     syncedSnippet!:team_snippet[]
 
-    @Watch("syncedSnippet",{deep:true})
-    onNewRating(newVal:team_snippet){
-        this.$emit("input",newVal)
-    }
     
 }
 </script>

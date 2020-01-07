@@ -32,24 +32,37 @@
         Elevator Pitch
       </v-row>
 
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto mb-12"
-      >
-        <input
-          placeholder=""
-          class="pt-1 pb-12 pl-5 pr-4 elevator_enter__paragraph"
+      <ValidationObserver v-slot="{invalid, validate}">
+        <v-row
+          justify="center"
+          class="mr-auto ml-auto mt-12 mb-12"
         >
-      </v-row>
-
-      <v-col
-        class="mr-auto ml-auto"
-        cols="5"
-      >
-        <button class="elevator_enter__button">
-          SAVE
-        </button>
-      </v-col>
+          <ValidationProvider
+            v-slot="{errors}"
+            class="pt-1 pb-12 pl-5 pr-4 elevator_enter__paragraph"
+            rules="required"
+          >
+            <v-textarea
+              v-model="text"
+              :error-messages="errors"
+              placeholder="My pitch is..."
+            />
+          </ValidationProvider>
+        </v-row>
+  
+        <v-col
+          class="mr-auto ml-auto"
+          cols="5"
+        >
+          <v-btn
+            class="elevator_enter__button"
+            :loading="loading"
+            @click="validate().then(valid => {if(valid) submit()})"
+          >
+            SAVE
+          </v-btn>
+        </v-col>
+      </ValidationObserver>
 
       <!-- NO RATING YET -->
 
@@ -101,8 +114,9 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
+import { TextEnter } from '../components'
 @Component
-export default class elevator_enter extends Vue{
+export default class elevator_enter extends TextEnter{
     
 }
 </script>

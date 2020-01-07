@@ -221,10 +221,7 @@ export default class BusinessModelCanvas extends Vue {
     innovation: number;
     cost: number;
   };
-  @Watch("syncedCanvas", { deep: true })
-  onCanvasChanged(newVal: BusinessModelCanvas) {
-    this.$emit("input", newVal);
-  }
+
   @Watch("syncedStars", { deep: true })
   onStarsChanged(newVal: BusinessModelCanvas) {
     this.$emit("starsChanged", newVal);
