@@ -1,14 +1,20 @@
 #login-button{
     background-color: $pc-blue;
     color: white;
-    height: 75px;
+    height: 50px;
+    border-radius:0px;
+    box-shadow:none;
 }
 #login-title{
     color: $pc-blue;
+    font-size: 22px;
+    font-weight: bold;
 }
 #login-image{
     display: block;
     margin: 0 auto;
+    margin-top:0px;
+    width:200px;
 }
 @media only screen and (max-width : 500px){
     #login-image{
@@ -17,4 +23,13 @@
     #login-button{
         height: 5vh;
     }
+}
+
+.label_annotate{
+    font-size: 13px;
+    font-style: italic;
+}
+
+.XXX{
+    // border: 1px solid #000000;
 }

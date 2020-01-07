@@ -5,7 +5,7 @@ import { omitBy, isUndefined } from 'lodash'
 import {
     CreateEmployerProfileMutationVariables
 } from '../../../../store/Graphql/global_types'
-import { jsToSQL, tableToDecimal, findOther } from '@/utilities/graphql'
+import { jsToSQL, findOther } from '@/utilities/graphql'
 
 import { AuthStore, GraphqlStore } from '../../../../store/index'
 
@@ -18,7 +18,6 @@ import {
     MutationCreatePublicCitizenProfileArgs
 } from '@/store/Graphql/global_types'
 
-export { IEmployerQuery } from '@/store/Graphql/types'
 
 export interface Citizen {
     first_name: string;
@@ -235,7 +234,7 @@ export class EmployerQueryForm extends CONST implements Employer_Profile_V1, Mut
                     profile_img_url: this.profile_img_url
                 })
             })
-            await GraphqlStore.sdk.createEmployerProfile(omitBy(this, isUndefined) as CreateEmployerProfileMutationVariables) // removes undefined properties from object
+            await GraphqlStore.sdk.createEmployerProfile(this)
         }
     }
 
@@ -399,8 +398,8 @@ class SQLConversion<Query extends Record<string,any>,Page extends Record<string,
     flipMap(hashMap:SqlMap):SqlMap {
         let map:SqlMap = {}
         Object.keys(hashMap).forEach(prop => {
-            map[hashMap[prop].key] = {
-                key:prop,
+            map[hashMap[prop].to] = {
+                to:prop,
                 ref:hashMap[prop].ref
             }
         })

@@ -64,7 +64,6 @@ export default class AutoComplete extends Vue {
   }
 
   created() {
-      console.log(this.$refs.address, 'OVER HERE')
   }
 }
 </script>
