@@ -149,7 +149,7 @@ interface nativeEvent {
       result: this.inputChange$.pipe(
         debounceTime(300),
         pluck<nativeEvent,string>("event","msg"),
-        filterByPromise(async (value) => (await validate(value,'url')).valid),
+        filterByPromise(async (value) => (await validate(value,'required|url')).valid),
         switchMap(value => from(this.checkUrl(value)))
         )
     };
