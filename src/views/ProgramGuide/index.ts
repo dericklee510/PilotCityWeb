@@ -1,6 +1,7 @@
 import Brief from "@/views/ProgramGuide/Brief/Brief.vue"
 import TrainingDay from "@/views/ProgramGuide/TrainingDay/TrainingDay.vue"
-
+import ManageTeams from "./Manageteam/Manageteam.vue"
+import ManageClass from "./Manageclass/ManageClass.vue"
 import viewcasestudies from "@/views/ProgramGuide/Viewcasestudies/Viewcasestudies.vue"
 import editcasestudies from "@/views/ProgramGuide/Editcasestudies/Editcasestudies.vue"
 import programbrief_edit from "@/views/ProgramGuide/Brief/programbrief_edit.vue"
@@ -37,6 +38,8 @@ export { Guide as Main } from './Guide.vue'
 export const Program = {
     Brief,
     TrainingDay,
+    ManageTeam,
+    ManageClass,
     CaseStudy,
     IntroVid,
     Practice,

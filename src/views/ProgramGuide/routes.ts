@@ -8,7 +8,9 @@ const routes: RouteConfig[] = [
         name: 'program-guide',
         component: Guide.Main,
         components:{
-            agenda: Guide.Program.Agenda,
+            Brief: Guide.Program.Brief,
+            TrainingDay: Guide.Program.TrainingDay,
+            
 
         }, // can make this programatic by using saving a key balue pair for program order program page
         meta: { layout: 'simple' },
