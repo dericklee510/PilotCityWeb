@@ -130,13 +130,15 @@ import { pluck, switchMap, debounceTime } from "rxjs/operators";
 import { Subject, from } from "rxjs";
 import { ValidationObserver, ValidationProvider } from 'vee-validate';
 import { TextEnter } from '../components';
+import {isLinkValid} from "@/api"
 interface nativeEvent {
   data: undefined;
   event: {
     msg: string;
     name: string;
   };
-}@Component<PresentationEnter>({
+}
+@Component<PresentationEnter>({
   domStreams: ["inputChange$"],
   subscriptions() {
     return {
@@ -164,22 +166,12 @@ export default class PresentationEnter extends TextEnter {
   success?:boolean
   async checkUrl(URL: string) {
     this.loading = true;
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       setTimeout(() => {
         reject("Could not verify URL, server timeout");
       },2000);
       try {
-      var request
-      if (window.XMLHttpRequest) request = new XMLHttpRequest();
-      else request = new ActiveXObject("Microsoft.XMLHTTP");
-      request.open("GET", URL, false);
-      request.setRequestHeader(
-    'X-Custom-Header', 'value');
-      request.send(); // there will be a 'pause' here until the response to come.
-      // the object request will be actually modified
-      if (request.status === 404) {
-        reject("URL does not exist");
-      } else resolve("Link Exists");
+        return isLinkValid(URL).then(value => value?resolve("Link is verified"):reject("Link does not exist"))
       }catch{
         reject("Could not verify URL, exception occured")
       }

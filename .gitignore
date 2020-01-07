@@ -25,3 +25,4 @@ yarn-error.log*
 *.sw?
 .gitsecret/keys/random_seed
 !*.secret
+src/api.ts
