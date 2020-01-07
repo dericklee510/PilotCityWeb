@@ -40,210 +40,202 @@ const routes: RouteConfig [] = [
         name: 'test-page',
         component: test
     },
-    {
-        path: `/programbrief`,
-        name: `program-brief`,
-        component: programbrief
-    },
+    // {
+    //     path: `/programbrief`,
+    //     name: `program-brief`,
+    //     component: programbrief
+    // },
 
-    {
-        path: `/programbrief_edit`,
-        name: `programbrief-edit`,
-        component: programbrief_edit
-    },
+    // {
+    //     path: `/programbrief_edit`,
+    //     name: `programbrief-edit`,
+    //     component: programbrief_edit
+    // },
 
-    {
-        path: `/introvideo`,
-        name: `intro-video`,
-        component: introvideo
-    },
+    // {
+    //     path: `/introvideo`,
+    //     name: `intro-video`,
+    //     component: introvideo
+    // },
 
-    {
-        path: `/introvideo_edit`,
-        name: `intro-video-edit`,
-        component: introvideo_edit
-    },
+    // {
+    //     path: `/introvideo_edit`,
+    //     name: `intro-video-edit`,
+    //     component: introvideo_edit
+    // },
 
-    {
-        path: `/practicelog`,
-        name: `practice-log`,
-        component: practicelog
-    },
+    // {
+    //     path: `/practicelog`,
+    //     name: `practice-log`,
+    //     component: practicelog
+    // },
 
-    {
-        path: `/practicelog_manage`,
-        name: `practicelog-manage`,
-        component: practicelog_manage
-    },
+    // {
+    //     path: `/practicelog_manage`,
+    //     name: `practicelog-manage`,
+    //     component: practicelog_manage
+    // },
 
-    {
-        path: `/processlog`,
-        name: `processlog`,
-        component: processlog
-    },
+    // {
+    //     path: `/processlog`,
+    //     name: `processlog`,
+    //     component: processlog
+    // },
 
-    {
-        path: `/presentation_enter`,
-        name: `presentation-enter`,
-        component: presentation_enter
-    },
+    // {
+    //     path: `/presentation_enter`,
+    //     name: `presentation-enter`,
+    //     component: presentation_enter
+    // },
 
-    {
-        path: `/presentation_view`,
-        name: `presentation-view`,
-        component: presentation_view
-    },
+    // {
+    //     path: `/presentation_view`,
+    //     name: `presentation-view`,
+    //     component: presentation_view
+    // },
 
-    {
-        path: `/demovideo_view`,
-        name: `demovideo-view`,
-        component: demovideo_view
-    },
+    // {
+    //     path: `/demovideo_view`,
+    //     name: `demovideo-view`,
+    //     component: demovideo_view
+    // },
 
-    {
-        path: `/demovideo_enter`,
-        name: `demovideo-enter`,
-        component: demovideo_enter
-    },
+    // {
+    //     path: `/demovideo_enter`,
+    //     name: `demovideo-enter`,
+    //     component: demovideo_enter
+    // },
 
-    {
-        path: `/pitch_enter`,
-        name: `pitch-enter`,
-        component: pitch_enter
-    },
+    // {
+    //     path: `/pitch_enter`,
+    //     name: `pitch-enter`,
+    //     component: pitch_enter
+    // },
 
-    {
-        path: `/pitch_view`,
-        name: `pitch-view`,
-        component: pitch_view
-    },
+    // {
+    //     path: `/pitch_view`,
+    //     name: `pitch-view`,
+    //     component: pitch_view
+    // },
 
-    {
-        path: `/elevator_enter`,
-        name: `elevator-enter`,
-        component: elevator_enter
-    },
+    // {
+    //     path: `/elevator_enter`,
+    //     name: `elevator-enter`,
+    //     component: elevator_enter
+    // },
 
-    {
-        path: `/elevator_view`,
-        name: `elevator-view`,
-        component: elevator_view
-    },
+    // {
+    //     path: `/elevator_view`,
+    //     name: `elevator-view`,
+    //     component: elevator_view
+    // },
 
-    {
-        path: `/elevator_view2`,
-        name: `elevator-view2`,
-        component: elevator_view2
-    },
+    // {
+    //     path: `/elevator_view2`,
+    //     name: `elevator-view2`,
+    //     component: elevator_view2
+    // },
 
-    {
-        path: `/businessmodelcanvas_enter`,
-        name: `businessmodelcanvas-enter`,
-        component: businessmodelcanvas_enter
-    },
+    // {
+    //     path: `/businessmodelcanvas_enter`,
+    //     name: `businessmodelcanvas-enter`,
+    //     component: businessmodelcanvas_enter
+    // },
 
-    {
-        path: `/businessmodelcanvas_view2`,
-        name: `businessmodelcanvas-view2`,
-        component: businessmodelcanvas_view2
-    },
+    // {
+    //     path: `/businessmodelcanvas_view2`,
+    //     name: `businessmodelcanvas-view2`,
+    //     component: businessmodelcanvas_view2
+    // },
 
-    {
-        path: `/agenda`,
-        name: `agenda`,
-        component: agenda
-    },
+    // {
+    //     path: `/agenda`,
+    //     name: `agenda`,
+    //     component: agenda
+    // },
 
-    {
-        path: `/agenda_view`,
-        name: `agenda-view`,
-        component: agenda_view
-    },
+    // {
+    //     path: `/agenda_view`,
+    //     name: `agenda-view`,
+    //     component: agenda_view
+    // },
 
-    {
-        path: `/externshipagenda_edit`,
-        name: `externshipagenda-edit`,
-        component: externshipagenda_edit
-    },
+    // {
+    //     path: `/externshipagenda_edit`,
+    //     name: `externshipagenda-edit`,
+    //     component: externshipagenda_edit
+    // },
 
-    {
-        path: `/externshipagenda_view`,
-        name: `externshipagenda-view`,
-        component: externshipagenda_view
-    },
+    // {
+    //     path: `/externshipagenda_view`,
+    //     name: `externshipagenda-view`,
+    //     component: externshipagenda_view
+    // },
 
-    {
-        path: `/hackagenda_edit`,
-        name: `hackagenda-edit`,
-        component: hackagenda_edit
-    },
+    // {
+    //     path: `/hackagenda_edit`,
+    //     name: `hackagenda-edit`,
+    //     component: hackagenda_edit
+    // },
 
-    {
-        path: `/hackagenda_view`,
-        name: `hackagenda-view`,
-        component: hackagenda_view
-    },
+    // {
+    //     path: `/hackagenda_view`,
+    //     name: `hackagenda-view`,
+    //     component: hackagenda_view
+    // },
 
-    {
-        path: `/demoagenda_edit`,
-        name: `demoagenda-edit`,
-        component: demoagenda_edit
-    },
+    // {
+    //     path: `/demoagenda_edit`,
+    //     name: `demoagenda-edit`,
+    //     component: demoagenda_edit
+    // },
 
-    {
-        path: `/demoagenda_view`,
-        name: `demoagenda-view`,
-        component: demoagenda_view
-    },
+    // {
+    //     path: `/demoagenda_view`,
+    //     name: `demoagenda-view`,
+    //     component: demoagenda_view
+    // },
 
-    {
-        path: `/login2`,
-        name: `login2`,
-        component: login2
-    },
+    // {
+    //     path: `/login2`,
+    //     name: `login2`,
+    //     component: login2
+    // },
 
-    {
-        path: `/signup2`,
-        name: `signup2`,
-        component: signup2
-    },
+    // {
+    //     path: `/signup2`,
+    //     name: `signup2`,
+    //     component: signup2
+    // },
 
-    {
-        path: `/myprograms`,
-        name: `my-programs`,
-        component: myprograms
-    },
+    // {
+    //     path: `/myprograms`,
+    //     name: `my-programs`,
+    //     component: myprograms
+    // },
 
-    {
-        path: `/launcher`,
-        name: `launcher`,
-        component: launcher
-    },
+    // {
+    //     path: `/launcher`,
+    //     name: `launcher`,
+    //     component: launcher
+    // },
 
-    {
-        path: `/guide`,
-        name: `guide`,
-        component: guide
-    },
+    // {
+    //     path: `/guide`,
+    //     name: `guide`,
+    //     component: guide
+    // },
 
-    {
-        path: `/viewcasestudies`,
-        name: `view-case-studies`,
-        component: viewcasestudies
-    },
-    {
-        path: `/editcasestudies`,
-        name: `edit-case-studies`,
-        component: editcasestudies
-    },
-<<<<<<< HEAD
-=======
-    {
-        path: `/manageteam`,
-        name: `manage-team`,
-        component: manageteam
-    },
->>>>>>> 6664c9b0b3cf8e41ef0d5e6c1ccbbe0ac3e4c5fc
+    // {
+    //     path: `/viewcasestudies`,
+    //     name: `view-case-studies`,
+    //     component: viewcasestudies
+    // },
+    // {
+    //     path: `/editcasestudies`,
+    //     name: `edit-case-studies`,
+    //     component: editcasestudies
+    // },
     {
         path: '/',
         name: 'home',

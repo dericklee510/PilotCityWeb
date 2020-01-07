@@ -5,13 +5,13 @@
       md="2"
       class="d-sm-none"
     >
-      <Nav />
+      <Nav v-model="currentProgram" />
     </v-col>
     <v-col cols="1">
       <Lock />
     </v-col>
     <v-col>
-      <router-view :name="getProgram" /> 
+      <router-view :name="currentProgram" /> 
     </v-col>
     <v-col cols="1">
       <Unlock />
@@ -33,34 +33,60 @@ import {Nav, Lock, Unlock} from './components'
   }
 })
 export default class Guide extends Vue{
-  public PROGRAMNAMES = [ // for reference
-    'Brief',
-    'TrainingDay',
-    'CaseStudy',
-    'IntroVid',
-    'Practice',
-    'Presentation',
-    'DemoVid',
-    'Pitch',
-    'Elevator',
-    'Canvas',
-    'Externship',
-    'Hack',
-    'Demo',
-    'Process',
-  ]
-  public get getProgram(): string{
-
+  public PROGRAMNAMES = {
+    Externship: [
+      'Agenda',
+      'Brief',
+      'Manage',
+    ],
+    Project: [
+      'IntroVid',
+      'TrainingDay',
+      'Practice',
+      // 'Research',
+      // 'Ideate',
+      // 'Prepare',
+      'Hack',
+      // 'Reflection'
+      // 'Design & Prototype'
+      // 'Package'
+      'Demo'
+      // 'Exit'
+    ],
+    Internship: [
+      // 'Offer 1'
+      // 'Interview 1'
+      // 'Interview 2'
+      // 'Offer 2'
+      // 'Next Program'
+    ],
+    Unsorted: [
+      'CaseStudy',
+      'IntroVid',
+      'Practice',
+      'Presentation',
+      'DemoVid',
+      'Pitch',
+      'Elevator',
+      'Canvas',
+      'Externship',
+      'Process',
+    ]
+  }// for reference
+  public _currentProgram = ''; //set this to a default
+  public get currentProgram(): string {
+    return this._currentProgram
+  }
+  public set currentProgram(value: string) {
+    this._currentProgram = value;
+    // set this in created hook based on firebase
+  }
+  public created(){
     // psuedo-code [could probably turn this into a util function]
     /* 
-      if(on.currentPage)
-        return currentPage //this should keep them on the same page if they refresh
       if(user.fb.getLastProgress)
-        return user.fb.getLastProgress.Name //this should take them to their latest unlock
-      
-      return FirstPage //this should take them to the first page if its their first time
+        this.currentProgram = user.fb.getLastProgress.Name //this should take them to their latest unlock
     */
-   return 'Agenda'//enter desired test-page here   
   }
 }
 </script>

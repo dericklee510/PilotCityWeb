@@ -7,6 +7,56 @@
       cols="12"
       class="pl-12 pr-12 guide__bar"
     >
+      <!--MAIN GROUP -->
+      <v-col
+        v-for="(obj, main, index) in PROGRAMNAMES"
+        :key="main+index"
+        no-gutters
+      > 
+        <!-- if index == 1, don't show this "bridge" -->
+        <v-col>
+          <v-col class="guide__bridge" />
+        </v-col>
+        <v-col class="guide__mainrow">
+          <span
+            class="guide__bigdot guide__bigdot--active"
+            :class="unlocked?'guide__background_blue':''"
+          ><i class="guide__icon_white fas fa-chalkboard-teacher guide__programicon" /></span>
+
+          <span
+            class="guide__maintext"
+            :class=" isActive?'guide__maintext--active':''"
+          >{{ main }}</span>
+        </v-col>
+        <v-col
+          v-for="(subitem, key) in obj"
+          :key="subitem+key"
+          no-gutters
+        >
+          <v-col>
+            <v-col class="guide__bridge" />
+          </v-col>
+          <v-col
+            class="guide__subrow"
+            @click="updateProgram(subitem)"
+          >
+            <span>
+              <div class="guide__smalldot" />
+              <div
+                class="guide__smalldotfilled"
+                :class="unlocked?'guide__background_blue':''"
+              />
+              <div class="guide__subtext">
+                {{ subitem }}
+              </div>
+            </span>
+          </v-col>
+        </v-col>
+      </v-col>
+    
+
+
+
       <!-- MAIN GROUP -->
       <v-col class="guide__mainrow">
         <span class="guide__bigdot guide__bigdot--active guide__background_blue"><i class="guide__icon_white fas fa-chalkboard-teacher guide__programicon" /></span>
@@ -249,13 +299,74 @@
   </v-row>
 </template>
 
-
-
-
-
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
+import { Prop } from 'vue-property-decorator';
+import { forEachField } from 'graphql-tools';
 @Component
-export default class Nav extends Vue {}
+export default class Nav extends Vue {
+  @Prop()
+  public value !: string;
+
+  public _select = this.value;
+  public unlocked = false;
+  get select() {
+    return this._select;
+  }
+  set select(value: string) {
+    this._select = value;
+  }
+  public updateProgram(name: string) {
+    this.$emit('input', name )
+  }
+  public PROGRAMNAMES = { // for reference
+    'Externship': [
+      'Agenda',
+      'Brief',
+      'Manage',
+    ],
+    'Project': [
+      'IntroVid',
+      'TrainingDay',
+      'Practice',
+      // 'Research',
+      // 'Ideate',
+      // 'Prepare',
+      'Hack',
+      // 'Reflection'
+      // 'Design & Prototype'
+      // 'Package'
+      'Demo'
+      // 'Exit'
+    ],
+    'Internship': [
+      // 'Offer 1'
+      // 'Interview 1'
+      // 'Interview 2'
+      // 'Offer 2'
+      // 'Next Program'
+    ],
+    'Unsorted': [
+      'CaseStudy',
+      'IntroVid',
+      'Practice',
+      'Presentation',
+      'DemoVid',
+      'Pitch',
+      'Elevator',
+      'Canvas',
+      'Process',
+    ]
+  }
+  public isActive(): boolean{
+    var active: boolean = false;
+    Object.keys(this.PROGRAMNAMES).forEach( key => {
+      this.PROGRAMNAMES[key].forEach(item => {
+        item==this.select?active = true: active = false;
+      })
+    })
+    return active;
+  }
+}
 </script>
