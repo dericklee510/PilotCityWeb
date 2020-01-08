@@ -1,6 +1,6 @@
 <template>
   <v-row>
-    <!-- <span class="manageteam__topbutton">
+    <span class="manageteam__topbutton">
 
       <button class="manageteam__classesbutton">CLASSES</button>
 
@@ -8,7 +8,7 @@
 
       <button class="manageteam__teambutton">TEAMS</button>
 
-    </span> -->
+    </span>
 
 
     <v-row class="manageteam__titlemain">

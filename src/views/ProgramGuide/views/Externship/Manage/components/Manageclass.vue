@@ -1,12 +1,12 @@
 <template>
   <v-row>
-    <!-- <span class="manageclass__topbutton">
+    <span class="manageclass__topbutton">
       <button class="manageclass__classesbutton">CLASSES</button>
 
       <button class="manageclass__studentsbutton">STUDENTS</button>
 
       <button class="manageclass__teambutton">TEAMS</button>
-    </span> -->
+    </span>
 
     <v-row class="manageclass__titlemain">
       <span class="manageclass__title"> Manage Classes</span>

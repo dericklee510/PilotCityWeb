@@ -38,13 +38,11 @@ import Guide from './Guide.vue'
 export { default as routes } from './routes'
 export { Guide as Main } from './Guide.vue'
 
-export const Externship = {
+export const Program = [
     Agenda,
     Brief,
-    Manage
-}
-
-export const Project = [
+    ManageClass,
+    ManageTeams,
     IntroVid,
     TrainingDay,
     PracticeLog,
