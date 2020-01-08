@@ -33,17 +33,27 @@
 
       <v-row
         justify="center"
-        class="mr-auto ml-auto mt-10 mb-5"
+        class=""
       >
-        <input
-          class="logtime__input"
-          placeholder="0m"
+        <v-col
+          align-self="center"
+          cols="8"
+          sm="6"
+          md="4"
         >
+          <v-text-field
+            label="Enter Time"
+            outlined
+            height="100px"
+            class="logtime__input"
+            placeholder="0m"
+          />
+        </v-col>
       </v-row>
 
       <v-row
         justify="center"
-        class="mr-auto ml-auto mt-5 mb-5"
+        class=""
       >
         <button class="logtime__button">
           LOG TIME
@@ -74,8 +84,14 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
+import { ValidationObserver, ValidationProvider, extend} from 'vee-validate'
+extend('isTime',{
+  message: `Must end with an "h" or an "m"`,
+  validate: ((val) => ["h","m"].map(char => char === val.charAt(val.length-1)).every(val => val))
+})
 @Component
 export default class logtime extends Vue{
+    time:string = ""
     
 }
 </script>
