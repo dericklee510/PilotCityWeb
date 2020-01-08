@@ -10,7 +10,10 @@ import {
   ForgotPassword
 } from '@/views/Login'
 import programbrief from "@/views/ProgramGuide/Brief/Brief.vue"
+import  jointeam from "@/views/ProgramGuide/jointeam/jointeam.vue"
+import  Team from "@/views/ProgramGuide/Team/Team.vue"
 import test from '@/views/Test'
+import managestudents from '@/views/ProgramGuide/ManageStudents/managestudents.vue'
 import Home from '@/views/Home.vue'
 import { routes as ProfileRoutes } from '@/views/Profile'
 import { routes as SignupRoutes } from '@/views/Signup'
@@ -42,6 +45,21 @@ const routes: RouteConfig [] = [
         path: `/programbrief`,
         name: `program-brief`,
         component: programbrief
+    },
+    {
+        path: `/jointeam`,
+        name: `join-team`,
+        component: jointeam
+    },
+    {
+        path: `/managestudents`,
+        name: `manage-students`,
+        component: managestudents
+    },
+    {
+        path: `/Team`,
+        name: `Team-page`,
+        component: Team
     },
     {
         path: '/',
