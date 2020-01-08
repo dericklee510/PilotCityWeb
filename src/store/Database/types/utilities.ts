@@ -49,6 +49,12 @@ export interface ProgramEvent {
     dynamicClass: string
 
 }
+export interface BusinessModelCanvas{
+    problem:string,
+    solution:string,
+    innovation:string,
+    customer:string
+}
 export interface CompletedEvent {
     completed: boolean
 

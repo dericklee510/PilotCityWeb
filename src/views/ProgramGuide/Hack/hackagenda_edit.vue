@@ -84,7 +84,8 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { Agenda } from '../components'
-const emptyAgenda:Omit<Event,'completed'> = {
+import { EventItem } from '../../../store/Database/types/utilities'
+const emptyAgenda:Omit<EventItem,'completed'> = {
   name:"",
   duration:"",
   description:""
@@ -95,6 +96,6 @@ const emptyAgenda:Omit<Event,'completed'> = {
   }
 })
 export default class agenda extends Vue{
-    entries:Omit<Event,'completed'>[] = [emptyAgenda]
+    entries:Omit<EventItem,'completed'>[] = [emptyAgenda]
 }
 </script>

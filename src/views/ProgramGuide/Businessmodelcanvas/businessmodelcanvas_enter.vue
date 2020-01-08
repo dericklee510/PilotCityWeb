@@ -64,7 +64,7 @@ export default class businessmodelcanvas_enter extends Vue{
     problem:"",
     solution:"",
     innovation:"",
-    cost:""
+    customer:""
   }
 }
 </script>
