@@ -53,7 +53,7 @@
             >
           </button>
           <input
-            v-model="entry.name"
+            v-model="entry.linkName"
             class="editcasestudies__inputlinkname"
             placeholder="Lidar for Drones"
           >
@@ -107,14 +107,14 @@ import { NamedLink } from '../../../store/Database/types/utilities'
 interface NamedLinkID extends NamedLink {
   id:number
 }
-let namedLinkDefault:NamedLink = {name:"",link:""}
+let namedLinkDefault:NamedLink = {linkName:"",link:""}
 let linkData:NamedLink[] = [
   {
-    name:"Lidar For Drones",
+    linkName:"Lidar For Drones",
     link:"velodyne.co"
   },
   {
-    name:"Lidar for Autonomous Shuttles",
+    linkName:"Lidar for Autonomous Shuttles",
     link:"http://velodyne.co"
   }
 ]

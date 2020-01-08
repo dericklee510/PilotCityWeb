@@ -1,56 +1,56 @@
-import { AutoCompleteAddress } from './../../../components/GoogleMaps/Autocomplete/types';
+import { AutoComplete, AutoCompleteAddress } from '@/components/GoogleMaps';
+
 //#region 
 // interfaces not stored on firebase
 export interface NamedLink {
-    name: string
+    linkName: string
     link: string
 }
 export interface ReviewedLink extends NamedLink {
-    reviewed:boolean
+    reviewed: boolean
 }
-export interface Event {
+export interface EventItem {
     name: string
     duration: string
     description: string
     completed: boolean
 }
 export interface AgendaTemplate {
-    id: string
-    authorKey: string
-    name: string
+    agendaTitle: string
     date: Date
-    time: number
-    location: string
+    startTime: number
+    address: AutoCompleteAddress
     events: Event[]
+    lastUpdate: firebase.firestore.Timestamp
+    eventTimestamp: firebase.firestore.Timestamp[]
 }
 export interface PostHackReflection {
     feedback: string
     checked: boolean
-} 
-export interface DesignLog { 
+}
+export interface DesignLog {
     description: string
-    date: Date
-    time: number
     link: string
+    lastUpdate: firebase.firestore.Timestamp
 }
-export interface Timelog {
+export interface TimeLog {
     minutes: number
-    projectId: string
-    timestamp: firebase.firestore.Timestamp
+    lastUpdate: firebase.firestore.Timestamp
 }
-export interface generalUser{
-    id:string 
-    firstName:string
-    lastName:string
-    profilePicture:string
-    phoneNumber:string
-    dob: Date
-    address: AutoCompleteAddress
+export interface ProgramEvent {
+    header: string
+    startDate: Date
+    /**
+     * Dynamic Class by Font Awesome
+     * i.e. "fas fa-user"
+     * @type {string}
+     * @memberof ProgramEvent
+     */
+    dynamicClass: string
+
 }
-export interface BusinessModelCanvas {
-    problem:string
-    solution:string
-    innovation:string
-    cost:string
-} 
+export interface CompletedEvent {
+    completed: boolean
+
+}
 //#endregion

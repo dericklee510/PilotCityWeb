@@ -174,10 +174,10 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { Event } from '../../../store/Database/types/utilities'
+import { EventItem } from '../../../store/Database/types/utilities'
 @Component
 export default class agenda extends Vue{
-  agendaItems:Event[] = [{
+  agendaItems:EventItem[] = [{
   name:"",
   duration:"",
   description:"",

@@ -71,9 +71,9 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { PCmultiinput } from '@/components/inputs'
-import {Event} from "@/store/Database/types/utilities"
+import {EventItem} from "@/store/Database/types/utilities"
 import {Agenda} from "@/views/ProgramGuide/components/"
-const emptyAgenda:Omit<Event,'completed'> = {
+const emptyAgenda:Omit<EventItem,'completed'> = {
   name:"",
   duration:"",
   description:""
@@ -85,6 +85,6 @@ const emptyAgenda:Omit<Event,'completed'> = {
   }
 })
 export default class ExternshipAgendaEdit extends Vue{
-    entries:Omit<Event,'completed'>[] = [emptyAgenda]
+    entries:Omit<EventItem,'completed'>[] = [emptyAgenda]
 }
 </script>

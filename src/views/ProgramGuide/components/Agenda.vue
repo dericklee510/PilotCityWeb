@@ -77,9 +77,9 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import {Event} from "@/store/Database/types/utilities"
+import {EventItem} from "@/store/Database/types/utilities"
 import { PCmultiinput } from '../../../components/inputs'
-const emptyAgenda:Omit<Event,'completed'> = {
+const emptyAgenda:Omit<EventItem,'completed'> = {
   name:"",
   duration:"",
   description:""

@@ -4,7 +4,7 @@
     <img
       id="profileBanner"
       src="@/assets/PC_user_banner.png"
-      alt=""
+      alt
     >
     <v-container>
       <!-- make tag component -- backlog -->
@@ -535,7 +535,7 @@
                                   v-model="programdetails.project.capacity.minimum"
                                   :dark-mode="true"
                                   :items="CLASSROOM_COUNT"
-                                  title=""
+                                  title
                                   placeholder="Select Minimum"
                                 />
                               </ValidationProvider>
@@ -552,7 +552,7 @@
                                   v-model="programdetails.project.capacity.maximum"
                                   :dark-mode="true"
                                   :items="CLASSROOM_COUNT"
-                                  title=""
+                                  title
                                   placeholder="Select Maximum"
                                 />
                               </ValidationProvider>
@@ -989,7 +989,7 @@
                                   :error-messages="errors"
                                   :dark-mode="true"
                                   placeholder="Minimum"
-                                  title=""
+                                  title
                                 />
                               </ValidationProvider>
                             </v-col>
@@ -1006,7 +1006,7 @@
                                   :error-messages="errors"
                                   :dark-mode="true"
                                   placeholder="Maximum"
-                                  title=""
+                                  title
                                 />
                               </ValidationProvider>
                             </v-col>
@@ -1123,9 +1123,7 @@
                           </v-col>
                         </v-col>
                       </ValidationProvider>
-                      <ValidationProvider
-                        v-slot="{errors}"
-                      >
+                      <ValidationProvider v-slot="{errors}">
                         <v-col cols="12">
                           <v-col cols="12">
                             <v-row>
@@ -1190,151 +1188,136 @@
 </template>
 
 <script lang="ts">
-import Component from 'vue-class-component'
-import { ValidationProvider, ValidationObserver, extend } from 'vee-validate'
-import { mask } from 'vue-the-mask'
-import { min_value } from 'vee-validate/dist/rules'
-import Vue from 'vue'
+import Component from "vue-class-component";
+import { ValidationProvider, ValidationObserver, extend } from "vee-validate";
+import { mask } from "vue-the-mask";
+import { min_value } from "vee-validate/dist/rules";
+import Vue from "vue";
 import {
   PCselect,
   PCtextfield,
   PCcheckbox,
   PCmultiinput
-} from '@/components/inputs'
-import autoComplete from '@/components/GoogleMaps/Autocomplete/AutoComplete.vue'
-import * as Employer from './types'
-import { ObserverInstance } from '@/utilities/validation'
-import { tableToDecimal, findOther } from '@/store/Graphql'
-import { CONST } from './const'
-import { ProfileUpload } from '@/components/Doka'
-import { GraphqlStore, AuthStore } from '@/store'
-import { citizenBaseToProfile } from './helpers'
-import { IPublicCitizenProfile } from '../../../../store/Graphql/types'
-import { EmployerFetch } from './gql'
-import { applyMixins } from '../../../../utilities/classes'
-import { ICitizenBase } from '../../types'
+} from "@/components/inputs";
+import autoComplete from "@/components/GoogleMaps/Autocomplete/AutoComplete.vue";
+import * as Employer from "./types";
+import { ObserverInstance } from "@/utilities/validation";
+import { tableToDecimal, findOther } from "@/store/Graphql";
+import { CONST } from "./const";
+import { ProfileUpload } from "@/components/Doka";
+import { GraphqlStore, AuthStore } from "@/store";
+import { citizenBaseToProfile } from "./helpers";
+import { IPublicCitizenProfile } from "../../../../store/Graphql/types";
+import { EmployerFetch } from "./gql";
+import { applyMixins } from "../../../../utilities/classes";
+import { ICitizenBase } from "../../types";
 
-extend('min_value', {
-    ...min_value,
-    message: 'This field cannot be less than {min}'
-})
+extend("min_value", {
+  ...min_value,
+  message: "This field cannot be less than {min}"
+});
 
-
-
-const app = CONST.addConst(Vue)
+const app = CONST.addConst(Vue);
 
 @Component({
-    components: {
-        pcSelect: PCselect,
-        pcTextfield: PCtextfield,
-        autoComplete,
-        ValidationProvider,
-        ValidationObserver,
-        'profile-upload': ProfileUpload,
-        pcMultiInput: PCmultiinput,
-        pcCheckbox: PCcheckbox
-    },
-    directives: {
-        mask
-    }
+  components: {
+    pcSelect: PCselect,
+    pcTextfield: PCtextfield,
+    autoComplete,
+    ValidationProvider,
+    ValidationObserver,
+    "profile-upload": ProfileUpload,
+    pcMultiInput: PCmultiinput,
+    pcCheckbox: PCcheckbox
+  },
+  directives: {
+    mask
+  }
 })
-
 export default class EmployerProfile extends app {
-    profile_img_url: string = ''
+  profile_img_url: string = "";
+  loading:boolean = false
+  private CITIZENSTYLES = {
+    Teacher: "citizen-id__type--teacher",
+    Employer: "citizen-id__type--employer",
+    Student: "citizen-id__type--student"
+  };
 
-    private CITIZENSTYLES = {
-        Teacher: 'citizen-id__type--teacher',
-        Employer: 'citizen-id__type--employer',
-        Student: 'citizen-id__type--student'
+  private AVAILABLETYPES: string[] = ["Teacher", "Employer", "Student"];
+
+  private ispublic: boolean = true;
+
+  public citizenBase: ICitizenBase = {
+    honorific: "",
+    firstName: "",
+    lastName: "",
+    profilePicture: "",
+    citizenType: ""
+  };
+
+  public citizen: Employer.Citizen = {} as Employer.Citizen;
+
+  public organization: Employer.Organization = {
+    industry: [] as string[],
+    products_services: [] as string[]
+  } as Employer.Organization;
+
+  public programdetails: Employer.ProgramDetails = {
+    externship: { prefered_date: {}, contribution: [] as string[] },
+    project: { capacity: {}, engagement: {} }
+  } as Employer.ProgramDetails;
+
+  public internship: Employer.Internship = {
+    talent: [] as string[],
+    project: [] as string[],
+    compensation: [] as string[],
+    position_type: [] as string[]
+  } as Employer.Internship;
+
+  public syncStorageCitizen() {
+    localStorage.citizen_first_name = this.citizen.first_name;
+    localStorage.citizen_last_name = this.citizen.last_name;
+    localStorage.citizen_position = this.citizen.position;
+    localStorage.citizen_organization = this.citizen.organization;
+  }
+
+  private addOption(from: string, to: string[]): void {
+    to.push(from);
+  }
+
+  getUpdate() {
+    if (!AuthStore.user) throw "Not logged in";
+    GraphqlStore.sdk.publicProfileFetch({ user_id: AuthStore.user.uid });
+  }
+  async syncStorage() {
+    this.loading = true;
+    try {
+      if (await (this.$refs.observer as ObserverInstance).validate()) {
+        let query = new Employer.EmployerQueryForm({
+          Base: this.citizenBase,
+          Citizen: this.citizen,
+          Organization: this.organization,
+          ProgramDetails: this.programdetails,
+          Internship: this.internship
+        });
+        await query.init();
+        await query.submitQuery();
+      }
+    } catch (err) {
+      console.log(err);
     }
+    this.loading = false;
+  }
 
-    private AVAILABLETYPES: string[] = ['Teacher', 'Employer', 'Student']
+  get Name() {
+    return `${this.citizen.first_name} ${this.citizen.last_name}`;
+  }
+  beforeCreate() {}
+  async created() {
+    this.citizenBase.citizenType = this.$route.params.citizenType;
 
-    private ispublic: boolean = true;
-
-    public citizenBase: ICitizenBase = {
-        honorific: '',
-        firstName: '',
-        lastName: '',
-        profilePicture: '',
-        citizenType: ''
-    }
-
-    public citizen: Employer.Citizen = {} as Employer.Citizen
-
-    public organization: Employer.Organization = {
-        industry: [] as string[],
-        products_services: [] as string[]
-    } as Employer.Organization
-
-    public programdetails: Employer.ProgramDetails = {
-        externship: { prefered_date: {}, contribution: [] as string[] },
-        project: { capacity: {}, engagement: {} }
-    } as Employer.ProgramDetails
-
-    public internship: Employer.Internship = {
-        talent: [] as string[],
-        project: [] as string[],
-        compensation: [] as string[],
-        position_type: [] as string[]
-    } as Employer.Internship
-
-    contributionOther: string = '';
-
-    internOther: string = '';
-
-    private loading: boolean = false
-
-
-    public syncStorageCitizen() {
-        localStorage.citizen_first_name = this.citizen.first_name
-        localStorage.citizen_last_name = this.citizen.last_name
-        localStorage.citizen_position = this.citizen.position
-        localStorage.citizen_organization = this.citizen.organization
-    }
-
-    private addOption(from: string, to: string[]): void {
-        to.push(from)
-    }
-
-    getUpdate(){
-      if(!AuthStore.user)
-        throw("Not logged in")
-      GraphqlStore.sdk.publicProfileFetch({user_id:AuthStore.user.uid})
-      
-    }
-    async syncStorage() {
-        this.loading = true
-        try {
-            if (await (this.$refs.observer as ObserverInstance).validate()) {
-                let query = new Employer.EmployerQueryForm({
-                  Base:this.citizenBase,
-                  Citizen:this.citizen,
-                  Organization:this.organization,
-                  ProgramDetails:this.programdetails,
-                  Internship:this.internship
-                })
-                await query.init()
-                await query.submitQuery()
-            }
-        } catch (err) {
-            console.log(err)
-        }
-        this.loading = false
-    }
-
-
-    get Name() {
-        return `${this.citizen.first_name} ${this.citizen.last_name}`
-    }
-    beforeCreate(){
-      
-    }
-    async created() {
-        this.citizenBase.citizenType = this.$route.params.citizenType
-        
-        let arr:string[] = []
-        console.log(typeof arr)
-    }
+    let arr: string[] = [];
+    console.log(typeof arr);
+  }
 }
 </script>
