@@ -44,117 +44,44 @@
 
       <!-- LOGGER -->
 
-      <v-row justify="center">
+      <v-row
+        v-for="(timeLogs,studentId) in practiceLogs"
+        :key="studentId"
+        justify="center"
+      >
         <!-- <v-col class="practicelog_manage__externallink" cols="1"><i class="fas fa-external-link-alt"></i></v-col> -->
         <v-col
           class="practicelog_manage__loginfo"
           cols="2"
         >
-          210m
+          {{ reduceEntry(timeLogs) }}
         </v-col>
         <v-col cols="6">
           <v-row class="practicelog_manage__loginfo">
-            Antonio Loza
+            {{ nameHash[studentId] }}
           </v-row>
-          <v-row>
-            <button class="practicelog_manage__rejectbutton">
-              Reject
-            </button><div class="practicelog_manage__singlelog">
-              10m
-            </div>
-          </v-row>
-          <v-row>
-            <button class="practicelog_manage__rejectbutton">
-              Reject
-            </button><div class="practicelog_manage__singlelog">
-              32m
-            </div>
-          </v-row>
-          <v-row>
-            <button class="practicelog_manage__rejectbutton">
-              Reject
-            </button><div class="practicelog_manage__singlelog">
-              56m
-            </div>
-          </v-row>
+          <pc-timelog
+            v-model="practiceLogs[studentId]"
+            v-slot="{entries,deleteEntry}"
+          >
+            <v-row
+              v-for="entry in entries"
+              :key="entry.id"
+            >
+              <button
+                class="practicelog_manage__rejectbutton"
+                @click="deleteEntry(entry.id)"
+              >
+                Reject
+              </button><div class="practicelog_manage__singlelog">
+                {{ `${entry.minutes}m` }}
+              </div>
+            </v-row>
+          </pc-timelog>
         </v-col>
       </v-row>
-
+        
       <!-- LOGGER -->
-
-      <v-row justify="center">
-        <!-- <v-col class="practicelog_manage__externallink" cols="1"><i class="fas fa-external-link-alt"></i></v-col> -->
-        <v-col
-          class="practicelog_manage__loginfo"
-          cols="2"
-        >
-          251m
-        </v-col>
-        <v-col cols="6">
-          <v-row class="practicelog_manage__loginfo">
-            Carly Hudson
-          </v-row>
-          <v-row>
-            <button class="practicelog_manage__rejectbutton">
-              Reject
-            </button><div class="practicelog_manage__singlelog">
-              6m
-            </div>
-          </v-row>
-          <v-row>
-            <button class="practicelog_manage__rejectbutton">
-              Reject
-            </button><div class="practicelog_manage__singlelog">
-              25m
-            </div>
-          </v-row>
-          <v-row>
-            <button class="practicelog_manage__rejectbutton">
-              Reject
-            </button><div class="practicelog_manage__singlelog">
-              63m
-            </div>
-          </v-row>
-        </v-col>
-      </v-row>
-
-      <!-- LOGGER -->
-
-      <v-row justify="center">
-        <!-- <v-col class="practicelog_manage__externallink" cols="1"><i class="fas fa-external-link-alt"></i></v-col> -->
-        <v-col
-          class="practicelog_manage__loginfo"
-          cols="2"
-        >
-          76m
-        </v-col>
-        <v-col cols="6">
-          <v-row class="practicelog_manage__loginfo">
-            Dylan Layden
-          </v-row>
-          <v-row>
-            <button class="practicelog_manage__rejectbutton">
-              Reject
-            </button><div class="practicelog_manage__singlelog">
-              36m
-            </div>
-          </v-row>
-          <v-row>
-            <button class="practicelog_manage__rejectbutton">
-              Reject
-            </button><div class="practicelog_manage__singlelog">
-              72m
-            </div>
-          </v-row>
-          <v-row>
-            <button class="practicelog_manage__rejectbutton">
-              Reject
-            </button><div class="practicelog_manage__singlelog">
-              55m
-            </div>
-          </v-row>
-        </v-col>
-      </v-row>
     </v-col>
   </v-row>
 </template>
@@ -166,8 +93,43 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-@Component
+import { TimeLog } from '../../../store/Database/types/utilities'
+import { PCmultiinput } from '../../../components/inputs'
+import {firebase} from "@/firebase/init"
+export const pcTimelog = PCmultiinput.createMultiInput<TimeLog>({
+  minutes:0,
+  lastUpdate: firebase.firestore.Timestamp.fromDate(new Date())
+})
+@Component({
+  components:{
+    pcTimelog
+  }
+})
 export default class logtime extends Vue{
-    
+    practiceLogs:Record<string,TimeLog[]> = {
+      'someuid':[{
+        minutes:45,
+        lastUpdate: firebase.firestore.Timestamp.fromDate(new Date(12))
+      },
+      {
+        minutes:13,
+        lastUpdate: firebase.firestore.Timestamp.fromDate(new Date(42))
+      },
+      {
+        minutes:10,
+        lastUpdate: firebase.firestore.Timestamp.fromDate(new Date(14))
+      }],
+      "otheruid":[{
+        minutes:20,
+        lastUpdate: firebase.firestore.Timestamp.fromDate(new Date(23))
+      }]
+    }
+    nameHash:Record<string,string> ={
+      'someuid': "Antonio Laza",
+      otheruid: "Carly Hudson"
+    }
+    reduceEntry(entries:TimeLog[]):number {
+      return entries.reduce((sum,entry) => sum += entry.minutes,0)
+    }
 }
 </script>

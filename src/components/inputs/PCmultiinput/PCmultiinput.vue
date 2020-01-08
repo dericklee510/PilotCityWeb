@@ -105,14 +105,23 @@ export default class PCmultiinput extends Vue {
     }
     
     @Component<MultiInput>({
-      template:`<span>
+      template:`<div>
       <slot :entries="entries" :newEntry="newEntry" :deleteEntry="deleteEntry" ></slot>
-      </span>`
+      </div>`
     })
     class MultiInput extends Vue {
-
+      created(){
+        if(this.dontFill === "")
+          this.entries = []
+        if(this.value){
+          let counter = 0
+          this.entries = this.value.map(entry => ({id:counter++,...entry}))}
+      }
       @Prop()
-      value!: string[];
+      value!: EntryClass[];
+      @Prop()
+      dontFill:""|undefined
+
       allocateEntry = (val:ExtendId):EntryClassID => new EntryClassIDGen(val) as EntryClassID
       entries:EntryClassID[] = [{...emptyEntry,id:0}]
 

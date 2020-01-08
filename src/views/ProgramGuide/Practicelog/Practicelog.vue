@@ -96,6 +96,9 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import { ValidationObserver, ValidationProvider, extend } from "vee-validate";
 import { isNumber } from "util";
+import { TimeLog } from '../../../store/Database/types/utilities';
+import { timestamp } from 'rxjs/operators';
+import {firebase} from "@/firebase/init"
 extend("isTime", {
   message: `Must end with an "h" or an "m"`,
   validate: (val: string) =>
@@ -118,17 +121,26 @@ extend("isTimeNumerical", {
 })
 export default class logtime extends Vue {
   timeInput: string = "";
-  totalTime: number = 0;
+  timeLog:TimeLog[] = []
+  get totalTime(){
+    return this.timeLog.reduce((sum,entry) => sum+=entry.minutes,0)
+  }
   get timeOutput() {
     return `${Math.floor(this.totalTime / 60)}h ${this.totalTime % 60}m`;
   }
   addTime() {
     switch (this.timeInput.charAt(this.timeInput.length - 1)) {
       case "m":
-        this.totalTime += parseInt(this.timeInput);
+        this.timeLog.push({
+          minutes:parseInt(this.timeInput),
+          lastUpdate: firebase.firestore.Timestamp.fromDate(new Date())
+        })
         break;
       case "h":
-        this.totalTime += parseInt(this.timeInput) * 60;
+        this.timeLog.push({
+          minutes:parseInt(this.timeInput)*60,
+          lastUpdate:firebase.firestore.Timestamp.fromDate(new Date())
+        })
     }
     this.timeInput=""
   }
