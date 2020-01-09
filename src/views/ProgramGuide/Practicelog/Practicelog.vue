@@ -97,7 +97,6 @@ import Component from "vue-class-component";
 import { ValidationObserver, ValidationProvider, extend } from "vee-validate";
 import { isNumber } from "util";
 import { TimeLog } from '../../../store/Database/types/utilities';
-import { timestamp } from 'rxjs/operators';
 import {firebase} from "@/firebase/init"
 extend("isTime", {
   message: `Must end with an "h" or an "m"`,

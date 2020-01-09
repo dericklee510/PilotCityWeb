@@ -21,7 +21,7 @@ import Simple from "@/components/layout/Simple.vue"
 import New from "@/components/layout/New.vue"
 
 import VuetifyGoogleAutocomplete from 'vuetify-google-autocomplete'
-
+import VueMoment from "vue-moment"
 import VueRx from 'vue-rx'
 import { createProvider } from './vue-apollo'
 import "@/utilities/validation/index.ts"
@@ -30,6 +30,7 @@ Vue.use(Vuetify)
 Vue.use(VuetifyGoogleAutocomplete, {
     apiKey: MAPS_API_KEY
 })
+Vue.use(VueMoment)
 Vue.component('default-layout', Default)
 Vue.component('simple-layout', Simple)
 Vue.component('new-layout', New )
