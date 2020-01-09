@@ -1,12 +1,18 @@
-
-import externshipagenda_edit from "@/views/ProgramGuide/Externship/externshipagenda_edit.vue"
-import externshipagenda_view from "@/views/ProgramGuide/Externship/externshipagenda_view.vue"
 import Brief from "@/views/ProgramGuide/views/Externship/Brief/Brief.vue"
-import TrainingDay from "@/views/ProgramGuide/TrainingDay/TrainingDay.vue"
+
+import externshipagenda_edit from "@/views/ProgramGuide/views/Externship/Agenda/externshipagenda_edit.vue"
+import ExternshipAgenda from "@/views/ProgramGuide/views/Externship/Agenda/externshipagenda_view.vue"
+import TrainingAgenda from "@/views/ProgramGuide/views/Project/TrainingAgenda/TrainingAgenda.vue"
+import hackagenda_edit from "@/views/ProgramGuide/Hack/hackagenda_edit.vue"
+import HackAgenda from "@/views/ProgramGuide/Hack/hackagenda_view.vue"
+import demoagenda_edit from "@/views/ProgramGuide/Demo/demoagenda_edit.vue"
+import DemoAgenda from "@/views/ProgramGuide/Demo/demoagenda_view.vue"
+
+
 import ManageTeams from "./Manageteam/Manageteam.vue"
 import ManageClass from "./Manageclass/Manageclass.vue"
 import viewcasestudies from "@/views/ProgramGuide/Viewcasestudies/Viewcasestudies.vue"
-import editcasestudies from "@/views/ProgramGuide/Editcasestudies/Editcasestudies.vue"
+// import editcasestudies from "@/views/ProgramGuide/Editcasestudies/Editcasestudies.vue"
 import programbrief_edit from "@/views/ProgramGuide/Brief/programbrief_edit.vue"
 import introvideo from "@/views/ProgramGuide/Introvideo/Introvideo.vue"
 import introvideo_edit from "@/views/ProgramGuide/Introvideo/Introvideo_edit.vue"
@@ -25,35 +31,16 @@ import businessmodelcanvas_enter from "@/views/ProgramGuide/Businessmodelcanvas/
 import businessmodelcanvas_view2 from "@/views/ProgramGuide/Businessmodelcanvas/businessmodelcanvas_view2.vue"
 import agenda from "@/views/ProgramGuide/Agenda/Agenda.vue"
 import agenda_view from "@/views/ProgramGuide/Agenda/agenda_view.vue"
-import hackagenda_edit from "@/views/ProgramGuide/Hack/hackagenda_edit.vue"
-import hackagenda_view from "@/views/ProgramGuide/Hack/hackagenda_view.vue"
-import demoagenda_edit from "@/views/ProgramGuide/Demo/demoagenda_edit.vue"
-import demoagenda_view from "@/views/ProgramGuide/Demo/demoagenda_view.vue"
 import programbrief from "@/views/ProgramGuide/Brief/Brief.vue"
 import editcasestudies from "@/views/ProgramGuide/Editcasestudies/Editcasestudies.vue"
 import processlog from "@/views/ProgramGuide/Process/processlog.vue"
 import launcher from "@/views/Myprograms/launcher.vue"
 import Guide from './Guide.vue'
 
-export { default as routes } from './routes'
-export { Guide as Main } from './Guide.vue'
+import { Program } from './views'
 
-export const Program = [
-    Agenda,
-    Brief,
-    ManageClass,
-    ManageTeams,
-    IntroVid,
-    TrainingDay,
-    PracticeLog,
-    CaseStudy,
-    Presentation,
-    DemoVid,
-    Pitch,
-    Elevator,
-    Canvas,
-    Hack,
-    Demo,
-    Process,
+export { default as routes } from './routes'
+export { 
+    Guide as Main,
+    Program
 }
-]

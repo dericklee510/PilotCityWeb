@@ -3,7 +3,7 @@
     <img
       id="agenda_view__icon"
       class="agenda_view__image"
-      src="@/assets/agenda.png"
+      src="@/assets/icons/agenda.png"
     >
 
     <v-col
@@ -60,8 +60,6 @@
         </v-row> -->
 
 
-<<<<<<< HEAD
-=======
       <!-- AGENDA ITEM -->
 
       <v-row class="mt-10 pt-0 pb-0">
@@ -224,7 +222,6 @@
 
 
 
->>>>>>> 6664c9b0b3cf8e41ef0d5e6c1ccbbe0ac3e4c5fc
 
 
 
@@ -250,7 +247,6 @@
 
 
 <script lang="ts">
-<<<<<<< HEAD
 import Vue from "vue";
 import Component from "vue-class-component";
 import { AgendaView } from "../components";
@@ -272,12 +268,5 @@ export default class DemoAgendaView extends Vue {
     duration:"",
     completed:true
   }];
-=======
-import Vue from 'vue'
-import Component from 'vue-class-component'
-@Component
-export default class agenda extends Vue{
-    
->>>>>>> 6664c9b0b3cf8e41ef0d5e6c1ccbbe0ac3e4c5fc
 }
 </script>

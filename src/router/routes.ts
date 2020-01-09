@@ -11,7 +11,7 @@ import {
 } from '@/views/Login'
 import { routes as ProfileRoutes } from '@/views/Profile'
 import { routes as SignupRoutes } from '@/views/Signup'
-
+import { routes as ProgramRoutes } from '@/views/ProgramGuide'
 import myprograms from "@/views/Myprograms/myprograms.vue"
 import test from '@/views/Test'
 import Home from '@/views/Home.vue'
@@ -21,6 +21,7 @@ const routes: RouteConfig [] = [
     ...SignupRoutes,
     ...LoginRoutes,
     ...ProfileRoutes,
+    ...ProgramRoutes,
     {
         path: '/reset_password',
         component: ForgotPassword,
@@ -196,23 +197,23 @@ const routes: RouteConfig [] = [
     //     component: demoagenda_view
     // },
 
-    // {
-    //     path: `/login2`,
-    //     name: `login2`,
-    //     component: login2
-    // },
+    {
+        path: `/login2`,
+        name: `login2`,
+        component: login2
+    },
 
-    // {
-    //     path: `/signup2`,
-    //     name: `signup2`,
-    //     component: signup2
-    // },
+    {
+        path: `/signup2`,
+        name: `signup2`,
+        component: signup2
+    },
 
-    // {
-    //     path: `/myprograms`,
-    //     name: `my-programs`,
-    //     component: myprograms
-    // },
+    {
+        path: `/myprograms`,
+        name: `my-programs`,
+        component: myprograms
+    },
 
     // {
     //     path: `/launcher`,
@@ -236,11 +237,6 @@ const routes: RouteConfig [] = [
     //     name: `edit-case-studies`,
     //     component: editcasestudies
     // },
-    {
-        path: `/editcasestudies`,
-        name: `edit-case-studies`,
-        component: editcasestudies
-    },
     {
         path: '/',
         name: 'home',

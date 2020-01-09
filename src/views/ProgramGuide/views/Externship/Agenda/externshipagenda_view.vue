@@ -3,7 +3,7 @@
     <img
       id="agenda_view__icon"
       class="agenda_view__image"
-      src="@/assets/agenda.png"
+      src="@/assets/icons/agenda.png"
     >
 
     <v-col
@@ -174,12 +174,12 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { Event } from '../../../store/Database/types/utilities'
+import { EventItem } from '@/store/Database/types/utilities'
 @Component
-export default class agenda extends Vue{
-  agendaItems:Event[] = [{
+export default class ExternshipAgenda extends Vue{
+  agendaItems:EventItem[] = [{
   name:"",
-  duration:"",
+  duration: 0,
   description:"",
   completed:false
 }]

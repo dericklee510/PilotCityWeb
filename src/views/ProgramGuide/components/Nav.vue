@@ -53,9 +53,71 @@
           </v-col>
         </v-col>
       </v-col>
-    
+    </v-col>
+  </v-row>
+</template>
 
+<script lang="ts">
+import Vue from "vue";
+import Component from "vue-class-component";
+import { Prop } from 'vue-property-decorator';
+import { forEachField } from 'graphql-tools';
+@Component
+export default class Nav extends Vue {
+  @Prop()
+  public value !: string;
 
+  public _select = this.value;
+  public unlocked = false;
+  get select() {
+    return this._select;
+  }
+  set select(value: string) {
+    this._select = value;
+  }
+  public updateProgram(name: string) {
+    this.$emit('input', name )
+  }
+  public PROGRAMNAMES = { // for reference
+    'Externship': [
+      'Agenda',
+      'Brief',
+      'Manage',
+    ],
+    'Project': [
+      'IntroVid',
+      'TrainingDay',
+      'Practice',
+      // 'Research',
+      // 'Ideate',
+      // 'Prepare',
+      'Hack',
+      // 'Reflection'
+      // 'Design & Prototype'
+      // 'Package'
+      'Demo'
+      // 'Exit'
+    ],
+    'Internship': [
+      // 'Offer 1'
+      // 'Interview 1'
+      // 'Interview 2'
+      // 'Offer 2'
+      // 'Next Program'
+    ],
+    'Unsorted': [
+      'CaseStudy',
+      'IntroVid',
+      'Practice',
+      'Presentation',
+      'DemoVid',
+      'Pitch',
+      'Elevator',
+      'Canvas',
+      'Process',
+    ]
+  }
+  public DONTDELETE = `
 
       <!-- MAIN GROUP -->
       <v-col class="guide__mainrow">
@@ -83,12 +145,6 @@
           </div>
         </span>
       </v-col>
-
-
-
-
-
-
 
 
       <!-- SUB GROUP -->
@@ -296,69 +352,7 @@
         <span class="guide__subtext">Next Program</span>
       </v-col>
     </v-col>
-  </v-row>
-</template>
-
-<script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-import { Prop } from 'vue-property-decorator';
-import { forEachField } from 'graphql-tools';
-@Component
-export default class Nav extends Vue {
-  @Prop()
-  public value !: string;
-
-  public _select = this.value;
-  public unlocked = false;
-  get select() {
-    return this._select;
-  }
-  set select(value: string) {
-    this._select = value;
-  }
-  public updateProgram(name: string) {
-    this.$emit('input', name )
-  }
-  public PROGRAMNAMES = { // for reference
-    'Externship': [
-      'Agenda',
-      'Brief',
-      'Manage',
-    ],
-    'Project': [
-      'IntroVid',
-      'TrainingDay',
-      'Practice',
-      // 'Research',
-      // 'Ideate',
-      // 'Prepare',
-      'Hack',
-      // 'Reflection'
-      // 'Design & Prototype'
-      // 'Package'
-      'Demo'
-      // 'Exit'
-    ],
-    'Internship': [
-      // 'Offer 1'
-      // 'Interview 1'
-      // 'Interview 2'
-      // 'Offer 2'
-      // 'Next Program'
-    ],
-    'Unsorted': [
-      'CaseStudy',
-      'IntroVid',
-      'Practice',
-      'Presentation',
-      'DemoVid',
-      'Pitch',
-      'Elevator',
-      'Canvas',
-      'Process',
-    ]
-  }
+  </v-row>`
   public isActive(): boolean{
     var active: boolean = false;
     Object.keys(this.PROGRAMNAMES).forEach( key => {

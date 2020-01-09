@@ -1,14 +1,14 @@
 import { RouteConfig } from 'vue-router'
 import { AuthStore } from '@/store'
-import * as Guide from '../ProgramGuide'
+import * as Guide from '.'
 
 const routes: RouteConfig[] = [
     {
-        path: '/program/:type',
+        path: '/program',
         component: Guide.Main,
         children: [
             {
-                path: 'Agenda',
+                path: 'agenda',
                 name: 'program-agenda',
                 components: {
                     ExternshipAgenda: Guide.Program.ExternshipAgenda,
@@ -19,30 +19,30 @@ const routes: RouteConfig[] = [
                 /* BEFORE ROUTE ENTER, CHECK ROLE? */
             },
             {
-                path: 'Brief',
+                path: 'brief',
                 name: 'program-brief',
                 component: Guide.Program.Brief,
             },
-            {
-                path: 'Manage',
-                name: 'program-manage',
-                components:{
-                    ManageClass:
-                    ManageStudents:
-                    ManageTeams:
-                    ManageTeam:  
-                }
-            },
-            {
-                path: 'internship',
-                name: 'internship-guide',
-                components: {
-                }
-            }
-        ]
+            // {
+            //     path: 'Manage',
+            //     name: 'program-manage',
+            //     components:{
+            //         ManageClass:
+            //         ManageStudents:
+            //         ManageTeams:
+            //         ManageTeam:  
+            //     }
+            // },
+            // {
+            //     path: 'internship',
+            //     name: 'internship-guide',
+            //     components: {
+            //     }
+            // }
+        ],
         meta: { layout: 'simple' },
         beforeEnter(to, from, next): void{
-            AuthStore.user ? next({ name: 'signup.type' }) : next()
+            AuthStore.user ? next():next({ name: 'signup.type' });
         }
 
     }

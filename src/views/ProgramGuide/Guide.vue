@@ -1,16 +1,19 @@
 <template>
-  <v-row>
+  <v-row no-gutters>
     <v-col
-      no-gutters
+      cols="1"
       md="2"
-      class="d-sm-none"
+      class="d-sm-block"
     >
       <Nav v-model="currentProgram" />
     </v-col>
     <v-col cols="1">
       <Lock />
     </v-col>
-    <v-col>
+    <v-col
+      cols="9"
+      md="8"
+    >
       <router-view :name="currentProgram" /> 
     </v-col>
     <v-col cols="1">
@@ -73,11 +76,11 @@ export default class Guide extends Vue{
       'Process',
     ]
   }// for reference
-  public _currentProgram = ''; //set this to a default
-  public get currentProgram(): string {
+  public _currentProgram = 'Brief'; //set this to a default
+  get currentProgram(): string {
     return this._currentProgram
   }
-  public set currentProgram(value: string) {
+  set currentProgram(value: string) {
     this._currentProgram = value;
     // set this in created hook based on firebase
   }

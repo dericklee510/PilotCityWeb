@@ -3,7 +3,7 @@
     <img
       id="agenda_view__icon"
       class="agenda_view__image"
-      src="@/assets/agenda.png"
+      src="@/assets/icons/agenda.png"
     >
 
     <v-col
