@@ -93,21 +93,31 @@ export default class PCmultiinput extends Vue {
     this.$emit('input', newVal.map(entree => entree.value))
   }
 
-  static createMultiInput<EntryClass extends Record<string,any>>(emptyEntry:(EntryClass),initialEntry?:EntryClass[], ) {
-    interface ID{
-      id:number
+  static createMultiInput<EntryClass>(emptyEntry:(EntryClass),initialEntry?:EntryClass[], ) {
+    type ExtendId = {id:number}&Partial<EntryClass>
+    type EntryClassID = {id:number} & EntryClass
+    class EntryClassIDGen{
+      [key:string]:any
+      id!:number
+      constructor({id, ...rest}:ExtendId){
+        Object.assign(this,emptyEntry,{id},rest)
+      }
     }
-    type EntryClassID =  ID & EntryClass;
-    @Component({})
+    
+    @Component<MultiInput>({
+      template:`<span>
+      <slot :entries="entries" :newEntry="newEntry" :deleteEntry="deleteEntry" ></slot>
+      </span>`
+    })
     class MultiInput extends Vue {
 
       @Prop()
       value!: string[];
-
+      allocateEntry = (val:ExtendId):EntryClassID => new EntryClassIDGen(val) as EntryClassID
       entries:EntryClassID[] = [{...emptyEntry,id:0}]
 
       newEntry() {
-            this.entries.push({...emptyEntry, id: this.entries.length?(this.entries.slice(-1)[0].id + 1):0})
+            this.entries.push(this.allocateEntry({id: this.entries.length?(this.entries.slice(-1)[0].id + 1):0} as ExtendId))
 
       }
       deleteEntry(id: number) {
@@ -116,12 +126,9 @@ export default class PCmultiinput extends Vue {
 
       @Watch('entries', { deep: true })
       onEntriesChanged(newVal:EntryClassID[]){
+        
           this.$emit('input',newVal.map((entree:EntryClassID) => {
-            let obj:Record<string,string> ={}
-            Object.keys(emptyEntry).forEach(key => {
-              obj[key] = entree[key]
-            })
-            return obj
+            return (({ id,...params }:EntryClassID):EntryClass => (params as unknown as EntryClass))(entree)
           } ))
         }
       constructor(){

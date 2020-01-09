@@ -1215,9 +1215,7 @@ extend("min_value", {
   message: "This field cannot be less than {min}"
 });
 
-
-
-const app = CONST.addConst(Vue)
+const app = CONST.addConst(Vue);
 
 @Component({
   components: {
@@ -1236,7 +1234,7 @@ const app = CONST.addConst(Vue)
 })
 export default class EmployerProfile extends app {
   profile_img_url: string = "";
-
+  loading:boolean = false
   private CITIZENSTYLES = {
     Teacher: "citizen-id__type--teacher",
     Employer: "citizen-id__type--employer",
@@ -1274,53 +1272,50 @@ export default class EmployerProfile extends app {
     position_type: [] as string[]
   } as Employer.Internship;
 
-    public syncStorageCitizen() {
-        localStorage.citizen_first_name = this.citizen.first_name
-        localStorage.citizen_last_name = this.citizen.last_name
-        localStorage.citizen_position = this.citizen.position
-        localStorage.citizen_organization = this.citizen.organization
-    }
-
-    private addOption(from: string, to: string[]): void {
-        to.push(from)
-    }
-
-    getUpdate(){
-      if(!AuthStore.user)
-        throw("Not logged in")
-      GraphqlStore.sdk.publicProfileFetch({user_id:AuthStore.user.uid})
-      
-    }
-    async syncStorage() {
-        this.loading = true
-        try {
-            if (await (this.$refs.observer as ObserverInstance).validate()) {
-                let query = new Employer.EmployerQueryForm({
-                  Base:this.citizenBase,
-                  Citizen:this.citizen,
-                  Organization:this.organization,
-                  ProgramDetails:this.programdetails,
-                  Internship:this.internship
-                })
-                await query.init()
-                await query.submitQuery()
-            }
-        } catch (err) {
-            console.log(err)
-        }
-        this.loading = false
-    }
-    get Name() {
-        return `${this.citizen.first_name} ${this.citizen.last_name}`
-    }
-    beforeCreate(){
-      
-    }
-    async created() {
-        this.citizenBase.citizenType = this.$route.params.citizenType
-        
-        let arr:string[] = []
-        console.log(typeof arr)
-    }
+  public syncStorageCitizen() {
+    localStorage.citizen_first_name = this.citizen.first_name;
+    localStorage.citizen_last_name = this.citizen.last_name;
+    localStorage.citizen_position = this.citizen.position;
+    localStorage.citizen_organization = this.citizen.organization;
   }
+
+  private addOption(from: string, to: string[]): void {
+    to.push(from);
+  }
+
+  getUpdate() {
+    if (!AuthStore.user) throw "Not logged in";
+    GraphqlStore.sdk.publicProfileFetch({ user_id: AuthStore.user.uid });
+  }
+  async syncStorage() {
+    this.loading = true;
+    try {
+      if (await (this.$refs.observer as ObserverInstance).validate()) {
+        let query = new Employer.EmployerQueryForm({
+          Base: this.citizenBase,
+          Citizen: this.citizen,
+          Organization: this.organization,
+          ProgramDetails: this.programdetails,
+          Internship: this.internship
+        });
+        await query.init();
+        await query.submitQuery();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+    this.loading = false;
+  }
+
+  get Name() {
+    return `${this.citizen.first_name} ${this.citizen.last_name}`;
+  }
+  beforeCreate() {}
+  async created() {
+    this.citizenBase.citizenType = this.$route.params.citizenType;
+
+    let arr: string[] = [];
+    console.log(typeof arr);
+  }
+}
 </script>

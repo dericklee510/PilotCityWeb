@@ -3,27 +3,19 @@ import { AutoComplete, AutoCompleteAddress } from '@/components/GoogleMaps';
 //#region 
 // interfaces not stored on firebase
 export interface NamedLink {
-    namedLinkId: string
-    userId: string
     linkName: string
     link: string
 }
 export interface ReviewedLink extends NamedLink {
-    reviewedLinkId: string
-    namedLinkId: string
-    userId: string
-    reviewed:boolean
-    lastUpdate: firebase.firestore.Timestamp
+    reviewed: boolean
 }
 export interface EventItem {
     name: string
-    duration: number
+    duration: string
     description: string
     completed: boolean
 }
 export interface AgendaTemplate {
-    agendaId: string
-    userId: string
     agendaTitle: string
     date: Date
     startTime: number
@@ -33,36 +25,32 @@ export interface AgendaTemplate {
     eventTimestamp: firebase.firestore.Timestamp[]
 }
 export interface PostHackReflection {
-    projectId: string
     feedback: string
     checked: boolean
-} 
-export interface DesignLog { 
-    designLogId: string
-    projectId: string
-    userId: string
+}
+export interface DesignLog {
     description: string
     link: string
     lastUpdate: firebase.firestore.Timestamp
 }
 export interface TimeLog {
-    timeLogId: string
-    projectId: string
-    userId: string
     minutes: number
     lastUpdate: firebase.firestore.Timestamp
 }
-export interface GeneralUser{
-    userId:string
-    classroomIds: string[] 
-    employerProgramIds: string[]
-    firstName:string
-    lastName:string
-    citizenType: string
-    dob: Date
-    address: AutoCompleteAddress
-    phoneNumber:string
-    profilePicture:string
-    lastUpdate: firebase.firestore.Timestamp
+export interface ProgramEvent {
+    header: string
+    startDate: Date
+    /**
+     * Dynamic Class by Font Awesome
+     * i.e. "fas fa-user"
+     * @type {string}
+     * @memberof ProgramEvent
+     */
+    dynamicClass: string
+
+}
+export interface CompletedEvent {
+    completed: boolean
+
 }
 //#endregion

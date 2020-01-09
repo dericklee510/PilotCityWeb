@@ -34,8 +34,8 @@ const renameBrief = async (name: string, uid: string): Promise<void> => { }
 
 const uploadVideo = async (url: string): Promise<void> => {
     // check link
-    if (!doesLinkexist(url))
-        throw ("link does not exist")
+    // if (!doesLinkexist(url))
+    //     throw ("link does not exist")
     // upload video
 }
 

@@ -83,16 +83,15 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { EventItem } from "@/store/Database/types/utilities"
-import { PCmultiinput } from '@/components/inputs'
-
-import {Agenda, AgendaView} from '../../../components'
-@Component({
-  components: {
-    Agenda,
-    AgendaView,
-  }
-})
+import {EventItem} from "@/store/Database/types/utilities"
+import { PCmultiinput } from '../../../components/inputs'
+const emptyAgenda:Omit<EventItem,'completed'> = {
+  name:"",
+  duration:"",
+  description:""
+}
+const app = PCmultiinput.createMultiInput(emptyAgenda)
+@Component
 export default class TrainingAgenda extends Vue{
     
 }
