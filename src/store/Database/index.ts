@@ -36,6 +36,15 @@ export default class Fb extends VuexModule {
         this.employerProgram = Object.assign(property, this.employerProgram);
     }
 
+    @Mutation
+    async updateProject(property: any) {
+        let user = this.context.rootState.Auth.user as firebase.User | null
+        if (!user) throw new Error('User not logged in')
+        await this.firestore.collection('Project').doc(user.uid).update(property);
+        
+        // this.employerProgram = Object.assign(property, this.employerProgram);
+    }
+
     @Action({ commit: 'initEmployerProgram'})
     async fetchEmployerProgram() {
         let user = this.context.rootState.Auth.user as firebase.User | null
@@ -114,8 +123,11 @@ export default class Fb extends VuexModule {
     }
 
     @Action( { commit: 'updateProject'})
-    async addRating(rating:number, uid:string) {
+    async addRating(ratingName: string, rating:number) {
         // StudentProject.rating = rating
+        return {
+            [ratingName]: rating
+        }
     }
 
     @Action({ commit: 'updateEmployerProgram' })
@@ -124,11 +136,12 @@ export default class Fb extends VuexModule {
             externshipAgenda: textEntry
         }
     }
-
-    async viewExternshipAgenda(eventCompleted:Event, uid:string){
-        // Event
-    }
 }    
+
+
+async viewExternshipAgenda(eventCompleted:Event, uid:string){
+    // Event
+}
 
 const uploadVideo = async (url:string):void => {
     // check link
