@@ -41,7 +41,7 @@ export default class Fb extends VuexModule {
     async updateProject(property: any) {
         let user = this.context.rootState.Auth.user as firebase.User | null
         if (!user) throw new Error('User not logged in')
-        await this.firestore.collection('Project').doc(user.uid).update(property);
+        await this.firestore.collection('Project').doc(currentProjectID).update(property);
         
         // this.employerProgram = Object.assign(property, this.employerProgram);
     }
@@ -146,17 +146,6 @@ const uploadVideo = async (url:string):void => {
         throw("link does not exist")
     // upload video
 }
-
-/**
- *Updates Case Study for creation and removal
- *
- * @param {NamedLink[]} link
- * @param {string} uid
- */
-const updateCaseStudy = async (link:NamedLink[], uid:string) => {
-    // update EmployerProgram.programBrief with link
-}
-
 
 /**
  * Updates Case Study for creation and removal
