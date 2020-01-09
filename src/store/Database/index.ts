@@ -3,6 +3,7 @@ import { AgendaTemplate, NamedLink } from './types/utilities';
 import { Module, VuexModule, Action, Mutation } from "vuex-module-decorators" //action unused
 import { firebaseApp as fb } from '@/firebase/init'
 import { EmployerProgram } from './types/types' 
+const _ = require('lodash');
 
 @Module({ namespaced: true, name: 'Fb' })
 export default class Fb extends VuexModule {
@@ -28,8 +29,11 @@ export default class Fb extends VuexModule {
     }
 
     @Mutation
-    updateEmployerProgram(property: any) {
-        
+    async updateEmployerProgram(property: any) {
+        let user = this.context.rootState.Auth.user as firebase.User | null
+        if (!user) throw new Error('User not logged in')
+        await this.firestore.collection('EmployerProgram').doc(user.uid).update(property);
+        this.employerProgram = Object.assign(property, this.employerProgram);
     }
 
     @Action({ commit: 'initEmployerProgram'})
@@ -44,7 +48,11 @@ export default class Fb extends VuexModule {
         }
     }
 
-    createProgramBrief = async (file:File):Promise<void> => {
+    @Action({ commit: 'updateEmployerProgram' })
+    async createProgramBrief(file: File) {
+        let user = this.context.rootState.Auth.user as firebase.User | null
+        if (!user)
+            throw new Error('User not logged in')
         if (!this.getCurrentEmployerProgram)
             throw new Error('Current EmployerProgram is not initialized')
         if (!this.storageRef)
@@ -52,35 +60,75 @@ export default class Fb extends VuexModule {
         // File name
         // Store file in FB Storage
         const fileName = file.name; // should validate the name of the file on the frontend
-        const filePath = `program_briefs/${fileName}`;
+        const filePath = `program_briefs/${user.uid}/${fileName}`;
         const fileRef = this.storageRef.child(filePath);
-        const snapshot = await fileRef.put(file);
-        
-    }
-        
-    reuploadProgramBrief = async (file:File, uid:string):Promise<void> => {
-        // delete file in FB Storage
-        // upload new file
-        await this.createProgramBrief(file);
+        await fileRef.put(file);
+        const index = _.findIndex(this.getCurrentEmployerProgram.programBrief!, ['name', fileName]);
+        if (index < 0) {
+            const newProgramBrief = [...this.getCurrentEmployerProgram.programBrief!, {
+                name: fileName,
+                link: filePath
+            }]
+            return {
+                programBrief: newProgramBrief
+            };
+        } else {
+            this.getCurrentEmployerProgram.programBrief![index].link = filePath;
+            const newProgramBrief = [...this.getCurrentEmployerProgram.programBrief!]
+            return {
+                programBrief: newProgramBrief
+            };
+        }
     }
 
-    deleteProgramBrief = async (empProgramId:string):Promise<void> => {
+    async reuploadProgramBrief(file:File) {
+        // upload new file
+        await this.createProgramBrief(file)
+    }
+
+    @Action({ commit: 'updateEmployerProgram' })
+    async deleteProgramBrief (fileName: string){
+        let user = this.context.rootState.Auth.user as firebase.User | null
+        if (!user)
+            throw new Error('User not logged in')
+        if (!this.getCurrentEmployerProgram)
+            throw new Error('Current EmployerProgram is not initialized')
         if (!this.storageRef)
-            return;
-        let path: string;
-        const snapshot = await this.firestore.collection('EmployerProgram').doc(empProgramId).get();
-        if (snapshot.exists) {
-            const d = snapshot.data()!
-            // get that stupid ass link 
-            path = "temp"
+            throw new Error('Can\'t find cloud storage ref')
+
+        const index = _.findIndex(this.getCurrentEmployerProgram.programBrief, ['name', fileName]);
+        if (index < 0) {
+            throw new Error('file with associated name does not exist')
         } else {
-            throw new Error("err msg")
+            await this.storageRef.child(`program_briefs/${user.uid}/${fileName}`).delete();
+            const newProgramBriefs = _.remove(this.getCurrentEmployerProgram.programBrief, (n: any)  => n.name === fileName);
+            return newProgramBriefs;  
         }
-        // call a rest api to delete that file: https://cloud.google.com/storage/docs/deleting-objects
+    }
+
+    // we have to ask them to resubmit the brief because firebase storage doesnt support rename
+    @Action({ commit: 'updateEmployerProgram' })
+    async renameBrief(newFile: File, originalFileName: string){
+        await this.createProgramBrief(newFile);
+        await this.deleteProgramBrief(originalFileName);
+    }
+
+    @Action( { commit: 'updateProject'})
+    async addRating(rating:number, uid:string) {
+        // StudentProject.rating = rating
+    }
+
+    @Action({ commit: 'updateEmployerProgram' })
+    async externshipAgenda(textEntry:AgendaTemplate, employerProgramUID:string){
+        return {
+            externshipAgenda: textEntry
+        }
+    }
+
+    async viewExternshipAgenda(eventCompleted:Event, uid:string){
+        // Event
     }
 }    
-
-const renameBrief = async (name:string, uid:string):Promise<void> => {}
 
 const uploadVideo = async (url:string):void => {
     // check link
@@ -88,7 +136,6 @@ const uploadVideo = async (url:string):void => {
         throw("link does not exist")
     // upload video
 }
-
 
 /**
  *Updates Case Study for creation and removal
@@ -99,21 +146,3 @@ const uploadVideo = async (url:string):void => {
 const updateCaseStudy = async (link:NamedLink[], uid:string) => {
     // update EmployerProgram.programBrief with link
 }
-
-const addRating = async (rating:number, uid:string):Promise<void> => {
-    // StudentProject.rating = rating
-}
-
-const externshipAgenda = async (textEntry:AgendaTemplate, uid:string):Promise<void></void> => {
-    // EmployerProgram.externshipDayAgenda = textEntry
-}
-
-const viewExternshipAgenda = async (eventCompleted:Event, uid:string) => {
-    // Event
-}
- 
-
-
-
-
-
