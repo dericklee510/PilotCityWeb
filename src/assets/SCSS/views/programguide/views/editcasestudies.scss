@@ -1,0 +1,181 @@
+#editcasestudies{
+
+    position: relative;
+    &__icon{
+        width: 86.25px;
+        height: 83.26px;
+        position: absolute;
+        margin-top: 23px;
+    }
+
+    &__contain{
+        height: 100%;
+        border: 0.75px solid #000000;
+        margin-top: 69.29px;
+        margin-bottom: 49.29px;
+        padding-left: 0%;
+        padding-right: 0%;
+    }
+
+    &__box{
+            
+        width: 728.24px;
+        height: 41.81px;
+        margin-left: 8.5%;
+        padding-left: 41.8%;
+        padding-top:0.5%;
+        border: 0.375px dashed #231F20;
+        margin-top: 1.5%;
+    }
+
+    
+}
+
+
+.editcasestudies{
+
+        &__title{
+        
+        margin-top:56.78px ;
+        font-family: 'Raleway';
+        font-style: normal;
+        font-weight: 900;
+        font-size: 1.41rem;
+        line-height: 26px;
+        color: #000000;
+        width: 75%;
+        text-align: center;
+        letter-spacing: .05rem;
+    
+        }
+
+
+        &__borderline{
+        
+            border-spacing: 0px;
+            position: relative;
+
+            border: 0.75px solid #000000;
+            border-top-color: transparent;
+            border-left-color: transparent;
+            border-right-color: transparent;
+            padding-top: 0%;
+            
+        }
+
+        &__description{
+        
+            margin-top: 5%;
+            font-family: Raleway;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 1.41rem;
+            color: #949598;
+            width: 80%;
+            text-align: center;
+            line-height: unset;
+        
+        }
+
+
+        &__titlename{
+
+            margin-left: 10%;
+            margin-top: 6.9%;
+            font-family: Raleway;
+            font-style: normal;
+            font-weight: 800;
+            font-size: 0.94rem;
+            line-height: 18px;
+            color: #231F20;
+
+        }
+
+        &__titleurl{
+
+            margin-left: 34.5%;
+            margin-top: 6.9%;
+            font-family: Raleway;
+            font-style: normal;
+            font-weight: 800;
+            font-size: 0.94rem;
+            line-height: 18px;
+            color: #231F20;
+
+        }
+
+        &__plustext{
+            width: 15.01px;
+            height: 15.01px;
+            padding-left: 0%;
+            padding-right: 0%;
+            padding-top: 0%;
+            padding-bottom: 0%;
+            margin-left: 45.98px;
+        }
+
+        &__inputlinkname{
+            width: 352.12px;
+            height: 41.81px;
+            margin-left: 10px;
+            border: 0.375px solid #000000;
+            text-align: left;
+
+            font-family: Raleway;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 15px;
+            line-height: 18px;
+            /* identical to box height */
+            color: #231F20;
+
+            padding-left: 2.4%;
+
+
+        }
+
+        &__inputlinkurl{
+            margin-left: 3%;
+            width: 352.12px;
+            height: 41.81px;
+            border: 0.375px solid #000000;
+            text-align: left;
+
+            font-family: Raleway;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 15px;
+            line-height: 18px;
+            /* identical to box height */
+            color: #231F20;
+
+            padding-left: 2.4%;
+
+            margin-right: 1%;
+
+
+
+        }
+
+        &__savebutton{
+            //border box
+            width: 374.24px;
+            height: 73.5px;
+            border: 0.75px solid #231F20;
+
+            //for font 
+            font-family: Raleway;
+            font-style: normal;
+            font-weight: 900;
+            font-size: 30px;
+            line-height: 35px;
+            color: #231F20;
+
+            //to make the border 
+            margin-top: 8%;
+            margin-left: 29%;
+            margin-bottom: 4.5%;
+        }
+        
+
+}

@@ -4,11 +4,11 @@ import { FbStore, AuthStore, StorageStore } from '@/store/index'
 
 
 export function updateUserPhotoUrl(filepath: string): Promise<void> {
-    if (!AuthStore.user || !FbStore.userDoc) {
+    if (!AuthStore.user || !FbStore.userDocRef) {
         throw ('Not logged in!')
     }
     const AuthStoreUser = AuthStore.user as firebase.User
-    const FbStoreUserDoc = FbStore.userDoc as firebase.firestore.DocumentReference
+    const FbStoreUserDoc = FbStore.userDocRef as firebase.firestore.DocumentReference
     const ref = StorageStore.bucketRef.child(filepath)
     return ref.getDownloadURL().then((photoURL: string) => {
         AuthStoreUser.updateProfile({

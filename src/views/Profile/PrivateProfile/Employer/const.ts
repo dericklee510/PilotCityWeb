@@ -1,4 +1,5 @@
-type Constructable = new (...args: any[]) => object;
+import { Constructable } from './../../../../utilities/classes/index';
+
 export class CONST {
     ORGANIZATION_INDUSTRY_OPTIONS = [
         'Agriculture and Natural Resources',
