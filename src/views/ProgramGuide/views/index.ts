@@ -39,7 +39,6 @@ import DemoVideoSubmit from "@/views/ProgramGuide/views/Demovideo/demovideo_ente
 
 import ProgramList from "@/views/Myprograms/myprograms.vue"
 import ProgramLaunch from "@/views/Myprograms/launcher.vue"
-import
 export const MyPrograms = {
     ProgramList,
     ProgramLaunch
