@@ -5,7 +5,7 @@
         id="agenda_view__icon"
         class="agenda_view__image"
         src="@/assets/icons/agenda.png"
-      />
+      >
     
       <v-col
         id="agenda_view__contain"

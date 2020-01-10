@@ -179,7 +179,7 @@ import { EventItem } from '@/store/Database/types/utilities'
 export default class ExternshipAgenda extends Vue{
   agendaItems:EventItem[] = [{
   name:"",
-  duration: 0,
+  duration: "",
   description:"",
   completed:false
 }]

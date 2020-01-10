@@ -27,7 +27,7 @@
       >
         Develop a final presentation and enter the link. You can use it to present to employers, customers or who you wish.
       </v-row>
-      <ValidationObserver v-slot="{invalid, validate}">
+      <ValidationObserver v-slot="{invalid, validate, valid}">
         <v-row
           justify="center"
           class="mr-auto ml-auto mt-12 mb-12"
@@ -42,12 +42,15 @@
               id="urlInput"
               v-model="inputUrl"
               v-stream:input="inputChange$"
-              :error-messages="errors"
+              :error-messages="valid?result:errors"
+              :success="valid"
+              :success-messages="result"
+              :loading="loading"
+              :color="color"
               placeholder="https://"
             />
           </ValidationProvider>
         </v-row>
-  
         <v-row
           justify="center"
           class="ml-auto mr-auto presentation_enter__check"
@@ -126,28 +129,29 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import { pluck, switchMap, debounceTime } from "rxjs/operators";
+import { pluck, switchMap, debounceTime, filter } from "rxjs/operators";
 import { Subject, from } from "rxjs";
-import { ValidationObserver, ValidationProvider } from 'vee-validate';
+import { ValidationObserver, ValidationProvider,validate } from 'vee-validate';
 import { TextEnter } from '../../components';
+import {isLinkValid} from "@/api"
+import {filterByPromise} from "filter-async-rxjs-pipe"
 interface nativeEvent {
   data: undefined;
   event: {
     msg: string;
     name: string;
   };
-}@Component<PresentationEnter>({
+}
+@Component<PresentationEnter>({
   domStreams: ["inputChange$"],
   subscriptions() {
     return {
-      // result: this.inputChange$.pipe(
-      //   debounceTime(300),
-      //   pluck<nativeEvent,string>("event","msg"),
-      //   switchMap(value => from(this.checkUrl(value)))
-      //   )
-      result:this.inputChange$.pipe(
-        pluck<nativeEvent,string>("event","msg")
-      )
+      result: this.inputChange$.pipe(
+        debounceTime(300),
+        pluck<nativeEvent,string>("event","msg"),
+        filterByPromise(async (value) => (await validate(value,'required|url')).valid),
+        switchMap(value => from(this.checkUrl(value)))
+        )
     };
   },
   components:{
@@ -156,39 +160,35 @@ interface nativeEvent {
   }
 })
 export default class PresentationEnter extends TextEnter {
+  loading:boolean=false
   checkbox:boolean = false
   inputChange$!: Subject<nativeEvent>;
   result!: string;
   inputUrl:string = ""
   url: string = "";
+  color: "success" |  "error" = "success"
   success?:boolean
   async checkUrl(URL: string) {
     this.loading = true;
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       setTimeout(() => {
         reject("Could not verify URL, server timeout");
       },2000);
       try {
-      var request
-      if (window.XMLHttpRequest) request = new XMLHttpRequest();
-      else request = new ActiveXObject("Microsoft.XMLHTTP");
-      request.open("GET", URL, false);
-      request.setRequestHeader(
-    'X-Custom-Header', 'value');
-      request.send(); // there will be a 'pause' here until the response to come.
-      // the object request will be actually modified
-      if (request.status === 404) {
-        reject("URL does not exist");
-      } else resolve("Link Exists");
+        isLinkValid(URL).then(value => value?resolve("Link is verified"):reject("Link does not exist"))
       }catch{
         reject("Could not verify URL, exception occured")
       }
     }).then(value => {
       this.success = true
+      this.color = "success"
       return value
     }).catch(error => {
       this.success= false
+      this.color = "error"
       return error
+    }).finally(() =>{
+      this.loading = false
     })
   }
 }

@@ -72,7 +72,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { NamedLink, ReviewedLink } from '../../../store/Database/types/utilities'
+import { NamedLink, ReviewedLink } from '@/store/Database/types/utilities'
 @Component
 export default class ViewCaseStudies extends Vue{
     namedLinks:ReviewedLink[] = [{

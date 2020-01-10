@@ -84,14 +84,14 @@
 import Vue from "vue";
 import "reflect-metadata";
 import Component from "vue-class-component";
-import { Event } from "../../../store/Database/types/utilities";
+import { EventItem } from "../../../store/Database/types/utilities";
 import { PropSync, Watch } from "vue-property-decorator";
 @Component
 export default class AgendaView extends Vue {
   @PropSync("value")
-  syncedAgenda!: Event[];
+  syncedAgenda!: EventItem[];
   
-  static emptyAgenda: Event[] = [
+  static emptyAgenda: EventItem[] = [
     {
       name: "",
       duration: "",

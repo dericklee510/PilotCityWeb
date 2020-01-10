@@ -102,7 +102,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import {PCmultiinput} from "@/components/inputs"
-import { NamedLink } from '../../../store/Database/types/utilities'
+import { NamedLink } from '@/store/Database/types/utilities'
 
 interface NamedLinkID extends NamedLink {
   id:number

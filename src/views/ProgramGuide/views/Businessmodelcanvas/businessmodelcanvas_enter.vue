@@ -51,7 +51,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { ValidationProvider, ValidationObserver } from 'vee-validate'
 import {BusinessModelCanvas as BusinessModelCanvasComp} from "./components"
-import { BusinessModelCanvas } from '../../../store/Database/types/utilities'
+import { BusinessModelCanvas } from '@/store/Database/types/utilities'
 @Component({
   components:{
     ValidationProvider,
@@ -64,7 +64,7 @@ export default class businessmodelcanvas_enter extends Vue{
     problem:"",
     solution:"",
     innovation:"",
-    cost:""
+    customer:""
   }
 }
 </script>

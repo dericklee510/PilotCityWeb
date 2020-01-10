@@ -181,7 +181,10 @@
         class="mr-auto ml-auto"
         cols="5"
       >
-        <button class="launcher__button mb-10" @click="launchProgram">
+        <button
+          class="launcher__button mb-10"
+          @click="launchProgram"
+        >
           LAUNCH
         </button>
       </v-col>

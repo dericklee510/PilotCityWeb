@@ -29,27 +29,47 @@
         As you practice, use and apply the employer's product or service, log how many minutes you use it each time.
       </v-row>
 
-
-
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto mt-10 mb-5"
-      >
-        <input
-          class="logtime__input"
-          placeholder="0m"
+      <ValidationObserver v-slot="{invalid, reset}">
+        <v-row
+          justify="center"
+          class
         >
-      </v-row>
+          <v-col
+            align-self="center"
+            cols="8"
+            sm="6"
+            md="4"
+          >
+            <ValidationProvider
+              v-slot="{errors}"
+              rules="required|min:2|max:3|isTimeNumerical|isTime"
+              class="logtime__input"
+            >
+              <v-text-field
+                v-model="timeInput"
+                label="Enter Time"
+                :error-messages="errors"
+                outlined
+                height="100px"
+                placeholder="0m"
+              />
+            </ValidationProvider>
+          </v-col>
+        </v-row>
 
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto mt-5 mb-5"
-      >
-        <button class="logtime__button">
-          LOG TIME
-        </button>
-      </v-row>
-
+        <v-row
+          justify="center"
+          class
+        >
+          <v-btn
+            class="logtime__button"
+            :disabled="invalid"
+            @click="addTime();reset()"
+          >
+            LOG TIME
+          </v-btn>
+        </v-row>
+      </ValidationObserver>
       <v-row
         justify="center"
         class="mr-auto ml-auto mt-10 logtime__label"
@@ -61,7 +81,7 @@
         justify="center"
         class="mr-auto ml-auto mt-2 mb-7 logtime__calculated"
       >
-        1h 30m
+        {{ timeOutput }}
       </v-row>
     </v-col>
   </v-row>
@@ -72,10 +92,56 @@
 
 
 <script lang="ts">
-import Vue from 'vue'
-import Component from 'vue-class-component'
-@Component
-export default class logtime extends Vue{
-    
+import Vue from "vue";
+import Component from "vue-class-component";
+import { ValidationObserver, ValidationProvider, extend } from "vee-validate";
+import { isNumber } from "util";
+import { TimeLog } from '@/store/Database/types/utilities';
+import {firebase} from "@/firebase/init"
+extend("isTime", {
+  message: `Must end with an "h" or an "m"`,
+  validate: (val: string) =>
+    ["h", "m"].map(char => char === val.charAt(val.length - 1)).some(val => val)
+});
+extend("isTimeNumerical", {
+  message: "Must be numeric",
+  validate: (val: string) =>
+    val.length >= 2
+      ? [...Array(val.length - 1).keys()]
+          .map(index => val.charAt(index))
+          .every(char => !isNaN(parseInt(char)))
+      : false
+});
+@Component({
+  components: {
+    ValidationObserver,
+    ValidationProvider
+  }
+})
+export default class logtime extends Vue {
+  timeInput: string = "";
+  timeLog:TimeLog[] = []
+  get totalTime(){
+    return this.timeLog.reduce((sum,entry) => sum+=entry.minutes,0)
+  }
+  get timeOutput() {
+    return `${Math.floor(this.totalTime / 60)}h ${this.totalTime % 60}m`;
+  }
+  addTime() {
+    switch (this.timeInput.charAt(this.timeInput.length - 1)) {
+      case "m":
+        this.timeLog.push({
+          minutes:parseInt(this.timeInput),
+          lastUpdate: firebase.firestore.Timestamp.fromDate(new Date())
+        })
+        break;
+      case "h":
+        this.timeLog.push({
+          minutes:parseInt(this.timeInput)*60,
+          lastUpdate:firebase.firestore.Timestamp.fromDate(new Date())
+        })
+    }
+    this.timeInput=""
+  }
 }
 </script>

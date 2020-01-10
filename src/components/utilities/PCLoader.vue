@@ -18,7 +18,7 @@ type filter<T> = (value: T) => boolean;
 export default class Loader extends Vue {
   loading: boolean = false;
   onSuccess: boolean = false;
-  result: any;
+  result: any = null
   async setLoader<cbType>(
     callback: (...args: any[]) => Promise<cbType>,
     onSuccess?: {
@@ -56,14 +56,6 @@ export default class Loader extends Vue {
       .finally(() => {
         this.loading = false;
       });
-  }
-  get slotProps() {
-    return {
-        loading:this.loading,
-onSuccess:this.onSuccess,
-result:this.result,
-setLoader:this.setLoader
-    }
   }
 }
 </script>

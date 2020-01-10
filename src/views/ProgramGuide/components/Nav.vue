@@ -260,8 +260,8 @@
       :key="main+index"
       no-gutters
     > 
-      <!-- if index == 1, don't show this "bridge" -->
-      <!-- <v-col>
+      if index == 1, don't show this "bridge"
+    <v-col>
         <v-col class="guide__bridge" />
       </v-col>
       <v-col class="guide__mainrow">
@@ -324,7 +324,7 @@ export default class Nav extends Vue {
   public updateProgram(name: string) {
     this.$emit('input', name )
   }
-  public PROGRAMNAMES = { // for reference
+  public PROGRAMNAMES:Record<string,string[]> = { // for reference
     'Externship': [
       'Agenda',
       'Brief',

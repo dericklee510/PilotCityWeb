@@ -196,13 +196,14 @@ import Component from "vue-class-component";
 import "reflect-metadata";
 import { Prop, PropSync, Watch } from "vue-property-decorator";
 import { ValidationProvider, ValidationObserver } from "vee-validate";
+import { BusinessModelCanvas } from '@/store/Database/types/utilities';
 @Component({
   components: {
     ValidationProvider,
     ValidationObserver
   }
 })
-export default class BusinessModelCanvas extends Vue {
+export default class BusinessModelCanvasComp extends Vue {
   @Prop()
   stars!: {
     problem: number;
@@ -215,12 +216,7 @@ export default class BusinessModelCanvas extends Vue {
   @Prop()
   readonly?: string;
   @PropSync("stars")
-  syncedStars!: {
-    problem: number;
-    solution: number;
-    innovation: number;
-    cost: number;
-  };
+  syncedStars!: Record<keyof BusinessModelCanvas,Number>
 
   @Watch("syncedStars", { deep: true })
   onStarsChanged(newVal: BusinessModelCanvas) {
@@ -232,7 +228,7 @@ export default class BusinessModelCanvas extends Vue {
         problem: 0,
         solution: 0,
         innovation: 0,
-        cost: 0
+        customer: 0
       };
   }
 }

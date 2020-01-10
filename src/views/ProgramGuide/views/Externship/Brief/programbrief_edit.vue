@@ -32,7 +32,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import BriefCard_edit from './components/BriefCard_edit.vue'
-import { PCmultiinput } from '../../../components/inputs'
+import { PCmultiinput } from '@/components/inputs'
 
 
 @Component(({

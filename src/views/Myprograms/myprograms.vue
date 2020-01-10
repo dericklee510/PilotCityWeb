@@ -28,7 +28,10 @@
               <v-row class="myprograms__progressbaractive" />
             </v-col>
             <v-col cols="3">
-              <button class="myprograms__cardbutton" @click="openprogram">
+              <button
+                class="myprograms__cardbutton"
+                @click="openprogram"
+              >
                 Open
               </button>
             </v-col>

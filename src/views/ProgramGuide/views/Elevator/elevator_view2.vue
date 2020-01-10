@@ -60,8 +60,6 @@
   </v-row>
 
   <!-- <v-col class="mr-auto ml-auto" cols="5"><button class="elevator_view2__button mb-10">SAVE</button></v-col> -->
-  </v-col>
-  </v-row>
 </template>
 
 
@@ -71,8 +69,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { Rating } from '../components'
-import { team_snippet } from '../components/Rating.vue'
+import { Rating } from '../../components'
+import { team_snippet } from '../../components/Rating.vue'
 @Component({
   components:{
     Rating

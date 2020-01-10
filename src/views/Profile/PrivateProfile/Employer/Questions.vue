@@ -1,10 +1,16 @@
 <template>
   <v-card class="pc-container pc-profile-page--dark">
     <!-- probably going to use Doka here.... -->
+    <<<<<<< HEAD
     <img
       id="profileBanner"
+      id="profileBanner"
+      src="@/assets/PC_user_banner.png"
+      alt="======"
+      <img
       src="@/assets/PC_user_banner.png"
       alt
+    >>>>>>> page/introvideo
     >
     <v-container>
       <v-row>
