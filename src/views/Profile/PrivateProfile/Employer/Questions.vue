@@ -1,16 +1,11 @@
 <template>
   <v-card class="pc-container pc-profile-page--dark">
     <!-- probably going to use Doka here.... -->
-    <<<<<<< HEAD
+
     <img
       id="profileBanner"
-      id="profileBanner"
-      src="@/assets/PC_user_banner.png"
-      alt="======"
-      <img
       src="@/assets/PC_user_banner.png"
       alt
-    >>>>>>> page/introvideo
     >
     <v-container>
       <v-row>
@@ -1240,7 +1235,7 @@ const app = CONST.addConst(Vue);
 })
 export default class EmployerProfile extends app {
   profile_img_url: string = "";
-  loading:boolean = false
+  loading: boolean = false;
   private CITIZENSTYLES = {
     Teacher: "citizen-id__type--teacher",
     Employer: "citizen-id__type--employer",
