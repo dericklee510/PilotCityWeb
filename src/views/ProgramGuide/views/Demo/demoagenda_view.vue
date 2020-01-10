@@ -3,7 +3,7 @@
     <img
       id="agenda_view__icon"
       class="agenda_view__image"
-      src="@/assets/agenda.png"
+      src="@/assets/icons/agenda.png"
     >
 
     <v-col
@@ -16,7 +16,7 @@
         justify="center"
         class="mr-auto ml-auto agenda_view__title"
       >
-        AGENDA
+        DEMO DAY AGENDA
       </v-row>
 
       <!-- BORDERLINE -->
@@ -32,7 +32,7 @@
       >
         Enter your agenda for the event or activity.
       </v-row>
-
+      <agenda-view v-model="agendaItems" />
       <!-- DESCRIPTION -->
 
       <!-- <v-row 
@@ -247,10 +247,26 @@
 
 
 <script lang="ts">
-import Vue from 'vue'
-import Component from 'vue-class-component'
-@Component
-export default class agenda extends Vue{
-    
+import Vue from "vue";
+import Component from "vue-class-component";
+import { AgendaView } from "../../components";
+@Component({
+  components: {
+    AgendaView
+  }
+})
+export default class DemoAgendaView extends Vue {
+  agendaItems = [...AgendaView.emptyAgenda,{
+    name:"stuff",
+    description:"",
+    duration:"",
+    completed:true
+  }
+  ,{
+    name:"stuff",
+    description:"",
+    duration:"",
+    completed:true
+  }];
 }
 </script>

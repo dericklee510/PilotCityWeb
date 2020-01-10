@@ -1,13 +1,35 @@
+.programguide{
+    height: calc(100vh - 64px) !important;
+}
 .guide{
-    
+    &__viewer-container{
+        position: relative;
+        height: 100%;
+    }
+    &__locks{
+        z-index: 1000;
+        height: 100%;
+        position: absolute;
+        &--right{
+            right: 0;
+        }
+        &--left{
+            left: 0
+        }
+    }
+}
+.guide{
     &__bar{
+        // min-height: 100vh;
+        // box-sizing: border-box;
+        padding: 5% 0%;
         height: 100%;
         background-color: transparent;
         border-right: 1px solid #404142;
         border-bottom: 1px dashed #404142;
         overflow: auto;
-        min-width: max-content;
-        max-width: max-content;
+        min-width: fit-content;
+        max-width: fit-content;
     }
 
     &__bar > .col{
@@ -30,8 +52,8 @@
     }
 
     &__subrow{
-        margin-top: 5px;
-        margin-bottom:5px;
+        // margin-top: 5px;
+        // margin-bottom:5px;
 
         // Makes it so that dot stays put
         position: relative;
@@ -59,7 +81,7 @@
         text-transform: uppercase;
         letter-spacing: 1.5px;
         padding-top: 2px;
-        // margin: 15px 0px 15px 0px;
+        margin: 10px 0px;
         // text-align: center;
     }
 

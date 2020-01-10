@@ -1,23 +1,23 @@
 <template>
   <v-row justify="center">
     <img
-      id="presentation_view__icon"
-      src="@/assets/presentation_view.png"
+      id="demovideo_view__icon"
+      src="@/assets/demovideo_view.png"
     >
 
     <v-col
-      id="presentation_view__contain"
+      id="demovideo_view__contain"
       cols="7"
     >
       <v-row
         justify="center"
-        class="mr-auto ml-auto presentation_view__title"
+        class="mr-auto ml-auto demovideo_view__title"
       >
-        ENTER LINK TO PRESENTATION
+        VIEW 1-MINUTE PROTOTYPE DEMONSTRATION VIDEOS
       </v-row>
 
       <v-col
-        id="presentation_view__borderline"
+        id="demovideo_view__borderline"
         cols="12"
       />
 
@@ -27,17 +27,17 @@
         justify="center"
       >
         <v-col
-          class="presentation_view__label"
+          class="demovideo_view__label"
           cols="1"
         />
         <v-col
-          class="presentation_view__label"
+          class="demovideo_view__label"
           cols="6"
         >
           Name
         </v-col>
         <v-col
-          class="presentation_view__label"
+          class="demovideo_view__label"
           cols="3"
         >
           Rate
@@ -47,6 +47,9 @@
       <!-- TEAM -->
 
       <Rating v-model="team" />
+
+     
+      <!-- TEAM -->
     </v-col>
   </v-row>
 </template>
@@ -58,14 +61,15 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { Rating } from '../components'
+import { Rating } from '../../components'
 import { team_snippet } from '../components/Rating.vue'
+Rating
 @Component({
   components:{
     Rating
   }
 })
-export default class presentation_view extends Vue{
+export default class demovideo_view extends Vue{
     team:team_snippet[] = [{
       id:'0',
       name:"Data Analysis for the Alameda Library",

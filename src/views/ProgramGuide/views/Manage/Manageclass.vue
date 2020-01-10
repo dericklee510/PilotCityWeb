@@ -31,7 +31,7 @@
         <button class="manageclass__renamebutton">RENAME</button>
         <button class="manageclass__deletebutton">DELETE</button>
         <span class="manageclass__sharecode"> SKLWEM8730  </span>
-        <button class="manageclass__icon"><img src="@/assets/link.png"></button>
+        <!-- <button class="manageclass__icon"><img src="@/assets/link.png"></button> -->
       </span>
     </v-row>
 
@@ -46,7 +46,7 @@
         <button class="manageclass__renamebutton">RENAME</button>
         <button class="manageclass__deletebutton">DELETE</button>
         <span class="manageclass__sharecode"> MCJFUAL68D  </span>
-        <button class="manageclass__icon"><img src="@/assets/link.png"></button>
+        <!-- <button class="manageclass__icon"><img src="@/assets/link.png"></button> -->
       </span>
     </v-row>
 
@@ -61,7 +61,7 @@
         <button class="manageclass__renamebutton">RENAME</button>
         <button class="manageclass__deletebutton">DELETE</button>
         <span class="manageclass__sharecode"> OUKLBA3GM8  </span>
-        <button class="manageclass__icon"><img src="@/assets/link.png"></button>
+        <!-- <button class="manageclass__icon"><img src="@/assets/link.png"></button> -->
       </span>
 
       <v-row>

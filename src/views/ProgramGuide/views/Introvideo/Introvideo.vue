@@ -27,16 +27,15 @@
       >
         Watch the following introduction video by your employer to get warmed up on what we’re doing.
       </v-row>
-
       <v-row
         justify="center"
         class="mr-auto ml-auto introvideo__video"
-      />
-      <video-player
-        :options="playerOptions"
-        @ended="canBeAcknowldged = true"
-      />
-
+      >
+        <video-player
+          :options="playerOptions"
+          @ended="canBeAcknowldged = true"
+        />
+      </v-row>
       <v-row
         justify="center"
         class="ml-auto mr-auto introvideo__check"

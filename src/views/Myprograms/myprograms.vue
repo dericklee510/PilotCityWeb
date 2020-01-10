@@ -28,7 +28,7 @@
               <v-row class="myprograms__progressbaractive" />
             </v-col>
             <v-col cols="3">
-              <button class="myprograms__cardbutton">
+              <button class="myprograms__cardbutton" @click="openprogram">
                 Open
               </button>
             </v-col>
@@ -120,5 +120,11 @@ export default class myprograms extends Vue {
   get color() {
     return ["error", "warning", "success"][Math.floor(this.progress / 40)];
   }
+  openprogram() {
+        this.$router.push({
+            name: 'program.launch',
+            // params: { citizenType: citizenKey }
+        })
+    }
 }
 </script>

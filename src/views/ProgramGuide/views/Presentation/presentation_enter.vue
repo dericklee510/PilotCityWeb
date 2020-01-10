@@ -129,7 +129,7 @@ import Component from "vue-class-component";
 import { pluck, switchMap, debounceTime } from "rxjs/operators";
 import { Subject, from } from "rxjs";
 import { ValidationObserver, ValidationProvider } from 'vee-validate';
-import { TextEnter } from '../components';
+import { TextEnter } from '../../components';
 interface nativeEvent {
   data: undefined;
   event: {

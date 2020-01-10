@@ -9,7 +9,8 @@
         <v-col
           class="mr-5"
           cols="12"
-          md="2"
+          md="3"
+          lg="2"
           xl="1"
         >
           <div class="briefcard__cover" />

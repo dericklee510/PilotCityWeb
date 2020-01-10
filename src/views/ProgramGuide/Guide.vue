@@ -1,23 +1,45 @@
 <template>
-  <v-row no-gutters>
+  <v-row
+    no-gutters
+    class="programguide"
+  >
     <v-col
       cols="1"
+      sm="3"
       md="2"
-      class="d-sm-block"
+      xl="1"
+      class="d-sm-block d-none"
     >
-      <Nav v-model="currentProgram" />
-    </v-col>
-    <v-col cols="1">
-      <Lock />
+      <Nav />
     </v-col>
     <v-col
-      cols="9"
-      md="8"
+      xl="11"
+      md="10"
+      sm="9"
+      cols="11"
     >
-      <router-view :name="currentProgram" /> 
-    </v-col>
-    <v-col cols="1">
-      <Unlock />
+      <v-row
+        no-gutters
+        class="guide__viewer-container"
+      >
+        <v-col
+          cols="1"
+          class="guide__locks guide__locks--left"
+        >
+          <Unlock />
+        </v-col>
+        <v-col
+          cols="12"
+        >
+          <router-view /> 
+        </v-col>
+        <v-col
+          cols="1"
+          class="guide__locks guide__locks--right"
+        >
+          <Lock />
+        </v-col>
+      </v-row>
     </v-col>
   </v-row>
 </template>

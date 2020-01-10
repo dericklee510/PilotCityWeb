@@ -16,7 +16,7 @@
         justify="center"
         class="mr-auto ml-auto agenda__title"
       >
-        TRAINING DAY AGENDA
+        EXTERNSHIP DAY AGENDA
       </v-row>
 
       <!-- BORDERLINE -->
@@ -25,6 +25,7 @@
         cols="12"
         class="agenda__borderline"
       />
+
       <v-row
         justify="center"
         class="mr-auto ml-auto businessmodelcanvas_view2__description"
@@ -59,40 +60,31 @@
         </v-row> -->
 
       <!-- AGENDA ITEM -->
-      <Agenda v-if="getRole == 'Student'" />
-      <!-- require getRole Utility -->
-      
-      <AgendaView v-else />
-      <!-- LOG TIME / COULD DELETE -->
 
-      <!-- <v-row justify="center" class="mr-auto ml-auto mt-10 mb-5"><input class="agenda__input" placeholder="0m"></v-row>
-
-        <v-row justify="center" class="mr-auto ml-auto mt-5 mb-5"><button class="agenda__button">LOG TIME</button></v-row>
-
-        <v-row justify="center" class="mr-auto ml-auto mt-10 agenda__label">LOGGED TIME</v-row>
-
-        <v-row justify="center" class="mr-auto ml-auto mt-2 mb-7 agenda__calculated">1h 30m</v-row> -->
+      <Agenda v-model="entries" />
     </v-col>
   </v-row>
 </template>
 
 
-
-
-
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
+import { PCmultiinput } from '@/components/inputs'
 import {EventItem} from "@/store/Database/types/utilities"
-import { PCmultiinput } from '../../../components/inputs'
+import {Agenda} from "@/views/ProgramGuide/components/"
 const emptyAgenda:Omit<EventItem,'completed'> = {
   name:"",
   duration:"",
   description:""
 }
-const app = PCmultiinput.createMultiInput(emptyAgenda)
-@Component
-export default class TrainingAgenda extends Vue{
-    
+
+@Component({
+  components:{
+    Agenda
+  }
+})
+export default class ExternshipAgendaEdit extends Vue{
+    entries:Omit<EventItem,'completed'>[] = [emptyAgenda]
 }
 </script>

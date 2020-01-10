@@ -83,7 +83,7 @@
 <script lang="ts">
 import Vue, {Component as VueComponent} from "vue";
 import Component from "vue-class-component";
-import { PCmultiinput } from "../../../../components/inputs";
+import { PCmultiinput } from "@/components/inputs";
 import { VFileInput } from 'vuetify/lib';
 
 interface ProgramBrief {

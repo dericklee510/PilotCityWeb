@@ -3,7 +3,7 @@
     <img
       id="agenda__icon"
       class="agenda__image"
-      src="@/assets/agenda.png"
+      src="@/assets/icons/agenda.png"
     >
 
     <v-col
@@ -16,7 +16,7 @@
         justify="center"
         class="mr-auto ml-auto agenda__title"
       >
-        HACK DAY AGENDA
+        TRAINING DAY AGENDA
       </v-row>
 
       <!-- BORDERLINE -->
@@ -25,12 +25,11 @@
         cols="12"
         class="agenda__borderline"
       />
-
       <v-row
         justify="center"
         class="mr-auto ml-auto businessmodelcanvas_view2__description"
       >
-        Enter your agenda for the event or activity.
+        As you practice, use and apply the employer's product or service, log how many minutes you use it each time.
       </v-row>
 
       <!-- DESCRIPTION -->
@@ -59,9 +58,9 @@
 
         </v-row> -->
 
- 
-
-
+      <!-- AGENDA ITEM -->
+      <Agenda />
+      <!-- require getRole Utility -->
       <!-- LOG TIME / COULD DELETE -->
 
       <!-- <v-row justify="center" class="mr-auto ml-auto mt-10 mb-5"><input class="agenda__input" placeholder="0m"></v-row>
@@ -71,7 +70,6 @@
         <v-row justify="center" class="mr-auto ml-auto mt-10 agenda__label">LOGGED TIME</v-row>
 
         <v-row justify="center" class="mr-auto ml-auto mt-2 mb-7 agenda__calculated">1h 30m</v-row> -->
-      <Agenda v-model="entries" />
     </v-col>
   </v-row>
 </template>
@@ -83,18 +81,16 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { Agenda } from '../components'
-const emptyAgenda:Omit<Event,'completed'> = {
+import {EventItem} from "@/store/Database/types/utilities"
+import { PCmultiinput } from '@/components/inputs'
+const emptyAgenda:Omit<EventItem,'completed'> = {
   name:"",
   duration:"",
   description:""
 }
-@Component({
-  components:{
-    Agenda
-  }
-})
-export default class agenda extends Vue{
-    entries:Omit<Event,'completed'>[] = [emptyAgenda]
+const app = PCmultiinput.createMultiInput(emptyAgenda)
+@Component
+export default class TrainingAgenda extends Vue{
+    
 }
 </script>

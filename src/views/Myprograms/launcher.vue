@@ -181,7 +181,7 @@
         class="mr-auto ml-auto"
         cols="5"
       >
-        <button class="launcher__button mb-10">
+        <button class="launcher__button mb-10" @click="launchProgram">
           LAUNCH
         </button>
       </v-col>
@@ -197,7 +197,12 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 @Component
-export default class businessmodelcanvas_view2 extends Vue{
-    
+export default class ProgramLauncher extends Vue{
+    launchProgram() {
+        this.$router.push({
+            name: 'teach-externship-agenda',
+            // params: { citizenType: citizenKey }
+        })
+    }
 }
 </script>

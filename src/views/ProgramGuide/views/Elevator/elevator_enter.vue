@@ -114,7 +114,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { TextEnter } from '../components'
+import { TextEnter } from '../../components'
 @Component
 export default class elevator_enter extends TextEnter{
     

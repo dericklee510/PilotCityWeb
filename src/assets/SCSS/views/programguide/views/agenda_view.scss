@@ -285,8 +285,11 @@
 
 
             &__button{
-                width: 275px;
+                max-width: 275px;
+                width: 100%;
+                display: block;
                 height: 50px;
+                display: inline-block;
                 // border: 1px solid #000000;
                 font-family: 'Raleway';
                 font-size: 1rem;

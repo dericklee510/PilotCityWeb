@@ -31,7 +31,7 @@
                     <h2
                       class="text-capitalize pr-5 pl-5"
                     >
-                      {{ citizenType }}
+                      {{ $route.params.citizenType }}
                     </h2>
                   </v-btn>
                 </v-col>
@@ -128,7 +128,7 @@
             class="pc-button"
             text
             outlined
-            :to="{name: 'profile.private', params: {citizenType: citizenType}}"
+            :to="{name: 'program.programlist'}"
           >
             <h3 class="text-center">
               NEXT

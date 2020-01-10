@@ -75,10 +75,9 @@ export default class CitizenType extends Vue {
     selectCitizenType(citizenKey: string) {
         localStorage.citizenType = citizenKey
         this.$router.push({
-            name: 'profile.private',
+            name: 'signup.data',
             params: { citizenType: citizenKey }
         })
-        this.$router.push
     }
 }
 </script>
