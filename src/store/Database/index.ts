@@ -1,8 +1,9 @@
+import { isLinkValid } from './../../api';
 import { AgendaTemplate, NamedLink, EventItem } from './types/utilities';
 /* eslint-disable-next-line */
 import { Module, VuexModule, Action, Mutation } from "vuex-module-decorators" //action unused
 import { firebaseApp as fb } from '@/firebase/init'
-import { EmployerProgram } from './types/types' 
+import { EmployerProgram } from './types/types'
 const _ = require('lodash');
 
 
@@ -16,6 +17,7 @@ export default class Fb extends VuexModule {
         let user = this.context.rootState.Auth.user as firebase.User | null
         return (user) ? this.firestore.collection('users').doc(user.uid) : null
     }
+
     get storageRef() {
         let user = this.context.rootState.Auth.user as firebase.User | null
         return (user) ? this.storage.ref() : null
@@ -42,17 +44,17 @@ export default class Fb extends VuexModule {
         let user = this.context.rootState.Auth.user as firebase.User | null
         if (!user) throw new Error('User not logged in')
         await this.firestore.collection('Project').doc(currentProjectID).update(property);
-        
+
         // this.employerProgram = Object.assign(property, this.employerProgram);
     }
 
-    @Action({ commit: 'initEmployerProgram'})
+    @Action({ commit: 'initEmployerProgram' })
     async fetchEmployerProgram() {
         let user = this.context.rootState.Auth.user as firebase.User | null
         if (!user) throw new Error('Not authorized')
         const snapshot = await this.firestore.collection('EmployerProgram').doc(user.uid).get();
-        if (!snapshot.exists) { 
-            return null ;
+        if (!snapshot.exists) {
+            return null;
         } else {
             return snapshot.data()
         }
@@ -91,13 +93,13 @@ export default class Fb extends VuexModule {
         }
     }
 
-    async reuploadProgramBrief(file:File) {
+    async reuploadProgramBrief(file: File) {
         // upload new file
         await this.createProgramBrief(file)
     }
 
     @Action({ commit: 'updateEmployerProgram' })
-    async deleteProgramBrief (fileName: string){
+    async deleteProgramBrief(fileName: string) {
         let user = this.context.rootState.Auth.user as firebase.User | null
         if (!user)
             throw new Error('User not logged in')
@@ -111,39 +113,66 @@ export default class Fb extends VuexModule {
             throw new Error('file with associated name does not exist')
         } else {
             await this.storageRef.child(`program_briefs/${user.uid}/${fileName}`).delete();
-            const newProgramBriefs = _.remove(this.getCurrentEmployerProgram.programBrief, (n: any)  => n.name === fileName);
-            return newProgramBriefs;  
+            const newProgramBriefs = _.remove(this.getCurrentEmployerProgram.programBrief, (n: any) => n.name === fileName);
+            return newProgramBriefs;
         }
     }
 
     // we have to ask them to resubmit the brief because firebase storage doesnt support rename
     @Action({ commit: 'updateEmployerProgram' })
-    async renameBrief(newFile: File, originalFileName: string){
+    async renameBrief(newFile: File, originalFileName: string) {
         await this.createProgramBrief(newFile);
         await this.deleteProgramBrief(originalFileName);
     }
 
-    @Action( { commit: 'updateProject'})
+    @Action({ commit: 'updateProject'})
     async addRating(ratingName: string, rating:number) {
         // StudentProject.rating = rating
         return {
             [ratingName]: rating
         }
     }
-
+    /**
+     *Will update/create externship agenda
+     *
+     * @param {AgendaTemplate} textEntry
+     * @param {string} employerProgramUID
+     * @returns
+     * @memberof Fb
+     */
     @Action({ commit: 'updateEmployerProgram' })
-    async externshipAgenda(textEntry:AgendaTemplate, employerProgramUID:string){
+    async externshipAgenda(textEntry: AgendaTemplate, employerProgramUID: string) {
         return {
             externshipAgenda: textEntry
         }
     }
-}    
+    @Action({ commit: 'updateEmployerProgram' })
+    async uploadVideo(url: string) {
+        // check link
+        if (await isLinkValid(url))
+            return ({
+                introVideo: url
+            })
+        // upload video
+        throw ("invalid link")
+    }
+
+    @Action({ commit: 'updateEmployerProgram' })
+    async updateCaseStudy(link: NamedLink[], employerProgramUID: string) {
+        return {
+            caseStudy: link
+        }
+        // update EmployerProgram.caseStudies with link
+        // update TeacherProgramData.caseStudies with link
+    }
+
+}
 
 
-const uploadVideo = async (url:string):void => {
+const uploadVideo = async (url: string): void => {
     // check link
-    if(!doesLinkexist(url))
-        throw("link does not exist")
+    if (!doesLinkexist(url))
+        throw ("link does not exist")
     // upload video
 }
 
@@ -153,27 +182,24 @@ const uploadVideo = async (url:string):void => {
  * @param {NamedLink[]} link
  * @param {string} uid
  */
-const updateCaseStudy = async (link: NamedLink[], uid: string): Promise<void> => {
-    // update EmployerProgram.caseStudies with link
-    // update TeacherProgramData.caseStudies with link
-}
 
-type addRatingArg = "customerRatingT"|
-"demoRatingT"|
-"elevatorPitchRatingT"|
-"innovationRatingT"|
-"presentationRatingT"|
-"problemRatingT"|
-"sentencePitchRatingT"|
-"solutionRatingT"|
-"customerRatingE"|
-"demoRatingE"|
-"elevatorPitchRatingE"|
-"innovationRatingE"|
-"presentationRatingE"|
-"problemRatingE"|
-"sentencePitchRatingE"|
-"solutionRatingE";
+
+type addRatingArg = "customerRatingT" |
+    "demoRatingT" |
+    "elevatorPitchRatingT" |
+    "innovationRatingT" |
+    "presentationRatingT" |
+    "problemRatingT" |
+    "sentencePitchRatingT" |
+    "solutionRatingT" |
+    "customerRatingE" |
+    "demoRatingE" |
+    "elevatorPitchRatingE" |
+    "innovationRatingE" |
+    "presentationRatingE" |
+    "problemRatingE" |
+    "sentencePitchRatingE" |
+    "solutionRatingE";
 /**
  * Enables user to rate student work 
  * User: Employer, Teacher
@@ -181,7 +207,7 @@ type addRatingArg = "customerRatingT"|
  * @param {string} uid
  * @returns {Promise<void>}
  */
-const addRating = async (rating: number, projectuid: string, arg:addRatingArg, uid: string): Promise<void> => {
+const addRating = async (rating: number, projectuid: string, arg: addRatingArg, uid: string): Promise<void> => {
     // assert(usertype, employer) || assert(usertype, teacher)
     // throw if employer tries to modify teacher data, vice versa
     // StudentProject[arg] = rating
@@ -268,7 +294,7 @@ const renameClassroom = async (classroomId: string, className: string, uid: stri
  * @param {string} uid
  * @returns {Promise<void>}
  */
-const deleteClassroom = async (classroomId: string, uid:string): Promise<void> => { 
+const deleteClassroom = async (classroomId: string, uid: string): Promise<void> => {
     // kick all students from Classroom.projectIds
     // delete all assosciated projects
     // delete classroom id from all students in Student.classroomID
@@ -317,7 +343,7 @@ const createTeam = async (teamName: string, classroomId: string, uid: string): P
     // Project.teamName = teamName
     // Project.classroomId = classroomId
     // if created by Teacher
-        // Project.createdByTeacher = 1
+    // Project.createdByTeacher = 1
     // Project.teamMembers = []
     // add projectId to employer.projectId
 }
@@ -341,7 +367,7 @@ const renameTeam = async (newTeamName: string, projectId: string, uid: string): 
  * @param {string} uid
  * @returns {Promise<void>}
  */
-const deleteTeam = async (projectId: string, uid: string): Promise<void> => { 
+const deleteTeam = async (projectId: string, uid: string): Promise<void> => {
     // remove projectId from every student's student.projectId interface
     // remove projectId from classroom.projectId 
     // remove projectId from employerProgram.Id
@@ -370,6 +396,28 @@ const leaveTeam = async (projectId: string, uid: string): Promise<void> => {
     // remove student with Student.id = uid from Project.teamMembers where Project.id = projectId
     // remove projectId from Student.projectIds
 }
-
-
-
+/**
+ * Allows User to add an Employer Program using a shareCode
+ * User: Teacher or Student
+ * @param {string} shareCode
+ * @param {string} uid
+ * @returns {Promise<void>}
+ */
+const addProgram = async (shareCode: string, employerProgramId: string, uid: string): Promise<void> => {
+    if (!shareCode) {
+        throw new Error('invalid sharecode')
+    } 
+    // add employerProgramId to GeneralUser's employerProgramIds array 
+        // GeneralUser.employerProgramIds.push(employerProgramId), where GeneralUser.userId == uid
+    // GeneralUser.initializeProgram = timestamp
+}
+/**
+ * Allows User to remove an Employer Program
+ * User: Teacher or Student
+ * @param {string} employerProgramId
+ * @returns {Promise<void>}
+ */
+const removeProgram = async (uid: string, employerProgramId: string): Promise<void> => {
+    // remove employerProgramId from GeneralUser employerProgramIds array, where GeneralUser.userId == uid
+    // delete timestamp from GeneralUser.initializeProgram that corresponds to employerProgramId 
+}
