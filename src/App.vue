@@ -1,7 +1,12 @@
 <template>
   <div>
+<<<<<<< HEAD
     <link 
       href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" 
+=======
+    <link
+      href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap"
+>>>>>>> 7c6d02c29d4be6155dbb3e0888a5b99782c74e84
       rel="stylesheet"
     >
     <component :is="layout">

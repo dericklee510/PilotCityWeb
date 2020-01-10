@@ -1,13 +1,13 @@
 import DemoVideoEdit from "@/views/ProgramGuide/views/Demovideo/demovideo_enter.vue"
 
 /* TEACHER */
-import BriefEdit from "@/views/ProgramGuide/views/Externship/Brief/programbrief_edit.vue"
-import BriefView from "@/views/ProgramGuide/views/Externship/Brief/Brief.vue"
+import BriefEdit from "@/views/ProgramGuide/views/Brief/programbrief_edit.vue"
+import BriefView from "@/views/ProgramGuide/views/Brief/Brief.vue"
 import ExternshipAgendaEdit from "@/views/ProgramGuide/views/Agenda/externshipagenda_edit.vue"
 import ExternshipAgendaView from "@/views/ProgramGuide/views/Agenda/externshipagenda_view.vue"
 import ManageTeams from "@/views/ProgramGuide/views/Manage/Manageteam.vue"
 import ManageClass from "@/views/ProgramGuide/views/Manage/Manageclass.vue"
-// import ManageStudents //MISSING
+import ManageStudents from "@/views/ProgramGuide/views/MnageStudents/managestudents.vue"
 import IntroVideoView from "@/views/ProgramGuide/views/Introvideo/Introvideo.vue"
 import TrainingAgendaEdit from "@/views/ProgramGuide/views/TrainingAgenda/TrainingAgenda.vue"
 import TrainingAgendaView from "@/views/ProgramGuide/views/TrainingAgenda/agenda_view.vue"
@@ -31,14 +31,15 @@ import PracticeLogEdit from "@/views/ProgramGuide/views/Practicelog/Practicelog.
 import PresentationSubmit from "@/views/ProgramGuide/views/Presentation/presentation_enter.vue"
 import OSPitchSubmit from "@/views/ProgramGuide/views/Pitch/pitch_enter.vue"
 import ElevatorSubmit from "@/views/ProgramGuide/views/Elevator/elevator_enter.vue"
-// import ManageTeam //MISSING
+import JoinTeam from "@/views/ProgramGuide/views/jointeam/jointeam.vue"
+import Team from "@/views/ProgramGuide/views/jointeam/Team.vue"
 // import HackReflection //MISSING
 import ProcessLog from "@/views/ProgramGuide/views/Process/processlog.vue"
 import DemoVideoSubmit from "@/views/ProgramGuide/views/Demovideo/demovideo_enter.vue"
 
 import ProgramList from "@/views/Myprograms/myprograms.vue"
 import ProgramLaunch from "@/views/Myprograms/launcher.vue"
-
+import
 export const MyPrograms = {
     ProgramList,
     ProgramLaunch
