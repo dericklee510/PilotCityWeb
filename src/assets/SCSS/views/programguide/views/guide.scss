@@ -7,6 +7,7 @@
         height: 100%;
     }
     &__locks{
+        cursor: pointer;
         z-index: 1000;
         height: 100%;
         position: absolute;
@@ -32,7 +33,11 @@
         max-width: fit-content;
     }
 
-    &__bar > .col{
+    &__bar .col > .guide__bridge:first-child{
+        // display: none;
+    }
+
+    &__bar >.col, &__bar .guide__sub-container > .col, .guide__sub-container {
         padding-top: 0px;
         padding-bottom: 0px;
     }
@@ -57,7 +62,9 @@
 
         // Makes it so that dot stays put
         position: relative;
-
+        &:hover{
+            cursor: pointer;
+        }
 
     }
 

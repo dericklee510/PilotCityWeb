@@ -10,7 +10,7 @@
       xl="1"
       class="d-sm-block d-none"
     >
-      <Nav />
+      <Nav v-model="currentModule" />
     </v-col>
     <v-col
       xl="11"
@@ -25,6 +25,7 @@
         <v-col
           cols="1"
           class="guide__locks guide__locks--left"
+          @click="navBackward(sequence[currentModule])"
         >
           <Unlock />
         </v-col>
@@ -36,8 +37,9 @@
         <v-col
           cols="1"
           class="guide__locks guide__locks--right"
+          @click="navForward(sequence[currentModule])" 
         >
-          <Lock />
+          <Unlock />
         </v-col>
       </v-row>
     </v-col>
@@ -47,8 +49,10 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component';
-
+import { Watch } from 'vue-property-decorator'
+import { STUDENTMODULES, EMPLOYERMODULES, TEACHERMODULES } from './views'
 import {Nav, Lock, Unlock} from './components'
+import _ from "lodash"
 
 @Component({
   components: {
@@ -58,59 +62,69 @@ import {Nav, Lock, Unlock} from './components'
   }
 })
 export default class Guide extends Vue{
-  public PROGRAMNAMES = {
-    Externship: [
-      'Agenda',
-      'Brief',
-      'Manage',
-    ],
-    Project: [
-      'IntroVid',
-      'TrainingDay',
-      'Practice',
-      // 'Research',
-      // 'Ideate',
-      // 'Prepare',
-      'Hack',
-      // 'Reflection'
-      // 'Design & Prototype'
-      // 'Package'
-      'Demo'
-      // 'Exit'
-    ],
-    Internship: [
-      // 'Offer 1'
-      // 'Interview 1'
-      // 'Interview 2'
-      // 'Offer 2'
-      // 'Next Program'
-    ],
-    Unsorted: [
-      'CaseStudy',
-      'IntroVid',
-      'Practice',
-      'Presentation',
-      'DemoVid',
-      'Pitch',
-      'Elevator',
-      'Canvas',
-      'Externship',
-      'Process',
-    ]
-  }// for reference
-  public _currentProgram = 'Brief'; //set this to a default
-  get currentProgram(): string {
-    return this._currentProgram
+  public sequenceHash = {
+    Teacher: TEACHERMODULES,
+    Employer: EMPLOYERMODULES,
+    Student: STUDENTMODULES
   }
-  set currentProgram(value: string) {
-    this._currentProgram = value;
+  public xcurrentModule: string = '';  
+
+  get citizenType(): string{
+    return localStorage.citizenType
+  }
+  get sequence() {
+    return this.sequenceHash[this.citizenType] 
+  }
+  get nextModule(){
+    let programs = Object.keys(this.sequence);
+    let index = programs.indexOf(this.currentModule);
+    if(programs.length-1 == index)
+      return this.currentModule;
+    return programs[index+1] 
+  }
+  get priorModule(){
+    let programs = Object.keys(this.sequence);
+    let index = programs.indexOf(this.currentModule);
+    if(index == 0)
+      return this.currentModule;
+    return programs[index-1] 
+  }
+  get currentModule(): string {
+    return this.xcurrentModule
+  }
+  set currentModule(value: string) {
+    this.xcurrentModule = value;
     // set this in created hook based on firebase
+  }
+  @Watch('currentModule')
+  onModuleChange(){
+    if(this.$route.name != this.sequence[this.currentModule][0])
+    this.$router.push({name: this.sequence[this.currentModule][0]})
+  }
+  
+  public navForward(mod: string[]){
+    let currentRoute!: string = this.$route.name;
+    let length = mod.length;
+    console.log(currentRoute,length)
+    if(mod.includes(currentRoute) && mod[length-1] != currentRoute)
+      this.$router.push({ name: mod[mod.indexOf(currentRoute)+1] })
+    if(mod[length-1] == currentRoute) 
+      this.$router.push({name: this.sequenceHash[this.nextModule][0]})
+  }
+  public navBackward(mod: string[]){
+    let currentRoute!: string = this.$route.name;
+    if(mod.includes(currentRoute) && mod[0] != currentRoute)
+      this.$router.push({ name: mod[mod.indexOf(currentRoute)+1] })
+    if(mod[0] == currentRoute) 
+      this.$router.push({name: this.sequenceHash[this.priorModule][this.priorModule.length-1]})
   }
   public created(){
     // psuedo-code [could probably turn this into a util function]
     /* 
       if(user.fb.getLastProgress)
-        this.currentProgram = user.fb.getLastProgress.Name //this should take them to their latest unlock
+        this.currentModule = user.fb.getLastProgress.Name //this should take them to their latest unlock
+
+        BIND THIS TO `XCURRENTMODULE`
     */
   }
 }
