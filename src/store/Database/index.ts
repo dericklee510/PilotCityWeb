@@ -123,7 +123,7 @@ export default class Fb extends VuexModule {
         await this.deleteProgramBrief(originalFileName);
     }
 
-    @Action( { commit: 'updateProject'})
+    @Action({ commit: 'updateProject'})
     async addRating(ratingName: string, rating:number) {
         // StudentProject.rating = rating
         return {
@@ -137,6 +137,26 @@ export default class Fb extends VuexModule {
             externshipAgenda: textEntry
         }
     }
+    @Action({ commit: 'updateEmployerProgram' })
+    async uploadVideo(url:string){
+        // check link
+        if(isLink(url)) {
+            return{
+                link: url
+            }
+        }
+            throw("link does not exist")
+        // upload video
+    }
+    @Action({ commit: 'updateEmployerProgram' })
+    async updateCaseStudy(link: NamedLink[], employerProgramUID: string) {
+        return {
+            caseStudy: link
+        }
+        // update EmployerProgram.caseStudies with link
+        // update TeacherProgramData.caseStudies with link
+    }
+
 }    
 
 
@@ -370,6 +390,28 @@ const leaveTeam = async (projectId: string, uid: string): Promise<void> => {
     // remove student with Student.id = uid from Project.teamMembers where Project.id = projectId
     // remove projectId from Student.projectIds
 }
-
-
-
+/**
+ * Allows User to add an Employer Program using a shareCode
+ * User: Teacher or Student
+ * @param {string} shareCode
+ * @param {string} uid
+ * @returns {Promise<void>}
+ */
+const addProgram = async (shareCode: string, employerProgramId: string, uid: string): Promise<void> => {
+    if (!shareCode) {
+        throw new Error('invalid sharecode')
+    } 
+    // add employerProgramId to GeneralUser's employerProgramIds array 
+        // GeneralUser.employerProgramIds.push(employerProgramId), where GeneralUser.userId == uid
+    // GeneralUser.initializeProgram = timestamp
+}
+/**
+ * Allows User to remove an Employer Program
+ * User: Teacher or Student
+ * @param {string} employerProgramId
+ * @returns {Promise<void>}
+ */
+const removeProgram = async (uid: string, employerProgramId: string): Promise<void> => {
+    // remove employerProgramId from GeneralUser employerProgramIds array, where GeneralUser.userId == uid
+    // delete timestamp from GeneralUser.initializeProgram that corresponds to employerProgramId 
+}
