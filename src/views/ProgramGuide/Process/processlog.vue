@@ -32,32 +32,46 @@
       <!-- <i class="pt-3 pb-3 pl-3 fas fa-paperclip"></i> -->
 
       <!-- LOG -->
-
-      <v-row justify="center">
-        <!-- <i class="processlog__fileattachment fas fa-paperclip pt-3 pb-3 pl-3 pr-4" /> -->
-
-        <v-text-field
-          v-model="inputDescription"
-          class="processlog__logdescription"
-        />
-        <i
-          class="processlog__fileattachment fas fa-paperclip pt-3 pb-3 pl-3 pr-4"
-          @click="triggerFileInput"
-        />
-        <v-file-input
-          ref="fileInput"
-          v-model="inputFile"
-          style="display: none;"
-          @change="onChange"
-        />
-        <button
-          class="processlog__logbutton"
-          @click="appendEntry"
-        >
-          LOG
-        </button>
-      </v-row>
-
+      <ValidationObserver v-slot="{invalid, reset}">
+        <pc-loader v-slot="{loading, setLoader}">
+          <v-row justify="center">
+            <!-- <i class="processlog__fileattachment fas fa-paperclip pt-3 pb-3 pl-3 pr-4" /> -->
+          
+            <ValidationProvider
+              v-slot="{errors}"
+              rules="required"
+              class="processlog__logdescription"
+            >
+              <v-text-field
+                v-model="inputDescription"
+                :error-messages="errors"
+                :disabled="loading"
+              />
+            </ValidationProvider>
+          
+            <i
+              class="processlog__fileattachment fas fa-paperclip pt-3 pb-3 pl-3 pr-4"
+              @click="triggerFileInput"
+            />
+            <v-file-input
+              ref="fileInput"
+              v-model="inputFile"
+              style="display: none;"
+              @change="onChange"
+            />
+         
+        
+            <v-btn
+              class="processlog__logbutton"
+              :disabled="invalid || !fileQueue.length"
+              :loading="loading"
+              @click="setLoader(appendEntry);reset();"
+            >
+              LOG
+            </v-btn>
+          </v-row>
+        </pc-loader>
+      </ValidationObserver>
       <!-- LOG ATTACHMENT -->
 
       <multifile-input
@@ -144,6 +158,7 @@ import moment from "moment";
 import { PCmultiinput } from "../../../components/inputs";
 import {PCLoader} from "@/components/utilities/"
 import { VFileInput } from 'vuetify/lib';
+import { ValidationObserver, ValidationProvider } from 'vee-validate';
 moment(
   firebase.firestore.Timestamp.fromDate(
     moment(new Date())
@@ -151,12 +166,13 @@ moment(
       .toDate()
   )
 ).diff(moment(), "d");
-
 @Component({
   components: {
     multiInput: PCmultiinput.createMultiInput<DesignLog>(),
     multifileInput: PCmultiinput.createMultiInput<{file:File,fileName:string}>(),
-    pcLoader:PCLoader
+    pcLoader:PCLoader,
+    ValidationProvider,
+    ValidationObserver
   }
 })
 export default class logtime extends Vue {
@@ -217,7 +233,7 @@ export default class logtime extends Vue {
     this.inputFile = null;
     this.key++
   }
-  async appendEntry(){
+  async holdEntry(){
     const getLinks:(files:File[])=>Promise<NamedLink[]> = async (files) => files.map(file => ({
       linkName:file.name,
       link:"https://random.com"
@@ -231,6 +247,14 @@ export default class logtime extends Vue {
     this.fileQueue = []
     this.inputDescription = ""
     this.key++
+  }
+  async appendEntry(){
+    await new Promise((resolve,reject) => {
+      setTimeout(() =>{
+        this.holdEntry()
+        resolve()
+      },2000)
+    })
   }
    triggerFileInput() {
     let ref = `fileInput`;
