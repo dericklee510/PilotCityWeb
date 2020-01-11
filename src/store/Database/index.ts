@@ -2,15 +2,19 @@ import { AgendaTemplate, NamedLink, EventItem } from './types/utilities';
 /* eslint-disable-next-line */
 import { Module, VuexModule, Action, Mutation } from "vuex-module-decorators" //action unused
 import { firebaseApp as fb } from '@/firebase/init'
-import { EmployerProgram, GeneralUser, Project, RatingTag } from './types/types' 
+import { EmployerProgram, GeneralUser, Project, RatingTag, TeacherProgramData } from './types/types' 
 import { Dependency } from '../../utilities/Dependency'
 const _ = require('lodash');
+const assert = require('assert')
 
 @Module({ namespaced: true, name: 'Fb' })
 export default class Fb extends VuexModule {
     public firestore = fb.firestore()
     public storage = fb.storage()
-    private employerProgram?: EmployerProgram
+    private currentTeacherProgramUID? :string
+    private currentTeacherProgramData?: TeacherProgramData
+    private currentEmployerProgramUID? :string
+    private currentEmployerProgram?: EmployerProgram
     private FBUser = fb.auth().currentUser;
     private currentUserProfile?: GeneralUser
     private currentProject?: Project
@@ -25,10 +29,15 @@ export default class Fb extends VuexModule {
         return this.storage.ref();
     }
     get getCurrentEmployerProgram() {
-        return this.employerProgram;
+        return this.currentEmployerProgram;
     }
     get getCurrentUserProfile() {
         return this.currentUserProfile
+    }
+
+    @Dependency('currentUserProfile')
+    get userCitizenType() {
+        return this.currentUserProfile!.citizenType;
     }
 
     @Dependency('FBUser')
@@ -42,18 +51,23 @@ export default class Fb extends VuexModule {
 
     @Dependency('FBUser')
     @Mutation
-    async initEmployerProgram() {
-        const snapshot = await this.firestore.collection('EmployerProgram').doc(this.FBUser!.uid).get();
-        if (!snapshot.exists)
-            throw new Error(`Current uset with uid: ${this.FBUser!.uid} does not have a record on EmployerProgram Collection`);
-        this.employerProgram = snapshot.data() as EmployerProgram
+    async initCurrentEmployerProgram(program: EmployerProgram) {
+        this.currentEmployerProgramUID = program.employerProgramId;
+        this.currentEmployerProgram = program;
+    }
+    
+    @Dependency('currentEmployerProgramUID', 'currentEmployerProgram')
+    @Mutation
+    async updateCurrentEmployerProgram(property: any) {
+        await this.firestore.collection('EmployerProgram').doc(this.currentEmployerProgramUID).update(property);
+        this.currentEmployerProgram = Object.assign(property, this.currentEmployerProgram);
     }
 
-    @Dependency('FBUser')
+    @Dependency('currentEmployerProgramUID', 'currentTeacherProgramData')
     @Mutation
-    async updateEmployerProgram(property: any) {
-        await this.firestore.collection('EmployerProgram').doc(this.FBUser!.uid).update(property);
-        this.employerProgram = Object.assign(property, this.employerProgram);
+    async updateCurrentTeacherProgramData(property: any) {
+        await this.firestore.collection('TeacherProgramData').doc(this.currentTeacherProgramUID).update(property);
+        this.currentTeacherProgramData = Object.assign(property, this.currentTeacherProgramData);
     }
 
     @Dependency('currentProject')
@@ -63,18 +77,26 @@ export default class Fb extends VuexModule {
         this.currentProject = Object.assign(property, this.currentProject)
     }
     
-    @Dependency('FBUser')
     @Action({ commit: 'initEmployerProgram'})
-    async fetchEmployerProgram() {
-        const snapshot = await this.firestore.collection('EmployerProgram').doc(this.FBUser!.uid).get();
-        if (!snapshot.exists) 
-            throw new Error(`Current uset with uid: ${this.FBUser!.uid} does not have a record on EmployerProgram Collection`);
-        else 
-            return snapshot.data()
+    async fetchEmployerProgram(employerProgramUID: string) {
+        const snapshot = await this.firestore.collection('EmployerProgram').doc(employerProgramUID).get();
+        if (!snapshot.exists)
+            throw new Error(`Failed to fetch employer program with uid of ${employerProgramUID}`);
+        return snapshot;
+    }
+
+    @Action({ commit: 'initEmployerProgram'})
+    async switchCurrentEmployerProgramWithProgramUID(employerProgramUID: string) {
+        return await this.fetchEmployerProgram(employerProgramUID)
+    }
+
+    @Action({ commit: 'initEmployerProgram'})
+    async switchCurrentEmployerProgramWithProgramObject(program : EmployerProgram) {
+        return program;
     }
 
     @Dependency('FBUser', 'employerProgram', 'storage')
-    @Action({ commit: 'updateEmployerProgram' })
+    @Action({ commit: 'updateCurrentEmployerProgram' })
     async createProgramBrief(file: File) {
         const fileName = file.name; // should validate the name of the file on the frontend
         const filePath = `program_briefs/${this.FBUser!.uid}/${fileName}`;
@@ -103,7 +125,7 @@ export default class Fb extends VuexModule {
     }
 
     @Dependency('FBUser', 'employerProgram', 'storageRef')
-    @Action({ commit: 'updateEmployerProgram' })
+    @Action({ commit: 'updateCurrentEmployerProgram' })
     async deleteProgramBrief (fileName: string){
         const index = _.findIndex(this.getCurrentEmployerProgram!.programBrief, ['name', fileName]);
         if (index < 0) {
@@ -115,7 +137,7 @@ export default class Fb extends VuexModule {
         }
     }
 
-    @Action({ commit: 'updateEmployerProgram' }) // we have to ask them to resubmit the brief because firebase storage doesnt support rename
+    @Action({ commit: 'updateCurrentEmployerProgram' }) // we have to ask them to resubmit the brief because firebase storage doesnt support rename
     async renameBrief(newFile: File, originalFileName: string){
         await this.createProgramBrief(newFile);
         await this.deleteProgramBrief(originalFileName);
@@ -128,31 +150,73 @@ export default class Fb extends VuexModule {
         }
     }
 
-    @Action({ commit: 'updateEmployerProgram' })
-    async externshipAgenda(textEntry:AgendaTemplate, employerProgramUID:string){
+   
+    /**
+     * Enables User to create an Agenda
+     * User: Employer
+     * @param {AgendaTemplate} textEntry
+     * @param {string} uid
+     */
+    @Action({ commit: 'updateCurrentEmployerProgram' })
+    async createExternshipAgenda(textEntry: AgendaTemplate, EmployerProgramId: string){
+        assert(this.userCitizenType == 'employer', 'User type not emplyer');
         return {
             externshipAgenda: textEntry
         }
     }
-    @Action({ commit: 'updateEmployerProgram' })
-    async uploadVideo(url:string){
-        // check link
-        if(isLink(url)) {
-            return{
-                link: url
-            }
-        }
-            throw("link does not exist")
-        // upload video
+
+    // @Action({ commit: 'updateCurrentEmployerProgram' })
+    // async uploadVideo(url:string){
+    //     // check link
+    //     if(isLink(url)) {
+    //         return{
+    //             link: url
+    //         }
+    //     }
+    //         throw("link does not exist")
+    //     // upload video
+    // }
+   
+    @Action({ commit: 'updateCurrentEmployerProgram' })
+    async updateCurrentEmployerProgramCaseStudy(caseStudies: NamedLink[]) {
+        return { caseStudies }
     }
-    @Action({ commit: 'updateEmployerProgram' })
-    async updateCaseStudy(link: NamedLink[], employerProgramUID: string) {
-        return {
-            caseStudy: link
-        }
-        // update EmployerProgram.caseStudies with link
-        // update TeacherProgramData.caseStudies with link
+
+    @Action({ commit: 'updateCurrentTeacherProgramData' })
+    async updateCurrentTeacherProgramCaseStudy(caseStudies: NamedLink[]) {
+        return { caseStudies }
     }
+
+    /**
+     * Updates Case Study for creation and removal
+     * User: Employer or Teacher
+     * @param {NamedLink[]} link
+     */
+    @Dependency('currentUserProfile')
+    async updateCaseStudy(link: NamedLink[]){
+        if (this.currentUserProfile!.citizenType == 'teacher') {
+            await this.updateCurrentEmployerProgramCaseStudy(link)
+        } else if (this.currentUserProfile!.citizenType == 'employer') {
+            await this.updateCurrentTeacherProgramCaseStudy(link)
+        } else {
+            throw new Error('wrong user type');
+        }
+    }
+    
+    /**
+     * Check completed Agenda Items
+     * User: Employer, Teacher, Student
+     * @param {EventItem[]} checkItem
+     * @param {string} uid
+     * @returns {Promise<void>}
+     */
+    async checkAgendaItem(checkItem: EventItem[], uid: string) {
+        // Employer: EmployerProgram.
+        // EventItem.boolean = 1
+
+        // wtf?
+    }
+        
 
 }    
 
@@ -206,29 +270,6 @@ const addRating = async (rating: number, projectuid: string, arg:addRatingArg, u
     // StudentProject[arg] = rating
 }
 
-/**
- * Enables User to create an Agenda
- * User: Employer
- * @param {AgendaTemplate} textEntry
- * @param {string} uid
- * @returns {Promise<void>}
- */
-const createExternshipAgenda = async (textEntry: AgendaTemplate, EmployerProgramId: string): Promise<void> => {
-    // assert(programType, employer)
-    // EmployerProgram.externshipDayAgenda = textEntry
-}
-
-/**
- * Check completed Agenda Items
- * User: Employer, Teacher, Student
- * @param {EventItem[]} checkItem
- * @param {string} uid
- * @returns {Promise<void>}
- */
-const checkAgendaItem = async (checkItem: EventItem[], uid: string): Promise<void> => {
-    // Employer: EmployerProgram.
-    // EventItem.boolean = 1
-}
 
 /**
  * Uncheck incomplete Agenda Items

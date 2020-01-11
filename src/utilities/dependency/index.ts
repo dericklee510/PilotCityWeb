@@ -11,7 +11,7 @@ export function Dependency(messages?: any, ...dependencies: string[]) {
         let pass = true;
         descriptor.value = function (...args: any[]){
             dependencies.forEach(key => {
-                if (!(key in this)) {
+                if (!(key in this) || !((this as any)[key])) {
                     pass = false;
                     console.error(
                         (messages && messages[key]) ?
