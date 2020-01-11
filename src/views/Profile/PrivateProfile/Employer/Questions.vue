@@ -1,16 +1,11 @@
 <template>
   <v-card class="pc-container pc-profile-page--dark">
     <!-- probably going to use Doka here.... -->
-<<<<<<< HEAD
-    <img id="profileBanner"
-src="@/assets/PC_user_banner.png" alt >
-=======
     <img
       id="profileBanner"
       src="@/assets/PC_user_banner.png"
       alt
     >
->>>>>>> origin/page/program_guide.firebase
     <v-container>
       <!-- make tag component -- backlog -->
       <v-row>
@@ -19,33 +14,17 @@ src="@/assets/PC_user_banner.png" alt >
           <profile-upload v-model="citizenBase.profilePicture" />
           <!-- <div class="pc-profile-picture pc-profile-picture--page pc-vh-center" /> -->
         </v-col>
-<<<<<<< HEAD
-        <v-col cols="12"
-md="7" class="pl-6" style="padding-bottom: 0">
-=======
         <v-col
           cols="12"
           md="7"
           class="pl-6"
           style="padding-bottom: 0"
         >
->>>>>>> origin/page/program_guide.firebase
           <v-row>
             <v-col cols="12">
               <h1>{{ Name }}</h1>
             </v-col>
             <v-row justify="start">
-<<<<<<< HEAD
-              <v-col cols="12"
-md="6" lg="4" xl="3">
-                <v-menu max-width="300px"
-:offset-y="true">
-                  <template v-slot:activator="{ on, attrs }">
-                    <v-row justify="center"
-no-gutters>
-                      <v-col cols="4"
-sm="3" md="12">
-=======
               <v-col
                 cols="12"
                 md="6"
@@ -66,22 +45,15 @@ sm="3" md="12">
                         sm="3"
                         md="12"
                       >
->>>>>>> origin/page/program_guide.firebase
                         <v-btn
                           :id="CITIZENSTYLES[citizenBase.citizenType]"
                           v-bind="attrs"
                           rounded
                           v-on="on"
                         >
-<<<<<<< HEAD
-                          <h2 class="text-capitalize pr-5 pl-5">
-{{ citizenBase.citizenType }}
-</h2>
-=======
                           <h2 class="text-capitalize pr-5 pl-5">
                             {{ citizenBase.citizenType }}
                           </h2>
->>>>>>> origin/page/program_guide.firebase
                         </v-btn>
                       </v-col>
                     </v-row>
@@ -93,17 +65,6 @@ sm="3" md="12">
                       style="padding: 0;"
                       @click="changeCitizenType(type)"
                     >
-<<<<<<< HEAD
-                      <v-col cols="12"
-class="pa-0">
-                        <v-list-item-title :id="CITIZENSTYLES[type]">
-                          <v-row align="center"
-justify="center">
-                            <v-col cols="8">
-                              <h3 class="text-center">
-{{ type }}
-</h3>
-=======
                       <v-col
                         cols="12"
                         class="pa-0"
@@ -117,7 +78,6 @@ justify="center">
                               <h3 class="text-center">
                                 {{ type }}
                               </h3>
->>>>>>> origin/page/program_guide.firebase
                             </v-col>
                           </v-row>
                         </v-list-item-title>
@@ -126,18 +86,6 @@ justify="center">
                   </v-list>
                 </v-menu>
               </v-col>
-<<<<<<< HEAD
-              <v-col v-if="ispublic"
-cols="12" md="6" lg="4" align-self="center">
-                <v-row justify="center"
-no-gutters>
-                  <v-col cols="4"
-md="12">
-                    <h3 class="text-center"
-style="display: block">
-Fremont, CA
-</h3>
-=======
               <v-col
                 v-if="ispublic"
                 cols="12"
@@ -159,7 +107,6 @@ Fremont, CA
                     >
                       Fremont, CA
                     </h3>
->>>>>>> origin/page/program_guide.firebase
                   </v-col>
                 </v-row>
               </v-col>
@@ -169,23 +116,6 @@ Fremont, CA
       </v-row>
       <v-container>
         <ValidationObserver ref="observer">
-<<<<<<< HEAD
-          <v-list id="profileFields"
-class="pc-profile-page--dark" text>
-            <v-list-item-title style="max-width: fit-content"
-v-text="'Citizen'" />
-            <v-list-item>
-              <v-list-item-content>
-                <v-col cols="12"
-class="pt-0">
-                  <v-row id="citizen-id__base-questions"
-justify="start">
-                    <v-col cols="12">
-                      <v-col cols="12"
-md="8" lg="6" xl="5">
-                        <ValidationProvider v-slot="{errors}"
-rules="required">
-=======
           <v-list
             id="profileFields"
             class="pc-profile-page--dark"
@@ -216,7 +146,6 @@ rules="required">
                           v-slot="{errors}"
                           rules="required"
                         >
->>>>>>> origin/page/program_guide.firebase
                           <pcSelect
                             v-model="citizenBase.honorific"
                             :dark-mode="true"
@@ -226,15 +155,10 @@ rules="required">
                             :error-messages="errors"
                           />
                         </ValidationProvider>
-<<<<<<< HEAD
-                        <ValidationProvider v-slot="{errors}"
-rules="required">
-=======
                         <ValidationProvider
                           v-slot="{errors}"
                           rules="required"
                         >
->>>>>>> origin/page/program_guide.firebase
                           <pcTextfield
                             v-model="citizen.first_name"
                             :value.sync="citizenBase.firstName"
@@ -244,15 +168,10 @@ rules="required">
                             :error-messages="errors"
                           />
                         </ValidationProvider>
-<<<<<<< HEAD
-                        <ValidationProvider v-slot="{errors}"
-rules="required">
-=======
                         <ValidationProvider
                           v-slot="{errors}"
                           rules="required"
                         >
->>>>>>> origin/page/program_guide.firebase
                           <pcTextfield
                             v-model="citizenBase.lastName"
                             :value.sync="citizen.last_name"
@@ -262,15 +181,10 @@ rules="required">
                             placeholder="Last Name"
                           />
                         </ValidationProvider>
-<<<<<<< HEAD
-                        <ValidationProvider v-slot="{errors}"
-rules="required">
-=======
                         <ValidationProvider
                           v-slot="{errors}"
                           rules="required"
                         >
->>>>>>> origin/page/program_guide.firebase
                           <pcTextfield
                             v-model="citizen.organization"
                             :error-messages="errors"
@@ -279,15 +193,10 @@ rules="required">
                             placeholder="Company Name"
                           />
                         </ValidationProvider>
-<<<<<<< HEAD
-                        <ValidationProvider v-slot="{errors}"
-rules="required">
-=======
                         <ValidationProvider
                           v-slot="{errors}"
                           rules="required"
                         >
->>>>>>> origin/page/program_guide.firebase
                           <pcTextfield
                             v-model="citizen.position"
                             :error-messages="errors"
@@ -302,26 +211,15 @@ rules="required">
                 </v-col>
               </v-list-item-content>
             </v-list-item>
-<<<<<<< HEAD
-            <v-list-item-title style="max-width: fit-content"
-v-text="'Organization'" />
-=======
             <v-list-item-title
               style="max-width: fit-content"
               v-text="'Organization'"
             />
->>>>>>> origin/page/program_guide.firebase
             <v-list-item>
               <v-list-item-content>
                 <v-col cols="12">
                   <v-row justify="start">
                     <v-col cols="12">
-<<<<<<< HEAD
-                      <v-col cols="12"
-md="8" lg="6" xl="5">
-                        <ValidationProvider v-slot="{errors}"
-rules="required">
-=======
                       <v-col
                         cols="12"
                         md="8"
@@ -332,7 +230,6 @@ rules="required">
                           v-slot="{errors}"
                           rules="required"
                         >
->>>>>>> origin/page/program_guide.firebase
                           <pcTextfield
                             v-model="organization.department"
                             :error-messages="errors"
@@ -342,19 +239,6 @@ rules="required">
                           />
                         </ValidationProvider>
                       </v-col>
-<<<<<<< HEAD
-                      <v-col cols="12"
-md="8" lg="6" xl="5">
-                        <ValidationProvider v-slot="{errors}"
-rules="required">
-                          <autoComplete v-model="organization.location"
-:error-messages="{errors}" />
-                        </ValidationProvider>
-                      </v-col>
-                      <v-col>
-                        <ValidationProvider v-slot="{errors}"
-rules="required">
-=======
                       <v-col
                         cols="12"
                         md="8"
@@ -376,25 +260,11 @@ rules="required">
                           v-slot="{errors}"
                           rules="required"
                         >
->>>>>>> origin/page/program_guide.firebase
                           <v-col cols="12">
                             <v-row>
                               <h4
                                 id="text-uppercase"
                                 style="color:#C7C8CA"
-<<<<<<< HEAD
-                              >
-WHAT TYPE OF HIGH SCHOOL TALENT WOULD YOU LIKE TO HIRE?
-</h4>
-                              <h4 style="color:#EA6763">
-{{ errors?'*':'' }}
-</h4>
-                            </v-row>
-                          </v-col>
-                          <v-col cols="12">
-                            <v-col cols="12"
-md="4">
-=======
                               >
                                 WHAT TYPE OF HIGH SCHOOL TALENT WOULD YOU LIKE TO HIRE?
                               </h4>
@@ -408,7 +278,6 @@ md="4">
                               cols="12"
                               md="4"
                             >
->>>>>>> origin/page/program_guide.firebase
                               <pcCheckbox
                                 v-model="internship.talent"
                                 :options="INTERNSHIP_TALENT_OPTIONS"
@@ -417,24 +286,6 @@ md="4">
                             </v-col>
                           </v-col>
                         </ValidationProvider>
-<<<<<<< HEAD
-                        <ValidationProvider v-slot="{errors}"
-rules="required">
-                          <v-col cols="12">
-                            <v-col cols="12">
-                              <v-row>
-                                <h4 style="color:#C7C8CA"
-class="text-uppercase">
-Industry
-</h4>
-                                <h4 style="color:#EA6763">
-{{ errors?'*':'' }}
-</h4>
-                              </v-row>
-                            </v-col>
-                            <v-col cols="12"
-md="8" lg="6" xl="5">
-=======
                         <ValidationProvider
                           v-slot="{errors}"
                           rules="required"
@@ -459,7 +310,6 @@ md="8" lg="6" xl="5">
                               lg="6"
                               xl="5"
                             >
->>>>>>> origin/page/program_guide.firebase
                               <pcCheckbox
                                 v-model="organization.industry"
                                 :options="ORGANIZATION_INDUSTRY_OPTIONS"
@@ -468,12 +318,6 @@ md="8" lg="6" xl="5">
                             </v-col>
                           </v-col>
                         </ValidationProvider>
-<<<<<<< HEAD
-                        <ValidationProvider v-slot="{errors}"
-rules="required">
-                          <v-col cols="12"
-md="8" lg="6" xl="5">
-=======
                         <ValidationProvider
                           v-slot="{errors}"
                           rules="required"
@@ -484,27 +328,17 @@ md="8" lg="6" xl="5">
                             lg="6"
                             xl="5"
                           >
->>>>>>> origin/page/program_guide.firebase
                             <v-col cols="12">
                               <v-row>
                                 <h4
                                   style="color:#C7C8CA"
                                   class="text-uppercase"
-<<<<<<< HEAD
-                                >
-LIST YOUR PRODUCT / SERVICE
-</h4>
-                                <h4 style="color:#EA6763">
-{{ errors?'*':'' }}
-</h4>
-=======
                                 >
                                   LIST YOUR PRODUCT / SERVICE
                                 </h4>
                                 <h4 style="color:#EA6763">
                                   {{ errors?'*':'' }}
                                 </h4>
->>>>>>> origin/page/program_guide.firebase
                               </v-row>
                             </v-col>
                             <pcMultiInput
@@ -513,12 +347,6 @@ LIST YOUR PRODUCT / SERVICE
                             />
                           </v-col>
                         </ValidationProvider>
-<<<<<<< HEAD
-                        <v-col cols="12"
-md="8" lg="6" xl="5">
-                          <ValidationProvider v-slot="{errors}"
-rules="required">
-=======
                         <v-col
                           cols="12"
                           md="8"
@@ -529,7 +357,6 @@ rules="required">
                             v-slot="{errors}"
                             rules="required"
                           >
->>>>>>> origin/page/program_guide.firebase
                             <pcSelect
                               v-model="organization.employee_count"
                               :items="WORKFORCE_COUNT"
@@ -546,29 +373,15 @@ rules="required">
               </v-list-item-content>
             </v-list-item>
 
-<<<<<<< HEAD
-            <v-list-item-title style="max-width: fit-content"
-v-text="'Program Details'" />
-=======
             <v-list-item-title
               style="max-width: fit-content"
               v-text="'Program Details'"
             />
->>>>>>> origin/page/program_guide.firebase
             <v-list-item>
               <v-list-item-content>
                 <v-col cols="12">
                   <v-row justify="start">
                     <v-col cols="12">
-<<<<<<< HEAD
-                      <h3 style="color:#AE90B0"
-class="item-subheaders">
-Externship
-</h3>
-                    </v-col>
-                    <v-col cols="12"
-style="color:#C7C8CA">
-=======
                       <h3
                         style="color:#AE90B0"
                         class="item-subheaders"
@@ -580,21 +393,11 @@ style="color:#C7C8CA">
                       cols="12"
                       style="color:#C7C8CA"
                     >
->>>>>>> origin/page/program_guide.firebase
                       <v-col>
                         <v-col cols="12">
                           <h4
                             style="color:#C7C8CA"
                             class="text-uppercase"
-<<<<<<< HEAD
-                          >
-SELECT THREE DATE OPTIONS FOR YOUR FULL DAY TEACHER EXTERNSHIP DAY AT YOUR WORKPLACE BETWEEN JAN 1 - FEB 1
-</h4>
-                        </v-col>
-                        <v-col cols="12">
-                          <v-col cols="12"
-md="8" lg="6" xl="5">
-=======
                           >
                             SELECT THREE DATE OPTIONS FOR YOUR FULL DAY TEACHER EXTERNSHIP DAY AT YOUR WORKPLACE BETWEEN JAN 1 - FEB 1
                           </h4>
@@ -606,7 +409,6 @@ md="8" lg="6" xl="5">
                             lg="6"
                             xl="5"
                           >
->>>>>>> origin/page/program_guide.firebase
                             <ValidationProvider
                               v-slot="{errors, failedRules}"
                               :rules="{ required:true,regex: /^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/ }"
@@ -622,17 +424,12 @@ md="8" lg="6" xl="5">
                               />
                             </ValidationProvider>
                           </v-col>
-<<<<<<< HEAD
-                          <v-col cols="12"
-md="8" lg="6" xl="5">
-=======
                           <v-col
                             cols="12"
                             md="8"
                             lg="6"
                             xl="5"
                           >
->>>>>>> origin/page/program_guide.firebase
                             <ValidationProvider
                               v-slot="{errors, failedRules}"
                               :rules="{ required:true,regex: /^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/ }"
@@ -648,17 +445,12 @@ md="8" lg="6" xl="5">
                               />
                             </ValidationProvider>
                           </v-col>
-<<<<<<< HEAD
-                          <v-col cols="12"
-md="8" lg="6" xl="5">
-=======
                           <v-col
                             cols="12"
                             md="8"
                             lg="6"
                             xl="5"
                           >
->>>>>>> origin/page/program_guide.firebase
                             <ValidationProvider
                               v-slot="{errors, failedRules}"
                               :rules="{ required:true,regex: /^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/ }"
@@ -677,36 +469,22 @@ md="8" lg="6" xl="5">
                         </v-col>
                       </v-col>
                       <v-col cols="12">
-<<<<<<< HEAD
-                        <ValidationProvider v-slot="{errors}"
-rules="required">
-=======
                         <ValidationProvider
                           v-slot="{errors}"
                           rules="required"
                         >
->>>>>>> origin/page/program_guide.firebase
                           <v-col cols="12">
                             <v-col cols="12">
                               <v-row>
                                 <h4
                                   style="color:#C7C8CA"
                                   class="text-uppercase"
-<<<<<<< HEAD
-                                >
-WILL YOU BE ABLE TO PROVIDE CLASSROOMS ACCESS TO YOUR PRODUCT OR SERVICE WITH ANY OF THE FOLLOWING?
-</h4>
-                                <h4 style="color:#EA6763">
-{{ errors?'*':'' }}
-</h4>
-=======
                                 >
                                   WILL YOU BE ABLE TO PROVIDE CLASSROOMS ACCESS TO YOUR PRODUCT OR SERVICE WITH ANY OF THE FOLLOWING?
                                 </h4>
                                 <h4 style="color:#EA6763">
                                   {{ errors?'*':'' }}
                                 </h4>
->>>>>>> origin/page/program_guide.firebase
                               </v-row>
                             </v-col>
 
@@ -726,44 +504,25 @@ WILL YOU BE ABLE TO PROVIDE CLASSROOMS ACCESS TO YOUR PRODUCT OR SERVICE WITH AN
                   </v-row>
                   <v-row>
                     <v-col cols="12">
-<<<<<<< HEAD
-                      <h3 style="color:#AE90B0"
-class="item-subheaders">
-Project
-</h3>
-=======
                       <h3
                         style="color:#AE90B0"
                         class="item-subheaders"
                       >
                         Project
                       </h3>
->>>>>>> origin/page/program_guide.firebase
                     </v-col>
                     <v-col cols="12">
                       <v-col cols="12">
                         <h4
                           id="text-uppercase"
                           style="color:#c7c8ca"
-<<<<<<< HEAD
-                        >
-WHAT IS THE MINIMUM AND MAXIMUM NUMBER OF CLASSROOMS YOU’D LIKE IN YOUR PROGRAM?
-</h4>
-=======
                         >
                           WHAT IS THE MINIMUM AND MAXIMUM NUMBER OF CLASSROOMS YOU’D LIKE IN YOUR PROGRAM?
                         </h4>
->>>>>>> origin/page/program_guide.firebase
                       </v-col>
                       <v-col cols="12">
                         <v-col cols="12">
                           <v-row>
-<<<<<<< HEAD
-                            <v-col cols="12"
-md="4">
-                              <ValidationProvider v-slot="{errors}"
-rules="required">
-=======
                             <v-col
                               cols="12"
                               md="4"
@@ -772,7 +531,6 @@ rules="required">
                                 v-slot="{errors}"
                                 rules="required"
                               >
->>>>>>> origin/page/program_guide.firebase
                                 <pcSelect
                                   v-model="programdetails.project.capacity.minimum"
                                   :dark-mode="true"
@@ -782,12 +540,6 @@ rules="required">
                                 />
                               </ValidationProvider>
                             </v-col>
-<<<<<<< HEAD
-                            <v-col cols="12"
-md="4">
-                              <ValidationProvider v-slot="{errors}"
-rules="required">
-=======
                             <v-col
                               cols="12"
                               md="4"
@@ -796,7 +548,6 @@ rules="required">
                                 v-slot="{errors}"
                                 rules="required"
                               >
->>>>>>> origin/page/program_guide.firebase
                                 <pcSelect
                                   v-model="programdetails.project.capacity.maximum"
                                   :dark-mode="true"
@@ -809,34 +560,16 @@ rules="required">
                           </v-row>
                         </v-col>
                       </v-col>
-<<<<<<< HEAD
-                      <ValidationProvider v-slot="{errors}"
-rules="required">
-=======
                       <ValidationProvider
                         v-slot="{errors}"
                         rules="required"
                       >
->>>>>>> origin/page/program_guide.firebase
                         <v-col cols="12">
                           <v-col cols="12">
                             <v-row>
                               <h4
                                 style="color:#C7C8CA"
                                 class="text-uppercase"
-<<<<<<< HEAD
-                              >
-How do you prefer to engage with the classroom?
-</h4>
-                              <h4 style="color:#EA6763">
-{{ errors?'*':'' }}
-</h4>
-                            </v-row>
-                          </v-col>
-                          <v-col cols="12">
-                            <v-col cols="12"
-md="6">
-=======
                               >
                                 How do you prefer to engage with the classroom?
                               </h4>
@@ -850,7 +583,6 @@ md="6">
                               cols="12"
                               md="6"
                             >
->>>>>>> origin/page/program_guide.firebase
                               <v-radio-group
                                 v-model="programdetails.project.engagement.type"
                                 class="pc-radio"
@@ -866,34 +598,16 @@ md="6">
                           </v-col>
                         </v-col>
                       </ValidationProvider>
-<<<<<<< HEAD
-                      <ValidationProvider v-slot="{errors}"
-rules="required">
-=======
                       <ValidationProvider
                         v-slot="{errors}"
                         rules="required"
                       >
->>>>>>> origin/page/program_guide.firebase
                         <v-col cols="12">
                           <v-col cols="12">
                             <v-row>
                               <h4
                                 style="color:#C7C8CA"
                                 class="text-uppercase"
-<<<<<<< HEAD
-                              >
-How far would you travel to engage with a classroom in person?
-</h4>
-                              <h4 style="color:#EA6763">
-{{ errors?'*':'' }}
-</h4>
-                            </v-row>
-                          </v-col>
-                          <v-col>
-                            <v-col cols="12"
-md="6">
-=======
                               >
                                 How far would you travel to engage with a classroom in person?
                               </h4>
@@ -907,7 +621,6 @@ md="6">
                               cols="12"
                               md="6"
                             >
->>>>>>> origin/page/program_guide.firebase
                               <v-radio-group
                                 v-model="programdetails.project.engagement.radius"
                                 class="pc-radio"
@@ -927,16 +640,6 @@ md="6">
                   </v-row>
                   <v-row>
                     <v-col cols="12">
-<<<<<<< HEAD
-                      <h3 style="color:#AE90B0"
-class="item-subheaders">
-Internships
-</h3>
-                    </v-col>
-                    <v-col cols="12">
-                      <ValidationProvider v-slot="{errors}"
-rules="required">
-=======
                       <h3
                         style="color:#AE90B0"
                         class="item-subheaders"
@@ -949,28 +652,18 @@ rules="required">
                         v-slot="{errors}"
                         rules="required"
                       >
->>>>>>> origin/page/program_guide.firebase
                         <v-col>
                           <v-col cols="12">
                             <v-row>
                               <h4
                                 style="color:#C7C8CA"
                                 class="text-uppercase"
-<<<<<<< HEAD
-                              >
-What would be the primary focus of their internship program
-</h4>
-                              <h4 style="color:#EA6763">
-{{ errors?'*':'' }}
-</h4>
-=======
                               >
                                 What would be the primary focus of their internship program
                               </h4>
                               <h4 style="color:#EA6763">
                                 {{ errors?'*':'' }}
                               </h4>
->>>>>>> origin/page/program_guide.firebase
                             </v-row>
                           </v-col>
                           <v-col cols="12">
@@ -983,40 +676,16 @@ What would be the primary focus of their internship program
                         </v-col>
                       </ValidationProvider>
 
-<<<<<<< HEAD
-                      <ValidationProvider v-slot="{errors}"
-rules="required">
-=======
                       <ValidationProvider
                         v-slot="{errors}"
                         rules="required"
                       >
->>>>>>> origin/page/program_guide.firebase
                         <v-col>
                           <v-col cols="12">
                             <v-row>
                               <h4
                                 style="color:#C7C8CA"
                                 class="text-uppercase"
-<<<<<<< HEAD
-                              >
-Do you require hiring adults 18 years or older?
-</h4>
-                              <h4 style="color:#EA6763">
-{{ errors?'*':'' }}
-</h4>
-                            </v-row>
-                          </v-col>
-                          <v-col cols="12">
-                            <v-col cols="12"
-md="6">
-                              <v-radio-group v-model="internship.hiring_adult"
-class="pc-radio">
-                                <v-radio label="Yes"
-value="yes" />
-                                <v-radio label="No"
-value="no" />
-=======
                               >
                                 Do you require hiring adults 18 years or older?
                               </h4>
@@ -1042,42 +711,21 @@ value="no" />
                                   label="No"
                                   value="no"
                                 />
->>>>>>> origin/page/program_guide.firebase
                               </v-radio-group>
                             </v-col>
                           </v-col>
                         </v-col>
                       </ValidationProvider>
-<<<<<<< HEAD
-                      <ValidationProvider v-slot="{errors}"
-rules="required">
-=======
                       <ValidationProvider
                         v-slot="{errors}"
                         rules="required"
                       >
->>>>>>> origin/page/program_guide.firebase
                         <v-col>
                           <v-col cols="12">
                             <v-row>
                               <h4
                                 style="color:#C7C8CA"
                                 class="text-uppercase"
-<<<<<<< HEAD
-                              >
-Would you need the student(s) to have either a drivers license or a vehicle?
-</h4>
-                              <h4 style="color:#EA6763">
-{{ errors?'*':'' }}
-</h4>
-                            </v-row>
-                          </v-col>
-                          <v-col cols="12">
-                            <v-col cols="12"
-md="6">
-                              <v-radio-group v-model="internship.travel"
-class="pc-radio">
-=======
                               >
                                 Would you need the student(s) to have either a drivers license or a vehicle?
                               </h4>
@@ -1095,7 +743,6 @@ class="pc-radio">
                                 v-model="internship.travel"
                                 class="pc-radio"
                               >
->>>>>>> origin/page/program_guide.firebase
                                 <v-radio
                                   v-for="option in ΙΝΤΕRN_TRAVEL_OPTIONS"
                                   :key="option"
@@ -1107,34 +754,16 @@ class="pc-radio">
                           </v-col>
                         </v-col>
                       </ValidationProvider>
-<<<<<<< HEAD
-                      <ValidationProvider v-slot="{errors}"
-rules="required">
-=======
                       <ValidationProvider
                         v-slot="{errors}"
                         rules="required"
                       >
->>>>>>> origin/page/program_guide.firebase
                         <v-col cols="12">
                           <v-col cols="12">
                             <v-row>
                               <h4
                                 style="color:#C7C8CA"
                                 class="text-uppercase"
-<<<<<<< HEAD
-                              >
-What level of education do you typically hire from?
-</h4>
-                              <h4 style="color:#EA6763">
-{{ errors?'*':'' }}
-</h4>
-                            </v-row>
-                          </v-col>
-                          <v-col cols="12">
-                            <v-col cols="12"
-md="6">
-=======
                               >
                                 What level of education do you typically hire from?
                               </h4>
@@ -1148,7 +777,6 @@ md="6">
                               cols="12"
                               md="6"
                             >
->>>>>>> origin/page/program_guide.firebase
                               <pcCheckbox
                                 v-model="internship.education_level"
                                 :other="false"
@@ -1158,34 +786,16 @@ md="6">
                           </v-col>
                         </v-col>
                       </ValidationProvider>
-<<<<<<< HEAD
-                      <ValidationProvider v-slot="{errors}"
-rules="required">
-=======
                       <ValidationProvider
                         v-slot="{errors}"
                         rules="required"
                       >
->>>>>>> origin/page/program_guide.firebase
                         <v-col cols="12">
                           <v-col cols="12">
                             <v-row>
                               <h4
                                 id="text-uppercase"
                                 style="color:#C7C8CA"
-<<<<<<< HEAD
-                              >
-WHAT TYPE OF HIGH SCHOOL TALENT WOULD YOU LIKE TO HIRE?
-</h4>
-                              <h4 style="color:#EA6763">
-{{ errors?'*':'' }}
-</h4>
-                            </v-row>
-                          </v-col>
-                          <v-col cols="12">
-                            <v-col cols="12"
-md="4">
-=======
                               >
                                 WHAT TYPE OF HIGH SCHOOL TALENT WOULD YOU LIKE TO HIRE?
                               </h4>
@@ -1199,7 +809,6 @@ md="4">
                               cols="12"
                               md="4"
                             >
->>>>>>> origin/page/program_guide.firebase
                               <pcCheckbox
                                 v-model="internship.talent"
                                 :options="INTERNSHIP_TALENT_OPTIONS"
@@ -1209,36 +818,16 @@ md="4">
                           </v-col>
                         </v-col>
                       </ValidationProvider>
-<<<<<<< HEAD
-                      <ValidationProvider v-slot="{errors}"
-rules="required">
-=======
                       <ValidationProvider
                         v-slot="{errors}"
                         rules="required"
                       >
->>>>>>> origin/page/program_guide.firebase
                         <v-col cols="12">
                           <v-col cols="12">
                             <v-row>
                               <h4
                                 class="text-uppercase"
                                 style="color:#C7C8CA"
-<<<<<<< HEAD
-                              >
-HOW MANY DAYS PER WEEK WILL YOU BE ABLE TO HOST INTERNS & FELLOWS BETWEEN JUNE 29 - AUGUST 7?
-</h4>
-                              <h4 style="color:#EA6763">
-{{ errors?'*':'' }}
-</h4>
-                            </v-row>
-                          </v-col>
-                          <v-col cols="12">
-                            <v-col cols="12"
-md="4">
-                              <v-radio-group v-model="internship.days_week"
-class="pc-radio">
-=======
                               >
                                 HOW MANY DAYS PER WEEK WILL YOU BE ABLE TO HOST INTERNS & FELLOWS BETWEEN JUNE 29 - AUGUST 7?
                               </h4>
@@ -1256,7 +845,6 @@ class="pc-radio">
                                 v-model="internship.days_week"
                                 class="pc-radio"
                               >
->>>>>>> origin/page/program_guide.firebase
                                 <v-radio
                                   v-for="(sched, index) in HOST_SCHED"
                                   :key="sched+index"
@@ -1268,36 +856,16 @@ class="pc-radio">
                           </v-col>
                         </v-col>
                       </ValidationProvider>
-<<<<<<< HEAD
-                      <ValidationProvider v-slot="{errors}"
-rules="required">
-=======
                       <ValidationProvider
                         v-slot="{errors}"
                         rules="required"
                       >
->>>>>>> origin/page/program_guide.firebase
                         <v-col cols="12">
                           <v-col cols="12">
                             <v-row>
                               <h4
                                 class="text-uppercase"
                                 style="color:#C7C8CA"
-<<<<<<< HEAD
-                              >
-HOW MANY HOURS PER DAY WILL YOU BE ABLE TO HOST INTERNS & FELLOWS BETWEEN JUNE 29 - AUGUST 7?
-</h4>
-                              <h4 style="color:#EA6763">
-{{ errors?'*':'' }}
-</h4>
-                            </v-row>
-                          </v-col>
-                          <v-col cols="12">
-                            <v-col cols="12"
-md="4">
-                              <v-radio-group v-model="internship.hours_day"
-class="pc-radio">
-=======
                               >
                                 HOW MANY HOURS PER DAY WILL YOU BE ABLE TO HOST INTERNS & FELLOWS BETWEEN JUNE 29 - AUGUST 7?
                               </h4>
@@ -1315,7 +883,6 @@ class="pc-radio">
                                 v-model="internship.hours_day"
                                 class="pc-radio"
                               >
->>>>>>> origin/page/program_guide.firebase
                                 <v-radio
                                   v-for="(freq, index) in HOST_FREQ"
                                   :key="freq+index"
@@ -1328,34 +895,16 @@ class="pc-radio">
                         </v-col>
                       </ValidationProvider>
 
-<<<<<<< HEAD
-                      <ValidationProvider v-slot="{errors}"
-rules="required">
-=======
                       <ValidationProvider
                         v-slot="{errors}"
                         rules="required"
                       >
->>>>>>> origin/page/program_guide.firebase
                         <v-col cols="12">
                           <v-col cols="12">
                             <v-row>
                               <h4
                                 class="text-uppercase"
                                 style="color:#C7C8CA"
-<<<<<<< HEAD
-                              >
-WHO DO YOU PREFER TO BE THE EMPLOYER-OF-RECORD?
-</h4>
-                              <h4 style="color:#EA6763">
-{{ errors?'*':'' }}
-</h4>
-                            </v-row>
-                          </v-col>
-                          <v-col cols="12">
-                            <v-col cols="12"
-md="4">
-=======
                               >
                                 WHO DO YOU PREFER TO BE THE EMPLOYER-OF-RECORD?
                               </h4>
@@ -1369,7 +918,6 @@ md="4">
                               cols="12"
                               md="4"
                             >
->>>>>>> origin/page/program_guide.firebase
                               <v-radio-group
                                 v-model="internship.employer_of_record"
                                 class="pc-radio"
@@ -1385,34 +933,16 @@ md="4">
                           </v-col>
                         </v-col>
                       </ValidationProvider>
-<<<<<<< HEAD
-                      <ValidationProvider v-slot="{errors}"
-rules="required">
-=======
                       <ValidationProvider
                         v-slot="{errors}"
                         rules="required"
                       >
->>>>>>> origin/page/program_guide.firebase
                         <v-col cols="12">
                           <v-col cols="12">
                             <v-row>
                               <h4
                                 class="text-uppercase"
                                 style="color:#C7C8CA"
-<<<<<<< HEAD
-                              >
-WHAT COMPENSATION TYPES WOULD YOU CONSIDER FOR OUR INTERNSHIP PROGRAM?
-</h4>
-                              <h4 style="color:#EA6763">
-{{ errors?'*':'' }}
-</h4>
-                            </v-row>
-                          </v-col>
-                          <v-col cols="12">
-                            <v-col cols="12"
-md="4">
-=======
                               >
                                 WHAT COMPENSATION TYPES WOULD YOU CONSIDER FOR OUR INTERNSHIP PROGRAM?
                               </h4>
@@ -1426,7 +956,6 @@ md="4">
                               cols="12"
                               md="4"
                             >
->>>>>>> origin/page/program_guide.firebase
                               <pcCheckbox
                                 v-model="internship.compensation"
                                 :options="INTERN_COMP"
@@ -1440,25 +969,13 @@ md="4">
                         <h4
                           class="text-uppercase"
                           style="color:#C7C8CA"
-<<<<<<< HEAD
-                        >
-IF YOU HAVE AN INTERNSHIP BUDGET IN MIND FOR OUR PROGRAM, ENTER THE MININMUM AND MAXIMUM AMOUNT
-</h4>
-=======
                         >
                           IF YOU HAVE AN INTERNSHIP BUDGET IN MIND FOR OUR PROGRAM, ENTER THE MININMUM AND MAXIMUM AMOUNT
                         </h4>
->>>>>>> origin/page/program_guide.firebase
                       </v-col>
                       <v-col cols="12">
                         <v-col cols="12">
                           <v-row>
-<<<<<<< HEAD
-                            <v-col cols="12"
-md="4">
-                              <ValidationProvider v-slot="{errors}"
-rules="required|min_value:0">
-=======
                             <v-col
                               cols="12"
                               md="4"
@@ -1467,7 +984,6 @@ rules="required|min_value:0">
                                 v-slot="{errors}"
                                 rules="required|min_value:0"
                               >
->>>>>>> origin/page/program_guide.firebase
                                 <pcTextfield
                                   v-model="internship.budget_min"
                                   :error-messages="errors"
@@ -1477,12 +993,6 @@ rules="required|min_value:0">
                                 />
                               </ValidationProvider>
                             </v-col>
-<<<<<<< HEAD
-                            <v-col cols="12"
-md="4">
-                              <ValidationProvider v-slot="{errors}"
-rules="required|min_value:0">
-=======
                             <v-col
                               cols="12"
                               md="4"
@@ -1491,7 +1001,6 @@ rules="required|min_value:0">
                                 v-slot="{errors}"
                                 rules="required|min_value:0"
                               >
->>>>>>> origin/page/program_guide.firebase
                                 <pcTextfield
                                   v-model="internship.budget_max"
                                   :error-messages="errors"
@@ -1508,15 +1017,6 @@ rules="required|min_value:0">
                         <h4
                           class="text-uppercase"
                           style="color:#C7C8CA"
-<<<<<<< HEAD
-                        >
-SELECT THREE DATE OPTIONS FOR INTERVIEWING CANDIDATES BETWEEN APRIL 15 - MAY 15 FROM 4PM - 6PM
-</h4>
-                      </v-col>
-                      <v-col cols="12">
-                        <v-col cols="12"
-md="8" lg="6" xl="5">
-=======
                         >
                           SELECT THREE DATE OPTIONS FOR INTERVIEWING CANDIDATES BETWEEN APRIL 15 - MAY 15 FROM 4PM - 6PM
                         </h4>
@@ -1528,7 +1028,6 @@ md="8" lg="6" xl="5">
                           lg="6"
                           xl="5"
                         >
->>>>>>> origin/page/program_guide.firebase
                           <ValidationProvider
                             v-slot="{errors, failedRules}"
                             :rules="{ required:true,regex: /^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/ }"
@@ -1543,17 +1042,12 @@ md="8" lg="6" xl="5">
                             />
                           </ValidationProvider>
                         </v-col>
-<<<<<<< HEAD
-                        <v-col cols="12"
-md="8" lg="6" xl="5">
-=======
                         <v-col
                           cols="12"
                           md="8"
                           lg="6"
                           xl="5"
                         >
->>>>>>> origin/page/program_guide.firebase
                           <ValidationProvider
                             v-slot="{errors, failedRules}"
                             :rules="{ required:true,regex: /^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/ }"
@@ -1568,17 +1062,12 @@ md="8" lg="6" xl="5">
                             />
                           </ValidationProvider>
                         </v-col>
-<<<<<<< HEAD
-                        <v-col cols="12"
-md="8" lg="6" xl="5">
-=======
                         <v-col
                           cols="12"
                           md="8"
                           lg="6"
                           xl="5"
                         >
->>>>>>> origin/page/program_guide.firebase
                           <ValidationProvider
                             v-slot="{errors, failedRules}"
                             :rules="{ required:true,regex: /^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/ }"
@@ -1594,40 +1083,16 @@ md="8" lg="6" xl="5">
                           </ValidationProvider>
                         </v-col>
                       </v-col>
-<<<<<<< HEAD
-                      <ValidationProvider v-slot="{errors}"
-rules="required">
-=======
                       <ValidationProvider
                         v-slot="{errors}"
                         rules="required"
                       >
->>>>>>> origin/page/program_guide.firebase
                         <v-col cols="12">
                           <v-col cols="12">
                             <v-row>
                               <h4
                                 class="text-uppercase"
                                 style="color:#C7C8CA"
-<<<<<<< HEAD
-                              >
-IF SATISFIED AFTER SUMMER PROGRAM, WILL YOU CONSIDER CONTINUED EMPLOYMENT OF INTERN OR FELLOW?
-</h4>
-                              <h4 style="color:#EA6763">
-{{ errors?'*':'' }}
-</h4>
-                            </v-row>
-                          </v-col>
-                          <v-col cols="12">
-                            <v-col cols="12"
-md="6">
-                              <v-radio-group v-model="internship.employment"
-class="pc-radio">
-                                <v-radio label="Yes"
-value="yes" />
-                                <v-radio label="No"
-value="no" />
-=======
                               >
                                 IF SATISFIED AFTER SUMMER PROGRAM, WILL YOU CONSIDER CONTINUED EMPLOYMENT OF INTERN OR FELLOW?
                               </h4>
@@ -1653,7 +1118,6 @@ value="no" />
                                   label="No"
                                   value="no"
                                 />
->>>>>>> origin/page/program_guide.firebase
                               </v-radio-group>
                             </v-col>
                           </v-col>
@@ -1666,19 +1130,6 @@ value="no" />
                               <h4
                                 class="text-uppercase"
                                 style="color:#C7C8CA"
-<<<<<<< HEAD
-                              >
-WHAT POSITIONS WOULD YOU HAVE AVAILABLE FOR CONTINUED EMPLOYMENT OF IN-SCHOOL OR GRADUATED HIGH SCHOOL TALENT?
-</h4>
-                              <h4 style="color:#EA6763">
-{{ errors?'*':'' }}
-</h4>
-                            </v-row>
-                          </v-col>
-                          <v-col cols="12">
-                            <v-col cols="12"
-md="4">
-=======
                               >
                                 WHAT POSITIONS WOULD YOU HAVE AVAILABLE FOR CONTINUED EMPLOYMENT OF IN-SCHOOL OR GRADUATED HIGH SCHOOL TALENT?
                               </h4>
@@ -1692,7 +1143,6 @@ md="4">
                               cols="12"
                               md="4"
                             >
->>>>>>> origin/page/program_guide.firebase
                               <pcCheckbox
                                 v-model="internship.position_type"
                                 :options="INTERNSHIP_POSITION_TYPE_OPTIONS"
@@ -1707,16 +1157,11 @@ md="4">
                 </v-col>
 
                 <v-row justify="start">
-<<<<<<< HEAD
-                  <v-col cols="12"
-md="4" lg="2">
-=======
                   <v-col
                     cols="12"
                     md="4"
                     lg="2"
                   >
->>>>>>> origin/page/program_guide.firebase
                     <v-btn
                       id="save_profile-button"
                       block
@@ -1727,15 +1172,9 @@ md="4" lg="2">
                       class="mb-6 pc-button"
                       @click="syncStorage"
                     >
-<<<<<<< HEAD
-                      <h3 class="text-uppercase">
-save
-</h3>
-=======
                       <h3 class="text-uppercase">
                         save
                       </h3>
->>>>>>> origin/page/program_guide.firebase
                     </v-btn>
                   </v-col>
                 </v-row>
@@ -1797,45 +1236,6 @@ const app = CONST.addConst(Vue);
 })
 export default class EmployerProfile extends app {
   profile_img_url: string = "";
-<<<<<<< HEAD
-
-  private CITIZENSTYLES = {
-    Teacher: "citizen-id__type--teacher",
-    Employer: "citizen-id__type--employer",
-    Student: "citizen-id__type--student"
-  };
-
-  private AVAILABLETYPES: string[] = ["Teacher", "Employer", "Student"];
-
-  private ispublic: boolean = true;
-
-  public citizenBase: ICitizenBase = {
-    honorific: "",
-    firstName: "",
-    lastName: "",
-    profilePicture: "",
-    citizenType: ""
-  };
-
-  public citizen: Employer.Citizen = {} as Employer.Citizen;
-
-  public organization: Employer.Organization = {
-    industry: [] as string[],
-    products_services: [] as string[]
-  } as Employer.Organization;
-
-  public programdetails: Employer.ProgramDetails = {
-    externship: { prefered_date: {}, contribution: [] as string[] },
-    project: { capacity: {}, engagement: {} }
-  } as Employer.ProgramDetails;
-
-  public internship: Employer.Internship = {
-    talent: [] as string[],
-    project: [] as string[],
-    compensation: [] as string[],
-    position_type: [] as string[]
-  } as Employer.Internship;
-=======
   loading:boolean = false
   private CITIZENSTYLES = {
     Teacher: "citizen-id__type--teacher",
@@ -1880,7 +1280,6 @@ export default class EmployerProfile extends app {
     localStorage.citizen_position = this.citizen.position;
     localStorage.citizen_organization = this.citizen.organization;
   }
->>>>>>> origin/page/program_guide.firebase
 
   private addOption(from: string, to: string[]): void {
     to.push(from);
@@ -1917,23 +1316,8 @@ export default class EmployerProfile extends app {
   async created() {
     this.citizenBase.citizenType = this.$route.params.citizenType;
 
-<<<<<<< HEAD
-    get Name() {
-        return `${this.citizen.first_name} ${this.citizen.last_name}`
-    }
-    beforeCreate(){
-      
-    }
-    async created() {
-        this.citizenBase.citizenType = this.$route.params.citizenType
-        
-        let arr:string[] = []
-        console.log(typeof arr)
-    }
-=======
     let arr: string[] = [];
     console.log(typeof arr);
->>>>>>> origin/page/program_guide.firebase
   }
 }
 </script>

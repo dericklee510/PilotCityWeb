@@ -7,11 +7,7 @@ export interface NamedLink {
     name: string
     link: string
 }
-<<<<<<< HEAD
-interface Event {
-=======
 interface EventItem {
->>>>>>> origin/page/program_guide.firebase
     name: string
     duration: number
     description: string
@@ -22,11 +18,7 @@ interface AgendaTemplate {
     date: Date
     time: number
     location: string
-<<<<<<< HEAD
-    events: Event[]
-=======
     events: EventItem[]
->>>>>>> origin/page/program_guide.firebase
 }
 interface PostHackReflection {
     feedback: string

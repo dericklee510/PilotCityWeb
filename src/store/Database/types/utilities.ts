@@ -20,7 +20,7 @@ export interface AgendaTemplate {
     date: Date
     startTime: number
     address: AutoCompleteAddress
-    events: Event[]
+    events: EventItem[]
     lastUpdate: firebase.firestore.Timestamp
     eventTimestamp: firebase.firestore.Timestamp[]
 }
