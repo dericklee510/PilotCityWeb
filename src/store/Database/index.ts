@@ -2,80 +2,87 @@ import { AgendaTemplate, NamedLink, EventItem } from './types/utilities';
 /* eslint-disable-next-line */
 import { Module, VuexModule, Action, Mutation } from "vuex-module-decorators" //action unused
 import { firebaseApp as fb } from '@/firebase/init'
-import { EmployerProgram } from './types/types' 
+import { EmployerProgram, GeneralUser, Project, RatingTag } from './types/types' 
+import { Dependency } from '../../utilities/Dependency'
 const _ = require('lodash');
-
 
 @Module({ namespaced: true, name: 'Fb' })
 export default class Fb extends VuexModule {
     public firestore = fb.firestore()
     public storage = fb.storage()
-    private employerProgram: EmployerProgram | null = null;
+    private employerProgram?: EmployerProgram
+    private FBUser = fb.auth().currentUser;
+    private currentUserProfile?: GeneralUser
+    private currentProject?: Project
 
-    get userDocRef() { //no return type
-        let user = this.context.rootState.Auth.user as firebase.User | null
-        return (user) ? this.firestore.collection('users').doc(user.uid) : null
+    @Dependency('FBUser')
+    get userDocRef() {
+        return this.firestore.collection('users').doc(this.FBUser!.uid);
     }
+
+    @Dependency('FBUser')
     get storageRef() {
-        let user = this.context.rootState.Auth.user as firebase.User | null
-        return (user) ? this.storage.ref() : null
+        return this.storage.ref();
     }
     get getCurrentEmployerProgram() {
         return this.employerProgram;
     }
-
-    @Mutation
-    initEmployerProgram(program: EmployerProgram | null) {
-        this.employerProgram = program;
+    get getCurrentUserProfile() {
+        return this.currentUserProfile
     }
 
+    @Dependency('FBUser')
+    @Mutation
+    async initCurrentUserProfile() {
+        const snapshot = await this.firestore.collection('GeneralUser').doc(this.FBUser!.uid).get();
+        if (!snapshot.exists)
+            throw new Error("User profile is not found on the GeneralUser Collection");
+        this.FBUser = snapshot.data() as firebase.User
+    }
+
+    @Dependency('FBUser')
+    @Mutation
+    async initEmployerProgram() {
+        const snapshot = await this.firestore.collection('EmployerProgram').doc(this.FBUser!.uid).get();
+        if (!snapshot.exists)
+            throw new Error(`Current uset with uid: ${this.FBUser!.uid} does not have a record on EmployerProgram Collection`);
+        this.employerProgram = snapshot.data() as EmployerProgram
+    }
+
+    @Dependency('FBUser')
     @Mutation
     async updateEmployerProgram(property: any) {
-        let user = this.context.rootState.Auth.user as firebase.User | null
-        if (!user) throw new Error('User not logged in')
-        await this.firestore.collection('EmployerProgram').doc(user.uid).update(property);
+        await this.firestore.collection('EmployerProgram').doc(this.FBUser!.uid).update(property);
         this.employerProgram = Object.assign(property, this.employerProgram);
     }
 
+    @Dependency('currentProject')
     @Mutation
     async updateProject(property: any) {
-        let user = this.context.rootState.Auth.user as firebase.User | null
-        if (!user) throw new Error('User not logged in')
-        await this.firestore.collection('Project').doc(currentProjectID).update(property);
-        
-        // this.employerProgram = Object.assign(property, this.employerProgram);
+        await this.firestore.collection('Project').doc(this.currentProject!.projectId).update(property);
+        this.currentProject = Object.assign(property, this.currentProject)
     }
-
+    
+    @Dependency('FBUser')
     @Action({ commit: 'initEmployerProgram'})
     async fetchEmployerProgram() {
-        let user = this.context.rootState.Auth.user as firebase.User | null
-        if (!user) throw new Error('Not authorized')
-        const snapshot = await this.firestore.collection('EmployerProgram').doc(user.uid).get();
-        if (!snapshot.exists) { 
-            return null ;
-        } else {
+        const snapshot = await this.firestore.collection('EmployerProgram').doc(this.FBUser!.uid).get();
+        if (!snapshot.exists) 
+            throw new Error(`Current uset with uid: ${this.FBUser!.uid} does not have a record on EmployerProgram Collection`);
+        else 
             return snapshot.data()
-        }
     }
 
+    @Dependency('FBUser', 'employerProgram', 'storage')
     @Action({ commit: 'updateEmployerProgram' })
     async createProgramBrief(file: File) {
-        let user = this.context.rootState.Auth.user as firebase.User | null
-        if (!user)
-            throw new Error('User not logged in')
-        if (!this.getCurrentEmployerProgram)
-            throw new Error('Current EmployerProgram is not initialized')
-        if (!this.storageRef)
-            throw new Error('Can\'t find cloud storage ref')
-        // File name
-        // Store file in FB Storage
         const fileName = file.name; // should validate the name of the file on the frontend
-        const filePath = `program_briefs/${user.uid}/${fileName}`;
-        const fileRef = this.storageRef.child(filePath);
+        const filePath = `program_briefs/${this.FBUser!.uid}/${fileName}`;
+        const fileRef = this.storageRef!.child(filePath);
         await fileRef.put(file);
-        const index = _.findIndex(this.getCurrentEmployerProgram.programBrief!, ['name', fileName]);
+        const index = _.findIndex(this.getCurrentEmployerProgram!.programBrief!, ['name', fileName]);
         if (index < 0) {
-            const newProgramBrief = [...this.getCurrentEmployerProgram.programBrief!, {
+            const newProgramBrief = [...this.getCurrentEmployerProgram!.programBrief!, {
                 name: fileName,
                 link: filePath
             }]
@@ -83,8 +90,8 @@ export default class Fb extends VuexModule {
                 programBrief: newProgramBrief
             };
         } else {
-            this.getCurrentEmployerProgram.programBrief![index].link = filePath;
-            const newProgramBrief = [...this.getCurrentEmployerProgram.programBrief!]
+            this.getCurrentEmployerProgram!.programBrief![index].link = filePath;
+            const newProgramBrief = [...this.getCurrentEmployerProgram!.programBrief!]
             return {
                 programBrief: newProgramBrief
             };
@@ -92,42 +99,32 @@ export default class Fb extends VuexModule {
     }
 
     async reuploadProgramBrief(file:File) {
-        // upload new file
-        await this.createProgramBrief(file)
+        await this.createProgramBrief(file); // it's the same shit
     }
 
+    @Dependency('FBUser', 'employerProgram', 'storageRef')
     @Action({ commit: 'updateEmployerProgram' })
     async deleteProgramBrief (fileName: string){
-        let user = this.context.rootState.Auth.user as firebase.User | null
-        if (!user)
-            throw new Error('User not logged in')
-        if (!this.getCurrentEmployerProgram)
-            throw new Error('Current EmployerProgram is not initialized')
-        if (!this.storageRef)
-            throw new Error('Can\'t find cloud storage ref')
-
-        const index = _.findIndex(this.getCurrentEmployerProgram.programBrief, ['name', fileName]);
+        const index = _.findIndex(this.getCurrentEmployerProgram!.programBrief, ['name', fileName]);
         if (index < 0) {
             throw new Error('file with associated name does not exist')
         } else {
-            await this.storageRef.child(`program_briefs/${user.uid}/${fileName}`).delete();
-            const newProgramBriefs = _.remove(this.getCurrentEmployerProgram.programBrief, (n: any)  => n.name === fileName);
+            await this.storageRef!.child(`program_briefs/${this.FBUser!.uid}/${fileName}`).delete();
+            const newProgramBriefs = _.remove(this.getCurrentEmployerProgram!.programBrief, (n: any)  => n.name === fileName);
             return newProgramBriefs;  
         }
     }
 
-    // we have to ask them to resubmit the brief because firebase storage doesnt support rename
-    @Action({ commit: 'updateEmployerProgram' })
+    @Action({ commit: 'updateEmployerProgram' }) // we have to ask them to resubmit the brief because firebase storage doesnt support rename
     async renameBrief(newFile: File, originalFileName: string){
         await this.createProgramBrief(newFile);
         await this.deleteProgramBrief(originalFileName);
     }
-
+  
     @Action( { commit: 'updateProject'})
-    async addRating(ratingName: string, rating:number) {
-        // StudentProject.rating = rating
+    async addRating(ratingName: RatingTag, rating:number) {
         return {
-            [ratingName]: rating
+            [ratingName]: rating 
         }
     }
 
@@ -156,6 +153,8 @@ const uploadVideo = async (url:string):void => {
 const updateCaseStudy = async (link: NamedLink[], uid: string): Promise<void> => {
     // update EmployerProgram.caseStudies with link
     // update TeacherProgramData.caseStudies with link
+
+    
 }
 
 type addRatingArg = "customerRatingT"|
