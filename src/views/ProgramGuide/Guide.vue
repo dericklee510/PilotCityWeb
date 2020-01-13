@@ -54,7 +54,7 @@ import { STUDENTMODULES, EMPLOYERMODULES, TEACHERMODULES } from './views'
 import {Nav, Lock, Unlock} from './components'
 import _ from "lodash"
 import { LinkedList, LinkedListItem } from 'linked-list-typescript';
-import { ProgramNode } from './types';
+import { ProgramNode, RouteList } from './types';
 
 @Component({
   components: {
@@ -64,14 +64,13 @@ import { ProgramNode } from './types';
   }
 })
 export default class Guide extends Vue{
-
   public sequenceHash:Record<string,Record<string,string[]>> = {
     Teacher: TEACHERMODULES,
     Employer: EMPLOYERMODULES,
     Student: STUDENTMODULES
   }
   public xcurrentModule: string = '';  
-  routeMap!:LinkedList<LinkedListItem<ProgramNode<Record<string,any>>>>
+  routeMap!:LinkedList<ProgramNode<typeof EMPLOYERMODULES | typeof STUDENTMODULES | typeof TEACHERMODULES>>
   get citizenType(): string{
     return localStorage.citizenType
   }
@@ -131,6 +130,7 @@ export default class Guide extends Vue{
 
         BIND THIS TO `XCURRENTMODULE`
     */
+    this.routeMap = new RouteList("employer").createLinkedList()
   }
 }
 </script>
