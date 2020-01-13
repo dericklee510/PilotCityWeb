@@ -83,47 +83,18 @@
             </v-col>
           </v-row>
         </v-col>
-    
-        <v-row
-          v-for="(item,index) in agendaItems"
-          :key="index"
-          class="mt-10 pt-0 pb-0"
+
+        <v-col
+          class="mr-auto ml-auto"
+          cols="5"
         >
-          <v-col
-            cols="2"
+          <v-btn
+            class="agenda_view__button mb-10"
+            :disabled="!isAgendaComplete"
           >
-            <input
-              type="checkbox"
-            >
-          </v-col>
-    
-          <v-col
-            cols="8"
-            class="agenda_view__item mr-auto ml-auto "
-          >
-            <v-row id="agenda_view__borderline">
-              <input
-                v-model="item.name"
-                disabled="true"
-                placeholder="Item"
-                class="agenda_view__item-input__header pt-3 pb-3 pl-4 pr-4"
-              >
-            </v-row>
-            <v-row id="agenda_view__borderline" />
-            <v-row>
-              <input
-                v-model="item.description"
-                disabled="true"
-                placeholder="Description"
-                class="agenda_view__item-input__description pt-3 pb-12 pl-4 pr-4"
-              >
-            </v-row>
-          </v-col>
-    
-          <v-col cols="2" />
-    
-          <!-- <v-col cols="2"><i class="mt-2 ml-3 far fa-trash-alt agenda_view__trashicon"></i></v-col> -->
-        </v-row>
+            FINISH
+          </v-btn>
+        </v-col>  
       </v-col>
     </v-row>
   </v-container>

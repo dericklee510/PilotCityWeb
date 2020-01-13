@@ -53,7 +53,8 @@ import { Watch } from 'vue-property-decorator'
 import { STUDENTMODULES, EMPLOYERMODULES, TEACHERMODULES } from './views'
 import {Nav, Lock, Unlock} from './components'
 import _ from "lodash"
-import { getCitizenType } from '../../store/Auth/helpers';
+import { LinkedList } from 'linked-list-typescript';
+import { ProgramNode } from './types';
 
 @Component({
   components: {
@@ -63,16 +64,16 @@ import { getCitizenType } from '../../store/Auth/helpers';
   }
 })
 export default class Guide extends Vue{
+  created(){
+    this.$route
+  }
   public sequenceHash:Record<string,Record<string,string[]>> = {
     Teacher: TEACHERMODULES,
     Employer: EMPLOYERMODULES,
     Student: STUDENTMODULES
   }
   public xcurrentModule: string = '';  
-
-  get citizenType(): string{
-    return getCitizenType();
-  }
+  routeMap!:LinkedList<ProgramNode>
   get sequence() {
     return this.sequenceHash[this.citizenType] 
   }
@@ -104,6 +105,7 @@ export default class Guide extends Vue{
   }
   
   public navForward(mod: string[]){
+    console.log(mod)
     let currentRoute= this.$route.name as string;
     let length = mod.length;
     console.log(currentRoute,length)
@@ -118,15 +120,6 @@ export default class Guide extends Vue{
       this.$router.push({ name: mod[mod.indexOf(currentRoute)+1] })
     if(mod[0] == currentRoute) 
       this.$router.push({name: this.sequence[this.priorModule][this.priorModule.length-1]})
-  }
-  public created(){
-    // psuedo-code [could probably turn this into a util function]
-    /* 
-      if(user.fb.getLastProgress)
-        this.currentModule = user.fb.getLastProgress.Name //this should take them to their latest unlock
-
-        BIND THIS TO `XCURRENTMODULE`
-    */
   }
 }
 </script>
