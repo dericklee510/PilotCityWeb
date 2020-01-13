@@ -71,6 +71,7 @@ export default class Guide extends Vue{
   }
   public xcurrentModule: string = '';  
   routeMap!:LinkedList<ProgramNode<typeof EMPLOYERMODULES | typeof STUDENTMODULES | typeof TEACHERMODULES>>
+  currentNode!:ProgramNode<typeof EMPLOYERMODULES | typeof STUDENTMODULES | typeof TEACHERMODULES>
   get citizenType(): string{
     return localStorage.citizenType
   }
@@ -105,15 +106,20 @@ export default class Guide extends Vue{
   }
   
   public navForward(mod: string[]){
-    this.routeMap.head
-    console.log(mod)
-    let currentRoute= this.$route.name as string;
-    let length = mod.length;
-    console.log(currentRoute,length)
-    if(mod.includes(currentRoute) && mod[length-1] != currentRoute)
-      this.$router.push({ name: mod[mod.indexOf(currentRoute)+1] })
-    if(mod[length-1] == currentRoute) 
-      this.$router.push({name: this.sequence[this.nextModule][0]})
+    // this.routeMap.head
+    // console.log(mod)
+    // let currentRoute= this.$route.name as string;
+    // let length = mod.length;
+    // console.log(currentRoute,length)
+    // if(mod.includes(currentRoute) && mod[length-1] != currentRoute)
+    //   this.$router.push({ name: mod[mod.indexOf(currentRoute)+1] })
+    // if(mod[length-1] == currentRoute) 
+    //   this.$router.push({name: this.sequence[this.nextModule][0]})
+    let next = this.currentNode.next
+    if(next){
+      this.$router.push({name:next.value.routeName})
+      this.currentNode = next
+      }
   }
   public navBackward(mod: string[]){
     let currentRoute:string = this.$route.name as string;
@@ -131,6 +137,7 @@ export default class Guide extends Vue{
         BIND THIS TO `XCURRENTMODULE`
     */
     this.routeMap = new RouteList("employer").createLinkedList()
+    this.currentNode = this.routeMap.head
   }
 }
 </script>
