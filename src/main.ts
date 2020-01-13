@@ -1,4 +1,3 @@
-import "../env" // sets env variables
 import Vue from 'vue'
 
 /* eslint-disable */

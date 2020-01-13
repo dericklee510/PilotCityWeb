@@ -1,10 +1,10 @@
+import { Dependency } from '@/utilities/dependency';
 import { isLinkValid } from './../../api';
 import { AgendaTemplate, NamedLink, EventItem } from './types/utilities';
 /* eslint-disable-next-line */
 import { Module, VuexModule, Action, Mutation } from "vuex-module-decorators" //action unused
 import { firebaseApp as fb } from '@/firebase/init'
 import { EmployerProgram, GeneralUser, Project, RatingTag, TeacherProgramData } from './types/types' 
-import { Dependency } from '../../utilities/Dependency'
 const _ = require('lodash');
 const assert = require('assert')
 
@@ -20,12 +20,12 @@ export default class Fb extends VuexModule {
     private currentUserProfile?: GeneralUser
     private currentProject?: Project
 
-    @Dependency('FBUser')
+//  @Dependency('FBUser')
     get userDocRef() {
         return this.firestore.collection('users').doc(this.FBUser!.uid);
     }
 
-    @Dependency('FBUser')
+//  @Dependency('FBUser')
     get storageRef() {
         return this.storage.ref();
     }
@@ -36,12 +36,12 @@ export default class Fb extends VuexModule {
         return this.currentUserProfile
     }
 
-    @Dependency('currentUserProfile')
+//  @Dependency('currentUserProfile')
     get userCitizenType() {
         return this.currentUserProfile!.citizenType;
     }
 
-    @Dependency('FBUser')
+//  @Dependency('FBUser')
     @Mutation
     async initCurrentUserProfile() {
         const snapshot = await this.firestore.collection('GeneralUser').doc(this.FBUser!.uid).get();
@@ -50,28 +50,28 @@ export default class Fb extends VuexModule {
         this.currentUserProfile = snapshot.data<GeneralUser>()
     }
 
-    @Dependency('FBUser')
+//  @Dependency('FBUser')
     @Mutation
     async initCurrentEmployerProgram(program: EmployerProgram) {
         this.currentEmployerProgramUID = program.employerProgramId;
         this.currentEmployerProgram = program;
     }
     
-    @Dependency('currentEmployerProgramUID', 'currentEmployerProgram')
+//  @Dependency('currentEmployerProgramUID', 'currentEmployerProgram')
     @Mutation
     async updateCurrentEmployerProgram(property: any) {
         await this.firestore.collection('EmployerProgram').doc(this.currentEmployerProgramUID).update(property);
         this.currentEmployerProgram = Object.assign(property, this.currentEmployerProgram);
     }
 
-    @Dependency('currentEmployerProgramUID', 'currentTeacherProgramData')
+//  @Dependency('currentEmployerProgramUID', 'currentTeacherProgramData')
     @Mutation
     async updateCurrentTeacherProgramData(property: any) {
         await this.firestore.collection('TeacherProgramData').doc(this.currentTeacherProgramUID).update(property);
         this.currentTeacherProgramData = Object.assign(property, this.currentTeacherProgramData);
     }
 
-    @Dependency('currentProject')
+//  @Dependency('currentProject')
     @Mutation
     async updateProject(property: any) {
         await this.firestore.collection('Project').doc(this.currentProject!.projectId).update(property);
@@ -96,7 +96,7 @@ export default class Fb extends VuexModule {
         return program;
     }
 
-    @Dependency('FBUser', 'employerProgram', 'storage')
+//  @Dependency('FBUser', 'employerProgram', 'storage')
     @Action({ commit: 'updateCurrentEmployerProgram' })
     async createProgramBrief(file: File) {
         const fileName = file.name; // should validate the name of the file on the frontend
@@ -125,7 +125,7 @@ export default class Fb extends VuexModule {
         await this.createProgramBrief(file); // it's the same shit
     }
 
-    @Dependency('FBUser', 'employerProgram', 'storageRef')
+//  @Dependency('FBUser', 'employerProgram', 'storageRef')
     @Action({ commit: 'updateCurrentEmployerProgram' })
     async deleteProgramBrief (fileName: string){
         const index = _.findIndex(this.getCurrentEmployerProgram!.programBrief, ['name', fileName]);
@@ -193,7 +193,7 @@ export default class Fb extends VuexModule {
      * User: Employer or Teacher
      * @param {NamedLink[]} link
      */
-    @Dependency('currentUserProfile')
+//  @Dependency('currentUserProfile')
     async updateCaseStudy(link: NamedLink[]){
         if (this.currentUserProfile!.citizenType == 'teacher') {
             await this.updateCurrentEmployerProgramCaseStudy(link)
@@ -222,7 +222,7 @@ export default class Fb extends VuexModule {
 }
 
 
-const uploadVideo = async (url: string): void => {
+const uploadVideo = async (url: string): Promise<void> => {
     // check link
     if (!isLinkValid(url))
         throw ("link does not exist")
