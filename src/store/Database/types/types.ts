@@ -1,6 +1,5 @@
 import { AgendaTemplate, ReviewedLink, ProgramEvent, PostHackReflection, DesignLog, TimeLog, NamedLink } from './utilities';
 import { AutoComplete, AutoCompleteAddress } from '@/components/GoogleMaps';
-import { firebase } from '@/firebase/init';
 export interface Classroom {
     classroomId: string
     projectIds: string []

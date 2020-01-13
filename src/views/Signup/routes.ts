@@ -1,7 +1,6 @@
 import { RouteConfig } from 'vue-router'
 import { AuthStore } from '../../store/index'
 import * as Signup from '.'
-import EmployerSignup from '@/views/Test/Test.vue'
 
 const routes: RouteConfig[] = [
     {
