@@ -204,19 +204,19 @@ export default class Fb extends VuexModule {
         }
     }
     
-    /**
-     * Check completed Agenda Items
-     * User: Employer, Teacher, Student
-     * @param {EventItem[]} checkItem
-     * @param {string} uid
-     * @returns {Promise<void>}
-     */
-    async checkAgendaItem(checkItem: EventItem[], uid: string) {
-        // Employer: EmployerProgram.
-        // EventItem.boolean = 1
+    // /**
+    //  * Check completed Agenda Items
+    //  * User: Employer, Teacher, Student
+    //  * @param {EventItem[]} checkItem
+    //  * @param {string} uid
+    //  * @returns {Promise<void>}
+    //  */
+    // async checkAgendaItem(checkItem: EventItem[], uid: string) {
+    //     // Employer: EmployerProgram.
+    //     // EventItem.boolean = 1
 
-        // wtf?
-    }
+    //     // wtf?
+    // }
         
 
 }
@@ -273,16 +273,16 @@ const addRating = async (rating: number, projectuid: string, arg: addRatingArg, 
 }
 
 
-/**
- * Uncheck incomplete Agenda Items
- * User: Employer, Teacher, Student
- * @param {EventItem[]} uncheckItem
- * @param {string} uid
- * @returns {Promise<void>}
- */
-const uncheckAgendaItem = async (uncheckItem: EventItem[], uid: string): Promise<void> => {
-    // EventItem.boolean = 0
-}
+// /**
+//  * Uncheck incomplete Agenda Items
+//  * User: Employer, Teacher, Student
+//  * @param {EventItem[]} uncheckItem
+//  * @param {string} uid
+//  * @returns {Promise<void>}
+//  */
+// const uncheckAgendaItem = async (uncheckItem: EventItem[], uid: string): Promise<void> => {
+//     // EventItem.boolean = 0
+// }
 
 /**
  * Allows the User to confirm a Program Brief
@@ -381,7 +381,7 @@ const createTeam = async (teamName: string, classroomId: string, uid: string): P
     // if created by Teacher
     // Project.createdByTeacher = 1
     // Project.teamMembers = []
-    // add projectId to employer.projectId
+    // add projectId to employer.projectId (employer program) project->classroom -> employerProgram
 }
 
 /**
@@ -410,6 +410,7 @@ const deleteTeam = async (projectId: string, uid: string): Promise<void> => {
     // delete project with Project.Id = projectId
     // User must be a teacher
 }
+
 /**
  * Allows User to join a Team
  * User: Student
@@ -439,7 +440,7 @@ const leaveTeam = async (projectId: string, uid: string): Promise<void> => {
  * @param {string} uid
  * @returns {Promise<void>}
  */
-const addProgram = async (shareCode: string, employerProgramId: string, uid: string): Promise<void> => {
+const addProgram = async (shareCode: string, uid: string): Promise<void> => {
     if (!shareCode) {
         throw new Error('invalid sharecode')
     } 
