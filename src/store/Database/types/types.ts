@@ -24,6 +24,7 @@ export interface GeneralUser {
     address: AutoCompleteAddress
     phoneNumber: string
     profilePicture: string
+    reviewedLinks: string[]
     lastUpdate: firebase.firestore.Timestamp
 }
 export interface EmployerProgram {
@@ -32,7 +33,7 @@ export interface EmployerProgram {
     programLauncher: ProgramEvent[]
     externshipDayAgenda: AgendaTemplate
     masterHackDayAgenda: AgendaTemplate    //  Employer  cannot  modify  this
-    programBrief?: NamedLink[]
+    programBriefLinks?: NamedLink[]
     introVideo?: string
     caseStudies?: NamedLink[]
     projectIds?: string[]
@@ -53,8 +54,6 @@ export interface Project {
     teamMembersIds: string[]
     teamName: string
     createdByTeacher: boolean
-    teacherName: string
-    period: string
     timeline: {
         programBrief?: firebase.firestore.Timestamp
         introVideo?: firebase.firestore.Timestamp
