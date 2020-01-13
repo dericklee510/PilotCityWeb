@@ -1,10 +1,9 @@
 import Vue from 'vue'
-import { MAPS_API_KEY } from '@/keys'
+
 /* eslint-disable */
 import App from "./App.vue"
 import router from "@/router"
 import store from "./store"
-
 
 import firestore, { firebaseApp } from "@/firebase/init"
 import { SET_USER } from './store/Auth/mutation-types'
@@ -24,11 +23,13 @@ import VuetifyGoogleAutocomplete from 'vuetify-google-autocomplete'
 import VueMoment from "vue-moment"
 import VueRx from 'vue-rx'
 import { createProvider } from './vue-apollo'
-import "@/utilities/validation/index.ts"
+
+
+
 Vue.use(VueRx)
 Vue.use(Vuetify)
 Vue.use(VuetifyGoogleAutocomplete, {
-    apiKey: MAPS_API_KEY
+    apiKey: process.env.MAPS_API_KEY
 })
 Vue.use(VueMoment)
 Vue.component('default-layout', Default)

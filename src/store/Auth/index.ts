@@ -30,6 +30,10 @@ export default class Auth extends VuexModule {
 
     public authResponse: string = ''
 
+    get getUser() {
+        return this.user;
+    }
+
     @Mutation
     private [SET_USER](userDoc: FirebaseUser | null): void {
         this.user = userDoc

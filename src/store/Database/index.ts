@@ -1,44 +1,232 @@
+import { isLinkValid } from './../../api';
 import { AgendaTemplate, NamedLink, EventItem } from './types/utilities';
 /* eslint-disable-next-line */
-import { Module, VuexModule, Action } from "vuex-module-decorators" //action unused
-import firestore from '@/firebase/init'
-
-
+import { Module, VuexModule, Action, Mutation } from "vuex-module-decorators" //action unused
+import { firebaseApp as fb, firebase } from '@/firebase/init'
+import { EmployerProgram, GeneralUser, Project, RatingTag, TeacherProgramData } from './types/types' 
+import { Dependency } from '@/utilities/dependency';
+const _ = require('lodash');
+const assert = require('assert')
 @Module({ namespaced: true, name: 'Fb' })
 export default class Fb extends VuexModule {
-    public firestore = firestore
+    public firestore = fb.firestore()
+    public storage = fb.storage()
+    private currentTeacherProgramUID? :string
+    private currentTeacherProgramData?: TeacherProgramData
+    private currentEmployerProgramUID? :string
+    private currentEmployerProgram?: EmployerProgram
+    private FBUser:firebase.User | null = fb.auth().currentUser;
+    private currentUserProfile?: GeneralUser
+    private currentProject?: Project
 
-    get userDocRef() { //no return type
-        let user = this.context.rootState.Auth.user as firebase.User | null
-        return (user) ? firestore.collection('users').doc(user.uid) : null
+    @Dependency('FBUser')
+    get userDocRef() {
+        return this.firestore.collection('users').doc(this.FBUser!.uid);
     }
 
+    @Dependency('FBUser')
+    get storageRef() {
+        return this.storage.ref();
+    }
+    get getCurrentEmployerProgram() {
+        return this.currentEmployerProgram;
+    }
+    get getCurrentUserProfile() {
+        return this.currentUserProfile
+    }
+
+    @Dependency('currentUserProfile')
+    get userCitizenType() {
+        return this.currentUserProfile!.citizenType;
+    }
+
+    @Dependency('FBUser')
+    @Mutation
+    async initCurrentUserProfile() {
+        const snapshot = await this.firestore.collection('GeneralUser').doc(this.FBUser!.uid).get();
+        if (!snapshot.exists)
+            throw new Error("User profile is not found on the GeneralUser Collection");
+        this.currentUserProfile = snapshot.data<GeneralUser>()
+    }
+
+    @Dependency('FBUser')
+    @Mutation
+    async initCurrentEmployerProgram(program: EmployerProgram) {
+        this.currentEmployerProgramUID = program.employerProgramId;
+        this.currentEmployerProgram = program;
+    }
+    
+    @Dependency('currentEmployerProgramUID', 'currentEmployerProgram')
+    @Mutation
+    async updateCurrentEmployerProgram(property: any) {
+        await this.firestore.collection('EmployerProgram').doc(this.currentEmployerProgramUID).update(property);
+        this.currentEmployerProgram = Object.assign(property, this.currentEmployerProgram);
+    }
+
+    @Dependency('currentEmployerProgramUID', 'currentTeacherProgramData')
+    @Mutation
+    async updateCurrentTeacherProgramData(property: any) {
+        await this.firestore.collection('TeacherProgramData').doc(this.currentTeacherProgramUID).update(property);
+        this.currentTeacherProgramData = Object.assign(property, this.currentTeacherProgramData);
+    }
+
+    @Dependency('currentProject')
+    @Mutation
+    async updateProject(property: any) {
+        await this.firestore.collection('Project').doc(this.currentProject!.projectId).update(property);
+        this.currentProject = Object.assign(property, this.currentProject)
+    }
+    
+    @Action({ commit: 'initEmployerProgram'})
+    async fetchEmployerProgram(employerProgramUID: string) {
+        const snapshot = await this.firestore.collection('EmployerProgram').doc(employerProgramUID).get();
+        if (!snapshot.exists)
+            throw new Error(`Failed to fetch employer program with uid of ${employerProgramUID}`);
+        return snapshot;
+    }
+
+    @Action({ commit: 'initEmployerProgram'})
+    async switchCurrentEmployerProgramWithProgramUID(employerProgramUID: string) {
+        return await this.fetchEmployerProgram(employerProgramUID)
+    }
+
+    @Action({ commit: 'initEmployerProgram'})
+    async switchCurrentEmployerProgramWithProgramObject(program : EmployerProgram) {
+        return program;
+    }
+
+    @Dependency('FBUser', 'employerProgram', 'storage')
+    @Action({ commit: 'updateCurrentEmployerProgram' })
+    async createProgramBrief(file: File) {
+        const fileName = file.name; // should validate the name of the file on the frontend
+        const filePath = `program_briefs/${this.FBUser!.uid}/${fileName}`;
+        const fileRef = this.storageRef!.child(filePath);
+        await fileRef.put(file);
+        const index = _.findIndex(this.getCurrentEmployerProgram!.programBrief!, ['name', fileName]);
+        if (index < 0) {
+            const newProgramBrief = [...this.getCurrentEmployerProgram!.programBrief!, {
+                name: fileName,
+                link: filePath
+            }]
+            return {
+                programBrief: newProgramBrief
+            };
+        } else {
+            this.getCurrentEmployerProgram!.programBrief![index].link = filePath;
+            const newProgramBrief = [...this.getCurrentEmployerProgram!.programBrief!]
+            return {
+                programBrief: newProgramBrief
+            };
+        }
+    }
+
+    async reuploadProgramBrief(file:File) {
+        await this.createProgramBrief(file); // it's the same shit
+    }
+
+    @Dependency('FBUser', 'employerProgram', 'storageRef')
+    @Action({ commit: 'updateCurrentEmployerProgram' })
+    async deleteProgramBrief (fileName: string){
+        const index = _.findIndex(this.getCurrentEmployerProgram!.programBrief, ['name', fileName]);
+        if (index < 0) {
+            throw new Error('file with associated name does not exist')
+        } else {
+            await this.storageRef!.child(`program_briefs/${this.FBUser!.uid}/${fileName}`).delete();
+            const newProgramBriefs = _.remove(this.getCurrentEmployerProgram!.programBrief, (n: any)  => n.name === fileName);
+            return newProgramBriefs;  
+        }
+    }
+
+    @Action({ commit: 'updateCurrentEmployerProgram' }) // we have to ask them to resubmit the brief because firebase storage doesnt support rename
+    async renameBrief(newFile: File, originalFileName: string){
+        await this.createProgramBrief(newFile);
+        await this.deleteProgramBrief(originalFileName);
+    }
+  
+    @Action( { commit: 'updateProject'})
+    async addRating(ratingName: RatingTag, rating:number) {
+        return {
+            [ratingName]: rating 
+        }
+    }
+
+   
+    /**
+     * Enables User to create an Agenda
+     * User: Employer
+     * @param {AgendaTemplate} textEntry
+     * @param {string} uid
+     */
+    @Action({ commit: 'updateCurrentEmployerProgram' })
+    async createExternshipAgenda(textEntry: AgendaTemplate, EmployerProgramId: string){
+        assert(this.userCitizenType === 'employer', 'User type not emplyer');
+        return {
+            externshipAgenda: textEntry
+        }
+    }
+
+    // @Action({ commit: 'updateCurrentEmployerProgram' })
+    // async uploadVideo(url:string){
+    //     // check link
+    //     if(isLink(url)) {
+    //         return{
+    //             link: url
+    //         }
+    //     }
+    //         throw("link does not exist")
+    //     // upload video
+    // }
+   
+    @Action({ commit: 'updateCurrentEmployerProgram' })
+    async updateCurrentEmployerProgramCaseStudy(caseStudies: NamedLink[]) {
+        return { caseStudies }
+    }
+
+    @Action({ commit: 'updateCurrentTeacherProgramData' })
+    async updateCurrentTeacherProgramCaseStudy(caseStudies: NamedLink[]) {
+        return { caseStudies }
+    }
+
+    /**
+     * Updates Case Study for creation and removal
+     * User: Employer or Teacher
+     * @param {NamedLink[]} link
+     */
+    @Dependency('currentUserProfile')
+    async updateCaseStudy(link: NamedLink[]){
+        if (this.currentUserProfile!.citizenType == 'teacher') {
+            await this.updateCurrentEmployerProgramCaseStudy(link)
+        } else if (this.currentUserProfile!.citizenType == 'employer') {
+            await this.updateCurrentTeacherProgramCaseStudy(link)
+        } else {
+            throw new Error('wrong user type');
+        }
+    }
+    
+    /**
+     * Check completed Agenda Items
+     * User: Employer, Teacher, Student
+     * @param {EventItem[]} checkItem
+     * @param {string} uid
+     * @returns {Promise<void>}
+     */
+    async checkAgendaItem(checkItem: EventItem[], uid: string) {
+        // Employer: EmployerProgram.
+        // EventItem.boolean = 1
+
+        // wtf?
+    }
+        
+
 }
 
-const createProgramBrief = async (file: File): Promise<void> => {
-    // File name
-    // Store file in FB Storage
-    // Create Employer Program 
-    return
-}
-
-const reuploadProgramBrief = async (file: File, uid: string): Promise<void> => {
-    // delete file in FB Storage
-    // upload new file
-    return
-}
-
-const deleteProgramBrief = async (uid: string): Promise<void> => { }
-
-const renameBrief = async (name: string, uid: string): Promise<void> => { }
 
 const uploadVideo = async (url: string): Promise<void> => {
     // check link
-    // if (!doesLinkexist(url))
-    //     throw ("link does not exist")
+    if (!isLinkValid(url))
+        throw ("link does not exist")
     // upload video
 }
-
 
 /**
  * Updates Case Study for creation and removal
@@ -49,24 +237,27 @@ const uploadVideo = async (url: string): Promise<void> => {
 const updateCaseStudy = async (link: NamedLink[], uid: string): Promise<void> => {
     // update EmployerProgram.caseStudies with link
     // update TeacherProgramData.caseStudies with link
+
+    
 }
 
-type addRatingArg = "customerRatingT"|
-"demoRatingT"|
-"elevatorPitchRatingT"|
-"innovationRatingT"|
-"presentationRatingT"|
-"problemRatingT"|
-"sentencePitchRatingT"|
-"solutionRatingT"|
-"customerRatingE"|
-"demoRatingE"|
-"elevatorPitchRatingE"|
-"innovationRatingE"|
-"presentationRatingE"|
-"problemRatingE"|
-"sentencePitchRatingE"|
-"solutionRatingE";
+
+type addRatingArg = "customerRatingT" |
+    "demoRatingT" |
+    "elevatorPitchRatingT" |
+    "innovationRatingT" |
+    "presentationRatingT" |
+    "problemRatingT" |
+    "sentencePitchRatingT" |
+    "solutionRatingT" |
+    "customerRatingE" |
+    "demoRatingE" |
+    "elevatorPitchRatingE" |
+    "innovationRatingE" |
+    "presentationRatingE" |
+    "problemRatingE" |
+    "sentencePitchRatingE" |
+    "solutionRatingE";
 /**
  * Enables user to rate student work 
  * User: Employer, Teacher
@@ -74,35 +265,12 @@ type addRatingArg = "customerRatingT"|
  * @param {string} uid
  * @returns {Promise<void>}
  */
-const addRating = async (rating: number, projectuid: string, arg:addRatingArg, uid: string): Promise<void> => {
+const addRating = async (rating: number, projectuid: string, arg: addRatingArg, uid: string): Promise<void> => {
     // assert(usertype, employer) || assert(usertype, teacher)
     // throw if employer tries to modify teacher data, vice versa
     // StudentProject[arg] = rating
 }
 
-/**
- * Enables User to create an Agenda
- * User: Employer
- * @param {AgendaTemplate} textEntry
- * @param {string} uid
- * @returns {Promise<void>}
- */
-const createExternshipAgenda = async (textEntry: AgendaTemplate, EmployerProgramId: string): Promise<void> => {
-    // assert(programType, employer)
-    // EmployerProgram.externshipDayAgenda = textEntry
-}
-
-/**
- * Check completed Agenda Items
- * User: Employer, Teacher, Student
- * @param {EventItem[]} checkItem
- * @param {string} uid
- * @returns {Promise<void>}
- */
-const checkAgendaItem = async (checkItem: EventItem[], uid: string): Promise<void> => {
-    // Employer: EmployerProgram.
-    // EventItem.boolean = 1
-}
 
 /**
  * Uncheck incomplete Agenda Items
@@ -161,7 +329,7 @@ const renameClassroom = async (classroomId: string, className: string, uid: stri
  * @param {string} uid
  * @returns {Promise<void>}
  */
-const deleteClassroom = async (classroomId: string, uid:string): Promise<void> => { 
+const deleteClassroom = async (classroomId: string, uid: string): Promise<void> => {
     // kick all students from Classroom.projectIds
     // delete all assosciated projects
     // delete classroom id from all students in Student.classroomID
@@ -210,7 +378,7 @@ const createTeam = async (teamName: string, classroomId: string, uid: string): P
     // Project.teamName = teamName
     // Project.classroomId = classroomId
     // if created by Teacher
-        // Project.createdByTeacher = 1
+    // Project.createdByTeacher = 1
     // Project.teamMembers = []
     // add projectId to employer.projectId
 }
@@ -234,7 +402,7 @@ const renameTeam = async (newTeamName: string, projectId: string, uid: string): 
  * @param {string} uid
  * @returns {Promise<void>}
  */
-const deleteTeam = async (projectId: string, uid: string): Promise<void> => { 
+const deleteTeam = async (projectId: string, uid: string): Promise<void> => {
     // remove projectId from every student's student.projectId interface
     // remove projectId from classroom.projectId 
     // remove projectId from employerProgram.Id
@@ -263,6 +431,28 @@ const leaveTeam = async (projectId: string, uid: string): Promise<void> => {
     // remove student with Student.id = uid from Project.teamMembers where Project.id = projectId
     // remove projectId from Student.projectIds
 }
-
-
-
+/**
+ * Allows User to add an Employer Program using a shareCode
+ * User: Teacher or Student
+ * @param {string} shareCode
+ * @param {string} uid
+ * @returns {Promise<void>}
+ */
+const addProgram = async (shareCode: string, employerProgramId: string, uid: string): Promise<void> => {
+    if (!shareCode) {
+        throw new Error('invalid sharecode')
+    } 
+    // add employerProgramId to GeneralUser's employerProgramIds array 
+        // GeneralUser.employerProgramIds.push(employerProgramId), where GeneralUser.userId == uid
+    // GeneralUser.initializeProgram = timestamp
+}
+/**
+ * Allows User to remove an Employer Program
+ * User: Teacher or Student
+ * @param {string} employerProgramId
+ * @returns {Promise<void>}
+ */
+const removeProgram = async (uid: string, employerProgramId: string): Promise<void> => {
+    // remove employerProgramId from GeneralUser employerProgramIds array, where GeneralUser.userId == uid
+    // delete timestamp from GeneralUser.initializeProgram that corresponds to employerProgramId 
+}
