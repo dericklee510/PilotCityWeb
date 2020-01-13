@@ -9,22 +9,26 @@
       :key="main+index"
     > 
       <!-- if index == 1, don't show this "bridge" -->
-      <v-col>
+      <div class="guide__sub-container">
         <v-col>
-          <v-col class="guide__bridge" />
+          <v-col>
+            <v-col class="guide__bridge guide__bridge--first" />
+          </v-col>
         </v-col>
-      </v-col>
-      <v-col class="guide__mainrow">
-        <span
-          class="guide__bigdot guide__bigdot--active"
-          :class="unlocked&&index==0?'guide__background_blue':unlocked&&index==1?'guide__background_green':''"
-        ><i class="guide__icon_white fas fa-chalkboard-teacher guide__programicon" /></span>
-
-        <span
-          class="guide__maintext"
-          :class=" isActive?'guide__maintext--active':''"
-        >{{ main }}</span>
-      </v-col>
+        <v-col style="padding: none">
+          <v-col class="guide__mainrow">
+            <span
+              class="guide__bigdot guide__bigdot--active"
+              :class="unlocked&&index==0?'guide__background_blue':unlocked&&index==1?'guide__background_green':''"
+            ><i class="guide__icon_white fas fa-chalkboard-teacher guide__programicon" /></span>
+          
+            <span
+              class="guide__maintext"
+              :class=" isActive?'guide__maintext--active':''"
+            >{{ main }}</span>
+          </v-col>
+        </v-col>
+      </div>
       <v-col
         v-for="(arr, subitem, key) in obj"
         :key="subitem+key"

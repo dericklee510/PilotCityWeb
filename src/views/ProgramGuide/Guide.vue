@@ -6,7 +6,7 @@
     <v-col
       cols="1"
       sm="3"
-      md="2"
+      lg="2"
       xl="1"
       class="d-sm-block d-none"
     >
@@ -14,8 +14,8 @@
     </v-col>
     <v-col
       xl="11"
-      md="10"
       sm="9"
+      lg="10"
       cols="11"
     >
       <v-row
@@ -53,6 +53,7 @@ import { Watch } from 'vue-property-decorator'
 import { STUDENTMODULES, EMPLOYERMODULES, TEACHERMODULES } from './views'
 import {Nav, Lock, Unlock} from './components'
 import _ from "lodash"
+import { getCitizenType } from '../../store/Auth/helpers';
 
 @Component({
   components: {
@@ -70,7 +71,7 @@ export default class Guide extends Vue{
   public xcurrentModule: string = '';  
 
   get citizenType(): string{
-    return localStorage.citizenType
+    return getCitizenType();
   }
   get sequence() {
     return this.sequenceHash[this.citizenType] 

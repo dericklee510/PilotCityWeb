@@ -33,11 +33,11 @@
         max-width: fit-content;
     }
 
-    &__bar .col > .guide__bridge:first-child{
-        // display: none;
+    &__bar > .col:first-child .guide__bridge--first{
+        display: none;
     }
 
-    &__bar >.col, &__bar .guide__sub-container > .col, .guide__sub-container {
+    &__bar .col{
         padding-top: 0px;
         padding-bottom: 0px;
     }
@@ -49,10 +49,9 @@
     &__mainrow{
         margin-top: 5px;
         margin-bottom:5px;
-        padding-bottom:5px;
         // Makes it so that dot stays put
         position: relative;
-
+        padding: 0;
 
     }
 
@@ -62,6 +61,7 @@
 
         // Makes it so that dot stays put
         position: relative;
+        padding: none;
         &:hover{
             cursor: pointer;
         }
@@ -95,7 +95,6 @@
     &__bridge{
         border-left: 1px solid #939598;
         height: 15px;
-
     }
 
     &__smalldot{
@@ -118,7 +117,7 @@
         display: inline-block;
         position: relative;
         left:-5px;
-        top: 1px;
+        top: .5px;
     }
 
     &__smalldotunfilled{
