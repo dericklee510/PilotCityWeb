@@ -147,16 +147,16 @@ export default class Fb extends VuexModule {
         }
     }
     @Action({ commit: 'updateEmployerProgram' })
-    async uploadVideo(url: string) {
+    async uploadVideo(url:string){
         // check link
-        if (await isLinkValid(url))
-            return ({
-                introVideo: url
-            })
+        if(isLinkValid(url)) {
+            return{
+                link: url
+            }
+        }
+            throw("link does not exist")
         // upload video
-        throw ("invalid link")
     }
-
     @Action({ commit: 'updateEmployerProgram' })
     async updateCaseStudy(link: NamedLink[], employerProgramUID: string) {
         return {

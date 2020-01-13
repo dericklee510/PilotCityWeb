@@ -1,10 +1,11 @@
+import "../env" // sets env variables
 import Vue from 'vue'
-import { MAPS_API_KEY } from '@/keys'
+
 /* eslint-disable */
 import App from "./App.vue"
 import router from "@/router"
 import store from "./store"
-
+import {process} from "@/@types/process"
 
 import firestore, { firebaseApp } from "@/firebase/init"
 import { SET_USER } from './store/Auth/mutation-types'
@@ -25,10 +26,12 @@ import VuetifyGoogleAutocomplete from 'vuetify-google-autocomplete'
 import VueRx from 'vue-rx'
 import { createProvider } from './vue-apollo'
 
+
+
 Vue.use(VueRx)
 Vue.use(Vuetify)
 Vue.use(VuetifyGoogleAutocomplete, {
-    apiKey: MAPS_API_KEY
+    apiKey: process.env.MAPS_API_KEY
 })
 Vue.component('default-layout', Default)
 Vue.component('simple-layout', Simple)

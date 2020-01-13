@@ -1,7 +1,7 @@
-import { REAL_DB_KEY, TEST_DB_KEY } from '@/keys'
+import { process } from '@/@types/process';
 
 export class ApplicationConfig {
-    public apiKey: string = TEST_DB_KEY
+    public apiKey: string = process.env.TEST_DB_KEY
 
     public authDomain: string = 'test-database-5c3f8.firebaseapp.com'
 
@@ -15,7 +15,7 @@ export class ApplicationConfig {
 
     public constructor(productionMode: string) {
         if (productionMode === 'production') {
-            this.apiKey = REAL_DB_KEY
+            this.apiKey = process.env.REAL_DB_KEY
             this.authDomain = 'pilotcity-firestore.firebaseapp.com'
             this.databaseURL = 'https://pilotcity-firestore.firebaseio.com',
             this.projectId = 'pilotcity-firestore'
