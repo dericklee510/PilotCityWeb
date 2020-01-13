@@ -22,9 +22,12 @@
               :class="unlocked&&index==0?'guide__background_blue':unlocked&&index==1?'guide__background_green':''"
             ><i class="guide__icon_white fas fa-chalkboard-teacher guide__programicon" /></span>
           
-            <span
+            <!-- <span
               class="guide__maintext"
               :class=" isActive?'guide__maintext--active':''"
+            >{{ main }}</span> -->
+            <span
+              class="guide__maintext"
             >{{ main }}</span>
           </v-col>
         </v-col>

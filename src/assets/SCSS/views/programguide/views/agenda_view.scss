@@ -288,7 +288,7 @@
         &-input > input{
             height: 18px;
             left: 50%;
-            @include set-opacity(0);
+            opacity: get-opacity();
             position: absolute;
             top: 30%;
             width: 18px;
@@ -311,7 +311,7 @@
             content: "";
             height: 13.6px;
             left: -9.6%;
-            opacity: get-opacity();
+            // opacity: get-opacity();
             position: absolute;
             top: 33.7%;
             background-color: black;

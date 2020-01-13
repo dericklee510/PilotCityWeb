@@ -124,45 +124,6 @@
     
           <!-- <v-col cols="2"><i class="mt-2 ml-3 far fa-trash-alt agenda_view__trashicon"></i></v-col> -->
         </v-row>
-    
-    
-    
-        <!-- ADD AGENDA ITEM
-    
-   
-    
-    
-        <v-col
-          class="mr-auto ml-auto"
-          cols="5"
-        >
-          <v-btn
-            class="agenda_view__button mb-10"
-            :disabled="!isAgendaComplete"
-          >
-            FINISH
-          </v-btn>
-        </v-col>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-        <!-- LOG TIME / COULD DELETE -->
-    
-        <!-- <v-row justify="center" class="mr-auto ml-auto mt-10 mb-5"><input class="agenda_view__input" placeholder="0m"></v-row>
-    
-          <v-row justify="center" class="mr-auto ml-auto mt-5 mb-5"><button class="agenda_view__button">LOG TIME</button></v-row>
-    
-          <v-row justify="center" class="mr-auto ml-auto mt-10 agenda_view__label">LOGGED TIME</v-row>
-    
-          <v-row justify="center" class="mr-auto ml-auto mt-2 mb-7 agenda_view__calculated">1h 30m</v-row> -->
       </v-col>
     </v-row>
   </v-container>
