@@ -3,6 +3,7 @@ import { AutoComplete, AutoCompleteAddress } from '@/components/GoogleMaps';
 
 export interface Classroom {
     classroomId: string
+    projectIds: string []
     teacherId: string
     teacherProgramId: string
     employerProgramId: string
