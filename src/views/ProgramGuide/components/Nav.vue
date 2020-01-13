@@ -62,7 +62,7 @@ export default class Nav extends Vue {
   @Prop()
   public value !: string;
   public unlocked = true;
-   public sequenceHash = {
+   public sequenceHash:Record<string,any> = {
     Teacher: TEACHERSEQUENCE,
     Employer: EMPLOYERSEQUENCE,
     Student: STUDENTSEQUENCE
@@ -76,14 +76,14 @@ export default class Nav extends Vue {
   public updateProgram(name: string) {
     this.$emit('input', name )
   }
-  public isActive(): boolean{
-    var active: boolean = false;
-    Object.keys(this.sequence).forEach( key => {
-      this.sequence[key].forEach(item => {
-        item==this.select?active = true: active = false;
-      })
-    })
-    return active;
-  }
+  // public isActive(): boolean{
+  //   var active: boolean = false;
+  //   Object.keys(this.sequence).forEach( key => {
+  //     this.sequence[key].forEach(item => {
+  //       item==this.select?active = true: active = false;
+  //     })
+  //   })
+  //   return active;
+  // }
 }
 </script>

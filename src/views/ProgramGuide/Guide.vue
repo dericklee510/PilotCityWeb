@@ -62,7 +62,7 @@ import _ from "lodash"
   }
 })
 export default class Guide extends Vue{
-  public sequenceHash = {
+  public sequenceHash:Record<string,Record<string,string[]>> = {
     Teacher: TEACHERMODULES,
     Employer: EMPLOYERMODULES,
     Student: STUDENTMODULES
@@ -103,20 +103,20 @@ export default class Guide extends Vue{
   }
   
   public navForward(mod: string[]){
-    let currentRoute!: string = this.$route.name;
+    let currentRoute= this.$route.name as string;
     let length = mod.length;
     console.log(currentRoute,length)
     if(mod.includes(currentRoute) && mod[length-1] != currentRoute)
       this.$router.push({ name: mod[mod.indexOf(currentRoute)+1] })
     if(mod[length-1] == currentRoute) 
-      this.$router.push({name: this.sequenceHash[this.nextModule][0]})
+      this.$router.push({name: this.sequence[this.nextModule][0]})
   }
   public navBackward(mod: string[]){
-    let currentRoute!: string = this.$route.name;
+    let currentRoute:string = this.$route.name as string;
     if(mod.includes(currentRoute) && mod[0] != currentRoute)
       this.$router.push({ name: mod[mod.indexOf(currentRoute)+1] })
     if(mod[0] == currentRoute) 
-      this.$router.push({name: this.sequenceHash[this.priorModule][this.priorModule.length-1]})
+      this.$router.push({name: this.sequence[this.priorModule][this.priorModule.length-1]})
   }
   public created(){
     // psuedo-code [could probably turn this into a util function]

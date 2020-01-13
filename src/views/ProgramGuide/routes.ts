@@ -50,17 +50,17 @@ const routes: RouteConfig[] = [
             {
                 path: 'teacher/externship/manage/class',
                 name: 'teach-externship-manage-class',
-                components: Guide.Program.ManageClass,
+                component: Guide.Program.ManageClass,
             },
             {
                 path: 'teacher/externship/manage/students',
                 name: 'teach-externship-manage-students',
-                components: Guide.Program.ManageStudents,
+                component: Guide.Program.ManageStudents,
             },
             {
                 path: 'teacher/externship/manage/teams',
                 name: 'teach-externship-manage-teams',
-                components: Guide.Program.ManageTeams,
+                component: Guide.Program.ManageTeams,
             },
             {
                 path: 'student/project/team/join',
