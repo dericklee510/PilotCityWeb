@@ -1,4 +1,4 @@
-import { process } from '@/@types/process';
+
 
 export class ApplicationConfig {
     public apiKey: string = process.env.TEST_DB_KEY

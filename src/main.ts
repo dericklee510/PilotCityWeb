@@ -5,7 +5,6 @@ import Vue from 'vue'
 import App from "./App.vue"
 import router from "@/router"
 import store from "./store"
-import {process} from "@/@types/process"
 
 import firestore, { firebaseApp } from "@/firebase/init"
 import { SET_USER } from './store/Auth/mutation-types'
