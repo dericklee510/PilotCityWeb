@@ -28,11 +28,6 @@ const routes: RouteConfig[] = [
                 component: Guide.Program.ExternshipAgendaEdit,
             },
             {
-                path: 'teacher/externship/brief/edit',
-                name: 'teach-externship-brief-edit',
-                component: Guide.Program.BriefEdit,
-            },
-            {
                 path: 'teacher/externship/brief',
                 name: 'teach-externship-brief', 
                 component: Guide.Program.BriefView,
@@ -42,40 +37,51 @@ const routes: RouteConfig[] = [
                 name: 'emp-externship-brief-edit',
                 component: Guide.Program.BriefEdit,
             },
-            {
-                path: 'employer/externship/brief',
-                name: 'emp-externship-brief',
-                component: Guide.Program.BriefView,
-            },
+            // { // DON'T THINK EMPLOYERS EVER VIEW
+            //     path: 'employer/externship/brief',
+            //     name: 'emp-externship-brief',
+            //     component: Guide.Program.BriefView,
+            // },
             {
                 path: 'student/project/brief',
-                name: 'stud-program-brief',
+                name: 'stud-project-brief',
                 component: Guide.Program.BriefView,
             },
             {
-                path: 'teacher/externship/manage',
-                name: 'teach-externship-manage',
-                components:{
-                    default: Guide.Program.ManageClass,
-                    // ManageStudents: Guide.Program.ManageStudents, //MISSING
-                    ManageTeams: Guide.Program.ManageTeams
-                }
+                path: 'teacher/externship/manage/class',
+                name: 'teach-externship-manage-class',
+                component: Guide.Program.ManageClass,
             },
-            // {
-            //     path: 'student/project/Team',
-            //     name: 'student-externship-manage',
-            //     component: Guide.Program.ManageTeam
-            // },
+            {
+                path: 'teacher/externship/manage/students',
+                name: 'teach-externship-manage-students',
+                component: Guide.Program.ManageStudents,
+            },
+            {
+                path: 'teacher/externship/manage/teams',
+                name: 'teach-externship-manage-teams',
+                component: Guide.Program.ManageTeams,
+            },
+            {
+                path: 'student/project/team/join',
+                name: 'student-project-team-join',
+                component: Guide.Program.TeamJoin
+            },
+            {
+                path: 'student/project/team',
+                name: 'student-project-team',
+                component: Guide.Program.ManageTeam
+            },
             {
                 path: 'employer/project/intro/edit',
                 name: 'emp-project-intro-edit',
                 component: Guide.Program.IntroVideoSubmit
             },
-            {
-                path: 'employer/project/intro',
-                name: 'emp-project-intro',
-                component: Guide.Program.IntroVideoView
-            },
+            // { //DONT USE?
+            //     path: 'employer/project/intro',
+            //     name: 'emp-project-intro',
+            //     component: Guide.Program.IntroVideoView
+            // },
             {
                 path: 'teacher/project/intro',
                 name: 'teach-project-intro',
@@ -102,12 +108,12 @@ const routes: RouteConfig[] = [
                 component: Guide.Program.TrainingAgendaView
             },
             {
-                path: 'teacher/project/practicelog',
+                path: 'teacher/project/practice',
                 name: 'teach-project-practicelog',
                 component: Guide.Program.PracticeLogManage
             },
             {
-                path: 'student/project/practicelog',
+                path: 'student/project/practice',
                 name: 'stud-project-practicelog',
                 component: Guide.Program.PracticeLogEdit
             },
@@ -222,6 +228,16 @@ const routes: RouteConfig[] = [
                 component: Guide.Program.HackView
             },
             {
+                path: 'student/project/hack/reflect',
+                name: 'stud-project-hack-reflect',
+                component: Guide.Program.HackReflection
+            },
+            {
+                path: 'student/project/process',
+                name: 'stud-project-processlog',
+                component: Guide.Program.ProcessLog
+            },
+            {
                 path: 'teacher/project/demo',
                 name: 'teach-project-demo',
                 component: Guide.Program.DemoVideoView
@@ -291,7 +307,7 @@ const routes: RouteConfig[] = [
         ],
         meta: { layout: 'simple' },
         beforeEnter(to, from, next): void{
-            AuthStore.user ? next():next({ name: 'signup.type' });
+            localStorage.citizenType && AuthStore.user ? next(): AuthStore.user ? next({ name: 'signup.type' }) : next({name: 'login'});
         }
 
     }

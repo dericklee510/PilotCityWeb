@@ -133,8 +133,9 @@ import { pluck, switchMap, debounceTime, filter } from "rxjs/operators";
 import { Subject, from } from "rxjs";
 import { ValidationObserver, ValidationProvider,validate } from 'vee-validate';
 import { TextEnter } from '../../components';
-import {isLinkValid} from "@/api"
+// import {isLinkValid} from "@/api"
 import {filterByPromise} from "filter-async-rxjs-pipe"
+import { isLinkValid } from '../../../../api';
 interface nativeEvent {
   data: undefined;
   event: {
