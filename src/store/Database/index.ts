@@ -3,81 +3,109 @@ import { AgendaTemplate, NamedLink, EventItem } from './types/utilities';
 /* eslint-disable-next-line */
 import { Module, VuexModule, Action, Mutation } from "vuex-module-decorators" //action unused
 import { firebaseApp as fb } from '@/firebase/init'
-import { EmployerProgram } from './types/types'
+import { EmployerProgram, GeneralUser, Project, RatingTag, TeacherProgramData } from './types/types' 
+import { Dependency } from '../../utilities/Dependency'
 const _ = require('lodash');
-
+const assert = require('assert')
 
 @Module({ namespaced: true, name: 'Fb' })
 export default class Fb extends VuexModule {
     public firestore = fb.firestore()
     public storage = fb.storage()
-    private employerProgram: EmployerProgram | null = null;
+    private currentTeacherProgramUID? :string
+    private currentTeacherProgramData?: TeacherProgramData
+    private currentEmployerProgramUID? :string
+    private currentEmployerProgram?: EmployerProgram
+    private FBUser:firebase.User | null = fb.auth().currentUser;
+    private currentUserProfile?: GeneralUser
+    private currentProject?: Project
 
-    get userDocRef() { //no return type
-        let user = this.context.rootState.Auth.user as firebase.User | null
-        return (user) ? this.firestore.collection('users').doc(user.uid) : null
+    @Dependency('FBUser')
+    get userDocRef() {
+        return this.firestore.collection('users').doc(this.FBUser!.uid);
     }
 
+    @Dependency('FBUser')
     get storageRef() {
-        let user = this.context.rootState.Auth.user as firebase.User | null
-        return (user) ? this.storage.ref() : null
+        return this.storage.ref();
     }
     get getCurrentEmployerProgram() {
-        return this.employerProgram;
+        return this.currentEmployerProgram;
+    }
+    get getCurrentUserProfile() {
+        return this.currentUserProfile
     }
 
+    @Dependency('currentUserProfile')
+    get userCitizenType() {
+        return this.currentUserProfile!.citizenType;
+    }
+
+    @Dependency('FBUser')
     @Mutation
-    initEmployerProgram(program: EmployerProgram | null) {
-        this.employerProgram = program;
+    async initCurrentUserProfile() {
+        const snapshot = await this.firestore.collection('GeneralUser').doc(this.FBUser!.uid).get();
+        if (!snapshot.exists)
+            throw new Error("User profile is not found on the GeneralUser Collection");
+        this.currentUserProfile = snapshot.data<GeneralUser>()
     }
 
+    @Dependency('FBUser')
     @Mutation
-    async updateEmployerProgram(property: any) {
-        let user = this.context.rootState.Auth.user as firebase.User | null
-        if (!user) throw new Error('User not logged in')
-        await this.firestore.collection('EmployerProgram').doc(user.uid).update(property);
-        this.employerProgram = Object.assign(property, this.employerProgram);
+    async initCurrentEmployerProgram(program: EmployerProgram) {
+        this.currentEmployerProgramUID = program.employerProgramId;
+        this.currentEmployerProgram = program;
+    }
+    
+    @Dependency('currentEmployerProgramUID', 'currentEmployerProgram')
+    @Mutation
+    async updateCurrentEmployerProgram(property: any) {
+        await this.firestore.collection('EmployerProgram').doc(this.currentEmployerProgramUID).update(property);
+        this.currentEmployerProgram = Object.assign(property, this.currentEmployerProgram);
     }
 
+    @Dependency('currentEmployerProgramUID', 'currentTeacherProgramData')
+    @Mutation
+    async updateCurrentTeacherProgramData(property: any) {
+        await this.firestore.collection('TeacherProgramData').doc(this.currentTeacherProgramUID).update(property);
+        this.currentTeacherProgramData = Object.assign(property, this.currentTeacherProgramData);
+    }
+
+    @Dependency('currentProject')
     @Mutation
     async updateProject(property: any) {
-        let user = this.context.rootState.Auth.user as firebase.User | null
-        if (!user) throw new Error('User not logged in')
-        await this.firestore.collection('Project').doc(currentProjectID).update(property);
-
-        // this.employerProgram = Object.assign(property, this.employerProgram);
+        await this.firestore.collection('Project').doc(this.currentProject!.projectId).update(property);
+        this.currentProject = Object.assign(property, this.currentProject)
+    }
+    
+    @Action({ commit: 'initEmployerProgram'})
+    async fetchEmployerProgram(employerProgramUID: string) {
+        const snapshot = await this.firestore.collection('EmployerProgram').doc(employerProgramUID).get();
+        if (!snapshot.exists)
+            throw new Error(`Failed to fetch employer program with uid of ${employerProgramUID}`);
+        return snapshot;
     }
 
-    @Action({ commit: 'initEmployerProgram' })
-    async fetchEmployerProgram() {
-        let user = this.context.rootState.Auth.user as firebase.User | null
-        if (!user) throw new Error('Not authorized')
-        const snapshot = await this.firestore.collection('EmployerProgram').doc(user.uid).get();
-        if (!snapshot.exists) {
-            return null;
-        } else {
-            return snapshot.data()
-        }
+    @Action({ commit: 'initEmployerProgram'})
+    async switchCurrentEmployerProgramWithProgramUID(employerProgramUID: string) {
+        return await this.fetchEmployerProgram(employerProgramUID)
     }
 
-    @Action({ commit: 'updateEmployerProgram' })
+    @Action({ commit: 'initEmployerProgram'})
+    async switchCurrentEmployerProgramWithProgramObject(program : EmployerProgram) {
+        return program;
+    }
+
+    @Dependency('FBUser', 'employerProgram', 'storage')
+    @Action({ commit: 'updateCurrentEmployerProgram' })
     async createProgramBrief(file: File) {
-        let user = this.context.rootState.Auth.user as firebase.User | null
-        if (!user)
-            throw new Error('User not logged in')
-        if (!this.getCurrentEmployerProgram)
-            throw new Error('Current EmployerProgram is not initialized')
-        if (!this.storageRef)
-            throw new Error('Can\'t find cloud storage ref')
-        // File name
-        // Store file in FB Storage
         const fileName = file.name; // should validate the name of the file on the frontend
-        const filePath = `program_briefs/${user.uid}/${fileName}`;
-        const fileRef = this.storageRef.child(filePath);
+        const filePath = `program_briefs/${this.FBUser!.uid}/${fileName}`;
+        const fileRef = this.storageRef!.child(filePath);
         await fileRef.put(file);
-        const index = _.findIndex(this.getCurrentEmployerProgram.programBrief!, ['name', fileName]);
+        const index = _.findIndex(this.getCurrentEmployerProgram!.programBrief!, ['name', fileName]);
         if (index < 0) {
-            const newProgramBrief = [...this.getCurrentEmployerProgram.programBrief!, {
+            const newProgramBrief = [...this.getCurrentEmployerProgram!.programBrief!, {
                 name: fileName,
                 link: filePath
             }]
@@ -85,93 +113,118 @@ export default class Fb extends VuexModule {
                 programBrief: newProgramBrief
             };
         } else {
-            this.getCurrentEmployerProgram.programBrief![index].link = filePath;
-            const newProgramBrief = [...this.getCurrentEmployerProgram.programBrief!]
+            this.getCurrentEmployerProgram!.programBrief![index].link = filePath;
+            const newProgramBrief = [...this.getCurrentEmployerProgram!.programBrief!]
             return {
                 programBrief: newProgramBrief
             };
         }
     }
 
-    async reuploadProgramBrief(file: File) {
-        // upload new file
-        await this.createProgramBrief(file)
+    async reuploadProgramBrief(file:File) {
+        await this.createProgramBrief(file); // it's the same shit
     }
 
-    @Action({ commit: 'updateEmployerProgram' })
-    async deleteProgramBrief(fileName: string) {
-        let user = this.context.rootState.Auth.user as firebase.User | null
-        if (!user)
-            throw new Error('User not logged in')
-        if (!this.getCurrentEmployerProgram)
-            throw new Error('Current EmployerProgram is not initialized')
-        if (!this.storageRef)
-            throw new Error('Can\'t find cloud storage ref')
-
-        const index = _.findIndex(this.getCurrentEmployerProgram.programBrief, ['name', fileName]);
+    @Dependency('FBUser', 'employerProgram', 'storageRef')
+    @Action({ commit: 'updateCurrentEmployerProgram' })
+    async deleteProgramBrief (fileName: string){
+        const index = _.findIndex(this.getCurrentEmployerProgram!.programBrief, ['name', fileName]);
         if (index < 0) {
             throw new Error('file with associated name does not exist')
         } else {
-            await this.storageRef.child(`program_briefs/${user.uid}/${fileName}`).delete();
-            const newProgramBriefs = _.remove(this.getCurrentEmployerProgram.programBrief, (n: any) => n.name === fileName);
-            return newProgramBriefs;
+            await this.storageRef!.child(`program_briefs/${this.FBUser!.uid}/${fileName}`).delete();
+            const newProgramBriefs = _.remove(this.getCurrentEmployerProgram!.programBrief, (n: any)  => n.name === fileName);
+            return newProgramBriefs;  
         }
     }
 
-    // we have to ask them to resubmit the brief because firebase storage doesnt support rename
-    @Action({ commit: 'updateEmployerProgram' })
-    async renameBrief(newFile: File, originalFileName: string) {
+    @Action({ commit: 'updateCurrentEmployerProgram' }) // we have to ask them to resubmit the brief because firebase storage doesnt support rename
+    async renameBrief(newFile: File, originalFileName: string){
         await this.createProgramBrief(newFile);
         await this.deleteProgramBrief(originalFileName);
     }
-
-    @Action({ commit: 'updateProject'})
-    async addRating(ratingName: string, rating:number) {
-        // StudentProject.rating = rating
+  
+    @Action( { commit: 'updateProject'})
+    async addRating(ratingName: RatingTag, rating:number) {
         return {
-            [ratingName]: rating
+            [ratingName]: rating 
         }
     }
+
+   
     /**
-     *Will update/create externship agenda
-     *
+     * Enables User to create an Agenda
+     * User: Employer
      * @param {AgendaTemplate} textEntry
-     * @param {string} employerProgramUID
-     * @returns
-     * @memberof Fb
+     * @param {string} uid
      */
-    @Action({ commit: 'updateEmployerProgram' })
-    async externshipAgenda(textEntry: AgendaTemplate, employerProgramUID: string) {
+    @Action({ commit: 'updateCurrentEmployerProgram' })
+    async createExternshipAgenda(textEntry: AgendaTemplate, EmployerProgramId: string){
+        assert(this.userCitizenType === 'employer', 'User type not emplyer');
         return {
             externshipAgenda: textEntry
         }
     }
-    @Action({ commit: 'updateEmployerProgram' })
-    async uploadVideo(url:string){
-        // check link
-        if(isLinkValid(url)) {
-            return{
-                link: url
-            }
-        }
-            throw("link does not exist")
-        // upload video
+
+    // @Action({ commit: 'updateCurrentEmployerProgram' })
+    // async uploadVideo(url:string){
+    //     // check link
+    //     if(isLink(url)) {
+    //         return{
+    //             link: url
+    //         }
+    //     }
+    //         throw("link does not exist")
+    //     // upload video
+    // }
+   
+    @Action({ commit: 'updateCurrentEmployerProgram' })
+    async updateCurrentEmployerProgramCaseStudy(caseStudies: NamedLink[]) {
+        return { caseStudies }
     }
-    @Action({ commit: 'updateEmployerProgram' })
-    async updateCaseStudy(link: NamedLink[], employerProgramUID: string) {
-        return {
-            caseStudy: link
-        }
-        // update EmployerProgram.caseStudies with link
-        // update TeacherProgramData.caseStudies with link
+
+    @Action({ commit: 'updateCurrentTeacherProgramData' })
+    async updateCurrentTeacherProgramCaseStudy(caseStudies: NamedLink[]) {
+        return { caseStudies }
     }
+
+    /**
+     * Updates Case Study for creation and removal
+     * User: Employer or Teacher
+     * @param {NamedLink[]} link
+     */
+    @Dependency('currentUserProfile')
+    async updateCaseStudy(link: NamedLink[]){
+        if (this.currentUserProfile!.citizenType == 'teacher') {
+            await this.updateCurrentEmployerProgramCaseStudy(link)
+        } else if (this.currentUserProfile!.citizenType == 'employer') {
+            await this.updateCurrentTeacherProgramCaseStudy(link)
+        } else {
+            throw new Error('wrong user type');
+        }
+    }
+    
+    /**
+     * Check completed Agenda Items
+     * User: Employer, Teacher, Student
+     * @param {EventItem[]} checkItem
+     * @param {string} uid
+     * @returns {Promise<void>}
+     */
+    async checkAgendaItem(checkItem: EventItem[], uid: string) {
+        // Employer: EmployerProgram.
+        // EventItem.boolean = 1
+
+        // wtf?
+    }
+        
 
 }
 
 
 const uploadVideo = async (url: string): void => {
     // check link
-    if (!doesLinkexist(url))
+    if (!isLinkValid(url))
         throw ("link does not exist")
     // upload video
 }
@@ -182,6 +235,12 @@ const uploadVideo = async (url: string): void => {
  * @param {NamedLink[]} link
  * @param {string} uid
  */
+const updateCaseStudy = async (link: NamedLink[], uid: string): Promise<void> => {
+    // update EmployerProgram.caseStudies with link
+    // update TeacherProgramData.caseStudies with link
+
+    
+}
 
 
 type addRatingArg = "customerRatingT" |
@@ -213,29 +272,6 @@ const addRating = async (rating: number, projectuid: string, arg: addRatingArg, 
     // StudentProject[arg] = rating
 }
 
-/**
- * Enables User to create an Agenda
- * User: Employer
- * @param {AgendaTemplate} textEntry
- * @param {string} uid
- * @returns {Promise<void>}
- */
-const createExternshipAgenda = async (textEntry: AgendaTemplate, EmployerProgramId: string): Promise<void> => {
-    // assert(programType, employer)
-    // EmployerProgram.externshipDayAgenda = textEntry
-}
-
-/**
- * Check completed Agenda Items
- * User: Employer, Teacher, Student
- * @param {EventItem[]} checkItem
- * @param {string} uid
- * @returns {Promise<void>}
- */
-const checkAgendaItem = async (checkItem: EventItem[], uid: string): Promise<void> => {
-    // Employer: EmployerProgram.
-    // EventItem.boolean = 1
-}
 
 /**
  * Uncheck incomplete Agenda Items

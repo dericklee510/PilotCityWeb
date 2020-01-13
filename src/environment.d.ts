@@ -14,4 +14,9 @@ declare global {
       VERIFY_LINK_REST:string
     }
   }
+  namespace firebase.firestore {
+    interface DocumentSnapshot {
+      data<RetrievedClass>(options?: SnapshotOptions):(RetrievedClass & Record<string,any> ) | undefined
+    }
+  }
 }

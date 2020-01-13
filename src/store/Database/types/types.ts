@@ -19,7 +19,7 @@ export interface GeneralUser {
     }
     firstName: string
     lastName: string
-    citizenType: string
+    citizenType: "employer" | "teacher" | "student"
     dob: Date
     address: AutoCompleteAddress
     phoneNumber: string
@@ -104,3 +104,20 @@ export interface Project {
     presentationRatingE?: number
     lastUpdate: firebase.firestore.Timestamp
 }
+
+export type RatingTag = "customerRatingT"|
+"demoRatingT"|
+"elevatorPitchRatingT"|
+"innovationRatingT"|
+"presentationRatingT"|
+"problemRatingT"|
+"sentencePitchRatingT"|
+"solutionRatingT"|
+"customerRatingE"|
+"demoRatingE"|
+"elevatorPitchRatingE"|
+"innovationRatingE"|
+"presentationRatingE"|
+"problemRatingE"|
+"sentencePitchRatingE"|
+"solutionRatingE";
