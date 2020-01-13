@@ -53,7 +53,7 @@ import { Watch } from 'vue-property-decorator'
 import { STUDENTMODULES, EMPLOYERMODULES, TEACHERMODULES } from './views'
 import {Nav, Lock, Unlock} from './components'
 import _ from "lodash"
-import { LinkedList } from 'linked-list-typescript';
+import { LinkedList, LinkedListItem } from 'linked-list-typescript';
 import { ProgramNode } from './types';
 
 @Component({
@@ -64,16 +64,14 @@ import { ProgramNode } from './types';
   }
 })
 export default class Guide extends Vue{
-  created(){
-    this.$route
-  }
+
   public sequenceHash:Record<string,Record<string,string[]>> = {
     Teacher: TEACHERMODULES,
     Employer: EMPLOYERMODULES,
     Student: STUDENTMODULES
   }
   public xcurrentModule: string = '';  
-  routeMap!:LinkedList<ProgramNode>
+  routeMap!:LinkedList<LinkedListItem<ProgramNode<Record<string,any>>>>
   get citizenType(): string{
     return localStorage.citizenType
   }
@@ -108,6 +106,7 @@ export default class Guide extends Vue{
   }
   
   public navForward(mod: string[]){
+    this.routeMap.head
     console.log(mod)
     let currentRoute= this.$route.name as string;
     let length = mod.length;
