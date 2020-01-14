@@ -54,7 +54,7 @@ import { STUDENTMODULES, EMPLOYERMODULES, TEACHERMODULES } from './views'
 import {Nav, Lock, Unlock} from './components'
 import _ from "lodash"
 import { LinkedList, LinkedListItem } from 'linked-list-typescript';
-import { ProgramNode } from './types';
+import { ProgramNode, RouteList } from './types';
 
 @Component({
   components: {
@@ -64,14 +64,14 @@ import { ProgramNode } from './types';
   }
 })
 export default class Guide extends Vue{
-
   public sequenceHash:Record<string,Record<string,string[]>> = {
     Teacher: TEACHERMODULES,
     Employer: EMPLOYERMODULES,
     Student: STUDENTMODULES
   }
   public xcurrentModule: string = '';  
-  routeMap!:LinkedList<LinkedListItem<ProgramNode<Record<string,any>>>>
+  routeMap!:LinkedList<ProgramNode<typeof EMPLOYERMODULES | typeof STUDENTMODULES | typeof TEACHERMODULES>>
+  currentNode!:ProgramNode<typeof EMPLOYERMODULES | typeof STUDENTMODULES | typeof TEACHERMODULES>
   get citizenType(): string{
     return localStorage.citizenType
   }
@@ -106,15 +106,20 @@ export default class Guide extends Vue{
   }
   
   public navForward(mod: string[]){
-    this.routeMap.head
-    console.log(mod)
-    let currentRoute= this.$route.name as string;
-    let length = mod.length;
-    console.log(currentRoute,length)
-    if(mod.includes(currentRoute) && mod[length-1] != currentRoute)
-      this.$router.push({ name: mod[mod.indexOf(currentRoute)+1] })
-    if(mod[length-1] == currentRoute) 
-      this.$router.push({name: this.sequence[this.nextModule][0]})
+    // this.routeMap.head
+    // console.log(mod)
+    // let currentRoute= this.$route.name as string;
+    // let length = mod.length;
+    // console.log(currentRoute,length)
+    // if(mod.includes(currentRoute) && mod[length-1] != currentRoute)
+    //   this.$router.push({ name: mod[mod.indexOf(currentRoute)+1] })
+    // if(mod[length-1] == currentRoute) 
+    //   this.$router.push({name: this.sequence[this.nextModule][0]})
+    let next = this.currentNode.next
+    if(next){
+      this.$router.push({name:next.value.routeName})
+      this.currentNode = next
+      }
   }
   public navBackward(mod: string[]){
     let currentRoute:string = this.$route.name as string;
@@ -122,6 +127,17 @@ export default class Guide extends Vue{
       this.$router.push({ name: mod[mod.indexOf(currentRoute)+1] })
     if(mod[0] == currentRoute) 
       this.$router.push({name: this.sequence[this.priorModule][this.priorModule.length-1]})
+  }
+  public created(){
+    // psuedo-code [could probably turn this into a util function]
+    /* 
+      if(user.fb.getLastProgress)
+        this.currentModule = user.fb.getLastProgress.Name //this should take them to their latest unlock
+
+        BIND THIS TO `XCURRENTMODULE`
+    */
+    this.routeMap = new RouteList("employer").createLinkedList()
+    this.currentNode = this.routeMap.head
   }
 }
 </script>

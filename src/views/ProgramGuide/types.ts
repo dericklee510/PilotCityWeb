@@ -1,32 +1,40 @@
 import { STUDENTMODULES, EMPLOYERMODULES, TEACHERMODULES } from './views/index';
 
-import {flatMapDeep} from 'lodash'
+import { flatMapDeep } from 'lodash'
 import { LinkedList, LinkedListItem } from 'linked-list-typescript';
-import {RequiredKeys} from "utility-types"
+import { RequiredKeys } from "utility-types"
 export class RouteList {
-    private module:Record<string,string[]>
-    createLinkedList(){
-        const map = flatMapDeep(this.module, (page,key) => {
+    private module: Record<string, string[]>
+    createLinkedList() {
+        const module = this.module
+        var map: ProgramNode<typeof module>[] = flatMapDeep(this.module, (page, key) => {
             return page.map(route => ({
-                type:this.type,
-                page:key,
-                routeName:route
+                value: {
+                    type: this.type,
+                    page: key,
+                    routeName: route,
+                },
+                next: null,
+                prev: null
             }))
         })
-        
-        const module = this.module
-        return new LinkedList<LinkedListItem<ProgramNode<typeof module>>>(...map)
+       for(let index =0;index < map.length -1;index++){
+           map[index].prev = (index-1)?map[(index-1)]:null
+           map[index].next = map[index +1]?map[index +1]:null
+       }
+       
+        return new LinkedList<ProgramNode<typeof module>>(...map)
     }
-    
-    constructor(private type:"employer" |"teacher" | "student"){
-        switch(type){
-            case("employer"):
+
+    constructor(private type: "employer" | "teacher" | "student") {
+        switch (type) {
+            case ("employer"):
                 this.module = EMPLOYERMODULES
                 break;
-            case("teacher"):
+            case ("teacher"):
                 this.module = TEACHERMODULES
                 break;
-            case("student"):
+            case ("student"):
                 this.module = STUDENTMODULES
                 break
         }
@@ -34,7 +42,11 @@ export class RouteList {
 }
 
 export interface ProgramNode<Module> {
-    type:"employer" |"teacher" | "student"
-    page:keyof Module // i.e. Agenda Brief
-    routeName:string // i.e.emp-externship-agenda
+    value: {
+        type: "employer" | "teacher" | "student"
+        page: keyof Module // i.e. Agenda Brief
+        routeName: string // i.e.emp-externship-agenda
+    }
+    next:ProgramNode<Module> | null
+    prev: ProgramNode<Module> | null
 }

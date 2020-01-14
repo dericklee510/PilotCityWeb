@@ -26,6 +26,7 @@ export type Employer_Profile_V1 = {
   organization_industry_other?: Maybe<Scalars['String']>,
   organization_product_list?: Maybe<Array<Maybe<Scalars['String']>>>,
   organization_product_employee_count?: Maybe<Scalars['String']>,
+  /** ISO 8601 format for the date */
   program_externship_time_first?: Maybe<Scalars['String']>,
   program_externship_time_second?: Maybe<Scalars['String']>,
   program_externship_time_third?: Maybe<Scalars['String']>,
