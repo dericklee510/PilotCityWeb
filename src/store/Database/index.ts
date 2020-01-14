@@ -4,7 +4,7 @@ import { AgendaTemplate, NamedLink, EventItem } from './types/utilities';
 /* eslint-disable-next-line */
 import { Module, VuexModule, Action, Mutation, MutationAction } from "vuex-module-decorators" //action unused
 import { firebaseApp as fb } from '@/firebase/init'
-import { EmployerProgram, GeneralUser, Project, RatingTag, TeacherProgramData } from './types/types' 
+import { Classroom, EmployerProgram, GeneralUser, Project, RatingTag, TeacherProgramData } from './types/types' 
 const _ = require('lodash');
 const assert = require('assert')
 
@@ -201,7 +201,26 @@ export default class Fb extends VuexModule {
 
     //     // wtf?
     // }
-        
+    
+    /**
+     * Allows User to create a classroom 
+     * User: Teacher
+     * @param {string} uid
+     * @returns {Promise<voiv>}
+     */
+    async createClassroom(className: string, teacherProgramId: string, employerProgramId: string) {
+        assert(this.userCitizenType === 'teacher', 'User type not teacher');
+        const classroomID = this.firestore.collection('Classroom').doc().id,
+        const classroom = {
+            classroomID,
+            teacherId : this.currentUserProfile!.userId,
+            teacherProgramId,
+            employerProgramId,
+            className,
+            lastUpdate: firebase.firestore.FieldValue.serverTimestamp()
+        }
+        await this.firestore.collection('Classroom').doc(classroomID).set(classroom);
+    }
 
 }
 
@@ -277,22 +296,6 @@ const confirmProgramBrief = async (uid: string): Promise<void> => { //REVIEW LAT
     // ONLY ONE CAN BE CONFIRMED
     // ReviewedLink.reviewd = 1
     // lastUpdate = timestamp
-}
-
-/**
- * Allows User to create a classroom 
- * User: Teacher
- * @param {string} uid
- * @returns {Promise<voiv>}
- */
-const createClassroom = async (className: string, teacherProgramId: string, employerProgramId: string, uid: string): Promise<void> => {
-    // Classroom.id = string
-    // Classroom.teacherId = uid
-    // Classroom.teacherProgramId = TeacherProgramData.id
-    // Classroom.employerProgramId = EmployerProgram.id
-    // Classroom.className = className
-    // Classroom.lastUpdate = timestamp
-    // Teacher.classroomIds.push(Classroom.id)
 }
 
 /**

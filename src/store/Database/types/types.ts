@@ -11,6 +11,7 @@ export interface Classroom {
     shareCode: string  //  create  hash  code
     lastUpdate: firebase.firestore.Timestamp
 }
+
 export interface GeneralUser {
     userId: string
     classroomIds: string[]
