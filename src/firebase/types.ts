@@ -13,14 +13,18 @@ export class ApplicationConfig {
 
     public messagingSenderId: string = '206893838009'
 
+    public appId?:string
+    public measurementId?:string
     public constructor(productionMode: string) {
         if (productionMode === 'production') {
-            this.apiKey = process.env.REAL_DB_KEY
-            this.authDomain = 'pilotcity-firestore.firebaseapp.com'
-            this.databaseURL = 'https://pilotcity-firestore.firebaseio.com',
-            this.projectId = 'pilotcity-firestore'
-            this.storageBucket = 'gs://pilotcity-firestore-site_data'
-            this.messagingSenderId = '80767280856'
+            this.apiKey = "AIzaSyDuO0l8_9gA9UOHX6wRPwaiLk3LTPGqJ-g",
+            this.authDomain = "pilotcitymoonshot.firebaseapp.com",
+            this.databaseURL = "https://pilotcitymoonshot.firebaseio.com",
+            this.projectId = "pilotcitymoonshot",
+            this.storageBucket = "pilotcitymoonshot.appspot.com",
+            this.messagingSenderId = "613152995665",
+            this.appId = "1:613152995665:web:f5a0e0e8e8b7e341553b70",
+            this.measurementId = "G-K158X9L3BE"
         }
     }
 }

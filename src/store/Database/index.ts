@@ -1,10 +1,10 @@
+import { Dependency } from '@/utilities/dependency';
 import { isLinkValid } from './../../api';
 import { AgendaTemplate, NamedLink, EventItem } from './types/utilities';
 /* eslint-disable-next-line */
-import { Module, VuexModule, Action, Mutation } from "vuex-module-decorators" //action unused
+import { Module, VuexModule, Action, Mutation, MutationAction } from "vuex-module-decorators" //action unused
 import { firebaseApp as fb } from '@/firebase/init'
 import { EmployerProgram, GeneralUser, Project, RatingTag, TeacherProgramData } from './types/types' 
-import { Dependency } from '../../utilities/Dependency'
 const _ = require('lodash');
 const assert = require('assert')
 
@@ -12,20 +12,20 @@ const assert = require('assert')
 export default class Fb extends VuexModule {
     public firestore = fb.firestore()
     public storage = fb.storage()
-    private currentTeacherProgramUID? :string
-    private currentTeacherProgramData?: TeacherProgramData
-    private currentEmployerProgramUID? :string
-    private currentEmployerProgram?: EmployerProgram
-    private FBUser:firebase.User | null = fb.auth().currentUser;
-    private currentUserProfile?: GeneralUser
-    private currentProject?: Project
+    public currentTeacherProgramUID    : string                | null = null 
+    public currentTeacherProgramData   : TeacherProgramData    | null = null
+    public currentEmployerProgramUID   : string                | null = null
+    public currentEmployerProgram      : EmployerProgram       | null = null
+    public FBUser                      : firebase.User         | null = fb.auth().currentUser;
+    public currentUserProfile          : GeneralUser           | null = null
+    public currentProject              : Project               | null = null
 
-    @Dependency('FBUser')
+//  @Dependency('FBUser')
     get userDocRef() {
         return this.firestore.collection('users').doc(this.FBUser!.uid);
     }
 
-    @Dependency('FBUser')
+//  @Dependency('FBUser')
     get storageRef() {
         return this.storage.ref();
     }
@@ -36,68 +36,66 @@ export default class Fb extends VuexModule {
         return this.currentUserProfile
     }
 
-    @Dependency('currentUserProfile')
+//  @Dependency('currentUserProfile')
     get userCitizenType() {
         return this.currentUserProfile!.citizenType;
     }
 
-    @Dependency('FBUser')
-    @Mutation
+//  @Dependency('FBUser')
+    @MutationAction({ mutate: ['currentUserProfile']})
     async initCurrentUserProfile() {
         const snapshot = await this.firestore.collection('GeneralUser').doc(this.FBUser!.uid).get();
         if (!snapshot.exists)
             throw new Error("User profile is not found on the GeneralUser Collection");
-        this.currentUserProfile = snapshot.data<GeneralUser>()
+        return { currentUserProfile : snapshot.data<GeneralUser>() }
     }
 
-    @Dependency('FBUser')
+//  @Dependency('FBUser')
     @Mutation
-    async initCurrentEmployerProgram(program: EmployerProgram) {
-        this.currentEmployerProgramUID = program.employerProgramId;
-        this.currentEmployerProgram = program;
+    initCurrentEmployerProgram(program: EmployerProgram) {
+        this.currentEmployerProgramUID = program.employerProgramId,
+        this.currentEmployerProgram = program
     }
     
-    @Dependency('currentEmployerProgramUID', 'currentEmployerProgram')
-    @Mutation
+//  @Dependency('currentEmployerProgramUID', 'currentEmployerProgram')
+    @MutationAction({ mutate: ['currentEmployerProgram']})
     async updateCurrentEmployerProgram(property: any) {
-        await this.firestore.collection('EmployerProgram').doc(this.currentEmployerProgramUID).update(property);
-        this.currentEmployerProgram = Object.assign(property, this.currentEmployerProgram);
+        await this.firestore.collection('EmployerProgram').doc(this.currentEmployerProgramUID!).update(property);
+        return { currentEmployerProgram: Object.assign(property, this.currentEmployerProgram) };
     }
 
-    @Dependency('currentEmployerProgramUID', 'currentTeacherProgramData')
-    @Mutation
+//  @Dependency('currentEmployerProgramUID', 'currentTeacherProgramData')
+    @MutationAction({ mutate: ['currentTeacherProgramData']})
     async updateCurrentTeacherProgramData(property: any) {
-        await this.firestore.collection('TeacherProgramData').doc(this.currentTeacherProgramUID).update(property);
-        this.currentTeacherProgramData = Object.assign(property, this.currentTeacherProgramData);
+        await this.firestore.collection('TeacherProgramData').doc(this.currentTeacherProgramUID!).update(property);
+        return { currentTeacherProgramData: Object.assign(property, this.currentTeacherProgramData) }
     }
 
-    @Dependency('currentProject')
-    @Mutation
+//  @Dependency('currentProject')
+    @MutationAction( {mutate: ['currentProject']})
     async updateProject(property: any) {
         await this.firestore.collection('Project').doc(this.currentProject!.projectId).update(property);
-        this.currentProject = Object.assign(property, this.currentProject)
+        return { currentProject: Object.assign(property, this.currentProject) }
     }
     
-    @Action({ commit: 'initEmployerProgram'})
+    @Action({ commit: 'initCurrentEmployerProgram '})
     async fetchEmployerProgram(employerProgramUID: string) {
         const snapshot = await this.firestore.collection('EmployerProgram').doc(employerProgramUID).get();
         if (!snapshot.exists)
             throw new Error(`Failed to fetch employer program with uid of ${employerProgramUID}`);
-        return snapshot;
+        return snapshot.data<EmployerProgram>();
     }
 
-    @Action({ commit: 'initEmployerProgram'})
     async switchCurrentEmployerProgramWithProgramUID(employerProgramUID: string) {
-        return await this.fetchEmployerProgram(employerProgramUID)
+        await this.fetchEmployerProgram(employerProgramUID)
     }
 
-    @Action({ commit: 'initEmployerProgram'})
+    @Action({ commit: 'initCurrentEmployerProgram'})
     async switchCurrentEmployerProgramWithProgramObject(program : EmployerProgram) {
         return program;
     }
 
-    @Dependency('FBUser', 'employerProgram', 'storage')
-    @Action({ commit: 'updateCurrentEmployerProgram' })
+//  @Dependency('FBUser', 'employerProgram', 'storage')
     async createProgramBrief(file: File) {
         const fileName = file.name; // should validate the name of the file on the frontend
         const filePath = `program_briefs/${this.FBUser!.uid}/${fileName}`;
@@ -109,15 +107,11 @@ export default class Fb extends VuexModule {
                 name: fileName,
                 link: filePath
             }]
-            return {
-                programBrief: newProgramBrief
-            };
+            await this.updateCurrentEmployerProgram({ programBrief: newProgramBrief });
         } else {
             this.getCurrentEmployerProgram!.programBrief![index].link = filePath;
             const newProgramBrief = [...this.getCurrentEmployerProgram!.programBrief!]
-            return {
-                programBrief: newProgramBrief
-            };
+            await this.updateCurrentEmployerProgram({ programBrief: newProgramBrief });
         }
     }
 
@@ -125,30 +119,25 @@ export default class Fb extends VuexModule {
         await this.createProgramBrief(file); // it's the same shit
     }
 
-    @Dependency('FBUser', 'employerProgram', 'storageRef')
-    @Action({ commit: 'updateCurrentEmployerProgram' })
+//  @Dependency('FBUser', 'employerProgram', 'storageRef')
     async deleteProgramBrief (fileName: string){
         const index = _.findIndex(this.getCurrentEmployerProgram!.programBrief, ['name', fileName]);
         if (index < 0) {
             throw new Error('file with associated name does not exist')
         } else {
             await this.storageRef!.child(`program_briefs/${this.FBUser!.uid}/${fileName}`).delete();
-            const newProgramBriefs = _.remove(this.getCurrentEmployerProgram!.programBrief, (n: any)  => n.name === fileName);
-            return newProgramBriefs;  
+            const newProgramBrief = _.remove(this.getCurrentEmployerProgram!.programBrief, (n: any)  => n.name === fileName);
+            await this.updateCurrentEmployerProgram({ programBrief: newProgramBrief });
         }
     }
 
-    @Action({ commit: 'updateCurrentEmployerProgram' }) // we have to ask them to resubmit the brief because firebase storage doesnt support rename
     async renameBrief(newFile: File, originalFileName: string){
         await this.createProgramBrief(newFile);
         await this.deleteProgramBrief(originalFileName);
     }
   
-    @Action( { commit: 'updateProject'})
     async addRating(ratingName: RatingTag, rating:number) {
-        return {
-            [ratingName]: rating 
-        }
+        await this.updateProject({ [ratingName]: rating })
     }
 
    
@@ -158,12 +147,9 @@ export default class Fb extends VuexModule {
      * @param {AgendaTemplate} textEntry
      * @param {string} uid
      */
-    @Action({ commit: 'updateCurrentEmployerProgram' })
-    async createExternshipAgenda(textEntry: AgendaTemplate, EmployerProgramId: string){
+    async createExternshipAgenda(externshipAgenda: AgendaTemplate, EmployerProgramId: string){
         assert(this.userCitizenType === 'employer', 'User type not emplyer');
-        return {
-            externshipAgenda: textEntry
-        }
+        await this.updateCurrentEmployerProgram({ externshipAgenda })
     }
 
     // @Action({ commit: 'updateCurrentEmployerProgram' })
@@ -178,14 +164,12 @@ export default class Fb extends VuexModule {
     //     // upload video
     // }
    
-    @Action({ commit: 'updateCurrentEmployerProgram' })
     async updateCurrentEmployerProgramCaseStudy(caseStudies: NamedLink[]) {
-        return { caseStudies }
+        await this.updateCurrentEmployerProgram({ caseStudies })
     }
 
-    @Action({ commit: 'updateCurrentTeacherProgramData' })
     async updateCurrentTeacherProgramCaseStudy(caseStudies: NamedLink[]) {
-        return { caseStudies }
+        await this.updateCurrentTeacherProgramData({ caseStudies })
     }
 
     /**
@@ -193,7 +177,7 @@ export default class Fb extends VuexModule {
      * User: Employer or Teacher
      * @param {NamedLink[]} link
      */
-    @Dependency('currentUserProfile')
+//  @Dependency('currentUserProfile')
     async updateCaseStudy(link: NamedLink[]){
         if (this.currentUserProfile!.citizenType == 'teacher') {
             await this.updateCurrentEmployerProgramCaseStudy(link)
@@ -222,7 +206,7 @@ export default class Fb extends VuexModule {
 }
 
 
-const uploadVideo = async (url: string): void => {
+const uploadVideo = async (url: string): Promise<void> => {
     // check link
     if (!isLinkValid(url))
         throw ("link does not exist")
