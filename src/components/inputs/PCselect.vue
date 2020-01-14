@@ -14,6 +14,7 @@
       </h5>
     </label>
     <v-select
+      v-model="syncValue"
       :multiple="multiselect"
       append-icon="mdi-chevron-down"
       flat
@@ -27,7 +28,6 @@
       :items="items"
       :error-messages="error"
       :dark="darkMode"
-      @input="handleInput"
     />
   </div>
 </template>
@@ -35,13 +35,13 @@
 <script lang="ts">
 import Vue from 'vue'
 import 'reflect-metadata'
-import { Component, Prop } from 'vue-property-decorator'
+import { Component, Prop, PropSync } from 'vue-property-decorator'
 
 
 @Component
 export default class PCselect extends Vue {
-    @Prop({ required: true })
-    public value!: string;
+    @PropSync('value',{ required: true })
+    public syncValue!: string;
 
     @Prop({ default: false })
     public darkMode!: boolean;
@@ -49,21 +49,17 @@ export default class PCselect extends Vue {
     @Prop({ default: false })
     public multiselect!: boolean;
 
-    @Prop({ required: true })
+    @Prop()
     public title!: string;
 
     @Prop({ required: true })
     public items!: string[];
 
-    @Prop({ required: true })
+    @Prop()
     public placeholder!: string;
 
     @Prop()
     public errorMessages?: string | string []
-
-    public handleInput(event: any) {
-        this.$emit('input', event)
-    }
 
     get errorMessage() {
         return this.errorMessages
