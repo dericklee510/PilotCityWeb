@@ -55,7 +55,6 @@ export interface Project {
     teamMembersIds: string[]
     teamName: string
     createdByTeacher: boolean
-    teacherName: string
     period: string
     timeline: {
         programBrief?: firebase.firestore.Timestamp

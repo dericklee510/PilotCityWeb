@@ -210,7 +210,7 @@ export default class Fb extends VuexModule {
      */
     async createClassroom(className: string, teacherProgramId: string, employerProgramId: string) {
         assert(this.userCitizenType === 'teacher', 'User type not teacher');
-        const classroomID = this.firestore.collection('Classroom').doc().id,
+        const classroomID = this.firestore.collection('Classroom').doc().id;
         const classroom = {
             classroomID,
             teacherId : this.currentUserProfile!.userId,
@@ -220,6 +220,174 @@ export default class Fb extends VuexModule {
             lastUpdate: firebase.firestore.FieldValue.serverTimestamp()
         }
         await this.firestore.collection('Classroom').doc(classroomID).set(classroom);
+        // update current classroom ?
+    }
+
+    
+
+    /**
+     * Allows User to rename a classroom
+     * User: Teacher
+     * @param {string} className
+     * @param {string} uid
+     * @returns {Promise<void>}
+     */
+    async renameClassroom(classroomId: string, className: string, uid: string){
+        // Classroom.className = className
+        // Classroom.lastUpdate = timestamp
+        await this.firestore.collection('Classroom').doc(classroomId).update({ className });
+        // update current classroom ?
+    }
+
+
+        
+    /**
+     * Allows User to delete a classroom
+     * User: Teacher
+     * @param {string} classroomId
+     * @param {string} uid
+     * @returns {Promise<void>}
+     */
+    async deleteClassroom(classroomId: string, uid: string){
+        // kick all students from Classroom.projectIds
+        // delete all assosciated projects
+        // delete classroom id from all students in Student.classroomID
+        // remove classroomId from projectIds
+        // delete classroom table
+        // remove classroom id from teacher
+    }
+
+    /**
+     * Allows User to change a student's classroom
+     * User: Teacher
+     * @param {string} classroomId
+     * @param null uid
+     */
+    async switchClassroom(oldClassroomId: string, newClassroomId: string, uid: string, studentId: string){
+        // kick student from project
+        // remove classroomId from Student.projectIds
+        // remove classroomID from the student
+        // Add student with StudentId to classroom with newClassroomId
+    }
+
+    /**
+     * Allows User to change a student's team (ie. Project)
+     * New Team and Old Team must be of the same classroom
+     * User: Teacher
+     * @param {string} oldProjectId
+     * @param {string} newProjectId
+     * @param {string} uid
+     * @param {string} studentId
+     * @returns {Promise<void>}
+     */
+    async switchTeam(oldProjectId: string, newProjectId: string, uid: string, studentId: string){
+        // remove student.id with studentId from Project.teamMembers with oldProjectId
+        // Student.projectIds[clasroomID] = newProjectId
+        // add student.id with studentId to Project.teamMembers with newProjectId
+    }
+
+    /**
+     * Allows User to create a team
+     * User: Teacher, Student
+     * @param {string} teamName
+     * @param {string} uid
+     */
+    async createTeam(teamName: string, classroomId: string, uid: string) {
+        let createdByTeacher: boolean = false;
+        let teacherName: string | null = null;
+        if (this.currentUserProfile?.citizenType == 'teacher') {
+            createdByTeacher = true;
+            teacherName = this.currentUserProfile.
+        }
+        const projectId = this.firestore.collection('Project').doc().id;
+        const project = {
+            projectId,
+            classroomId,
+            createdByTeacher,
+            
+        }
+        // Project.id = projectId
+        // Project.teamName = teamName
+        // Project.classroomId = classroomId
+        // if created by Teacher
+        // Project.createdByTeacher = 1
+        // Project.teamMembers = []
+        // add projectId to employer.projectId (employer program) project->classroom -> employerProgram
+    }
+
+    /**
+     * Allows User to rename a team
+     * User: Teacher or Student
+     * @param {string} newTeamName
+     * @param {string} projectId
+     * @param {string} uid
+     * @returns {Promise<void>}
+     */
+    const renameTeam = async (newTeamName: string, projectId: string, uid: string): Promise<void> => {
+        // Project.teamName = newTeamName
+    }
+
+    /**
+     * Allows User to delete a team
+     * User: Teacher 
+     * @param {string} projectId
+     * @param {string} uid
+     * @returns {Promise<void>}
+     */
+    const deleteTeam = async (projectId: string, uid: string): Promise<void> => {
+        // remove projectId from every student's student.projectId interface
+        // remove projectId from classroom.projectId 
+        // remove projectId from employerProgram.Id
+        // delete project with Project.Id = projectId
+        // User must be a teacher
+    }
+
+    /**
+     * Allows User to join a Team
+     * User: Student
+     * @param {string} projectId
+     * @param {string} uid
+     * @returns {Promise<void>}
+     */
+    const joinTeam = async (projectId: string, uid: string): Promise<void> => {
+        // append Student.id to Project.teamMembers where Project.Id = projectId 
+        // add projectId to Student.projectIds
+    }
+    /**
+     * Allows User to leave a Team
+     * User: Student
+     * @param {string} projectId
+     * @param {string} uid
+     * @returns {Promise<void>}
+     */
+    const leaveTeam = async (projectId: string, uid: string): Promise<void> => {
+        // remove student with Student.id = uid from Project.teamMembers where Project.id = projectId
+        // remove projectId from Student.projectIds
+    }
+    /**
+     * Allows User to add an Employer Program using a shareCode
+     * User: Teacher or Student
+     * @param {string} shareCode
+     * @param {string} uid
+     * @returns {Promise<void>}
+     */
+    const addProgram = async (shareCode: string, uid: string): Promise<void> => {
+        if (!shareCode) {
+            throw new Error('invalid sharecode')
+        } 
+        // add employerProgramId to GeneralUser's employerProgramIds array 
+            // GeneralUser.employerProgramIds.push(employerProgramId), where GeneralUser.userId == uid
+        // GeneralUser.initializeProgram = timestamp
+    }
+    /**
+     * Allows User to remove an Employer Program
+     * User: Teacher or Student
+     * @param {string} employerProgramId
+     * @returns {Promise<void>}
+     */
+    const removeProgram = async (uid: string, employerProgramId: string): Promise<void> => {
+        // remove employerProgramId from GeneralUser employerProgramIds array, where GeneralUser.userId == uid
+        // delete timestamp from GeneralUser.initializeProgram that corresponds to employerProgramId 
     }
 
 }
@@ -296,152 +464,4 @@ const confirmProgramBrief = async (uid: string): Promise<void> => { //REVIEW LAT
     // ONLY ONE CAN BE CONFIRMED
     // ReviewedLink.reviewd = 1
     // lastUpdate = timestamp
-}
-
-/**
- * Allows User to rename a classroom
- * User: Teacher
- * @param {string} className
- * @param {string} uid
- * @returns {Promise<void>}
- */
-const renameClassroom = async (classroomId: string, className: string, uid: string): Promise<void> => {
-    // Classroom.className = className
-    // Classroom.lastUpdate = timestamp
-}
-
-/**
- * Allows User to delete a classroom
- * User: Teacher
- * @param {string} classroomId
- * @param {string} uid
- * @returns {Promise<void>}
- */
-const deleteClassroom = async (classroomId: string, uid: string): Promise<void> => {
-    // kick all students from Classroom.projectIds
-    // delete all assosciated projects
-    // delete classroom id from all students in Student.classroomID
-    // remove classroomId from projectIds
-    // delete classroom table
-    // remove classroom id from teacher
-}
-
-/**
- * Allows User to change a student's classroom
- * User: Teacher
- * @param {string} classroomId
- * @param null uid
- */
-const switchClassroom = async (oldClassroomId: string, newClassroomId: string, uid: string, studentId: string): Promise<void> => {
-    // kick student from project
-    // remove classroomId from Student.projectIds
-    // remove classroomID from the student
-    // Add student with StudentId to classroom with newClassroomId
-}
-
-/**
- * Allows User to change a student's team (ie. Project)
- * New Team and Old Team must be of the same classroom
- * User: Teacher
- * @param {string} oldProjectId
- * @param {string} newProjectId
- * @param {string} uid
- * @param {string} studentId
- * @returns {Promise<void>}
- */
-const switchTeam = async (oldProjectId: string, newProjectId: string, uid: string, studentId: string): Promise<void> => {
-    // remove student.id with studentId from Project.teamMembers with oldProjectId
-    // Student.projectIds[clasroomID] = newProjectId
-    // add student.id with studentId to Project.teamMembers with newProjectId
-}
-
-/**
- * Allows User to create a team
- * User: Teacher, Student
- * @param {string} teamName
- * @param {string} uid
- */
-const createTeam = async (teamName: string, classroomId: string, uid: string): Promise<void> => {
-    // Project.id = projectId
-    // Project.teamName = teamName
-    // Project.classroomId = classroomId
-    // if created by Teacher
-    // Project.createdByTeacher = 1
-    // Project.teamMembers = []
-    // add projectId to employer.projectId (employer program) project->classroom -> employerProgram
-}
-
-/**
- * Allows User to rename a team
- * User: Teacher or Student
- * @param {string} newTeamName
- * @param {string} projectId
- * @param {string} uid
- * @returns {Promise<void>}
- */
-const renameTeam = async (newTeamName: string, projectId: string, uid: string): Promise<void> => {
-    // Project.teamName = newTeamName
-}
-
-/**
- * Allows User to delete a team
- * User: Teacher 
- * @param {string} projectId
- * @param {string} uid
- * @returns {Promise<void>}
- */
-const deleteTeam = async (projectId: string, uid: string): Promise<void> => {
-    // remove projectId from every student's student.projectId interface
-    // remove projectId from classroom.projectId 
-    // remove projectId from employerProgram.Id
-    // delete project with Project.Id = projectId
-    // User must be a teacher
-}
-
-/**
- * Allows User to join a Team
- * User: Student
- * @param {string} projectId
- * @param {string} uid
- * @returns {Promise<void>}
- */
-const joinTeam = async (projectId: string, uid: string): Promise<void> => {
-    // append Student.id to Project.teamMembers where Project.Id = projectId 
-    // add projectId to Student.projectIds
-}
-/**
- * Allows User to leave a Team
- * User: Student
- * @param {string} projectId
- * @param {string} uid
- * @returns {Promise<void>}
- */
-const leaveTeam = async (projectId: string, uid: string): Promise<void> => {
-    // remove student with Student.id = uid from Project.teamMembers where Project.id = projectId
-    // remove projectId from Student.projectIds
-}
-/**
- * Allows User to add an Employer Program using a shareCode
- * User: Teacher or Student
- * @param {string} shareCode
- * @param {string} uid
- * @returns {Promise<void>}
- */
-const addProgram = async (shareCode: string, uid: string): Promise<void> => {
-    if (!shareCode) {
-        throw new Error('invalid sharecode')
-    } 
-    // add employerProgramId to GeneralUser's employerProgramIds array 
-        // GeneralUser.employerProgramIds.push(employerProgramId), where GeneralUser.userId == uid
-    // GeneralUser.initializeProgram = timestamp
-}
-/**
- * Allows User to remove an Employer Program
- * User: Teacher or Student
- * @param {string} employerProgramId
- * @returns {Promise<void>}
- */
-const removeProgram = async (uid: string, employerProgramId: string): Promise<void> => {
-    // remove employerProgramId from GeneralUser employerProgramIds array, where GeneralUser.userId == uid
-    // delete timestamp from GeneralUser.initializeProgram that corresponds to employerProgramId 
 }
