@@ -295,24 +295,26 @@ export default class Fb extends VuexModule {
     async createTeam(teamName: string, classroomId: string, uid: string) {
         let createdByTeacher: boolean = false;
         let teacherName: string | null = null;
-        if (this.currentUserProfile?.citizenType == 'teacher') {
+        if (this.currentUserProfile?.citizenType == 'teacher')
             createdByTeacher = true;
-            teacherName = this.currentUserProfile.
-        }
         const projectId = this.firestore.collection('Project').doc().id;
         const project = {
             projectId,
             classroomId,
             createdByTeacher,
-            
+            teamMembersIds : [],
         }
+        await this.firestore.collection('Project').doc(projectId).set(project);
+
+
+    
         // Project.id = projectId
         // Project.teamName = teamName
         // Project.classroomId = classroomId
         // if created by Teacher
         // Project.createdByTeacher = 1
         // Project.teamMembers = []
-        // add projectId to employer.projectId (employer program) project->classroom -> employerProgram
+        // add projectId to (employer program) project->classroom -> employerProgram
     }
 
     /**
