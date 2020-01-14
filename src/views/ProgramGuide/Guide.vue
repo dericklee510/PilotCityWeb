@@ -25,19 +25,17 @@
         <v-col
           cols="1"
           class="guide__locks guide__locks--left"
-          @click="navBackward(sequence[currentModule])"
+          @click="navBackward"
         >
           <Unlock />
         </v-col>
-        <v-col
-          cols="12"
-        >
-          <router-view /> 
+        <v-col cols="12">
+          <router-view />
         </v-col>
         <v-col
           cols="1"
           class="guide__locks guide__locks--right"
-          @click="navForward(sequence[currentModule])" 
+          @click="navForward"
         >
           <Unlock />
         </v-col>
@@ -47,65 +45,52 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import Component from 'vue-class-component';
-import { Watch } from 'vue-property-decorator'
-import { STUDENTMODULES, EMPLOYERMODULES, TEACHERMODULES } from './views'
-import {Nav, Lock, Unlock} from './components'
-import _ from "lodash"
-import { LinkedList, LinkedListItem } from 'linked-list-typescript';
-import { ProgramNode, RouteList } from './types';
+import Vue from "vue";
+import Component from "vue-class-component";
+import { Watch } from "vue-property-decorator";
+import { STUDENTMODULES, EMPLOYERMODULES, TEACHERMODULES } from "./views";
+import { Nav, Lock, Unlock } from "./components";
+import _ from "lodash";
+import { LinkedList, LinkedListItem } from "linked-list-typescript";
+import { ProgramNode, RouteList } from "./types";
 
 @Component({
   components: {
     Nav,
     Lock,
-    Unlock,
+    Unlock
   }
 })
-export default class Guide extends Vue{
-  public sequenceHash:Record<string,Record<string,string[]>> = {
+export default class Guide extends Vue {
+  public sequenceHash: Record<string, Record<string, string[]>> = {
     Teacher: TEACHERMODULES,
     Employer: EMPLOYERMODULES,
     Student: STUDENTMODULES
-  }
-  public xcurrentModule: string = '';  
-  routeMap!:LinkedList<ProgramNode<typeof EMPLOYERMODULES | typeof STUDENTMODULES | typeof TEACHERMODULES>>
-  currentNode!:ProgramNode<typeof EMPLOYERMODULES | typeof STUDENTMODULES | typeof TEACHERMODULES>
-  get citizenType(): string{
-    return localStorage.citizenType
+  };
+  public xcurrentModule: string = "";
+  routeMap!: LinkedList<
+    ProgramNode
+  >;
+  currentNode!: ProgramNode;
+  get citizenType(): string {
+    return localStorage.citizenType;
   }
   get sequence() {
-    return this.sequenceHash[this.citizenType] 
+    return this.sequenceHash[this.citizenType];
   }
-  get nextModule(){
-    let programs = Object.keys(this.sequence);
-    let index = programs.indexOf(this.currentModule);
-    if(programs.length-1 == index)
-      return this.currentModule;
-    return programs[index+1] 
+  get nextModule() {
+    if (this.currentNode) return this.currentNode.next;
+    else return null;
   }
-  get priorModule(){
-    let programs = Object.keys(this.sequence);
-    let index = programs.indexOf(this.currentModule);
-    if(index == 0)
-      return this.currentModule;
-    return programs[index-1] 
+  get prevModule() {
+    if (this.currentNode) return this.currentNode.prev;
+    else return null;
   }
-  get currentModule(): string {
-    return this.xcurrentModule
+  get currentModule() {
+    return this.currentNode;
   }
-  set currentModule(value: string) {
-    this.xcurrentModule = value;
-    // set this in created hook based on firebase
-  }
-  @Watch('currentModule')
-  onModuleChange(){
-    if(this.$route.name != this.sequence[this.currentModule][0])
-    this.$router.push({name: this.sequence[this.currentModule][0]})
-  }
-  
-  public navForward(mod: string[]){
+
+  public navForward() {
     // this.routeMap.head
     // console.log(mod)
     // let currentRoute= this.$route.name as string;
@@ -113,22 +98,22 @@ export default class Guide extends Vue{
     // console.log(currentRoute,length)
     // if(mod.includes(currentRoute) && mod[length-1] != currentRoute)
     //   this.$router.push({ name: mod[mod.indexOf(currentRoute)+1] })
-    // if(mod[length-1] == currentRoute) 
+    // if(mod[length-1] == currentRoute)
     //   this.$router.push({name: this.sequence[this.nextModule][0]})
-    let next = this.currentNode.next
-    if(next){
-      this.$router.push({name:next.value.routeName})
-      this.currentNode = next
-      }
+    let next = this.currentNode.next;
+    if (next) {
+      this.currentNode = next;
+      this.$router.push({ name: next.value.routeName });
+    }
   }
-  public navBackward(mod: string[]){
-    let currentRoute:string = this.$route.name as string;
-    if(mod.includes(currentRoute) && mod[0] != currentRoute)
-      this.$router.push({ name: mod[mod.indexOf(currentRoute)+1] })
-    if(mod[0] == currentRoute) 
-      this.$router.push({name: this.sequence[this.priorModule][this.priorModule.length-1]})
+  public navBackward() {
+    let prev = this.currentNode.prev;
+    if (prev) {
+      this.currentNode = prev;
+      this.$router.push({ name: prev.value.routeName });
+    }
   }
-  public created(){
+  public created() {
     // psuedo-code [could probably turn this into a util function]
     /* 
       if(user.fb.getLastProgress)
@@ -136,8 +121,9 @@ export default class Guide extends Vue{
 
         BIND THIS TO `XCURRENTMODULE`
     */
-    this.routeMap = new RouteList("employer").createLinkedList()
-    this.currentNode = this.routeMap.head
+    this.routeMap = new RouteList("teacher").createLinkedList();
+    this.currentNode = this.routeMap.head;
+    this.currentNode.value.page
   }
 }
 </script>

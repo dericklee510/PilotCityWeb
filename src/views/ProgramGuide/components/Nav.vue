@@ -57,10 +57,15 @@ import Component from "vue-class-component";
 import { Prop } from 'vue-property-decorator';
 import { forEachField } from 'graphql-tools';
 import { TEACHERSEQUENCE, EMPLOYERSEQUENCE, STUDENTSEQUENCE } from '../views';
+import { LinkedList, LinkedListItem } from "linked-list-typescript";
+import { ProgramNode, RouteList } from "../types";
+import { STUDENTMODULES, EMPLOYERMODULES, TEACHERMODULES } from "../views";
+
 @Component
 export default class Nav extends Vue {
   @Prop()
-  public value !: string;
+  public value !: LinkedList<
+    ProgramNode>;
   public unlocked = true;
    public sequenceHash:Record<string,any> = {
     Teacher: TEACHERSEQUENCE,
@@ -76,14 +81,8 @@ export default class Nav extends Vue {
   public updateProgram(name: string) {
     this.$emit('input', name )
   }
-  // public isActive(): boolean{
-  //   var active: boolean = false;
-  //   Object.keys(this.sequence).forEach( key => {
-  //     this.sequence[key].forEach(item => {
-  //       item==this.select?active = true: active = false;
-  //     })
-  //   })
-  //   return active;
-  // }
+  public isActive(): boolean{
+   
+  }
 }
 </script>
