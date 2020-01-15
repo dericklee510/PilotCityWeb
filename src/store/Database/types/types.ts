@@ -2,7 +2,6 @@ import { AgendaTemplate, ReviewedLink, ProgramEvent, PostHackReflection, DesignL
 import { AutoComplete, AutoCompleteAddress } from '@/components/GoogleMaps';
 
 export interface Classroom {
-    classroomId: string
     projectIds: string []
     teacherId: string
     teacherProgramId: string
@@ -13,7 +12,6 @@ export interface Classroom {
 }
 
 export interface GeneralUser {
-    userId: string
     classroomIds: string[]
     employerProgramIds: string[]
     projectIds: string[]
@@ -23,14 +21,13 @@ export interface GeneralUser {
     firstName: string
     lastName: string
     citizenType: "employer" | "teacher" | "student"
-    dob: Date
-    address: AutoCompleteAddress
-    phoneNumber: string
-    profilePicture: string
+    dob?: Date
+    address?: AutoCompleteAddress
+    phoneNumber?: string
+    profilePicture?: string
     lastUpdate: firebase.firestore.Timestamp
 }
 export interface EmployerProgram {
-    employerProgramId: string
     employerId: string
     programLauncher: ProgramEvent[]
     externshipDayAgenda: AgendaTemplate
@@ -43,7 +40,6 @@ export interface EmployerProgram {
     lastUpdate: firebase.firestore.Timestamp
 }
 export interface TeacherProgramData {
-    teacherProgramId: string
     classroomId: string
     employerProgramId: string
     caseStudies: NamedLink[]
@@ -52,7 +48,6 @@ export interface TeacherProgramData {
 }
 //  StudentProject  should  be  an  extension  of  a  Team
 export interface Project {
-    projectId: string
     classroomId: string
     teamMembersIds: string[]
     teamName: string
