@@ -30,7 +30,7 @@ export interface PostHackReflection {
 }
 export interface DesignLog {
     description: string
-    link: string
+    fileLinks: NamedLink[]
     lastUpdate: firebase.firestore.Timestamp
 }
 export interface TimeLog {
@@ -53,4 +53,10 @@ export interface CompletedEvent {
     completed: boolean
 
 }
+export interface BusinessModelCanvas{
+    problem:string
+    solution:string
+    innovation:string
+    customer:string
+  }
 //#endregion
