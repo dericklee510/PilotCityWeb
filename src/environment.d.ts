@@ -8,16 +8,16 @@ declare global {
       PORT?: string;
       PWD: string;
       //API Keys
-      REAL_DB_KEY: string
-      TEST_DB_KEY: string
-      MAPS_API_KEY: string
+      VUE_APP_REAL_DB_KEY: string
+      VUE_APP_TEST_DB_KEY: string
+      VUE_APP_MAPS_API_KEY: string
       //Server Endpoints
-      VERIFY_LINK_REST:string
+      VUE_APP_VERIFY_LINK_REST:string
     }
   }
   namespace firebase.firestore {
     interface DocumentSnapshot {
-      data<RetrievedClass>(options?: SnapshotOptions):(RetrievedClass & Record<string,any> ) | undefined
+      data<RetrievedClass>(options?: SnapshotOptions):(RetrievedClass & Record<string,any> )
     }
     interface DocumentReference{
       update<UpdateClass>(data:Partial<UpdateClass>):Promise<void>

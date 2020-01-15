@@ -261,9 +261,9 @@ export default class Fb extends VuexModule {
             throw "classroom does not exist!"
 
         const classroomData = classroomSnapshot.data<Classroom>();
-        const projectList = classroomData?.projectIds;
-        const teacherId  = classroomData?.teacherId;
-        if (!projectList)
+        const projectList = classroomData.projectIds;
+        const teacherId  = classroomData.teacherId;
+        if (projectList.length)
             throw "classroom doesnt have projectIds"
 
     

@@ -18,7 +18,7 @@ export default class Test extends Vue {
     FbStore.firestore
       .collection("GeneralUser")
       .doc(uid)
-      .set<GeneralUser>({
+      .update<GeneralUser>({
         firstName: "Taisei"
       });
   }
