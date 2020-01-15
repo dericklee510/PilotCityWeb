@@ -13,6 +13,7 @@ export interface Classroom {
 }
 
 export interface GeneralUser {
+    userId: string
     classroomIds: string[]
     employerProgramIds: string[]
     projectIds: string[]
@@ -42,6 +43,7 @@ export interface EmployerProgram {
     lastUpdate: firebase.firestore.Timestamp
 }
 export interface TeacherProgramData {
+    teacherProgramId: string
     classroomId: string
     employerProgramId: string
     caseStudies: NamedLink[]
