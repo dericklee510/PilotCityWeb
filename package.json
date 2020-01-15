@@ -11,7 +11,7 @@
     "preserve": "npm run generate",
     "test:e2e": "vue-cli-service test:e2e",
     "test:unit": "vue-cli-service test:unit",
-    "hide": "git secret hide -d",
+    "hide": "git secret hide -m",
     "reveal": "git secret reveal"
   },
   "dependencies": {
@@ -19,9 +19,8 @@
     "@graphql-codegen/cli": "^1.9.1",
     "@graphql-codegen/typescript": "^1.9.1",
     "@graphql-codegen/typescript-graphql-files-modules": "^1.9.1",
-    "@graphql-codegen/typescript-graphql-request": "^1.9.1",
+    "@graphql-codegen/typescript-graphql-request": "^1.11.2",
     "@graphql-codegen/typescript-operations": "^1.11.2",
-    "@graphql-toolkit/common": "^0.9.0",
     "@types/axios": "^0.14.0",
     "@types/google__maps": "^0.5.7",
     "@types/lodash": "^4.14.136",
@@ -50,7 +49,6 @@
     "graphql-tag": "^2.10.1",
     "grpc": "^1.24.1",
     "husky": "^3.1.0",
-    "linked-list-typescript": "^1.0.15",
     "lodash": "^4.17.15",
     "reflect-metadata": "^0.1.13",
     "rxfire": "^3.6.11",

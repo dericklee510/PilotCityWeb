@@ -10,24 +10,24 @@ export interface Classroom {
     shareCode: string  //  create  hash  code
     lastUpdate: firebase.firestore.Timestamp
 }
+
 export interface GeneralUser {
-    userId: string
     classroomIds: string[]
     employerProgramIds: string[]
+    projectIds: string[]
     initializeProgram: {
         [employerProgramId: string]: firebase.firestore.Timestamp
     }
     firstName: string
     lastName: string
     citizenType: "employer" | "teacher" | "student"
-    dob: Date
-    address: AutoCompleteAddress
-    phoneNumber: string
-    profilePicture: string
+    dob?: Date
+    address?: AutoCompleteAddress
+    phoneNumber?: string
+    profilePicture?: string
     lastUpdate: firebase.firestore.Timestamp
 }
 export interface EmployerProgram {
-    employerProgramId: string
     employerId: string
     programLauncher: ProgramEvent[]
     externshipDayAgenda: AgendaTemplate
@@ -36,10 +36,10 @@ export interface EmployerProgram {
     introVideo?: string
     caseStudies?: NamedLink[]
     projectIds?: string[]
+    shareCode: string
     lastUpdate: firebase.firestore.Timestamp
 }
 export interface TeacherProgramData {
-    teacherProgramId: string
     classroomId: string
     employerProgramId: string
     caseStudies: NamedLink[]
@@ -48,12 +48,10 @@ export interface TeacherProgramData {
 }
 //  StudentProject  should  be  an  extension  of  a  Team
 export interface Project {
-    projectId: string
     classroomId: string
     teamMembersIds: string[]
     teamName: string
     createdByTeacher: boolean
-    teacherName: string
     period: string
     timeline: {
         programBrief?: firebase.firestore.Timestamp

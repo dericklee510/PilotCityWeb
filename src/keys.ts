@@ -1,3 +1,3 @@
-export const VUE_APP_REAL_DB_KEY = "AIzaSyCftpeiBIbwsHwLetXHXrLxNUuwY3bMoJc"
-export const VUE_APP_TEST_DB_KEY = "AIzaSyDprzWrDkxxIV2gnyApN9CrSeqDRErafxs"
-export const VUE_APP_MAPS_API_KEY = "AIzaSyCtVhJzsgf8J51DH8pb2qApqEm54VZewc8"
+export const REAL_DB_KEY = "AIzaSyDfuNr3RaCZkituTfoB7b7pR2u2rWuraWE"
+export const TEST_DB_KEY = "AIzaSyBKKxWc5PQI7TX3z32sIFpZJwQ_62DV0ls"
+export const MAPS_API_KEY = "AIzaSyD9436iO-77haxwWRRY0qVo5spHS8qsjH8"

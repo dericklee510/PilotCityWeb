@@ -221,10 +221,6 @@ export default class Signup extends Vue {
         this.loading = false
     }
 
-    public syncLocalStorage() {
-        localStorage.citizenFirstName = this.firstName
-        localStorage.citizenLastName = this.lastName
-    }
 }
 </script>
 
