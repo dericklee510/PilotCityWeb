@@ -16,6 +16,7 @@ export interface GeneralUser {
     userId: string
     classroomIds: string[]
     employerProgramIds: string[]
+    projectIds: string[]
     initializeProgram: {
         [employerProgramId: string]: firebase.firestore.Timestamp
     }
@@ -38,6 +39,7 @@ export interface EmployerProgram {
     introVideo?: string
     caseStudies?: NamedLink[]
     projectIds?: string[]
+    shareCode: string
     lastUpdate: firebase.firestore.Timestamp
 }
 export interface TeacherProgramData {

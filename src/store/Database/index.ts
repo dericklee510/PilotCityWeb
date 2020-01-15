@@ -249,12 +249,52 @@ export default class Fb extends VuexModule {
      * @returns {Promise<void>}
      */
     async deleteClassroom(classroomId: string, uid: string){
+        const classroomRef = this.firestore.collection('Classroom').doc(classroomId);
+        const classroomSnapshot = await classroomRef.get();
+        const studentsSnapshot = await this.firestore.collection('GeneralUser').where("classroomIds", 'array-contains', classroomId).get();
+        if (!classroomSnapshot.exists)
+            throw "classroom does not exist!"
+
+        const classroomData = classroomSnapshot.data<Classroom>();
+        const projectList = classroomData?.projectIds;
+        const teacherId  = classroomData?.teacherId;
+        if (!projectList)
+            throw "classroom doesnt have projectIds"
+
+    
+        const batch = this.firestore.batch();
+        projectList.forEach(pid => {
+            const projectRef = this.firestore.collection("Project").doc(pid);
+            batch.delete(projectRef);
+        });
+        studentsSnapshot.forEach(sRef => {
+            batch.update(sRef.ref, {
+                classroomIds: firebase.firestore.FieldValue.arrayRemove(classroomId)
+            })
+            projectList.forEach( pid => {
+                batch.update(sRef.ref, {
+                    projectIds: firebase.firestore.FieldValue.arrayRemove(pid)
+                })
+            })
+        })
+        const teacherRef = this.firestore.collection('GeneralUser').doc(teacherId);
+        batch.update(teacherRef, {
+            classroomIds: firebase.firestore.FieldValue.arrayRemove(classroomId)
+        })
+        projectList.forEach( pid => {
+            batch.update(teacherRef, {
+                projectIds: firebase.firestore.FieldValue.arrayRemove(pid)
+            })
+        })
+        batch.delete(classroomRef);
+        await batch.commit();
         // kick all students from Classroom.projectIds
-        // delete all assosciated projects
-        // delete classroom id from all students in Student.classroomID
-        // remove classroomId from projectIds
-        // delete classroom table
-        // remove classroom id from teacher
+        // delete all assosciated projects X
+        // delete classroom id from all students in Student.classroomID X
+        // remove classroomId(should be project id) from projectIds X
+        // delete classroom table X
+        // remove classroom id from teacher X
+
     }
 
     /**
@@ -263,8 +303,34 @@ export default class Fb extends VuexModule {
      * @param {string} classroomId
      * @param null uid
      */
+    @Dependency('currentUserProfile')
     async switchClassroom(oldClassroomId: string, newClassroomId: string, uid: string, studentId: string){
         // kick student from project
+        const myuid = uid ? uid : this.currentUserProfile!.userId;
+        const batch = this.firestore.batch();
+        const classroomRef = this.firestore.collection('Classroom').doc(oldClassroomId);
+        const studentRef = this.firestore.collection('GeneralUser').doc(uid);
+        
+        const classroomDocRef = await classroomRef.get();
+        const studentDocRef = await studentRef.get();
+        if (!studentDocRef.exists || !classroomDocRef.exists)
+            throw "Student / classroom not exist"
+        
+        const projectIds = classroomDocRef.data<Classroom>()!.projectIds; // get all project ids under old classroom
+        projectIds.forEach(pid => { // remove this user from all those project
+            const projectRef = this.firestore.collection('Project').doc(pid);
+            batch.update(projectRef, {
+                teamMembersIds: firebase.firestore.FieldValue.arrayRemove(myuid)
+            })
+        })
+        batch.update(studentRef, { // remove old classroom uid from user's classroomIds
+            classroomIds: firebase.firestore.FieldValue.arrayRemove(oldClassroomId)
+        })
+        batch.update(studentRef, { // add the new one, i think there's something wrong with the db design, should add user's uid into classroom 
+            classroomIds: firebase.firestore.FieldValue.arrayUnion(newClassroomId)
+        })
+        await batch.commit();
+
         // remove classroomId from Student.projectIds
         // remove classroomID from the student
         // Add student with StudentId to classroom with newClassroomId
@@ -272,7 +338,7 @@ export default class Fb extends VuexModule {
 
     /**
      * Allows User to change a student's team (ie. Project)
-     * New Team and Old Team must be of the same classroom
+     * New Project and Old Project must be of the same classroom
      * User: Teacher
      * @param {string} oldProjectId
      * @param {string} newProjectId
@@ -280,10 +346,11 @@ export default class Fb extends VuexModule {
      * @param {string} studentId
      * @returns {Promise<void>}
      */
-    async switchTeam(oldProjectId: string, newProjectId: string, uid: string, studentId: string){
+    async switchProject(oldProjectId: string, newProjectId: string, uid: string, studentId: string){
         // remove student.id with studentId from Project.teamMembers with oldProjectId
         // Student.projectIds[clasroomID] = newProjectId
-        // add student.id with studentId to Project.teamMembers with newProjectId
+        await this.leaveProject(oldProjectId);
+        await this.joinProject(newProjectId);
     }
 
     /**
@@ -292,7 +359,14 @@ export default class Fb extends VuexModule {
      * @param {string} teamName
      * @param {string} uid
      */
-    async createTeam(teamName: string, classroomId: string, uid: string) {
+    // Project.id = projectId
+    // Project.teamName = teamName
+    // Project.classroomId = classroomId
+    // if created by Teacher
+    // Project.createdByTeacher = 1
+    // Project.teamMembers = []
+    // add projectId to (employer program) project->classroom -> employerProgram
+    async createProject(teamName: string, classroomId: string, uid: string) {
         let createdByTeacher: boolean = false;
         let teacherName: string | null = null;
         if (this.currentUserProfile?.citizenType == 'teacher')
@@ -304,29 +378,34 @@ export default class Fb extends VuexModule {
             createdByTeacher,
             teamMembersIds : [],
         }
-        await this.firestore.collection('Project').doc(projectId).set(project);
+        await this.firestore.runTransaction(async transaction => {
+            const classroomRef = this.firestore.collection('Classroom').doc(classroomId);
+            let doc = await transaction.get(classroomRef);
+            if (!doc.exists) {
+                throw `Document does not exist`
+            }
+            const classroomData = doc.data()
+            const projectRef = this.firestore.collection('Project').doc(projectId);
+            const employerProgramRef = this.firestore.collection('EmployerProgram').doc(classroomData!.EmployerProgramId);
 
-
-    
-        // Project.id = projectId
-        // Project.teamName = teamName
-        // Project.classroomId = classroomId
-        // if created by Teacher
-        // Project.createdByTeacher = 1
-        // Project.teamMembers = []
-        // add projectId to (employer program) project->classroom -> employerProgram
+            transaction
+                .set(projectRef, project)
+                .update(employerProgramRef, {
+                    projectIds: firebase.firestore.FieldValue.arrayUnion(projectId)
+                });
+        })
     }
 
     /**
      * Allows User to rename a team
      * User: Teacher or Student
-     * @param {string} newTeamName
+     * @param {string} newProjectName
      * @param {string} projectId
-     * @param {string} uid
-     * @returns {Promise<void>}
      */
-    const renameTeam = async (newTeamName: string, projectId: string, uid: string): Promise<void> => {
-        // Project.teamName = newTeamName
+    async renameProject(newProjectName: string, projectId: string) {
+        // Project.teamName = newProjectName
+        await this.firestore.collection('Project').doc(projectId).update({ teamName: newProjectName });
+        // update current Project
     }
 
     /**
@@ -336,35 +415,96 @@ export default class Fb extends VuexModule {
      * @param {string} uid
      * @returns {Promise<void>}
      */
-    const deleteTeam = async (projectId: string, uid: string): Promise<void> => {
-        // remove projectId from every student's student.projectId interface
-        // remove projectId from classroom.projectId 
-        // remove projectId from employerProgram.Id
-        // delete project with Project.Id = projectId
-        // User must be a teacher
+    @Dependency('currentUserProfile')
+    async deleteProject(projectId: string, uid?: string) {
+        // remove projectId from every student's student.projectId interface X 
+        // remove projectId from classroom.projectId  X 
+        // remove projectId from employerProgram.Id 
+        // delete project with Project.Id = projectId X
+        // User must be a teacher X
+        assert(this.userCitizenType === 'teacher', 'User type not teacher');
+        const batch = this.firestore.batch();
+        const myuid = uid ? uid : this.currentUserProfile!.userId
+        const studentsSnapshot = await this.firestore.collection('GeneralUser').where('projectIds', 'array-contains', projectId).get();
+        const projectDocSnapshot = await this.firestore.collection('Project').doc(projectId).get();
+        if (!projectDocSnapshot.exists) throw "project does not exist"
+        
+        const projectData = projectDocSnapshot.data<Project>()
+        const classroomDocSnapshot = await this.firestore.collection('Classroom').doc(projectData!.classroomId).get();
+        const classroomData = await classroomDocSnapshot.data<Classroom>();
+        const employerPuid = classroomData!.employerProgramId;
+        const employerProgramRef = this.firestore.collection('EmployerProgram').doc(employerPuid);
+
+        batch.update(classroomDocSnapshot.ref, {
+            projectIds: firebase.firestore.FieldValue.arrayRemove(projectId)
+        })
+        studentsSnapshot.forEach(sss => {
+            batch.update(sss.ref, {
+                projectIds: firebase.firestore.FieldValue.arrayRemove(projectId)
+            })
+        })
+        batch.update(employerProgramRef, {
+            projectIds: firebase.firestore.FieldValue.arrayRemove(projectId)
+        })
+        batch.delete(projectDocSnapshot.ref)
+        await batch.commit();
+        
     }
 
     /**
-     * Allows User to join a Team
+     * Allows User to join a Project
      * User: Student
      * @param {string} projectId
      * @param {string} uid
      * @returns {Promise<void>}
      */
-    const joinTeam = async (projectId: string, uid: string): Promise<void> => {
+    @Dependency('currentUserProfile')
+    async joinProject(projectId: string, uid?: string){
         // append Student.id to Project.teamMembers where Project.Id = projectId 
         // add projectId to Student.projectIds
+        const myuid = uid ? uid : this.currentUserProfile!.userId
+        const batch = this.firestore.batch();
+        const projectRef = this.firestore.collection('Project').doc(projectId);
+        const studentRef = this.firestore.collection('GeneralUser').doc(myuid);
+
+        batch.update(projectRef, {
+            teamMemberIds: firebase.firestore.FieldValue.arrayUnion(myuid)
+        });
+        batch.update(studentRef, {
+            projectIds: firebase.firestore.FieldValue.arrayUnion(projectId)
+        });
+        await batch.commit();
+        // await this.firestore.collection('Project').doc(projectId).update({
+        //     teamMemberIds: firebase.firestore.FieldValue.arrayUnion(this.currentUserProfile!.userId)
+        // })
     }
     /**
-     * Allows User to leave a Team
+     * Allows User to leave a Project
      * User: Student
      * @param {string} projectId
      * @param {string} uid
      * @returns {Promise<void>}
      */
-    const leaveTeam = async (projectId: string, uid: string): Promise<void> => {
+    @Dependency('currentUserProfile')
+    async leaveProject(projectId: string, uid? : string ){
+        if (this.currentUserProfile!.citizenType != 'student') {
+            throw "Wrong citizen type";
+        }
         // remove student with Student.id = uid from Project.teamMembers where Project.id = projectId
         // remove projectId from Student.projectIds
+        const myuid = uid ? uid : this.currentUserProfile!.userId
+        const batch = this.firestore.batch();
+        const projectRef = this.firestore.collection('Project').doc(projectId);
+        const studentRef = this.firestore.collection('GeneralUser').doc(myuid);
+
+        batch.update(projectRef, {
+            teamMemberIds: firebase.firestore.FieldValue.arrayRemove(myuid)
+        });
+        batch.update(studentRef, {
+            projectIds: firebase.firestore.FieldValue.arrayRemove(projectId)
+        });
+        await batch.commit();
+        // change local
     }
     /**
      * Allows User to add an Employer Program using a shareCode
@@ -373,13 +513,24 @@ export default class Fb extends VuexModule {
      * @param {string} uid
      * @returns {Promise<void>}
      */
-    const addProgram = async (shareCode: string, uid: string): Promise<void> => {
-        if (!shareCode) {
-            throw new Error('invalid sharecode')
-        } 
+    async addProgram(shareCode: string, uid: string){
         // add employerProgramId to GeneralUser's employerProgramIds array 
             // GeneralUser.employerProgramIds.push(employerProgramId), where GeneralUser.userId == uid
         // GeneralUser.initializeProgram = timestamp
+        const snapshot = await this.firestore.collection('EmployerProgram').where("shareCode", "==",  shareCode).limit(1).get();
+        const employerProgram = snapshot.docs[0].data();
+        const emppid = employerProgram.employerProgramId;
+        await this.firestore.collection('GeneralUser').doc(this.currentUserProfile!.userId).update({
+            employerProgramIds: firebase.firestore.FieldValue.arrayUnion(emppid),
+            [`initializeProgram/${emppid}`]: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        // await this.firestore.runTransaction( async transaction => {
+        //         const meRef = this.firestore.collection('GeneralUser').doc(this.currentUserProfile!.userId);
+        //         await transaction.update(meRef, {
+        //             employerProgramIds: firebase.firestore.FieldValue.arrayUnion(emppid),
+        //             [`initializeProgram/${emppid}`]: firebase.firestore.FieldValue.serverTimestamp()
+        //         })
+        // });
     }
     /**
      * Allows User to remove an Employer Program
@@ -387,83 +538,97 @@ export default class Fb extends VuexModule {
      * @param {string} employerProgramId
      * @returns {Promise<void>}
      */
-    const removeProgram = async (uid: string, employerProgramId: string): Promise<void> => {
+    async removeProgram(uid: string, employerProgramId: string) {
+        const batch = this.firestore.batch();
+        const userRef = this.firestore.collection('GeneralUser').doc(this.currentUserProfile!.userId);
+
+        batch.update(userRef, {
+            employerProgramIds: firebase.firestore.FieldValue.arrayRemove(employerProgramId)
+        });
+        batch.update(userRef, {
+            [`initializeProgram/${employerProgramId}`] : firebase.firestore.FieldValue.delete()
+        });
+        await batch.commit();
         // remove employerProgramId from GeneralUser employerProgramIds array, where GeneralUser.userId == uid
         // delete timestamp from GeneralUser.initializeProgram that corresponds to employerProgramId 
+
+        // await this.firestore.collection('GeneralUser').doc(this.currentUserProfile!.userId).update({
+        //     [`initializeProgram/${employerProgramId}`] : firebase.firestore.FieldValue.delete()
+        // })
     }
 
 }
 
 
-const uploadVideo = async (url: string): Promise<void> => {
-    // check link
-    if (!isLinkValid(url))
-        throw ("link does not exist")
-    // upload video
-}
-
-/**
- * Updates Case Study for creation and removal
- * User: Employer or Teacher
- * @param {NamedLink[]} link
- * @param {string} uid
- */
-const updateCaseStudy = async (link: NamedLink[], uid: string): Promise<void> => {
-    // update EmployerProgram.caseStudies with link
-    // update TeacherProgramData.caseStudies with link
-
-    
-}
-
-
-type addRatingArg = "customerRatingT" |
-    "demoRatingT" |
-    "elevatorPitchRatingT" |
-    "innovationRatingT" |
-    "presentationRatingT" |
-    "problemRatingT" |
-    "sentencePitchRatingT" |
-    "solutionRatingT" |
-    "customerRatingE" |
-    "demoRatingE" |
-    "elevatorPitchRatingE" |
-    "innovationRatingE" |
-    "presentationRatingE" |
-    "problemRatingE" |
-    "sentencePitchRatingE" |
-    "solutionRatingE";
-/**
- * Enables user to rate student work 
- * User: Employer, Teacher
- * @param {number} rating
- * @param {string} uid
- * @returns {Promise<void>}
- */
-const addRating = async (rating: number, projectuid: string, arg: addRatingArg, uid: string): Promise<void> => {
-    // assert(usertype, employer) || assert(usertype, teacher)
-    // throw if employer tries to modify teacher data, vice versa
-    // StudentProject[arg] = rating
-}
-
+// const uploadVideo = async (url: string): Promise<void> => {
+//     // check link
+//     if (!isLinkValid(url))
+//         throw ("link does not exist")
+//     // upload video
+// }
 
 // /**
-//  * Uncheck incomplete Agenda Items
-//  * User: Employer, Teacher, Student
-//  * @param {EventItem[]} uncheckItem
+//  * Updates Case Study for creation and removal
+//  * User: Employer or Teacher
+//  * @param {NamedLink[]} link
+//  * @param {string} uid
+//  */
+// const updateCaseStudy = async (link: NamedLink[], uid: string): Promise<void> => {
+//     // update EmployerProgram.caseStudies with link
+//     // update TeacherProgramData.caseStudies with link
+
+    
+// }
+
+
+// type addRatingArg = "customerRatingT" |
+//     "demoRatingT" |
+//     "elevatorPitchRatingT" |
+//     "innovationRatingT" |
+//     "presentationRatingT" |
+//     "problemRatingT" |
+//     "sentencePitchRatingT" |
+//     "solutionRatingT" |
+//     "customerRatingE" |
+//     "demoRatingE" |
+//     "elevatorPitchRatingE" |
+//     "innovationRatingE" |
+//     "presentationRatingE" |
+//     "problemRatingE" |
+//     "sentencePitchRatingE" |
+//     "solutionRatingE";
+// /**
+//  * Enables user to rate student work 
+//  * User: Employer, Teacher
+//  * @param {number} rating
 //  * @param {string} uid
 //  * @returns {Promise<void>}
 //  */
-// const uncheckAgendaItem = async (uncheckItem: EventItem[], uid: string): Promise<void> => {
-//     // EventItem.boolean = 0
+// const addRating = async (rating: number, projectuid: string, arg: addRatingArg, uid: string): Promise<void> => {
+//     // assert(usertype, employer) || assert(usertype, teacher)
+//     // throw if employer tries to modify teacher data, vice versa
+//     // StudentProject[arg] = rating
 // }
 
-/**
- * Allows the User to confirm a Program Brief
- * User: Teacher, Student
- * @returns {Promise<void>}
- */
-const confirmProgramBrief = async (uid: string): Promise<void> => { //REVIEW LATER
-    // ONLY ONE CAN BE CONFIRMED
-    // ReviewedLink.reviewd = 1
-    // lastUpdate = timestamp
-}
+
+// // /**
+// //  * Uncheck incomplete Agenda Items
+// //  * User: Employer, Teacher, Student
+// //  * @param {EventItem[]} uncheckItem
+// //  * @param {string} uid
+// //  * @returns {Promise<void>}
+// //  */
+// // const uncheckAgendaItem = async (uncheckItem: EventItem[], uid: string): Promise<void> => {
+// //     // EventItem.boolean = 0
+// // }
+
+// /**
+//  * Allows the User to confirm a Program Brief
+//  * User: Teacher, Student
+//  * @returns {Promise<void>}
+//  */
+// const confirmProgramBrief = async (uid: string): Promise<void> => { //REVIEW LATER
+//     // ONLY ONE CAN BE CONFIRMED
+//     // ReviewedLink.reviewd = 1
+//     // lastUpdate = timestamp
+// }
