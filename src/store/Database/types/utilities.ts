@@ -1,4 +1,3 @@
-
 import { AutoComplete, AutoCompleteAddress } from '@/components/GoogleMaps';
 
 //#region 
@@ -54,6 +53,7 @@ export interface CompletedEvent {
     completed: boolean
 
 }
+
 export interface BusinessModelCanvas{
     problem:string
     solution:string

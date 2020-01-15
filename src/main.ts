@@ -30,7 +30,7 @@ import { createProvider } from './vue-apollo'
 Vue.use(VueRx)
 Vue.use(Vuetify)
 Vue.use(VuetifyGoogleAutocomplete, {
-    apiKey: process.env.VUE_APP_MAPS_API_KEY
+    apiKey: process.env.MAPS_API_KEY
 })
 Vue.use(VueMoment)
 Vue.component('default-layout', Default)
@@ -60,6 +60,7 @@ let instanceCreated = false
 
 AuthObserver.subscribe(user => {
     store.commit(`Auth/${SET_USER}`, user)
+    store.commit(`Fb/${SET_USER}`, user)
     if (!instanceCreated){
         createVueInstance()
         instanceCreated = true
