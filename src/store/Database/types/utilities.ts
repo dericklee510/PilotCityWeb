@@ -53,7 +53,6 @@ export interface CompletedEvent {
     completed: boolean
 
 }
-
 export interface BusinessModelCanvas{
     problem:string
     solution:string
