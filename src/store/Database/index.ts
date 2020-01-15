@@ -23,7 +23,7 @@ export default class Fb extends VuexModule {
 
 //  @Dependency('FBUser')
     get userDocRef() {
-        return this.firestore.collection('users').doc(this.FBUser!.uid);
+        return this.firestore.collection('GeneralUser').doc(this.FBUser!.uid);
     }
 
 //  @Dependency('FBUser')
