@@ -218,11 +218,7 @@ export default class Fb extends VuexModule {
         const classroomID = this.firestore.collection('Classroom').doc().id;
         const classroom = {
             classroomID,
-<<<<<<< Updated upstream
-            teacherId : this.currentUserProfile!.userId,
-=======
             teacherId : this.FBUser!.uid,
->>>>>>> Stashed changes
             teacherProgramId,
             employerProgramId,
             className,
@@ -315,11 +311,7 @@ export default class Fb extends VuexModule {
     @Dependency('currentUserProfile')
     async switchClassroom(oldClassroomId: string, newClassroomId: string, uid: string, studentId: string){
         // kick student from project
-<<<<<<< Updated upstream
-        const myuid = uid ? uid : this.currentUserProfile!.userId;
-=======
         const myuid = uid ? uid : this.FBUser!.uid;
->>>>>>> Stashed changes
         const batch = this.firestore.batch();
         const classroomRef = this.firestore.collection('Classroom').doc(oldClassroomId);
         const studentRef = this.firestore.collection('GeneralUser').doc(uid);
@@ -437,11 +429,7 @@ export default class Fb extends VuexModule {
         // User must be a teacher X
         assert(this.userCitizenType === 'teacher', 'User type not teacher');
         const batch = this.firestore.batch();
-<<<<<<< Updated upstream
-        const myuid = uid ? uid : this.currentUserProfile!.userId
-=======
         const myuid = uid ? uid : this.FBUser!.uid
->>>>>>> Stashed changes
         const studentsSnapshot = await this.firestore.collection('GeneralUser').where('projectIds', 'array-contains', projectId).get();
         const projectDocSnapshot = await this.firestore.collection('Project').doc(projectId).get();
         if (!projectDocSnapshot.exists) throw "project does not exist"
@@ -479,11 +467,7 @@ export default class Fb extends VuexModule {
     async joinProject(projectId: string, uid?: string){
         // append Student.id to Project.teamMembers where Project.Id = projectId 
         // add projectId to Student.projectIds
-<<<<<<< Updated upstream
-        const myuid = uid ? uid : this.currentUserProfile!.userId
-=======
         const myuid = uid ? uid : this.FBUser!.uid
->>>>>>> Stashed changes
         const batch = this.firestore.batch();
         const projectRef = this.firestore.collection('Project').doc(projectId);
         const studentRef = this.firestore.collection('GeneralUser').doc(myuid);
@@ -496,11 +480,7 @@ export default class Fb extends VuexModule {
         });
         await batch.commit();
         // await this.firestore.collection('Project').doc(projectId).update({
-<<<<<<< Updated upstream
-        //     teamMemberIds: firebase.firestore.FieldValue.arrayUnion(this.currentUserProfile!.userId)
-=======
         //     teamMemberIds: firebase.firestore.FieldValue.arrayUnion(this.FBUser!.uid)
->>>>>>> Stashed changes
         // })
     }
     /**
@@ -517,11 +497,7 @@ export default class Fb extends VuexModule {
         }
         // remove student with Student.id = uid from Project.teamMembers where Project.id = projectId
         // remove projectId from Student.projectIds
-<<<<<<< Updated upstream
-        const myuid = uid ? uid : this.currentUserProfile!.userId
-=======
         const myuid = uid ? uid : this.FBUser!.uid
->>>>>>> Stashed changes
         const batch = this.firestore.batch();
         const projectRef = this.firestore.collection('Project').doc(projectId);
         const studentRef = this.firestore.collection('GeneralUser').doc(myuid);
@@ -549,20 +525,12 @@ export default class Fb extends VuexModule {
         const snapshot = await this.firestore.collection('EmployerProgram').where("shareCode", "==",  shareCode).limit(1).get();
         const employerProgram = snapshot.docs[0].data();
         const emppid = employerProgram.employerProgramId;
-<<<<<<< Updated upstream
-        await this.firestore.collection('GeneralUser').doc(this.currentUserProfile!.userId).update({
-=======
         await this.firestore.collection('GeneralUser').doc(this.FBUser!.uid).update({
->>>>>>> Stashed changes
             employerProgramIds: firebase.firestore.FieldValue.arrayUnion(emppid),
             [`initializeProgram/${emppid}`]: firebase.firestore.FieldValue.serverTimestamp()
         });
         // await this.firestore.runTransaction( async transaction => {
-<<<<<<< Updated upstream
-        //         const meRef = this.firestore.collection('GeneralUser').doc(this.currentUserProfile!.userId);
-=======
         //         const meRef = this.firestore.collection('GeneralUser').doc(this.FBUser!.uid);
->>>>>>> Stashed changes
         //         await transaction.update(meRef, {
         //             employerProgramIds: firebase.firestore.FieldValue.arrayUnion(emppid),
         //             [`initializeProgram/${emppid}`]: firebase.firestore.FieldValue.serverTimestamp()
@@ -577,11 +545,7 @@ export default class Fb extends VuexModule {
      */
     async removeProgram(uid: string, employerProgramId: string) {
         const batch = this.firestore.batch();
-<<<<<<< Updated upstream
-        const userRef = this.firestore.collection('GeneralUser').doc(this.currentUserProfile!.userId);
-=======
         const userRef = this.firestore.collection('GeneralUser').doc(this.FBUser!.uid);
->>>>>>> Stashed changes
 
         batch.update(userRef, {
             employerProgramIds: firebase.firestore.FieldValue.arrayRemove(employerProgramId)
@@ -593,11 +557,7 @@ export default class Fb extends VuexModule {
         // remove employerProgramId from GeneralUser employerProgramIds array, where GeneralUser.userId == uid
         // delete timestamp from GeneralUser.initializeProgram that corresponds to employerProgramId 
 
-<<<<<<< Updated upstream
-        // await this.firestore.collection('GeneralUser').doc(this.currentUserProfile!.userId).update({
-=======
         // await this.firestore.collection('GeneralUser').doc(this.FBUser!.uid).update({
->>>>>>> Stashed changes
         //     [`initializeProgram/${employerProgramId}`] : firebase.firestore.FieldValue.delete()
         // })
     }
