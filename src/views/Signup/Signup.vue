@@ -217,6 +217,7 @@ export default class Signup extends Vue {
                 firstName: this.firstName,
                 lastName: this.lastName
             })
+            
         }
         this.loading = false
     }
