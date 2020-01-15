@@ -174,7 +174,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { ValidationObserver } from 'vee-validate'
-import { AuthStore } from '@/store'
+import { AuthStore, FbStore } from '@/store'
 /* eslint-disable-next-line */
 import _ from "lodash"
 import PCselect from '@/components/inputs/PCselect.vue'
@@ -183,6 +183,7 @@ import { ValidationProvider } from './validation'
 import { ObserverInstance } from '@/utilities/validation'
 
 import { AutoComplete } from '@/components/GoogleMaps'
+import Fb from '../../store/Database'
 
 @Component({
     components: {
@@ -217,7 +218,7 @@ export default class Signup extends Vue {
                 firstName: this.firstName,
                 lastName: this.lastName
             })
-            
+            FbStore.firestore.collection("GeneralUser")
         }
         this.loading = false
     }
