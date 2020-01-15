@@ -7,11 +7,11 @@ declare global {
       PORT?: string;
       PWD: string;
       //API Keys
-      REAL_DB_KEY: string
-      TEST_DB_KEY: string
-      MAPS_API_KEY: string
+      VUE_APP_REAL_DB_KEY: string
+      VUE_APP_TEST_DB_KEY: string
+      VUE_APP_MAPS_API_KEY: string
       //Server Endpoints
-      VERIFY_LINK_REST:string
+      VUE_APP_VERIFY_LINK_REST:string
     }
   }
   namespace firebase.firestore {

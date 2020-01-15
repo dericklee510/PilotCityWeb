@@ -106,7 +106,7 @@
           </div>
           <v-rating
             v-model="stars.innovation"
-            :readonly="!readonly"
+            :readonly="!!readonly"
           />
         </v-row>
       </v-col>
@@ -182,7 +182,6 @@
     >
       <v-btn
         class="businessmodelcanvas_enter__button mb-10"
-        :disabled="invalid"
       >
         SAVE
       </v-btn>

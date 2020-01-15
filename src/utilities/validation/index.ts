@@ -20,6 +20,6 @@ extend('min',{
     message:"Must be a minimum of {length} characters"
 })
 // extend('dateYYYYMMDD',validators.DateYYYYMMDD)
-
+export {ValidationObserver, ValidationProvider, validate}
 export declare type ProviderInstance = InstanceType<typeof ValidationProvider>
 export declare type ObserverInstance = InstanceType<typeof ValidationObserver>

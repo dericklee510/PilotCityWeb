@@ -13,7 +13,10 @@
           lg="2"
           xl="1"
         >
-          <div class="briefcard__cover" />
+          <iframe
+            class="briefcard__cover"
+            :src="`https://docs.google.com/viewer?url=http://infolab.stanford.edu/pub/papers/google.pdf&embedded=true`"
+          />
         </v-col>
       
         <v-col

@@ -23,8 +23,18 @@ const routes: RouteConfig[] = [
                 component: Guide.Program.ExternshipAgendaView,
             },
             {
+                path: 'employer/externship/agenda',
+                name: 'emp-externship-agenda',
+                component: Guide.Program.ExternshipAgendaView,
+            },
+            {
                 path: 'teacher/externship/agenda/edit',
                 name: 'teach-externship-agenda-edit',
+                component: Guide.Program.ExternshipAgendaEdit,
+            },
+            {
+                path: 'employer/externship/agenda/edit',
+                name: 'emp-externship-agenda-edit',
                 component: Guide.Program.ExternshipAgendaEdit,
             },
             {
@@ -64,12 +74,12 @@ const routes: RouteConfig[] = [
             },
             {
                 path: 'student/project/team/join',
-                name: 'student-project-team-join',
+                name: 'stud-project-team-join',
                 component: Guide.Program.TeamJoin
             },
             {
                 path: 'student/project/team',
-                name: 'student-project-team',
+                name: 'stud-project-team',
                 component: Guide.Program.ManageTeam
             },
             {
@@ -152,11 +162,11 @@ const routes: RouteConfig[] = [
                 name: 'emp-project-canvas',
                 component: Guide.Program.BusinessCanvasView
             },
-            {
-                path: 'student/project/canvas',
-                name: 'stud-project-canvas',
-                component: Guide.Program.BusinessCanvasView
-            },
+            // {
+            //     path: 'student/project/canvas',
+            //     name: 'stud-project-canvas',
+            //     component: Guide.Program.BusinessCanvasView
+            // },
             {
                 path: 'student/project/canvas/edit',
                 name: 'stud-project-canvas-edit',
@@ -172,11 +182,11 @@ const routes: RouteConfig[] = [
                 name: 'emp-project-ospitch',
                 component: Guide.Program.OSPitchView
             },
-            {
-                path: 'student/project/shortpitch',
-                name: 'stud-project-ospitch',
-                component: Guide.Program.OSPitchView
-            },
+            // {
+            //     path: 'student/project/shortpitch',
+            //     name: 'stud-project-ospitch',
+            //     component: Guide.Program.OSPitchView
+            // },
             {
                 path: 'student/project/shortpitch/edit',
                 name: 'stud-project-ospitch-edit',
@@ -192,11 +202,11 @@ const routes: RouteConfig[] = [
                 name: 'emp-project-elevator',
                 component: Guide.Program.ElevatorView
             },
-            {
-                path: 'student/project/elevatorpitch',
-                name: 'stud-project-elevator',
-                component: Guide.Program.ElevatorView
-            },
+            // {
+            //     path: 'student/project/elevatorpitch',
+            //     name: 'stud-project-elevator',
+            //     component: Guide.Program.ElevatorView
+            // },
             {
                 path: 'student/project/elevatorpitch/edit',
                 name: 'stud-project-elevator-edit',
@@ -242,21 +252,21 @@ const routes: RouteConfig[] = [
                 name: 'teach-project-demo',
                 component: Guide.Program.DemoVideoView
             },
-            {
-                path: 'employer/project/demo',
-                name: 'emp-project-demo',
-                component: Guide.Program.DemoVideoView
-            },
+            // {
+            //     path: 'employer/project/demo',
+            //     name: 'emp-project-demo',
+            //     component: Guide.Program.DemoVideoView
+            // },
             {
                 path: 'student/project/demo/edit',
                 name: 'stud-project-demo-edit',
                 component: Guide.Program.DemoVideoSubmit
             },
-            {
-                path: 'student/project/demo',
-                name: 'stud-project-demo',
-                component: Guide.Program.DemoVideoView
-            },
+            // {
+            //     path: 'student/project/demo',
+            //     name: 'stud-project-demo',
+            //     component: Guide.Program.DemoVideoView
+            // },
             {
                 path: 'teacher/project/presentation',
                 name: 'teach-project-presentation',
@@ -272,11 +282,11 @@ const routes: RouteConfig[] = [
                 name: 'stud-project-presentation-edit',
                 component: Guide.Program.PresentationSubmit
             },
-            {
-                path: 'student/project/presentation',
-                name: 'stud-project-presentation',
-                component: Guide.Program.PresentationView
-            },
+            // {
+            //     path: 'student/project/presentation',
+            //     name: 'stud-project-presentation',
+            //     component: Guide.Program.PresentationView
+            // },
             {
                 path: 'teacher/project/demoagenda/edit',
                 name: 'teach-project-demoagenda-edit',
@@ -294,7 +304,7 @@ const routes: RouteConfig[] = [
             },
             {
                 path: 'employer/project/demoagenda',
-                name: 'teach-project-demoagenda',
+                name: 'emp-project-demoagenda',
                 component: Guide.Program.DemoAgendaView
             },
             {

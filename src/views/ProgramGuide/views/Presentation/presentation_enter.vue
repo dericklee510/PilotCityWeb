@@ -166,7 +166,6 @@ export default class PresentationEnter extends TextEnter {
   inputChange$!: Subject<nativeEvent>;
   result!: string;
   inputUrl:string = ""
-  url: string = "";
   color: "success" |  "error" = "success"
   success?:boolean
   async checkUrl(URL: string) {

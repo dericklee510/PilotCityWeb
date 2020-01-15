@@ -1,7 +1,7 @@
 
 
 export class ApplicationConfig {
-    public apiKey: string = process.env.TEST_DB_KEY
+    public apiKey: string = process.env.VUE_APP_TEST_DB_KEY
 
     public authDomain: string = 'test-database-5c3f8.firebaseapp.com'
 

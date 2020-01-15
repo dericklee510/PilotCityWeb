@@ -55,6 +55,7 @@
                 <label for="checkbox+index">
                   <input
                     v-model="item.name"
+                    class="agenda-view__item"
                     disabled="true"
                     placeholder="Item"
                   >
@@ -70,6 +71,7 @@
                 <input
                   v-model="item.duration"
                   disabled="true"
+                  class="agenda-view__duration"
                   placeholder="Duration"
                 >
               </v-col>
@@ -77,24 +79,30 @@
                 <input
                   v-model="item.description"
                   disabled="true"
+                  class="agenda-view__description"
                   placeholder="Description"
                 >
               </v-col>
             </v-col>
           </v-row>
         </v-col>
-
-        <v-col
-          class="mr-auto ml-auto"
-          cols="5"
+        <v-row
+          no-gutters
+          justify="center"
         >
-          <v-btn
-            class="agenda_view__button mb-10"
-            :disabled="!isAgendaComplete"
+          <v-col
+            cols="6"
+            sm="4"
+            md="2"
           >
-            FINISH
-          </v-btn>
-        </v-col>  
+            <v-btn
+              class="agenda-view__button mb-10"
+              :disabled="!isAgendaComplete"
+            >
+              FINISH
+            </v-btn>
+          </v-col>  
+        </v-row>
       </v-col>
     </v-row>
   </v-container>

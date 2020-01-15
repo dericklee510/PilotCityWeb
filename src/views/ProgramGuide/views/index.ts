@@ -84,130 +84,130 @@ export const Program = {
 }
 
 export const TEACHERMODULES = {
-        'Agenda': [ 
-            'teach-externship-agenda',
-            'teach-externship-agenda-edit',
-        ],
-        'Brief': [
-            'teach-externship-brief',
-        ],
-        'Manage':[
-            'teach-externship-manage-class',
-            'teach-externship-manage-students',
-            'teach-externship-manage-teams',
-        ],
-        'Launch Day': [
-            'teach-project-intro'
-        ],
-        'Train': [
-            'teach-project-training',
-            'teach-project-training-edit',
-        ],
-        'Practice': [
-            'teach-project-practicelog',
-        ],
-        'Research': [
-            'teach-project-casestudy',
-            'teach-project-casestudy-edit',
-        ],
-        'Ideate': [
-            'teach-project-canvas',
-            'teach-project-ospitch',
-            'teach-project-elevator',
-        ],
-        'Hack Day': [
-            'teach-project-hack',
-            'teach-project-hack-edit',
-        ],
-        'Package': [
-            'teach-project-demo',
-            'teach-project-presentation',
-        ],
-        'Demo Day': [
-            'teach-project-demoagenda',
-            'teach-project-demoagenda-edit',
-        ]
+    'Agenda': [
+        'teach-externship-agenda',
+        'teach-externship-agenda-edit',
+    ],
+    'Brief': [
+        'teach-externship-brief',
+    ],
+    'Manage': [
+        'teach-externship-manage-class',
+        'teach-externship-manage-students',
+        'teach-externship-manage-teams',
+    ],
+    'Launch Day': [
+        'teach-project-intro'
+    ],
+    'Train': [
+        'teach-project-training',
+        'teach-project-training-edit',
+    ],
+    'Practice': [
+        'teach-project-practicelog',
+    ],
+    'Research': [
+        'teach-project-casestudy',
+        'teach-project-casestudy-edit',
+    ],
+    'Ideate': [
+        'teach-project-canvas',
+        'teach-project-ospitch',
+        'teach-project-elevator',
+    ],
+    'Hack Day': [
+        'teach-project-hack',
+        'teach-project-hack-edit',
+    ],
+    'Package': [
+        'teach-project-demo',
+        'teach-project-presentation',
+    ],
+    'Demo Day': [
+        'teach-project-demoagenda',
+        'teach-project-demoagenda-edit',
+    ]
 }
 
 export const EMPLOYERMODULES = {
-        'Agenda': [ 
-            'emp-externship-agenda',
-            'emp-externship-agenda-edit',
-        ],
-        'Brief': [
-            'emp-externship-brief-edit',
-        ],
-        'Intro Video': [
-            'emp-project-intro-edit'
-        ],
-        'Research': [
-            'emp-project-casestudy',
-            'emp-project-casestudy-edit',
-        ],
-        'Ideate': [
-            'emp-project-canvas',
-            'emp-project-ospitch',
-        ],
-        'Hack Day': [
-            'emp-project-hack',
-            'emp-project-hack-edit',
-        ],
-        'Package': [
-            'emp-project-demo',
-            'emp-project-presentation',
-        ],
-        'Demo Day': [
-            'emp-project-demoagenda',
-            'emp-project-demoagenda-edit',
-        ]
+    'Agenda': [
+        'emp-externship-agenda',
+        'emp-externship-agenda-edit',
+    ],
+    'Brief': [
+        'emp-externship-brief-edit',
+    ],
+    'Intro Video': [
+        'emp-project-intro-edit'
+    ],
+    'Research': [
+        'emp-project-casestudy',
+        'emp-project-casestudy-edit',
+    ],
+    'Ideate': [
+        'emp-project-canvas',
+        'emp-project-ospitch',
+    ],
+    'Hack Day': [
+        'emp-project-hack',
+        'emp-project-hack-edit',
+    ],
+    'Package': [
+        'emp-project-demo',
+        'emp-project-presentation',
+    ],
+    'Demo Day': [
+        'emp-project-demoagenda-edit',
+        'emp-project-demoagenda-edit',
+    ]
 }
 
 export const STUDENTMODULES = {
-        'Launch Day': [
-            'stud-project-brief',
-            'stud-project-intro',
-            'stud-project-team',
-            'stud-project-team-join',
-        ],
-        'Train': [
-            'teach-project-training',
-        ],
-        'Practice & Research': [
-            'teach-project-practicelog',
-            'stud-project-casestudy',
-        ],
-        'Ideate': [
-            'teach-project-canvas-edit',
-            'teach-project-ospitch-edit',
-            'teach-project-elevator-edit',
-        ],
-        'Hack Day': [
-            'teach-project-hack',
-        ],
-        'Reflection':[
-            'teach-project-hack-reflect',
-        ],
-        'Design & Prototype': [
-            'stud-project-processlog',
-        ],
-        'Package': [
-            'teach-project-demo-edit',
-            'teach-project-presentation-edit',
-        ],
-        'Demo Day': [
-            'teach-project-demoagenda',
-        ]
+    'Launch Day': [
+        'stud-project-brief',
+        'stud-project-intro',
+        'stud-project-team',
+        'stud-project-team-join',
+    ],
+    'Train': [
+        'stud-project-training',
+    ],
+    'Practice & Research': [
+        'stud-project-practicelog',
+        'stud-project-casestudy',
+    ],
+    'Ideate': [
+        'stud-project-canvas-edit',
+        'stud-project-ospitch-edit',
+        'stud-project-elevator-edit',
+    ],
+    'Hack Day': [
+        'stud-project-hack',
+    ],
+    'Reflection': [
+        'stud-project-hack-reflect',
+    ],
+    'Design & Prototype': [
+        'stud-project-processlog',
+    ],
+    'Package': [
+        'stud-project-demo-edit',
+        'stud-project-presentation-edit',
+    ],
+    'Demo Day': [
+        'stud-project-demoagenda',
+    ]
 }
 export const TEACHERSEQUENCE = {
     Externship: {
-        'Agenda': [ 
-            'teach-externship-agenda',
+        'Agenda': [
             'teach-externship-agenda-edit',
+            'teach-externship-agenda',
         ],
         'Brief': [
             'teach-externship-brief',
         ],
-        'Manage':[
+        'Manage': [
             'teach-externship-manage-class',
             'teach-externship-manage-students',
             'teach-externship-manage-teams',
@@ -250,7 +250,7 @@ export const TEACHERSEQUENCE = {
 
 export const EMPLOYERSEQUENCE = {
     Externship: {
-        'Agenda': [ 
+        'Agenda': [
             'emp-externship-agenda',
             'emp-externship-agenda-edit',
         ],
@@ -291,36 +291,37 @@ export const STUDENTSEQUENCE = {
         'Launch Day': [
             'stud-project-brief',
             'stud-project-intro',
-            'stud-project-team',
+
             'stud-project-team-join',
+            'stud-project-team',
         ],
         'Train': [
-            'teach-project-training',
+            'stud-project-training',
         ],
         'Practice & Research': [
-            'teach-project-practicelog',
+            'stud-project-practicelog',
             'stud-project-casestudy',
         ],
         'Ideate': [
-            'teach-project-canvas-edit',
-            'teach-project-ospitch-edit',
-            'teach-project-elevator-edit',
+            'stud-project-canvas-edit',
+            'stud-project-ospitch-edit',
+            'stud-project-elevator-edit',
         ],
         'Hack Day': [
-            'teach-project-hack',
+            'stud-project-hack',
         ],
-        'Reflection':[
-            'teach-project-hack-reflect',
+        'Reflection': [
+            'stud-project-hack-reflect',
         ],
         'Design & Prototype': [
             'stud-project-processlog',
         ],
         'Package': [
-            'teach-project-demo-edit',
-            'teach-project-presentation-edit',
+            'stud-project-demo-edit',
+            'stud-project-presentation-edit',
         ],
         'Demo Day': [
-            'teach-project-demoagenda',
+            'stud-project-demoagenda',
         ]
     },
     Internship: {

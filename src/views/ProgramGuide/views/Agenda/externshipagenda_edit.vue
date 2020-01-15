@@ -85,6 +85,10 @@ const emptyAgenda:Omit<EventItem,'completed'> = {
   }
 })
 export default class ExternshipAgendaEdit extends Vue{
+  created(){
+    // set ref to update based on user type
+  }
+  ref!:firebase.firestore.DocumentReference
     entries:Omit<EventItem,'completed'>[] = [emptyAgenda]
 }
 </script>
