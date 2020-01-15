@@ -1,4 +1,5 @@
 export { };
+
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
@@ -17,6 +18,10 @@ declare global {
   namespace firebase.firestore {
     interface DocumentSnapshot {
       data<RetrievedClass>(options?: SnapshotOptions):(RetrievedClass & Record<string,any> ) | undefined
+    }
+    interface DocumentReference{
+      update<UpdateClass>(data:Partial<UpdateClass>):Promise<void>
+      set<UpdateClass>(data:UpdateClass):Promise<void>
     }
   }
 }
