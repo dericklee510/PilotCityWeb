@@ -42,7 +42,7 @@
         &__container:hover { 
             width: 100vw;
             border-radius: 0px;
-            
+            outline-offset: 1px;
             border: 1px dashed #ffffff;
             //  border-color: #FFFFFF;   
         }

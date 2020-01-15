@@ -45,15 +45,15 @@ export class RouteList {
         return new LinkedList<ProgramNode>(...map)
     }
 
-    constructor(private type: "employer" | "teacher" | "student") {
+    constructor(private type: "Employer" | "Teacher" | "Student") {
         switch (type) {
-            case ("employer"):
+            case ("Employer"):
                 this.module = EMPLOYERSEQUENCE
                 break;
-            case ("teacher"):
+            case ("Teacher"):
                 this.module = TEACHERSEQUENCE
                 break;
-            case ("student"):
+            case ("Student"):
                 this.module = STUDENTSEQUENCE
                 break
         }
