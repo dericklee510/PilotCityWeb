@@ -58,6 +58,7 @@ let instanceCreated = false
 
 AuthObserver.subscribe(user => {
     store.commit(`Auth/${SET_USER}`, user)
+    store.commit(`Fb/${SET_USER}`, user)
     if (!instanceCreated){
         createVueInstance()
         instanceCreated = true

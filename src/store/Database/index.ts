@@ -1,16 +1,17 @@
+import { SET_USER } from './../Auth/mutation-types';
 import { Dependency } from '@/utilities/dependency';
 import { isLinkValid } from './../../api';
 import { AgendaTemplate, NamedLink, EventItem } from './types/utilities';
 /* eslint-disable-next-line */
 import { Module, VuexModule, Action, Mutation, MutationAction } from "vuex-module-decorators" //action unused
-import { firebaseApp as fb } from '@/firebase/init'
+import firestore,{ firebaseApp as fb } from '@/firebase/init'
 import { Classroom, EmployerProgram, GeneralUser, Project, RatingTag, TeacherProgramData } from './types/types' 
 const _ = require('lodash');
 const assert = require('assert')
 
 @Module({ namespaced: true, name: 'Fb' })
 export default class Fb extends VuexModule {
-    public firestore = fb.firestore()
+    public firestore = firestore
     public storage = fb.storage()
     public currentTeacherProgramUID    : string                | null = null 
     public currentTeacherProgramData   : TeacherProgramData    | null = null
@@ -41,6 +42,10 @@ export default class Fb extends VuexModule {
         return this.currentUserProfile!.citizenType;
     }
 
+    @Mutation 
+    [SET_USER](userDoc: firebase.User | null): void {
+        this.FBUser = userDoc
+    }
 //  @Dependency('FBUser')
     @MutationAction({ mutate: ['currentUserProfile']})
     async initCurrentUserProfile() {
@@ -295,7 +300,7 @@ export default class Fb extends VuexModule {
     async createTeam(teamName: string, classroomId: string, uid: string) {
         let createdByTeacher: boolean = false;
         let teacherName: string | null = null;
-        if (this.currentUserProfile?.citizenType == 'teacher')
+        if ((this.currentUserProfile as GeneralUser).citizenType == 'teacher')
             createdByTeacher = true;
         const projectId = this.firestore.collection('Project').doc().id;
         const project = {
