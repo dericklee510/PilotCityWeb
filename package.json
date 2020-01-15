@@ -11,7 +11,7 @@
     "preserve": "npm run generate",
     "test:e2e": "vue-cli-service test:e2e",
     "test:unit": "vue-cli-service test:unit",
-    "hide": "git secret hide -d",
+    "hide": "git secret hide -m",
     "reveal": "git secret reveal"
   },
   "dependencies": {
