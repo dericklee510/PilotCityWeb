@@ -19,7 +19,8 @@ export default class Test extends Vue {
       .collection("GeneralUser")
       .doc(uid)
       .update<GeneralUser>({
-        firstName: "Taisei"
+        firstName: "Taisei",
+        lastName: "Tateno"
       });
   }
 }

@@ -218,7 +218,11 @@ export default class Fb extends VuexModule {
         const classroomID = this.firestore.collection('Classroom').doc().id;
         const classroom = {
             classroomID,
+<<<<<<< HEAD
             teacherId : this.currentUserProfile!.userId,
+=======
+            teacherId : this.FBUser!.uid,
+>>>>>>> page/program.firebase
             teacherProgramId,
             employerProgramId,
             className,
@@ -311,7 +315,11 @@ export default class Fb extends VuexModule {
     @Dependency('currentUserProfile')
     async switchClassroom(oldClassroomId: string, newClassroomId: string, uid: string, studentId: string){
         // kick student from project
+<<<<<<< HEAD
         const myuid = uid ? uid : this.currentUserProfile!.userId;
+=======
+        const myuid = uid ? uid : this.FBUser!.uid;
+>>>>>>> page/program.firebase
         const batch = this.firestore.batch();
         const classroomRef = this.firestore.collection('Classroom').doc(oldClassroomId);
         const studentRef = this.firestore.collection('GeneralUser').doc(uid);
@@ -429,7 +437,11 @@ export default class Fb extends VuexModule {
         // User must be a teacher X
         assert(this.userCitizenType === 'teacher', 'User type not teacher');
         const batch = this.firestore.batch();
+<<<<<<< HEAD
         const myuid = uid ? uid : this.currentUserProfile!.userId
+=======
+        const myuid = uid ? uid : this.FBUser!.uid
+>>>>>>> page/program.firebase
         const studentsSnapshot = await this.firestore.collection('GeneralUser').where('projectIds', 'array-contains', projectId).get();
         const projectDocSnapshot = await this.firestore.collection('Project').doc(projectId).get();
         if (!projectDocSnapshot.exists) throw "project does not exist"
@@ -467,7 +479,11 @@ export default class Fb extends VuexModule {
     async joinProject(projectId: string, uid?: string){
         // append Student.id to Project.teamMembers where Project.Id = projectId 
         // add projectId to Student.projectIds
+<<<<<<< HEAD
         const myuid = uid ? uid : this.currentUserProfile!.userId
+=======
+        const myuid = uid ? uid : this.FBUser!.uid
+>>>>>>> page/program.firebase
         const batch = this.firestore.batch();
         const projectRef = this.firestore.collection('Project').doc(projectId);
         const studentRef = this.firestore.collection('GeneralUser').doc(myuid);
@@ -480,7 +496,11 @@ export default class Fb extends VuexModule {
         });
         await batch.commit();
         // await this.firestore.collection('Project').doc(projectId).update({
+<<<<<<< HEAD
         //     teamMemberIds: firebase.firestore.FieldValue.arrayUnion(this.currentUserProfile!.userId)
+=======
+        //     teamMemberIds: firebase.firestore.FieldValue.arrayUnion(this.FBUser!.uid)
+>>>>>>> page/program.firebase
         // })
     }
     /**
@@ -497,7 +517,11 @@ export default class Fb extends VuexModule {
         }
         // remove student with Student.id = uid from Project.teamMembers where Project.id = projectId
         // remove projectId from Student.projectIds
+<<<<<<< HEAD
         const myuid = uid ? uid : this.currentUserProfile!.userId
+=======
+        const myuid = uid ? uid : this.FBUser!.uid
+>>>>>>> page/program.firebase
         const batch = this.firestore.batch();
         const projectRef = this.firestore.collection('Project').doc(projectId);
         const studentRef = this.firestore.collection('GeneralUser').doc(myuid);
@@ -525,12 +549,20 @@ export default class Fb extends VuexModule {
         const snapshot = await this.firestore.collection('EmployerProgram').where("shareCode", "==",  shareCode).limit(1).get();
         const employerProgram = snapshot.docs[0].data();
         const emppid = employerProgram.employerProgramId;
+<<<<<<< HEAD
         await this.firestore.collection('GeneralUser').doc(this.currentUserProfile!.userId).update({
+=======
+        await this.firestore.collection('GeneralUser').doc(this.FBUser!.uid).update({
+>>>>>>> page/program.firebase
             employerProgramIds: firebase.firestore.FieldValue.arrayUnion(emppid),
             [`initializeProgram/${emppid}`]: firebase.firestore.FieldValue.serverTimestamp()
         });
         // await this.firestore.runTransaction( async transaction => {
+<<<<<<< HEAD
         //         const meRef = this.firestore.collection('GeneralUser').doc(this.currentUserProfile!.userId);
+=======
+        //         const meRef = this.firestore.collection('GeneralUser').doc(this.FBUser!.uid);
+>>>>>>> page/program.firebase
         //         await transaction.update(meRef, {
         //             employerProgramIds: firebase.firestore.FieldValue.arrayUnion(emppid),
         //             [`initializeProgram/${emppid}`]: firebase.firestore.FieldValue.serverTimestamp()
@@ -545,7 +577,11 @@ export default class Fb extends VuexModule {
      */
     async removeProgram(uid: string, employerProgramId: string) {
         const batch = this.firestore.batch();
+<<<<<<< HEAD
         const userRef = this.firestore.collection('GeneralUser').doc(this.currentUserProfile!.userId);
+=======
+        const userRef = this.firestore.collection('GeneralUser').doc(this.FBUser!.uid);
+>>>>>>> page/program.firebase
 
         batch.update(userRef, {
             employerProgramIds: firebase.firestore.FieldValue.arrayRemove(employerProgramId)
@@ -557,7 +593,11 @@ export default class Fb extends VuexModule {
         // remove employerProgramId from GeneralUser employerProgramIds array, where GeneralUser.userId == uid
         // delete timestamp from GeneralUser.initializeProgram that corresponds to employerProgramId 
 
+<<<<<<< HEAD
         // await this.firestore.collection('GeneralUser').doc(this.currentUserProfile!.userId).update({
+=======
+        // await this.firestore.collection('GeneralUser').doc(this.FBUser!.uid).update({
+>>>>>>> page/program.firebase
         //     [`initializeProgram/${employerProgramId}`] : firebase.firestore.FieldValue.delete()
         // })
     }
@@ -636,4 +676,8 @@ export default class Fb extends VuexModule {
 //     // ONLY ONE CAN BE CONFIRMED
 //     // ReviewedLink.reviewd = 1
 //     // lastUpdate = timestamp
+<<<<<<< HEAD
 // }
+=======
+// }
+>>>>>>> page/program.firebase

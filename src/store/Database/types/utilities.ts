@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> page/program.firebase
 import { AutoComplete, AutoCompleteAddress } from '@/components/GoogleMaps';
 
 //#region 
@@ -57,13 +53,11 @@ export interface CompletedEvent {
     completed: boolean
 
 }
-<<<<<<< HEAD
+
 export interface BusinessModelCanvas{
     problem:string
     solution:string
     innovation:string
     customer:string
   }
-=======
->>>>>>> page/program.firebase
 //#endregion

@@ -12,6 +12,7 @@ export interface Classroom {
 }
 
 export interface GeneralUser {
+    userId: string
     classroomIds: string[]
     employerProgramIds: string[]
     projectIds: string[]
@@ -28,6 +29,7 @@ export interface GeneralUser {
     lastUpdate: firebase.firestore.Timestamp
 }
 export interface EmployerProgram {
+    employerProgramId: string
     employerId: string
     programLauncher: ProgramEvent[]
     externshipDayAgenda: AgendaTemplate
@@ -40,6 +42,7 @@ export interface EmployerProgram {
     lastUpdate: firebase.firestore.Timestamp
 }
 export interface TeacherProgramData {
+    teacherProgramId: string
     classroomId: string
     employerProgramId: string
     caseStudies: NamedLink[]
@@ -48,6 +51,7 @@ export interface TeacherProgramData {
 }
 //  StudentProject  should  be  an  extension  of  a  Team
 export interface Project {
+    projectId: string
     classroomId: string
     teamMembersIds: string[]
     teamName: string
