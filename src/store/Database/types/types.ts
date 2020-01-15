@@ -3,6 +3,7 @@ import { AutoComplete, AutoCompleteAddress } from '@/components/GoogleMaps';
 
 export interface Classroom {
     classroomId: string
+    projectIds: string []
     teacherId: string
     teacherProgramId: string
     employerProgramId: string
@@ -10,21 +11,21 @@ export interface Classroom {
     shareCode: string  //  create  hash  code
     lastUpdate: firebase.firestore.Timestamp
 }
+
 export interface GeneralUser {
-    userId: string
     classroomIds: string[]
     employerProgramIds: string[]
+    projectIds: string[]
     initializeProgram: {
         [employerProgramId: string]: firebase.firestore.Timestamp
     }
     firstName: string
     lastName: string
-    citizenType: string
-    dob: Date
-    address: AutoCompleteAddress
-    phoneNumber: string
-    profilePicture: string
-    reviewedLinks: string[]
+    citizenType: "employer" | "teacher" | "student"
+    dob?: Date
+    address?: AutoCompleteAddress
+    phoneNumber?: string
+    profilePicture?: string
     lastUpdate: firebase.firestore.Timestamp
 }
 export interface EmployerProgram {
@@ -33,14 +34,14 @@ export interface EmployerProgram {
     programLauncher: ProgramEvent[]
     externshipDayAgenda: AgendaTemplate
     masterHackDayAgenda: AgendaTemplate    //  Employer  cannot  modify  this
-    programBriefLinks?: NamedLink[]
+    programBrief?: NamedLink[]
     introVideo?: string
     caseStudies?: NamedLink[]
     projectIds?: string[]
+    shareCode: string
     lastUpdate: firebase.firestore.Timestamp
 }
 export interface TeacherProgramData {
-    teacherProgramId: string
     classroomId: string
     employerProgramId: string
     caseStudies: NamedLink[]
@@ -54,6 +55,7 @@ export interface Project {
     teamMembersIds: string[]
     teamName: string
     createdByTeacher: boolean
+    period: string
     timeline: {
         programBrief?: firebase.firestore.Timestamp
         introVideo?: firebase.firestore.Timestamp

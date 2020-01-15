@@ -11,7 +11,7 @@
     "preserve": "npm run generate",
     "test:e2e": "vue-cli-service test:e2e",
     "test:unit": "vue-cli-service test:unit",
-    "hide": "git secret hide -d",
+    "hide": "git secret hide -m",
     "reveal": "git secret reveal"
   },
   "dependencies": {
@@ -19,8 +19,8 @@
     "@graphql-codegen/cli": "^1.9.1",
     "@graphql-codegen/typescript": "^1.9.1",
     "@graphql-codegen/typescript-graphql-files-modules": "^1.9.1",
-    "@graphql-codegen/typescript-graphql-request": "^1.9.1",
-    "@graphql-codegen/typescript-operations": "^1.9.1",
+    "@graphql-codegen/typescript-graphql-request": "^1.11.2",
+    "@graphql-codegen/typescript-operations": "^1.11.2",
     "@types/axios": "^0.14.0",
     "@types/google__maps": "^0.5.7",
     "@types/lodash": "^4.14.136",
@@ -31,6 +31,7 @@
     "axios": "^0.19.0",
     "babel-plugin-transform-decorators": "^6.24.1",
     "core-js": "^2.6.5",
+    "dotenv": "^8.2.0",
     "filepond": "^4.4.12",
     "filepond-plugin-file-validate-type": "^1.2.4",
     "filepond-plugin-image-crop": "^2.0.3",
@@ -68,7 +69,7 @@
   "devDependencies": {
     "@mdi/font": "^4.3.95",
     "@types/jest": "^23.1.4",
-    "@types/node": "12.12.22",
+    "@types/node": "^12.12.22",
     "@typescript-eslint/eslint-plugin": "^1.13.0",
     "@vue/cli-plugin-babel": "^3.8.0",
     "@vue/cli-plugin-e2e-cypress": "^3.8.0",

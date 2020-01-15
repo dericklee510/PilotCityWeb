@@ -13,6 +13,7 @@ export function Dependency(messages?: any, ...dependencies: string[]) {
             dependencies.forEach(key => {
                 if (!(key in this) || !((this as any)[key])) {
                     pass = false;
+                    // eslint-disable-next-line no-console
                     console.error(
                         (messages && messages[key]) ?
                         messages[key] :
