@@ -1,3 +1,4 @@
+require('dotenv').config()
 import Vue from 'vue'
 
 /* eslint-disable */
@@ -29,7 +30,7 @@ import { createProvider } from './vue-apollo'
 Vue.use(VueRx)
 Vue.use(Vuetify)
 Vue.use(VuetifyGoogleAutocomplete, {
-    apiKey: process.env.MAPS_API_KEY
+    apiKey: process.env.VUE_APP_MAPS_API_KEY
 })
 Vue.use(VueMoment)
 Vue.component('default-layout', Default)

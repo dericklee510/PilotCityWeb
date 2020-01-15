@@ -23,8 +23,18 @@ const routes: RouteConfig[] = [
                 component: Guide.Program.ExternshipAgendaView,
             },
             {
+                path: 'employer/externship/agenda',
+                name: 'emp-externship-agenda',
+                component: Guide.Program.ExternshipAgendaView,
+            },
+            {
                 path: 'teacher/externship/agenda/edit',
                 name: 'teach-externship-agenda-edit',
+                component: Guide.Program.ExternshipAgendaEdit,
+            },
+            {
+                path: 'employer/externship/agenda/edit',
+                name: 'emp-externship-agenda-edit',
                 component: Guide.Program.ExternshipAgendaEdit,
             },
             {
@@ -64,12 +74,12 @@ const routes: RouteConfig[] = [
             },
             {
                 path: 'student/project/team/join',
-                name: 'student-project-team-join',
+                name: 'stud-project-team-join',
                 component: Guide.Program.TeamJoin
             },
             {
                 path: 'student/project/team',
-                name: 'student-project-team',
+                name: 'stud-project-team',
                 component: Guide.Program.ManageTeam
             },
             {
@@ -294,7 +304,7 @@ const routes: RouteConfig[] = [
             },
             {
                 path: 'employer/project/demoagenda',
-                name: 'teach-project-demoagenda',
+                name: 'emp-project-demoagenda',
                 component: Guide.Program.DemoAgendaView
             },
             {

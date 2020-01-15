@@ -122,7 +122,7 @@ export default class Guide extends Vue {
         BIND THIS TO `XCURRENTMODULE`
     */
     let name = this.$route.name as string
-    this.routeMap = new RouteList("teacher").createLinkedList();
+    this.routeMap = new RouteList("student").createLinkedList();
     this.currentNode = this.routeMap.toArray().find(node => node.value.routeName === name) || this.routeMap.head
   }
 }

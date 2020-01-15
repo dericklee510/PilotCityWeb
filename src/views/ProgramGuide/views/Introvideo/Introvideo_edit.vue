@@ -28,35 +28,44 @@
         Record, upload and enter link for an introduction video to your project challenge for students to view.
       </v-row>
 
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto mt-12 mb-12"
-      >
-        <input
-          placeholder="https://"
-          class="introvideo_edit__videolink"
-        ><i class="far fa-copy mt-4 ml-5 introvideo_edit__copyicon" />
-      </v-row>
-
-
-      <v-row
-        justify="center"
-        class="ml-auto mr-auto introvideo_edit__check"
-      >
-        <input
-          type="checkbox"
-          class="introvideo_edit__checkbox"
-        >I confirm this video is set for public view
-      </v-row>
-
-      <v-col
-        class="mr-auto ml-auto"
-        cols="5"
-      >
-        <button class="introvideo_edit__button">
-          CONFIRM
-        </button>
-      </v-col>
+      <ValidationObserver v-slot="{invalid, valid}">
+        <v-row
+          justify="center"
+          class="mr-auto ml-auto mt-12 mb-12"
+        >
+          <LinkChecker
+            v-model="url"
+            :success="success"
+            class="introvideo_edit__videolink"
+          />
+        </v-row>
+     
+     
+        <v-row
+          justify="center"
+          class="ml-auto mr-auto introvideo_edit__check"
+        >
+          <v-checkbox
+            v-model="checkbox"
+            type="checkbox"
+            class="introvideo_edit__checkbox"
+            :readonly="invalid"
+          />
+          I confirm this video is set for public view
+        </v-row>
+     
+        <v-col
+          class="mr-auto ml-auto"
+          cols="5"
+        >
+          <v-btn
+            class="introvideo_edit__button"
+            :disabled="invalid || !checkbox"
+          >
+            CONFIRM
+          </v-btn>
+        </v-col>
+      </ValidationObserver>
     </v-col>
   </v-row>
 </template>
@@ -68,8 +77,19 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-@Component
+import { LinkChecker } from '../../components'
+import { ValidationObserver } from 'vee-validate'
+
+@Component({
+  components:{
+    LinkChecker,
+    ValidationObserver
+  }
+})
 export default class introvideo_edit extends Vue{
-    
+    url:string = ""
+    success:boolean=false
+    showerr = false
+    checkbox = false
 }
 </script>
