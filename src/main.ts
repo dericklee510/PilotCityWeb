@@ -1,3 +1,4 @@
+import { FbStore } from './store/index';
 require('dotenv').config()
 import Vue from 'vue'
 
@@ -24,8 +25,8 @@ import VuetifyGoogleAutocomplete from 'vuetify-google-autocomplete'
 import VueMoment from "vue-moment"
 import VueRx from 'vue-rx'
 import { createProvider } from './vue-apollo'
-
-
+import {filter, switchMap} from 'rxjs/operators'
+import { doc } from 'rxfire/firestore';
 
 Vue.use(VueRx)
 Vue.use(Vuetify)
@@ -67,4 +68,12 @@ AuthObserver.subscribe(user => {
     }
 })
 
+AuthObserver.pipe(
+    filter(user => !!user),
+    switchMap(user => 
+        doc(FbStore.firestore.collection("GeneralUser").doc(user.uid))
+)
+).subscribe(snapshot => {
+    FbStore.setCurrentUserProfile(snapshot.data())
+})
 

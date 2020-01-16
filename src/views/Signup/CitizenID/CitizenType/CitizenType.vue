@@ -60,7 +60,10 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-
+import { FbStore } from '../../../../store'
+import { GeneralUser } from '../../../../store/Database/types/types'
+import firebase from 'firebase'
+import { userTypes } from '../../../../store/Database/types/utilities'
 
 @Component
 export default class CitizenType extends Vue {
@@ -72,8 +75,11 @@ export default class CitizenType extends Vue {
 
     private AVAILABLETYPES: string[] = ['Employer', 'Teacher', 'Student']
 
-    selectCitizenType(citizenKey: string) {
+    async selectCitizenType(citizenKey: string) {
         localStorage.citizenType = citizenKey
+        await FbStore.updateCurrentUserProfile({
+          citizenType: citizenKey.toLowerCase() as userTypes
+        })
         this.$router.push({
             name: 'signup.data',
             params: { citizenType: citizenKey }

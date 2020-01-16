@@ -8,7 +8,7 @@ export interface Classroom {
     employerProgramId: string
     className: string
     shareCode: string  //  create  hash  code
-    lastUpdate: firebase.firestore.Timestamp
+    lastUpdate: firebase.firestore.Timestamp | firebase.firestore.FieldValue
 }
 
 export interface GeneralUser {
@@ -26,7 +26,7 @@ export interface GeneralUser {
     address?: AutoCompleteAddress
     phoneNumber?: string
     profilePicture?: string
-    lastUpdate: firebase.firestore.Timestamp
+    lastUpdate: firebase.firestore.Timestamp | firebase.firestore.FieldValue
 }
 export interface EmployerProgram {
     employerProgramId: string
@@ -39,7 +39,7 @@ export interface EmployerProgram {
     caseStudies?: NamedLink[]
     projectIds?: string[]
     shareCode: string
-    lastUpdate: firebase.firestore.Timestamp
+    lastUpdate: firebase.firestore.Timestamp | firebase.firestore.FieldValue
 }
 export interface TeacherProgramData {
     teacherProgramId: string
@@ -104,7 +104,7 @@ export interface Project {
     elevatorPitchRatingE?: number
     demoRatingE?: number
     presentationRatingE?: number
-    lastUpdate: firebase.firestore.Timestamp
+    lastUpdate: firebase.firestore.Timestamp | firebase.firestore.FieldValue
 }
 
 export type RatingTag = "customerRatingT"|

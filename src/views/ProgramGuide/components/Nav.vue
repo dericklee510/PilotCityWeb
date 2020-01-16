@@ -7,7 +7,7 @@
     <v-col
       v-for="(obj, main, index) in sequence"
       :key="main+index"
-    > 
+    >
       <!-- if index == 1, don't show this "bridge" -->
       <div class="guide__sub-container">
         <v-col>
@@ -19,16 +19,16 @@
           <v-col class="guide__mainrow">
             <span
               class="guide__bigdot guide__bigdot--active"
-            :class="unlocked&&index==0?'guide__background_blue':unlocked&&index==1?'guide__background_green':''"
-            ><i class="guide__icon_white fas fa-chalkboard-teacher guide__programicon" /></span>
-          
+              :class="unlocked&&index==0?'guide__background_blue':unlocked&&index==1?'guide__background_green':''"
+            >
+              <i class="guide__icon_white fas fa-chalkboard-teacher guide__programicon" />
+            </span>
+
             <!-- <span
               class="guide__maintext"
               :class=" isActive?'guide__maintext--active':''"
-            >{{ main }}</span> -->
-            <span
-              class="guide__maintext"
-            >{{ main }}</span>
+            >{{ main }}</span>-->
+            <span class="guide__maintext">{{ main }}</span>
           </v-col>
         </v-col>
       </div>
@@ -49,9 +49,7 @@
             class="guide__smalldotfilled"
             :class="unlocked&&index==0?'guide__background_blue':unlocked&&index==1?'guide__background_green':''"
           />
-          <span class="guide__subtext">
-            {{ subitem }}
-          </span>
+          <span class="guide__subtext">{{ subitem }}</span>
         </v-col>
       </v-col>
     </v-col>
@@ -61,9 +59,9 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import { Prop } from 'vue-property-decorator';
-import { forEachField } from 'graphql-tools';
-import { TEACHERSEQUENCE, EMPLOYERSEQUENCE, STUDENTSEQUENCE } from '../views';
+import { Prop } from "vue-property-decorator";
+import { forEachField } from "graphql-tools";
+import { TEACHERSEQUENCE, EMPLOYERSEQUENCE, STUDENTSEQUENCE } from "../views";
 import { LinkedList, LinkedListItem } from "linked-list-typescript";
 import { ProgramNode, RouteList } from "../types";
 import { STUDENTMODULES, EMPLOYERMODULES, TEACHERMODULES } from "../views";
@@ -71,25 +69,22 @@ import { STUDENTMODULES, EMPLOYERMODULES, TEACHERMODULES } from "../views";
 @Component
 export default class Nav extends Vue {
   @Prop()
-  public value !: LinkedList<
-    ProgramNode>;
+  public value!: LinkedList<ProgramNode>;
   public unlocked = true;
-   public sequenceHash:Record<string,any> = {
+  public sequenceHash: Record<string, any> = {
     Teacher: TEACHERSEQUENCE,
     Employer: EMPLOYERSEQUENCE,
     Student: STUDENTSEQUENCE
-  }
+  };
   get citizenType() {
     return localStorage.citizenType;
   }
-  get sequence(){
-    return this.sequenceHash[this.citizenType]
+  get sequence() {
+    return this.sequenceHash[this.citizenType];
   }
   public updateProgram(name: string) {
-    this.$emit('input', name )
+    this.$emit("input", name);
   }
-  public isActive(): boolean{
-   
-  }
+  public isActive(): boolean {}
 }
 </script>

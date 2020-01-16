@@ -184,6 +184,8 @@ import { ObserverInstance } from '@/utilities/validation'
 
 import { AutoComplete } from '@/components/GoogleMaps'
 import Fb from '../../store/Database'
+import { GeneralUser } from '../../store/Database/types/types'
+import firebase from 'firebase'
 
 @Component({
     components: {
@@ -218,7 +220,18 @@ export default class Signup extends Vue {
                 firstName: this.firstName,
                 lastName: this.lastName
             })
-            FbStore.firestore.collection("GeneralUser")
+            let uid = FbStore.firestore.collection("GeneralUser").doc().id
+            FbStore.firestore.collection("GeneralUser").doc(uid).set<GeneralUser>({
+              userId:uid,
+              classroomIds:[],
+              employerProgramIds:[],
+              projectIds:[],
+              initializeProgram:{},
+              firstName:this.firstName,
+              lastName:this.lastName,
+              citizenType:"teacher",
+              lastUpdate:firebase.firestore.FieldValue.serverTimestamp()
+            })
         }
         this.loading = false
     }

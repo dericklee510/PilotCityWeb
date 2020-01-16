@@ -23,7 +23,7 @@ export default class Fb extends VuexModule {
 
 //  @Dependency('FBUser')
     get userDocRef() {
-        return this.firestore.collection('GeneralUser').doc(this.FBUser!.uid);
+        return firestore.collection('GeneralUser').doc(this.FBUser!.uid);
     }
 
 //  @Dependency('FBUser')
@@ -46,10 +46,14 @@ export default class Fb extends VuexModule {
     [SET_USER](userDoc: firebase.User | null): void {
         this.FBUser = userDoc
     }
+    @Mutation
+    setCurrentUserProfile(generalUser:GeneralUser | null){
+        this.currentUserProfile = generalUser
+    }
 //  @Dependency('FBUser')
     @MutationAction({ mutate: ['currentUserProfile']})
     async initCurrentUserProfile() {
-        const snapshot = await this.firestore.collection('GeneralUser').doc(this.FBUser!.uid).get();
+        const snapshot = await firestore.collection('GeneralUser').doc(this.FBUser!.uid).get();
         if (!snapshot.exists)
             throw new Error("User profile is not found on the GeneralUser Collection");
         return { currentUserProfile : snapshot.data<GeneralUser>() }
@@ -62,30 +66,37 @@ export default class Fb extends VuexModule {
         this.currentEmployerProgram = program
     }
     
+    @MutationAction({ mutate: ['currentUserProfile']})
+    async updateCurrentUserProfile(property: Partial<GeneralUser>) {
+        console.log(this.FBUser)
+        await firestore.collection('GeneralUser').doc(this.FBUser!.uid).update(property);
+        return { currentUserProfile: Object.assign(property, this.currentUserProfile) };
+    }
+
 //  @Dependency('currentEmployerProgramUID', 'currentEmployerProgram')
     @MutationAction({ mutate: ['currentEmployerProgram']})
     async updateCurrentEmployerProgram(property: any) {
-        await this.firestore.collection('EmployerProgram').doc(this.currentEmployerProgramUID!).update(property);
+        await firestore.collection('EmployerProgram').doc(this.currentEmployerProgramUID!).update(property);
         return { currentEmployerProgram: Object.assign(property, this.currentEmployerProgram) };
     }
 
 //  @Dependency('currentEmployerProgramUID', 'currentTeacherProgramData')
     @MutationAction({ mutate: ['currentTeacherProgramData']})
     async updateCurrentTeacherProgramData(property: any) {
-        await this.firestore.collection('TeacherProgramData').doc(this.currentTeacherProgramUID!).update(property);
+        await firestore.collection('TeacherProgramData').doc(this.currentTeacherProgramUID!).update(property);
         return { currentTeacherProgramData: Object.assign(property, this.currentTeacherProgramData) }
     }
 
 //  @Dependency('currentProject')
     @MutationAction( {mutate: ['currentProject']})
     async updateProject(property: any) {
-        await this.firestore.collection('Project').doc(this.currentProject!.projectId).update(property);
+        await firestore.collection('Project').doc(this.currentProject!.projectId).update(property);
         return { currentProject: Object.assign(property, this.currentProject) }
     }
     
     @Action({ commit: 'initCurrentEmployerProgram '})
     async fetchEmployerProgram(employerProgramUID: string) {
-        const snapshot = await this.firestore.collection('EmployerProgram').doc(employerProgramUID).get();
+        const snapshot = await firestore.collection('EmployerProgram').doc(employerProgramUID).get();
         if (!snapshot.exists)
             throw new Error(`Failed to fetch employer program with uid of ${employerProgramUID}`);
         return snapshot.data<EmployerProgram>();
@@ -215,7 +226,7 @@ export default class Fb extends VuexModule {
      */
     async createClassroom(className: string, teacherProgramId: string, employerProgramId: string) {
         assert(this.userCitizenType === 'teacher', 'User type not teacher');
-        const classroomID = this.firestore.collection('Classroom').doc().id;
+        const classroomID = firestore.collection('Classroom').doc().id;
         const classroom = {
             classroomID,
             teacherId : this.FBUser!.uid,
@@ -224,7 +235,7 @@ export default class Fb extends VuexModule {
             className,
             lastUpdate: firebase.firestore.FieldValue.serverTimestamp()
         }
-        await this.firestore.collection('Classroom').doc(classroomID).set(classroom);
+        await firestore.collection('Classroom').doc(classroomID).set(classroom);
         // update current classroom ?
     }
 
@@ -240,7 +251,7 @@ export default class Fb extends VuexModule {
     async renameClassroom(classroomId: string, className: string, uid: string){
         // Classroom.className = className
         // Classroom.lastUpdate = timestamp
-        await this.firestore.collection('Classroom').doc(classroomId).update({ className });
+        await firestore.collection('Classroom').doc(classroomId).update({ className });
         // update current classroom ?
     }
 
@@ -254,9 +265,9 @@ export default class Fb extends VuexModule {
      * @returns {Promise<void>}
      */
     async deleteClassroom(classroomId: string, uid: string){
-        const classroomRef = this.firestore.collection('Classroom').doc(classroomId);
+        const classroomRef = firestore.collection('Classroom').doc(classroomId);
         const classroomSnapshot = await classroomRef.get();
-        const studentsSnapshot = await this.firestore.collection('GeneralUser').where("classroomIds", 'array-contains', classroomId).get();
+        const studentsSnapshot = await firestore.collection('GeneralUser').where("classroomIds", 'array-contains', classroomId).get();
         if (!classroomSnapshot.exists)
             throw "classroom does not exist!"
 
@@ -267,9 +278,9 @@ export default class Fb extends VuexModule {
             throw "classroom doesnt have projectIds"
 
     
-        const batch = this.firestore.batch();
+        const batch = firestore.batch();
         projectList.forEach(pid => {
-            const projectRef = this.firestore.collection("Project").doc(pid);
+            const projectRef = firestore.collection("Project").doc(pid);
             batch.delete(projectRef);
         });
         studentsSnapshot.forEach(sRef => {
@@ -282,7 +293,7 @@ export default class Fb extends VuexModule {
                 })
             })
         })
-        const teacherRef = this.firestore.collection('GeneralUser').doc(teacherId);
+        const teacherRef = firestore.collection('GeneralUser').doc(teacherId);
         batch.update(teacherRef, {
             classroomIds: firebase.firestore.FieldValue.arrayRemove(classroomId)
         })
@@ -312,9 +323,9 @@ export default class Fb extends VuexModule {
     async switchClassroom(oldClassroomId: string, newClassroomId: string, uid: string, studentId: string){
         // kick student from project
         const myuid = uid ? uid : this.FBUser!.uid;
-        const batch = this.firestore.batch();
-        const classroomRef = this.firestore.collection('Classroom').doc(oldClassroomId);
-        const studentRef = this.firestore.collection('GeneralUser').doc(uid);
+        const batch = firestore.batch();
+        const classroomRef = firestore.collection('Classroom').doc(oldClassroomId);
+        const studentRef = firestore.collection('GeneralUser').doc(uid);
         
         const classroomDocRef = await classroomRef.get();
         const studentDocRef = await studentRef.get();
@@ -323,7 +334,7 @@ export default class Fb extends VuexModule {
         
         const projectIds = classroomDocRef.data<Classroom>()!.projectIds; // get all project ids under old classroom
         projectIds.forEach(pid => { // remove this user from all those project
-            const projectRef = this.firestore.collection('Project').doc(pid);
+            const projectRef = firestore.collection('Project').doc(pid);
             batch.update(projectRef, {
                 teamMembersIds: firebase.firestore.FieldValue.arrayRemove(myuid)
             })
@@ -376,22 +387,22 @@ export default class Fb extends VuexModule {
         let teacherName: string | null = null;
         if ((this.currentUserProfile as GeneralUser).citizenType == 'teacher')
             createdByTeacher = true;
-        const projectId = this.firestore.collection('Project').doc().id;
+        const projectId = firestore.collection('Project').doc().id;
         const project = {
             projectId,
             classroomId,
             createdByTeacher,
             teamMembersIds : [],
         }
-        await this.firestore.runTransaction(async transaction => {
-            const classroomRef = this.firestore.collection('Classroom').doc(classroomId);
+        await firestore.runTransaction(async transaction => {
+            const classroomRef = firestore.collection('Classroom').doc(classroomId);
             let doc = await transaction.get(classroomRef);
             if (!doc.exists) {
                 throw `Document does not exist`
             }
             const classroomData = doc.data()
-            const projectRef = this.firestore.collection('Project').doc(projectId);
-            const employerProgramRef = this.firestore.collection('EmployerProgram').doc(classroomData!.EmployerProgramId);
+            const projectRef = firestore.collection('Project').doc(projectId);
+            const employerProgramRef = firestore.collection('EmployerProgram').doc(classroomData!.EmployerProgramId);
 
             transaction
                 .set(projectRef, project)
@@ -409,7 +420,7 @@ export default class Fb extends VuexModule {
      */
     async renameProject(newProjectName: string, projectId: string) {
         // Project.teamName = newProjectName
-        await this.firestore.collection('Project').doc(projectId).update({ teamName: newProjectName });
+        await firestore.collection('Project').doc(projectId).update({ teamName: newProjectName });
         // update current Project
     }
 
@@ -428,17 +439,17 @@ export default class Fb extends VuexModule {
         // delete project with Project.Id = projectId X
         // User must be a teacher X
         assert(this.userCitizenType === 'teacher', 'User type not teacher');
-        const batch = this.firestore.batch();
+        const batch = firestore.batch();
         const myuid = uid ? uid : this.FBUser!.uid
-        const studentsSnapshot = await this.firestore.collection('GeneralUser').where('projectIds', 'array-contains', projectId).get();
-        const projectDocSnapshot = await this.firestore.collection('Project').doc(projectId).get();
+        const studentsSnapshot = await firestore.collection('GeneralUser').where('projectIds', 'array-contains', projectId).get();
+        const projectDocSnapshot = await firestore.collection('Project').doc(projectId).get();
         if (!projectDocSnapshot.exists) throw "project does not exist"
         
         const projectData = projectDocSnapshot.data<Project>()
-        const classroomDocSnapshot = await this.firestore.collection('Classroom').doc(projectData!.classroomId).get();
+        const classroomDocSnapshot = await firestore.collection('Classroom').doc(projectData!.classroomId).get();
         const classroomData = await classroomDocSnapshot.data<Classroom>();
         const employerPuid = classroomData!.employerProgramId;
-        const employerProgramRef = this.firestore.collection('EmployerProgram').doc(employerPuid);
+        const employerProgramRef = firestore.collection('EmployerProgram').doc(employerPuid);
 
         batch.update(classroomDocSnapshot.ref, {
             projectIds: firebase.firestore.FieldValue.arrayRemove(projectId)
@@ -468,9 +479,9 @@ export default class Fb extends VuexModule {
         // append Student.id to Project.teamMembers where Project.Id = projectId 
         // add projectId to Student.projectIds
         const myuid = uid ? uid : this.FBUser!.uid
-        const batch = this.firestore.batch();
-        const projectRef = this.firestore.collection('Project').doc(projectId);
-        const studentRef = this.firestore.collection('GeneralUser').doc(myuid);
+        const batch = firestore.batch();
+        const projectRef = firestore.collection('Project').doc(projectId);
+        const studentRef = firestore.collection('GeneralUser').doc(myuid);
 
         batch.update(projectRef, {
             teamMemberIds: firebase.firestore.FieldValue.arrayUnion(myuid)
@@ -479,7 +490,7 @@ export default class Fb extends VuexModule {
             projectIds: firebase.firestore.FieldValue.arrayUnion(projectId)
         });
         await batch.commit();
-        // await this.firestore.collection('Project').doc(projectId).update({
+        // await firestore.collection('Project').doc(projectId).update({
         //     teamMemberIds: firebase.firestore.FieldValue.arrayUnion(this.FBUser!.uid)
         // })
     }
@@ -498,9 +509,9 @@ export default class Fb extends VuexModule {
         // remove student with Student.id = uid from Project.teamMembers where Project.id = projectId
         // remove projectId from Student.projectIds
         const myuid = uid ? uid : this.FBUser!.uid
-        const batch = this.firestore.batch();
-        const projectRef = this.firestore.collection('Project').doc(projectId);
-        const studentRef = this.firestore.collection('GeneralUser').doc(myuid);
+        const batch = firestore.batch();
+        const projectRef = firestore.collection('Project').doc(projectId);
+        const studentRef = firestore.collection('GeneralUser').doc(myuid);
 
         batch.update(projectRef, {
             teamMemberIds: firebase.firestore.FieldValue.arrayRemove(myuid)
@@ -522,15 +533,15 @@ export default class Fb extends VuexModule {
         // add employerProgramId to GeneralUser's employerProgramIds array 
             // GeneralUser.employerProgramIds.push(employerProgramId), where GeneralUser.userId == uid
         // GeneralUser.initializeProgram = timestamp
-        const snapshot = await this.firestore.collection('EmployerProgram').where("shareCode", "==",  shareCode).limit(1).get();
+        const snapshot = await firestore.collection('EmployerProgram').where("shareCode", "==",  shareCode).limit(1).get();
         const employerProgram = snapshot.docs[0].data();
         const emppid = employerProgram.employerProgramId;
-        await this.firestore.collection('GeneralUser').doc(this.FBUser!.uid).update({
+        await firestore.collection('GeneralUser').doc(this.FBUser!.uid).update({
             employerProgramIds: firebase.firestore.FieldValue.arrayUnion(emppid),
             [`initializeProgram/${emppid}`]: firebase.firestore.FieldValue.serverTimestamp()
         });
-        // await this.firestore.runTransaction( async transaction => {
-        //         const meRef = this.firestore.collection('GeneralUser').doc(this.FBUser!.uid);
+        // await firestore.runTransaction( async transaction => {
+        //         const meRef = firestore.collection('GeneralUser').doc(this.FBUser!.uid);
         //         await transaction.update(meRef, {
         //             employerProgramIds: firebase.firestore.FieldValue.arrayUnion(emppid),
         //             [`initializeProgram/${emppid}`]: firebase.firestore.FieldValue.serverTimestamp()
@@ -544,8 +555,8 @@ export default class Fb extends VuexModule {
      * @returns {Promise<void>}
      */
     async removeProgram(uid: string, employerProgramId: string) {
-        const batch = this.firestore.batch();
-        const userRef = this.firestore.collection('GeneralUser').doc(this.FBUser!.uid);
+        const batch = firestore.batch();
+        const userRef = firestore.collection('GeneralUser').doc(this.FBUser!.uid);
 
         batch.update(userRef, {
             employerProgramIds: firebase.firestore.FieldValue.arrayRemove(employerProgramId)
@@ -557,7 +568,7 @@ export default class Fb extends VuexModule {
         // remove employerProgramId from GeneralUser employerProgramIds array, where GeneralUser.userId == uid
         // delete timestamp from GeneralUser.initializeProgram that corresponds to employerProgramId 
 
-        // await this.firestore.collection('GeneralUser').doc(this.FBUser!.uid).update({
+        // await firestore.collection('GeneralUser').doc(this.FBUser!.uid).update({
         //     [`initializeProgram/${employerProgramId}`] : firebase.firestore.FieldValue.delete()
         // })
     }

@@ -2,6 +2,11 @@ import { AutoComplete, AutoCompleteAddress } from '@/components/GoogleMaps';
 
 //#region 
 // interfaces not stored on firebase
+export enum userTypes{
+    employer = 'employer',
+    teacher = 'teacher',
+    student = 'student'
+}
 export interface NamedLink {
     linkName: string
     link: string
