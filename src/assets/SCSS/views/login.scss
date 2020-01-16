@@ -1,3 +1,4 @@
+
 #login-button{
     background-color: $pc-blue;
     color: white;
@@ -7,7 +8,7 @@
 }
 #login-title{
     color: $pc-blue;
-    font-size: 22px;
+    font-size: 1.375rem;
     font-weight: bold;
 }
 #login-image{
@@ -26,7 +27,7 @@
 }
 
 .label_annotate{
-    font-size: 13px;
+    @include fluid-type(font-size, 600px, 1200px, 16px, 32px);
     font-style: italic;
 }
 
