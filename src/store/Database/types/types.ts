@@ -8,8 +8,8 @@ export interface Classroom {
     teacherProgramId: string
     employerProgramId: string
     className: string
-    shareCode: string  //  create  hash  code
-    lastUpdate: firebase.firestore.Timestamp
+    shareCode?: string  //  create  hash  code
+    lastUpdate: firebase.firestore.Timestamp |  firebase.firestore.FieldValue
 }
 
 export interface GeneralUser {
@@ -65,8 +65,8 @@ export interface Project {
         practice?: firebase.firestore.Timestamp
         caseStudies?: firebase.firestore.Timestamp
         bmc?: firebase.firestore.Timestamp
-        sentencePitch: firebase.firestore.Timestamp
-        elevatorPitch: firebase.firestore.Timestamp
+        sentencePitch?: firebase.firestore.Timestamp
+        elevatorPitch?: firebase.firestore.Timestamp
         hackDay?: firebase.firestore.Timestamp
         reflection?: firebase.firestore.Timestamp
         demoVideo?: firebase.firestore.Timestamp
@@ -75,8 +75,8 @@ export interface Project {
         exitForm?: firebase.firestore.Timestamp
         interviewOffer?: firebase.firestore.Timestamp
     }
-    caseStudies: ReviewedLink
-    practiceLog: {
+    caseStudies?: ReviewedLink
+    practiceLog?: {
         [userId: string]: TimeLog[]
     }
     problem?: string
