@@ -15,14 +15,18 @@ export interface GeneralUser {
     userId: string
     classroomIds: string[]
     employerProgramIds: string[]
+    teacherProgramDataIds:{
+        [employerProgramId:string]:string
+    }
     projectIds: string[]
     initializeProgram: {
         [employerProgramId: string]: firebase.firestore.Timestamp
     }
     firstName: string
     lastName: string
-    citizenType: "employer" | "teacher" | "student"
+    citizenType?: "employer" | "teacher" | "student"
     dob?: Date
+    title?:string
     address?: AutoCompleteAddress
     phoneNumber?: string
     profilePicture?: string
@@ -30,10 +34,11 @@ export interface GeneralUser {
 }
 export interface EmployerProgram {
     employerProgramId: string
-    employerId: string
+    programName: string
+    employerId?: string
     programLauncher: ProgramEvent[]
-    externshipDayAgenda: AgendaTemplate
-    masterHackDayAgenda: AgendaTemplate    //  Employer  cannot  modify  this
+    externshipDayAgenda?: AgendaTemplate
+    masterHackDayAgenda?: AgendaTemplate    //  Employer  cannot  modify  this
     programBrief?: NamedLink[]
     introVideo?: string
     caseStudies?: NamedLink[]
@@ -43,16 +48,17 @@ export interface EmployerProgram {
 }
 export interface TeacherProgramData {
     teacherProgramId: string
-    classroomId: string
+    classroomIds: string[]
     employerProgramId: string
     caseStudies: NamedLink[]
-    trainingDayAgenda: AgendaTemplate
-    hackDayAgenda: AgendaTemplate    //  Modified  version  of  HackDayAgenda  Master  Template
+    trainingDayAgenda?: AgendaTemplate
+    hackDayAgenda?: AgendaTemplate    //  Modified  version  of  HackDayAgenda  Master  Template
+    created: firebase.firestore.Timestamp | firebase.firestore.FieldValue
 }
 //  StudentProject  should  be  an  extension  of  a  Team
 export interface Project {
     projectId: string
-    classroomId: string
+    classroomId: string 
     teamMembersIds: string[]
     teamName: string
     createdByTeacher: boolean

@@ -86,7 +86,7 @@ export const Program = {
 export const TEACHERMODULES = {
     'Agenda': [
         'teach-externship-agenda',
-        'teach-externship-agenda-edit',
+        // 'teach-externship-agenda-edit',
     ],
     'Brief': [
         'teach-externship-brief',

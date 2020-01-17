@@ -225,11 +225,11 @@ export default class Signup extends Vue {
               userId:uid,
               classroomIds:[],
               employerProgramIds:[],
+              teacherProgramDataIds:{},
               projectIds:[],
               initializeProgram:{},
               firstName:this.firstName,
               lastName:this.lastName,
-              citizenType:"teacher",
               lastUpdate:firebase.firestore.FieldValue.serverTimestamp()
             })
         }

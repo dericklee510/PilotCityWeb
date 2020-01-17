@@ -25,7 +25,8 @@ import VuetifyGoogleAutocomplete from 'vuetify-google-autocomplete'
 import VueMoment from "vue-moment"
 import VueRx from 'vue-rx'
 import { createProvider } from './vue-apollo'
-import {filter, switchMap} from 'rxjs/operators'
+import { switchMap} from 'rxjs/operators'
+import {from} from "rxjs"
 import { doc } from 'rxfire/firestore';
 
 Vue.use(VueRx)
@@ -59,21 +60,26 @@ function createVueInstance() {
 const AuthObserver = authState(firebaseApp.auth())
 let instanceCreated = false
 
-AuthObserver.subscribe(user => {
-    store.commit(`Auth/${SET_USER}`, user)
-    store.commit(`Fb/${SET_USER}`, user)
+AuthObserver.pipe(
+    switchMap(user => {
+        store.commit(`Auth/${SET_USER}`, user)
+        store.commit(`Fb/${SET_USER}`, user)
+        if(user)
+            return doc(FbStore.firestore.collection("GeneralUser").doc(user.uid))
+        else {
+            if (!instanceCreated){
+                createVueInstance()
+                instanceCreated = true
+            }
+            return from([])
+        }
+    }
+)
+).subscribe(snapshot => {
+    FbStore.initCurrentUserProfile(snapshot.data())
     if (!instanceCreated){
         createVueInstance()
         instanceCreated = true
     }
-})
-
-AuthObserver.pipe(
-    filter(user => !!user),
-    switchMap(user => 
-        doc(FbStore.firestore.collection("GeneralUser").doc(user.uid))
-)
-).subscribe(snapshot => {
-    FbStore.setCurrentUserProfile(snapshot.data())
 })
 

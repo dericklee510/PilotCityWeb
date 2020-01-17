@@ -53,6 +53,7 @@ import { Nav, Lock, Unlock } from "./components";
 import _ from "lodash";
 import { LinkedList, LinkedListItem } from "linked-list-typescript";
 import { ProgramNode, RouteList } from "./types";
+import { FbStore } from '../../store';
 
 @Component({
   components: {
@@ -122,7 +123,7 @@ export default class Guide extends Vue {
         BIND THIS TO `XCURRENTMODULE`
     */
     let name = this.$route.name as string
-    this.routeMap = new RouteList("student").createLinkedList();
+    this.routeMap = new RouteList(FbStore.currentUserProfile!.citizenType!).createLinkedList();
     this.currentNode = this.routeMap.toArray().find(node => node.value.routeName === name) || this.routeMap.head
   }
 }

@@ -165,6 +165,7 @@
       >
         <v-col cols="1">
           <input
+            v-model="existing"
             type="checkbox"
             class="launcher__checkbox"
           >
@@ -199,9 +200,20 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-@Component
+import { FbStore } from '../../store'
+@Component({
+  async beforeRouteEnter(to,from,next){
+    if(localStorage.PILOTCITY_EMPLOYERPROGRAMID)
+    await FbStore.initCurrentEmployerProgram(localStorage.PILOTCITY_EMPLOYERPROGRAMID)
+    next()
+  },
+})
 export default class ProgramLauncher extends Vue{
+    check = false 
+    get existing(){return !!FbStore.currentUserProfile!.teacherProgramDataIds[FbStore.currentEmployerProgramUID!] || this.check}
+    set existing(val) { this.check =val}
     launchProgram() {
+      FbStore.createTeacherProgramData(FbStore.currentEmployerProgramUID!)
         this.$router.push({
             name: 'teach-externship-agenda',
             // params: { citizenType: citizenKey }

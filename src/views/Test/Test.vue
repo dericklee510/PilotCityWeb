@@ -20,8 +20,11 @@ export default class Test extends Vue {
       .doc(uid)
       .update<GeneralUser>({
         firstName: "Taisei",
-        lastName: "Tateno"
+        lastName: "Tateno",
+        
       });
   }
+
+ 
 }
 </script>

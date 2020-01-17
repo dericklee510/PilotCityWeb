@@ -85,6 +85,6 @@ export default class Nav extends Vue {
   public updateProgram(name: string) {
     this.$emit("input", name);
   }
-  public isActive(): boolean {}
+  // public isActive(): boolean {}
 }
 </script>
