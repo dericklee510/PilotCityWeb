@@ -115,7 +115,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { ValidationProvider, ValidationObserver } from 'vee-validate'
-import { AuthStore } from '@/store'
+import { AuthStore, FbStore } from '@/store'
 import {
   /* eslint-disable-next-line */
     SUCCESSFUL_SIGNUP_RESP,
@@ -151,6 +151,7 @@ export default class Login extends Vue {
             })
         }
         if (this.authResponse == SUCCESSFUL_LOGIN_RESP && AuthStore.user && !AuthStore.user.photoURL) {
+            await FbStore.initCurrentUserProfile(AuthStore.user.uid)
             this.$router.push({
                 name: 'signup.type'
             })

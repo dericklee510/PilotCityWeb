@@ -7,9 +7,7 @@
       alt
     >
     <v-container>
-      <!-- make tag component -- backlog -->
       <v-row>
-        <!-- insert Doka-profile-picture-component -->
         <v-col id="profileContainer">
           <profile-upload v-model="citizenBase.profilePicture" />
           <!-- <div class="pc-profile-picture pc-profile-picture--page pc-vh-center" /> -->

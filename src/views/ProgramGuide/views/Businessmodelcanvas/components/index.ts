@@ -1,0 +1,1 @@
+export {default as BusinessModelCanvas} from "./BusinessModelCanvas.vue"

@@ -165,6 +165,7 @@
       >
         <v-col cols="1">
           <input
+            v-model="existing"
             type="checkbox"
             class="launcher__checkbox"
           >
@@ -181,7 +182,10 @@
         class="mr-auto ml-auto"
         cols="5"
       >
-        <button class="launcher__button mb-10">
+        <button
+          class="launcher__button mb-10"
+          @click="launchProgram"
+        >
           LAUNCH
         </button>
       </v-col>
@@ -196,8 +200,25 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-@Component
-export default class businessmodelcanvas_view2 extends Vue{
-    
+import { FbStore } from '../../store'
+@Component({
+  async beforeRouteEnter(to,from,next){
+    if(localStorage.PILOTCITY_EMPLOYERPROGRAMID)
+    await FbStore.initCurrentEmployerProgram(localStorage.PILOTCITY_EMPLOYERPROGRAMID)
+    next()
+  },
+})
+export default class ProgramLauncher extends Vue{
+    check = false 
+    get existing(){return !!FbStore.currentUserProfile!.teacherProgramDataIds[FbStore.currentEmployerProgramUID!] || this.check}
+    set existing(val) { this.check =val}
+    launchProgram() {
+      if(FbStore.userCitizenType === "teacher")
+      FbStore.createTeacherProgramData(FbStore.currentEmployerProgramUID!)
+        this.$router.push({
+            name: 'teach-externship-agenda',
+            // params: { citizenType: citizenKey }
+        })
+    }
 }
 </script>

@@ -26,7 +26,7 @@ import Component from 'vue-class-component'
 /* eslint-disable-next-line */
 import VuetifyGoogleAutocomplete from 'vuetify-google-autocomplete'
 import 'reflect-metadata'
-import { Prop, PropSync } from 'vue-property-decorator'
+import { Prop } from 'vue-property-decorator'
 
 @Component({
 })

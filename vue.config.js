@@ -4,6 +4,7 @@ module.exports = {
             lintGQL: true
         }
     },
+    runtimeCompiler: true,
     chainWebpack: (config) => {
         const svgRule = config.module.rule('svg')
 
