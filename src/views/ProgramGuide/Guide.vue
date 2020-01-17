@@ -1,210 +1,137 @@
 <template>
-  <v-row class="ml-0 mr-0">
+  <v-row
+    no-gutters
+    class="programguide"
+  >
     <v-col
-      cols="2"
-      class="pl-12 pr-12 guide__bar"
+      cols="1"
+      sm="3"
+      lg="2"
+      xl="1"
+      class="d-sm-block d-none"
     >
-      <!-- MAIN GROUP -->
-      <v-row class="guide__mainrow">
-        <span class="guide__bigdot guide__activebigdot guide__background_blue"><i class="guide__icon_white fas fa-chalkboard-teacher guide__programicon" /></span>
-
-        <span class="guide__maintext guide__activemaintext">Externship Day</span>
-      </v-row>
-
-
-
-
-
-      <!-- SUB GROUP -->
-      <v-row class="guide__bridge" />
-      <v-row class="guide__subrow">
-        <span class="guide__smalldot" />
-
-        <span class="guide__smalldotfilled guide__background_blue" />
-
-        <span class="guide__subtext">Agenda</span>
-      </v-row>
-
-
-
-
-
-
-
-
-      <!-- SUB GROUP -->
-      <v-row class="guide__bridge" />
-      <v-row class="guide__subrow">
-        <span class="guide__smalldot" />
-        <span class="guide__smalldotfilled guide__background_blue" />
-        <span class="guide__subtext">Brief</span>
-      </v-row>
-
-      <!-- SUB GROUP -->
-      <v-row class="guide__bridge" />
-      <v-row class="guide__subrow">
-        <span class="guide__smalldot" />
-        <span class="guide__smalldotfilled guide__background_blue" />
-        <span class="guide__subtext">Manage</span>
-      </v-row>
-
-      <!-- MAIN GROUP -->
-      <v-row class="guide__bridge" />
-      <v-row class="guide__mainrow">
-        <span class="guide__bigdot  guide__background_green guide__activebigdot"><i class="fas fa-project-diagram guide__icon_white guide__programicon" /></span>
-        <span class="guide__maintext guide__activemaintext ">Project</span>
-      </v-row>
-      <!-- SUB GROUP -->
-      <v-row class="guide__bridge" />
-      <v-row class="guide__subrow">
-        <span class="guide__smalldot" />
-        <span class="guide__smalldotfilled guide__background_green" />
-        <span class="guide__subtext">Intro Video</span>
-      </v-row>
-      <!-- SUB GROUP -->
-      <v-row class="guide__bridge" />
-      <v-row class="guide__subrow">
-        <span class="guide__smalldot" />
-        <span class="guide__smalldotfilled guide__background_green" />
-        <span class="guide__subtext">Train</span>
-      </v-row>
-      <!-- SUB GROUP -->
-      <v-row class="guide__bridge" />
-      <v-row class="guide__subrow">
-        <span class="guide__smalldot" />
-        <span class="guide__smalldotfilled guide__background_green" />
-        <span class="guide__subtext">Practice</span>
-      </v-row>
-
-      <!-- SUB GROUP -->
-      <v-row class="guide__bridge" />
-      <v-row class="guide__subrow">
-        <span class="guide__smalldot" />
-        <span class="guide__smalldotfilled guide__background_green" />
-        <span class="guide__subtext">Research</span>
-      </v-row>
-
-      <!-- SUB GROUP -->
-      <v-row class="guide__bridge" />
-      <v-row class="guide__subrow">
-        <span class="guide__smalldot" />
-        <span class="guide__smalldotfilled guide__background_green" />
-        <span class="guide__subtext">Ideate</span>
-      </v-row>
-
-      <!-- SUB GROUP -->
-      <v-row class="guide__bridge" />
-      <v-row class="guide__subrow">
-        <span class="guide__smalldot" />
-        <span class="guide__smalldotfilled guide__background_green" />
-        <span class="guide__subtext">Prepare</span>
-      </v-row>
-
-      <!-- SUB GROUP -->
-      <v-row class="guide__bridge" />
-      <v-row class="guide__subrow">
-        <span class="guide__smalldot" />
-        <span class="guide__smalldotunfilled" />
-        <span class="guide__subtext">Hack Day</span>
-      </v-row>
-
-      <!-- SUB GROUP -->
-      <v-row class="guide__bridge" />
-      <v-row class="guide__subrow">
-        <span class="guide__smalldot" />
-        <span class="guide__smalldotunfilled" />
-        <span class="guide__subtext">Reflection</span>
-      </v-row>
-
-      <!-- SUB GROUP -->
-      <v-row class="guide__bridge" />
-      <v-row class="guide__subrow">
-        <span class="guide__smalldot" />
-        <span class="guide__smalldotunfilled" />
-        <span class="guide__subtext">Design & Prototype</span>
-      </v-row>
-
-      <!-- SUB GROUP -->
-      <v-row class="guide__bridge" />
-      <v-row class="guide__subrow">
-        <span class="guide__smalldot" />
-        <span class="guide__smalldotunfilled" />
-        <span class="guide__subtext">Package</span>
-      </v-row>
-
-      <!-- SUB GROUP -->
-      <v-row class="guide__bridge" />
-      <v-row class="guide__subrow">
-        <span class="guide__smalldot" />
-        <span class="guide__smalldotunfilled" />
-        <span class="guide__subtext">Demo Day</span>
-      </v-row>
-
-      <!-- SUB GROUP -->
-      <v-row class="guide__bridge" />
-      <v-row class="guide__subrow">
-        <span class="guide__smalldot" />
-        <span class="guide__smalldotunfilled" />
-        <span class="guide__subtext">Exit Form</span>
-      </v-row>
-
-
-
-      <!-- MAIN GROUP -->
-      <v-row class="guide__bridge" />
-      <v-row class="guide__mainrow">
-        <span class="guide__bigdot"><i class="fas fa-seedling guide__programicon guide__icon_gray" /></span>
-        <span class="guide__maintext">Internship</span>
-      </v-row>
-
-      <!-- SUB GROUP -->
-      <v-row class="guide__bridge" />
-      <v-row class="guide__subrow">
-        <span class="guide__smalldot" />
-        <span class="guide__smalldotunfilled" />
-        <span class="guide__subtext">Interview Offer</span>
-      </v-row>
-
-      <!-- SUB GROUP -->
-      <v-row class="guide__bridge" />
-      <v-row class="guide__subrow">
-        <span class="guide__smalldot" />
-        <span class="guide__smalldotunfilled" />
-        <span class="guide__subtext">First Interview</span>
-      </v-row>
-      <!-- SUB GROUP -->
-      <v-row class="guide__bridge" />
-      <v-row class="guide__subrow">
-        <span class="guide__smalldot" />
-        <span class="guide__smalldotunfilled" />
-        <span class="guide__subtext">Final Interview</span>
-      </v-row>
-      <!-- SUB GROUP -->
-      <v-row class="guide__bridge" />
-      <v-row class="guide__subrow">
-        <span class="guide__smalldot" />
-        <span class="guide__smalldotunfilled" />
-        <span class="guide__subtext">Position Offer</span>
-      </v-row>
-
-      <!-- SUB GROUP -->
-      <v-row class="guide__bridge" />
-      <v-row class="guide__subrow">
-        <span class="guide__smalldot" />
-        <span class="guide__smalldotunfilled" />
-        <span class="guide__subtext">Next Program</span>
+      <Nav v-model="currentModule" />
+    </v-col>
+    <v-col
+      xl="11"
+      sm="9"
+      lg="10"
+      cols="11"
+    >
+      <v-row
+        no-gutters
+        class="guide__viewer-container"
+      >
+        <v-col
+          cols="1"
+          class="guide__locks guide__locks--left"
+          @click="navBackward"
+        >
+          <Unlock />
+        </v-col>
+        <v-col cols="12">
+          <router-view />
+        </v-col>
+        <v-col
+          cols="1"
+          class="guide__locks guide__locks--right"
+          @click="navForward"
+        >
+          <Unlock />
+        </v-col>
       </v-row>
     </v-col>
   </v-row>
 </template>
 
-
-
-
-
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-@Component
-export default class guide extends Vue {}
+import { Watch } from "vue-property-decorator";
+import { STUDENTMODULES, EMPLOYERMODULES, TEACHERMODULES } from "./views";
+import { Nav, Lock, Unlock } from "./components";
+import _ from "lodash";
+import { LinkedList, LinkedListItem } from "linked-list-typescript";
+import { ProgramNode, RouteList } from "./types";
+import { FbStore } from '../../store';
+
+@Component({
+  async beforeRouteEnter(to,from,next){
+    if(localStorage.PILOTCITY_EMPLOYERPROGRAMID)
+    await FbStore.initCurrentEmployerProgram(localStorage.PILOTCITY_EMPLOYERPROGRAMID)
+    if(FbStore.currentUserProfile!.citizenType != "employer")
+      await FbStore.initCurrentTeacherProgramData(FbStore.currentTeacherProgramUID! )
+    next()
+  },
+  components: {
+    Nav,
+    Lock,
+    Unlock
+  }
+})
+export default class Guide extends Vue {
+  public sequenceHash: Record<string, Record<string, string[]>> = {
+    Teacher: TEACHERMODULES,
+    Employer: EMPLOYERMODULES,
+    Student: STUDENTMODULES
+  };
+  public xcurrentModule: string = "";
+  routeMap!: LinkedList<
+    ProgramNode
+  >;
+  currentNode!: ProgramNode;
+  get citizenType(): string {
+    return localStorage.citizenType;
+  }
+  get sequence() {
+    return this.sequenceHash[this.citizenType];
+  }
+  get nextModule() {
+    if (this.currentNode) return this.currentNode.next;
+    else return null;
+  }
+  get prevModule() {
+    if (this.currentNode) return this.currentNode.prev;
+    else return null;
+  }
+  get currentModule() {
+    return this.currentNode;
+  }
+
+  public navForward() {
+    // this.routeMap.head
+    // console.log(mod)
+    // let currentRoute= this.$route.name as string;
+    // let length = mod.length;
+    // console.log(currentRoute,length)
+    // if(mod.includes(currentRoute) && mod[length-1] != currentRoute)
+    //   this.$router.push({ name: mod[mod.indexOf(currentRoute)+1] })
+    // if(mod[length-1] == currentRoute)
+    //   this.$router.push({name: this.sequence[this.nextModule][0]})
+    let next = this.currentNode.next;
+    if (next) {
+      this.currentNode = next;
+      this.$router.push({ name: next.value.routeName });
+    }
+  }
+  public navBackward() {
+    let prev = this.currentNode.prev;
+    if (prev) {
+      this.currentNode = prev;
+      this.$router.push({ name: prev.value.routeName });
+    }
+  }
+  public created() {
+    // psuedo-code [could probably turn this into a util function]
+    /* 
+      if(user.fb.getLastProgress)
+        this.currentModule = user.fb.getLastProgress.Name //this should take them to their latest unlock
+
+        BIND THIS TO `XCURRENTMODULE`
+    */
+    let name = this.$route.name as string
+    this.routeMap = new RouteList(FbStore.currentUserProfile!.citizenType!).createLinkedList();
+    this.currentNode = this.routeMap.toArray().find(node => node.value.routeName === name) || this.routeMap.head
+  }
+}
 </script>

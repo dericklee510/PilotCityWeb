@@ -1,3 +1,7 @@
+@import "./views/manageteam.scss";
+@import "./views/trainingday.scss";
+@import "./views/manageclass.scss";
+@import "./views/posthack.scss";
 @import "./views/programbrief.scss";
 @import "./views/viewcasestudies.scss";
 @import "./views/programbrief_edit.scss";
@@ -25,14 +29,14 @@
 @import "./views/hackagenda_edit.scss";
 @import "./views/hackagenda_view.scss";
 @import "./views/processlog.scss";
-
 @import "./views/login2.scss";
 @import "./views/signup2.scss";
-
 @import "./views/myprograms.scss";
-
 @import "./views/launcher.scss";
-
 @import "./views/Guide.scss";
-
-
+@import "./views/editcasestudies.scss";
+@import "./views/jointeam.scss";
+@import "./views/Team.scss";
+@import "./views/managestudents.scss";
+@import "./views/manageclass.scss";
+@import "./lock.scss"

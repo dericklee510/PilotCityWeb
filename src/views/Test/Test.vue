@@ -15,12 +15,16 @@ export default class Test extends Vue {
   createUserProfile() {
     let uid = (FbStore.FBUser as firebase.User).uid;
 
-    // FbStore.firestore
-    //   .collection("GeneralUser")
-    //   .doc(uid)
-    //   .set<GeneralUser>({
-    //     firstName: "Taisei"
-    //   });
+    FbStore.firestore
+      .collection("GeneralUser")
+      .doc(uid)
+      .update<GeneralUser>({
+        firstName: "Taisei",
+        lastName: "Tateno",
+        
+      });
   }
+
+ 
 }
 </script>

@@ -14,6 +14,10 @@
         margin-bottom: 49.29px;
         padding-left: 0%;
         padding-right: 0%;
+        .video-player .vjs_video_3-dimensions{
+            width: 49vw;
+            height: calc(49vw / 2.4);
+        }
     }
 
     &__borderline{
@@ -33,10 +37,9 @@
 .introvideo{
 
     &__video{
-        height: 500px;
-        background-color: #414042;
+        // background-color: #414042;
         margin-top:5%;
-        width: 100%;
+        // width: 100%;
     }
 
     

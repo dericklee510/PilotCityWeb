@@ -32,5 +32,6 @@ declare global {
     interface Firestore {
       collection(collectionPath: Collection): CollectionReference
     }
+    
   }
 }

@@ -60,10 +60,20 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
+import { FbStore, GraphqlStore } from '../../../../store'
+import { GeneralUser } from '../../../../store/Database/types/types'
+import firebase from 'firebase'
+import { userTypes } from '../../../../store/Database/types/utilities'
 
-
-@Component
+@Component({
+  // beforeRouteEnter(to,from,next){
+  //   const {citizenType} = FbStore.currentUserProfile!
+  //   if(citizenType)
+  //     next({name:'signup.data'})
+  // }
+})
 export default class CitizenType extends Vue {
+  
     private CITIZENSTYLES = {
         Teacher: 'citizen-id__type--teacher',
         Employer: 'citizen-id__type--employer',
@@ -72,13 +82,14 @@ export default class CitizenType extends Vue {
 
     private AVAILABLETYPES: string[] = ['Employer', 'Teacher', 'Student']
 
-    selectCitizenType(citizenKey: string) {
-        localStorage.citizenType = citizenKey
-        this.$router.push({
-            name: 'profile.private',
-            params: { citizenType: citizenKey }
+    async selectCitizenType(citizenKey: string) {
+        await FbStore.updateCurrentUserProfile({
+          citizenType: citizenKey.toLowerCase() as userTypes
         })
-        this.$router.push
+
+        this.$router.push({
+            name: 'signup.data',
+        })
     }
 }
 </script>
