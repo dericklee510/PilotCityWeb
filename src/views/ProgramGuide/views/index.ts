@@ -251,8 +251,9 @@ export const TEACHERSEQUENCE = {
 export const EMPLOYERSEQUENCE = {
     Externship: {
         'Agenda': [
-            'emp-externship-agenda',
             'emp-externship-agenda-edit',
+            'emp-externship-agenda',
+            
         ],
         'Brief': [
             'emp-externship-brief-edit',

@@ -75,8 +75,8 @@ AuthObserver.pipe(
         }
     }
 )
-).subscribe(snapshot => {
-    FbStore.initCurrentUserProfile(snapshot.data())
+).subscribe(async (snapshot) => {
+    await FbStore.initCurrentUserProfile(snapshot.data())
     if (!instanceCreated){
         createVueInstance()
         instanceCreated = true

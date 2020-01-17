@@ -34,7 +34,7 @@ export default class Fb extends VuexModule {
         return this.currentEmployerProgram?.employerProgramId
     }
     get currentTeacherProgramUID() {
-        return this.currentTeacherProgramData?.teacherProgramId
+        return this.currentTeacherProgramData?.teacherProgramId || this.currentUserProfile?.teacherProgramDataIds[this.currentEmployerProgramUID!]
     }
     //  @Dependency('FBUser')
     get storageRef() {
@@ -53,17 +53,22 @@ export default class Fb extends VuexModule {
     }
     @MutationAction({ mutate: ['currentUserProfile'], rawError: true })
     async updateCurrentUserProfile(property: Partial<GeneralUser>) {
-        const uid = (this.state as Pick<Fb, NonFunctionKeys<Fb>>).FBUser?.uid
+        const state = (this.state as Pick<Fb, NonFunctionKeys<Fb>>)
+        const uid = state.FBUser?.uid
         await firestore.collection('GeneralUser').doc(uid).update(property);
-        return { currentUserProfile: Object.assign(property, this.currentUserProfile) };
+        return { currentUserProfile: Object.assign(property, state.currentUserProfile) };
     }
     @Mutation
     [SET_USER](userDoc: firebase.User | null): void {
         this.FBUser = userDoc
     }
-    @Mutation
-    initCurrentUserProfile(generalUser: GeneralUser | null) {
-        this.currentUserProfile = generalUser
+    @MutationAction({mutate:['currentUserProfile']})
+    async initCurrentUserProfile(arg: GeneralUser | string) {
+        return {
+            currentUserProfile: (typeof arg === "string")
+            ?(await firestore.collection("GeneralUser").doc(arg).get()).data<GeneralUser>()
+            :arg
+        }
     }
     //  @Dependency('FBUser')
     // @MutationAction({ mutate: ['currentUserProfile'] })
@@ -83,9 +88,12 @@ export default class Fb extends VuexModule {
             return { currentEmployerProgram: arg }
 
     }
-    @Mutation
-    initCurrentTeacherProgramData(program: TeacherProgramData) {
-        this.currentTeacherProgramData = program
+    @MutationAction({ mutate: ['currentTeacherProgramData'] })
+    async initCurrentTeacherProgramData(arg: TeacherProgramData | string) {
+        if (typeof arg === "string")
+            return { currentTeacherProgramData: (await (firestore.collection("TeacherProgramData").doc(arg).get())).data<TeacherProgramData>() }
+        else
+            return { currentTeacherProgramData: arg }
     }
 
 

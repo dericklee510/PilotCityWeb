@@ -118,6 +118,9 @@ import Component from 'vue-class-component'
 import { EventItem } from '@/store/Database/types/utilities'
 @Component
 export default class ExternshipAgenda extends Vue{
+  created(){
+    // const agendaItems
+  }
   agendaItems:EventItem[] = [{
   name:"",
   duration: "",

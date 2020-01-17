@@ -56,6 +56,13 @@ import { ProgramNode, RouteList } from "./types";
 import { FbStore } from '../../store';
 
 @Component({
+  async beforeRouteEnter(to,from,next){
+    if(localStorage.PILOTCITY_EMPLOYERPROGRAMID)
+    await FbStore.initCurrentEmployerProgram(localStorage.PILOTCITY_EMPLOYERPROGRAMID)
+    if(FbStore.currentUserProfile!.citizenType != "employer")
+      await FbStore.initCurrentTeacherProgramData(FbStore.currentTeacherProgramUID! )
+    next()
+  },
   components: {
     Nav,
     Lock,

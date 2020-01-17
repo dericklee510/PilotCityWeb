@@ -213,6 +213,7 @@ export default class ProgramLauncher extends Vue{
     get existing(){return !!FbStore.currentUserProfile!.teacherProgramDataIds[FbStore.currentEmployerProgramUID!] || this.check}
     set existing(val) { this.check =val}
     launchProgram() {
+      if(FbStore.userCitizenType === "teacher")
       FbStore.createTeacherProgramData(FbStore.currentEmployerProgramUID!)
         this.$router.push({
             name: 'teach-externship-agenda',
