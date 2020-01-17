@@ -62,7 +62,6 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { FbStore, GraphqlStore } from '../../../../store'
 import { GeneralUser } from '../../../../store/Database/types/types'
-import firebase from 'firebase'
 import { userTypes } from '../../../../store/Database/types/utilities'
 
 @Component({

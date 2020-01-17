@@ -96,7 +96,6 @@ export default class AgendaView extends Vue {
       name: "",
       duration: "",
       description: "",
-      completed: false
     }
   ];
   get isAgendaComplete() {

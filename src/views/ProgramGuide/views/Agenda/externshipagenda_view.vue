@@ -116,17 +116,13 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { EventItem } from '@/store/Database/types/utilities'
+import { FbStore } from '../../../../store'
 @Component
 export default class ExternshipAgenda extends Vue{
   created(){
     // const agendaItems
   }
-  agendaItems:EventItem[] = [{
-  name:"",
-  duration: "",
-  description:"",
-  completed:false
-}]
+  agendaItems:EventItem[] = FbStore.currentEmployerProgram?.externshipDayAgenda?.events! || []
   get isAgendaComplete(){
     return this.agendaItems.map(item => item.completed).every(isTrue => isTrue)
   }

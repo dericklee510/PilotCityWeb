@@ -185,7 +185,6 @@ import { ObserverInstance } from '@/utilities/validation'
 import { AutoComplete } from '@/components/GoogleMaps'
 import Fb from '../../store/Database'
 import { GeneralUser } from '../../store/Database/types/types'
-import firebase from 'firebase'
 
 @Component({
     components: {
