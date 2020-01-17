@@ -9,16 +9,10 @@
           <v-col />
         </v-col>
         <v-col>
-          <BriefCard_edit ref="Card" />
-        </v-col>
-
-        <v-col>
-          <button
-            class="programbrief__addbrief"
-            @click="addEntry"
-          >
-            +
-          </button>
+          <BriefCard_edit
+            ref="Card"
+            v-model="entries"
+          />
         </v-col>
       </v-row>
     </v-container>
@@ -33,6 +27,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import BriefCard_edit from './components/BriefCard_edit.vue'
 import { PCmultiinput } from '@/components/inputs'
+import { NamedLink } from '../../../../store/Database/types/utilities'
 
 
 @Component(({
@@ -42,6 +37,8 @@ import { PCmultiinput } from '@/components/inputs'
 }))
 
 export default class Brief extends Vue {
+  files:File[]= [{} as File]
+ 
   addEntry(){
     (this.$refs.Card as BriefCard_edit).newEntry()
   }

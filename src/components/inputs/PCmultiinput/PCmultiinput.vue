@@ -160,7 +160,7 @@ export default class PCmultiinput extends Vue {
         this.$emit(
           "input",
           newVal.map((entree: EntryClassID) => {
-            return (({ id, ...params }: EntryClassID): EntryClass =>
+            return (({ id, isTrusted, ...params }: EntryClassID & {isTrusted?:boolean}): EntryClass =>
               (params as unknown) as EntryClass)(entree);
           })
         );

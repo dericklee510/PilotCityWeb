@@ -11,10 +11,6 @@
         <v-col>
           <BriefCard />
         </v-col>
-
-        <v-col>
-          <BriefCard />
-        </v-col>
       </v-row>
     </v-container>
   </div>
@@ -34,6 +30,6 @@ import BriefCard from './components/BriefCard.vue'
     }
 }))
 export default class Brief extends Vue{
-    
+    entries = "stuff"
 }
 </script>]

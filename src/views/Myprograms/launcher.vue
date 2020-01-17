@@ -201,6 +201,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { FbStore } from '../../store'
+import { RouteList } from '../ProgramGuide/types'
 @Component({
   async beforeRouteEnter(to,from,next){
     if(localStorage.PILOTCITY_EMPLOYERPROGRAMID)
@@ -212,11 +213,13 @@ export default class ProgramLauncher extends Vue{
     check = false 
     get existing(){return !!FbStore.currentUserProfile!.teacherProgramDataIds[FbStore.currentEmployerProgramUID!] || this.check}
     set existing(val) { this.check =val}
-    launchProgram() {
+    async launchProgram() {
       if(FbStore.userCitizenType === "teacher")
-      FbStore.createTeacherProgramData(FbStore.currentEmployerProgramUID!)
+        await FbStore.createTeacherProgramData(FbStore.currentEmployerProgramUID!)
         this.$router.push({
-            name: 'teach-externship-agenda',
+            name: new RouteList(
+      FbStore.currentUserProfile!.citizenType!
+    ).createLinkedList().head.value.routeName
             // params: { citizenType: citizenKey }
         })
     }

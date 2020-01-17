@@ -55,16 +55,16 @@ import { LinkedList, LinkedListItem } from "linked-list-typescript";
 import { ProgramNode, RouteList } from "./types";
 import { FbStore } from "../../store";
 import { doc } from "rxfire/firestore";
-import { map, filter } from "rxjs/operators";
+import { map, filter, tap } from "rxjs/operators";
 import { EmployerProgram, TeacherProgramData } from "../../store/Database/types/types";
-import { Observable } from "rxjs";
+import { Observable, } from "rxjs";
 @Component<Guide>({
   async beforeRouteEnter(to, from, next) {
     if (localStorage.PILOTCITY_EMPLOYERPROGRAMID)
       await FbStore.initCurrentEmployerProgram(
         localStorage.PILOTCITY_EMPLOYERPROGRAMID
       );
-    if (FbStore.currentUserProfile!.citizenType != "employer")
+    if (FbStore.currentUserProfile!.citizenType !== "employer")
       await FbStore.initCurrentTeacherProgramData(
         FbStore.currentTeacherProgramUID!
       );
@@ -80,7 +80,7 @@ import { Observable } from "rxjs";
       teacherProgramData:doc(
         FbStore.firestore.collection("TeacherProgramData").doc(FbStore.currentTeacherProgramUID)
       ).pipe(
-        filter(snapshot => snapshot.exists),
+        filter(snapshot => snapshot.exists && FbStore.userCitizenType === "teacher"),
         map(snapshot => snapshot.data())
       )
     };
@@ -89,7 +89,7 @@ import { Observable } from "rxjs";
     this.$subscribeTo(this.$observables.employerProgramData,(data:EmployerProgram)=>{
       FbStore.initCurrentEmployerProgram(data)
     })
-    this.$subscribeTo(this.$observables.employerProgramData,(data:TeacherProgramData)=>{
+    this.$subscribeTo(this.$observables.teacherProgramData,(data:TeacherProgramData)=>{
       FbStore.initCurrentTeacherProgramData(data)
     })
   },

@@ -99,8 +99,10 @@ export default class Fb extends VuexModule {
 
     //  @Dependency('currentEmployerProgramUID', 'currentEmployerProgram')
     @MutationAction({ mutate: ['currentEmployerProgram'] })
-    async updateCurrentEmployerProgram(property: any) {
-        await firestore.collection('EmployerProgram').doc(this.currentEmployerProgramUID!).update(property);
+    async updateCurrentEmployerProgram(property: Partial<EmployerProgram>) {
+        const state = (this.state as Pick<Fb, NonFunctionKeys<Fb>>)
+        const uid = state.currentEmployerProgram?.employerProgramId
+        await firestore.collection('EmployerProgram').doc(uid).update(property);
         return { currentEmployerProgram: Object.assign(property, this.currentEmployerProgram) };
     }
 
@@ -144,7 +146,7 @@ export default class Fb extends VuexModule {
         const index = _.findIndex(this.currentEmployerProgram!.programBrief!, ['name', fileName]);
         if (index < 0) {
             const newProgramBrief = [...this.currentEmployerProgram!.programBrief!, {
-                name: fileName,
+                linkName: fileName,
                 link: filePath
             }]
             await this.updateCurrentEmployerProgram({ programBrief: newProgramBrief });
@@ -187,9 +189,9 @@ export default class Fb extends VuexModule {
      * @param {AgendaTemplate} textEntry
      * @param {string} uid
      */
-    async createExternshipAgenda(externshipAgenda: AgendaTemplate, EmployerProgramId: string) {
+    async createExternshipAgenda(externshipDayAgenda: AgendaTemplate, EmployerProgramId: string) {
         assert(this.userCitizenType === 'employer', 'User type not emplyer');
-        await this.updateCurrentEmployerProgram({ externshipAgenda })
+        await this.updateCurrentEmployerProgram({ externshipDayAgenda })
     }
 
     // @Action({ commit: 'updateCurrentEmployerProgram' })

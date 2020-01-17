@@ -28,7 +28,7 @@
         Record, upload and enter link for an introduction video to your project challenge for students to view.
       </v-row>
 
-      <ValidationObserver v-slot="{invalid, valid}">
+      <ValidationObserver v-slot="{invalid}">
         <v-row
           justify="center"
           class="mr-auto ml-auto mt-12 mb-12"

@@ -61,7 +61,10 @@
 
       <!-- AGENDA ITEM -->
 
-      <Agenda v-model="entries" />
+      <Agenda
+        v-model="entries"
+        v-stream:update:value="onAgendaChange$"
+      />
     </v-col>
   </v-row>
 </template>
@@ -73,22 +76,46 @@ import Component from 'vue-class-component'
 import { PCmultiinput } from '@/components/inputs'
 import {EventItem} from "@/store/Database/types/utilities"
 import {Agenda} from "@/views/ProgramGuide/components/"
-const emptyAgenda:Omit<EventItem,'completed'> = {
+import { FbStore } from '../../../../store'
+import { Subject, pipe } from 'rxjs'
+import { pluck, debounceTime } from 'rxjs/operators'
+import {firebase} from "@/firebase/init"
+const emptyAgenda:EventItem = {
   name:"",
   duration:"",
-  description:""
+  description:"",
 }
 
-@Component({
+@Component<ExternshipAgendaEdit>({
+  domStreams:['onAgendaChange$'],
+  subscriptions(){
+    return {
+      agendaEvents: this.onAgendaChange$.pipe(
+        debounceTime(300),
+       pluck<{event:{name:string,msg:EventItem[]},data:undefined},EventItem[]>("event","msg")
+      )
+    }
+  },
   components:{
     Agenda
   }
 })
 export default class ExternshipAgendaEdit extends Vue{
+  mounted(){
+    this.$subscribeTo(this.$observables.agendaEvents,async (events:EventItem[]) => {
+      await FbStore.updateCurrentEmployerProgram({
+        externshipDayAgenda:{
+          events:events.filter(obj => Object.keys(obj).length !== 0),
+          lastUpdate:firebase.firestore.FieldValue.serverTimestamp()
+        }
+      })
+    })
+  }
   created(){
     // set ref to update based on user type
   }
+  onAgendaChange$!:Subject<{event:{name:string,msg:EventItem[]},data:undefined}>;
   ref!:firebase.firestore.DocumentReference
-    entries:Omit<EventItem,'completed'>[] = [emptyAgenda]
+    entries:EventItem[] = FbStore.currentEmployerProgram?.externshipDayAgenda?.events || [emptyAgenda]
 }
 </script>
