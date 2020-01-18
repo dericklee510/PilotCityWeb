@@ -201,7 +201,7 @@ export const STUDENTMODULES = {
 export const TEACHERSEQUENCE = {
     Externship: {
         'Agenda': [
-            'teach-externship-agenda-edit',
+            // 'teach-externship-agenda-edit',
             'teach-externship-agenda',
         ],
         'Brief': [

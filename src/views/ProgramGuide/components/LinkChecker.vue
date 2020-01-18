@@ -7,9 +7,8 @@
     <v-text-field
       v-model="inputUrl"
       v-stream:input="inputChange$"
-      :error-messages="errors"
-      :success="valid"
-      :success-messages="result"
+      :error-messages="color=='error'?result:errors"
+      :success-messages="color!='sucess'?result:[]"
       :loading="loading"
       :color="color"
       placeholder="https://"
@@ -53,6 +52,9 @@ interface nativeEvent {
   }
 })
 export default class LinkChecker extends Vue {
+  mounted(){
+    this.inputUrl = this.value
+  }
   @Prop({ required: true })
   value!: string;
   inputUrl: string = "";

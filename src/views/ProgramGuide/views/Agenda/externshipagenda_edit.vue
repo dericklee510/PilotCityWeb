@@ -103,6 +103,7 @@ const emptyAgenda:EventItem = {
 export default class ExternshipAgendaEdit extends Vue{
   mounted(){
     this.$subscribeTo(this.$observables.agendaEvents,async (events:EventItem[]) => {
+      if(FbStore.userCitizenType === "employer")
       await FbStore.updateCurrentEmployerProgram({
         externshipDayAgenda:{
           events:events.filter(obj => Object.keys(obj).length !== 0),

@@ -61,6 +61,7 @@
           <v-btn
             class="introvideo_edit__button"
             :disabled="invalid || !checkbox"
+            @click="onSubmit"
           >
             CONFIRM
           </v-btn>
@@ -79,6 +80,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { LinkChecker } from '../../components'
 import { ValidationObserver } from 'vee-validate'
+import { FbStore } from '../../../../store'
 
 @Component({
   components:{
@@ -87,9 +89,14 @@ import { ValidationObserver } from 'vee-validate'
   }
 })
 export default class introvideo_edit extends Vue{
-    url:string = ""
+    url:string = FbStore.currentEmployerProgram?.introVideo || "other"
     success:boolean=false
     showerr = false
     checkbox = false
+    onSubmit(){
+      FbStore.updateCurrentEmployerProgram({
+        introVideo:this.url
+      })
+    }
 }
 </script>

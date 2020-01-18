@@ -32,7 +32,10 @@
       >
         Enter your agenda for the event or activity.
       </v-row>
-      <Agenda v-model="agendaItems" />
+      <Agenda
+        v-model="agendaItems"
+        v-stream:update:value="onAgendaChange$"
+      />
     </v-col>
   </v-row>
 </template>
@@ -44,14 +47,49 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { Agenda } from '../../components'
-import { EventItem } from '../../../../store/Database/types/utilities'
-@Component({
+import { PCmultiinput } from '@/components/inputs'
+import {EventItem} from "@/store/Database/types/utilities"
+import {Agenda} from "@/views/ProgramGuide/components/"
+import { FbStore } from '../../../../store'
+import { Subject, pipe } from 'rxjs'
+import { pluck, debounceTime } from 'rxjs/operators'
+import {firebase} from "@/firebase/init"
+const emptyAgenda:EventItem = {
+  name:"",
+  duration:"",
+  description:"",
+}
+
+@Component<DemoAgendaEdit>({
+  domStreams:['onAgendaChange$'],
+  subscriptions(){
+    return {
+      agendaEvents: this.onAgendaChange$.pipe(
+        debounceTime(300),
+       pluck<{event:{name:string,msg:EventItem[]},data:undefined},EventItem[]>("event","msg")
+      )
+    }
+  },
   components:{
     Agenda
   }
 })
-export default class agenda extends Vue{
-    agendaItems:EventItem[]= [{} as EventItem]
+export default class DemoAgendaEdit extends Vue{
+  mounted(){
+    this.$subscribeTo(this.$observables.agendaEvents,async (events:EventItem[]) => {
+      await FbStore.updateCurrentEmployerProgram({
+        demoDayAgenda:{
+          events:events.filter(obj => Object.keys(obj).length !== 0),
+          lastUpdate:firebase.firestore.FieldValue.serverTimestamp()
+        }
+      })
+    })
+  }
+  created(){
+    // set ref to update based on user type
+  }
+  onAgendaChange$!:Subject<{event:{name:string,msg:EventItem[]},data:undefined}>;
+  ref!:firebase.firestore.DocumentReference
+    agendaItems:EventItem[] = FbStore.currentEmployerProgram?.demoDayAgenda?.events || [emptyAgenda]
 }
 </script>

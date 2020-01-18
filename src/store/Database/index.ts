@@ -1,11 +1,10 @@
-
 import { SET_USER } from './../Auth/mutation-types';
 import { Dependency } from '@/utilities/dependency';
 import { isLinkValid } from './../../api';
 import { AgendaTemplate, NamedLink, EventItem } from './types/utilities';
 /* eslint-disable-next-line */
 import { Module, VuexModule, Action, Mutation, MutationAction } from "vuex-module-decorators"
-import firestore, { firebaseApp as fb, firebase } from '@/firebase/init'
+import firestore,{ firebaseApp as fb, firebase } from '@/firebase/init'
 import { Classroom, EmployerProgram, GeneralUser, Project, RatingTag, TeacherProgramData } from './types/types'
 import { NonFunctionKeys } from "utility-types"
 const _ = require('lodash');
@@ -108,8 +107,10 @@ export default class Fb extends VuexModule {
 
     //  @Dependency('currentEmployerProgramUID', 'currentTeacherProgramData')
     @MutationAction({ mutate: ['currentTeacherProgramData'] })
-    async updateCurrentTeacherProgramData(property: any) {
-        await firestore.collection('TeacherProgramData').doc(this.currentTeacherProgramUID!).update(property);
+    async updateCurrentTeacherProgramData(property: Partial<TeacherProgramData>) {
+        const state = (this.state as Pick<Fb, NonFunctionKeys<Fb>>)
+        const uid = state.currentTeacherProgramData?.teacherProgramId
+        await firestore.collection('TeacherProgramData').doc(uid).update(property);
         return { currentTeacherProgramData: Object.assign(property, this.currentTeacherProgramData) }
     }
 
@@ -272,18 +273,24 @@ export default class Fb extends VuexModule {
      * @param {string} uid
      * @returns {Promise<voiv>}
      */
-    async createClassroom(className: string, teacherProgramId: string, employerProgramId: string) {
-        assert(this.userCitizenType === 'teacher', 'User type not teacher');
-        const classroomID = firestore.collection('Classroom').doc().id;
+    @Action({rawError:true})
+    async createClassroom({teacherProgramId,className , employerProgramId}:{className: string, teacherProgramId: string, employerProgramId: string}) {
+        assert(this.context.getters["userCitizenType"] === 'teacher', 'User type not teacher');
+        const batch = firestore.batch();
+        const classroomId = firestore.collection('Classroom').doc().id;
         const classroom = {
-            classroomID,
-            teacherId: this.FBUser!.uid,
+            classroomId,
+            teacherId: this.currentUserProfile!.userId,
             teacherProgramId,
             employerProgramId,
             className,
             lastUpdate: firebase.firestore.FieldValue.serverTimestamp()
         }
-        await firestore.collection('Classroom').doc(classroomID).set(classroom);
+        console.log(classroom)
+        batch.update(firestore.collection("TeacherProgramData").doc(teacherProgramId), {classroomIds: firebase.firestore.FieldValue.arrayUnion(classroomId)})
+        batch.set(firestore.collection('Classroom').doc(classroomId),classroom)
+        await batch.commit()
+        return firestore.collection('Classroom').doc(classroomId)
         // update current classroom ?
     }
 

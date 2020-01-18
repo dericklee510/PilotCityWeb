@@ -7,7 +7,7 @@ export interface Classroom {
     teacherProgramId: string
     employerProgramId: string
     className: string
-    shareCode: string  //  create  hash  code
+    shareCode?: string  //  create  hash  code
     lastUpdate: firebase.firestore.Timestamp | firebase.firestore.FieldValue
 }
 
@@ -38,6 +38,7 @@ export interface EmployerProgram {
     employerId?: string
     programLauncher: ProgramEvent[]
     externshipDayAgenda?: AgendaTemplate
+    demoDayAgenda?: AgendaTemplate
     masterHackDayAgenda?: AgendaTemplate    //  Employer  cannot  modify  this
     programBrief?: NamedLink[]
     introVideo?: string

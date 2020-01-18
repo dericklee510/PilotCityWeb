@@ -14,6 +14,15 @@
             v-model="entries"
           />
         </v-col>
+
+        <v-col>
+          <button
+            class="programbrief__addbrief"
+            @click="addEntry"
+          >
+            +
+          </button>
+        </v-col>
       </v-row>
     </v-container>
   </div>

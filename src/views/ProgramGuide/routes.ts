@@ -252,11 +252,11 @@ const routes: RouteConfig[] = [
                 name: 'teach-project-demo',
                 component: Guide.Program.DemoVideoView
             },
-            // {
-            //     path: 'employer/project/demo',
-            //     name: 'emp-project-demo',
-            //     component: Guide.Program.DemoVideoView
-            // },
+            {
+                path: 'employer/project/demo',
+                name: 'emp-project-demo',
+                component: Guide.Program.DemoVideoView
+            },
             {
                 path: 'student/project/demo/edit',
                 name: 'stud-project-demo-edit',

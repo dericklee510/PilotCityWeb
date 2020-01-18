@@ -41,25 +41,23 @@
               cols="2"
               class="agenda-view__checkbox-input"
             >
-              <input
+              <v-checkbox
                 :id="'checkbox'+index"
                 v-model="item.completed"
                 type="checkbox"
-              >
+              />
             </v-col>
             <v-col
               cols="10"
               class="agenda-view__checkbox-label"
             >
               <v-col>
-                <label for="checkbox+index">
-                  <input
-                    v-model="item.name"
-                    class="agenda-view__item"
-                    disabled="true"
-                    placeholder="Item"
-                  >
-                </label>
+                <input
+                  v-model="item.name"
+                  class="agenda-view__item"
+                  disabled="true"
+                  placeholder="Item"
+                >
               </v-col>
             </v-col>
           </v-row>
