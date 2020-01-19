@@ -47,11 +47,6 @@ const routes: RouteConfig[] = [
                 name: 'emp-externship-brief-edit',
                 component: Guide.Program.BriefEdit,
             },
-            // { // DON'T THINK EMPLOYERS EVER VIEW
-            //     path: 'employer/externship/brief',
-            //     name: 'emp-externship-brief',
-            //     component: Guide.Program.BriefView,
-            // },
             {
                 path: 'student/project/brief',
                 name: 'stud-project-brief',
@@ -87,11 +82,6 @@ const routes: RouteConfig[] = [
                 name: 'emp-project-intro-edit',
                 component: Guide.Program.IntroVideoSubmit
             },
-            // { //DONT USE?
-            //     path: 'employer/project/intro',
-            //     name: 'emp-project-intro',
-            //     component: Guide.Program.IntroVideoView
-            // },
             {
                 path: 'teacher/project/intro',
                 name: 'teach-project-intro',
@@ -154,8 +144,17 @@ const routes: RouteConfig[] = [
             },
             {
                 path: 'teacher/project/canvas',
-                name: 'teach-project-canvas',
-                component: Guide.Program.BusinessCanvasView
+                component: Guide.Program.BusinessCanvasView,
+                children: [
+                    {
+                        path: '',
+                        name: 'teach-project-canvas',
+                        components: {
+                            view: Guide.Canvas.BusinessCanvasView1,
+                            detail: Guide.Canvas.BusinessCanvasView2,
+                        }
+                    }
+                ]
             },
             {
                 path: 'employer/project/canvas',

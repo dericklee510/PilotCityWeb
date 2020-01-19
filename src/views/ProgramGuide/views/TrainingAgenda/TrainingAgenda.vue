@@ -1,29 +1,42 @@
 <template>
-  <v-row justify="center">
-    <img
-      id="trainingday__icon"
-      class="trainingday__image"
-      src="@/assets/icons/agenda.png"
-    >
-
-    <v-col
-      id="trainingday__contain"
-      cols="7"
-    >
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto trainingday__title"
+  <v-container>
+    <v-row justify="center">
+      <img
+        id="agenda__icon"
+        class="agenda__image"
+        src="@/assets/icons/agenda.png"
       >
-        Training Day Agenda
-      </v-row>
-
+    
       <v-col
-        cols="12"
-        class="trainingday__borderline"
-      />
-      <Agenda v-model="entries" />
-    </v-col>
-  </v-row>
+        id="agenda__contain"
+        cols="10"
+      >
+        <!-- TITLE -->
+    
+        <v-row
+          justify="center"
+          class="mr-auto ml-auto agenda__title"
+        >
+          TRAINING DAY AGENDA
+        </v-row>
+    
+        <!-- BORDERLINE -->
+    
+        <v-col
+          cols="12"
+          class="agenda__borderline"
+        />
+    
+        <v-row
+          justify="center"
+          class="mr-auto ml-auto businessmodelcanvas_view2__description"
+        >
+          Enter agenda for Externship event.
+        </v-row>
+        <Agenda v-model="entries" />
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 
@@ -32,16 +45,24 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import {Agenda} from "@/views/ProgramGuide/components"
-import { EventItem } from '../../../../store/Database/types/utilities'
-
+import {EventItem} from "@/store/Database/types/utilities"
+import {Agenda} from "@/views/ProgramGuide/components/"
+const emptyAgenda:Omit<EventItem,'completed'> = {
+  name:"",
+  duration:"",
+  description:""
+}
 
 @Component({
   components:{
     Agenda
   }
 })
-export default class TrainingDay extends Vue{
-    entries:EventItem[] = [{} as EventItem]
+export default class TrainingDayEdit extends Vue{
+  created(){
+    // set ref to update based on user type
+  }
+  ref!:firebase.firestore.DocumentReference
+    entries:Omit<EventItem,'completed'>[] = [emptyAgenda]
 }
 </script>

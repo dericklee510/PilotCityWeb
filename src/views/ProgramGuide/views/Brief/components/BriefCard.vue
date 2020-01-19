@@ -7,11 +7,9 @@
       <!-- <img src="" alt="" id="programbrief__cover"> -->
       <v-row id="briefcard__rowcontain">
         <v-col
-          class="mr-5"
           cols="12"
           md="3"
           lg="2"
-          xl="1"
         >
           <iframe
             class="briefcard__cover"
@@ -20,8 +18,10 @@
         </v-col>
       
         <v-col
-          class=""
-          cols=""
+        class="pl-5"
+          cols="12"
+          md="9"
+          lg="10"
         >
           <v-col
             class=""

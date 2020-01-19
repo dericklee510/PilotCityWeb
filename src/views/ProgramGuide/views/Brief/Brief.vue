@@ -1,22 +1,31 @@
 <template>
   <div class="programbrief__dark">
-      <v-row class="programbrief__container">
-        <v-col cols="2" md="1"/>
-        <v-col cols="8" md="10">
-          <v-col class="programbrief__tile">
-            Program Briefs
-          </v-col>
-        
-          <v-col>
-            <BriefCard />
-          </v-col>
-
-          <v-col>
-            <BriefCard />
-          </v-col>
+    <v-row class="programbrief__container">
+      <v-col
+        cols="2"
+        md="1"
+      />
+      <v-col
+        cols="8"
+        md="10"
+      >
+        <v-col class="programbrief__tile">
+          Program Briefs
         </v-col>
-        <v-col cols="2" md="1" />
-      </v-row>
+        
+        <v-col>
+          <BriefCard />
+        </v-col>
+
+        <v-col>
+          <BriefCard />
+        </v-col>
+      </v-col>
+      <v-col
+        cols="2"
+        md="1"
+      />
+    </v-row>
   </div>
 </template>
  

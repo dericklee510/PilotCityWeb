@@ -1,69 +1,77 @@
 <template>
-  <v-row justify="center">
-    <img
-      id="viewcasestudies__icon"
-      class="viewcasestudies__image"
-      src="@/assets/Viewcasestudies.png"
-    >
-
-    <v-col
-      id="viewcasestudies__contain"
-      cols="7"
-    >
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto viewcasestudies__title"
+  <v-container>
+    <v-row justify="center">
+      <img
+        id="viewcasestudies__icon"
+        class="viewcasestudies__image"
+        src="@/assets/Viewcasestudies.png"
       >
-        REVIEW CASE STUDIES & USE CASES
-      </v-row>
-
+    
       <v-col
-        cols="12"
-        class="viewcasestudies__borderline"
-      />
-
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto viewcasestudies__description"
+        id="viewcasestudies__contain"
+        cols="10"
       >
-        It is important to create unique and innovative solutions. Review what’s been done before so you don’t reinvent the wheel.
-      </v-row>
-
-      <v-row class="viewcasestudies__reviewtitle">
-        Reviewed
-      </v-row>
-
-
-
-      <v-row
-        v-for="(namedLink,index) in namedLinks"
-        id="viewcasestudies__check1"
-        :key="index"
-      >
-        <span
-          class="viewcasestudies__wholeline"
-        ><input
-           v-model="namedLink.reviewed"
-           class="viewcasestudies__check"
-           type="checkbox"
-         >
-          {{ namedLink.linkName }}
-          <a :ref="namedLink.link"><button class="viewcasestudies__exporticon"><img src="@/assets/exportbox.png"></button></a>
-
-        </span>
-      </v-row>
-
-
-      <v-row class="viewcasestudies__savebuttonrow">
-        <v-btn
-          class="viewcasestudies__savebutton"
-          :disabled="!allReviewed"
+        <v-row
+          justify="center"
+          class="mr-auto ml-auto viewcasestudies__title"
         >
-          NEXT
-        </v-btn>
-      </v-row>
-    </v-col>
-  </v-row>
+          REVIEW CASE STUDIES & USE CASES
+        </v-row>
+    
+        <v-col
+          cols="12"
+          class="viewcasestudies__borderline"
+        />
+    
+        <v-row
+          justify="center"
+          class="mr-auto ml-auto viewcasestudies__description"
+        >
+          It is important to create unique and innovative solutions. Review what’s been done before so you don’t reinvent the wheel.
+        </v-row>
+        <v-row
+          class="viewcasestudies__reviewtitle"
+          no-gutters
+        >
+          Reviewed
+        </v-row>
+        <v-row
+          v-for="(namedLink,index) in namedLinks"
+          id="viewcasestudies__check1"
+          :key="index"
+        >
+          <span
+            class="viewcasestudies__wholeline"
+          ><input
+             v-model="namedLink.reviewed"
+             class="viewcasestudies__check"
+             type="checkbox"
+           >
+            <span>
+              {{ namedLink.linkName }}
+            </span>
+            <a :ref="namedLink.link"><button class="viewcasestudies__exporticon"><img src="@/assets/exportbox.png"></button></a>
+          </span>
+        </v-row>
+        <v-row
+          no-gutters
+          justify="center"
+        >
+          <v-col
+            cols="4"
+            class="viewcasestudies__savebuttonrow"
+          >
+            <v-btn
+              class="viewcasestudies__savebutton"
+              :disabled="!allReviewed"
+            >
+              NEXT
+            </v-btn>
+          </v-col>
+        </v-row>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 

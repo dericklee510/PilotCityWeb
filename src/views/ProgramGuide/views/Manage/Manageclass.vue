@@ -1,57 +1,118 @@
 <template>
-  <div>
-    <span class="manageclass__topbutton">
-      <button class="manageclass__classesbutton">CLASSES</button>
+  <v-col class="manageclass__container">
+    <v-col
+      class="manageclass__topbuttons"
+      style="padding-left: 17.5%;"
+    >
+      <button class="manageclass__topbutton">
+        CLASSES
+      </button>
 
-      <button class="manageclass__studentsbutton">STUDENTS</button>
+      <button class="manageclass__topbutton">
+        STUDENTS
+      </button>
 
-      <button class="manageclass__teambutton">TEAMS</button>
-    </span>
+      <button class="manageclass__topbutton">
+        TEAMS
+      </button>
+    </v-col>
 
-    <v-row class="manageclass__titlemain">
+    <v-col class="manageclass__titlemain">
       <span class="manageclass__title">Manage Classes</span>
-
-      <v-row class="manageclass__headtitle">
-        <span>
-          <span class="manageclass__classtitle">Class Name</span>
-          <span class="manageclass__codetitle">Share code</span>
-        </span>
+      <v-row
+        no-gutters
+        class="manageclass__headtitle"
+        style="padding-left: 17.5%;"
+      >
+        <v-col
+          cols="12"
+          class="manageclass__classtitle"
+        >
+          Class Name
+        </v-col>
+        <!-- <v-spacer /> -->
       </v-row>
-    </v-row>
+    </v-col>
 
     <v-row
       v-for="(entry,index) in entries"
       :key="entry.id"
+      no-gutters
+      class="manageclass__wholeline"
+      
+      style="padding-left: 17.5%;"
     >
-      <span class="manageclass__wholeline">
-        <input
-          v-model="classNames[index]"
-          class="manageclass__classinput"
-          :placeholder="entry.className"
-        >
+      <v-col
+        cols="12"
+        md="4"
+      >
+        <div class="manageclass__classinput">
+          <input
+            v-model="classNames[index]"
+            class="manageclass__classinput--field"
+            :placeholder="entry.className"
+          >
+        </div>
+      </v-col>
+      <v-col
+        cols="12"
+        md="2"
+      >
         <button
           class="manageclass__renamebutton"
           @click="renameClass(entry.id,index)"
-        >RENAME</button>
+        >
+          RENAME
+        </button>
+      </v-col>
+      <v-col
+        cols="12"
+        md="2"
+      >
         <button
           class="manageclass__deletebutton"
           @click="deleteEntry(entry.id)"
-        >DELETE</button>
-        <v-progress-circular
-          v-if="!entry.shareCode"
-          indeterminate
-          color="primary"
-        />
-        <span class="manageclass__sharecode">{{ entry.shareCode?entry.shareCode:"GENERATING..." }}</span>
-        <button
-          v-if="entry.shareCode"
-          class="manageclass__icon"
         >
-          <!-- <img src="@/assets/link.png"> -->
+          DELETE
         </button>
-      </span>
+      </v-col>
+      <v-col
+        cols="12"
+        md="2"
+        xl="1"
+        style="padding-bottom: 68.62px;"
+      >
+        <v-col
+          cols="12"
+          style="padding: 0"
+        >
+          Share code
+        </v-col>
+        <v-col
+          cols="12"
+          style="padding: 0"
+        >
+          <v-progress-circular
+            v-if="!entry.shareCode"
+            indeterminate
+            color="primary"
+          />
+        </v-col>
+        <v-col
+          style="padding: 0"
+          cols="12"
+          class="manageclass__sharecode"
+        >
+          {{ entry.shareCode?entry.shareCode:"GENERATING..." }}
+          <button
+            v-if="entry.shareCode"
+            class="manageclass__icon"
+          >
+          <!-- <img src="@/assets/link.png"> -->
+          </button>
+        </v-col>
+      </v-col>
     </v-row>
-
     <v-row>
       <button
         class="manageclass__createbutton"
@@ -60,7 +121,7 @@
         CREATE
       </button>
     </v-row>
-  </div>
+  </v-col>
 </template>
 
 

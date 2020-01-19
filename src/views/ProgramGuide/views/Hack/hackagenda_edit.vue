@@ -32,45 +32,6 @@
       >
         Enter your agenda for the event or activity.
       </v-row>
-
-      <!-- DESCRIPTION -->
-
-      <!-- <v-row 
-            justify="center" 
-            class="mr-auto ml-auto agenda__description">As you practice, use and apply the employer's product or service, log how many minutes you use it each time.
-        </v-row> -->
-
-
-
-      <!-- AGENDA LOGISTICS
-
-<v-row class="agenda__logistics col-8 mr-auto ml-auto mt-10 pr-auto pl-auto pt-0 pb-0">
-
-
-        <v-column class="agenda__poop">
-
-            <v-row id="agenda__borderline" class="agenda__logisticslabel pl-4 pt-4 pb-4">DATE:<input placeholder="Enter date here" class="ml-4 agenda__item-input"></v-row>
-
-            <v-row id="agenda__borderline" class="agenda__logisticslabel pl-4 pt-4 pb-4">TIME:<input placeholder="Enter time here" class="ml-4 agenda__item-input"></v-row>
-
-            <v-row class="agenda__logisticslabel pl-4 pb-4 pt-4">LOCATION:<input placeholder="Enter location here" class="ml-4 agenda__item-input"></v-row>
-        
-        </v-column>
-
-        </v-row> -->
-
- 
-
-
-      <!-- LOG TIME / COULD DELETE -->
-
-      <!-- <v-row justify="center" class="mr-auto ml-auto mt-10 mb-5"><input class="agenda__input" placeholder="0m"></v-row>
-
-        <v-row justify="center" class="mr-auto ml-auto mt-5 mb-5"><button class="agenda__button">LOG TIME</button></v-row>
-
-        <v-row justify="center" class="mr-auto ml-auto mt-10 agenda__label">LOGGED TIME</v-row>
-
-        <v-row justify="center" class="mr-auto ml-auto mt-2 mb-7 agenda__calculated">1h 30m</v-row> -->
       <Agenda v-model="entries" />
     </v-col>
   </v-row>

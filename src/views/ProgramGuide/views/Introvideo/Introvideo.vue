@@ -1,66 +1,68 @@
 <template>
-  <v-row justify="center">
-    <img
-      id="introvideo__icon"
-      src="@/assets/watchintrovideo.png"
-    >
-
-    <v-col
-      id="introvideo__contain"
-      cols="7"
-    >
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto introvideo__watchintro"
+  <v-container>
+    <v-row justify="center">
+      <img
+        id="introvideo__icon"
+        src="@/assets/watchintrovideo.png"
       >
-        WATCH INTRODUCTION VIDEO
-      </v-row>
-
+    
       <v-col
-        id="introvideo__borderline"
-        cols="12"
-      />
-
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto introvideo__description"
+        id="introvideo__contain"
+        cols="10"
       >
-        Watch the following introduction video by your employer to get warmed up on what we’re doing.
-      </v-row>
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto introvideo__video"
-      >
-        <video-player
-          :options="playerOptions"
-          @ended="canBeAcknowldged = true"
-        />
-      </v-row>
-      <v-row
-        justify="center"
-        class="ml-auto mr-auto introvideo__check"
-      >
-        <input
-          v-model="acknowledged"
-          :disabled="!canBeAcknowldged"
-          type="checkbox"
-          class="introvideo__checkbox"
-        > I have finished watching the video
-      </v-row>
-
-      <v-col
-        class="mr-auto ml-auto"
-        cols="5"
-      >
-        <v-btn
-          class="introvideo__button"
-          :disabled="!acknowledged"
+        <v-row
+          justify="center"
+          class="mr-auto ml-auto introvideo__watchintro"
         >
-          NEXT
-        </v-btn>
+          WATCH INTRODUCTION VIDEO
+        </v-row>
+    
+        <v-col
+          id="introvideo__borderline"
+          cols="12"
+        />
+    
+        <v-row
+          justify="center"
+          class="mr-auto ml-auto introvideo__description"
+        >
+          Watch the following introduction video by your employer to get warmed up on what we’re doing.
+        </v-row>
+        <v-row
+          justify="center"
+          class="mr-auto ml-auto introvideo__video"
+        >
+          <video-player
+            :options="playerOptions"
+            @ended="canBeAcknowldged = true"
+          />
+        </v-row>
+        <v-row
+          justify="center"
+          class="ml-auto mr-auto introvideo__check"
+        >
+          <input
+            v-model="acknowledged"
+            :disabled="!canBeAcknowldged"
+            type="checkbox"
+            class="introvideo__checkbox"
+          > I have finished watching the video
+        </v-row>
+    
+        <v-col
+          class="mr-auto ml-auto"
+          cols="5"
+        >
+          <v-btn
+            class="introvideo__button"
+            :disabled="!acknowledged"
+          >
+            NEXT
+          </v-btn>
+        </v-col>
       </v-col>
-    </v-col>
-  </v-row>
+    </v-row>
+  </v-container>
 </template>
 
 

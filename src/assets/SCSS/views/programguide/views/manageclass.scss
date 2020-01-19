@@ -1,53 +1,25 @@
 .manageclass{
-    &__topbutton{
-
+    &__container{
+        margin-top : 82.5px;
+        height: 100%;
+    }
+    &__topbuttons{
         width:100%;
-
         font-family: Raleway;
         font-style: normal;
         font-weight: 900;
         font-size: 17.1097px;
         line-height: 20px;
-
         color: #231F20;
 
-        margin-left: 17.5%;
-        margin-top: 5.6%;
-
     }
-
-    &__classesbutton{
-
+    &__topbutton{
         width: 11.8%;
         height: 55.82px;
         border: 0.428px solid #231F20;
         margin-right: 3%;
-    
         background: #F1F2F2;
-
     }
-
-    &__studentsbutton{
-
-        width: 11.8%;
-        height: 55.82px;
-        border: 0.428px solid #231F20;
-        margin-right: 3%;
-
-    }
-
-    &__teambutton{
-
-        width: 11.8%;
-        height: 55.82px;
-        border: 0.428px solid #231F20;
-
-    }
-
-    &__titlemain{
-        width: 100%;
-    }
-
     &__title{
 
         width: 100%;
@@ -60,9 +32,9 @@
 
         color: #231F20;
 
-        margin-top: 4.5%;
-        margin-left: 17.84%;
-        padding-bottom: 0%;
+        margin-top: 65.43px;
+        padding-left: 17.84%;
+        padding-bottom: 0;
 
     }
 
@@ -73,68 +45,57 @@
         font-size: 15px;
         line-height: 18px;
         color: #231F20;
-
         margin-top: 3.3%;
     }
 
     &__classtitle{
-        position: absolute;
-        margin-left: 19.3%;
-        padding-right: 43.5%;
+        // margin-left: 19.3%;
+        // padding-right: 43.5%;
 
     }
 
     &__codetitle{
-    
-
-        margin-left: 1023px;
-        padding-right: 90px;
+        padding-bottom: 68.62px;
     }
     
     &__wholeline{
-        width: 100%;
-        margin-left: 17.8% ;
         margin-top: .7%;
     }
 
     &__classinput{
-        
-        width: 384.77px;
+        width: 100%;
         height: 55.88px;
         border: 0.375px solid #000000;
-
-        font-family: Raleway;
-        font-style: normal;
-        font-weight: 900;
-        font-size: 15px;
-        line-height: 18px;
-        color: #231F20;
-
-        padding-left: 1.5%;
-
+        &--field{
+            font-family: Raleway;
+            font-style: normal;
+            font-weight: 900;
+            font-size: 17.1097px;
+            line-height: 20px;
+            color: #231F20;
+            width: inherit;
+            height: inherit;
+            padding: 10px;
+        }
+        margin-right: 22.9px;
     }
 
     &__renamebutton{
-        width: 141.84px;
+        width: 100%;
         height: 55.88px;
-
         border: 0.428px solid #231F20;
-
         font-family: Raleway;
         font-style: normal;
         font-weight: 900;
         font-size: 17.1097px;
         line-height: 20px;
         color: #231F20;
-
-        margin-left: 2%;
-
-
+        margin: 0px 22.9px;
     }
 
 
     &__deletebutton{
-        width: 141.84px;
+        width: 100%;
         height: 55.82px;
 
         border: 0.428px solid #231F20;
@@ -145,10 +106,7 @@
         font-size: 17.1097px;
         line-height: 20px;
         color: #231F20;
-
-        margin-left: 2%;
-        margin-right: 2%;
-
+        margin:0 22.9px;
     }
 
     &__sharecode{
@@ -159,9 +117,7 @@
         font-size: 15px;
         line-height: 18px;
         color: #231F20;
-
-        margin-right: 3.5%;
-
+        margin-left: 22.9px;
     }
 
 
