@@ -1,35 +1,15 @@
-#practicelog_manage{
+#practicelog-manage{
     &__icon{
         width: 80px;
         height: 75px;
         position: absolute;
         margin-top: 33px;
     }
-
-    &__contain{ 
-
-            height: 100%;
-            border: 0.75px solid #000000;
-            margin-top: 69.29px;
-            margin-bottom: 49.29px;
-            padding-left: 0%;
-            padding-right: 0%;
-    
-
-    }
-
-
 }
 
 
 .practicelog_manage{
 
-    &__loginfo{
-        font-family: "Raleway";
-        font-size: 18px;
-        font-weight:800;
-        margin-bottom: 10px;
-    }
 
     &__singlelog{
         margin: 10px 10px 10px 0px;
@@ -59,59 +39,34 @@
         }
 
     }
-
-    &__label{
-        font-family: "Raleway";
-        font-size: 15px;
-        font-weight:800;
-
-    }
-
-&__input{
-    width: 275px;
-    height: 100px;
-    border: 1px solid #000000;
-    font-family: 'Raleway';
-    font-size: 50px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    padding: 50px;
-    color: #000000;
-    text-align: center;
-
-    &::placeholder{
+    
+    &__input{
+        width: 275px;
+        height: 100px;
+        border: 1px solid #000000;
+        font-family: 'Raleway';
         font-size: 50px;
         font-weight: 700;
-        color: #E6E7E8;
+        letter-spacing: 1px;
+        padding: 50px;
+        color: #000000;
         text-align: center;
-        
-        }
 
-    }
-    
-        &__calculated{
-            font-family: "Raleway";
-            font-size: 36px;
-            font-weight: 800;
-        }
-        
-            
-        
-            &__title{
-        
-            margin-top:56.78px ;
-            font-family: 'Raleway';
-            font-style: normal;
-            font-weight: 900;
-            font-size: 1.41rem;
-            line-height: 26px;
-            color: #000000;
-            width: 75%;
+        &::placeholder{
+            font-size: 50px;
+            font-weight: 700;
+            color: #E6E7E8;
             text-align: center;
-            letter-spacing: .05rem;
-        
+            
             }
-        
+
+        }
+    
+    &__calculated{
+        font-family: "Raleway";
+        font-size: 36px;
+        font-weight: 800;
+    }
             &__borderline{
         
                 border-spacing: 0px;
@@ -127,15 +82,15 @@
         
             &__description{
         
-            margin-top: 5%;
-            font-family: Raleway;
-            font-style: normal;
-            font-weight: 500;
-            font-size: 1.41rem;
-            color: #949598;
-            width: 75%;
-            text-align: center;
-            line-height: unset;
+                margin-top: 5%;
+                font-family: Raleway;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 1.41rem;
+                color: #949598;
+                width: 75%;
+                text-align: center;
+                line-height: unset;
         
             }
         
@@ -202,4 +157,59 @@
             }        
 
 
+}
+.practicelog-manage{
+    &__contain &__logged:last-child{
+        margin-bottom: 20px;
+    }
+    &__contain{ 
+        height: 100%;
+        border: 0.75px solid #000000;
+        margin-top: 69.29px;
+        margin-bottom: 49.29px;
+        padding-left: 0%;
+        padding-right: 0%;
+    }
+    &__title{
+        width: 100%;
+        margin-top:56.78px ;
+        font-family: 'Raleway';
+        font-style: normal;
+        font-weight: 900;
+        font-size: 1.41rem;
+        line-height: 26px;
+        color: #000000;
+        text-align: center;
+        letter-spacing: .05rem;
+        padding-bottom: 24px;
+        border-bottom: 0.75px solid black;
+    }
+    &__log-header{
+        font-family: "Raleway";
+        font-size: 18px;
+        font-weight:800;
+        padding-bottom: 0px;
+        &.col{
+            padding-left: 0;
+        }
+    }
+    &__label{
+        width: 100%;
+        font-family: "Raleway";
+        font-size: 15px;
+        font-weight:800;
+        &.row{
+            margin-left: 0;
+            margin-right: 0;
+        }
+        & .col{
+            padding-left: 0;
+        }
+    }
+    &__logged{
+        &.row{
+            margin-left: 0;
+            margin-right: 0;
+        }
+    }
 }

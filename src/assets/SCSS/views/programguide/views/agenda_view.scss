@@ -264,9 +264,11 @@
             top: 30%;
             width: 18px;
             z-index: 1;
-            &:checked git add .git {
+            &:checked{
                 // @include set-opacity(1)
-
+            }
+            @media (max-width: 610px) {
+                left: 0%;
             }
         }
         & label::before {
@@ -278,6 +280,9 @@
             position: absolute;
             top: 30%;
             width: 18px;
+            @media (max-width: 610px) {
+                left: -20%;
+            }
         }
         & label::after {
             content: "";
@@ -290,6 +295,9 @@
             background-color: black;
             transition: opacity 0.2s ease-in-out;
             width: 13.6px;
+            @media (max-width: 610px) {
+                left: -18.2%;
+            }
         }
     }
     &__icon{
@@ -305,6 +313,9 @@
         padding-left: 0%;
         padding-right: 0%;
         position: relative;
+        @media (max-width: 610px) {
+            border: none;
+        }
     }
     &__borderline{
 
@@ -342,6 +353,7 @@
         font-weight: 800;
         font-size: 15px;
         line-height: 18px;
+        width: 100%;
     }
     &__description{
         font-family: Raleway;
@@ -349,31 +361,20 @@
         font-weight: normal;
         font-size: 15px;
         line-height: 18px;
+        width: 100%;
     }
     
-    &__button{
+    &__button:not(.v-btn--disabled){
         max-width: 275px;
         display: block;
         height: 50px;
-        display: inline-block;
-        // border: 1px solid #000000;
         font-family: 'Raleway';
         font-size: 1rem;
         font-weight: 900;
+        border: 1px solid black;
         letter-spacing: 1px;
-        background-color: #BCBEC0;
-        color: #ffffff;
-    
-        &:hover{
-            height: 50px;
-            font-family: 'Raleway';
-            font-size: 1rem;
-            color: #ffffff;
-            border: 1px solid #EDA1BF;
-            font-weight: 900;
-            background-color:#EDA1BF;
-            letter-spacing: 1px;
-    
+        .theme--light.v-btn.v-btn--disabled{
+            border: none;
         }
     }  
 }

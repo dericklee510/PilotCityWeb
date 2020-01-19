@@ -6,7 +6,7 @@
     >
       <v-col
         class="agenda-view__container"
-        cols="7"
+        cols="10"
       >
         <img
           class="pc-vh-center agenda-view__icon"
@@ -26,81 +26,9 @@
           justify="center"
           class="mr-auto ml-auto businessmodelcanvas_view2__description"
         >
-          Enter your agenda for the event or activity.
+          Mark agenda items as you complete them.
         </v-row>
-    
-        <v-col
-          v-for="(item,index) in agendaItems"
-          :key="item+index"
-        >
-          <v-row
-            class="agenda-view__checkbox"
-            no-gutters
-          >
-            <v-col
-              cols="2"
-              class="agenda-view__checkbox-input"
-            >
-              <v-checkbox
-                :id="'checkbox'+index"
-                v-model="item.completed"
-                type="checkbox"
-              />
-            </v-col>
-            <v-col
-              cols="10"
-              class="agenda-view__checkbox-label"
-            >
-              <v-col>
-                <input
-                  v-model="item.name"
-                  class="agenda-view__item"
-                  disabled="true"
-                  placeholder="Item"
-                >
-              </v-col>
-            </v-col>
-          </v-row>
-          <v-row no-gutters>
-            <v-col cols="2" />
-          
-            <v-col cols="10">
-              <v-col>
-                <input
-                  v-model="item.duration"
-                  disabled="true"
-                  class="agenda-view__duration"
-                  placeholder="Duration"
-                >
-              </v-col>
-              <v-col>
-                <input
-                  v-model="item.description"
-                  disabled="true"
-                  class="agenda-view__description"
-                  placeholder="Description"
-                >
-              </v-col>
-            </v-col>
-          </v-row>
-        </v-col>
-        <v-row
-          no-gutters
-          justify="center"
-        >
-          <v-col
-            cols="6"
-            sm="4"
-            md="2"
-          >
-            <v-btn
-              class="agenda-view__button mb-10"
-              :disabled="!isAgendaComplete"
-            >
-              FINISH
-            </v-btn>
-          </v-col>  
-        </v-row>
+        <AgendaView v-model="agendaItems" />
       </v-col>
     </v-row>
   </v-container>
@@ -114,12 +42,13 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { EventItem } from '@/store/Database/types/utilities'
-import { FbStore } from '../../../../store'
+import { FbStore } from '@/store'
 @Component
 export default class ExternshipAgenda extends Vue{
   created(){
     // const agendaItems
   }
+  
   agendaItems:EventItem[] = FbStore.currentEmployerProgram?.externshipDayAgenda?.events! || []
   get isAgendaComplete(){
     return this.agendaItems.map(item => item.completed).every(isTrue => isTrue)

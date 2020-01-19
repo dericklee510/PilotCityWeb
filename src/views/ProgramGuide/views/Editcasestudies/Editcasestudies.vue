@@ -1,108 +1,136 @@
 <template>
-  <v-row justify="center">
-    <img
-      id="editcasestudies__icon"
-      class="editcasestudies__image"
-      src="@/assets/Reviewcase.png"
-    >
-     
-    <v-col
-      id="editcasestudies__contain"
-      cols="7"
-    >
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto editcasestudies__title"
+  <v-container>
+    <v-row justify="center">
+      <img
+        id="editcasestudies__icon"
+        class="editcasestudies__image"
+        src="@/assets/Reviewcase.png"
       >
-        ENTER CASE STUDIES & USE CASES
-      </v-row>
-     
+    
       <v-col
-        cols="12"
-        class="editcasestudies__borderline"
-      />
-     
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto editcasestudies__description"
+        id="editcasestudies__contain"
+        cols="10"
       >
-        Share key articles, publications and links that support the student’s understanding of the technology, product or service.
-      </v-row>
-     
-      <v-row>
-        <div class="editcasestudies__titlename">
-          Link Name
-        </div>
-        <div class="editcasestudies__titleurl">
-          Link URL
-        </div>
-      </v-row>
-     
-      <multi-input
-        v-model="links"
-        v-slot="{newEntry,deleteEntry,entries}"
-      >
+        <v-row
+          justify="center"
+          class="mr-auto ml-auto editcasestudies__title"
+        >
+          ENTER CASE STUDIES & USE CASES
+        </v-row>
+    
+        <v-col
+          cols="12"
+          class="editcasestudies__borderline"
+        />
+    
+        <v-row
+          justify="center"
+          class="mr-auto ml-auto editcasestudies__description"
+        >
+          Share key articles, publications and links that support the student’s understanding of the technology, product or service.
+        </v-row>
+    
+        <v-row
+          justify="center"
+          no-gutters
+          class="editcasestudies__labels"
+        >
+          <v-col
+            cols="2"
+            md="1"
+          /> 
+          <v-col
+            cols="3"
+            md="4"
+            class="editcasestudies__titlename"
+          >
+            Link Name
+          </v-col>
+          <v-col
+            cols="3"
+            md="4"
+            class="editcasestudies__titleurl"
+          >
+            Link URL
+          </v-col>
+          <v-col
+            cols="2"
+            md="1"
+          />
+        </v-row>
+    
         <v-row
           v-for="entry in entries"
           :key="entry.id"
-          justify="center"
           class="editcasestudies__textbox"
+          justify="center"
+          no-gutters
         >
-          <v-col>
-            <button>
-              <img
-                id="editcasestudies__plustexticon"
-                class="editcasestudies__plustext"
-                src="@/assets/Plus_casestudies.png"
-              >
-            </button>
-          </v-col>
-          <v-col>
+          <v-col
+            cols="2"
+            md="1"
+          /> 
+          <v-col
+            cols="3"
+            md="4"
+            class="editcasestudies__inputlinkname"
+          >
             <input
               v-model="entry.linkName"
-              class="editcasestudies__inputlinkname"
+              
               placeholder="Lidar for Drones"
             >
           </v-col>
-          <v-col>
-            <LinkChecker
+          <v-col
+            cols="3"
+            md="4"
+            class="editcasestudies__inputlinkurl"
+          >
+            <input
               v-model="entry.link"
-              class="editcasestudies__inputlinkurl"
               placeholder="http://www.velodyne.com/casestudy1"
+            >
+          </v-col>
+          <v-col
+            cols="2"
+            md="1"
+          >
+            <i
+              v-if="entries.length>1"
+              class="mt-2 ml-3 far fa-trash-alt agenda__trashicon"
+              @click="deleteEntry(entry.id)"
             />
           </v-col>
-          <v-col>
-            <v-btn @click="deleteEntry(entry.id)">
-              <img
-                id="editcasestudies__trashcanicon"
-                class="editcasestudies__trashcan"
-                src="@/assets/Redtrash.png"
-              >
-            </v-btn>
+        </v-row>
+        <v-row
+          no-gutters
+          justify="center"
+        >
+          <v-col
+            cols="8"
+            md="8"
+            class="editcasestudies__box"
+            @click="newEntry"
+          >
+            <span>+</span>
           </v-col>
         </v-row>
-       
-        <v-row id="editcasestudies__box">
-          <v-btn @click="newEntry">
-            <img
-              id="editcasestudies__plusicon"
-              class="editcasestudies__plus"
-              src="@/assets/Pluscase.png"
-            >
-          </v-btn>
-        </v-row>
-       
-        <v-row class="editcasestudies__savebuttonrow">
-          <button
+    
+        <v-row
+          
+          no-gutters
+          justify="center"
+        >
+          <v-col
             class="editcasestudies__savebutton"
-            @click="submit"
+            cols="4"
           >
-            SAVE
-          </button>
+            <span> SAVE </span>
+          </v-col>
         </v-row>
-      </multi-input>
-    </v-col>
-  </v-row>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 

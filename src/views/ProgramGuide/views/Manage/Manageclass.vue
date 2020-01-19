@@ -1,29 +1,44 @@
 <template>
-  <div>
-    <span class="manageclass__topbutton">
-      <button class="manageclass__classesbutton">CLASSES</button>
+  <v-col class="manageclass__container">
+    <v-col
+      class="manageclass__topbuttons"
+      style="padding-left: 17.5%;"
+    >
+      <button class="manageclass__topbutton">
+        CLASSES
+      </button>
 
-      <button class="manageclass__studentsbutton">STUDENTS</button>
+      <button class="manageclass__topbutton">
+        STUDENTS
+      </button>
 
-      <button class="manageclass__teambutton">TEAMS</button>
-    </span>
+      <button class="manageclass__topbutton">
+        TEAMS
+      </button>
+    </v-col>
 
-    <v-row class="manageclass__titlemain">
+    <v-col class="manageclass__titlemain">
       <span class="manageclass__title">Manage Classes</span>
-
-      <v-row class="manageclass__headtitle">
-        <span>
-          <span class="manageclass__classtitle">Class Name</span>
-          <span class="manageclass__codetitle">Share code</span>
-        </span>
+      <v-row
+        no-gutters
+        class="manageclass__headtitle"
+        style="padding-left: 17.5%;"
+      >
+        <v-col
+          cols="12"
+          class="manageclass__classtitle"
+        >
+          Class Name
+        </v-col>
+        <!-- <v-spacer /> -->
       </v-row>
-    </v-row>
-    <ManageClassHelper
+      <ManageClassHelper
      
      
-      :generate-first-classroom="generateClassroom"
-    />
-  </div>
+        :generate-first-classroom="generateClassroom"
+      />
+    </v-col>
+  </v-col>
 </template>
 
 <script lang="ts">

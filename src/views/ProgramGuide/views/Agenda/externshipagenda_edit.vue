@@ -1,48 +1,30 @@
 <template>
-  <v-row justify="center">
-    <img
-      id="agenda__icon"
-      class="agenda__image"
-      src="@/assets/icons/agenda.png"
-    >
-
-    <v-col
-      id="agenda__contain"
-      cols="7"
-    >
-      <!-- TITLE -->
-
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto agenda__title"
+  <v-container>
+    <v-row justify="center">
+      <img
+        id="agenda__icon"
+        class="agenda__image"
+        src="@/assets/icons/agenda.png"
       >
-        EXTERNSHIP DAY AGENDA
-      </v-row>
-
-      <!-- BORDERLINE -->
-
+    
       <v-col
-        cols="12"
-        class="agenda__borderline"
-      />
-
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto businessmodelcanvas_view2__description"
+        id="agenda__contain"
+        cols="10"
       >
         Enter your agenda for the event or activity.
-      </v-row>
+      </v-col>
+    </v-row>
 
-      <!-- DESCRIPTION -->
+    <!-- DESCRIPTION -->
 
-      <!-- <v-row 
+    <!-- <v-row 
             justify="center" 
             class="mr-auto ml-auto agenda__description">As you practice, use and apply the employer's product or service, log how many minutes you use it each time.
         </v-row> -->
 
 
 
-      <!-- AGENDA LOGISTICS
+    <!-- AGENDA LOGISTICS
 
 <v-row class="agenda__logistics col-8 mr-auto ml-auto mt-10 pr-auto pl-auto pt-0 pb-0">
 
@@ -59,14 +41,13 @@
 
         </v-row> -->
 
-      <!-- AGENDA ITEM -->
+    <!-- AGENDA ITEM -->
 
-      <Agenda
-        v-model="entries"
-        v-stream:update:value="onAgendaChange$"
-      />
-    </v-col>
-  </v-row>
+    <Agenda
+      v-model="entries"
+      v-stream:update:value="onAgendaChange$"
+    />
+  </v-container>
 </template>
 
 

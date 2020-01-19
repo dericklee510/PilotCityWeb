@@ -12,7 +12,7 @@
       </v-col>
 
       <v-col cols="4">
-        <v-row class>
+        <v-row v-if="stars">
           <div class="businessmodelcanvas_enter__ratinglabel pt-2 pr-3">
             Rating
           </div>
@@ -56,7 +56,7 @@
       </v-col>
 
       <v-col cols="4">
-        <v-row class>
+        <v-row v-if="stars">
           <div class="businessmodelcanvas_enter__ratinglabel pt-2 pr-3">
             Rating
           </div>
@@ -100,7 +100,7 @@
       </v-col>
 
       <v-col cols="4">
-        <v-row class>
+        <v-row v-if="stars">
           <div class="businessmodelcanvas_enter__ratinglabel pt-2 pr-3">
             Rating
           </div>
@@ -144,7 +144,7 @@
       </v-col>
 
       <v-col cols="4">
-        <v-row class>
+        <v-row v-if="stars">
           <div class="businessmodelcanvas_enter__ratinglabel pt-2 pr-3">
             Rating
           </div>
@@ -216,7 +216,7 @@ export default class BusinessModelCanvasComp extends Vue {
   readonly?: string;
   @PropSync("stars")
   syncedStars!: Record<keyof BusinessModelCanvas,Number>
-
+  
   @Watch("syncedStars", { deep: true })
   onStarsChanged(newVal: BusinessModelCanvas) {
     this.$emit("starsChanged", newVal);

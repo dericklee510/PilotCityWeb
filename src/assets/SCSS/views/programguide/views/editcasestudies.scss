@@ -1,12 +1,5 @@
 #editcasestudies{
-
     position: relative;
-    &__icon{
-        width: 86.25px;
-        height: 83.26px;
-        position: absolute;
-        margin-top: 23px;
-    }
 
     &__contain{
         height: 100%;
@@ -16,18 +9,12 @@
         padding-left: 0%;
         padding-right: 0%;
     }
-
-    &__box{
-            
-        width: 728.24px;
-        height: 41.81px;
-        margin-left: 8.5%;
-        padding-left: 41.8%;
-        padding-top:0.5%;
-        border: 0.375px dashed #231F20;
-        margin-top: 1.5%;
+    &__icon{
+        width: 75px;
+        height: 80px;
+        position: absolute;
+        margin-top: 33px;
     }
-
     
 }
 
@@ -76,24 +63,21 @@
             line-height: unset;
         
         }
-
+        &__labels{
+        }
 
         &__titlename{
-
-            margin-left: 10%;
-            margin-top: 6.9%;
             font-family: Raleway;
             font-style: normal;
             font-weight: 800;
             font-size: 0.94rem;
             line-height: 18px;
             color: #231F20;
-
+            margin-top: 6.9%;
         }
 
         &__titleurl{
 
-            margin-left: 34.5%;
             margin-top: 6.9%;
             font-family: Raleway;
             font-style: normal;
@@ -101,26 +85,13 @@
             font-size: 0.94rem;
             line-height: 18px;
             color: #231F20;
-
+            margin-left: 14px;
         }
-
-        &__plustext{
-            width: 15.01px;
-            height: 15.01px;
-            padding-left: 0%;
-            padding-right: 0%;
-            padding-top: 0%;
-            padding-bottom: 0%;
-            margin-left: 45.98px;
-        }
-
         &__inputlinkname{
-            width: 352.12px;
+            width: 100%;
             height: 41.81px;
-            margin-left: 10px;
             border: 0.375px solid #000000;
             text-align: left;
-
             font-family: Raleway;
             font-style: normal;
             font-weight: bold;
@@ -128,41 +99,40 @@
             line-height: 18px;
             /* identical to box height */
             color: #231F20;
-
-            padding-left: 2.4%;
-
-
+            & input{
+                width: 100%;
+                height: 100%;
+                padding: 5px 17px;
+            }
         }
 
         &__inputlinkurl{
-            margin-left: 3%;
-            width: 352.12px;
+            width: 100%;
             height: 41.81px;
             border: 0.375px solid #000000;
             text-align: left;
-
             font-family: Raleway;
             font-style: normal;
             font-weight: bold;
             font-size: 15px;
             line-height: 18px;
             /* identical to box height */
+            margin-left: 14px;
             color: #231F20;
-
-            padding-left: 2.4%;
-
-            margin-right: 1%;
-
-
-
+            & input{
+                width: 100%;
+                height: 100%;
+                padding: 5px 17px;
+            }
         }
 
         &__savebutton{
             //border box
-            width: 374.24px;
+            width: 100%;
             height: 73.5px;
             border: 0.75px solid #231F20;
-
+            text-align: center;
+            display: inline-block;
             //for font 
             font-family: Raleway;
             font-style: normal;
@@ -170,12 +140,36 @@
             font-size: 30px;
             line-height: 35px;
             color: #231F20;
-
             //to make the border 
-            margin-top: 8%;
-            margin-left: 29%;
-            margin-bottom: 4.5%;
+            margin-top: 64px;
+            margin-bottom: 64px;
+            & span{
+                width: 100%;
+                text-align: center;
+                display: inline-block;
+                vertical-align: middle;
+            }
         }
         
+    &__box{
+        text-align: center;
+        display: block;
+        width: 100%;
+        height: 41.81px;
+        line-height: 41.81px;
+        padding-top:0.5%;
+        border: 0.375px dashed #231F20;
+        text-align: center;
+        & span{
+            width: 100%;
+            padding: 7px;
+            display: inline-block;
+            vertical-align: middle;
+            line-height: normal;
+        }
+    }
+    &__textbox{
+        margin-bottom: 30px;
+    }
 
 }

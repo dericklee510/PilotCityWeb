@@ -11,21 +11,22 @@
       >
         <v-col
           class="agenda__item-box"
-          cols="2"
+          cols="1"
+          sm="2"
         />
 
         <v-col
           cols="8"
           class="agenda__item mr-auto ml-auto"
         >
-          <v-row id="agenda__borderline">
+          <v-row class="agenda__borderline">
             <input
               v-model="entry.name"
               placeholder="Item"
               class="agenda__item-input__header pt-3 pb-3 pl-4 pr-4"
             >
           </v-row>
-          <v-row id="agenda__borderline">
+          <v-row class="agenda__borderline">
             <input
               v-model="entry.duration"
               placeholder="Duration"
@@ -33,15 +34,24 @@
             >
           </v-row>
           <v-row>
-            <input
+            <v-textarea
               v-model="entry.description"
-              placeholder="Description"
-              class="agenda__item-input__description pt-3 pb-12 pl-4 pr-4"
-            >
+              placeholder="Describe your agenda item"
+              class="agenda__item-input__description"
+              dense
+              hide-details
+              background-color="transparent"
+              no-resize
+              solo
+              flat
+            />
           </v-row>
         </v-col>
 
-        <v-col cols="2">
+        <v-col
+          cols="1"
+          sm="2"
+        >
           <i
             v-if="entries.length>1"
             class="mt-2 ml-3 far fa-trash-alt agenda__trashicon"
@@ -60,11 +70,10 @@
 
         <v-col
           cols="8"
-          class="agenda__item-add mr-auto ml-auto mb-12"
+          class="agenda__item-add mb-8"
           @click="newEntry"
         >
           +
-          <v-row />
         </v-col>
 
         <v-col cols="2" />

@@ -285,7 +285,7 @@ export default class Guide extends Vue {
     */
     let name = this.$route.name as string;
     this.routeMap = new RouteList(
-      FbStore.currentUserProfile!.citizenType!
+      FbStore.currentUserProfile!.citizenType! 
     ).createLinkedList();
     this.currentNode =
       this.routeMap.toArray().find(node => node.value.routeName === name) ||

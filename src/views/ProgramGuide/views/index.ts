@@ -14,7 +14,9 @@ import TrainingAgendaView from "@/views/ProgramGuide/views/TrainingAgenda/agenda
 import PracticeLogManage from '@/views/ProgramGuide/views/Practicelog/Practicelog_manage.vue'
 import CaseStudyView from "@/views/ProgramGuide/views/Viewcasestudies/Viewcasestudies.vue"
 import CaseStudyEdit from "@/views/ProgramGuide/views/Editcasestudies/Editcasestudies.vue"
-import BusinessCanvasView from "@/views/ProgramGuide/views/Businessmodelcanvas/businessmodelcanvas_view2.vue"
+import BusinessCanvasView from "@/views/ProgramGuide/views/Businessmodelcanvas/BusinessCanvasView.vue"
+import BusinessCanvasView1 from "@/views/ProgramGuide/views/Businessmodelcanvas/businessmodelcanvas_view1.vue"
+import BusinessCanvasView2 from "@/views/ProgramGuide/views/Businessmodelcanvas/businessmodelcanvas_view2.vue"
 import OSPitchView from "@/views/ProgramGuide/views/Pitch/pitch_view.vue"
 import ElevatorView from "@/views/ProgramGuide/views/Elevator/elevator_view.vue"
 import HackEdit from "@/views/ProgramGuide/views/Hack/hackagenda_edit.vue"
@@ -44,7 +46,10 @@ export const MyPrograms = {
     ProgramList,
     ProgramLaunch
 }
-
+export const Canvas = {
+    BusinessCanvasView1,
+    BusinessCanvasView2
+}
 export const Program = {
     // Agenda,
     // IntroVid,
@@ -100,15 +105,14 @@ export const TEACHERMODULES = {
         'teach-project-intro'
     ],
     'Train': [
-        'teach-project-training',
         'teach-project-training-edit',
+        'teach-project-training',
     ],
     'Practice': [
         'teach-project-practicelog',
     ],
     'Research': [
         'teach-project-casestudy',
-        'teach-project-casestudy-edit',
     ],
     'Ideate': [
         'teach-project-canvas',
@@ -116,23 +120,23 @@ export const TEACHERMODULES = {
         'teach-project-elevator',
     ],
     'Hack Day': [
-        'teach-project-hack',
         'teach-project-hack-edit',
+        'teach-project-hack',
     ],
     'Package': [
         'teach-project-demo',
         'teach-project-presentation',
     ],
     'Demo Day': [
-        'teach-project-demoagenda',
         'teach-project-demoagenda-edit',
+        'teach-project-demoagenda',
     ]
 }
 
 export const EMPLOYERMODULES = {
     'Agenda': [
-        'emp-externship-agenda',
         'emp-externship-agenda-edit',
+        'emp-externship-agenda',
     ],
     'Brief': [
         'emp-externship-brief-edit',
@@ -141,7 +145,6 @@ export const EMPLOYERMODULES = {
         'emp-project-intro-edit'
     ],
     'Research': [
-        'emp-project-casestudy',
         'emp-project-casestudy-edit',
     ],
     'Ideate': [
@@ -149,8 +152,8 @@ export const EMPLOYERMODULES = {
         'emp-project-ospitch',
     ],
     'Hack Day': [
-        'emp-project-hack',
         'emp-project-hack-edit',
+        'emp-project-hack',
     ],
     'Package': [
         'emp-project-demo',
@@ -158,7 +161,7 @@ export const EMPLOYERMODULES = {
     ],
     'Demo Day': [
         'emp-project-demoagenda-edit',
-        'emp-project-demoagenda-edit',
+        'emp-project-demoagenda',
     ]
 }
 
@@ -226,7 +229,6 @@ export const TEACHERSEQUENCE = {
         ],
         'Research': [
             'teach-project-casestudy',
-            'teach-project-casestudy-edit',
         ],
         'Ideate': [
             'teach-project-canvas',

@@ -1,12 +1,10 @@
 #viewcasestudies{
-
     &__icon{
         width: 86.25px;
         height: 83.26px;
         position: absolute;
         margin-top: 2%;
     }
-
     &__contain{
         height: 100%;
         border: 0.75px solid #000000;
@@ -15,23 +13,14 @@
         padding-left: 0%;
         padding-right: 0%;
     }
-
-
     &__check1{
         margin-top: 4.8%;
     }
-
     &__check2{
         margin-top: 6%;
     }
-
-
-
 }
-
-
 .viewcasestudies{
-
     &__title{
         
         margin-top:56.78px ;
@@ -46,8 +35,6 @@
         letter-spacing: .05rem;
     
     }
-
-
     &__borderline{
         
         border-spacing: 0px;
@@ -60,7 +47,6 @@
         padding-top: 0%;
             
     }
-
     &__description{
         
         margin-top: 5%;
@@ -74,9 +60,7 @@
         line-height: unset;
     
     }
-
     &__reviewtitle{
-
         //text format
         font-family: Raleway;
         font-style: normal;
@@ -84,16 +68,10 @@
         font-size: 15px;
         line-height: 18px;
         color: #231F20;
-
         //margin format
-        margin-top: 7%;
+        margin-top: 35px;
         padding-left: 6%;
-
     }
-
-
-
-
     &__wholeline{
         
         width: 100%;
@@ -106,8 +84,6 @@
         color: #231F20;
 
     }
-
-
     &__check{
         width: 18px;
         height: 18px;
@@ -117,36 +93,22 @@
         margin-right: 4%;
         color: #231F20;
     }
-
-
     &__exporticon{
         margin-left: 4.5%;
     }
-
-
     &__savebutton{
         //border box
-        width: 374.25px;
+        width: 100%;
         height: 73.5px;
-        
         background: #E6E7E8;
-
         //for font 
         font-family: Raleway;
         font-style: normal;
         font-weight: 900;
         font-size: 30px;
         line-height: 35px;
-        
         color: #BCBEC0;
         //to make the border 
         margin-top: 10.7%;
-        margin-left: 29%;
-        margin-bottom: 5%;
     }
-
-
-
-
-
 }

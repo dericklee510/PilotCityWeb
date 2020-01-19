@@ -1,65 +1,86 @@
 <template>
-  <v-row justify="center">
-    <img
-      id="logtime__icon"
-      class="logtime__image"
-      src="@/assets/log.png"
-    >
-
-    <v-col
-      id="logtime__contain"
-      cols="7"
-    >
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto logtime__title"
+  <v-container>
+    <v-row justify="center">
+      <img
+        id="logtime__icon"
+        class="logtime__image"
+        src="@/assets/log.png"
       >
-        PRACTICE LOG
-      </v-row>
-
+    
       <v-col
-        cols="12"
-        class="logtime__borderline"
-      />
-
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto logtime__description"
+        id="logtime__contain"
+        cols="7"
       >
-        As you practice, use and apply the employer's product or service, log how many minutes you use it each time.
-      </v-row>
-
-      <ValidationObserver v-slot="{invalid, reset}">
         <v-row
           justify="center"
-          class
+          class="mr-auto ml-auto logtime__title"
         >
-          <v-col
-            align-self="center"
-            cols="8"
-            sm="6"
-            md="4"
-          >
-            <ValidationProvider
-              v-slot="{errors}"
-              rules="required|min:2|max:3|isTimeNumerical|isTime"
-              class="logtime__input"
-            >
-              <v-text-field
-                v-model="timeInput"
-                label="Enter Time"
-                :error-messages="errors"
-                outlined
-                height="100px"
-                placeholder="0m"
-              />
-            </ValidationProvider>
-          </v-col>
+          PRACTICE LOG
         </v-row>
-
+    
+        <v-col
+          cols="12"
+          class="logtime__borderline"
+        />
+    
         <v-row
           justify="center"
-          class
+          class="mr-auto ml-auto logtime__description"
+        >
+          As you practice, use and apply the employer's product or service, log how many minutes you use it each time.
+        </v-row>
+    
+        <ValidationObserver v-slot="{invalid, reset}">
+          <v-row
+            justify="center"
+            class
+          >
+            <v-col
+              align-self="center"
+              cols="8"
+              sm="6"
+              md="4"
+            >
+              <ValidationProvider
+                v-slot="{errors}"
+                rules="required|min:2|max:3|isTimeNumerical|isTime"
+                class="logtime__input"
+              >
+                <v-text-field
+                  v-model="timeInput"
+                  label="Enter Time"
+                  :error-messages="errors"
+                  outlined
+                  height="100px"
+                  placeholder="0m"
+                />
+              </ValidationProvider>
+            </v-col>
+          </v-row>
+    
+          <v-row
+            justify="center"
+            class
+          >
+            <v-btn
+              class="logtime__button"
+              :disabled="invalid"
+              @click="addTime();reset()"
+            >
+              LOG TIME
+            </v-btn>
+          </v-row>
+        </ValidationObserver>
+        <v-row
+          justify="center"
+          class="mr-auto ml-auto mt-10 logtime__label"
+        >
+          LOGGED TIME
+        </v-row>
+    
+        <v-row
+          justify="center"
+          class="mr-auto ml-auto mt-2 mb-7 logtime__calculated"
         >
           <PCLoader v-slot="{loading,setLoader}">
             <v-btn
@@ -72,22 +93,9 @@
             </v-btn>
           </PCLoader>
         </v-row>
-      </ValidationObserver>
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto mt-10 logtime__label"
-      >
-        LOGGED TIME
-      </v-row>
-
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto mt-2 mb-7 logtime__calculated"
-      >
-        {{ timeOutput }}
-      </v-row>
-    </v-col>
-  </v-row>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 
