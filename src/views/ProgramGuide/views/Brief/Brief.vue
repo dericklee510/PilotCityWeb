@@ -43,6 +43,6 @@ import BriefCard from './components/BriefCard.vue'
     }
 }))
 export default class Brief extends Vue{
-    
+    entries = "stuff"
 }
 </script>]

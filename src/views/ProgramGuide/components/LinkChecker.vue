@@ -7,9 +7,8 @@
     <v-text-field
       v-model="inputUrl"
       v-stream:input="inputChange$"
-      :error-messages="errors"
-      :success="valid"
-      :success-messages="result"
+      :error-messages="color=='error'?result:errors"
+      :success-messages="color!='sucess'?result:[]"
       :loading="loading"
       :color="color"
       placeholder="https://"
@@ -53,8 +52,8 @@ interface nativeEvent {
   }
 })
 export default class LinkChecker extends Vue {
-  async created() {
-    console.log(await isLinkValid("https://google.com"));
+  mounted(){
+    this.inputUrl = this.value
   }
   @Prop({ required: true })
   value!: string;
@@ -83,6 +82,7 @@ export default class LinkChecker extends Vue {
         let value = await isLinkValid(URL);
         resolve("Link is verified");
       } catch (err) {
+        console.log(err)
         if (err.response.status == 400)
           reject("Link does not exist")
         else

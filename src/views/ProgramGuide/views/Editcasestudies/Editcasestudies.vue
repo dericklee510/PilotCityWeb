@@ -142,6 +142,8 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import {PCmultiinput} from "@/components/inputs"
 import { NamedLink } from '@/store/Database/types/utilities'
+import { LinkChecker } from '../../components'
+import { FbStore } from '../../../../store'
 
 interface NamedLinkID extends NamedLink {
   id:number
@@ -157,11 +159,21 @@ let linkData:NamedLink[] = [
     link:"http://velodyne.co"
   }
 ]
-const app = PCmultiinput.createMultiInput<NamedLink>(namedLinkDefault,linkData)
+const multiInput = PCmultiinput.createMultiInput<NamedLink>(namedLinkDefault,linkData)
 
-@Component({})
-export default class editcasestudies extends app{
-
+@Component({
+  components:{
+    LinkChecker,
+    multiInput
+  }
+})
+export default class editcasestudies extends Vue{
+  links:NamedLink[] = FbStore.currentEmployerProgram?.caseStudies ||  [{} as NamedLink]
+submit(){
+  FbStore.updateCurrentEmployerProgram({
+    caseStudies:this.links
+  })
+}
 }
 
 </script>

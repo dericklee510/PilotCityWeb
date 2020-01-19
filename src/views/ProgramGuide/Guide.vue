@@ -53,8 +53,46 @@ import { Nav, Lock, Unlock } from "./components";
 import _ from "lodash";
 import { LinkedList, LinkedListItem } from "linked-list-typescript";
 import { ProgramNode, RouteList } from "./types";
-
-@Component({
+import { FbStore } from "../../store";
+import { doc } from "rxfire/firestore";
+import { map, filter, tap } from "rxjs/operators";
+import { EmployerProgram, TeacherProgramData } from "../../store/Database/types/types";
+import { Observable, } from "rxjs";
+@Component<Guide>({
+  async beforeRouteEnter(to, from, next) {
+    if (localStorage.PILOTCITY_EMPLOYERPROGRAMID)
+      await FbStore.initCurrentEmployerProgram(
+        localStorage.PILOTCITY_EMPLOYERPROGRAMID
+      );
+    if (FbStore.currentUserProfile!.citizenType !== "employer")
+      await FbStore.initCurrentTeacherProgramData(
+        FbStore.currentTeacherProgramUID!
+      );
+    next();
+  },
+  subscriptions() {
+    return {
+      employerProgramData: doc(
+        FbStore.firestore
+          .collection("EmployerProgram")
+          .doc(FbStore.currentEmployerProgramUID)
+      ).pipe(map(snapshot => snapshot.data())),
+      teacherProgramData:doc(
+        FbStore.firestore.collection("TeacherProgramData").doc(FbStore.currentTeacherProgramUID)
+      ).pipe(
+        filter(snapshot => snapshot.exists && FbStore.userCitizenType === "teacher"),
+        map(snapshot => snapshot.data())
+      )
+    };
+  },
+  mounted(){
+    this.$subscribeTo(this.$observables.employerProgramData,(data:EmployerProgram)=>{
+      FbStore.initCurrentEmployerProgram(data)
+    })
+    this.$subscribeTo(this.$observables.teacherProgramData,(data:TeacherProgramData)=>{
+      FbStore.initCurrentTeacherProgramData(data)
+    })
+  },
   components: {
     Nav,
     Lock,
@@ -68,9 +106,7 @@ export default class Guide extends Vue {
     Student: STUDENTMODULES
   };
   public xcurrentModule: string = "";
-  routeMap!: LinkedList<
-    ProgramNode
-  >;
+  routeMap!: LinkedList<ProgramNode>;
   currentNode!: ProgramNode;
   get citizenType(): string {
     return localStorage.citizenType;
@@ -121,9 +157,13 @@ export default class Guide extends Vue {
 
         BIND THIS TO `XCURRENTMODULE`
     */
-    let name = this.$route.name as string
-    this.routeMap = new RouteList(localStorage.citizenType).createLinkedList();
-    this.currentNode = this.routeMap.toArray().find(node => node.value.routeName === name) || this.routeMap.head
+    let name = this.$route.name as string;
+    this.routeMap = new RouteList(
+      FbStore.currentUserProfile!.citizenType!
+    ).createLinkedList();
+    this.currentNode =
+      this.routeMap.toArray().find(node => node.value.routeName === name) ||
+      this.routeMap.head;
   }
 }
 </script>

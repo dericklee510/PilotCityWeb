@@ -7,52 +7,59 @@ export interface Classroom {
     teacherProgramId: string
     employerProgramId: string
     className: string
-    shareCode: string  //  create  hash  code
-    lastUpdate: firebase.firestore.Timestamp
+    shareCode?: string  //  create  hash  code
+    lastUpdate: firebase.firestore.Timestamp | firebase.firestore.FieldValue
 }
 
 export interface GeneralUser {
     userId: string
     classroomIds: string[]
     employerProgramIds: string[]
+    teacherProgramDataIds:{
+        [employerProgramId:string]:string
+    }
     projectIds: string[]
     initializeProgram: {
         [employerProgramId: string]: firebase.firestore.Timestamp
     }
     firstName: string
     lastName: string
-    citizenType: "employer" | "teacher" | "student"
+    citizenType?: "employer" | "teacher" | "student"
     dob?: Date
+    title?:string
     address?: AutoCompleteAddress
     phoneNumber?: string
     profilePicture?: string
-    lastUpdate: firebase.firestore.Timestamp
+    lastUpdate: firebase.firestore.Timestamp | firebase.firestore.FieldValue
 }
 export interface EmployerProgram {
     employerProgramId: string
-    employerId: string
+    programName: string
+    employerId?: string
     programLauncher: ProgramEvent[]
-    externshipDayAgenda: AgendaTemplate
-    masterHackDayAgenda: AgendaTemplate    //  Employer  cannot  modify  this
+    externshipDayAgenda?: AgendaTemplate
+    demoDayAgenda?: AgendaTemplate
+    masterHackDayAgenda?: AgendaTemplate    //  Employer  cannot  modify  this
     programBrief?: NamedLink[]
     introVideo?: string
     caseStudies?: NamedLink[]
     projectIds?: string[]
     shareCode: string
-    lastUpdate: firebase.firestore.Timestamp
+    lastUpdate: firebase.firestore.Timestamp | firebase.firestore.FieldValue
 }
 export interface TeacherProgramData {
     teacherProgramId: string
-    classroomId: string
+    classroomIds: string[]
     employerProgramId: string
     caseStudies: NamedLink[]
-    trainingDayAgenda: AgendaTemplate
-    hackDayAgenda: AgendaTemplate    //  Modified  version  of  HackDayAgenda  Master  Template
+    trainingDayAgenda?: AgendaTemplate
+    hackDayAgenda?: AgendaTemplate    //  Modified  version  of  HackDayAgenda  Master  Template
+    created: firebase.firestore.Timestamp | firebase.firestore.FieldValue
 }
 //  StudentProject  should  be  an  extension  of  a  Team
 export interface Project {
     projectId: string
-    classroomId: string
+    classroomId: string 
     teamMembersIds: string[]
     teamName: string
     createdByTeacher: boolean
@@ -104,7 +111,7 @@ export interface Project {
     elevatorPitchRatingE?: number
     demoRatingE?: number
     presentationRatingE?: number
-    lastUpdate: firebase.firestore.Timestamp
+    lastUpdate: firebase.firestore.Timestamp | firebase.firestore.FieldValue
 }
 
 export type RatingTag = "customerRatingT"|

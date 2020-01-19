@@ -41,24 +41,17 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import {AgendaView} from "@/views/ProgramGuide/components/"
-@Component({
-  components: {
-    AgendaView
-  }
-})
+import { EventItem } from '@/store/Database/types/utilities'
+import { FbStore } from '@/store'
+@Component
 export default class ExternshipAgenda extends Vue{
-  agendaItems = [...AgendaView.emptyAgenda,{
-    name:"Tour",
-    description:"Provide an overview of the company at the beginning of the tour",
-    duration:"40 minutes",
-    completed:true
+  created(){
+    // const agendaItems
   }
-  ,{
-    name:"Demonstration",
-    description:" Tour spaces, departments, product and company culture with the teacher(s) ",
-    duration:"30 minutes",
-    completed:true
-  }];
+  
+  agendaItems:EventItem[] = FbStore.currentEmployerProgram?.externshipDayAgenda?.events! || []
+  get isAgendaComplete(){
+    return this.agendaItems.map(item => item.completed).every(isTrue => isTrue)
+  }
 }
 </script>

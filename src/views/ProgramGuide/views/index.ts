@@ -90,8 +90,8 @@ export const Program = {
 
 export const TEACHERMODULES = {
     'Agenda': [
-        'teach-externship-agenda-edit',
         'teach-externship-agenda',
+        // 'teach-externship-agenda-edit',
     ],
     'Brief': [
         'teach-externship-brief',
@@ -204,7 +204,7 @@ export const STUDENTMODULES = {
 export const TEACHERSEQUENCE = {
     Externship: {
         'Agenda': [
-            'teach-externship-agenda-edit',
+            // 'teach-externship-agenda-edit',
             'teach-externship-agenda',
         ],
         'Brief': [
@@ -253,8 +253,9 @@ export const TEACHERSEQUENCE = {
 export const EMPLOYERSEQUENCE = {
     Externship: {
         'Agenda': [
-            'emp-externship-agenda',
             'emp-externship-agenda-edit',
+            'emp-externship-agenda',
+            
         ],
         'Brief': [
             'emp-externship-brief-edit',

@@ -1,3 +1,4 @@
+import { FbStore } from './store/index';
 require('dotenv').config()
 import Vue from 'vue'
 
@@ -24,8 +25,9 @@ import VuetifyGoogleAutocomplete from 'vuetify-google-autocomplete'
 import VueMoment from "vue-moment"
 import VueRx from 'vue-rx'
 import { createProvider } from './vue-apollo'
-
-
+import { switchMap} from 'rxjs/operators'
+import {from} from "rxjs"
+import { doc } from 'rxfire/firestore';
 
 Vue.use(VueRx)
 Vue.use(Vuetify)
@@ -58,13 +60,26 @@ function createVueInstance() {
 const AuthObserver = authState(firebaseApp.auth())
 let instanceCreated = false
 
-AuthObserver.subscribe(user => {
-    store.commit(`Auth/${SET_USER}`, user)
-    store.commit(`Fb/${SET_USER}`, user)
+AuthObserver.pipe(
+    switchMap(user => {
+        store.commit(`Auth/${SET_USER}`, user)
+        store.commit(`Fb/${SET_USER}`, user)
+        if(user)
+            return doc(FbStore.firestore.collection("GeneralUser").doc(user.uid))
+        else {
+            if (!instanceCreated){
+                createVueInstance()
+                instanceCreated = true
+            }
+            return from([])
+        }
+    }
+)
+).subscribe(async (snapshot) => {
+    await FbStore.initCurrentUserProfile(snapshot.data())
     if (!instanceCreated){
         createVueInstance()
         instanceCreated = true
     }
 })
-
 

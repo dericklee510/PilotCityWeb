@@ -46,17 +46,46 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { Agenda } from '../../components'
 import { EventItem } from '@/store/Database/types/utilities'
+import { FbStore } from '../../../../store'
+import { Watch } from 'vue-property-decorator'
+import { Subject, pipe } from 'rxjs'
+import {firebase} from "@/firebase/init"
+import { pluck, debounceTime } from 'rxjs/operators'
 const emptyAgenda:Omit<EventItem,'completed'> = {
   name:"",
   duration:"",
   description:""
 }
-@Component({
+@Component<HackAgenda>({
+   domStreams:['onAgendaChange$'],
+  subscriptions(){
+    return {
+      agendaEvents: this.onAgendaChange$.pipe(
+        debounceTime(300),
+       pluck<{event:{name:string,msg:EventItem[]},data:undefined},EventItem[]>("event","msg")
+      )
+    }
+  },
   components:{
     Agenda
   }
 })
-export default class agenda extends Vue{
-    entries:Omit<EventItem,'completed'>[] = [emptyAgenda]
+export default class HackAgenda extends Vue{
+ mounted(){
+    this.$subscribeTo(this.$observables.agendaEvents,async (events:EventItem[]) => {
+      await FbStore.updateCurrentEmployerProgram({
+        masterHackDayAgenda:{
+          events:events.filter(obj => Object.keys(obj).length !== 0),
+          lastUpdate:firebase.firestore.FieldValue.serverTimestamp()
+        }
+      })
+    })
+  }
+  created(){
+    // set ref to update based on user type
+  }
+  onAgendaChange$!:Subject<{event:{name:string,msg:EventItem[]},data:undefined}>;
+  ref!:firebase.firestore.DocumentReference
+    entries:EventItem[] = FbStore.currentEmployerProgram?.masterHackDayAgenda?.events || [emptyAgenda]
 }
 </script>

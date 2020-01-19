@@ -2,6 +2,11 @@ import { AutoComplete, AutoCompleteAddress } from '@/components/GoogleMaps';
 
 //#region 
 // interfaces not stored on firebase
+export enum userTypes{
+    employer = 'employer',
+    teacher = 'teacher',
+    student = 'student'
+}
 export interface NamedLink {
     linkName: string
     link: string
@@ -13,16 +18,15 @@ export interface EventItem {
     name: string
     duration: string
     description: string
-    completed: boolean
+    completed?: Date
 }
 export interface AgendaTemplate {
-    agendaTitle: string
-    date: Date
-    startTime: number
-    address: AutoCompleteAddress
+    agendaTitle?: string
+    date?: Date
+    startTime?: number
+    address?: AutoCompleteAddress
     events: EventItem[]
-    lastUpdate: firebase.firestore.Timestamp
-    eventTimestamp: firebase.firestore.Timestamp[]
+    lastUpdate: firebase.firestore.Timestamp | firebase.firestore.FieldValue
 }
 export interface PostHackReflection {
     feedback: string

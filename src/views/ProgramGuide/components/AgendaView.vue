@@ -90,6 +90,11 @@ export default class AgendaView extends Vue {
   syncedAgenda!: EventItem[];
   
   static emptyAgenda: EventItem[] = [
+    {
+      name: "",
+      duration: "",
+      description: "",
+    }
   ];
   get isAgendaComplete() {
     return this.syncedAgenda

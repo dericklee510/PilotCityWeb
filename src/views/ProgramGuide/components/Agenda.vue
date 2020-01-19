@@ -87,7 +87,6 @@ const emptyAgenda: EventItem = {
   name: "",
   duration: "",
   description: "",
-  completed: false
 };
 const app = PCmultiinput.createMultiInput(emptyAgenda);
 @Component({
