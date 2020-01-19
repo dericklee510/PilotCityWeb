@@ -1,4 +1,4 @@
-import { AgendaTemplate, ReviewedLink, ProgramEvent, PostHackReflection, DesignLog, TimeLog, NamedLink } from './utilities';
+import { AgendaTemplate, ReviewedLink, ProgramEvent, DesignLog, TimeLog, NamedLink } from './utilities';
 import { AutoComplete, AutoCompleteAddress } from '@/components/GoogleMaps';
 export interface Classroom {
     classroomId: string
@@ -105,7 +105,7 @@ export interface Project {
     elevatorPitch?: string
     demoLink?: string
     presentationLink?: string
-    postHackReflection?: PostHackReflection[]
+    postHackReflection?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
     designLog?: DesignLog[]
     problemRatingT?: number
     solutionRatingT?: number

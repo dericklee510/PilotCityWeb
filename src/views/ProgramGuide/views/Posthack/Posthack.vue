@@ -96,6 +96,7 @@
         <v-btn
           class="posthack__acknowledgebutton"
           :disabled="!pivotReady"
+          @click="submit"
         >
           ACKNOWLEDGE
         </v-btn>
@@ -109,13 +110,27 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
+import { FbStore } from '../../../../store';
+import {firebase} from '@/firebase/init'
 @Component
 export default class posthack extends Vue {
+  created(){
+    if(FbStore.currentProject!.postHackReflection){
+      this.canvas = true
+      this.sentencePitch = true
+      this.elevatorPitch = true
+    }
+  }
   canvas: boolean = false;
   sentencePitch: boolean = false;
   elevatorPitch: boolean = false;
   get pivotReady(){
     return [this.canvas, this.sentencePitch, this.elevatorPitch].every(val => val)
+  }
+  submit(){
+    FbStore.updateCurrentProject({
+      postHackReflection:firebase.firestore.FieldValue.serverTimestamp()
+    })
   }
 }
 </script>

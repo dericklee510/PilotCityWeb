@@ -27,29 +27,15 @@
       >
         Develop a final presentation and enter the link. You can use it to present to employers, customers or who you wish.
       </v-row>
-      <ValidationObserver v-slot="{invalid, validate, valid}">
+      <ValidationObserver v-slot="{invalid}">
         <v-row
           justify="center"
           class="mr-auto ml-auto mt-12 mb-12"
         >
-          <ValidationProvider
-            ref="inputValidation"
-            v-slot="{errors}"
+          <LinkChecker
+            v-model="url"
             class="presentation_enter__videolink"
-            rules="required|url"
-          >
-            <v-text-field
-              id="urlInput"
-              v-model="inputUrl"
-              v-stream:input="inputChange$"
-              :error-messages="valid?result:errors"
-              :success="valid"
-              :success-messages="result"
-              :loading="loading"
-              :color="color"
-              placeholder="https://"
-            />
-          </ValidationProvider>
+          />
         </v-row>
         <v-row
           justify="center"
@@ -61,19 +47,18 @@
             type="checkbox"
             class="presentation_enter__checkbox"
           />
-       
+
           <span>I acknowledge this link is set for the public to view</span>
         </v-row>
-  
+
         <v-col
           class="mr-auto ml-auto"
           cols="5"
         >
           <v-btn
             class="presentation_enter__button"
-            :disabled="!checkbox"
-            :loading="loading"
-            @click="validate().then(valid => {if(valid) submit()})"
+            :disabled="invalid || !checkbox"
+            @click="onSubmit"
           >
             SAVE
           </v-btn>
@@ -131,65 +116,26 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import { pluck, switchMap, debounceTime, filter } from "rxjs/operators";
 import { Subject, from } from "rxjs";
-import { ValidationObserver, ValidationProvider,validate } from 'vee-validate';
-import { TextEnter } from '../../components';
+import { ValidationObserver, ValidationProvider, validate } from "vee-validate";
+import { TextEnter, LinkChecker } from "../../components";
 // import {isLinkValid} from "@/api"
-import {filterByPromise} from "filter-async-rxjs-pipe"
-import { isLinkValid } from '../../../../api';
-interface nativeEvent {
-  data: undefined;
-  event: {
-    msg: string;
-    name: string;
-  };
-}
+import { filterByPromise } from "filter-async-rxjs-pipe";
+import { isLinkValid } from "../../../../api";
+import { FbStore } from "../../../../store";
 @Component<PresentationEnter>({
-  domStreams: ["inputChange$"],
-  subscriptions() {
-    return {
-      result: this.inputChange$.pipe(
-        debounceTime(300),
-        pluck<nativeEvent,string>("event","msg"),
-        filterByPromise(async (value) => (await validate(value,'required|url')).valid),
-        switchMap(value => from(this.checkUrl(value)))
-        )
-    };
-  },
-  components:{
+  components: {
     ValidationObserver,
-    ValidationProvider
+    ValidationProvider,
+LinkChecker
   }
 })
 export default class PresentationEnter extends TextEnter {
-  loading:boolean=false
-  checkbox:boolean = false
-  inputChange$!: Subject<nativeEvent>;
-  result!: string;
-  inputUrl:string = ""
-  color: "success" |  "error" = "success"
-  success?:boolean
-  async checkUrl(URL: string) {
-    this.loading = true;
-    return new Promise(async (resolve, reject) => {
-      setTimeout(() => {
-        reject("Could not verify URL, server timeout");
-      },2000);
-      try {
-        isLinkValid(URL).then(value => value?resolve("Link is verified"):reject("Link does not exist"))
-      }catch{
-        reject("Could not verify URL, exception occured")
-      }
-    }).then(value => {
-      this.success = true
-      this.color = "success"
-      return value
-    }).catch(error => {
-      this.success= false
-      this.color = "error"
-      return error
-    }).finally(() =>{
-      this.loading = false
-    })
-  }
+    url:string = FbStore.currentProject!.presentationLink || ""
+    checkbox=false
+    onSubmit(){
+      FbStore.updateCurrentProject({
+        presentationLink:this.url
+      })
+    }
 }
 </script>

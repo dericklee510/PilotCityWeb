@@ -32,7 +32,7 @@
       <!-- <v-row class="mt-12 mr-auto ml-auto pl-5 mb-4 businessmodelcanvas_enter__description__label">Elevator Pitch</v-row> -->
       <business-model-canvas-comp
         v-model="canvas"
-        readonly
+        
         :stars="true"
       />
     </v-col>
@@ -49,6 +49,10 @@ import Component from 'vue-class-component'
 import { ValidationProvider, ValidationObserver } from 'vee-validate'
 import {BusinessModelCanvas as BusinessModelCanvasComp} from "./components"
 import { BusinessModelCanvas } from '@/store/Database/types/utilities'
+import { FbStore } from '../../../../store'
+import {debounce} from 'lodash'
+import { Watch } from 'vue-property-decorator'
+import { debounceTime } from 'rxjs/operators'
 @Component({
   components:{
     ValidationProvider,
@@ -57,11 +61,24 @@ import { BusinessModelCanvas } from '@/store/Database/types/utilities'
   }
 })
 export default class businessmodelcanvas_enter extends Vue{
-  canvas: BusinessModelCanvas = {
-    problem: "My Pitch is this",
-    solution: "My Pitch is this",
-    innovation: "My Pitch is this",
-    customer: "My Pitch is this"
-  };
+  // key = 0
+  get canvas():BusinessModelCanvas{
+    let {problem,solution,innovation,customer} = FbStore.currentProject!
+    //  this.key++
+    return {
+      problem:problem || "",
+      solution:solution || "",
+      innovation: innovation || "",
+      customer:customer || ""
+    }
+   
+  }
+  set canvas(value:BusinessModelCanvas){
+    debounce(()=>{
+      FbStore.updateCurrentProject({
+        ...value
+      })
+    },3000)()
+  }
 }
 </script>

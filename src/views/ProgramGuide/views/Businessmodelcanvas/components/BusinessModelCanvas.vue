@@ -18,7 +18,7 @@
           </div>
           <v-rating
             v-model="stars.problem"
-            :readonly="!!readonly"
+            :readonly="readonly===undefined"
           />
         </v-row>
       </v-col>
@@ -62,7 +62,7 @@
           </div>
           <v-rating
             v-model="stars.solution"
-            :readonly="!!readonly"
+            :readonly="readonly===undefined"
           />
         </v-row>
       </v-col>
@@ -106,7 +106,7 @@
           </div>
           <v-rating
             v-model="stars.innovation"
-            :readonly="!!readonly"
+            :readonly="readonly===undefined"
           />
         </v-row>
       </v-col>
@@ -150,7 +150,7 @@
           </div>
           <v-rating
             v-model="stars.cost"
-            :readonly="!!readonly"
+            :readonly="readonly===undefined"
           />
         </v-row>
       </v-col>
@@ -180,11 +180,15 @@
       class="mr-auto ml-auto"
       cols="5"
     >
-      <v-btn
-        class="businessmodelcanvas_enter__button mb-10"
-      >
-        SAVE
-      </v-btn>
+      <PCLoader v-slot="{loading,setLoader}">
+        <v-btn
+          :loading="loading"
+          class="businessmodelcanvas_enter__button mb-10"
+          @click="setLoader(saveCanvas)"
+        >
+          SAVE
+        </v-btn>
+      </PCLoader>
     </v-col>
   </ValidationObserver>
 </template>
@@ -196,10 +200,13 @@ import "reflect-metadata";
 import { Prop, PropSync, Watch } from "vue-property-decorator";
 import { ValidationProvider, ValidationObserver } from "vee-validate";
 import { BusinessModelCanvas } from '@/store/Database/types/utilities';
+import { FbStore } from '../../../../../store';
+import { PCLoader } from '../../../../../components/utilities';
 @Component({
   components: {
     ValidationProvider,
-    ValidationObserver
+    ValidationObserver,
+    PCLoader
   }
 })
 export default class BusinessModelCanvasComp extends Vue {
@@ -212,11 +219,16 @@ export default class BusinessModelCanvasComp extends Vue {
   };
   @PropSync("value")
   syncedCanvas!: BusinessModelCanvas;
+
   @Prop()
   readonly?: string;
   @PropSync("stars")
   syncedStars!: Record<keyof BusinessModelCanvas,Number>
-  
+  async saveCanvas(){
+    await FbStore.updateCurrentProject({
+      ...this.syncedCanvas
+    })
+  }
   @Watch("syncedStars", { deep: true })
   onStarsChanged(newVal: BusinessModelCanvas) {
     this.$emit("starsChanged", newVal);

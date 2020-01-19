@@ -28,7 +28,9 @@
         Before you run into a customer or investor, you have to know your solution in detail. Write out what you will say in an elevator pitch.
       </v-row>
 
-      <v-row class="mt-12 mr-auto ml-auto pl-5 mb-4 elevator_enter__description__label">
+      <v-row
+        class="mt-12 mr-auto ml-auto pl-5 mb-4 elevator_enter__description__label"
+      >
         Elevator Pitch
       </v-row>
 
@@ -49,7 +51,7 @@
             />
           </ValidationProvider>
         </v-row>
-  
+
         <v-col
           class="mr-auto ml-auto"
           cols="5"
@@ -112,11 +114,20 @@
 
 
 <script lang="ts">
-import Vue from 'vue'
-import Component from 'vue-class-component'
-import { TextEnter } from '../../components'
+import Vue from "vue";
+import Component from "vue-class-component";
+import { TextEnter } from "../../components";
+import { FbStore } from "../../../../store";
+
 @Component
-export default class elevator_enter extends TextEnter{
-    
+export default class elevator_enter extends TextEnter {
+  text: string = FbStore.currentProject!.elevatorPitch || "";
+  async submit(){
+    this.loading=true
+    await FbStore.updateCurrentProject({
+      elevatorPitch: this.text
+    });
+    this.loading = false
+  }
 }
 </script>

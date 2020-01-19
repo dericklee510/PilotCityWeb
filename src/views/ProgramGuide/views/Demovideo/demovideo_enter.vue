@@ -27,41 +27,47 @@
       >
         Record and upload a video demonstration your project. This will give your employer a good understanding of how it works.
       </v-row>
-
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto mt-12 mb-12"
-      >
-        <input
-          placeholder="https://"
-          class="demovideo_enter__videolink"
+      <ValidationObserver v-slot="{invalid}">
+        <v-row
+          justify="center"
+          class="mr-auto ml-auto mt-12 mb-12"
         >
-      </v-row>
-
-
-      <v-row
-        justify="center"
-        class="ml-auto mr-auto demovideo_enter__check"
-      >
-        <v-col cols="1">
-          <input
-            type="checkbox"
-            class="demovideo_enter__checkbox"
+          <LinkChecker
+            v-model="url"
+            placeholder="https://"
+            class="demovideo_enter__videolink"
+          />
+        </v-row>
+  
+  
+        <v-row
+          justify="center"
+          class="ml-auto mr-auto demovideo_enter__check"
+        >
+          <v-col cols="1">
+            <v-checkbox
+              v-model="checkbox"
+              :readonly="invalid"
+              class="demovideo_enter__checkbox"
+            />
+          </v-col><v-col cols="11">
+            I acknowledge this link is set for the public to view and video length is within reasonable range.
+          </v-col>
+        </v-row>
+  
+        <v-col
+          class="mr-auto ml-auto"
+          cols="5"
+        >
+          <v-btn
+            :disabled="invalid || !checkbox"
+            class="demovideo_enter__button"
+            @click="onSubmit"
           >
-        </v-col><v-col cols="11">
-          I acknowledge this link is set for the public to view and video length is within reasonable range.
+            SAVE
+          </v-btn>
         </v-col>
-      </v-row>
-
-      <v-col
-        class="mr-auto ml-auto"
-        cols="5"
-      >
-        <button class="demovideo_enter__button">
-          SAVE
-        </button>
-      </v-col>
-
+      </ValidationObserver>
       <!-- NO RATING YET -->
 
       <v-row
@@ -112,8 +118,23 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-@Component
+import { FbStore } from '../../../../store'
+import { ValidationObserver } from 'vee-validate'
+import { LinkChecker } from '../../components'
+
+@Component({
+  components:{
+    ValidationObserver,
+LinkChecker
+  }
+})
 export default class demovideo_enter extends Vue{
-    
+    url:string = FbStore.currentProject!.demoLink || ""
+    checkbox=false
+    onSubmit(){
+      FbStore.updateCurrentProject({
+        demoLink:this.url
+      })
+    }
 }
 </script>

@@ -65,7 +65,7 @@
               class="processlog__logbutton"
               :disabled="invalid || !fileQueue.length"
               :loading="loading"
-              @click="setLoader(appendEntry);reset();"
+              @click="setLoader(appendEntry).then(() => {reset()});"
             >
               LOG
             </v-btn>
@@ -159,6 +159,7 @@ import { PCmultiinput } from "@/components/inputs";
 import {PCLoader} from "@/components/utilities/"
 import { VFileInput } from 'vuetify/lib';
 import { ValidationObserver, ValidationProvider } from 'vee-validate';
+import { FbStore } from '../../../../store';
 moment(
   firebase.firestore.Timestamp.fromDate(
     moment(new Date())
@@ -166,6 +167,24 @@ moment(
       .toDate()
   )
 ).diff(moment(), "d");
+async function getFileLink(file:File,index?:number):Promise<NamedLink>{
+  let filePath = `project/${FbStore.currentProject!.projectId}/process_log/${file.name}`
+  if(index)
+    filePath = `${filePath}(${index})`
+  let fileRef = FbStore.storageRef.child(filePath)
+  try{
+        let res = await FbStore.storageRef.child(filePath).getDownloadURL();
+        // file exists already
+        return getFileLink(file,index?index+1:1)
+      }catch{
+        // file doesnt exist yet
+        let snapshot = await fileRef.put(file)
+        return {
+          linkName:index?`${file.name}(${index})`:file.name,
+          link:await snapshot.ref.getDownloadURL()
+          }
+      }
+}
 @Component({
   components: {
     multiInput: PCmultiinput.createMultiInput<DesignLog>(),
@@ -180,51 +199,7 @@ export default class logtime extends Vue {
   inputDescription:string = ""
   key:number = 0
   fileQueue: {file:File,fileName:string}[] = [];
-  designLog: DesignLog[] = [
-    {
-      description: "This is the log description",
-      fileLinks: [
-        {
-          linkName: "IMG_323.JPG",
-          link: "https://www.rapidtables.com/web/html/link/test_file.zip"
-        }
-      ],
-      lastUpdate: firebase.firestore.Timestamp.fromDate(new Date())
-    },
-    {
-      description: "This is the log description",
-      fileLinks: [
-        {
-          link: "https://www.rapidtables.com/web/html/link/test_file.zip",
-          linkName: "IMG_323.JPG"
-        },
-        {
-          link:
-            "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
-          linkName: "File.pdf"
-        }
-      ],
-      lastUpdate: firebase.firestore.Timestamp.fromDate(
-        moment(new Date())
-          .subtract(1, "d")
-          .toDate()
-      )
-    },
-    {
-      description: "This is the log description",
-      fileLinks: [
-        {
-          link: "https://www.rapidtables.com/web/html/link/test_file.zip",
-          linkName: "IMG_323.JPG"
-        }
-      ],
-      lastUpdate: firebase.firestore.Timestamp.fromDate(
-        moment(new Date())
-          .subtract(1, "d")
-          .toDate()
-      )
-    }
-  ];
+  designLog: DesignLog[] = FbStore.currentProject!.designLog || []
   onChange() {
     if (this.inputFile) this.fileQueue.push({
       file:this.inputFile,
@@ -234,15 +209,17 @@ export default class logtime extends Vue {
     this.key++
   }
   async holdEntry(){
-    const getLinks:(files:File[])=>Promise<NamedLink[]> = async (files) => files.map(file => ({
-      linkName:file.name,
-      link:"https://random.com"
-    }))
+    const getLinks:(files:File[])=>Promise<NamedLink[]> = (files) => {
+      return Promise.all(files.map(file => getFileLink(file)))
+    }
     let fileLinks:NamedLink[] = await getLinks(this.fileQueue.map(queue => queue.file))
     this.designLog.unshift({
       description:this.inputDescription,
       fileLinks,
       lastUpdate:firebase.firestore.Timestamp.now()
+    })
+    await FbStore.updateCurrentProject({
+      designLog:this.designLog.map(obj => ({...obj}))
     })
     this.fileQueue = []
     this.inputDescription = ""
