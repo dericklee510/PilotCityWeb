@@ -43,12 +43,12 @@
         <span
           class="viewcasestudies__wholeline"
         ><input
-           v-model="namedLink.reviewed"
+           v-model="caseStudiesReviewed[index]"
            class="viewcasestudies__check"
            type="checkbox"
          >
           {{ namedLink.linkName }}
-          <a :ref="namedLink.link"><button class="viewcasestudies__exporticon"><img src="@/assets/exportbox.png"></button></a>
+          <a :href="namedLink.link"><button class="viewcasestudies__exporticon"><img src="@/assets/exportbox.png"></button></a>
 
         </span>
       </v-row>
@@ -73,21 +73,13 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { NamedLink, ReviewedLink } from '@/store/Database/types/utilities'
+import { FbStore } from '../../../../store'
 @Component
 export default class ViewCaseStudies extends Vue{
-    namedLinks:ReviewedLink[] = [{
-      linkName:"LIDAR FOR AUTONOMOUS CAMPUS SHUTTLES",
-      link: "pilotcity.com",
-      reviewed:false
-    },
-    {
-        linkName:"lidar for drones",
-        link:"pilotcity.com",
-        reviewed:false
-      },
-]
+    namedLinks:NamedLink[] = FbStore.currentEmployerProgram?.caseStudies || [{} as NamedLink]
+    caseStudiesReviewed = FbStore.currentProject!.caseStudiesReviewed || []
   get allReviewed(){
-    return this.namedLinks.map(link => link.reviewed).every(isReviewed => isReviewed)
+    return this.namedLinks.map((link,index) => this.caseStudiesReviewed[index]).every(isReviewed => isReviewed)
   }
 }
 </script>

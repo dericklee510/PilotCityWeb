@@ -63,7 +63,7 @@ export class RouteList {
 export interface ProgramNode {
     value: {
         type: "employer" | "teacher" | "student"
-        sequence: string
+        sequence: string // Externship
         page: string // i.e. Agenda Brief
         routeName: string // i.e.emp-externship-agenda
     }

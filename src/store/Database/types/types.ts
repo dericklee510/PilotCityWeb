@@ -13,8 +13,20 @@ export interface Classroom {
 
 export interface GeneralUser {
     userId: string
+
+    /**
+     * Only for use by students
+     */
     classroomIds: string[]
+
+    /**
+     *Only for use by Employers
+     */
     employerProgramIds: string[]
+
+    /**
+     *Only for use by Teachers
+     */
     teacherProgramDataIds:{
         [employerProgramId:string]:string
     }
@@ -55,6 +67,7 @@ export interface TeacherProgramData {
     trainingDayAgenda?: AgendaTemplate
     hackDayAgenda?: AgendaTemplate    //  Modified  version  of  HackDayAgenda  Master  Template
     created: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+    lastUpdate: firebase.firestore.Timestamp | firebase.firestore.FieldValue
 }
 //  StudentProject  should  be  an  extension  of  a  Team
 export interface Project {
@@ -63,7 +76,6 @@ export interface Project {
     teamMembersIds: string[]
     teamName: string
     createdByTeacher: boolean
-    period: string
     timeline: {
         programBrief?: firebase.firestore.Timestamp
         introVideo?: firebase.firestore.Timestamp
@@ -71,8 +83,8 @@ export interface Project {
         practice?: firebase.firestore.Timestamp
         caseStudies?: firebase.firestore.Timestamp
         bmc?: firebase.firestore.Timestamp
-        sentencePitch: firebase.firestore.Timestamp
-        elevatorPitch: firebase.firestore.Timestamp
+        sentencePitch?: firebase.firestore.Timestamp
+        elevatorPitch?: firebase.firestore.Timestamp
         hackDay?: firebase.firestore.Timestamp
         reflection?: firebase.firestore.Timestamp
         demoVideo?: firebase.firestore.Timestamp
@@ -81,7 +93,7 @@ export interface Project {
         exitForm?: firebase.firestore.Timestamp
         interviewOffer?: firebase.firestore.Timestamp
     }
-    caseStudies: ReviewedLink
+    caseStudiesReviewed?: boolean[]
     practiceLog: {
         [userId: string]: TimeLog[]
     }

@@ -37,6 +37,8 @@
      
       <business-model-canvas-comp
         v-model="canvas"
+        readonly
+        :stars="true"
       />
     </v-col>
   </v-row>

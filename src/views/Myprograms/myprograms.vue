@@ -13,7 +13,7 @@
       <!-- ACTIVE CARD -->
       <PCLoader v-slot="{loading, setLoader}">
         <v-row
-          v-for="(program,index) in employerPrograms"
+          v-for="(program,index) in Programs"
           :key="index"
           class="myprograms__card"
         >
@@ -119,35 +119,43 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { FbStore } from "../../store";
-import { EmployerProgram } from "../../store/Database/types/types";
+import { EmployerProgram, Classroom } from "../../store/Database/types/types";
 import { firebase } from "@/firebase/init";
 import { from } from "rxjs";
 import { map, switchMap } from "rxjs/operators";
 import { PCLoader } from "../../components/utilities";
-@Component({
+@Component<myprograms>({
   components: {
     PCLoader
   },
   subscriptions() {
     return {
-      employerPrograms: from(
-        Promise.all(
-          FbStore.currentUserProfile!.employerProgramIds.map(id =>
-            FbStore.firestore
-              .collection("EmployerProgram")
-              .doc(id)
-              .get()
-          )
-        )
+      Programs: from(
+        this.getEmployerPrograms()
       ).pipe(map(snapshotArr => snapshotArr.map(snapshot => snapshot.data())))
     };
   }
 })
 export default class myprograms extends Vue {
-  created() {
-    // this.createProgram()
+  Programs: EmployerProgram[] = [];
+  get programIds() {
+    return FbStore.userCitizenType != "student"
+      ? FbStore.currentUserProfile!.employerProgramIds
+      : FbStore.currentUserProfile;
   }
-  employerPrograms: EmployerProgram[] = [];
+  async getEmployerProgramIds() {
+    if(FbStore.userCitizenType === "student")
+      return Promise.all(FbStore.currentUserProfile!.classroomIds.map(async id =>
+      (await FbStore.firestore.collection("Classroom").doc(id).get()).data<Classroom>().employerProgramId
+    ))
+    else
+      return FbStore.currentUserProfile!.employerProgramIds
+  }
+  async getEmployerPrograms(){
+   return Promise.all((await this.getEmployerProgramIds()).map(id => 
+     FbStore.firestore.collection("EmployerProgram").doc(id).get()
+   ))
+  }
   createProgram() {
     let id = FbStore.firestore.collection("EmployerProgram").doc().id;
     FbStore.firestore
@@ -161,7 +169,6 @@ export default class myprograms extends Vue {
         shareCode: "eoisrhjow3i4ubn3woi4nh",
         lastUpdate: firebase.firestore.FieldValue.serverTimestamp()
       });
-    "ya good @taisei? Check the vscode chat";
   }
   value = "";
   custom = true;
