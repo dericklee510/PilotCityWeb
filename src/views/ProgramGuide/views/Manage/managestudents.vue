@@ -26,14 +26,14 @@
       <v-col>{{ entry.name }}</v-col>
       <v-col>
         <pc-select
-          v-model="entry.class"
+          :value="{text:entry.class,value:entry.classroomId}"
           :items="availableClasses"
-          @update:value="changeClassroom"
+          @update:value="changeClassroom($event,entry)"
         />
       </v-col>
       <v-col>
         <pc-select
-          v-model="entry.project"
+          :value="{text:entry.project, value:entry.projectId}"
           :items="availableProjects[entry.classroomId]"
           @update:value="changeProject($event,entry)"
         />
