@@ -46,13 +46,22 @@
       </PCLoader>
       <!-- ADD CARD -->
 
-      <v-row
-        justify="center"
-        class="myprograms__addcard mt-9"
-      >
-        +
-      </v-row>
-
+      <v-dialog>
+        <template v-slot:activator="{on}">
+          <v-row
+            justify="center"
+            class="myprograms__addcard mt-9"
+            v-on="on"
+          >
+            +
+          </v-row>
+        </template>
+        <v-text-field
+          v-model="shareCode"
+          :success-messages="result"
+        />
+        <v-btn @click="joinProgram" />
+      </v-dialog>
       <!-- COMPLETED -->
 
       <v-row class="myprograms__categorytitle mt-12 mb-6">
@@ -119,7 +128,7 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { FbStore } from "../../store";
-import { EmployerProgram, Classroom } from "../../store/Database/types/types";
+import { EmployerProgram, Classroom, GeneralUser } from "../../store/Database/types/types";
 import { firebase } from "@/firebase/init";
 import { from } from "rxjs";
 import { map, switchMap } from "rxjs/operators";
@@ -172,6 +181,36 @@ export default class myprograms extends Vue {
   }
   value = "";
   custom = true;
+  shareCode=""
+  result= ""
+  async joinProgram(){
+    
+    if(FbStore.userCitizenType==="teacher"){
+      let querySnapshot = await FbStore.firestore.collection("Program").where("shareCode", "==", this.shareCode).get()
+      let foundProgram  = querySnapshot.docs[0]?.data() as EmployerProgram | undefined
+      if(foundProgram)
+    FbStore.firestore.collection("GeneralUser").doc(FbStore.FBUser!.uid).update({
+        employerProgramIds: firebase.firestore.FieldValue.arrayUnion(foundProgram.employerProgramId)
+     }); else this.result = "Could not verify share code"
+    }else if(FbStore.userCitizenType ==="student"){
+      let querySnapshot = await FbStore.firestore.collection("Classroom").where("shareCode", "==", this.shareCode).get()
+      let foundProgram  = querySnapshot.docs[0]?.data() as Classroom | undefined
+      if(foundProgram)
+        FbStore.joinClassroom({classroomUid:foundProgram.classroomId, studentUid:FbStore.FBUser!.uid})
+       else this.result = "Could not verify share code"
+    }else if(FbStore.userCitizenType ==="employer"){
+      let ref = FbStore.firestore.collection("EmployerProgram").doc(this.shareCode)
+      let doc = await ref.get()
+      if(doc.exists){
+        ref.update<EmployerProgram>({
+          employerId:FbStore.FBUser!.uid
+        })
+        FbStore.updateCurrentUserProfile({
+          employerProgramIds: firebase.firestore.FieldValue.arrayUnion(doc.id) as unknown as string[]
+        })
+      }
+    }
+  }
   get progress() {
     return Math.min(100, this.value.length * 10);
   }
