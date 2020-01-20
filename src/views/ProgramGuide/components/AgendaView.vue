@@ -12,10 +12,10 @@
           cols="2"
           class="agenda-view__checkbox-input"
         >
-          <input
+          <v-checkbox
             v-model="item.completed"
             type="checkbox"
-          >
+          />
         </v-col>
         <v-col
           cols="10"

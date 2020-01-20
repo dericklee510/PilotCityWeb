@@ -1,3 +1,4 @@
+import { FbStore } from './../index';
 import { SET_USER } from './../Auth/mutation-types';
 import { Dependency } from '@/utilities/dependency';
 import { isLinkValid } from './../../api';
@@ -55,7 +56,7 @@ export default class Fb extends VuexModule {
     async updateCurrentUserProfile(property: Partial<GeneralUser>) {
         const state = (this.state as Pick<Fb, NonFunctionKeys<Fb>>)
         const uid = state.FBUser?.uid
-        await firestore.collection('GeneralUser').doc(uid).update<GeneralUser>({...property, lastUpdate:firebase.firestore.FieldValue.serverTimestamp()});
+        await firestore.collection('GeneralUser').doc(uid).update<GeneralUser>({ ...property, lastUpdate: firebase.firestore.FieldValue.serverTimestamp() });
         return { currentUserProfile: Object.assign(property, state.currentUserProfile) };
     }
     @Mutation
@@ -97,10 +98,10 @@ export default class Fb extends VuexModule {
     async initCurrentProject(arg: Project | string | null) {
         if (typeof arg === "string")
             return { currentProject: (await (firestore.collection("Project").doc(arg).get())).data<Project>() }
-        else if(arg)
+        else if (arg)
             return { currentProject: arg }
         else {
-            return {currentProject: arg}
+            return { currentProject: arg }
         }
     }
 
@@ -109,7 +110,7 @@ export default class Fb extends VuexModule {
     async updateCurrentEmployerProgram(property: Partial<EmployerProgram>) {
         const state = (this.state as Pick<Fb, NonFunctionKeys<Fb>>)
         const uid = state.currentEmployerProgram?.employerProgramId
-        await firestore.collection('EmployerProgram').doc(uid).update<EmployerProgram>({...property, lastUpdate:firebase.firestore.FieldValue.serverTimestamp()});
+        await firestore.collection('EmployerProgram').doc(uid).update<EmployerProgram>({ ...property, lastUpdate: firebase.firestore.FieldValue.serverTimestamp() });
         return { currentEmployerProgram: Object.assign(property, this.currentEmployerProgram) };
     }
 
@@ -118,7 +119,7 @@ export default class Fb extends VuexModule {
     async updateCurrentTeacherProgramData(property: Partial<TeacherProgramData>) {
         const state = (this.state as Pick<Fb, NonFunctionKeys<Fb>>)
         const uid = state.currentTeacherProgramData?.teacherProgramId
-        await firestore.collection('TeacherProgramData').doc(uid).update<TeacherProgramData>({...property, lastUpdate:firebase.firestore.FieldValue.serverTimestamp()});
+        await firestore.collection('TeacherProgramData').doc(uid).update<TeacherProgramData>({ ...property, lastUpdate: firebase.firestore.FieldValue.serverTimestamp() });
         return { currentTeacherProgramData: Object.assign(property, this.currentTeacherProgramData) }
     }
 
@@ -127,7 +128,7 @@ export default class Fb extends VuexModule {
     async updateCurrentProject(property: Partial<Project>) {
         const state = (this.state as Pick<Fb, NonFunctionKeys<Fb>>)
         const uid = state.currentProject?.projectId
-        await firestore.collection('Project').doc(uid).update<Project>(Object.assign({},{...property, lastUpdate:firebase.firestore.FieldValue.serverTimestamp()}));
+        await firestore.collection('Project').doc(uid).update<Project>(Object.assign({}, { ...property, lastUpdate: firebase.firestore.FieldValue.serverTimestamp() }));
         return { currentProject: Object.assign(property, this.currentProject) }
     }
 
@@ -262,13 +263,13 @@ export default class Fb extends VuexModule {
             this.initCurrentTeacherProgramData((await this.firestore.collection("TeacherProgramData").doc(uid).get()).data())
         } else {
             uid = await this.firestore.collection("TeacherProgramData").doc().id
-            let emptyTeacherProgramData = {
+            let emptyTeacherProgramData: TeacherProgramData = {
                 teacherProgramId: uid,
                 classroomIds: [],
                 employerProgramId,
                 caseStudies: [],
                 created: firebase.firestore.FieldValue.serverTimestamp(),
-                lastUpdate:firebase.firestore.FieldValue.serverTimestamp()
+                lastUpdate: firebase.firestore.FieldValue.serverTimestamp()
             }
             this.firestore.collection("TeacherProgramData").doc(uid).set<TeacherProgramData>(emptyTeacherProgramData)
             this.updateCurrentUserProfile({
@@ -290,6 +291,7 @@ export default class Fb extends VuexModule {
         const batch = firestore.batch();
         const classroomId = firestore.collection('Classroom').doc().id;
         const classroom: Classroom = {
+            studentIds: [],
             projectIds: [],
             classroomId,
             teacherId: this.currentUserProfile!.userId,
@@ -303,6 +305,20 @@ export default class Fb extends VuexModule {
         await batch.commit()
         return firestore.collection('Classroom').doc(classroomId)
         // update current classroom ?
+    }
+    @Action({ rawError: true })
+    async joinClassroom({ classroomUid, studentUid }: { classroomUid: string, studentUid: string }) {
+        const batch = firestore.batch()
+        const classroomRef = firestore.collection('Classroom').doc(classroomUid);
+        const studentRef = firestore.collection('GeneralUser').doc(studentUid);
+
+        batch.update<Classroom>(classroomRef, {
+            studentIds: firebase.firestore.FieldValue.arrayUnion(studentUid)
+        })
+        batch.update<GeneralUser>(studentRef, {
+            classroomIds: firebase.firestore.FieldValue.arrayUnion(classroomUid)
+        })
+        await batch.commit()
     }
 
 
@@ -387,12 +403,12 @@ export default class Fb extends VuexModule {
      * @param null uid
      */
     @Dependency('currentUserProfile')
-    async switchClassroom(oldClassroomId: string, newClassroomId: string, uid: string, studentId: string) {
+    @Action({rawError:true})
+    async switchClassroom({oldClassroomId,newClassroomId,studentId}:{oldClassroomId: string, newClassroomId: string, studentId: string}) {
         // kick student from project
-        const myuid = uid ? uid : this.FBUser!.uid;
         const batch = firestore.batch();
         const classroomRef = firestore.collection('Classroom').doc(oldClassroomId);
-        const studentRef = firestore.collection('GeneralUser').doc(uid);
+        const studentRef = firestore.collection('GeneralUser').doc(studentId);
 
         const classroomDocRef = await classroomRef.get();
         const studentDocRef = await studentRef.get();
@@ -403,7 +419,7 @@ export default class Fb extends VuexModule {
         projectIds.forEach(pid => { // remove this user from all those project
             const projectRef = firestore.collection('Project').doc(pid);
             batch.update(projectRef, {
-                teamMembersIds: firebase.firestore.FieldValue.arrayRemove(myuid)
+                teamMembersIds: firebase.firestore.FieldValue.arrayRemove(studentId)
             })
         })
         batch.update(studentRef, { // remove old classroom uid from user's classroomIds
@@ -411,6 +427,12 @@ export default class Fb extends VuexModule {
         })
         batch.update(studentRef, { // add the new one, i think there's something wrong with the db design, should add user's uid into classroom 
             classroomIds: firebase.firestore.FieldValue.arrayUnion(newClassroomId)
+        })
+        batch.update(classroomRef, {
+            projectIds: firebase.firestore.FieldValue.arrayRemove(studentId)
+        })
+        batch.update(classroomRef, {
+            projectIds: firebase.firestore.FieldValue.arrayUnion(studentId)
         })
         await batch.commit();
 
@@ -429,11 +451,13 @@ export default class Fb extends VuexModule {
      * @param {string} studentId
      * @returns {Promise<void>}
      */
-    async switchProject(oldProjectId: string, newProjectId: string, uid: string, studentId: string) {
+    @Action({rawError:true})
+    async switchProject({oldProjectId,newProjectId,studentId}:{oldProjectId?: string, newProjectId: string, studentId: string}) {
         // remove student.id with studentId from Project.teamMembers with oldProjectId
         // Student.projectIds[clasroomID] = newProjectId
-        await this.leaveProject({projectId:oldProjectId});
-        await this.joinProject(newProjectId);
+        if(oldProjectId)
+            await this.leaveProject({ projectId: oldProjectId, uid:studentId});
+        await this.joinProject({ projectId: newProjectId, uid:studentId});
     }
 
     /**
@@ -449,16 +473,16 @@ export default class Fb extends VuexModule {
     // Project.createdByTeacher = 1
     // Project.teamMembers = []
     // add projectId to (employer program) project->classroom -> employerProgram
-    @Action({rawError:true})
-    async createProject({teamName, classroomId}:{teamName:string,classroomId:string}) {
+    @Action({ rawError: true })
+    async createProject({ teamName, classroomId }: { teamName: string, classroomId: string }) {
         let createdByTeacher: boolean = false;
         if ((this.currentUserProfile as GeneralUser).citizenType == 'teacher')
             createdByTeacher = true;
         const projectId = firestore.collection('Project').doc().id;
-        const project:Project = {
+        const project: Project = {
             teamName,
-            timeline:{},
-            practiceLog:{},
+            timeline: {},
+            practiceLog: {},
             projectId,
             classroomId,
             createdByTeacher,
@@ -474,33 +498,53 @@ export default class Fb extends VuexModule {
                 const classroomData = doc.data<Classroom>()
                 const projectRef = firestore.collection('Project').doc(projectId);
                 const employerProgramRef = firestore.collection('EmployerProgram').doc(classroomData!.employerProgramId);
-               
-                 transaction
+
+                transaction
                     .set(projectRef, project)
                     .update(employerProgramRef, {
                         projectIds: firebase.firestore.FieldValue.arrayUnion(projectId)
-                    }).update(classroomRef,{
+                    }).update(classroomRef, {
                         projectIds: firebase.firestore.FieldValue.arrayUnion(projectId)
                     })
             })
-           
+
         })
         return firestore.collection("Project").doc()
     }
-
+    @Action({ rawError: true })
+    async getStudentName({ studentUid, studentName }: { studentUid?: string, studentName?: {firstName:string,lastName:string} }): Promise<string> {
+        if((studentUid && studentName) || !(studentUid || studentName))
+            throw("Only one parameter must be defined")
+        return (({ firstName, lastName }) => (_.startCase(_.lowerCase(firstName + " " + lastName))))(studentUid?(await firestore.collection("GeneralUser").doc(studentUid).get()).data<GeneralUser>():studentName!)
+    }
     /**
      * Allows User to rename a team
      * User: Teacher or Student
      * @param {string} newProjectName
      * @param {string} projectId
      */
-    @Action({rawError:true})
-    async renameProject({newProjectName, projectId}:{[args:string]:string}) {
+    @Action({ rawError: true })
+    async renameProject({ newProjectName, projectId }: {newProjectName:string,projectId:string}) {
         // Project.teamName = newProjectName
         await firestore.collection('Project').doc(projectId).update({ teamName: newProjectName });
         // update current Project
     }
+    @Action({ rawError: true })
+    async findRelativeProject({ classroomId, studentId }: {
+        classroomId: string,
+        studentId: string
+    }): Promise<Project | null> {
+        return new Promise(async (resolve) => {
+            let studentDoc = await firestore.collection("GeneralUser").doc(studentId).get()
+            await Promise.all(studentDoc.data<GeneralUser>().projectIds.map(async id => {
+                let projectDoc = await firestore.collection("Project").doc(id).get()
+                if (projectDoc.data<Project>().classroomId === classroomId)
+                    resolve(projectDoc.data())
+            }))
+            resolve(null)
+        })
 
+    }
     /**
      * Allows User to delete a team
      * User: Teacher 
@@ -509,7 +553,7 @@ export default class Fb extends VuexModule {
      * @returns {Promise<void>}
      */
     @Dependency('currentUserProfile')
-    async deleteProject(projectId: string, uid?: string) {
+    async deleteProject(projectId:string) {
         // remove projectId from every student's student.projectId interface X 
         // remove projectId from classroom.projectId  X 
         // remove projectId from employerProgram.Id 
@@ -517,7 +561,6 @@ export default class Fb extends VuexModule {
         // User must be a teacher X
         assert(this.userCitizenType === 'teacher', 'User type not teacher');
         const batch = firestore.batch();
-        const myuid = uid ? uid : this.FBUser!.uid
         const studentsSnapshot = await firestore.collection('GeneralUser').where('projectIds', 'array-contains', projectId).get();
         const projectDocSnapshot = await firestore.collection('Project').doc(projectId).get();
         if (!projectDocSnapshot.exists) throw "project does not exist"
@@ -552,11 +595,11 @@ export default class Fb extends VuexModule {
      * @returns {Promise<void>}
      */
     @Dependency('currentUserProfile')
-    @Action({rawError:true})
-    async joinProject(projectId: string, uid?: string) {
+    @Action({ rawError: true })
+    async joinProject({ projectId, uid }: { projectId: string, uid?: string }) {
         // append Student.id to Project.teamMembers where Project.Id = projectId 
         // add projectId to Student.projectIds
-        const myuid = uid ? uid : this.FBUser!.uid
+        const myuid = uid || this.FBUser!.uid
         const batch = firestore.batch();
         const projectRef = firestore.collection('Project').doc(projectId);
         const studentRef = firestore.collection('GeneralUser').doc(myuid);
@@ -580,11 +623,8 @@ export default class Fb extends VuexModule {
      * @returns {Promise<void>}
      */
     @Dependency('currentUserProfile')
-    @Action({rawError:true})
-    async leaveProject({projectId, uid}:{projectId:string,uid?:string}) {
-        if (this.currentUserProfile!.citizenType != 'student') {
-            throw "Wrong citizen type";
-        }
+    @Action({ rawError: true })
+    async leaveProject({ projectId, uid }: { projectId: string, uid?: string }) {
         // remove student with Student.id = uid from Project.teamMembers where Project.id = projectId
         // remove projectId from Student.projectIds
         const myuid = uid || this.FBUser!.uid

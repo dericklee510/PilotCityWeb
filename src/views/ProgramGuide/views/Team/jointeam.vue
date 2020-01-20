@@ -128,7 +128,7 @@ export default class jointeam extends Vue {
     this.teamName = "";
   }
   async joinTeam(project:Project){
-    await FbStore.joinProject(project.projectId)
+    await FbStore.joinProject({projectId:project.projectId})
     // push to team settings after
   }
   projects: Project[] = [];

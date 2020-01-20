@@ -43,7 +43,13 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { EventItem } from '@/store/Database/types/utilities'
 import { FbStore } from '@/store'
-@Component
+import { AgendaView } from '../../components'
+@Component({
+components:{
+AgendaView
+
+}
+})
 export default class ExternshipAgenda extends Vue{
   created(){
     // const agendaItems

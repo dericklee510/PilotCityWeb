@@ -4,6 +4,7 @@ export interface Classroom {
     classroomId: string
     projectIds: string []
     teacherId: string
+    studentIds: string[]
     teacherProgramId: string
     employerProgramId: string
     className: string

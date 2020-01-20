@@ -19,6 +19,7 @@
           <v-rating
             v-model="stars.problem"
             :readonly="readonly===undefined"
+            @input="onStarsChanged($event,'problem')"
           />
         </v-row>
       </v-col>
@@ -63,6 +64,7 @@
           <v-rating
             v-model="stars.solution"
             :readonly="readonly===undefined"
+            @input="onStarsChanged($event,'solution')"
           />
         </v-row>
       </v-col>
@@ -107,6 +109,7 @@
           <v-rating
             v-model="stars.innovation"
             :readonly="readonly===undefined"
+            @input="onStarsChanged($event,'innovation')"
           />
         </v-row>
       </v-col>
@@ -149,8 +152,9 @@
             Rating
           </div>
           <v-rating
-            v-model="stars.cost"
+            v-model="stars.customer"
             :readonly="readonly===undefined"
+            @input="onStarsChanged($event,'customer')"
           />
         </v-row>
       </v-col>
@@ -166,7 +170,7 @@
         class="pt-1 pb-12 pl-5 pr-4 businessmodelcanvas_enter__paragraph"
       >
         <v-textarea
-          v-model="syncedCanvas.cost"
+          v-model="syncedCanvas.customer"
           :disabled="readonly"
           :error-messages="failedRules.max?`Must not be longer than 280 Characters`:errors"
           counter
@@ -175,7 +179,7 @@
       </ValidationProvider>
     </v-row>
 
-    <v-col
+    <!-- <v-col
       v-if="!readonly"
       class="mr-auto ml-auto"
       cols="5"
@@ -189,7 +193,7 @@
           SAVE
         </v-btn>
       </PCLoader>
-    </v-col>
+    </v-col> -->
   </ValidationObserver>
 </template>
 
@@ -199,9 +203,9 @@ import Component from "vue-class-component";
 import "reflect-metadata";
 import { Prop, PropSync, Watch } from "vue-property-decorator";
 import { ValidationProvider, ValidationObserver } from "vee-validate";
-import { BusinessModelCanvas } from '@/store/Database/types/utilities';
-import { FbStore } from '../../../../../store';
-import { PCLoader } from '../../../../../components/utilities';
+import { BusinessModelCanvas } from "@/store/Database/types/utilities";
+import { FbStore } from "../../../../../store";
+import { PCLoader } from "../../../../../components/utilities";
 @Component({
   components: {
     ValidationProvider,
@@ -215,7 +219,7 @@ export default class BusinessModelCanvasComp extends Vue {
     problem: number;
     solution: number;
     innovation: number;
-    cost: number;
+    customer: number;
   };
   @PropSync("value")
   syncedCanvas!: BusinessModelCanvas;
@@ -223,16 +227,19 @@ export default class BusinessModelCanvasComp extends Vue {
   @Prop()
   readonly?: string;
   @PropSync("stars")
-  syncedStars!: Record<keyof BusinessModelCanvas,Number>
-  async saveCanvas(){
+  syncedStars!: Record<keyof BusinessModelCanvas, Number>;
+  async saveCanvas() {
     await FbStore.updateCurrentProject({
       ...this.syncedCanvas
-    })
+    });
   }
-  @Watch("syncedStars", { deep: true })
-  onStarsChanged(newVal: BusinessModelCanvas) {
-    this.$emit("starsChanged", newVal);
+  onStarsChanged(
+    newRating:number,
+    canvasField: "problem" | "solution" | "innovation" | "customer"
+  ) {
+    this.$emit('starsChanged', {newRating,canvasField})
   }
+
   created() {
     if (!this.stars)
       this.syncedStars = {

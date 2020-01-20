@@ -50,7 +50,7 @@
             <span>
               {{ namedLink.linkName }}
             </span>
-            <a :ref="namedLink.link"><button class="viewcasestudies__exporticon"><img src="@/assets/exportbox.png"></button></a>
+            <a :href="namedLink.link"><button class="viewcasestudies__exporticon"><img src="@/assets/exportbox.png"></button></a>
           </span>
         </v-row>
         <v-row
@@ -85,7 +85,7 @@ import { FbStore } from '../../../../store'
 @Component
 export default class ViewCaseStudies extends Vue{
     namedLinks:NamedLink[] = FbStore.currentEmployerProgram?.caseStudies || [{} as NamedLink]
-    caseStudiesReviewed = FbStore.currentProject!.caseStudiesReviewed || []
+    caseStudiesReviewed = FbStore.currentProject?.caseStudiesReviewed || []
   get allReviewed(){
     return this.namedLinks.map((link,index) => this.caseStudiesReviewed[index]).every(isReviewed => isReviewed)
   }
