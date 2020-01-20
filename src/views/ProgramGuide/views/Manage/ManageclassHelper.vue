@@ -55,7 +55,11 @@
             </v-btn>
           </PCLoader>
         </v-col>
-        <v-col cols="12" lg="3" xl="2">
+        <v-col
+          cols="12"
+          lg="3"
+          xl="2"
+        >
           <v-progress-circular
             v-if="!entry.shareCode"
             indeterminate
@@ -72,7 +76,11 @@
         </v-col>
       </v-row>
     </v-col>
-    <v-col cols="12" lg="2" class=" manageclass__create-button">
+    <v-col
+      cols="12"
+      lg="2"
+      class=" manageclass__create-button"
+    >
       <PCLoader v-slot="{loading,setLoader}">
         <v-btn
           class="manageclass__button"

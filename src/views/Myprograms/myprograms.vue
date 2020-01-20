@@ -46,7 +46,9 @@
       </PCLoader>
       <!-- ADD CARD -->
 
-      <v-dialog>
+      <v-dialog
+        max-width="50vw"
+      >
         <template v-slot:activator="{on}">
           <v-row
             justify="center"
@@ -56,11 +58,70 @@
             +
           </v-row>
         </template>
-        <v-text-field
-          v-model="shareCode"
-          :success-messages="result"
-        />
-        <v-btn @click="joinProgram" />
+        <template>
+          <v-container class="code-modal pa-0">
+            <v-row
+              no-gutters
+              justify="center"
+            >
+              <v-col
+                cols="10"
+                class="code-modal__container"
+              >
+                <v-row
+                  no-gutters
+                  justify="center"
+                >
+                  <v-col
+                    class="code-modal__title"
+                    cols="12"
+                  >
+                    <span>Enter your program code</span>
+                  </v-col>
+                </v-row>
+                <v-row
+                  no-gutters
+                  justify="center"
+                >
+                  <v-col
+                    cols="8"
+                    class="code-modal__input"
+                  >
+                    <v-text-field
+                      v-model="shareCode"
+                      solo
+                      depressed
+                      flat
+                      outlined
+                      :success-messages="result"
+                    />
+                  </v-col>
+                </v-row>
+                <v-row
+                  no-gutters
+                  justify="center"
+                >
+                  <v-col
+                    cols="6"
+                    md="2"
+                    class="code-modal__button"
+                  >
+                    <v-btn
+                      width="100%"
+                      height="100%"
+                      flat
+                      depressed
+                      outlined
+                      @click="joinProgram"
+                    >
+                      ADD
+                    </v-btn>
+                  </v-col>
+                </v-row>
+              </v-col>
+            </v-row>
+          </v-container>
+        </template>
       </v-dialog>
       <!-- COMPLETED -->
 
@@ -195,6 +256,7 @@ export default class myprograms extends Vue {
     }else if(FbStore.userCitizenType ==="student"){
       let querySnapshot = await FbStore.firestore.collection("Classroom").where("shareCode", "==", this.shareCode).get()
       let foundProgram  = querySnapshot.docs[0]?.data() as Classroom | undefined
+      console.log({foundProgram})
       if(foundProgram)
         FbStore.joinClassroom({classroomUid:foundProgram.classroomId, studentUid:FbStore.FBUser!.uid})
        else this.result = "Could not verify share code"

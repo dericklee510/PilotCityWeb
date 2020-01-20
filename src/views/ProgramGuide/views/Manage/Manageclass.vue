@@ -12,13 +12,25 @@
           class="manageclass__nav text-center"
           no-gutters
         >
-          <v-col cols="4" sm="3" lg="2">
+          <v-col
+            cols="4"
+            sm="3"
+            lg="2"
+          >
             CLASSES
           </v-col>
-          <v-col cols="4" sm="3" lg="2" >
+          <v-col
+            cols="4"
+            sm="3"
+            lg="2"
+          >
             STUDENTS
           </v-col>
-          <v-col cols="4" sm="3" lg="2">
+          <v-col
+            cols="4"
+            sm="3"
+            lg="2"
+          >
             TEAMS
           </v-col>
         </v-row>

@@ -2,21 +2,8 @@
   <div class="pc-background--dark">
     <v-container style="padding-top: 10vh; padding-bottom: 25vh">
       <v-row justify="center">
-        <v-col cols="12">
-          <v-row justify="center">
-            <v-col
-              cols="12"
-              md="4"
-            >
-              <img
-                id="login-image"
-                src="@/assets/Knock_knock.png"
-              >
-            </v-col>
-          </v-row>
-        </v-col>
-        <v-col cols="12">
-          <v-row justify="center">
+        <v-col cols="8">
+           <v-row justify="center">
             <v-col
               cols="12"
               md="3"
@@ -30,6 +17,10 @@
               </h2>
             </v-col>
           </v-row>
+
+        </v-col>
+        <v-col cols="12">
+         
         </v-col>
         <v-col
           cols="12"
