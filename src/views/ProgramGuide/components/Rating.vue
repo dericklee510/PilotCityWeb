@@ -17,6 +17,12 @@
           >
             <i class="fas fa-external-link-alt" />
           </router-link>
+          <a
+            v-else-if="team.href"
+            :href="team.href"
+          >
+            <i class="fas fa-external-link-alt" />
+          </a>
         </slot>
       </v-col>
       <!-- <v-col class="pitch_view__externallink" cols="1"><i class="fas fa-external-link-alt"></i></v-col> -->
@@ -37,7 +43,10 @@
         </slot>
       </v-col>
       <v-col cols="2">
-        <v-rating v-model="team.rating" />
+        <v-rating
+          v-model="team.rating"
+          @input="ratingChange($event,team.projectId)"
+        />
       </v-col>
     </v-row>
   </v-container>
@@ -50,10 +59,11 @@ import Component from 'vue-class-component'
 import { Prop, PropSync, Watch } from 'vue-property-decorator'
 import { RawLocation } from 'vue-router'
 export interface team_snippet {
-    id:string
+    projectId:string
     name:string
     item_preview?:string
     router_params?:RawLocation
+    href?:string
     rating:number
 }
 @Component
@@ -63,7 +73,9 @@ export default class Rating extends Vue{
 
     @Prop()
     preview?:string
-
+    ratingChange(newRating:number,projectId:string){
+      this.$emit("ratingChange",{newRating,projectId})
+    }
    
 
     @PropSync("value")

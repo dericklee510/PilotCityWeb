@@ -47,7 +47,10 @@
           cols="12"
           md="3"
         >
-          <v-rating />
+          <v-rating
+            v-model="team.averageRating"
+            readonly
+          />
         </v-col>
       </v-row>
     </v-col>
@@ -91,10 +94,12 @@ export default class businessmodelcanvas_view2 extends Vue {
                 FbStore.firestore.collection("Project").doc(projectId)
               ).subscribe(projectSnapshot => {
                 let projectData = projectSnapshot.data<Project>();
+                projectData[``]
                 spliceOrPush(
                   this.entries,
                   {
-                    ...projectData
+                    ...projectData,
+                    averageRating:this.getAverageRating(projectData)
                   },
                   "projectId"
                 );
@@ -106,6 +111,12 @@ export default class businessmodelcanvas_view2 extends Vue {
     });
   }
   entries: TeamInfo[] = [];
+  getAverageRating(project:Project & Record<string,any>){
+   let total = ["problem","customer","solution","innovation"].reduce((total, currentProp,currentIndex,array) => {
+     return total += project[`${currentProp}Rating${FbStore.userCitizenType!.charAt(0).toUpperCase()}`] || 0
+    },0)
+    return total /4
+  }
   projectSubscribers: {
     [classroomId: string]: Subscription[];
   } = {};

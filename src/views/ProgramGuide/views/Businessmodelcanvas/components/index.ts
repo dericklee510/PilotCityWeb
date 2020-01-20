@@ -14,4 +14,5 @@ export interface TeamInfo {
     solution?: string;
     innovation?: string;
     customer?: string;
+    averageRating:number
   }

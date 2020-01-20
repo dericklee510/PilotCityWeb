@@ -46,7 +46,10 @@
 
       <!-- TEAM -->
 
-      <Rating v-model="team" />
+      <Rating
+        v-model="entries"
+        @ratingChange="onRatingChange"
+      />
     </v-col>
   </v-row>
 </template>
@@ -60,23 +63,55 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { Rating } from '../../components'
 import { team_snippet } from '../../components/Rating.vue'
+import { FbStore } from '../../../../store';
+import { doc } from 'rxfire/firestore';
+import { Classroom, Project } from '../../../../store/Database/types/types';
+import { spliceOrPush } from '../../../../utilities/array';
+import { Subscription } from 'rxjs';
+import {firebase} from "@/firebase/init"
 @Component({
   components:{
     Rating
   }
 })
 export default class presentation_view extends Vue{
-    team:team_snippet[] = [{
-      id:'0',
-      name:"Data Analysis for the Alameda Library",
-      rating:2,
-      router_params:"idk"
-    },
-    {
-      id:'0',
-      name:"Data Analysis for the Alameda Library",
-      rating:3,
-      router_params:"idk"
-    }]
+    mounted() {
+    FbStore.currentTeacherProgramData!.classroomIds.forEach(classroomId => {
+      this.$subscribeTo(
+        doc(FbStore.firestore.collection("Classroom").doc(classroomId)),
+        classSnapshot => {
+          if (this.projectSubscribers[classSnapshot.id])
+            this.projectSubscribers[classSnapshot.id].forEach(subscriber =>
+              subscriber.unsubscribe()
+            );
+          else this.projectSubscribers[classSnapshot.id] = [];
+          classSnapshot.data<Classroom>().projectIds.forEach(projectId => {
+            this.projectSubscribers[classSnapshot.id].push(
+              doc(
+                FbStore.firestore.collection("Project").doc(projectId)
+              ).subscribe(projectSnapshot => {
+                let projectData = projectSnapshot.data<Project>();
+                spliceOrPush(
+                  this.entries,
+                  (({projectId,sentencePitch,teamName,presentationLink, ...rest}) => ({projectId,item_preview:sentencePitch || "",name:teamName,href:presentationLink, rating:(rest[`presentationRating${FbStore.userCitizenType!.charAt(0).toUpperCase()}`]||0)}))(projectData),
+                  "projectId"
+                );
+              })
+            );
+          });
+        }
+      );
+    });
+  }
+  onRatingChange({newRating,projectId}:{newRating:number,projectId:string}){
+   FbStore.firestore.collection("Project").doc(projectId).update<Project>({
+      [`presentationRating${FbStore.userCitizenType!.charAt(0).toUpperCase()}`]:newRating,
+      lastUpdate:firebase.firestore.FieldValue.serverTimestamp()
+    })
+  }
+    entries: team_snippet[] = [];
+  projectSubscribers: {
+    [classroomId: string]: Subscription[];
+  } = {};
 }
 </script>
