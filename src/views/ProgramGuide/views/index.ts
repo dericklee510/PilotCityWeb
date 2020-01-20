@@ -126,7 +126,7 @@ export const TEACHERMODULES = {
         'teach-project-elevator',
     ],
     'Hack Day': [
-        'teach-project-hack-edit',
+        // 'teach-project-hack-edit',
         'teach-project-hack',
     ],
     'Package': [
@@ -134,7 +134,7 @@ export const TEACHERMODULES = {
         'teach-project-presentation',
     ],
     'Demo Day': [
-        'teach-project-demoagenda-edit',
+        // 'teach-project-demoagenda-edit',
         'teach-project-demoagenda',
     ]
 }
@@ -227,8 +227,8 @@ export const TEACHERSEQUENCE = {
             'teach-project-intro'
         ],
         'Train': [
-            'teach-project-training',
             'teach-project-training-edit',
+            'teach-project-training',
         ],
         'Practice': [
             'teach-project-practicelog',
@@ -243,7 +243,7 @@ export const TEACHERSEQUENCE = {
         ],
         'Hack Day': [
             'teach-project-hack',
-            'teach-project-hack-edit',
+            // 'teach-project-hack-edit',
         ],
         'Package': [
             'teach-project-demo',
@@ -251,7 +251,7 @@ export const TEACHERSEQUENCE = {
         ],
         'Demo Day': [
             'teach-project-demoagenda',
-            'teach-project-demoagenda-edit',
+            // 'teach-project-demoagenda-edit',
         ]
     },
 }

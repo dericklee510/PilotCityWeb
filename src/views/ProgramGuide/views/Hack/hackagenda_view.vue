@@ -41,23 +41,27 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { AgendaView } from "../../components";
+import { FbStore } from '../../../../store';
 @Component({
   components: {
     AgendaView
   }
 })
 export default class agenda extends Vue {
-  agendaItems = [...AgendaView.emptyAgenda,{
-    name:"stuff",
-    description:"",
-    duration:"",
-    completed:true
+  // agendaItems = [...AgendaView.emptyAgenda,{
+  //   name:"stuff",
+  //   description:"",
+  //   duration:"",
+  //   completed:true
+  // }
+  // ,{
+  //   name:"stuff",
+  //   description:"",
+  //   duration:"",
+  //   completed:true
+  // }];
+  get agendaItems(){
+    return FbStore.currentEmployerProgram!.masterHackDayAgenda?.events
   }
-  ,{
-    name:"stuff",
-    description:"",
-    duration:"",
-    completed:true
-  }];
 }
 </script>

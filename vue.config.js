@@ -4,6 +4,9 @@ module.exports = {
             lintGQL: true
         }
     },
+    configureWebpack: {
+        devtool: 'source-map'
+      },
     runtimeCompiler: true,
     chainWebpack: (config) => {
         const svgRule = config.module.rule('svg')

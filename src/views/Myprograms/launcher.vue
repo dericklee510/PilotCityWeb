@@ -216,11 +216,11 @@ export default class ProgramLauncher extends Vue{
     async launchProgram() {
       if(FbStore.userCitizenType === "teacher")
         await FbStore.createTeacherProgramData(FbStore.currentEmployerProgramUID!)
-        this.$router.push({
-            name: new RouteList(
+        let route = new RouteList(
       FbStore.currentUserProfile!.citizenType!
     ).createLinkedList().head.value.routeName
-            // params: { citizenType: citizenKey }
+        this.$router.push({
+            name: route
         })
     }
 }
