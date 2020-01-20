@@ -72,6 +72,7 @@ import { Classroom, Project } from '../../../../store/Database/types/types';
 import { spliceOrPush } from '../../../../utilities/array';
 import { Subscription } from 'rxjs';
 import {firebase} from "@/firebase/init"
+import { Watch } from 'vue-property-decorator';
 Rating
 @Component({
   components:{
@@ -80,6 +81,7 @@ Rating
 })
 export default class demovideo_view extends Vue{
   mounted() {
+      if (FbStore.userCitizenType === "teacher")
     FbStore.currentTeacherProgramData!.classroomIds.forEach(classroomId => {
       this.$subscribeTo(
         doc(FbStore.firestore.collection("Classroom").doc(classroomId)),
@@ -105,7 +107,7 @@ export default class demovideo_view extends Vue{
           });
         }
       );
-    });
+    });else if (FbStore.userCitizenType === "employer") this.onProgramIdsChange();
   }
     onRatingChange({newRating,projectId}:{newRating:number,projectId:string}){
    FbStore.firestore.collection("Project").doc(projectId).update<Project>({
@@ -113,6 +115,34 @@ export default class demovideo_view extends Vue{
       lastUpdate:firebase.firestore.FieldValue.serverTimestamp()
     })
   }
+ get getProjectIds() {
+    return FbStore.currentEmployerProgram!.projectIds || [];
+  }
+  @Watch("getProgramIds")
+  onProgramIdsChange() {
+    if (FbStore.userCitizenType === "employer") {
+      this.employerSubscribers.forEach(subscriber => subscriber.unsubscribe());
+      this.getProjectIds.forEach(projectId => {
+        this.employerSubscribers.push(
+          doc(FbStore.firestore.collection("Project").doc(projectId)).subscribe(
+            projectSnapshot => {
+              let projectData = projectSnapshot.data<Project>();
+              spliceOrPush(
+                  this.entries,
+                  (({projectId,sentencePitch,teamName,demoLink, ...rest}) => ({projectId,item_preview:sentencePitch || "",name:teamName,href:demoLink, rating:(rest[`demoRating${FbStore.userCitizenType!.charAt(0).toUpperCase()}`]||0)}))(projectData),
+                  "projectId"
+                );
+            }
+          )
+        );
+      });
+    }
+  }
+    beforeDestroy() {
+    this.employerSubscribers.forEach(subscriber => subscriber.unsubscribe());
+  }
+  employerSubscribers: Subscription[] = [];
+
   entries: team_snippet[] = [];
   projectSubscribers: {
     [classroomId: string]: Subscription[];

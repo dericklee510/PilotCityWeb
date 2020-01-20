@@ -19,6 +19,8 @@ import BusinessCanvasView1 from "@/views/ProgramGuide/views/Businessmodelcanvas/
 import BusinessCanvasView2 from "@/views/ProgramGuide/views/Businessmodelcanvas/businessmodelcanvas_view2.vue"
 import OSPitchView from "@/views/ProgramGuide/views/Pitch/pitch_view.vue"
 import ElevatorView from "@/views/ProgramGuide/views/Elevator/elevator_view.vue"
+import ElevatorView1 from "@/views/ProgramGuide/views/Elevator/elevator_view1.vue"
+import ElevatorView2 from "@/views/ProgramGuide/views/Elevator/elevator_view2.vue"
 import HackEdit from "@/views/ProgramGuide/views/Hack/hackagenda_edit.vue"
 import HackView from "@/views/ProgramGuide/views/Hack/hackagenda_view.vue"
 import DemoVideoView from "@/views/ProgramGuide/views/Demovideo/demovideo_view.vue"
@@ -45,6 +47,10 @@ import ProgramLaunch from "@/views/Myprograms/launcher.vue"
 export const MyPrograms = {
     ProgramList,
     ProgramLaunch
+}
+export const Elevator = {
+    ElevatorView1,
+    ElevatorView2
 }
 export const Canvas = {
     BusinessCanvasView1,

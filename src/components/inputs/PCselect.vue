@@ -40,7 +40,7 @@ import { Component, Prop, PropSync } from 'vue-property-decorator'
 
 @Component
 export default class PCselect extends Vue {
-    @PropSync('value',{ required: true })
+    @PropSync('value')
     public syncValue!: string;
 
     @Prop({ default: false })

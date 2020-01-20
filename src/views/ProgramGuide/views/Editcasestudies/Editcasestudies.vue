@@ -59,63 +59,64 @@
           />
         </v-row>
     
-        <v-row
-          v-for="entry in entries"
-          :key="entry.id"
-          class="editcasestudies__textbox"
-          justify="center"
-          no-gutters
-        >
-          <v-col
-            cols="2"
-            md="1"
-          /> 
-          <v-col
-            cols="3"
-            md="4"
-            class="editcasestudies__inputlinkname"
+        <multi-input v-slot="{entries,newEntry,deleteEntry}">
+          <v-row
+            v-for="entry in entries"
+            :key="entry.id"
+            class="editcasestudies__textbox"
+            justify="center"
+            no-gutters
           >
-            <input
-              v-model="entry.linkName"
-              
-              placeholder="Lidar for Drones"
+            <v-col
+              cols="2"
+              md="1"
+            /> 
+            <v-col
+              cols="3"
+              md="4"
+              class="editcasestudies__inputlinkname"
             >
-          </v-col>
-          <v-col
-            cols="3"
-            md="4"
-            class="editcasestudies__inputlinkurl"
-          >
-            <input
-              v-model="entry.link"
-              placeholder="http://www.velodyne.com/casestudy1"
+              <input
+                v-model="entry.linkName"
+                
+                placeholder="Lidar for Drones"
+              >
+            </v-col>
+            <v-col
+              cols="3"
+              md="4"
+              class="editcasestudies__inputlinkurl"
             >
-          </v-col>
-          <v-col
-            cols="2"
-            md="1"
+              <input
+                v-model="entry.link"
+                placeholder="http://www.velodyne.com/casestudy1"
+              >
+            </v-col>
+            <v-col
+              cols="2"
+              md="1"
+            >
+              <i
+                v-if="entries.length>1"
+                class="mt-2 ml-3 far fa-trash-alt agenda__trashicon"
+                @click="deleteEntry(entry.id)"
+              />
+            </v-col>
+          </v-row>
+          <v-row
+            no-gutters
+            justify="center"
           >
-            <i
-              v-if="entries.length>1"
-              class="mt-2 ml-3 far fa-trash-alt agenda__trashicon"
-              @click="deleteEntry(entry.id)"
-            />
-          </v-col>
-        </v-row>
-        <v-row
-          no-gutters
-          justify="center"
-        >
-          <v-col
-            cols="8"
-            md="8"
-            class="editcasestudies__box"
-            @click="newEntry"
-          >
-            <span>+</span>
-          </v-col>
-        </v-row>
-    
+            <v-col
+              cols="8"
+              md="8"
+              class="editcasestudies__box"
+              @click="newEntry"
+            >
+              <span>+</span>
+            </v-col>
+          </v-row>
+        </multi-input>
         <v-row
           
           no-gutters

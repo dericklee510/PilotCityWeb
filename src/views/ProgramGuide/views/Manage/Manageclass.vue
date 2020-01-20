@@ -33,8 +33,6 @@
         <!-- <v-spacer /> -->
       </v-row>
       <ManageClassHelper
-     
-     
         :generate-first-classroom="generateClassroom"
       />
     </v-col>

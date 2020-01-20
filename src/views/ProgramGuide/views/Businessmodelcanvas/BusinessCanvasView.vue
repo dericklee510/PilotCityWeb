@@ -27,7 +27,6 @@
         </v-col>
         <v-col
           cols="12"
-          justify="center"
           class="programguide__title"
         >
           BUSINESS MODEL CANVAS
@@ -54,10 +53,9 @@ export default class BusinessCanvasView extends Vue{
   canvas:TeamInfo={} as TeamInfo
   changePage(team:TeamInfo){
     this.page == "view" ? this.page = "detail" : this.page = "view";
-    this.canvas = team
   }
   created(){
-    // this.page = "view";
+    this.page = "view";
   }
 }
 </script>
