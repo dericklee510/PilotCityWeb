@@ -5,20 +5,20 @@
       :key="index"
       justify="center"
     >
-      <v-col
-        v-if="preview === undefined"
-        class="demovideo_view__externallink"
-        cols="1"
-      >
-        <slot name="link">
+      <slot name="link">
+        <v-col
+          v-if="preview === undefined"
+          class="demovideo_view__externallink"
+          cols="1"
+        >
           <router-link
             v-if="team.router_params"
             :to="team.router_params"
           >
             <i class="fas fa-external-link-alt" />
           </router-link>
-        </slot>
-      </v-col>
+        </v-col>
+      </slot>
       <!-- <v-col class="pitch_view__externallink" cols="1"><i class="fas fa-external-link-alt"></i></v-col> -->
       <v-col cols="8">
         <slot name="header">

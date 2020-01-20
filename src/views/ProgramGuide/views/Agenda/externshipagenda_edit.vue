@@ -11,7 +11,6 @@
         id="agenda__contain"
         cols="10"
       >
-<<<<<<< HEAD
         <!-- TITLE -->
     
         <v-row
@@ -35,49 +34,13 @@
           Enter agenda for Externship event.
         </v-row>
     
-        <Agenda v-model="entries" />
+        <Agenda
+          v-model="entries"
+          v-stream:update:value="onAgendaChange$"
+        />
       </v-col>
     </v-row>
   </v-container>
-=======
-        Enter your agenda for the event or activity.
-      </v-row>
-
-      <!-- DESCRIPTION -->
-
-      <!-- <v-row 
-            justify="center" 
-            class="mr-auto ml-auto agenda__description">As you practice, use and apply the employer's product or service, log how many minutes you use it each time.
-        </v-row> -->
-
-
-
-      <!-- AGENDA LOGISTICS
-
-<v-row class="agenda__logistics col-8 mr-auto ml-auto mt-10 pr-auto pl-auto pt-0 pb-0">
-
-
-        <v-column class="agenda__poop">
-
-            <v-row id="agenda__borderline" class="agenda__logisticslabel pl-4 pt-4 pb-4">DATE:<input placeholder="Enter date here" class="ml-4 agenda__item-input"></v-row>
-
-            <v-row id="agenda__borderline" class="agenda__logisticslabel pl-4 pt-4 pb-4">TIME:<input placeholder="Enter time here" class="ml-4 agenda__item-input"></v-row>
-
-            <v-row class="agenda__logisticslabel pl-4 pb-4 pt-4">LOCATION:<input placeholder="Enter location here" class="ml-4 agenda__item-input"></v-row>
-        
-        </v-column>
-
-        </v-row> -->
-
-      <!-- AGENDA ITEM -->
-
-      <Agenda
-        v-model="entries"
-        v-stream:update:value="onAgendaChange$"
-      />
-    </v-col>
-  </v-row>
->>>>>>> 716c629e0cb2398f5dc5c50070446da96514b14c
 </template>
 
 

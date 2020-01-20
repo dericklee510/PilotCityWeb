@@ -26,7 +26,6 @@
         </v-col>
         <v-col
           cols="12"
-          justify="center"
           class="programguide__title"
         >
           BUSINESS MODEL CANVAS
@@ -48,7 +47,7 @@ import Component from 'vue-class-component'
 @Component
 export default class BusinessCanvasView extends Vue{
 
-  public page!: string = "view";
+  public page?: string = "view";
 
   changePage(){
     this.page == "view" ? this.page = "detail" : this.page = "view";

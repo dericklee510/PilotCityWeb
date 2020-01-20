@@ -32,13 +32,11 @@
         </v-col>
         <!-- <v-spacer /> -->
       </v-row>
-    </v-row>
-    <ManageClassHelper
-     
-     
-      :generate-first-classroom="generateClassroom"
-    />
-  </div>
+      <ManageClassHelper
+        :generate-first-classroom="generateClassroom"
+      />
+    </v-col>
+  </v-col>
 </template>
 
 <script lang="ts">

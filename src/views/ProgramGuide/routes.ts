@@ -158,8 +158,17 @@ const routes: RouteConfig[] = [
             },
             {
                 path: 'employer/project/canvas',
-                name: 'emp-project-canvas',
-                component: Guide.Program.BusinessCanvasView
+                component: Guide.Program.BusinessCanvasView,
+                children: [
+                    {
+                        path: '',
+                        name: 'emp-project-canvas',
+                        components: {
+                            view: Guide.Canvas.BusinessCanvasView1,
+                            detail: Guide.Canvas.BusinessCanvasView2,
+                        }
+                    }
+                ]
             },
             // {
             //     path: 'student/project/canvas',
@@ -193,19 +202,32 @@ const routes: RouteConfig[] = [
             },
             {
                 path: 'teacher/project/elevatorpitch',
-                name: 'teach-project-elevator',
-                component: Guide.Program.ElevatorView
+                component: Guide.Program.ElevatorView,
+                children: [
+                    {
+                        path: '',
+                        name: 'teach-project-elevator',
+                        components: {
+                            view: Guide.Elevator.ElevatorView1,
+                            detail: Guide.Elevator.ElevatorView2,
+                        }
+                    }
+                ]
             },
             {
                 path: 'employer/project/elevatorpitch',
-                name: 'emp-project-elevator',
-                component: Guide.Program.ElevatorView
+                component: Guide.Program.ElevatorView,
+                children: [
+                    {
+                        path: '',
+                        name: 'emp-project-elevator',
+                        components: {
+                            view: Guide.Elevator.ElevatorView1,
+                            detail: Guide.Elevator.ElevatorView2,
+                        }
+                    }
+                ]
             },
-            // {
-            //     path: 'student/project/elevatorpitch',
-            //     name: 'stud-project-elevator',
-            //     component: Guide.Program.ElevatorView
-            // },
             {
                 path: 'student/project/elevatorpitch/edit',
                 name: 'stud-project-elevator-edit',

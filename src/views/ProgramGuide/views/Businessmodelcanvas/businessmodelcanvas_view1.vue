@@ -3,16 +3,29 @@
 <template>
   <v-row no-gutters>
     <v-col>
-      <v-row class="programguide__labels" no-gutters>
+      <v-row
+        class="programguide__labels d-sm-block d-none "
+        no-gutters
+      >
         <v-col cols="1" />
-        <v-col cols="12" md="7">
+        <v-col
+          cols="12"
+          md="7"
+        >
           Name
         </v-col>
-        <v-col cols="12" md="3">
+        <v-col
+          cols="12"
+          md="3"
+        >
           Rating
         </v-col>
       </v-row>
-      <v-row class="programguide__content" align="center" no-gutters>
+      <v-row
+        class="programguide__content"
+        align="center"
+        no-gutters
+      >
         <!-- insert v-for here -->
         <v-col
           cols="1"
@@ -28,7 +41,10 @@
         >
           <span>${program.title}</span>
         </v-col>
-        <v-col cols="12" md="3">
+        <v-col
+          cols="12"
+          md="3"
+        >
           <v-rating />
         </v-col>
       </v-row>

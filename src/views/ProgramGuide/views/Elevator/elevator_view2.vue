@@ -1,61 +1,26 @@
 <template>
   <v-row justify="center">
-    <img
-      id="elevator_view2__icon"
-      src="@/assets/elevator_view.png"
+    <!-- <v-row class="mt-12 mr-auto ml-auto pl-5 mb-4 elevator_view2__description__label">Elevator Pitch</v-row> -->
+    <Rating
+      v-model="pitch"
+      preview
     >
-
-    <v-col
-      id="elevator_view2__contain"
-      cols="7"
-    >
-      <v-row>
-        <i
-          id="elevator_view2__backbuttonicon"
-          class="fas fa-chevron-left"
-        ><button class="elevator_view2__backbutton">Back</button></i>
-      </v-row>
-
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto elevator_view2__title"
-      >
-        VIEW 60-SECOND ELEVATOR PITCH
-      </v-row>
-
-      <v-col
-        id="elevator_view2__borderline"
-        cols="12"
-      />
-
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto elevator_view2__description"
-      >
-        Before you run into a customer or investor, you have to know your solution in detail. Write out what you will say in an elevator pitch.
-      </v-row>
-
-      <!-- <v-row class="mt-12 mr-auto ml-auto pl-5 mb-4 elevator_view2__description__label">Elevator Pitch</v-row> -->
-      <rating
-        v-model="pitch"
-        preview
-      >
-        <template v-slot:header>
-          <span
-            class="elevator_view2__description__label"
-          >
-            Elevator Pitch
-          </span>
-        </template>
+      <template v-slot:header>
+        <span
+          class="elevator_view2__description__label"
+        >
+          Elevator Pitch
+        </span>
+      </template>
         
-        <template v-slot:body>
-          <v-textarea
-            placeholder="My pitch is..."
-            :disabled="true"
-            class="pt-1 pb-12 pl-5 pr-4 elevator_view2__paragraph"
-          />
-        </template>
-      </rating>
+      <template v-slot:body>
+        <v-textarea
+          placeholder="My pitch is..."
+          :disabled="true"
+          class="pt-1 pb-12 pl-5 pr-4 elevator_view2__paragraph"
+        />
+      </template>
+    </Rating>
     </v-col>
   </v-row>
 
