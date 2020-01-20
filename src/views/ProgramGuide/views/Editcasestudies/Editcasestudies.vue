@@ -87,10 +87,10 @@
               md="4"
               class="editcasestudies__inputlinkurl"
             >
-              <input
+              <LinkChecker
                 v-model="entry.link"
                 placeholder="http://www.velodyne.com/casestudy1"
-              >
+              />
             </v-col>
             <v-col
               cols="2"

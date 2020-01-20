@@ -211,7 +211,7 @@ import { RouteList } from '../ProgramGuide/types'
 })
 export default class ProgramLauncher extends Vue{
     check = false 
-    get existing(){return !!FbStore.currentUserProfile!.teacherProgramDataIds[FbStore.currentEmployerProgramUID!] || this.check}
+    get existing(){return FbStore.currentUserProfile!.teacherProgramDataIds?!!FbStore.currentUserProfile!.teacherProgramDataIds[FbStore.currentEmployerProgramUID!] || this.check: false}
     set existing(val) { this.check =val}
     async launchProgram() {
       if(FbStore.userCitizenType === "teacher")
