@@ -336,7 +336,29 @@ export default class Fb extends VuexModule {
         await firestore.collection('Classroom').doc(classroomId).update({ className });
         // update current classroom ?
     }
-
+    @Action({rawError:true})
+    async getFileLink({file,filePath,index}:{file:File,filePath:string,index?:number}):Promise<NamedLink>{
+        let childPath:string
+        if(filePath.charAt(filePath.length-1) === "/")
+            childPath = filePath+file.name
+        else 
+            childPath = `${filePath}/${file.name}`
+        if(index)
+            childPath = `${childPath}(${index})`
+        let fileRef = FbStore.storageRef.child(childPath)
+        try{
+              let res = await FbStore.storageRef.child(childPath).getDownloadURL();
+              // file exists already
+              return await this.getFileLink({file,filePath,index:index?index+1:1})
+            }catch{
+              // file doesnt exist yet
+              let snapshot = await fileRef.put(file)
+              return {
+                linkName:index?`${file.name}(${index})`:file.name,
+                link:await snapshot.ref.getDownloadURL()
+                }
+            }
+      }
 
 
     /**

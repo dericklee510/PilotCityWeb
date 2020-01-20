@@ -11,7 +11,7 @@
         <v-col>
           <BriefCard_edit
             ref="Card"
-            v-model="entries"
+            v-model="files"
           />
         </v-col>
 
@@ -49,7 +49,7 @@ export default class Brief extends Vue {
   files:File[]= [{} as File]
  
   addEntry(){
-    (this.$refs.Card as BriefCard_edit).newEntry()
+    (((this.$refs.Card as BriefCard_edit).$refs).multiInput as PCmultiinput).newEntry()
   }
 }
 </script>]
