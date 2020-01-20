@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import {Component, Prop} from 'vue-property-decorators'
+import {Component, Prop} from 'vue-property-decorator'
 
 import {PCselect} from '@/components/inputs'
 @Component({

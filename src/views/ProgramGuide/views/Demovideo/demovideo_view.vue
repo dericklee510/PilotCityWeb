@@ -1,60 +1,65 @@
 <template>
-  <v-row justify="center">
-    <img
-      id="demovideo_view__icon"
-      src="@/assets/demovideo_view.png"
+  <v-container>
+    <v-row
+      justify="center"
+      no-gutters
     >
-
-    <v-col
-      id="demovideo_view__contain"
-      cols="7"
-    >
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto demovideo_view__title"
+      <img
+        id="demovideo_view__icon"
+        src="@/assets/demovideo_view.png"
       >
-        VIEW 1-MINUTE PROTOTYPE DEMONSTRATION VIDEOS
-      </v-row>
-
+    
       <v-col
-        id="demovideo_view__borderline"
-        cols="12"
-      />
-
-
-      <v-row
-        class="mt-5"
-        justify="center"
+        id="demovideo_view__contain"
+        cols="10"
       >
+        <v-row
+          justify="center"
+          class="mr-auto ml-auto demovideo_view__title"
+        >
+          VIEW 1-MINUTE PROTOTYPE DEMONSTRATION VIDEOS
+        </v-row>
+    
         <v-col
-          class="demovideo_view__label"
-          cols="1"
+          id="demovideo_view__borderline"
+          cols="12"
         />
-        <v-col
-          class="demovideo_view__label"
-          cols="6"
+    
+    
+        <v-row
+          class="mt-5"
+          justify="center"
         >
-          Name
-        </v-col>
-        <v-col
-          class="demovideo_view__label"
-          cols="3"
-        >
-          Rate
-        </v-col>
-      </v-row>
-
-      <!-- TEAM -->
-
-      <Rating
-        v-model="entries"
-        @ratingChange="onRatingChange"
-      />
-
-     
-      <!-- TEAM -->
-    </v-col>
-  </v-row>
+          <v-col
+            class="demovideo_view__label"
+            cols="1"
+          />
+          <v-col
+            class="demovideo_view__label"
+            cols="6"
+          >
+            Name
+          </v-col>
+          <v-col
+            class="demovideo_view__label"
+            cols="3"
+          >
+            Rate
+          </v-col>
+        </v-row>
+    
+        <!-- TEAM -->
+    
+        <Rating
+          v-model="entries"
+          @ratingChange="onRatingChange"
+        />
+    
+       
+        <!-- TEAM -->
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 
