@@ -255,9 +255,9 @@ export default class Fb extends VuexModule {
 
     //     // wtf?
     // }
-    @Action
+    @Action({rawError:true})
     async createTeacherProgramData(employerProgramId: string) {
-        let uid = this.currentUserProfile?.teacherProgramDataIds[this.currentEmployerProgram!.employerProgramId]
+        let uid = this.currentUserProfile?.teacherProgramDataIds? this.currentUserProfile?.teacherProgramDataIds[this.currentEmployerProgram!.employerProgramId]:undefined
 
         if (uid) {
             this.initCurrentTeacherProgramData((await this.firestore.collection("TeacherProgramData").doc(uid).get()).data())

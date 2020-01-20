@@ -74,6 +74,7 @@
               {{ nameHash[studentId].name }}
             </v-col>
             <pc-timelog
+              :key="studentId+key"
               v-model="practiceLogs[studentId]"
               v-slot="{entries}"
             >
@@ -127,6 +128,7 @@ export const pcTimelog = PCmultiinput.createMultiInput<TimeLog>({
   }
 })
 export default class logtime extends Vue{
+  key = 0
   mounted(){
     FbStore.currentTeacherProgramData!.classroomIds.forEach(async classroomId => {
      let classroomData = (await FbStore.firestore.collection("Classroom").doc(classroomId).get()).data<Classroom>()
@@ -137,6 +139,7 @@ export default class logtime extends Vue{
            this.nameHash[studentId] = {name:await FbStore.getStudentName({studentUid:studentId}), projectId}
            this.practiceLogs[studentId] = projectData.practiceLog[studentId]
            this.$forceUpdate()
+           this.key++
          })
        })
      })
