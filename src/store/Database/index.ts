@@ -294,7 +294,7 @@ export default class Fb extends VuexModule {
             studentIds: [],
             projectIds: [],
             classroomId,
-            teacherId: this.currentUserProfile!.userId,
+            teacherId: this.FBUser!.uid,
             teacherProgramId,
             employerProgramId,
             className,
