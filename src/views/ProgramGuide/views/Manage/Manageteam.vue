@@ -1,104 +1,196 @@
 <template>
   <v-container>
-    <v-row class="manageteam__topbutton">
-      <button class="manageteam__classesbutton">
-        CLASSES
-      </button>
-
-      <button class="manageteam__studentsbutton">
-        STUDENTS
-      </button>
-
-      <button class="manageteam__teambutton">
-        TEAMS
-      </button>
-    </v-row>
-
-    <v-row class="manageteam__titlemain">
-      <span class="manageteam__title">Manage Teams</span>
-    </v-row>
-    <v-row class="manageteam__headtitle">
-      <span class="manageteam__teamname">Team Name</span>
-    </v-row>
-
-    <multi-input
-      v-model="entries"
-      v-slot="{ }"
+    <v-row
+      no-gutters
+      justify="center"
     >
-      <v-row
-        v-for="(entry,index) in entries"
-        :key="entry.id"
-        class="manageteam__wholeline"
+      <v-col
+        class="manageteam__container"
+        cols="10"
       >
-        <input
-          v-model="teamNames[index]"
-          class="manageteam__classinput"
-          :placeholder="entry.teamName"
+        <v-row
+          class="manageteam__nav text-center"
+          no-gutters
         >
-        <template v-if="entry.teamUid">
-          <button
-            class="manageteam__renamebutton"
-            @click="renameTeam(entry,index)"
+          <v-col
+            cols="4"
+            sm="3"
+            lg="2"
           >
-            RENAME
-          </button>
-          <button
-            class="manageteam__deletebutton"
-            @click="deleteTeam(entry)"
+            CLASSES
+          </v-col>
+          <v-col
+            cols="4"
+            sm="3"
+            lg="2"
           >
-            DELETE
-          </button>
-        </template>
-        <template v-else>
-          <h4>Generating...</h4>
-          <v-progress-circular
-            indeterminate
-            color="primary"
-          />
-        </template>
-      </v-row>
-
-      <v-row class="manageteam__titlemain">
-        <span class="manageteam__title1">Create Team</span>
-
-        <v-row class="manageteam__headtitle">
-          <span class="manageteam__teamname">Team Name</span>
+            STUDENTS
+          </v-col>
+          <v-col
+            cols="4"
+            sm="3"
+            lg="2"
+          >
+            TEAMS
+          </v-col>
         </v-row>
-      </v-row>
-      <ValidationObserver v-slot="{invalid, reset}">
-        <v-row>
-          <!-- <span class="manageteam__wholeline3"> -->
-
-          <ValidationProvider
-            v-slot="{errors}"
-            rules="required"
+        <v-row no-gutters>
+          <v-col
+            cols="12"
+            class="manageteam__title"
           >
-            <v-text-field
-              v-model="currentName"
-              :error-messages="errors"
-              placeholder="TEAM NAME 3"
-            />
-            <!-- class="manageteam__classinput" -->
-          </ValidationProvider>
-
-          <PCLoader v-slot="{loading, setLoader}">
-            <v-btn
-              :loading="loading"
-              :disabled="loading || invalid"
-              class="manageteam__createbutton"
-              @click="setLoader(()=>{
-                reset()
-                createNewTeam()
-              })"
+            <span>Manage Teams</span>
+          </v-col>
+        </v-row>
+        <v-row
+          class="manageteam__labels"
+          no-gutters
+        >
+          <v-col
+            cols="12"
+            lg="5"
+            xl="6"
+          >
+            <span> Team Name </span>
+          </v-col>
+        </v-row>
+        <multi-input
+          v-model="entries"
+          v-slot="{ }"
+        >
+          <v-row
+            v-for="(entry,index) in entries"
+            :key="entry.id"
+            class="manageteam__class-input"
+          >
+            <v-col
+              cols="12"
+              lg="4"
+              xl="5"
+              class="manageteam__input"
             >
-              CREATE
-            </v-btn>
-          </PCLoader>
-
-          <!-- </span> -->
-        </v-row>
-      </ValidationObserver>
-    </multi-input>
+              <input
+                v-model="teamNames[index]"
+                :placeholder="entry.teamName"
+              >
+            </v-col>
+                
+            <template v-if="entry.teamUid">
+              <v-col
+                cols="6"
+                lg="2"
+                class="manageteam__button-wrapper first"
+              >
+                <v-btn
+                  class="manageteam__button"
+                  outlined
+                  depressed
+                  height="100%"
+                  @click="renameTeam(entry,index)"
+                >
+                  RENAME
+                </v-btn>
+              </v-col>
+              <v-col
+                cols="6"
+                lg="2"
+                class="manageteam__button-wrapper"
+              >
+                <v-btn
+                  class="manageteam__button"
+                  outlined
+                  depressed
+                  height="100%"
+                  @click="deleteTeam(entry)"
+                >
+                  DELETE
+                </v-btn>
+              </v-col>
+            </template>
+            <template v-else>
+              <v-col cols="2">
+                <h4>Generating...</h4>
+                <v-progress-circular
+                  indeterminate
+                  color="primary"
+                />
+              </v-col>
+            </template>
+          </v-row>
+        
+          <v-row no-gutters>
+            <v-col
+              cols="12"
+              class="manageteam__title"
+            >
+              <span>Create Teams</span>
+            </v-col>
+          </v-row>
+          <v-row
+            class="manageteam__labels"
+            no-gutters
+          >
+            <v-col
+              cols="12"
+              lg="5"
+              xl="6"
+            >
+              <span> Team Name </span>
+            </v-col>
+          </v-row>
+          
+          <v-row>
+            <v-col
+              cols="12"
+              lg="4"
+              xl="5"
+              class="manageteam__input problem-child pa-0"
+            >
+              <ValidationObserver>
+                <ValidationProvider
+                  v-slot="{errors}"
+                  rules="required"
+                >
+                  <v-text-field
+                    v-model="currentName"
+                    solo
+                    flat
+                    depressed
+                    height="100%"
+                    :error-messages="errors"
+                    placeholder="TEAM NAME 3"
+                  />
+                </ValidationProvider>
+              </validationobserver>
+            </v-col>
+            <v-col
+              cols="2"
+              class="manageteam__create-button-wrapper"
+            >
+              <PCLoader v-slot="{loading, setLoader}">
+                <v-btn
+                  :loading="loading"
+                  :disabled="loading || invalid"
+                  height="100%"
+                  flat
+                  depressed
+                  outline
+                  class="manageteam__create-button"
+                  @click="setLoader(()=>{
+                    reset()
+                    createNewTeam()
+                  })"
+                >
+                  CREATE
+                </v-btn>
+              </PCLoader>
+              </ValidationObserver>
+            </v-col>
+          </v-row>
+        </multi-input>
+        <v-col />
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 

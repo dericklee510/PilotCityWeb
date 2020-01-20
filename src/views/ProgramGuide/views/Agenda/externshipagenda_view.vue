@@ -12,8 +12,6 @@
           class="pc-vh-center agenda-view__icon"
           src="@/assets/icons/agenda.png"
         >
-        <!-- TITLE -->
-    
         <v-row
           justify="center"
           class="agenda-view__title"
@@ -21,7 +19,6 @@
         >
           EXTERNSHIP DAY AGENDA
         </v-row>
-    
         <v-row
           justify="center"
           class="mr-auto ml-auto businessmodelcanvas_view2__description"

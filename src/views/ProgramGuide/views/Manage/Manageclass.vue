@@ -1,42 +1,62 @@
 <template>
-  <v-col class="manageclass__container">
-    <v-col
-      class="manageclass__topbuttons"
-      style="padding-left: 17.5%;"
+  <v-container>
+    <v-row
+      no-gutters
+      justify="center"
     >
-      <button class="manageclass__topbutton">
-        CLASSES
-      </button>
-
-      <button class="manageclass__topbutton">
-        STUDENTS
-      </button>
-
-      <button class="manageclass__topbutton">
-        TEAMS
-      </button>
-    </v-col>
-
-    <v-col class="manageclass__titlemain">
-      <span class="manageclass__title">Manage Classes</span>
-      <v-row
-        no-gutters
-        class="manageclass__headtitle"
-        style="padding-left: 17.5%;"
+      <v-col
+        class="manageclass__container"
+        cols="10"
       >
-        <v-col
-          cols="12"
-          class="manageclass__classtitle"
+        <v-row
+          class="manageclass__nav text-center"
+          no-gutters
         >
-          Class Name
-        </v-col>
-        <!-- <v-spacer /> -->
-      </v-row>
-      <ManageClassHelper
-        :generate-first-classroom="generateClassroom"
-      />
-    </v-col>
-  </v-col>
+          <v-col cols="4" sm="3" lg="2">
+            CLASSES
+          </v-col>
+          <v-col cols="4" sm="3" lg="2" >
+            STUDENTS
+          </v-col>
+          <v-col cols="4" sm="3" lg="2">
+            TEAMS
+          </v-col>
+        </v-row>
+        <v-row no-gutters>
+          <v-col
+            cols="12"
+            class="manageclass__title"
+          >
+            <span>Manage Classes</span>
+          </v-col>
+        </v-row>
+        <v-row
+          class="manageclass__labels"
+          no-gutters
+        >
+          <v-col
+            cols="12"
+            lg="5"
+            xl="6"
+          >
+            <span>Class Name</span>
+          </v-col>
+          <v-spacer />
+          <v-col
+            cols="2"
+            xl="1"
+            class="manageclass__sharecode-label d-none d-lg-block "
+          >
+            <span> Share Code</span>
+          </v-col>
+          <v-col cols="1" />
+        </v-row>
+        <ManageClassHelper
+          :generate-first-classroom="generateClassroom"
+        />
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script lang="ts">

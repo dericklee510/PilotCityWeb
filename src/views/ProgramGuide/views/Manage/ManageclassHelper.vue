@@ -1,56 +1,93 @@
 <template>
-  <div>
-    <v-row
-      v-for="(entry,index) in entries"
-      :key="entry.id"
-    >
-      <span class="manageclass__wholeline">
-        <input
-          v-model="classNames[index]"
-          class="manageclass__classinput"
-          :placeholder="entry.className"
+  <v-row no-gutters>
+    <v-col cols="12">
+      <v-row
+        v-for="(entry,index) in entries"
+        :key="entry.id"
+        no-gutters
+        class="manageclass__class-input"
+      >
+        <v-col
+          cols="12"
+          lg="4"
+          xl="5"
+          class="manageclass__input"
         >
-        <PCLoader v-slot="{loading, setLoader}">
-          <v-btn
-            class="manageclass__renamebutton"
-            :loading="loading"
-            @click="setLoader(renameClass(entry.id,index))"
-          >RENAME</v-btn>
-        </PCLoader>
-        <PCLoader v-slot="{loading, setLoader}">
-          <v-btn
-            class="manageclass__deletebutton"
-            :loading="loading"
-            @click="setLoader(removeEntry(entry.id))"
-          >DELETE</v-btn>
-        </PCLoader>
-        <v-progress-circular
-          v-if="!entry.shareCode"
-          indeterminate
-          color="primary"
-        />
-        <span class="manageclass__sharecode">{{ entry.shareCode?entry.shareCode:"GENERATING..." }}</span>
-        <button
-          v-if="entry.shareCode"
-          class="manageclass__icon"
+          <input
+            v-model="classNames[index]"
+            
+            :placeholder="entry.className"
+          >
+        </v-col>
+        <v-col
+          cols="6"
+          lg="2"
+          class="manageclass__button-wrapper first"
         >
-          <!-- <img src="@/assets/link.png"> -->
-        </button>
-      </span>
-    </v-row>
-
-    <v-row>
+          <PCLoader v-slot="{loading, setLoader}">
+            <v-btn
+              class="manageclass__button"
+              :loading="loading"
+              outlined
+              depressed
+              height="100%"
+              @click="setLoader(renameClass(entry.id,index))"
+            >
+              RENAME
+            </v-btn>
+          </PCLoader>
+        </v-col>
+        <v-col
+          cols="6"
+          lg="2"
+          class="manageclass__button-wrapper"
+        >
+          <PCLoader v-slot="{loading, setLoader}">
+            <v-btn
+              class="manageclass__button"
+              outlined
+              depressed
+              height="100%"
+              :loading="loading"
+              @click="setLoader(removeEntry(entry.id))"
+            >
+              DELETE
+            </v-btn>
+          </PCLoader>
+        </v-col>
+        <v-col cols="12" lg="3" xl="2">
+          <v-progress-circular
+            v-if="!entry.shareCode"
+            indeterminate
+            color="primary"
+          />
+          <span>
+            <span class="manageclass__sharecode__label ma-0 pa-0 d-lg-none">Share Code: </span>
+            <span class="manageclass__sharecode">{{ entry.shareCode?entry.shareCode:"GENERATING..." }}</span>
+          </span>
+          <button
+            v-if="entry.shareCode"
+            class="manageclass__icon"
+          /></button>
+        </v-col>
+      </v-row>
+    </v-col>
+    <v-col cols="12" lg="2" class=" manageclass__create-button">
       <PCLoader v-slot="{loading,setLoader}">
         <v-btn
-          class="manageclass__createbutton"
+          class="manageclass__button"
           :loading="loading"
+          outlined
+          depressed
+          width="100%"
+          height="100%"
           @click="setLoader(newEntry)"
         >
-          CREATE
+          CREATE 
         </v-btn>
       </PCLoader>
-    </v-row>
-  </div>
+    </v-col>
+  </v-row>
 </template>
 
 

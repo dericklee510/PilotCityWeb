@@ -31,7 +31,7 @@
           justify="center"
           class="mr-auto ml-auto businessmodelcanvas_view2__description"
         >
-          Enter agenda for Externship event.
+          Enter agenda for Training Day.
         </v-row>
         <Agenda v-model="entries" />
       </v-col>

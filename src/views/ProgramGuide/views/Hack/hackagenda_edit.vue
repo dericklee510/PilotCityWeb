@@ -1,40 +1,44 @@
 <template>
-  <v-row justify="center">
-    <img
-      id="agenda__icon"
-      class="agenda__image"
-      src="@/assets/icons/agenda.png"
+  <div>
+    <v-row
+      justify="center"
+      no-gutters
     >
-
-    <v-col
-      id="agenda__contain"
-      cols="7"
-    >
-      <!-- TITLE -->
-
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto agenda__title"
+      <img
+        id="agenda__icon"
+        class="agenda__image"
+        src="@/assets/icons/agenda.png"
       >
-        HACK DAY AGENDA
-      </v-row>
-
-      <!-- BORDERLINE -->
-
       <v-col
-        cols="12"
-        class="agenda__borderline"
-      />
-
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto businessmodelcanvas_view2__description"
+        id="agenda__contain"
+        cols="10"
       >
-        Enter your agenda for the event or activity.
-      </v-row>
-      <Agenda v-model="entries" />
-    </v-col>
-  </v-row>
+        <!-- TITLE -->
+    
+        <v-row
+          justify="center"
+          class="mr-auto ml-auto agenda__title"
+        >
+          HACK DAY AGENDA
+        </v-row>
+    
+        <!-- BORDERLINE -->
+    
+        <v-col
+          cols="12"
+          class="agenda__borderline"
+        />
+    
+        <v-row
+          justify="center"
+          class="mr-auto ml-auto businessmodelcanvas_view2__description"
+        >
+          Enter your agenda for the event or activity.
+        </v-row>
+        <Agenda v-model="entries" />
+      </v-col>
+    </v-row>
+  </div>
 </template>
 
 

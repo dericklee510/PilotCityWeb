@@ -1,42 +1,102 @@
 <template>
   <v-container>
-    <span class="managestudents__topbutton">
-      <button class="managestudents__classesbutton">CLASSES</button>
-
-      <button class="managestudents__studentsbutton">STUDENTS</button>
-
-      <button class="managestudents__teambutton">TEAMS</button>
-    </span>
-
     <v-row
-      class="managestudents__titlemain"
-      justify="start"
+      no-gutters
+      justify="center"
     >
-      <span class="managestudents__title">Manage Students</span>
-    </v-row>
-    <v-row>
-      <v-col>Name</v-col>
-      <v-col>Classes</v-col>
-      <v-col>Team</v-col>
-    </v-row>
-    <v-row
-      v-for="(entry,index) in entries"
-      :key="index"
-    >
-      <v-col>{{ entry.name }}</v-col>
-      <v-col>
-        <pc-select
-          v-model="entry.class"
-          :items="availableClasses"
-          @update:value="changeClassroom"
-        />
-      </v-col>
-      <v-col>
-        <pc-select
-          v-model="entry.project"
-          :items="availableProjects[entry.classroomId]"
-          @update:value="changeProject($event,entry)"
-        />
+      <v-col
+        class="manageclass__container"
+        cols="10"
+      >
+        <v-row
+          class="manageclass__nav text-center"
+          no-gutters
+        >
+          <v-col
+            cols="4"
+            sm="3"
+            lg="2"
+          >
+            CLASSES
+          </v-col>
+          <v-col
+            cols="4"
+            sm="3"
+            lg="2"
+          >
+            STUDENTS
+          </v-col>
+          <v-col
+            cols="4"
+            sm="3"
+            lg="2"
+          >
+            TEAMS
+          </v-col>
+        </v-row>
+        <v-row no-gutters>
+          <v-col
+            cols="12"
+            class="manageclass__title"
+          >
+            <span>Manage Student</span>
+          </v-col>
+        </v-row>
+        <v-row
+          class="manageclass__labels"
+          no-gutters
+        >
+          <v-col
+            cols="12"
+            lg="5"
+            xl="6"
+          >
+            <span> Name </span>
+          </v-col>
+          <v-col class=" d-none d-lg-block">
+            <span> Classes </span>
+          </v-col>
+          <v-col
+            cols="2"
+            xl="1"
+            class="manageclass__sharecode-label d-none d-lg-block "
+          >
+            <span> Team </span>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="12">
+            <v-row
+              v-for="(entry,index) in entries"
+              :key="index"
+            >
+              <v-col
+                cols="12"
+                lg="5"
+                xl="6"
+              >
+                {{ entry.name }}
+              </v-col>
+              <v-col>
+                <pc-select
+                  v-model="entry.class"
+                  :items="availableClasses"
+                  @update:value="changeClassroom"
+                />
+              </v-col>
+              <v-col
+                cols="2"
+                xl="1"
+              >
+                <pc-select
+                  v-model="entry.project"
+                  :items="availableProjects[entry.classroomId]"
+                  @update:value="changeProject($event,entry)"
+                />
+              </v-col>
+            </v-row>
+          </v-col>
+        </v-row>
       </v-col>
     </v-row>
   </v-container>
