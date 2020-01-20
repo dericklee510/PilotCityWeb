@@ -42,17 +42,13 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import {AgendaView} from "@/views/ProgramGuide/components/"
+import { FbStore } from '../../../../store';
 @Component({
   components: {
     AgendaView
   }
 })
 export default class TrainingDayAgendaView extends Vue{
-  agendaItems = [...AgendaView.emptyAgenda,{
-    name:"Demonstration",
-    description:"Demonstrate the use of your employers technology",
-    duration:"10 minutes",
-    completed:true
-  }];
+  agendaItems = FbStore.currentTeacherProgramData!.trainingDayAgenda?.events || []
 }
 </script>

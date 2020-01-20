@@ -337,9 +337,9 @@ const routes: RouteConfig[] = [
             
         ],
         meta: { layout: 'simple' },
-        beforeEnter(to, from, next): void{
-            localStorage.citizenType && AuthStore.user ? next(): AuthStore.user ? next({ name: 'signup.type' }) : next({name: 'login'});
-        }
+        // beforeEnter(to, from, next): void{
+        //     localStorage.citizenType && AuthStore.user ? next(): AuthStore.user ? next({ name: 'signup.type' }) : next({name: 'login'});
+        // }
 
     }
 ]

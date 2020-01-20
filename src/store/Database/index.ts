@@ -1,4 +1,4 @@
-import { FbStore } from './../index';
+    import { FbStore } from './../index';
 import { SET_USER } from './../Auth/mutation-types';
 import { Dependency } from '@/utilities/dependency';
 import { isLinkValid } from './../../api';
@@ -370,6 +370,7 @@ export default class Fb extends VuexModule {
      */
     @Action({ rawError: true })
     async deleteClassroom(classroomId: string) {
+        
         const classroomRef = firestore.collection('Classroom').doc(classroomId);
         const classroomSnapshot = await classroomRef.get();
         const studentsSnapshot = await firestore.collection('GeneralUser').where("classroomIds", 'array-contains', classroomId).get();

@@ -109,6 +109,7 @@ export default class ManageClassHelper extends app {
   }
   async removeEntry(id: number) {
     let entryIndex = findIndex(this.entries, { id: id });
+    
     await FbStore.deleteClassroom(this.entries[entryIndex].classroomId);
     this.deleteEntry(id);
   }
@@ -123,6 +124,7 @@ export default class ManageClassHelper extends app {
         id: this.entries.length ? this.entries.slice(-1)[0].id + 1 : 0
       });
     }
+    this.$forceUpdate()
   }
   async newEntry() {
     let index = this.entries.length - 1;

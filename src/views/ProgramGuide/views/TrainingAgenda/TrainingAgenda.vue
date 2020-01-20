@@ -33,7 +33,10 @@
         >
           Enter agenda for Externship event.
         </v-row>
-        <Agenda v-model="entries" />
+        <Agenda
+          v-model="agendaItems"
+          v-stream:update:value="onAgendaChange$"
+        />
       </v-col>
     </v-row>
   </v-container>
@@ -47,22 +50,43 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import {EventItem} from "@/store/Database/types/utilities"
 import {Agenda} from "@/views/ProgramGuide/components/"
+import { FbStore } from '../../../../store'
+import { Subject, pipe } from 'rxjs'
+import { pluck, debounceTime } from 'rxjs/operators'
+import {firebase} from "@/firebase/init"
 const emptyAgenda:Omit<EventItem,'completed'> = {
   name:"",
   duration:"",
   description:""
 }
 
-@Component({
+@Component<TrainingDayEdit>({
+   domStreams:['onAgendaChange$'],
+  subscriptions(){
+    return {
+      agendaEvents: this.onAgendaChange$.pipe(
+        debounceTime(300),
+       pluck<{event:{name:string,msg:EventItem[]},data:undefined},EventItem[]>("event","msg")
+      )
+    }
+  },
   components:{
     Agenda
   }
 })
 export default class TrainingDayEdit extends Vue{
-  created(){
-    // set ref to update based on user type
+  mounted(){
+    this.$subscribeTo(this.$observables.agendaEvents,async (events:EventItem[]) => {
+      await FbStore.updateCurrentTeacherProgramData({
+        trainingDayAgenda:{
+          events:events.filter(obj => Object.keys(obj).length !== 0),
+          lastUpdate:firebase.firestore.FieldValue.serverTimestamp()
+        }
+      })
+    })
   }
+   onAgendaChange$!:Subject<{event:{name:string,msg:EventItem[]},data:undefined}>;
   ref!:firebase.firestore.DocumentReference
-    entries:Omit<EventItem,'completed'>[] = [emptyAgenda]
+    agendaItems:EventItem[] = FbStore.currentEmployerProgram?.demoDayAgenda?.events || [emptyAgenda]
 }
 </script>

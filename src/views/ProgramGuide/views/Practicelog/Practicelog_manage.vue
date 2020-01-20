@@ -146,26 +146,26 @@ export default class logtime extends Vue{
     })
   }
     practiceLogs:Record<string,TimeLog[]> = {
-      'someuid':[{
-        minutes:45,
-        lastUpdate: firebase.firestore.Timestamp.fromDate(new Date(12))
-      },
-      {
-        minutes:13,
-        lastUpdate: firebase.firestore.Timestamp.fromDate(new Date(42))
-      },
-      {
-        minutes:10,
-        lastUpdate: firebase.firestore.Timestamp.fromDate(new Date(14))
-      }],
-      "otheruid":[{
-        minutes:20,
-        lastUpdate: firebase.firestore.Timestamp.fromDate(new Date(23))
-      }]
+      // 'someuid':[{
+      //   minutes:45,
+      //   lastUpdate: firebase.firestore.Timestamp.fromDate(new Date(12))
+      // },
+      // {
+      //   minutes:13,
+      //   lastUpdate: firebase.firestore.Timestamp.fromDate(new Date(42))
+      // },
+      // {
+      //   minutes:10,
+      //   lastUpdate: firebase.firestore.Timestamp.fromDate(new Date(14))
+      // }],
+      // "otheruid":[{
+      //   minutes:20,
+      //   lastUpdate: firebase.firestore.Timestamp.fromDate(new Date(23))
+      // }]
     }
     nameHash:Record<string,{name:string,projectId:string}> ={
-      'someuid': {name:"Antonio Laza"},
-      otheruid: {name:"Carly Hudson"}
+      // 'someuid': {name:"Antonio Laza"},
+      // otheruid: {name:"Carly Hudson"}
     }
     rejectEntry(studentId:string,index:number){
       FbStore.firestore.collection("Project").doc(this.nameHash[studentId].projectId).update<Project>({

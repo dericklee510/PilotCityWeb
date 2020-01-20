@@ -55,7 +55,7 @@ export default class ExternshipAgenda extends Vue{
     // const agendaItems
   }
   
-  agendaItems:EventItem[] = FbStore.currentEmployerProgram?.externshipDayAgenda?.events! || []
+  agendaItems:EventItem[] = FbStore.currentEmployerProgram?.externshipDayAgenda?.events || []
   get isAgendaComplete(){
     return this.agendaItems.map(item => item.completed).every(isTrue => isTrue)
   }
