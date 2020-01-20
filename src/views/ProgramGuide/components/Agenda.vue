@@ -11,7 +11,8 @@
       >
         <v-col
           class="agenda__item-box"
-          cols="1" sm="2"
+          cols="1"
+          sm="2"
         />
 
         <v-col
@@ -47,7 +48,10 @@
           </v-row>
         </v-col>
 
-        <v-col cols="1" sm="2">
+        <v-col
+          cols="1"
+          sm="2"
+        >
           <i
             v-if="entries.length>1"
             class="mt-2 ml-3 far fa-trash-alt agenda__trashicon"
@@ -68,7 +72,8 @@
           cols="8"
           class="agenda__item-add mb-8"
           @click="newEntry"
-        >+
+        >
+          +
         </v-col>
 
         <v-col cols="2" />

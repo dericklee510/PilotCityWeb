@@ -1,12 +1,11 @@
 <template>
   <v-row justify="center">
-
-      <business-model-canvas-comp
-        v-model="canvas"
-        :stars="stars"
-        readonly
-        @starsChanged="onStarsChanged"
-      />
+    <business-model-canvas-comp
+      v-model="canvas"
+      :stars="stars"
+      readonly
+      @starsChanged="onStarsChanged"
+    />
   </v-row>
 </template>
 

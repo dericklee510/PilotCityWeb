@@ -33,6 +33,8 @@
           class="mr-auto ml-auto introvideo__video"
         >
           <video-player
+            ref="player"
+            :key="key"
             :options="playerOptions"
             @ended="canBeAcknowldged = true"
           />
@@ -70,11 +72,13 @@
 
 
 <script lang="ts">
-import Vue from 'vue'
-import Component from 'vue-class-component'
-import 'video.js/dist/video-js.css'
-
-import { videoPlayer } from 'vue-video-player'
+import Vue from "vue";
+import Component from "vue-class-component";
+import "video.js/dist/video-js.css";
+require("videojs-youtube");
+// import { VideoPlayer } from "@/components/VideoPlayer";
+import { videoPlayer} from 'vue-video-player'
+import { FbStore } from "../../../../store";
 
 @Component({
   components: {
@@ -82,22 +86,35 @@ import { videoPlayer } from 'vue-video-player'
   }
 })
 export default class Introvideo extends Vue {
-  canBeAcknowldged:boolean = false
-  acknowledged: boolean = false
-  playerOptions = {
-    responsive:true,
-    language: 'en',
-    controlBar:{
-      progressControl:false
-    },
-    sources: [{
-      type: "video/mp4",
-      // mp4
-      src: "http://vjs.zencdn.net/v/oceans.mp4",
-      // webm
-      // src: "https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm"
-    }],
-    poster: "https://surmon-china.github.io/vue-quill-editor/static/images/surmon-1.jpg",
+  mounted() {
+    // this.key++;
+    // this.$forceUpdate()
+    // console.log(this.$refs.player.player.nativeView)
   }
+  key = 0;
+  beforeDestroy() {
+    
+  }
+  canBeAcknowldged: boolean = false;
+  acknowledged: boolean = false;
+  playerOptions = {
+    responsive: true,
+    fluid: true,
+    techOrder: ["youtube"],
+    language: "en",
+    controlBar: {
+      progressControl: false
+    },
+    sources: [
+      {
+        type: "video/youtube",
+        // mp4
+        src: FbStore.currentEmployerProgram!.introVideo
+        // webm
+        // src: "https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm"
+      }
+    ]
+    // poster: "https://surmon-china.github.io/vue-quill-editor/static/images/surmon-1.jpg",
+  };
 }
 </script>

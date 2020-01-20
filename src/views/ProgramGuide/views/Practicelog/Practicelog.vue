@@ -82,7 +82,16 @@
           justify="center"
           class="mr-auto ml-auto mt-2 mb-7 logtime__calculated"
         >
-          {{ timeOutput }}
+          <PCLoader v-slot="{loading,setLoader}">
+            <v-btn
+              class="logtime__button"
+              :disabled="invalid"
+              :loading="loading"
+              @click="setLoader( ()=> { addTime().then(()=>{reset()})})"
+            >
+              LOG TIME
+            </v-btn>
+          </PCLoader>
         </v-row>
       </v-col>
     </v-row>
@@ -100,6 +109,8 @@ import { ValidationObserver, ValidationProvider, extend } from "vee-validate";
 import { isNumber } from "util";
 import { TimeLog } from '@/store/Database/types/utilities';
 import {firebase} from "@/firebase/init"
+import { FbStore } from '../../../../store';
+import { PCLoader } from '../../../../components/utilities';
 extend("isTime", {
   message: `Must end with an "h" or an "m"`,
   validate: (val: string) =>
@@ -117,19 +128,20 @@ extend("isTimeNumerical", {
 @Component({
   components: {
     ValidationObserver,
-    ValidationProvider
+    ValidationProvider,
+    PCLoader
   }
 })
 export default class logtime extends Vue {
   timeInput: string = "";
-  timeLog:TimeLog[] = []
+  timeLog:TimeLog[] = FbStore.currentProject!.practiceLog[FbStore.FBUser!.uid!] ||  []
   get totalTime(){
     return this.timeLog.reduce((sum,entry) => sum+=entry.minutes,0)
   }
   get timeOutput() {
     return `${Math.floor(this.totalTime / 60)}h ${this.totalTime % 60}m`;
   }
-  addTime() {
+  async addTime() {
     switch (this.timeInput.charAt(this.timeInput.length - 1)) {
       case "m":
         this.timeLog.push({
@@ -143,6 +155,10 @@ export default class logtime extends Vue {
           lastUpdate:firebase.firestore.Timestamp.fromDate(new Date())
         })
     }
+    
+    await FbStore.updateCurrentProject({
+      [`practiceLog.${FbStore.FBUser!.uid!}`]:this.timeLog
+    })
     this.timeInput=""
   }
 }

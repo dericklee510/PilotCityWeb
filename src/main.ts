@@ -28,7 +28,9 @@ import { createProvider } from './vue-apollo'
 import { switchMap} from 'rxjs/operators'
 import {from} from "rxjs"
 import { doc } from 'rxfire/firestore';
+import AsyncComputed from 'vue-async-computed'
 
+Vue.use(AsyncComputed)
 Vue.use(VueRx)
 Vue.use(Vuetify)
 Vue.use(VuetifyGoogleAutocomplete, {

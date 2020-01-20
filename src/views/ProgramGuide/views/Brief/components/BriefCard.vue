@@ -18,7 +18,7 @@
         </v-col>
       
         <v-col
-        class="pl-5"
+          class="pl-5"
           cols="12"
           md="9"
           lg="10"

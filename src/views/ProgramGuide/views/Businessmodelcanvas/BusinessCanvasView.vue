@@ -14,7 +14,8 @@
         class="programguide__container"
       >
         <v-col cols="12">
-          <i v-if="page!='view'"
+          <i
+            v-if="page!='view'"
             id="businessmodelcanvas_view2__backbuttonicon"
             class="fas fa-chevron-left"
           >

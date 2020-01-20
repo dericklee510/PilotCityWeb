@@ -52,7 +52,9 @@
             <p
               class="agenda-view__description"
               placeholder="Duration"
-            >{{item.description}}</p>
+            >
+              {{ item.description }}
+            </p>
           </v-col>
         </v-col>
       </v-row>

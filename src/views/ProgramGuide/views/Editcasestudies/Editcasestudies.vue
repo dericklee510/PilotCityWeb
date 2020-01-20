@@ -31,7 +31,7 @@
         </v-row>
     
         <v-row
-        justify="center"
+          justify="center"
           no-gutters
           class="editcasestudies__labels"
         >
@@ -121,7 +121,10 @@
           no-gutters
           justify="center"
         >
-          <v-col class="editcasestudies__savebutton" cols="4">
+          <v-col
+            class="editcasestudies__savebutton"
+            cols="4"
+          >
             <span> SAVE </span>
           </v-col>
         </v-row>

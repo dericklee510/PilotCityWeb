@@ -28,10 +28,7 @@ export interface AgendaTemplate {
     events: EventItem[]
     lastUpdate: firebase.firestore.Timestamp | firebase.firestore.FieldValue
 }
-export interface PostHackReflection {
-    feedback: string
-    checked: boolean
-}
+
 export interface DesignLog {
     description: string
     fileLinks: NamedLink[]

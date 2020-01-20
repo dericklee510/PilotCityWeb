@@ -110,6 +110,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import {ValidationObserver, ValidationProvider, extend } from 'vee-validate'
 import {max} from 'vee-validate/dist/rules';
+import { FbStore } from '../../../../store';
 extend('max',{
     ...max,
     message: "Must not be greater than {length} characters"
@@ -122,14 +123,12 @@ extend('max',{
   }
 })
 export default class pitch_enter extends Vue{
-    pitch:string = ""
+    pitch:string = FbStore.currentProject!.sentencePitch || ""
     loading:boolean = false
     async submit(){
       this.loading = true
-      await new Promise((resolve) => {
-        setTimeout(() => {
-          resolve()
-        },2000)
+      await FbStore.updateCurrentProject({
+        sentencePitch:this.pitch
       })
       this.loading = false
     }

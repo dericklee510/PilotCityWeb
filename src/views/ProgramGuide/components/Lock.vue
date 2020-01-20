@@ -5,7 +5,10 @@
     align="center"
     justify="center"
   >
-    <v-col cols="1" class="guide__lock-wrapper">
+    <v-col
+      cols="1"
+      class="guide__lock-wrapper"
+    >
       <i class="fas fa-lock-alt" />
     </v-col>
   </v-row>
