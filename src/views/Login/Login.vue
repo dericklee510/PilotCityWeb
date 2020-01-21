@@ -1,77 +1,44 @@
 <template>
   <div class="pc-background--dark">
     <v-container style="padding-top: 10vh; padding-bottom: 25vh">
-      <v-row justify="center">
-        <v-col cols="8">
-           <v-row justify="center">
-            <v-col
-              cols="12"
-              md="3"
+      <v-row
+        justify="center"
+        no-gutters
+      >
+        <v-col cols="4">
+          <v-col
+            class="text-center login__header pa-0"
+          >
+            Welcome back.
+          </v-col>
+          <v-col class="login__email pa-0">
+            Email
+          </v-col>
+          <v-col class="pa-0 mt-2">
+            <input
+              v-model="email"
+              placeholder="Email"
+              class="login__email-input"
+              @keyup.enter="$refs.password.focus()"
             >
-              <h2
-                id="login-title"
-                class="text-center text-uppercase"
-                style="display:block"
-              >
-                Who's There
-              </h2>
-            </v-col>
-          </v-row>
-
-        </v-col>
-        <v-col cols="12">
-         
-        </v-col>
-        <v-col
-          cols="12"
-          sm="7"
-          md="6"
-          lg="4"
-        >
-          <ValidationObserver ref="Observer">
-            <v-col cols="12">
-              <ValidationProvider
-                ref="email"
-                v-slot="{errors}"
-                rules="required|email"
-              >
-                <pcTextfield
-                  v-model="email"
-                  :dark-mode="true"
-                  title="EMAIL"
-                  placeholder="Enter your email"
-                  name="email"
-                  :error-messages="errors"
-                  required
-                  @keyup.enter="$refs.password.focus()"
-                />
-              </ValidationProvider>
-            </v-col>
-            <v-col cols="12">
-              <ValidationProvider
-                ref="password"
-                v-slot="{errors}"
-                rules="required"
-              >
-                <pcTextfield
-                  ref="password"
-                  v-model="password"
-                  type="password"
-                  :dark-mode="true"
-                  title="PASSWORD"
-                  placeholder="Enter a password"
-                  :error-messages="errors"
-                  required
-                  @keyup.enter="process()"
-                />
-              </ValidationProvider>
-            </v-col>
-          </ValidationObserver>
-          <v-col cols="12">
+          </v-col>
+          <v-col class="login__password mt-5 pa-0">
+            Password
+          </v-col>
+          <v-col class="pa-0 mt-2">
+            <input
+              v-model="password"
+              refs="password"
+              placeholder="Password"
+              class="login__password-input "
+              @keyup.enter="process()"
+            >
+          </v-col>
+          <v-col class="mt-10 pa-0">
             <v-btn
               id="login-button"
               block
-              :loading="loading"
+              :loading="loading"  
               :disabled="loading"
               class="mb-6"
               @click="process()"
@@ -88,10 +55,10 @@
                 {{ authResponse }}
               </h4>
               <h4
-                class="text-center pc-background--dark label_annotate"
+                class="text-center login__forgotpassword"
                 style="display: block"
               >
-                Don't have an account yet? Sign-up here
+                No account yet? Signup.
               </h4>
             </router-link>
           </v-col>

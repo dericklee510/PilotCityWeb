@@ -1,172 +1,101 @@
 <template>
   <div class="pc-background--dark">
-    <v-container style="padding-top: 10vh; padding-bottom: 25vh">
-      <v-row justify="center">
-        <v-col cols="12">
-          <v-row
-            justify="center"
+    <v-container style="padding-top: 48px; padding-bottom: 25vh">
+      <v-row
+        justify="center"
+        no-gutters
+      >
+        <v-col cols="4">
+          <v-col
+            class="text-center signup__header pa-0"
           >
-            <v-col
-              cols="12"
-              md="4"
+            Join the family.
+          </v-col>
+          <v-col class="signup__label pa-0">
+            First Name
+          </v-col>
+          <v-col class="pa-0 mt-2">
+            <input
+              v-model="firstName"
+              placeholder="First Name"
+              class="signup__field-input"
             >
-              <img
-                id="signup-image"
-                src="@/assets/Family.png"
-              >
-            </v-col>
-          </v-row>
-        </v-col>
-        <v-col cols="12">
-          <v-row justify="center">
-            <v-col
-              cols="12"
-              md="3"
+          </v-col>
+          <v-col class="signup__label mt-5 pa-0">
+            Last Name
+          </v-col>
+          <v-col class="pa-0 mt-2">
+            <input
+              v-model="lastName"
+              placeholder="Last Name"
+              class="signup__field-input "
+              @keyup.enter="process()"
             >
-              <h2
-                id="signup-title"
-                class="text-center"
-                style="display:block"
-              >
-                JOIN THE FAMILY
-              </h2>
-            </v-col>
-          </v-row>
-        </v-col>
-        <v-col
-          cols="12"
-          sm="7"
-          md="6"
-          lg="4"
-        >
-          <ValidationObserver ref="Observer">
-            <v-col
-              cols="12"
+          </v-col>
+          <v-col class="signup__label mt-5 pa-0">
+            Email
+          </v-col>
+          <v-col class="pa-0 mt-2">
+            <input
+              v-model="email"
+              placeholder="Email"
+              class="signup__field-input "
+              @keyup.enter="process()"
             >
-              <ValidationProvider
-                v-slot="{errors}"
-                vid="first_name"
-                rules="required"
-              >
-                <pcTextfield
-                  v-model="firstName"
-                  title="FIRST NAME"
-                  :dark-mode="true"
-                  placeholder="Enter your first name"
-                  :error-messages="errors"
-                  required
-                />
-              </ValidationProvider>
-            </v-col>
-            <v-col
-              cols="12"
+          </v-col>
+          <v-col class="signup__label mt-5 pa-0">
+            Password
+          </v-col>
+          <v-col class="pa-0 mt-2">
+            <input
+              v-model="password"
+              placeholder="Password"
+              class="signup__field-input"
+              @keyup.enter="process()"
             >
-              <ValidationProvider
-                v-slot="{errors}"
-                vid="last_name"
-                rules="required"
-              >
-                <pcTextfield
-                  v-model="lastName"
-                  title="LAST NAME"
-                  :dark-mode="true"
-                  placeholder="Enter your last name"
-                  :error-messages="errors"
-                  required
-                />
-              </ValidationProvider>
-            </v-col>
-            <v-col
-              cols="12"
+          </v-col>
+          <v-col class="signup__label mt-5 pa-0">
+            Confirm Password
+          </v-col>
+          <v-col class="pa-0 mt-2">
+            <input
+              v-model="confirmPassword"
+              placeholder="Password"
+              class="signup__field-input "
+              @keyup.enter="process()"
             >
-              <ValidationProvider
-                v-slot="{errors}"
-                vid="email"
-                rules="required|email"
-              >
-                <pcTextfield
-                  id="email"
-                  v-model="email"
-                  :dark-mode="true"
-                  title="EMAIL"
-                  placeholder="Enter your email"
-                  :error-messages="errors"
-                  required
-                />
-              </ValidationProvider>
-            </v-col>
-            <v-col
-              cols="12"
-            >
-              <ValidationProvider
-                v-slot="{errors}"
-                vid="password"
-                rules="required|complex-password"
-              >
-                <pcTextfield
-                  v-model="password"
-                  type="password"
-                  :dark-mode="true"
-                  title="PASSWORD"
-                  placeholder="Enter a password"
-                  :error-messages="errors"
-                  required
-                />
-              </ValidationProvider>
-            </v-col>
-            <v-col
-              cols="12"
-            >
-              <ValidationProvider
-                v-slot="{errors}"
-                vid="confirmPassword"
-                rules="required|confirmed:password"
-              >
-                <pcTextfield
-                  v-model="confirmPassword"
-                  type="password"
-                  :dark-mode="true"
-                  title="CONFIRM PASSWORD"
-                  placeholder="Confirm your password"
-                  :error-messages="errors"
-                  @keyup.enter="process"
-                />
-              </ValidationProvider>
-            </v-col>
-          </ValidationObserver>
-          <v-col cols="12">
+          </v-col>
+          <v-col class="mt-10 pa-0">
             <v-btn
               id="signup-button"
               block
-              :loading="loading"
+              :loading="loading"  
               :disabled="loading"
               class="mb-6"
-              @click="process"
+              @click="process()"
             >
               <h3 class="text-uppercase">
-                SIGN-UP
+                signup
               </h3>
             </v-btn>
-            <h4
-              class="text-center pc-background--dark"
-              style="display: block"
-            >
-              {{ authResponse }}
-            </h4>
-            <router-link
-              :to="{name: 'login'}"
-            >
+            <router-link :to="{name: 'login'}">
               <h4
                 class="text-center pc-background--dark"
                 style="display: block"
               >
-                Already have an account? Login Here
+                {{ authResponse }}
+              </h4>
+              <h4
+                class="text-center signup__forgotpassword"
+                style="display: block"
+              >
+                Have an account? Login
               </h4>
             </router-link>
           </v-col>
         </v-col>
       </v-row>
-    </v-container>
+    </v-container> 
   </div>
 </template>
 

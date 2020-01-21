@@ -1,35 +1,73 @@
 #login-button{
-    background-color: $pc-blue;
-    color: white;
+    font-family: "Raleway";
+    letter-spacing: 1px;
+    color: #ffffff;
+    background-color:$pc-blue;
+    font-weight: 900;
+    // text-transform: uppercase;
+    font-size: 10px;
+    width: 100%;
     height: 50px;
-    border-radius:0px;
-    box-shadow:none;
-}
-#login-title{
-    color: $pc-blue;
-    font-size: 1.375rem;
-    font-weight: bold;
-}
-#login-image{
-    display: block;
-    margin: 0 auto;
-    margin-top:0px;
-    width:200px;
-}
-@media only screen and (max-width : 500px){
-    #login-image{
-        height: 108px;
-    }
-    #login-button{
-        height: 5vh;
+    border-radius: 0px;
+    &:hover{
+        border: 1px solid #ffffff;
     }
 }
 
-.label_annotate{
-    font-size: 0.813rem;
-    font-style: italic;
-}
+.login{
+    &__header{
+        font-family: "Raleway";
+        font-size: 30px;
+        letter-spacing: 1px;
+        color: #3c9dcd;
+        font-weight: 800;
+        margin-bottom:48px;
+    }
+    &__email{
+        font-family: "Raleway";
+        font-size: 12px;
+        letter-spacing: 2px;
+        color: #ffffff;
+        font-weight: 900;
+        text-transform: uppercase;
+        margin-left:15px;
+    }
+    &__email-input{
+        width: 100%;
+        padding-left:15px;
+        font-family: "Raleway";
+        font-size: 18px;
+        font-weight: 800;
+        color: #ffffff;
+        border: 1px solid #ffffff;
+        height: 50px;
+    }
+    &__password{
+        font-family: "Raleway";
+        font-size: 12px;
+        letter-spacing: 2px;
+        color: #ffffff;
+        font-weight: 900;
+        text-transform: uppercase;
+        margin-left:15px;
+    }
 
-.XXX{
-    // border: 1px solid #000000;
+    &__password-input{
+        width: 100%;
+        height: 50px;
+        padding-left:15px;
+        font-family: "Raleway";
+        font-size: 18px;
+        font-weight: 800;
+        color: #ffffff;
+        border: 1px solid #ffffff;
+        height: 50px;
+    }
+    &__forgotpassword{
+        font-family: "Raleway";
+        font-size: 15px;
+        font-weight: 700;
+        color: #ffffff;
+        font-style: italic;
+    }
 }
