@@ -49,6 +49,7 @@
           <v-col class="pa-0 mt-2">
             <input
               v-model="password"
+              type="password"
               placeholder="Password"
               class="signup__field-input"
               @keyup.enter="process()"
@@ -60,6 +61,7 @@
           <v-col class="pa-0 mt-2">
             <input
               v-model="confirmPassword"
+              type="password"
               placeholder="Password"
               class="signup__field-input "
               @keyup.enter="process()"
@@ -126,22 +128,15 @@ import {firebase} from '@/firebase/init'
 })
 export default class Signup extends Vue {
     private confirmPassword: string = '';
-
     private password: string = ''
-
     public email: string = '';
-
     public firstName: string = '';
-
     public lastName: string = '';
-
     public loading: boolean = false;
-
     public authResponse: string = ''
-
     public async process(): Promise<void> {
         this.loading = true
-        if (await (this.$refs.Observer as ObserverInstance).validate()) {
+        // if (await (this.$refs.Observer as ObserverInstance).validate()) {
             this.authResponse = await AuthStore.createAccount({
                 email: this.email,
                 password: this.password,
@@ -151,8 +146,8 @@ export default class Signup extends Vue {
             this.$router.push({
               name:"signup.type"
             })
-        }
-        this.loading = false
+        // }
+        // this.loading = false
     }
 
 }

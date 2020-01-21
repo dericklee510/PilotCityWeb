@@ -29,6 +29,7 @@
             <input
               v-model="password"
               refs="password"
+              type="password"
               placeholder="Password"
               class="login__password-input "
               @keyup.enter="process()"
