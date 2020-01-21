@@ -76,11 +76,9 @@ export default class Fb extends VuexModule {
     async initCurrentEmployerProgram(arg: EmployerProgram | string) {
         if (typeof arg === "string"){
             let programData = (await (firestore.collection("EmployerProgram").doc(arg).get())).data<EmployerProgram>()
-            console.log(programData)
             return { currentEmployerProgram: programData }
         }
         else{
-            console.log("overwriting current with",arg)
             return { currentEmployerProgram: arg }
 }
     }
@@ -112,7 +110,6 @@ export default class Fb extends VuexModule {
     //  @Dependency('currentEmployerProgramUID', 'currentEmployerProgram')
     @MutationAction({ mutate: ['currentEmployerProgram'] })
     async updateCurrentEmployerProgram(property: Partial<EmployerProgram>) {
-        console.log(property)
         const state = (this.state as Pick<Fb, NonFunctionKeys<Fb>>)
         const uid = state.currentEmployerProgram?.employerProgramId
         await firestore.collection('EmployerProgram').doc(uid).update<EmployerProgram>({ ...property, lastUpdate: firebase.firestore.FieldValue.serverTimestamp() });
@@ -583,6 +580,7 @@ export default class Fb extends VuexModule {
      * @returns {Promise<void>}
      */
     @Dependency('currentUserProfile')
+    @Action({rawError:true})
     async deleteProject(projectId: string) {
         // remove projectId from every student's student.projectId interface X 
         // remove projectId from classroom.projectId  X 

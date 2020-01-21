@@ -48,13 +48,21 @@
                 LOGIN
               </h3>
             </v-btn>
-            <router-link :to="{name: 'signup'}">
+            <v-alert
+              v-if="authResponse"
+              text
+              color="error"
+            >
               <h4
+               
                 class="text-center pc-background--dark"
                 style="display: block"
+                color="error"
               >
                 {{ authResponse }}
               </h4>
+            </v-alert>
+            <router-link :to="{name: 'signup'}">
               <h4
                 class="text-center login__forgotpassword"
                 style="display: block"
@@ -103,12 +111,12 @@ export default class Login extends Vue {
 
     public async process(): Promise<void> {
         this.loading = true
-        if (await (this.$refs.Observer as ObserverInstance).validate()) {
+        // if (await (this.$refs.Observer as ObserverInstance).validate()) {
             this.authResponse = await AuthStore.login({
                 email: this.email,
                 password: this.password
-            })
-        }
+            }).then(resp => resp).catch(err => `The entered credentials do not exist`)
+        // }
         if (this.authResponse == SUCCESSFUL_LOGIN_RESP && AuthStore.user && !AuthStore.user.photoURL) {
             await FbStore.initCurrentUserProfile(AuthStore.user.uid)
             this.$router.push({
