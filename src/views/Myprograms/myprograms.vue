@@ -288,7 +288,6 @@ async onProgramChange(){
       let foundProgram = querySnapshot.docs[0]?.data() as
         | EmployerProgram
         | undefined;
-        console.log(foundProgram)
       if (foundProgram && !FbStore.currentUserProfile!.teacherProgramDataIds[foundProgramDoc.id])
         await FbStore.createTeacherProgramData(foundProgram.employerProgramId)
       else this.result = "Could not verify share code";
@@ -298,7 +297,6 @@ async onProgramChange(){
         .where("shareCode", "==", this.shareCode)
         .get();
       let foundProgram = querySnapshot.docs[0]?.data() as Classroom | undefined;
-      console.log({ foundProgram });
       if (foundProgram)
         FbStore.joinClassroom({
           classroomUid: foundProgram.classroomId,

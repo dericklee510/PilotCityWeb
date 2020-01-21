@@ -539,7 +539,7 @@ export default class Fb extends VuexModule {
             })
 
         })
-        return firestore.collection("Project").doc()
+        return projectId
     }
     @Action({ rawError: true })
     async getStudentName({ studentUid, studentName }: { studentUid?: string, studentName?: { firstName: string, lastName: string } }): Promise<string> {

@@ -13,13 +13,16 @@
           Program Briefs
         </v-col>
         
-        <v-col>
-          <BriefCard />
+        <v-col
+          v-for="program in programBriefs"
+          :key="program.linkName"
+        >
+          <BriefCard :value="program" />
         </v-col>
 
-        <v-col>
+        <!-- <v-col>
           <BriefCard />
-        </v-col>
+        </v-col> -->
       </v-col>
       <v-col
         cols="2"
@@ -48,6 +51,8 @@ const app = PCmultiinput.createMultiInput<NamedLink>()
 }))
 export default class Brief extends Vue{
 
-    // entries = FbStore.currentEmployerProgram!.
+  get programBriefs(){
+    return FbStore.currentEmployerProgram!.programBrief!
+  }
 }
 </script>]

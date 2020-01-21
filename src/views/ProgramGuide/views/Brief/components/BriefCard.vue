@@ -13,7 +13,7 @@
         >
           <iframe
             class="briefcard__cover"
-            :src="`https://docs.google.com/viewer?url=http://infolab.stanford.edu/pub/papers/google.pdf&embedded=true`"
+            :src="`https://drive.google.com/viewerng/viewer?url=${encodeURIComponent(syncValue.link)}?pid=explorer&efh=false&a=v&chrome=false&embedded=true&rm=minimal`"
           />
         </v-col>
       
@@ -28,7 +28,7 @@
             cols="12"
           >
             <div class="briefcard__header">
-              Request for Pilot (RFP)
+              {{ syncValue.linkName }}
             </div>
             <span class="briefcard__check"><input
               v-model="acknowledged"
@@ -53,9 +53,16 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from "vue-class-component"
+import { NamedLink } from '../../../../../store/Database/types/utilities'
+import { Prop } from 'vue-property-decorator'
 @Component({})
 export default class BriefCard extends Vue{
     acknowledged:boolean = false
+    @Prop()
+    value!: NamedLink
+    get syncValue(){
+      return this.value
+    }
 }
 </script>
 

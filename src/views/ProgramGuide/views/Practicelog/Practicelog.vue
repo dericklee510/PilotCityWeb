@@ -60,15 +60,18 @@
     
           <v-row
             justify="center"
-            class
+            class="mr-auto ml-auto mt-2 mb-7 logtime__calculated"
           >
-            <v-btn
-              class="logtime__button"
-              :disabled="invalid"
-              @click="addTime();reset()"
-            >
-              LOG TIME
-            </v-btn>
+            <PCLoader v-slot="{loading,setLoader}">
+              <v-btn
+                class="logtime__button"
+                :disabled="invalid"
+                :loading="loading"
+                @click="setLoader( ()=> { addTime().then(()=>{reset()})})"
+              >
+                LOG TIME
+              </v-btn>
+            </PCLoader>
           </v-row>
         </ValidationObserver>
         <v-row
@@ -77,21 +80,11 @@
         >
           LOGGED TIME
         </v-row>
-    
         <v-row
           justify="center"
           class="mr-auto ml-auto mt-2 mb-7 logtime__calculated"
         >
-          <PCLoader v-slot="{loading,setLoader}">
-            <v-btn
-              class="logtime__button"
-              :disabled="invalid"
-              :loading="loading"
-              @click="setLoader( ()=> { addTime().then(()=>{reset()})})"
-            >
-              LOG TIME
-            </v-btn>
-          </PCLoader>
+          {{ timeOutput }}
         </v-row>
       </v-col>
     </v-row>
