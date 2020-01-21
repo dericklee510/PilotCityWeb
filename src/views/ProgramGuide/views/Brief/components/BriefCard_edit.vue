@@ -47,7 +47,7 @@
                   v-if="entry.link"
                   class="briefcard__buton mr-3"
                 >
-                  <a :href="entry.link">VIEW</a>
+                  <a :href="`https://drive.google.com/viewerng/viewer?url=${encodeURIComponent(entry.link)}?pid%3Dexplorer&efh=false&a=v&chrome=false&rm=minimal`">VIEW</a>
                 </button>
                 <button
                   class="briefcard__buton mr-3"
@@ -111,10 +111,7 @@ const app = PCmultiinput.createMultiInput<NamedLink>();
 })
 export default class BriefCard extends Vue {
   key=0
-  mounted(){
-    
-  }
-  files: NamedLink[] = FbStore.currentEmployerProgram!.programBrief || [];
+  files: NamedLink[] = FbStore.currentEmployerProgram!.programBrief || [{} as NamedLink];
   
   async onFilesChanged(newFiles:{file?:File}&Partial<NamedLink>[]){
     let indexedFiles = newFiles.map((obj:Partial<NamedLink>&{file?:File},index) => ({...obj, index})).filter(obj => obj.file)

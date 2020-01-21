@@ -121,11 +121,13 @@ export default class jointeam extends Vue {
   subscribers: Subscription[] = [];
   teamName: string = "";
   async createProject() {
-    await FbStore.createProject({
+    let projectId = await FbStore.createProject({
       teamName: this.teamName,
       classroomId: FbStore.currentClassroom!.classroomId
     });
+    await FbStore.joinProject({projectId})
     this.teamName = "";
+    this.$forceUpdate()
   }
   async joinTeam(project:Project){
     await FbStore.joinProject({projectId:project.projectId})

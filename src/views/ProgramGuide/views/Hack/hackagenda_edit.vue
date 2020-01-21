@@ -35,7 +35,10 @@
         >
           Enter your agenda for the event or activity.
         </v-row>
-        <Agenda v-model="entries" />
+        <Agenda
+          v-model="entries"
+          v-stream:update:value="onAgendaChange$"
+        />
       </v-col>
     </v-row>
   </div>
@@ -77,6 +80,7 @@ const emptyAgenda:Omit<EventItem,'completed'> = {
 export default class HackAgenda extends Vue{
  mounted(){
     this.$subscribeTo(this.$observables.agendaEvents,async (events:EventItem[]) => {
+      if(FbStore.userCitizenType === "employer")
       await FbStore.updateCurrentEmployerProgram({
         masterHackDayAgenda:{
           events:events.filter(obj => Object.keys(obj).length !== 0),

@@ -40,8 +40,15 @@ import { Component, Prop, PropSync } from 'vue-property-decorator'
 
 @Component
 export default class PCselect extends Vue {
-    @PropSync('value')
-    public syncValue!: string;
+    @Prop()
+    value!:string 
+    
+    get syncValue(){
+      return this.value
+    }
+    set syncValue(newVal:string){
+      this.$emit('input',newVal)
+    }
 
     @Prop({ default: false })
     public darkMode!: boolean;

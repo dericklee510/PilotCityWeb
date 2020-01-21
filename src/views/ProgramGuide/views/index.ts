@@ -270,8 +270,9 @@ export const EMPLOYERSEQUENCE = {
             'emp-project-intro-edit'
         ],
         'Research': [
-            'emp-project-casestudy',
             'emp-project-casestudy-edit',
+            'emp-project-casestudy',
+            
         ],
 
     },
@@ -281,16 +282,18 @@ export const EMPLOYERSEQUENCE = {
             'emp-project-ospitch',
         ],
         'Hack Day': [
-            'emp-project-hack',
             'emp-project-hack-edit',
+            'emp-project-hack',
+
         ],
         'Package': [
             'emp-project-demo',
             'emp-project-presentation',
         ],
         'Demo Day': [
-            'emp-project-demoagenda',
             'emp-project-demoagenda-edit',
+
+            'emp-project-demoagenda',
         ]
     },
 }

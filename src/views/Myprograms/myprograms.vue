@@ -46,9 +46,7 @@
       </PCLoader>
       <!-- ADD CARD -->
 
-      <v-dialog
-        max-width="50vw"
-      >
+      <v-dialog max-width="50vw">
         <template v-slot:activator="{on}">
           <v-row
             justify="center"
@@ -189,42 +187,75 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { FbStore } from "../../store";
-import { EmployerProgram, Classroom, GeneralUser } from "../../store/Database/types/types";
+import {
+  EmployerProgram,
+  Classroom,
+  GeneralUser
+} from "../../store/Database/types/types";
 import { firebase } from "@/firebase/init";
 import { from } from "rxjs";
 import { map, switchMap } from "rxjs/operators";
 import { PCLoader } from "../../components/utilities";
+import { Watch } from 'vue-property-decorator';
 @Component<myprograms>({
   components: {
     PCLoader
   },
   subscriptions() {
     return {
-      Programs: from(
-        this.getEmployerPrograms()
-      ).pipe(map(snapshotArr => snapshotArr.map(snapshot => snapshot.data())))
+      
     };
   }
 })
 export default class myprograms extends Vue {
+  created(){
+    this.onProgramChange()
+  }
   Programs: EmployerProgram[] = [];
   get programIds() {
-    return FbStore.userCitizenType != "student"
-      ? FbStore.currentUserProfile!.employerProgramIds
-      : FbStore.currentUserProfile;
-  }
-  async getEmployerProgramIds() {
-    if(FbStore.userCitizenType === "student")
-      return Promise.all(FbStore.currentUserProfile!.classroomIds.map(async id =>
-      (await FbStore.firestore.collection("Classroom").doc(id).get()).data<Classroom>().employerProgramId
-    ))
-    else
+    switch(FbStore.userCitizenType!){
+      case("employer"):
       return FbStore.currentUserProfile!.employerProgramIds
+      case("teacher"):
+      return Object.keys(FbStore.currentUserProfile!.teacherProgramDataIds)
+      case("student"):
+      return FbStore.currentUserProfile!.classroomIds
+    }
+    return []
   }
-  async getEmployerPrograms(){
-   return Promise.all((await this.getEmployerProgramIds()).map(id => 
-     FbStore.firestore.collection("EmployerProgram").doc(id).get()
-   ))
+@Watch('programIds')
+async onProgramChange(){
+  this.Programs = (await this.getEmployerPrograms()).map(snapshot => snapshot.data())
+  this.$forceUpdate()
+}
+
+  async getEmployerProgramIds():Promise<string []> {
+    if (FbStore.userCitizenType === "student")
+      return await Promise.all(
+        FbStore.currentUserProfile!.classroomIds.map(
+          async id =>
+            (
+              await FbStore.firestore
+                .collection("Classroom")
+                .doc(id)
+                .get()
+            ).data<Classroom>().employerProgramId
+        )
+      );
+    else if(FbStore.userCitizenType === "employer") 
+      return FbStore.currentUserProfile!.employerProgramIds;
+    else  
+      return Object.keys(FbStore.currentUserProfile!.teacherProgramDataIds)
+  }
+  async getEmployerPrograms() {
+    return Promise.all(
+      (await this.getEmployerProgramIds()).map(id =>
+        FbStore.firestore
+          .collection("EmployerProgram")
+          .doc(id)
+          .get()
+      )
+    );
   }
   createProgram() {
     let id = FbStore.firestore.collection("EmployerProgram").doc().id;
@@ -239,37 +270,53 @@ export default class myprograms extends Vue {
         shareCode: "eoisrhjow3i4ubn3woi4nh",
         lastUpdate: firebase.firestore.FieldValue.serverTimestamp()
       });
+    FbStore.updateCurrentUserProfile({
+      employerProgramIds:firebase.firestore.FieldValue.arrayUnion(id) as unknown as string[]
+    });
   }
   value = "";
   custom = true;
-  shareCode=""
-  result= ""
-  async joinProgram(){
-    
-    if(FbStore.userCitizenType==="teacher"){
-      let querySnapshot = await FbStore.firestore.collection("Program").where("shareCode", "==", this.shareCode).get()
-      let foundProgram  = querySnapshot.docs[0]?.data() as EmployerProgram | undefined
-      if(foundProgram)
-    FbStore.firestore.collection("GeneralUser").doc(FbStore.FBUser!.uid).update({
-        employerProgramIds: firebase.firestore.FieldValue.arrayUnion(foundProgram.employerProgramId)
-     }); else this.result = "Could not verify share code"
-    }else if(FbStore.userCitizenType ==="student"){
-      let querySnapshot = await FbStore.firestore.collection("Classroom").where("shareCode", "==", this.shareCode).get()
-      let foundProgram  = querySnapshot.docs[0]?.data() as Classroom | undefined
-      console.log({foundProgram})
-      if(foundProgram)
-        FbStore.joinClassroom({classroomUid:foundProgram.classroomId, studentUid:FbStore.FBUser!.uid})
-       else this.result = "Could not verify share code"
-    }else if(FbStore.userCitizenType ==="employer"){
-      let ref = FbStore.firestore.collection("EmployerProgram").doc(this.shareCode)
-      let doc = await ref.get()
-      if(doc.exists){
+  shareCode = "";
+  result = "";
+  async joinProgram() {
+    if (FbStore.userCitizenType === "teacher") {
+      let querySnapshot = await FbStore.firestore
+        .collection("EmployerProgram")
+        .where("shareCode", "==", this.shareCode)
+        .get();
+        let foundProgramDoc =  querySnapshot.docs[0]
+      let foundProgram = querySnapshot.docs[0]?.data() as
+        | EmployerProgram
+        | undefined;
+      if (foundProgram && !FbStore.currentUserProfile!.teacherProgramDataIds[foundProgramDoc.id])
+        await FbStore.createTeacherProgramData(foundProgram.employerProgramId)
+      else this.result = "Could not verify share code";
+    } else if (FbStore.userCitizenType === "student") {
+      let querySnapshot = await FbStore.firestore
+        .collection("Classroom")
+        .where("shareCode", "==", this.shareCode)
+        .get();
+      let foundProgram = querySnapshot.docs[0]?.data() as Classroom | undefined;
+      if (foundProgram)
+        FbStore.joinClassroom({
+          classroomUid: foundProgram.classroomId,
+          studentUid: FbStore.FBUser!.uid
+        });
+      else this.result = "Could not verify share code";
+    } else if (FbStore.userCitizenType === "employer") {
+      let ref = FbStore.firestore
+        .collection("EmployerProgram")
+        .doc(this.shareCode);
+      let doc = await ref.get();
+      if (doc.exists) {
         ref.update<EmployerProgram>({
-          employerId:FbStore.FBUser!.uid
-        })
+          employerId: FbStore.FBUser!.uid
+        });
         FbStore.updateCurrentUserProfile({
-          employerProgramIds: firebase.firestore.FieldValue.arrayUnion(doc.id) as unknown as string[]
-        })
+          employerProgramIds: (firebase.firestore.FieldValue.arrayUnion(
+            doc.id
+          ) as unknown) as string[]
+        });
       }
     }
   }
