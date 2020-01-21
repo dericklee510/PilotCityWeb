@@ -65,7 +65,8 @@ import { TEACHERSEQUENCE, EMPLOYERSEQUENCE, STUDENTSEQUENCE } from "../views";
 import { LinkedList, LinkedListItem } from "linked-list-typescript";
 import { ProgramNode, RouteList } from "../types";
 import { STUDENTMODULES, EMPLOYERMODULES, TEACHERMODULES } from "../views";
-
+import { FbStore } from '../../../store';
+import {startCase} from 'lodash'
 @Component
 export default class Nav extends Vue {
   @Prop()
@@ -77,10 +78,10 @@ export default class Nav extends Vue {
     Student: STUDENTSEQUENCE
   };
   get citizenType() {
-    return localStorage.citizenType;
+    return startCase(FbStore.userCitizenType!)
   }
   get sequence() {
-    return this.sequenceHash[this.citizenType];
+    return this.sequenceHash[this.citizenType]
   }
   public updateProgram(name: string) {
     this.$emit("input", name);

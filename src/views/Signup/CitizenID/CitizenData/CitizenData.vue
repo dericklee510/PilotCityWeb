@@ -184,7 +184,7 @@ import { FbStore } from "../../../../store";
 import { startCase, toLower } from "lodash";
 import { mask } from "vue-the-mask";
 import { ValidationObserver, ValidationProvider } from "vee-validate";
-import { PCLoader } from '../../../../components/utilities';
+import { PCLoader } from "../../../../components/utilities";
 @Component({
   components: {
     pcSelect: PCselect,
@@ -205,7 +205,7 @@ export default class CitizenData extends Vue {
   };
   firstName = FbStore.currentUserProfile!.firstName;
   lastName = FbStore.currentUserProfile!.lastName;
-  title = FbStore.currentUserProfile!.title || "";
+  title = FbStore.currentUserProfile!.title || "Mr.";
   phoneNumber = FbStore.currentUserProfile!.phoneNumber || "";
   private AVAILABLETYPES: string[] = ["Teacher", "Employer", "Student"];
 
@@ -216,12 +216,13 @@ export default class CitizenData extends Vue {
   }
   async submit() {
     const { firstName, lastName, title, phoneNumber } = this;
-    FbStore.updateCurrentUserProfile({
+    const updateSettings = {
       firstName,
       lastName,
       title,
       phoneNumber
-    });
+    };
+    FbStore.updateCurrentUserProfile(updateSettings);
     this.$router.push({ name: "program.programlist" });
   }
 }

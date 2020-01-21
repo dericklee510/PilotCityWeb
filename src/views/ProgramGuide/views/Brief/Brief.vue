@@ -36,13 +36,18 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import BriefCard from './components/BriefCard.vue'
-
+import { PCmultiinput } from '../../../../components/inputs'
+import { NamedLink } from '../../../../store/Database/types/utilities'
+import { FbStore } from '../../../../store'
+const app = PCmultiinput.createMultiInput<NamedLink>()
 @Component(({
     components: {
-        BriefCard
+        BriefCard,
+        multiInput:app
     }
 }))
 export default class Brief extends Vue{
-    entries = "stuff"
+
+    // entries = FbStore.currentEmployerProgram!.
 }
 </script>]

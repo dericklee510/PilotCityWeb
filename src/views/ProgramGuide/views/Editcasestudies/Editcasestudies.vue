@@ -59,7 +59,10 @@
           />
         </v-row>
     
-        <multi-input v-slot="{entries,newEntry,deleteEntry}">
+        <multi-input
+          v-model="links"
+          v-slot="{entries,newEntry,deleteEntry}"
+        >
           <v-row
             v-for="entry in entries"
             :key="entry.id"
@@ -125,6 +128,7 @@
           <v-col
             class="editcasestudies__savebutton"
             cols="4"
+            @click="submit"
           >
             <span> SAVE </span>
           </v-col>

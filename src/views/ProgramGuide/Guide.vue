@@ -121,17 +121,6 @@ import { Observable, empty, Subscription } from "rxjs";
         skip(1),
         map(snapshot => {return snapshot.data<EmployerProgram>()})
       ),
-      teacherProgramData: doc(
-        FbStore.firestore
-          .collection("TeacherProgramData")
-          .doc(FbStore.currentTeacherProgramUID)
-      ).pipe(
-        skip(1),
-        filter(
-          snapshot => snapshot.exists && FbStore.userCitizenType != "employer"
-        ),
-        map(snapshot => snapshot.data<TeacherProgramData>())
-      ),
       classRoomData: FbStore.currentClassroom?.classroomId
         ? doc(
             FbStore.firestore
@@ -169,12 +158,25 @@ import { Observable, empty, Subscription } from "rxjs";
         FbStore.initCurrentEmployerProgram(data);
       }
     );
+    if(FbStore.userCitizenType === "teacher"){
+      let teacherProgramDataObservable = doc(
+        FbStore.firestore
+          .collection("TeacherProgramData")
+          .doc(FbStore.currentTeacherProgramUID)
+      ).pipe(
+        skip(1),
+        filter(
+          snapshot => snapshot.exists && FbStore.userCitizenType != "employer"
+        ),
+        map(snapshot => snapshot.data<TeacherProgramData>())
+      )
     this.$subscribeTo(
-      this.$observables.teacherProgramData,
+      teacherProgramDataObservable,
       (data: TeacherProgramData) => {
         FbStore.initCurrentTeacherProgramData(data);
       }
     );
+}
     this.$subscribeTo(this.$observables.classRoomData, (data: Classroom) => {
       FbStore.initcurrentClassroom(data);
     });

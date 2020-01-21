@@ -1,4 +1,4 @@
-    import { FbStore } from './../index';
+import { FbStore } from './../index';
 import { SET_USER } from './../Auth/mutation-types';
 import { Dependency } from '@/utilities/dependency';
 import { isLinkValid } from './../../api';
@@ -74,11 +74,15 @@ export default class Fb extends VuexModule {
     //  @Dependency('FBUser')
     @MutationAction({ mutate: ['currentEmployerProgram'] })
     async initCurrentEmployerProgram(arg: EmployerProgram | string) {
-        if (typeof arg === "string")
-            return { currentEmployerProgram: (await (firestore.collection("EmployerProgram").doc(arg).get())).data<EmployerProgram>() }
-        else
+        if (typeof arg === "string"){
+            let programData = (await (firestore.collection("EmployerProgram").doc(arg).get())).data<EmployerProgram>()
+            console.log(programData)
+            return { currentEmployerProgram: programData }
+        }
+        else{
+            console.log("overwriting current with",arg)
             return { currentEmployerProgram: arg }
-
+}
     }
     @MutationAction({ mutate: ['currentTeacherProgramData'] })
     async initCurrentTeacherProgramData(arg: TeacherProgramData | string) {
@@ -108,9 +112,12 @@ export default class Fb extends VuexModule {
     //  @Dependency('currentEmployerProgramUID', 'currentEmployerProgram')
     @MutationAction({ mutate: ['currentEmployerProgram'] })
     async updateCurrentEmployerProgram(property: Partial<EmployerProgram>) {
+        console.log(property)
         const state = (this.state as Pick<Fb, NonFunctionKeys<Fb>>)
         const uid = state.currentEmployerProgram?.employerProgramId
         await firestore.collection('EmployerProgram').doc(uid).update<EmployerProgram>({ ...property, lastUpdate: firebase.firestore.FieldValue.serverTimestamp() });
+        // console.log(Object.assign(property, this.currentEmployerProgram))
+        // console.log({ property, currentEmployerProgram: this.currentEmployerProgram,})
         return { currentEmployerProgram: Object.assign(property, this.currentEmployerProgram) };
     }
 
@@ -255,9 +262,9 @@ export default class Fb extends VuexModule {
 
     //     // wtf?
     // }
-    @Action({rawError:true})
+    @Action({ rawError: true })
     async createTeacherProgramData(employerProgramId: string) {
-        let uid = this.currentUserProfile?.teacherProgramDataIds? this.currentUserProfile?.teacherProgramDataIds[this.currentEmployerProgram!.employerProgramId]:undefined
+        let uid = this.currentEmployerProgram ? this.currentUserProfile?.teacherProgramDataIds[this.currentEmployerProgram.employerProgramId] : undefined
 
         if (uid) {
             this.initCurrentTeacherProgramData((await this.firestore.collection("TeacherProgramData").doc(uid).get()).data())
@@ -336,29 +343,29 @@ export default class Fb extends VuexModule {
         await firestore.collection('Classroom').doc(classroomId).update({ className });
         // update current classroom ?
     }
-    @Action({rawError:true})
-    async getFileLink({file,filePath,index}:{file:File,filePath:string,index?:number}):Promise<NamedLink>{
-        let childPath:string
-        if(filePath.charAt(filePath.length-1) === "/")
-            childPath = filePath+file.name
-        else 
+    @Action({ rawError: true })
+    async getFileLink({ file, filePath, index }: { file: File, filePath: string, index?: number }): Promise<NamedLink> {
+        let childPath: string
+        if (filePath.charAt(filePath.length - 1) === "/")
+            childPath = filePath + file.name
+        else
             childPath = `${filePath}/${file.name}`
-        if(index)
+        if (index)
             childPath = `${childPath}(${index})`
         let fileRef = FbStore.storageRef.child(childPath)
-        try{
-              let res = await FbStore.storageRef.child(childPath).getDownloadURL();
-              // file exists already
-              return await this.getFileLink({file,filePath,index:index?index+1:1})
-            }catch{
-              // file doesnt exist yet
-              let snapshot = await fileRef.put(file)
-              return {
-                linkName:index?`${file.name}(${index})`:file.name,
-                link:await snapshot.ref.getDownloadURL()
-                }
+        try {
+            let res = await FbStore.storageRef.child(childPath).getDownloadURL();
+            // file exists already
+            return await this.getFileLink({ file, filePath, index: index ? index + 1 : 1 })
+        } catch{
+            // file doesnt exist yet
+            let snapshot = await fileRef.put(file)
+            return {
+                linkName: index ? `${file.name}(${index})` : file.name,
+                link: await snapshot.ref.getDownloadURL()
             }
-      }
+        }
+    }
 
 
     /**
@@ -370,7 +377,7 @@ export default class Fb extends VuexModule {
      */
     @Action({ rawError: true })
     async deleteClassroom(classroomId: string) {
-        
+
         const classroomRef = firestore.collection('Classroom').doc(classroomId);
         const classroomSnapshot = await classroomRef.get();
         const studentsSnapshot = await firestore.collection('GeneralUser').where("classroomIds", 'array-contains', classroomId).get();
@@ -426,8 +433,8 @@ export default class Fb extends VuexModule {
      * @param null uid
      */
     @Dependency('currentUserProfile')
-    @Action({rawError:true})
-    async switchClassroom({oldClassroomId,newClassroomId,studentId}:{oldClassroomId: string, newClassroomId: string, studentId: string}) {
+    @Action({ rawError: true })
+    async switchClassroom({ oldClassroomId, newClassroomId, studentId }: { oldClassroomId: string, newClassroomId: string, studentId: string }) {
         // kick student from project
         const batch = firestore.batch();
         const classroomRef = firestore.collection('Classroom').doc(oldClassroomId);
@@ -474,13 +481,13 @@ export default class Fb extends VuexModule {
      * @param {string} studentId
      * @returns {Promise<void>}
      */
-    @Action({rawError:true})
-    async switchProject({oldProjectId,newProjectId,studentId}:{oldProjectId?: string, newProjectId: string, studentId: string}) {
+    @Action({ rawError: true })
+    async switchProject({ oldProjectId, newProjectId, studentId }: { oldProjectId?: string, newProjectId: string, studentId: string }) {
         // remove student.id with studentId from Project.teamMembers with oldProjectId
         // Student.projectIds[clasroomID] = newProjectId
-        if(oldProjectId)
-            await this.leaveProject({ projectId: oldProjectId, uid:studentId});
-        await this.joinProject({ projectId: newProjectId, uid:studentId});
+        if (oldProjectId)
+            await this.leaveProject({ projectId: oldProjectId, uid: studentId });
+        await this.joinProject({ projectId: newProjectId, uid: studentId });
     }
 
     /**
@@ -535,10 +542,10 @@ export default class Fb extends VuexModule {
         return firestore.collection("Project").doc()
     }
     @Action({ rawError: true })
-    async getStudentName({ studentUid, studentName }: { studentUid?: string, studentName?: {firstName:string,lastName:string} }): Promise<string> {
-        if((studentUid && studentName) || !(studentUid || studentName))
-            throw("Only one parameter must be defined")
-        return (({ firstName, lastName }) => (_.startCase(_.lowerCase(firstName + " " + lastName))))(studentUid?(await firestore.collection("GeneralUser").doc(studentUid).get()).data<GeneralUser>():studentName!)
+    async getStudentName({ studentUid, studentName }: { studentUid?: string, studentName?: { firstName: string, lastName: string } }): Promise<string> {
+        if ((studentUid && studentName) || !(studentUid || studentName))
+            throw ("Only one parameter must be defined")
+        return (({ firstName, lastName }) => (_.startCase(_.lowerCase(firstName + " " + lastName))))(studentUid ? (await firestore.collection("GeneralUser").doc(studentUid).get()).data<GeneralUser>() : studentName!)
     }
     /**
      * Allows User to rename a team
@@ -547,7 +554,7 @@ export default class Fb extends VuexModule {
      * @param {string} projectId
      */
     @Action({ rawError: true })
-    async renameProject({ newProjectName, projectId }: {newProjectName:string,projectId:string}) {
+    async renameProject({ newProjectName, projectId }: { newProjectName: string, projectId: string }) {
         // Project.teamName = newProjectName
         await firestore.collection('Project').doc(projectId).update({ teamName: newProjectName });
         // update current Project
@@ -576,7 +583,7 @@ export default class Fb extends VuexModule {
      * @returns {Promise<void>}
      */
     @Dependency('currentUserProfile')
-    async deleteProject(projectId:string) {
+    async deleteProject(projectId: string) {
         // remove projectId from every student's student.projectId interface X 
         // remove projectId from classroom.projectId  X 
         // remove projectId from employerProgram.Id 

@@ -53,8 +53,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from "vue-class-component"
-
-@Component
+@Component({})
 export default class BriefCard extends Vue{
     acknowledged:boolean = false
 }
