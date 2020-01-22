@@ -53,6 +53,7 @@ export default class BusinessCanvasView extends Vue{
   canvas:TeamInfo={} as TeamInfo
   changePage(team:TeamInfo){
     this.page == "view" ? this.page = "detail" : this.page = "view";
+    this.canvas = team
   }
   created(){
     this.page = "view";

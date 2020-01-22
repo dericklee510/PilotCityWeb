@@ -81,7 +81,7 @@
                 <pc-select
                   :value="{text:entry.class,value:entry.classroomId}"
                   :items="availableClasses"
-                  @update:value="changeClassroom"
+                  @input="changeClassroom($event,entry)"
                 />
               </v-col>
               <v-col
@@ -91,7 +91,8 @@
                 <pc-select
                   :value="{text:entry.project, value:entry.projectId}"
                   :items="availableProjects[entry.classroomId]"
-                  @update:value="changeProject($event,entry)"
+                  :label="entry.project || 'No Project'"
+                  @input="changeProject($event,entry)"
                 />
               </v-col>
             </v-row>
@@ -156,6 +157,7 @@ export default class managestudents extends Vue {
         // handle list of projects here
         classroomData.projectIds.forEach(projectId => {
           this.$subscribeTo(doc(FbStore.firestore.collection("Project").doc(projectId)), projectsnapshot => {
+            console.log(projectsnapshot.data(), projectsnapshot.id)
             spliceOrPush(this.availableProjects[id],{
               text:projectsnapshot.data<Project>().teamName,
               value:projectsnapshot.id
@@ -185,24 +187,30 @@ export default class managestudents extends Vue {
                       project: projectSnapshot.data<Project>().teamName,
                       class:classroomData.className,
                       studentId:studentID,
-                      classroomId:id,
+                      classroomId:projectSnapshot.data<Project>().classroomId,
                       projectId:projectSnapshot.id
                     }
                     spliceOrPush(this.entries,newObj,"studentId")
                   }
-                );else 
+                );else {
+                  let relativeClassroom = await FbStore.findRelativeClassroom({employerProgramId:FbStore.currentEmployerProgramUID!, studentId:studentID})
                   spliceOrPush(this.entries,{
                     name:await FbStore.getStudentName({studentName: studentSnapshot.data<GeneralUser>()}),
                     studentId: studentID,
-                    class:classroomData.className,
+                    class:relativeClassroom.className,
                     project:"",
-                    classroomId:id,
-                  })
+                    classroomId:relativeClassroom.classroomId,
+                  },'studentId')
+                  }
             }
           );
         });
       });
     });
+  }
+
+  get classroomIds(){
+    return FbStore.currentTeacherProgramData!.classroomIds
   }
   availableProjects:{
     [classroomId:string]:{

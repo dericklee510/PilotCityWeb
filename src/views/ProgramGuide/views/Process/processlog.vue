@@ -115,7 +115,7 @@
               <div class="mt-1">
                 <i
                   class="processlog__trashicon far fa-trash-alt"
-                  @click="deleteEntry(entry.id)"
+                  @click="removeEntry(entry)"
                 />
               </div>
             </v-row>
@@ -199,7 +199,16 @@ export default class logtime extends Vue {
   inputDescription:string = ""
   key:number = 0
   fileQueue: {file:File,fileName:string}[] = [];
-  designLog: DesignLog[] = FbStore.currentProject!.designLog || []
+  // designLog: DesignLog[] = FbStore.currentProject!.designLog || []
+  get designLog(){
+    this.key++
+    return FbStore.currentProject!.designLog || []
+  }
+  set designLog(newVal){
+    // FbStore.updateCurrentProject({
+    //   designLog:newVal
+    // })
+  }
   onChange() {
     if (this.inputFile) this.fileQueue.push({
       file:this.inputFile,
@@ -207,6 +216,15 @@ export default class logtime extends Vue {
     });
     this.inputFile = null;
     this.key++
+  }
+  async removeEntry(entry:DesignLog, index:number){
+    entry.fileLinks.forEach(fileLink => {
+      FbStore.storage.refFromURL(fileLink.link).delete()
+    })
+    this.designLog.splice(index,1)
+    FbStore.updateCurrentProject({
+      designLog:this.designLog
+    })
   }
   async holdEntry(){
     const getLinks:(files:File[])=>Promise<NamedLink[]> = (files) => {

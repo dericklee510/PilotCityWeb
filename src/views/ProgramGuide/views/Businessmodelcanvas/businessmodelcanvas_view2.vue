@@ -1,7 +1,7 @@
 <template>
   <v-row justify="center">
     <business-model-canvas-comp
-      v-model="syncedCanvas"
+      :value="syncedCanvas"
       :stars="stars"
       readonly
       @starsChanged="onStarsChanged"
@@ -31,6 +31,11 @@ import {firebase} from "@/firebase/init"
 export default class businessmodelcanvas_view2 extends Vue {
   @Prop()
   canvas!: TeamInfo
+  
+  
+  get syncCanvas():TeamInfo{
+    return this.canvas
+  }
   get syncedCanvas():BusinessModelCanvas{
     return {
       problem:this.canvas.problem || "",
@@ -57,6 +62,7 @@ export default class businessmodelcanvas_view2 extends Vue {
   }
   onStarsChanged({newRating,canvasField}:{ newRating:number,
     canvasField: "problem" | "solution" | "innovation" | "customer"}){
+      console.log(this.canvas)
     FbStore.firestore.collection("Project").doc(this.canvas.projectId).update<Project>({
       [`${canvasField}Rating${FbStore.userCitizenType!.charAt(0).toUpperCase()}`]:newRating,
       lastUpdate:firebase.firestore.FieldValue.serverTimestamp()

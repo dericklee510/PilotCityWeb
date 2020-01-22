@@ -72,39 +72,20 @@
         justify="center"
         class="mt-8 elevator_enter__ratinglabel"
       >
-        No rating yet
+        {{ rating || `No rating yet` }}
       </v-row>
 
       <v-row
         justify="center"
         class="mt-3 mb-6"
       >
-        <i class="far fa-star elevator_enter__unratedstar" />
-        <i class="far fa-star elevator_enter__unratedstar" />
-        <i class="far fa-star elevator_enter__unratedstar" />
-        <i class="far fa-star elevator_enter__unratedstar" />
-        <i class="far fa-star elevator_enter__unratedstar" />
+        <v-rating
+          v-model="rating"
+          readonly
+        />
       </v-row>
 
       <!-- RATING -->
-
-      <v-row
-        justify="center"
-        class="mt-8 elevator_enter__ratinglabel"
-      >
-        Rating
-      </v-row>
-
-      <v-row
-        justify="center"
-        class="mt-3 mb-6"
-      >
-        <i class="fas fa-star elevator_enter__ratedstar" />
-        <i class="fas fa-star elevator_enter__ratedstar" />
-        <i class="fas fa-star elevator_enter__ratedstar" />
-        <i class="fas fa-star elevator_enter__ratedstar" />
-        <i class="fas fa-star elevator_enter__ratedstar" />
-      </v-row>
     </v-col>
   </v-row>
 </template>
@@ -129,5 +110,6 @@ export default class elevator_enter extends TextEnter {
     });
     this.loading = false
   }
+  rating:number = FbStore.currentProject!.elevatorPitchRatingE || FbStore.currentProject!.elevatorPitchRatingT || 0
 }
 </script>

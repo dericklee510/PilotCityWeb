@@ -74,13 +74,13 @@ export default class Fb extends VuexModule {
     //  @Dependency('FBUser')
     @MutationAction({ mutate: ['currentEmployerProgram'] })
     async initCurrentEmployerProgram(arg: EmployerProgram | string) {
-        if (typeof arg === "string"){
+        if (typeof arg === "string") {
             let programData = (await (firestore.collection("EmployerProgram").doc(arg).get())).data<EmployerProgram>()
             return { currentEmployerProgram: programData }
         }
-        else{
+        else {
             return { currentEmployerProgram: arg }
-}
+        }
     }
     @MutationAction({ mutate: ['currentTeacherProgramData'] })
     async initCurrentTeacherProgramData(arg: TeacherProgramData | string) {
@@ -434,10 +434,11 @@ export default class Fb extends VuexModule {
     async switchClassroom({ oldClassroomId, newClassroomId, studentId }: { oldClassroomId: string, newClassroomId: string, studentId: string }) {
         // kick student from project
         const batch = firestore.batch();
-        const classroomRef = firestore.collection('Classroom').doc(oldClassroomId);
+        const oldClassroomRef = firestore.collection('Classroom').doc(oldClassroomId);
+        const newClassroomRef = firestore.collection('Classroom').doc(newClassroomId);
         const studentRef = firestore.collection('GeneralUser').doc(studentId);
 
-        const classroomDocRef = await classroomRef.get();
+        const classroomDocRef = await oldClassroomRef.get();
         const studentDocRef = await studentRef.get();
         if (!studentDocRef.exists || !classroomDocRef.exists)
             throw "Student / classroom not exist"
@@ -452,14 +453,15 @@ export default class Fb extends VuexModule {
         batch.update(studentRef, { // remove old classroom uid from user's classroomIds
             classroomIds: firebase.firestore.FieldValue.arrayRemove(oldClassroomId)
         })
+        batch.update(oldClassroomRef, { // remove studentuid from old classroom
+            studentIds: firebase.firestore.FieldValue.arrayRemove(studentId)
+        })
         batch.update(studentRef, { // add the new one, i think there's something wrong with the db design, should add user's uid into classroom 
             classroomIds: firebase.firestore.FieldValue.arrayUnion(newClassroomId)
         })
-        batch.update(classroomRef, {
-            projectIds: firebase.firestore.FieldValue.arrayRemove(studentId)
-        })
-        batch.update(classroomRef, {
-            projectIds: firebase.firestore.FieldValue.arrayUnion(studentId)
+
+        batch.update(newClassroomRef, { // add studentuid to new classroom
+            studentIds: firebase.firestore.FieldValue.arrayUnion(studentId)
         })
         await batch.commit();
 
@@ -572,6 +574,16 @@ export default class Fb extends VuexModule {
         })
 
     }
+    @Action({ rawError: true })
+    async findRelativeClassroom({ employerProgramId, studentId }: { employerProgramId: string, studentId: string }) {
+        let studentDoc = await FbStore.firestore.collection("GeneralUser").doc(studentId).get()
+        return (await Promise.all(studentDoc.data<GeneralUser>().classroomIds.map(
+            async classId => ( await FbStore.firestore.collection("Classroom").doc(classId).get()).data<Classroom>() 
+            ))).filter(
+                classData => classData.employerProgramId == employerProgramId
+            )[0]
+
+    }
     /**
      * Allows User to delete a team
      * User: Teacher 
@@ -580,7 +592,7 @@ export default class Fb extends VuexModule {
      * @returns {Promise<void>}
      */
     @Dependency('currentUserProfile')
-    @Action({rawError:true})
+    @Action({ rawError: true })
     async deleteProject(projectId: string) {
         // remove projectId from every student's student.projectId interface X 
         // remove projectId from classroom.projectId  X 

@@ -81,30 +81,36 @@
                 lg="2"
                 class="manageteam__button-wrapper first"
               >
-                <v-btn
-                  class="manageteam__button"
-                  outlined
-                  depressed
-                  height="100%"
-                  @click="renameTeam(entry,index)"
-                >
-                  RENAME
-                </v-btn>
+                <PCLoader v-slot="{loading,setLoader}">
+                  <v-btn
+                    class="manageteam__button"
+                    outlined
+                    :loading="loading"
+                    depressed
+                    height="100%"
+                    @click="setLoader(() =>renameTeam(entry,index))"
+                  >
+                    RENAME
+                  </v-btn>
+                </PCLoader>
               </v-col>
               <v-col
                 cols="6"
                 lg="2"
                 class="manageteam__button-wrapper"
               >
-                <v-btn
-                  class="manageteam__button"
-                  outlined
-                  depressed
-                  height="100%"
-                  @click="deleteTeam(entry)"
-                >
-                  DELETE
-                </v-btn>
+                <PCLoader v-slot="{loading,setLoader}">
+                  <v-btn
+                    class="manageteam__button"
+                    :loading="loading"
+                    outlined
+                    depressed
+                    height="100%"
+                    @click="setLoader(()=>deleteTeam(entry))"
+                  >
+                    DELETE
+                  </v-btn>
+                </PCLoader>
               </v-col>
             </template>
             <template v-else>
@@ -223,6 +229,7 @@ import { Classroom, Project } from "../../../../store/Database/types/types";
 import { Subscription } from "rxjs";
 import { spliceOrPush } from "@/utilities/array";
 interface Team {
+  classroomId:string
   teamName: string;
   teamUid: string;
   createdbyTeacher: boolean;
@@ -250,7 +257,7 @@ export default class ManageTeam extends Vue {
               subscriber.unsubscribe()
             );
 
-          this.entries
+          this.entries.filter(entry => entry.classroomId == classroomId)
             .map(entry => entry.teamUid)
             .forEach(existingId => {
               if (!includes(projectIds, existingId)) {
@@ -272,6 +279,7 @@ export default class ManageTeam extends Vue {
                   spliceOrPush(
                     this.entries,
                     {
+                      classroomId:classSnapshot.id,
                       teamName: projectData.teamName,
                       teamUid: projectId,
                       createdbyTeacher: projectData.createdByTeacher,
@@ -300,15 +308,16 @@ export default class ManageTeam extends Vue {
     );
   }
 
-  renameTeam(entry: Team, index: number) {
-    FbStore.renameProject({
+  async renameTeam(entry: Team, index: number) {
+    await FbStore.renameProject({
       newProjectName: this.teamNames[index],
       projectId: entry.teamUid!
     });
     this.teamNames[index] = "";
+    this.teamNames = this.teamNames.slice(0)
   }
-  deleteTeam(entry: Team) {
-    FbStore.deleteProject(entry.teamUid);
+  async deleteTeam(entry: Team) {
+    await FbStore.deleteProject(entry.teamUid);
   }
   createNewTeam() {
     FbStore.createProject({

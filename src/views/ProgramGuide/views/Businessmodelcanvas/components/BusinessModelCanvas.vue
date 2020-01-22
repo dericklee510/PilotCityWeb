@@ -41,6 +41,7 @@
             :error-messages="failedRules.max?`Must not be longer than 280 Characters`:errors"
             counter
             placeholder="My pitch is..."
+            @input="$emit('input',syncedCanvas)"
           />
         </ValidationProvider>
       </v-row>
@@ -86,6 +87,7 @@
             :error-messages="failedRules.max?`Must not be longer than 280 Characters`:errors"
             counter
             placeholder="My pitch is..."
+            @input="$emit('input',syncedCanvas)"
           />
         </ValidationProvider>
       </v-row>
@@ -131,6 +133,7 @@
             :error-messages="failedRules.max?`Must not be longer than 280 Characters`:errors"
             counter
             placeholder="My pitch is..."
+            @input="$emit('input',syncedCanvas)"
           />
         </ValidationProvider>
       </v-row>
@@ -176,6 +179,7 @@
             :error-messages="failedRules.max?`Must not be longer than 280 Characters`:errors"
             counter
             placeholder="My pitch is..."
+            @input="$emit('input',syncedCanvas)"
           />
         </ValidationProvider>
       </v-row>
@@ -223,8 +227,13 @@ export default class BusinessModelCanvasComp extends Vue {
     innovation: number;
     customer: number;
   };
-  @PropSync("value")
-  syncedCanvas!: BusinessModelCanvas;
+  @Prop()
+  value!: BusinessModelCanvas
+  
+  
+  get syncedCanvas(){
+    return this.value
+  }
 
   @Prop()
   readonly?: string;

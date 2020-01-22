@@ -25,7 +25,7 @@
       class="pc-input__select"
       background-color="transparent"
       :hide-selected="!multiselect"
-      :items="items || liveList"
+      :items="syncedItems || liveList"
       :error-messages="error"
       :dark="darkMode"
     />
@@ -73,6 +73,7 @@ export default class PCselect extends Vue {
           throw("Must Provide liveText and liveValue with documentRefs Prop")
       }
       this.liveSnapshots.forEach(subscriber => subscriber.unsubscribe())
+      if(this.documentRefs)
       this.documentRefs.forEach(ref => {
         this.liveSnapshots.push(doc(ref).subscribe((snapshot) => {
           spliceOrPush(this.liveList,{
@@ -96,8 +97,8 @@ export default class PCselect extends Vue {
     @Prop()
     public title!: string;
 
-    @Prop()
-    public items!: string[];
+    @PropSync('items')
+    public syncedItems!: string[];
 
     @Prop()
     public placeholder!: string;
