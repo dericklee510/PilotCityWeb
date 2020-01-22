@@ -1,5 +1,5 @@
-import { AgendaTemplate, ReviewedLink, ProgramEvent, DesignLog, TimeLog, NamedLink } from './utilities';
-import { AutoComplete, AutoCompleteAddress } from '@/components/GoogleMaps';
+import { AgendaTemplate, ProgramEvent, DesignLog, TimeLog, NamedLink } from './utilities';
+import { AutoCompleteAddress } from '@/components/GoogleMaps';
 export interface Classroom {
     classroomId: string
     projectIds: string []
@@ -60,6 +60,8 @@ export interface EmployerProgram {
     shareCode: string
     lastUpdate: firebase.firestore.Timestamp | firebase.firestore.FieldValue
 }
+
+
 export interface TeacherProgramData {
     teacherProgramId: string
     classroomIds: string[]
@@ -67,6 +69,29 @@ export interface TeacherProgramData {
     caseStudies: NamedLink[]
     trainingDayAgenda?: AgendaTemplate
     hackDayAgenda?: AgendaTemplate    //  Modified  version  of  HackDayAgenda  Master  Template
+    problemOrOpportunity?: string
+    solution?: string
+    keyMetric?: string
+    productOrService?: string
+    promptTemplate?: "tech" | "solution" | "product" | "metric"
+    finalPrompt?: string
+    programSequence: {
+        programBrief?: Date | Boolean
+        introVideo?: firebase.firestore.Timestamp
+        train?: firebase.firestore.Timestamp
+        practice?: firebase.firestore.Timestamp
+        caseStudies?: firebase.firestore.Timestamp
+        bmc?: firebase.firestore.Timestamp
+        sentencePitch?: firebase.firestore.Timestamp
+        elevatorPitch?: firebase.firestore.Timestamp
+        hackDay?: firebase.firestore.Timestamp
+        reflection?: firebase.firestore.Timestamp
+        demoVideo?: firebase.firestore.Timestamp
+        presentation?: firebase.firestore.Timestamp
+        demoDay?: firebase.firestore.Timestamp
+        exitForm?: firebase.firestore.Timestamp
+        interviewOffer?: firebase.firestore.Timestamp
+    }
     created: firebase.firestore.Timestamp | firebase.firestore.FieldValue
     lastUpdate: firebase.firestore.Timestamp | firebase.firestore.FieldValue
 }
@@ -77,7 +102,7 @@ export interface Project {
     teamMembersIds: string[]
     teamName: string
     createdByTeacher: boolean
-    timeline: {
+    programSequence: {
         programBrief?: firebase.firestore.Timestamp
         introVideo?: firebase.firestore.Timestamp
         train?: firebase.firestore.Timestamp
