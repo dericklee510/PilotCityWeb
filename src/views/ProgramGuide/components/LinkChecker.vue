@@ -82,7 +82,6 @@ export default class LinkChecker extends Vue {
         let value = await isLinkValid(URL);
         resolve("Link is verified");
       } catch (err) {
-        console.log(err)
         if (err.response.status == 400)
           reject("Link does not exist")
         else

@@ -80,7 +80,7 @@ import { doc } from "rxfire/firestore/dist/firestore";
 import { from, Subject } from "rxjs";
 import { map } from "rxjs/operators";
 import { Classroom } from "../../../../store/Database/types/types";
-@Component({
+@Component<ManageClass>({
   components: {
     ManageClassHelper
   },

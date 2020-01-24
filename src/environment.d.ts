@@ -22,7 +22,8 @@ declare global {
       | "EmployerProgram"
       | "TeacherProgramData"
       | "Project"
-      | "Classroom";
+      | "Classroom"
+      | "studentClassroom"
     interface DocumentSnapshot {
       data<RetrievedClass>(options?: SnapshotOptions): (RetrievedClass & Record<string, any>)
     }

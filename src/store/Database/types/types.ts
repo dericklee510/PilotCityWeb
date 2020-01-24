@@ -11,7 +11,13 @@ export interface Classroom {
     shareCode?: string  //  create  hash  code
     lastUpdate: firebase.firestore.Timestamp | firebase.firestore.FieldValue
 }
-
+export interface studentClassroom {
+    studentClassroomId:string // classroomId + studentId
+    studentId:string
+    classroomId:string
+    finishedIntrovideo?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+    finishedProgramSequence?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+}
 export interface GeneralUser {
     userId: string
 
@@ -103,8 +109,6 @@ export interface Project {
     teamName: string
     createdByTeacher: boolean
     programSequence: {
-        programBrief?: firebase.firestore.Timestamp
-        introVideo?: firebase.firestore.Timestamp
         train?: firebase.firestore.Timestamp
         practice?: firebase.firestore.Timestamp
         caseStudies?: firebase.firestore.Timestamp

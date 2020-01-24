@@ -1,13 +1,12 @@
+import { NonFunctionKeys } from 'utility-types';
 import { FbStore } from './../index';
 import { SET_USER } from './../Auth/mutation-types';
 import { Dependency } from '@/utilities/dependency';
-import { isLinkValid } from './../../api';
-import { AgendaTemplate, NamedLink, EventItem } from './types/utilities';
+import { AgendaTemplate, NamedLink } from './types/utilities';
 /* eslint-disable-next-line */
 import { Module, VuexModule, Action, Mutation, MutationAction } from "vuex-module-decorators"
 import firestore, { firebaseApp as fb, firebase } from '@/firebase/init'
-import { Classroom, EmployerProgram, GeneralUser, Project, RatingTag, TeacherProgramData } from './types/types'
-import { NonFunctionKeys } from "utility-types"
+import { Classroom, EmployerProgram, GeneralUser, Project, RatingTag, TeacherProgramData, studentClassroom } from './types/types'
 const _ = require('lodash');
 const assert = require('assert')
 
@@ -268,6 +267,7 @@ export default class Fb extends VuexModule {
         } else {
             uid = await this.firestore.collection("TeacherProgramData").doc().id
             let emptyTeacherProgramData: TeacherProgramData = {
+                programSequence:{},
                 teacherProgramId: uid,
                 classroomIds: [],
                 employerProgramId,
@@ -322,6 +322,11 @@ export default class Fb extends VuexModule {
         batch.update<GeneralUser>(studentRef, {
             classroomIds: firebase.firestore.FieldValue.arrayUnion(classroomUid)
         })
+        batch.set<studentClassroom>(firestore.collection("studentClassroom").doc(classroomUid+studentUid),{
+            studentClassroomId:classroomUid+studentUid,
+            studentId:studentUid,
+            classroomId:classroomUid,
+        })
         await batch.commit()
     }
 
@@ -340,7 +345,7 @@ export default class Fb extends VuexModule {
         await firestore.collection('Classroom').doc(classroomId).update({ className });
         // update current classroom ?
     }
-    @Action({ rawError: true })
+    @Action({ rawError: true }) 
     async getFileLink({ file, filePath, index }: { file: File, filePath: string, index?: number }): Promise<NamedLink> {
         let childPath: string
         if (filePath.charAt(filePath.length - 1) === "/")
@@ -430,16 +435,19 @@ export default class Fb extends VuexModule {
      * @param null uid
      */
     @Dependency('currentUserProfile')
-    @Action({ rawError: true })
+    @Action({ rawError: true }) 
     async switchClassroom({ oldClassroomId, newClassroomId, studentId }: { oldClassroomId: string, newClassroomId: string, studentId: string }) {
         // kick student from project
         const batch = firestore.batch();
         const oldClassroomRef = firestore.collection('Classroom').doc(oldClassroomId);
         const newClassroomRef = firestore.collection('Classroom').doc(newClassroomId);
         const studentRef = firestore.collection('GeneralUser').doc(studentId);
+        const oldStudentClassroomRef = firestore.collection("studentClassroom").doc(oldClassroomId + studentId)
+        const newStudentClassroomRef = firestore.collection("studentClassroom").doc(newClassroomId+studentId)
 
         const classroomDocRef = await oldClassroomRef.get();
         const studentDocRef = await studentRef.get();
+        const oldStudentClassroomData=  (await oldStudentClassroomRef.get()).data()
         if (!studentDocRef.exists || !classroomDocRef.exists)
             throw "Student / classroom not exist"
 
@@ -463,6 +471,12 @@ export default class Fb extends VuexModule {
         batch.update(newClassroomRef, { // add studentuid to new classroom
             studentIds: firebase.firestore.FieldValue.arrayUnion(studentId)
         })
+        batch.delete(oldStudentClassroomRef)
+
+        batch.update(newStudentClassroomRef,{
+            ...Object.assign(oldStudentClassroomData,{studentClassroomId:newStudentClassroomRef.id,classroomId:newClassroomId})
+        })
+
         await batch.commit();
 
         // remove classroomId from Student.projectIds
@@ -502,7 +516,7 @@ export default class Fb extends VuexModule {
     // Project.createdByTeacher = 1
     // Project.teamMembers = []
     // add projectId to (employer program) project->classroom -> employerProgram
-    @Action({ rawError: true })
+    @Action({ rawError: true }) 
     async createProject({ teamName, classroomId }: { teamName: string, classroomId: string }) {
         let createdByTeacher: boolean = false;
         if ((this.currentUserProfile as GeneralUser).citizenType == 'teacher')
@@ -510,7 +524,7 @@ export default class Fb extends VuexModule {
         const projectId = firestore.collection('Project').doc().id;
         const project: Project = {
             teamName,
-            timeline: {},
+            programSequence: {},
             practiceLog: {},
             projectId,
             classroomId,
@@ -592,7 +606,7 @@ export default class Fb extends VuexModule {
      * @returns {Promise<void>}
      */
     @Dependency('currentUserProfile')
-    @Action({ rawError: true })
+    @Action({ rawError: true }) 
     async deleteProject(projectId: string) {
         // remove projectId from every student's student.projectId interface X 
         // remove projectId from classroom.projectId  X 
@@ -635,7 +649,7 @@ export default class Fb extends VuexModule {
      * @returns {Promise<void>}
      */
     @Dependency('currentUserProfile')
-    @Action({ rawError: true })
+    @Action({ rawError: true }) 
     async joinProject({ projectId, uid }: { projectId: string, uid?: string }) {
         // append Student.id to Project.teamMembers where Project.Id = projectId 
         // add projectId to Student.projectIds
@@ -663,7 +677,7 @@ export default class Fb extends VuexModule {
      * @returns {Promise<void>}
      */
     @Dependency('currentUserProfile')
-    @Action({ rawError: true })
+    @Action({ rawError: true }) 
     async leaveProject({ projectId, uid }: { projectId: string, uid?: string }) {
         // remove student with Student.id = uid from Project.teamMembers where Project.id = projectId
         // remove projectId from Student.projectIds
