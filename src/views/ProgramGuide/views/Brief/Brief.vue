@@ -14,10 +14,14 @@
         </v-col>
         
         <v-col
-          v-for="program in programBriefs"
+          v-for="(program,index) in programBriefs"
           :key="program.linkName"
         >
-          <BriefCard :value="program" />
+          <BriefCard
+            v-model="acknowledgedBriefs[index]"
+            :program="program"
+            @confirm="onConfirmed"
+          />
         </v-col>
 
         <!-- <v-col>
@@ -42,6 +46,8 @@ import BriefCard from './components/BriefCard.vue'
 import { PCmultiinput } from '../../../../components/inputs'
 import { NamedLink } from '../../../../store/Database/types/utilities'
 import { FbStore } from '../../../../store'
+import { Watch } from 'vue-property-decorator'
+import {firebase} from "@/firebase/init"
 const app = PCmultiinput.createMultiInput<NamedLink>()
 @Component(({
     components: {
@@ -50,9 +56,27 @@ const app = PCmultiinput.createMultiInput<NamedLink>()
     }
 }))
 export default class Brief extends Vue{
-
+created(){
+  this.onConfirm()
+}
   get programBriefs(){
     return FbStore.currentEmployerProgram!.programBrief!
+  }
+   acknowledgedBriefs:boolean[] = []
+  get confirmed(){
+    return FbStore.currentStudentClassroom!.finishedProgramBrief
+  }
+  @Watch('confirmed')
+  onConfirm(){
+    if(this.confirmed)
+      this.acknowledgedBriefs = FbStore.currentEmployerProgram!.programBrief!.map(val => true)
+  }
+  onConfirmed(){
+    console.log("running")
+    if(this.acknowledgedBriefs.every(val => val))
+    FbStore.updateCurrentStudentClassroom({
+      finishedProgramBrief: firebase.firestore.FieldValue.serverTimestamp()
+    })
   }
 }
 </script>]

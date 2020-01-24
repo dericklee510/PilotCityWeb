@@ -22,6 +22,7 @@ export default class Fb extends VuexModule {
     public FBUser: firebase.User | null = null
     public currentUserProfile: GeneralUser | null = null
     public currentProject: Project | null = null
+    public currentStudentClassroom: studentClassroom | null = null
 
     //  @Dependency('FBUser')
     get userDocRef() {
@@ -51,17 +52,12 @@ export default class Fb extends VuexModule {
     get userCitizenType() {
         return this.currentUserProfile!.citizenType;
     }
-    @MutationAction({ mutate: ['currentUserProfile'], rawError: true })
-    async updateCurrentUserProfile(property: Partial<GeneralUser>) {
-        const state = (this.state as Pick<Fb, NonFunctionKeys<Fb>>)
-        const uid = state.FBUser?.uid
-        await firestore.collection('GeneralUser').doc(uid).update<GeneralUser>({ ...property, lastUpdate: firebase.firestore.FieldValue.serverTimestamp() });
-        return { currentUserProfile: Object.assign(property, state.currentUserProfile) };
-    }
+   
     @Mutation
     [SET_USER](userDoc: firebase.User | null): void {
         this.FBUser = userDoc
     }
+    
     @MutationAction({ mutate: ['currentUserProfile'] })
     async initCurrentUserProfile(arg: GeneralUser | string) {
         return {
@@ -105,7 +101,23 @@ export default class Fb extends VuexModule {
             return { currentProject: arg }
         }
     }
-
+    @MutationAction({ mutate: ['currentStudentClassroom'] })
+    async initCurrentStudentClassroom(arg: studentClassroom | string | null) {
+        if (typeof arg === "string")
+            return { currentStudentClassroom: (await (firestore.collection("studentClassroom").doc(arg).get())).data<Project>() }
+        else if (arg)
+            return { currentStudentClassroom: arg }
+        else {
+            return { currentStudentClassroom: arg }
+        }
+    }
+    @MutationAction({ mutate: ['currentUserProfile'], rawError: true })
+    async updateCurrentUserProfile(property: Partial<GeneralUser>) {
+        const state = (this.state as Pick<Fb, NonFunctionKeys<Fb>>)
+        const uid = state.FBUser?.uid
+        await firestore.collection('GeneralUser').doc(uid).update<GeneralUser>({ ...property, lastUpdate: firebase.firestore.FieldValue.serverTimestamp() });
+        return { currentUserProfile: Object.assign(property, state.currentUserProfile) };
+    }
     //  @Dependency('currentEmployerProgramUID', 'currentEmployerProgram')
     @MutationAction({ mutate: ['currentEmployerProgram'] })
     async updateCurrentEmployerProgram(property: Partial<EmployerProgram>) {
@@ -114,7 +126,7 @@ export default class Fb extends VuexModule {
         await firestore.collection('EmployerProgram').doc(uid).update<EmployerProgram>({ ...property, lastUpdate: firebase.firestore.FieldValue.serverTimestamp() });
         // console.log(Object.assign(property, this.currentEmployerProgram))
         // console.log({ property, currentEmployerProgram: this.currentEmployerProgram,})
-        return { currentEmployerProgram: Object.assign(property, this.currentEmployerProgram) };
+        return { currentEmployerProgram: Object.assign(property, state.currentEmployerProgram) };
     }
 
     //  @Dependency('currentEmployerProgramUID', 'currentTeacherProgramData')
@@ -123,7 +135,7 @@ export default class Fb extends VuexModule {
         const state = (this.state as Pick<Fb, NonFunctionKeys<Fb>>)
         const uid = state.currentTeacherProgramData?.teacherProgramId
         await firestore.collection('TeacherProgramData').doc(uid).update<TeacherProgramData>({ ...property, lastUpdate: firebase.firestore.FieldValue.serverTimestamp() });
-        return { currentTeacherProgramData: Object.assign(property, this.currentTeacherProgramData) }
+        return { currentTeacherProgramData: Object.assign(property, state.currentTeacherProgramData) }
     }
 
     //  @Dependency('currentProject')
@@ -132,7 +144,14 @@ export default class Fb extends VuexModule {
         const state = (this.state as Pick<Fb, NonFunctionKeys<Fb>>)
         const uid = state.currentProject?.projectId
         await firestore.collection('Project').doc(uid).update<Project>(Object.assign({}, { ...property, lastUpdate: firebase.firestore.FieldValue.serverTimestamp() }));
-        return { currentProject: Object.assign(property, this.currentProject) }
+        return { currentProject: Object.assign(property, state.currentProject) }
+    }
+    @MutationAction({ mutate: ['currentStudentClassroom'] })
+    async updateCurrentStudentClassroom(property: Partial<studentClassroom>) {
+        const state = (this.state as Pick<Fb, NonFunctionKeys<Fb>>)
+        const uid = state.currentStudentClassroom?.studentClassroomId
+        await firestore.collection('studentClassroom').doc(uid).update<studentClassroom>(Object.assign({}, { ...property, lastUpdate: firebase.firestore.FieldValue.serverTimestamp() }));
+        return { currentStudentClassroom: Object.assign(property, state.currentStudentClassroom) }
     }
 
     @Action({ commit: 'initCurrentEmployerProgram ' })

@@ -100,6 +100,7 @@ import Component from 'vue-class-component'
 import { FbStore } from '../../../../store'
 import { ValidationObserver } from 'vee-validate'
 import { LinkChecker } from '../../components'
+import {firebase} from '@/firebase/init'
 
 @Component({
   components:{
@@ -112,6 +113,7 @@ export default class demovideo_enter extends Vue{
     checkbox=false
     onSubmit(){
       FbStore.updateCurrentProject({
+        [`programSequence.${'demoVideo'}`]:firebase.firestore.FieldValue.serverTimestamp(),
         demoLink:this.url
       })
     }

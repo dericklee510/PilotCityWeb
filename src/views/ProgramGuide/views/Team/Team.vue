@@ -107,6 +107,9 @@ export default class Team extends Vue{
   get teamName(){
     return FbStore.currentProject!.teamName
   }
+  get currentProject(){
+    return FbStore.currentProject
+  }
   @Watch('teamIds')
   async onIdsChange(){
     this.names = await getNames()

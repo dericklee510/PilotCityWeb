@@ -92,6 +92,7 @@ import Component from 'vue-class-component'
 import {ValidationObserver, ValidationProvider, extend } from 'vee-validate'
 import {max} from 'vee-validate/dist/rules';
 import { FbStore } from '../../../../store';
+import {firebase} from "@/firebase/init"
 extend('max',{
     ...max,
     message: "Must not be greater than {length} characters"
@@ -109,6 +110,8 @@ export default class pitch_enter extends Vue{
     async submit(){
       this.loading = true
       await FbStore.updateCurrentProject({
+        [`programSequence.${'sentencePitch'}`]:firebase.firestore.FieldValue.serverTimestamp()
+        ,
         sentencePitch:this.pitch
       })
       this.loading = false

@@ -101,6 +101,7 @@ import { TextEnter, LinkChecker } from "../../components";
 import { filterByPromise } from "filter-async-rxjs-pipe";
 import { isLinkValid } from "../../../../api";
 import { FbStore } from "../../../../store";
+import {firebase} from '@/firebase/init'
 @Component<PresentationEnter>({
   components: {
     ValidationObserver,
@@ -113,6 +114,7 @@ export default class PresentationEnter extends TextEnter {
     checkbox=false
     onSubmit(){
       FbStore.updateCurrentProject({
+         [`programSequence.${'presentation'}`]:firebase.firestore.FieldValue.serverTimestamp(),
         presentationLink:this.url
       })
     }

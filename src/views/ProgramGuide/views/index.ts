@@ -305,7 +305,7 @@ export const STUDENTSEQUENCE = {
             'stud-project-intro',
 
             'stud-project-team-join',
-            'stud-project-team',
+            // 'stud-project-team',
         ],
         'Train': [
             'stud-project-training',

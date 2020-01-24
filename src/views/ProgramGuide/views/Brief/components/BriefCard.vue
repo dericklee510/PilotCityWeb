@@ -39,6 +39,7 @@
               <v-btn
                 class="briefcard__buton"
                 :disabled="!acknowledged"
+                @click="$emit('confirm')"
               >
                 CONFIRM
               </v-btn>
@@ -57,11 +58,18 @@ import { NamedLink } from '../../../../../store/Database/types/utilities'
 import { Prop } from 'vue-property-decorator'
 @Component({})
 export default class BriefCard extends Vue{
-    acknowledged:boolean = false
     @Prop()
-    value!: NamedLink
-    get syncValue(){
+    value!:boolean
+    get acknowledged(){
       return this.value
+    }
+    set acknowledged(val:boolean){
+      this.$emit('input', val)
+    }
+    @Prop()
+    program!: NamedLink
+    get syncValue(){
+      return this.program
     }
 }
 </script>

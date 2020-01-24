@@ -15,8 +15,8 @@ export interface studentClassroom {
     studentClassroomId:string // classroomId + studentId
     studentId:string
     classroomId:string
+    finishedProgramBrief?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
     finishedIntrovideo?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
-    finishedProgramSequence?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
 }
 export interface GeneralUser {
     userId: string
@@ -82,21 +82,21 @@ export interface TeacherProgramData {
     promptTemplate?: "tech" | "solution" | "product" | "metric"
     finalPrompt?: string
     programSequence: {
-        programBrief?: Date | Boolean
-        introVideo?: firebase.firestore.Timestamp
-        train?: firebase.firestore.Timestamp
-        practice?: firebase.firestore.Timestamp
-        caseStudies?: firebase.firestore.Timestamp
-        bmc?: firebase.firestore.Timestamp
-        sentencePitch?: firebase.firestore.Timestamp
-        elevatorPitch?: firebase.firestore.Timestamp
-        hackDay?: firebase.firestore.Timestamp
-        reflection?: firebase.firestore.Timestamp
-        demoVideo?: firebase.firestore.Timestamp
-        presentation?: firebase.firestore.Timestamp
-        demoDay?: firebase.firestore.Timestamp
-        exitForm?: firebase.firestore.Timestamp
-        interviewOffer?: firebase.firestore.Timestamp
+        programBrief?:Date | Boolean
+        introVideo?:Date | Boolean
+        train?:Date | Boolean
+        practice?:Date | Boolean
+        caseStudies?:Date | Boolean
+        bmc?:Date | Boolean
+        sentencePitch?:Date | Boolean
+        elevatorPitch?:Date | Boolean
+        hackDay?:Date | Boolean
+        reflection?:Date | Boolean
+        demoVideo?:Date | Boolean
+        presentation?:Date | Boolean
+        demoDay?:Date | Boolean
+        exitForm?:Date | Boolean
+        interviewOffer?:Date | Boolean
     }
     created: firebase.firestore.Timestamp | firebase.firestore.FieldValue
     lastUpdate: firebase.firestore.Timestamp | firebase.firestore.FieldValue
@@ -109,19 +109,19 @@ export interface Project {
     teamName: string
     createdByTeacher: boolean
     programSequence: {
-        train?: firebase.firestore.Timestamp
-        practice?: firebase.firestore.Timestamp
-        caseStudies?: firebase.firestore.Timestamp
-        bmc?: firebase.firestore.Timestamp
-        sentencePitch?: firebase.firestore.Timestamp
-        elevatorPitch?: firebase.firestore.Timestamp
-        hackDay?: firebase.firestore.Timestamp
-        reflection?: firebase.firestore.Timestamp
-        demoVideo?: firebase.firestore.Timestamp
-        presentation?: firebase.firestore.Timestamp
-        demoDay?: firebase.firestore.Timestamp
-        exitForm?: firebase.firestore.Timestamp
-        interviewOffer?: firebase.firestore.Timestamp
+        train?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+        practice?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+        caseStudies?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+        bmc?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+        sentencePitch?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+        elevatorPitch?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+        hackDay?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+        reflection?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+        demoVideo?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+        presentation?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+        demoDay?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+        exitForm?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+        interviewOffer?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
     }
     caseStudiesReviewed?: boolean[]
     practiceLog: {

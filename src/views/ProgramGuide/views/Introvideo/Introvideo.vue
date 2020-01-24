@@ -58,6 +58,7 @@
           <v-btn
             class="introvideo__button"
             :disabled="!acknowledged"
+            @click="onSubmit"
           >
             NEXT
           </v-btn>
@@ -75,11 +76,11 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import "video.js/dist/video-js.css";
-require("videojs-youtube");
+require('videojs-youtube/')
 // import { VideoPlayer } from "@/components/VideoPlayer";
-import { videoPlayer} from 'vue-video-player'
+import { videoPlayer } from "vue-video-player";
 import { FbStore } from "../../../../store";
-
+import {firebase} from "@/firebase/init"
 @Component({
   components: {
     videoPlayer
@@ -96,7 +97,12 @@ export default class Introvideo extends Vue {
     
   }
   canBeAcknowldged: boolean = false;
-  acknowledged: boolean = false;
+  acknowledged: boolean =  !!FbStore.currentStudentClassroom!.finishedIntrovideo || false;
+  onSubmit(){
+    FbStore.updateCurrentStudentClassroom({
+      finishedIntrovideo:firebase.firestore.FieldValue.serverTimestamp()
+    })
+  }
   playerOptions = {
     responsive: true,
     fluid: true,
