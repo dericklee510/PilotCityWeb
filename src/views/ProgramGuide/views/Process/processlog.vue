@@ -161,6 +161,7 @@ import { VFileInput } from 'vuetify/lib';
 import { ValidationObserver, ValidationProvider } from 'vee-validate';
 import { FbStore } from '../../../../store';
 
+
 async function getFileLink(file:File,index?:number):Promise<NamedLink>{
   let filePath = `project/${FbStore.currentProject!.projectId}/process_log/${file.name}`
   if(index)
@@ -230,6 +231,10 @@ export default class logtime extends Vue {
       fileLinks,
       lastUpdate:firebase.firestore.Timestamp.now()
     })
+    if(FbStore.currentProject!.programSequence?.processLog)
+      await FbStore.updateCurrentProject({
+        [`programSequence.${"processLog"}`]:firebase.firestore.FieldValue.serverTimestamp()
+      })
     await FbStore.updateCurrentProject({
       designLog:this.designLog.map(obj => ({...obj}))
     })

@@ -1,0 +1,94 @@
+<script lang="ts">
+import Vue from 'vue'
+import Component from "vue-class-component";
+import { TeacherProgramData, Classroom, Project, studentClassroom } from '../../../../store/Database/types/types';
+import { FbStore } from '../../../../store';
+import { BehaviorSubject, of, combineLatest, Observable } from 'rxjs';
+import { switchMap, map } from 'rxjs/operators';
+import { doc } from 'rxfire/firestore/dist/firestore';
+import { flatten,get, Many} from 'lodash'
+import undefined from 'firebase/empty-import';
+type trigger = undefined | Date | boolean;
+@Component<ManageProgram>({
+  subscriptions() {
+    this.classroomIdsSubject$ = new BehaviorSubject(FbStore.currentTeacherProgramData!.classroomIds)
+    this.latestClassroomData$ = this.classroomIdsSubject$.pipe(
+      map((ids) => ids.map(id => doc(FbStore.firestore.collection("Classroom").doc(id)))),
+      switchMap(docs => combineLatest(...docs)),
+      map((docs: firebase.firestore.DocumentSnapshot[]) => docs.map(doc => doc.data<Classroom>()))
+    )
+    return {
+      latestProjectData: this.latestClassroomData$.pipe(
+        map(classDataArr => flatten(classDataArr.map(classData => classData.projectIds.map(projectid => doc(FbStore.firestore.collection("Project").doc(projectid)))))),
+        switchMap(projectDocs => combineLatest(...projectDocs)),
+        map((projectDocs: firebase.firestore.DocumentSnapshot[]) => projectDocs.map(doc => doc.data<Project>()))
+      ),
+      latestStudentClassroomData: this.latestClassroomData$.pipe(
+        map(classDataArr => flatten(classDataArr.map(classData => classData.studentIds.map(studentid => doc(FbStore.firestore.collection("studentClassroom").doc(classData.classroomId + studentid)))))),
+        switchMap(studentClassroomDocs => combineLatest(...studentClassroomDocs)),
+        map((studentClassroomSnapshots: firebase.firestore.DocumentSnapshot[]) => studentClassroomSnapshots.map(doc => doc.data<studentClassroom>()))
+      )
+    }
+  }
+})
+export default class ManageProgram extends Vue {
+  classroomIdsSubject$ = new BehaviorSubject(FbStore.currentTeacherProgramData!.classroomIds)
+  latestClassroomData$!: Observable<(Classroom & Record<string, any>)[]>
+  latestProjectData!: (Project)[]
+  latestStudentClassroomData!: (studentClassroom)[]
+  routeHash = {
+    [`launch day`]: "programBrief",
+    [`training`]: "train",
+    [`practice & research`]: "practice",
+    [`ideate`]: "bmc",
+    [`hack day`]: "hackDay",
+    [`reflection`]: "reflection",
+    [`design & prototype`]: "processLog",
+    [`package`]: "demoVideo",
+    [`demo day`]: "demoDay",
+    [`exit survey`]: "exitForm",
+  }
+  get latestCompletionPercent(): Record<keyof typeof routeHash, number> {
+    const { routeHash } = this
+    return {
+        "launch day":this.getAverage(this.latestStudentClassroomData,"finishedIntrovideo"),
+        "training":this.getAverage(this.latestProjectData,"programSequence.train"),
+        "practice & research": this.getAverage(this.latestProjectData,"programSequence.caseStudies"),
+        "ideate" : this.getAverage(this.latestProjectData,"programSequence.elevatorPitch"),
+        "hack day":this.getAverage(this.latestProjectData,"programSequence.hackDay"),
+        "reflection":this.getAverage(this.latestProjectData,"programSequence.reflection"),
+        "design & prototype":this.getAverage(this.latestProjectData,"programSequence.processLog"),
+        "package":this.getAverage(this.latestProjectData,"programSequence.presentation"),
+        "demo day":this.getAverage(this.latestProjectData,"programSequence.demoDay"),
+        "exit survey":this.getAverage(this.latestProjectData,"programSequence.exitForm")
+    }
+  }
+  getAverage<TObject extends object, TKey extends keyof TObject>(arr:TObject[],field:TKey | [TKey] | Many<string | number | symbol> ){
+      let total = arr.reduce((sum, entry)=> {
+          return sum += get(entry,field,undefined)?1:0
+      },0)
+      return total/arr.length
+  }
+  onUpdateTrigger(route: keyof TeacherProgramData.programSequence, triggerType: trigger) {
+    FbStore.updateCurrentTeacherProgramData({
+      [`programSequence.${route}`]: triggerType
+    })
+  }
+  getCompletion(route: keyof TeacherProgramData.programSequence) {
+
+  }
+//   parseType(trigger: trigger) {
+//     switch (trigger) {
+//       case undefined:
+//         return {
+//           unlock: "By Completion",
+
+//         }
+//         break;
+
+//       default:
+//         break;
+//     }
+//   }
+}
+</script>

@@ -27,6 +27,7 @@ declare global {
     interface DocumentSnapshot {
       data<RetrievedClass>(options?: SnapshotOptions): (RetrievedClass & Record<string, any>)
     }
+  
     interface DocumentReference {
       update<UpdateClass>(data: Partial<UpdateClass>): Promise<void>
       set<UpdateClass>(data: UpdateClass): Promise<void>

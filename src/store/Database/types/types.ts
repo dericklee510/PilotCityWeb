@@ -1,5 +1,7 @@
+
 import { AgendaTemplate, ProgramEvent, DesignLog, TimeLog, NamedLink } from './utilities';
 import { AutoCompleteAddress } from '@/components/GoogleMaps';
+
 export interface Classroom {
     classroomId: string
     projectIds: string []
@@ -92,6 +94,7 @@ export interface TeacherProgramData {
         elevatorPitch?:Date | Boolean
         hackDay?:Date | Boolean
         reflection?:Date | Boolean
+        processLog?:Date | Boolean
         demoVideo?:Date | Boolean
         presentation?:Date | Boolean
         demoDay?:Date | Boolean
@@ -101,6 +104,45 @@ export interface TeacherProgramData {
     created: firebase.firestore.Timestamp | firebase.firestore.FieldValue
     lastUpdate: firebase.firestore.Timestamp | firebase.firestore.FieldValue
 }
+export namespace TeacherProgramData{
+    export type programSequence = {
+        programBrief?:Date | Boolean
+        introVideo?:Date | Boolean
+        train?:Date | Boolean
+        practice?:Date | Boolean
+        caseStudies?:Date | Boolean
+        bmc?:Date | Boolean
+        sentencePitch?:Date | Boolean
+        elevatorPitch?:Date | Boolean
+        hackDay?:Date | Boolean
+        reflection?:Date | Boolean
+        processLog?:Date | Boolean
+        demoVideo?:Date | Boolean
+        presentation?:Date | Boolean
+        demoDay?:Date | Boolean
+        exitForm?:Date | Boolean
+        interviewOffer?:Date | Boolean
+    }
+    export namespace programSequence{
+        export type programBrief = undefined| Date | Boolean
+        export type introVideo = undefined| Date | Boolean
+        export type train = undefined| Date | Boolean
+        export type practice = undefined| Date | Boolean
+        export type caseStudies = undefined| Date | Boolean
+        export type bmc = undefined| Date | Boolean
+        export type sentencePitch = undefined| Date | Boolean
+        export type elevatorPitch = undefined| Date | Boolean
+        export type hackDay = undefined| Date | Boolean
+        export type reflection = undefined| Date | Boolean
+        export type processLog = undefined| Date | Boolean
+        export type demoVideo = undefined| Date | Boolean
+        export type presentation = undefined| Date | Boolean
+        export type demoDay = undefined| Date | Boolean
+        export type exitForm = undefined| Date | Boolean
+        export type interviewOffer = undefined| Date | Boolean
+    }
+}
+
 //  StudentProject  should  be  an  extension  of  a  Team
 export interface Project {
     projectId: string
@@ -117,6 +159,7 @@ export interface Project {
         elevatorPitch?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
         hackDay?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
         reflection?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+        processLog?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
         demoVideo?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
         presentation?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
         demoDay?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
