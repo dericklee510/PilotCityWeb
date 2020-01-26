@@ -97,19 +97,19 @@ export default class Introvideo extends Vue {
     
   }
   canBeAcknowldged: boolean = false;
-  acknowledged: boolean =  !!FbStore.currentStudentClassroom!.finishedIntrovideo || false;
+  acknowledged: boolean =  !!FbStore.currentStudentClassroom?.finishedIntrovideo || false;
   onSubmit(){
     FbStore.updateCurrentStudentClassroom({
       finishedIntrovideo:firebase.firestore.FieldValue.serverTimestamp()
     })
   }
-  playerOptions = {
-    responsive: true,
+  get playerOptions(){
+   return { responsive: true,
     fluid: true,
     techOrder: ["youtube"],
     language: "en",
     controlBar: {
-      progressControl: false
+      progressControl: FbStore.userCitizenType =="student"?false:true
     },
     sources: [
       {
@@ -120,7 +120,8 @@ export default class Introvideo extends Vue {
         // src: "https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm"
       }
     ]
-    // poster: "https://surmon-china.github.io/vue-quill-editor/static/images/surmon-1.jpg",
+    // poster: "https://surmon-china.github.io/vue-quill-editor/static/images/surmon-1.jpg",}
   };
+}
 }
 </script>
