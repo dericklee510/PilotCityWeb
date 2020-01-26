@@ -26,7 +26,15 @@
         </v-col>
       </v-row>
       <v-row
+        v-if="readonly==true"
         justify="center"
+        class="mr-auto ml-auto mb-12"
+      >
+        {{ syncedCanvas.problem }}
+      </v-row>
+      <v-row
+        v-else
+        justifv-elsey="center"
         class="mr-auto ml-auto mb-12"
       >
         <ValidationProvider
@@ -71,8 +79,15 @@
           </v-row>
         </v-col>
       </v-row>
-      
       <v-row
+        v-if="readonly==true"
+        justify="center"
+        class="mr-auto ml-auto mb-12"
+      >
+        {{ syncedCanvas.solution }}
+      </v-row>
+      <v-row
+        v-else
         justify="center"
         class="mr-auto ml-auto mb-12"
       >
@@ -117,8 +132,15 @@
           </v-row>
         </v-col>
       </v-row>
-      
       <v-row
+        v-if="readonly==true"
+        justify="center"
+        class="mr-auto ml-auto mb-12"
+      >
+        {{ syncedCanvas.innovation }}
+      </v-row>
+      <v-row
+        v-else
         justify="center"
         class="mr-auto ml-auto mb-12"
       >
@@ -163,8 +185,15 @@
           </v-row>
         </v-col>
       </v-row>
-      
       <v-row
+        v-if="readonly==true"
+        justify="center"
+        class="mr-auto ml-auto mb-12"
+      >
+        {{ syncedCanvas.customer }}
+      </v-row>
+      <v-row
+        v-else
         justify="center"
         class="mr-auto ml-auto mb-12"
       >
@@ -183,22 +212,6 @@
           />
         </ValidationProvider>
       </v-row>
-      
-      <!-- <v-col
-        v-if="!readonly"
-        class="mr-auto ml-auto"
-        cols="5"
-      >
-        <PCLoader v-slot="{loading,setLoader}">
-          <v-btn
-            :loading="loading"
-            class="businessmodelcanvas_enter__button mb-10"
-            @click="setLoader(saveCanvas)"
-          >
-            SAVE
-          </v-btn>
-        </PCLoader>
-      </v-col> -->
     </v-container>
   </ValidationObserver>
 </template>
@@ -236,7 +249,7 @@ export default class BusinessModelCanvasComp extends Vue {
   }
 
   @Prop()
-  readonly?: string;
+  readonly?: boolean;
   @PropSync("stars")
   syncedStars!: Record<keyof BusinessModelCanvas, Number>;
   async saveCanvas() {

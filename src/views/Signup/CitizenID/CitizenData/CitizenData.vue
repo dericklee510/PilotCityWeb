@@ -4,7 +4,7 @@
       class="citizen-id__body"
       align="center"
     >
-      <v-row justify="center">
+      <!-- <v-row justify="center">
         <v-col
           cols="12"
           class="mt-6 pt-6 mb-3"
@@ -66,7 +66,7 @@
             </v-list>
           </v-menu>
         </v-col>
-      </v-row>
+      </v-row> -->
       <v-col
         cols="12"
         class="pt-0"

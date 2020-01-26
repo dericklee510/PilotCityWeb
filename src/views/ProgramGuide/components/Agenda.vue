@@ -16,7 +16,8 @@
         />
 
         <v-col
-          cols="8"
+          cols="6"
+          sm="8"
           class="agenda__item mr-auto ml-auto"
         >
           <v-row class="agenda__borderline">
@@ -51,10 +52,11 @@
         <v-col
           cols="1"
           sm="2"
+          class="agenda__trashicon"
         >
           <i
             v-if="entries.length>1"
-            class="mt-2 ml-3 far fa-trash-alt agenda__trashicon"
+            class="mt-2 far fa-trash-alt agenda__trashicon"
             @click="deleteEntry(entry.id)"
           />
         </v-col>

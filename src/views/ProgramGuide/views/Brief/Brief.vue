@@ -1,5 +1,5 @@
 <template>
-  <div class="programbrief__dark">
+  <v-container fluid class="programbrief__dark">
     <v-row class="programbrief__container">
       <v-col
         cols="2"
@@ -7,7 +7,7 @@
       />
       <v-col
         cols="8"
-        md="10"
+        md="7"
       >
         <v-col class="programbrief__tile">
           Program Briefs
@@ -29,7 +29,7 @@
         md="1"
       />
     </v-row>
-  </div>
+  </v-container>
 </template>
  
     

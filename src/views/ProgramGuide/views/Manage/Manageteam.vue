@@ -162,18 +162,20 @@
                     solo
                     flat
                     depressed
+                    background-color="transparent"
                     height="100%"
                     :error-messages="errors"
                     placeholder="TEAM NAME 3"
                   />
                 </ValidationProvider>
               </v-col>
-              <v-col>
+              <v-col class="manageteam__input problem-child pa-0">
                 <ValidationProvider
                   v-slot="{errors}"
                   rules="required"
                 >
                   <PCselect
+                  style="height: inherit !important;"
                     v-model="selectedClassroom"
                     :error-messages="errors"
                     :document-refs="CurrentClassroomsRefs"
@@ -184,7 +186,7 @@
               </v-col>
               <v-col
                 cols="2"
-                class="manageteam__create-button-wrapper"
+                class="manageteam__create-button-wrapper manageteam__input problem-child pa-0"
               >
                 <PCLoader v-slot="{loading, setLoader}">
                   <v-btn

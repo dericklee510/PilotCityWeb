@@ -3,6 +3,25 @@
     &__container{
         margin-top : 82.5px;
         height: 100%;
+        #pc-app .pc-input .theme--light.v-select .v-select__selections{
+            color: #000;
+        }
+        .v-select > .v-input__control > .v-input__slot{
+            padding-left: 12px;
+        }
+        .v-text-field > .v-input__control > .v-input__slot:before {
+            border: none;
+        }
+        .theme--light.v-text-field > .v-input__control > .v-input__slot:before{
+            border: none;
+        }
+        .pc-input .v-text-field{
+            margin-top: -2px;
+            color: #000;
+        }
+        #pc-app .pc-input__select{
+            letter-spacing: normal;
+        }
     }
     &__nav{
         width:100%;

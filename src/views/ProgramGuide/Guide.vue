@@ -27,7 +27,7 @@
           class="guide__locks guide__locks--left"
           @click="navBackward"
         >
-          <Unlock />
+          <Locks :orientation="'left'" />
         </v-col>
         <v-col cols="12">
           <router-view />
@@ -37,7 +37,7 @@
           class="guide__locks guide__locks--right"
           @click="navForward"
         >
-          <Unlock />
+          <Locks :orientation="'right'"/>
         </v-col>
       </v-row>
     </v-col>
@@ -49,7 +49,7 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import { Watch } from "vue-property-decorator";
 import { STUDENTMODULES, EMPLOYERMODULES, TEACHERMODULES } from "./views";
-import { Nav, Lock, Unlock } from "./components";
+import { Nav, Locks } from "./components";
 import _ from "lodash";
 import { LinkedList, LinkedListItem } from "linked-list-typescript";
 import { ProgramNode, RouteList } from "./types";
@@ -188,8 +188,7 @@ import { Observable, empty, Subscription } from "rxjs";
   },
   components: {
     Nav,
-    Lock,
-    Unlock
+    Locks,
   }
 })
 export default class Guide extends Vue {

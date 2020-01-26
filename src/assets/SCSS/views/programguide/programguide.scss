@@ -39,10 +39,12 @@
 @import "./views/Team.scss";
 @import "./views/managestudents.scss";
 @import "./views/manageclass.scss";
+@import "./views/manageprogram.scss";
 @import "./lock.scss";
 
 
 .programguide{
+    height: 100%;
     &__container{
         height: 100%;
         border: 0.75px solid #000000;
@@ -63,6 +65,18 @@
         text-align: center;
         letter-spacing: .05rem;
     }
+    &__description{
+        margin-top: 5%;
+        font-family: Raleway;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 1.41rem;
+        color: #949598;
+        width: 75%;
+        text-align: center;
+        line-height: unset;
+    
+        }
     &__icon img{
         width: 94px;
         height: 79px;

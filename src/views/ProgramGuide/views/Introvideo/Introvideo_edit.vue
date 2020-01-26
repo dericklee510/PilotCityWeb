@@ -1,74 +1,108 @@
 <template>
-  <v-row justify="center">
-    <img
-      id="introvideo_edit__icon"
-      src="@/assets/watchintrovideo_edit.png"
+  <v-container>
+    <v-row
+      justify="center"
+      no-gutters
     >
-
-    <v-col
-      id="introvideo_edit__contain"
-      cols="7"
-    >
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto introvideo_edit__title"
+      <img
+        id="introvideo_edit__icon"
+        src="@/assets/watchintrovideo_edit.png"
       >
-        EDIT INTRODUCTION VIDEO
-      </v-row>
-
+    
       <v-col
-        id="introvideo_edit__borderline"
-        cols="12"
-      />
-
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto introvideo_edit__description"
+        id="introvideo_edit__contain"
+        cols="10"
       >
-        Record, upload and enter link for an introduction video to your project challenge for students to view.
-      </v-row>
-
-      <ValidationObserver v-slot="{invalid}">
-        <v-row
-          justify="center"
-          class="mr-auto ml-auto mt-12 mb-12"
-        >
-          <LinkChecker
-            v-model="url"
-            :success="success"
-            class="introvideo_edit__videolink"
-          />
-        </v-row>
-     
-     
-        <v-row
-          justify="center"
-          class="ml-auto mr-auto introvideo_edit__check"
-        >
-          <v-checkbox
-            v-model="checkbox"
-            type="checkbox"
-            class="introvideo_edit__checkbox"
-            :readonly="invalid"
-          />
-          I confirm this video is set for public view
-        </v-row>
-     
         <v-col
-          class="mr-auto ml-auto"
-          cols="5"
+          justify="center"
+          class="programguide__title"
         >
-          <v-btn
-            class="introvideo_edit__button"
-            :disabled="invalid || !checkbox"
-            @click="onSubmit"
-          >
-            CONFIRM
-          </v-btn>
+          EDIT INTRODUCTION VIDEO
         </v-col>
-      </ValidationObserver>
-    </v-col>
-  </v-row>
+    
+        <v-col
+          class="programguide__description"
+        >
+          Record, upload and enter link for an introduction video to your project challenge for students to view.
+        </v-col>
+    
+        <v-col>
+          <ValidationObserver v-slot="{invalid}">
+            <v-row
+              no-gutters
+              justify="center"
+            >
+              <v-col
+                class="mt-12 mb-12"
+                cols="12"
+              >
+                <v-row
+                  no-gutters
+                  justify="center"
+                >
+                  <v-col cols="7">
+                    <LinkChecker
+                      v-model="url"
+                      :success="success"
+                      class="introvideo_edit__videolink"
+                    />
+                    <v-col />
+                  </v-col>
+                </v-row>
+              </v-col>
+                
+                
+              <v-col
+                cols="6"
+              >
+                <v-row
+                  no-gutters
+                  justify="center"
+                  align="center"
+                >
+                  <v-col cols="1">
+                    <v-checkbox
+                      v-model="checkbox"
+                      type="checkbox"
+                      :readonly="invalid"
+                    />
+                  </v-col>
+                    
+                  <v-col
+                    cols="11"
+                    class="introvideo_edit__check"
+                  >
+                    I confirm this video is set for public view
+                  </v-col>
+                </v-row>
+              </v-col>
+              <v-col cols="12" class="mt-10">
+                <v-row
+                  no-gutters
+                  justify="center"
+                >
+                  <v-col
+                    cols="5"
+                  >
+                    <v-btn
+                      text
+                      solo
+                      depressed
+                      class="introvideo_edit__button"
+                      :disabled="invalid || !checkbox"
+                      @click="onSubmit"
+                    >
+                      CONFIRM
+                    </v-btn>
+                  </v-col>
+                </v-row>
+              </v-col>
+            </v-row>
+          </ValidationObserver>
+        </v-col>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 

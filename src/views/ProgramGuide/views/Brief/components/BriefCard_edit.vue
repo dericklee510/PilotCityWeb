@@ -28,12 +28,8 @@
             />
           </v-col>
 
-          <v-col
-            class
-            cols
-          >
+          <v-col>
             <v-col
-              class
               cols="12"
             >
               <div class="briefcard__header">

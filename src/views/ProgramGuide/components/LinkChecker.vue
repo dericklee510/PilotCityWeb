@@ -7,6 +7,9 @@
     <v-text-field
       v-model="inputUrl"
       v-stream:input="inputChange$"
+      depressed
+      solo
+      flat
       :error-messages="color=='error'?result:errors"
       :success-messages="color!='sucess'?result:[]"
       :loading="loading"

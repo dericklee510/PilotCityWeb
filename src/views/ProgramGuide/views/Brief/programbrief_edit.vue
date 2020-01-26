@@ -1,12 +1,22 @@
 <template>
-  <div class="programbrief__dark">
-    <v-container>
-      <v-row class="programbrief__container">
-        <v-col cols="12">
-          <v-col class="programbrief__tile">
-            Program Briefs
-          </v-col>
-          <v-col />
+  <v-container
+    fluid
+    class="programbrief__dark"
+  >
+    <v-row
+      class="programbrief__container"
+      no-gutters
+    >
+      <v-col
+        cols="2"
+        md="1"
+      />
+      <v-col
+        cols="8"
+        md="10"
+      >
+        <v-col class="programbrief__tile">
+          Program Briefs
         </v-col>
         <v-col>
           <BriefCard_edit
@@ -14,7 +24,6 @@
             v-model="files"
           />
         </v-col>
-
         <v-col>
           <button
             class="programbrief__addbrief"
@@ -23,9 +32,9 @@
             +
           </button>
         </v-col>
-      </v-row>
-    </v-container>
-  </div>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
  
     
