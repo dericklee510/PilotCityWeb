@@ -59,6 +59,7 @@
           <v-btn
             class="elevator_enter__button"
             :loading="loading"
+            :disabled="invalid"
             @click="validate().then(valid => {if(valid) submit()})"
           >
             SAVE
@@ -72,39 +73,20 @@
         justify="center"
         class="mt-8 elevator_enter__ratinglabel"
       >
-        No rating yet
+        {{ rating || `No rating yet` }}
       </v-row>
 
       <v-row
         justify="center"
         class="mt-3 mb-6"
       >
-        <i class="far fa-star elevator_enter__unratedstar" />
-        <i class="far fa-star elevator_enter__unratedstar" />
-        <i class="far fa-star elevator_enter__unratedstar" />
-        <i class="far fa-star elevator_enter__unratedstar" />
-        <i class="far fa-star elevator_enter__unratedstar" />
+        <v-rating
+          v-model="rating"
+          readonly
+        />
       </v-row>
 
       <!-- RATING -->
-
-      <v-row
-        justify="center"
-        class="mt-8 elevator_enter__ratinglabel"
-      >
-        Rating
-      </v-row>
-
-      <v-row
-        justify="center"
-        class="mt-3 mb-6"
-      >
-        <i class="fas fa-star elevator_enter__ratedstar" />
-        <i class="fas fa-star elevator_enter__ratedstar" />
-        <i class="fas fa-star elevator_enter__ratedstar" />
-        <i class="fas fa-star elevator_enter__ratedstar" />
-        <i class="fas fa-star elevator_enter__ratedstar" />
-      </v-row>
     </v-col>
   </v-row>
 </template>
@@ -118,16 +100,19 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import { TextEnter } from "../../components";
 import { FbStore } from "../../../../store";
-
+import {firebase} from "@/firebase/init"
 @Component
 export default class elevator_enter extends TextEnter {
   text: string = FbStore.currentProject!.elevatorPitch || "";
   async submit(){
     this.loading=true
+
     await FbStore.updateCurrentProject({
+      [`programSequence.${'elevatorPitch'}`]:firebase.firestore.FieldValue.serverTimestamp(),
       elevatorPitch: this.text
     });
     this.loading = false
   }
+  rating:number = FbStore.currentProject!.elevatorPitchRatingE || FbStore.currentProject!.elevatorPitchRatingT || 0
 }
 </script>

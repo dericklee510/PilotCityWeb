@@ -115,7 +115,7 @@
               <div class="mt-1">
                 <i
                   class="processlog__trashicon far fa-trash-alt"
-                  @click="deleteEntry(entry.id)"
+                  @click="removeEntry(entry)"
                 />
               </div>
             </v-row>
@@ -160,13 +160,8 @@ import {PCLoader} from "@/components/utilities/"
 import { VFileInput } from 'vuetify/lib';
 import { ValidationObserver, ValidationProvider } from 'vee-validate';
 import { FbStore } from '../../../../store';
-moment(
-  firebase.firestore.Timestamp.fromDate(
-    moment(new Date())
-      .subtract(1, "d")
-      .toDate()
-  )
-).diff(moment(), "d");
+
+
 async function getFileLink(file:File,index?:number):Promise<NamedLink>{
   let filePath = `project/${FbStore.currentProject!.projectId}/process_log/${file.name}`
   if(index)
@@ -199,7 +194,16 @@ export default class logtime extends Vue {
   inputDescription:string = ""
   key:number = 0
   fileQueue: {file:File,fileName:string}[] = [];
-  designLog: DesignLog[] = FbStore.currentProject!.designLog || []
+  // designLog: DesignLog[] = FbStore.currentProject!.designLog || []
+  get designLog(){
+    this.key++
+    return FbStore.currentProject!.designLog || []
+  }
+  set designLog(newVal){
+    // FbStore.updateCurrentProject({
+    //   designLog:newVal
+    // })
+  }
   onChange() {
     if (this.inputFile) this.fileQueue.push({
       file:this.inputFile,
@@ -207,6 +211,15 @@ export default class logtime extends Vue {
     });
     this.inputFile = null;
     this.key++
+  }
+  async removeEntry(entry:DesignLog, index:number){
+    entry.fileLinks.forEach(fileLink => {
+      FbStore.storage.refFromURL(fileLink.link).delete()
+    })
+    this.designLog.splice(index,1)
+    FbStore.updateCurrentProject({
+      designLog:this.designLog
+    })
   }
   async holdEntry(){
     const getLinks:(files:File[])=>Promise<NamedLink[]> = (files) => {
@@ -218,6 +231,10 @@ export default class logtime extends Vue {
       fileLinks,
       lastUpdate:firebase.firestore.Timestamp.now()
     })
+    if(FbStore.currentProject!.programSequence?.processLog)
+      await FbStore.updateCurrentProject({
+        [`programSequence.${"processLog"}`]:firebase.firestore.FieldValue.serverTimestamp()
+      })
     await FbStore.updateCurrentProject({
       designLog:this.designLog.map(obj => ({...obj}))
     })

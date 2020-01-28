@@ -71,21 +71,22 @@
             style="padding: 0"
           >
             <v-col class="practicelog-manage__log-header">
-              {{ nameHash[studentId] }}
+              {{ nameHash[studentId].name }}
             </v-col>
             <pc-timelog
+              :key="studentId+key"
               v-model="practiceLogs[studentId]"
-              v-slot="{entries,deleteEntry}"
+              v-slot="{entries}"
             >
               <v-col
-                v-for="entry in entries"
+                v-for="(entry,index) in entries"
                 :key="entry.id"
                 style="padding: 0"
               >
                 <span>
                   <button
                     class="practicelog_manage__rejectbutton"
-                    @click="deleteEntry(entry.id)"
+                    @click="rejectEntry(studentId,index)"
                   >
                     Reject
                   </button><span class="practicelog_manage__singlelog">
@@ -113,6 +114,10 @@ import Component from 'vue-class-component'
 import { TimeLog } from '@/store/Database/types/utilities'
 import { PCmultiinput } from '@/components/inputs'
 import {firebase} from "@/firebase/init"
+import { FbStore } from '../../../../store'
+import { Subscription } from 'rxjs'
+import { Classroom, Project } from '../../../../store/Database/types/types'
+import { doc } from 'rxfire/firestore'
 export const pcTimelog = PCmultiinput.createMultiInput<TimeLog>({
   minutes:0,
   lastUpdate: firebase.firestore.Timestamp.fromDate(new Date())
@@ -123,27 +128,50 @@ export const pcTimelog = PCmultiinput.createMultiInput<TimeLog>({
   }
 })
 export default class logtime extends Vue{
+  key = 0
+  mounted(){
+    FbStore.currentTeacherProgramData!.classroomIds.forEach(async classroomId => {
+     let classroomData = (await FbStore.firestore.collection("Classroom").doc(classroomId).get()).data<Classroom>()
+     classroomData.projectIds.forEach(projectId => {
+       this.$subscribeTo(doc(FbStore.firestore.collection("Project").doc(projectId)), projectSnapshot => {
+         let projectData = projectSnapshot.data<Project>()
+         Object.keys(projectData.practiceLog).forEach(async studentId => {
+           this.nameHash[studentId] = {name:await FbStore.getStudentName({studentUid:studentId}), projectId}
+           this.practiceLogs[studentId] = projectData.practiceLog[studentId]
+           this.$forceUpdate()
+           this.key++
+         })
+       })
+     })
+    })
+  }
     practiceLogs:Record<string,TimeLog[]> = {
-      'someuid':[{
-        minutes:45,
-        lastUpdate: firebase.firestore.Timestamp.fromDate(new Date(12))
-      },
-      {
-        minutes:13,
-        lastUpdate: firebase.firestore.Timestamp.fromDate(new Date(42))
-      },
-      {
-        minutes:10,
-        lastUpdate: firebase.firestore.Timestamp.fromDate(new Date(14))
-      }],
-      "otheruid":[{
-        minutes:20,
-        lastUpdate: firebase.firestore.Timestamp.fromDate(new Date(23))
-      }]
+      // 'someuid':[{
+      //   minutes:45,
+      //   lastUpdate: firebase.firestore.Timestamp.fromDate(new Date(12))
+      // },
+      // {
+      //   minutes:13,
+      //   lastUpdate: firebase.firestore.Timestamp.fromDate(new Date(42))
+      // },
+      // {
+      //   minutes:10,
+      //   lastUpdate: firebase.firestore.Timestamp.fromDate(new Date(14))
+      // }],
+      // "otheruid":[{
+      //   minutes:20,
+      //   lastUpdate: firebase.firestore.Timestamp.fromDate(new Date(23))
+      // }]
     }
-    nameHash:Record<string,string> ={
-      'someuid': "Antonio Laza",
-      otheruid: "Carly Hudson"
+    nameHash:Record<string,{name:string,projectId:string}> ={
+      // 'someuid': {name:"Antonio Laza"},
+      // otheruid: {name:"Carly Hudson"}
+    }
+    rejectEntry(studentId:string,index:number){
+      FbStore.firestore.collection("Project").doc(this.nameHash[studentId].projectId).update<Project>({
+        [`practiceLog.${studentId}`]: this.practiceLogs[studentId].splice(index,1)
+      })
+      this.$forceUpdate()
     }
     reduceEntry(entries:TimeLog[]):number {
       return entries.reduce((sum,entry) => sum += entry.minutes,0)

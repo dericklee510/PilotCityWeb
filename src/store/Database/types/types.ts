@@ -1,16 +1,25 @@
-import { AgendaTemplate, ReviewedLink, ProgramEvent, DesignLog, TimeLog, NamedLink } from './utilities';
-import { AutoComplete, AutoCompleteAddress } from '@/components/GoogleMaps';
+
+import { AgendaTemplate, ProgramEvent, DesignLog, TimeLog, NamedLink } from './utilities';
+import { AutoCompleteAddress } from '@/components/GoogleMaps';
+
 export interface Classroom {
     classroomId: string
     projectIds: string []
     teacherId: string
+    studentIds: string[]
     teacherProgramId: string
     employerProgramId: string
     className: string
     shareCode?: string  //  create  hash  code
     lastUpdate: firebase.firestore.Timestamp | firebase.firestore.FieldValue
 }
-
+export interface studentClassroom {
+    studentClassroomId:string // classroomId + studentId
+    studentId:string
+    classroomId:string
+    finishedProgramBrief?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+    finishedIntrovideo?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+}
 export interface GeneralUser {
     userId: string
 
@@ -59,6 +68,8 @@ export interface EmployerProgram {
     shareCode: string
     lastUpdate: firebase.firestore.Timestamp | firebase.firestore.FieldValue
 }
+
+
 export interface TeacherProgramData {
     teacherProgramId: string
     classroomIds: string[]
@@ -66,9 +77,72 @@ export interface TeacherProgramData {
     caseStudies: NamedLink[]
     trainingDayAgenda?: AgendaTemplate
     hackDayAgenda?: AgendaTemplate    //  Modified  version  of  HackDayAgenda  Master  Template
+    problemOrOpportunity?: string
+    solution?: string
+    keyMetric?: string
+    productOrService?: string
+    promptTemplate?: "tech" | "solution" | "product" | "metric"
+    finalPrompt?: string
+    programSequence: {
+        programBrief?:Date | Boolean
+        introVideo?:Date | Boolean
+        train?:Date | Boolean
+        practice?:Date | Boolean
+        caseStudies?:Date | Boolean
+        bmc?:Date | Boolean
+        sentencePitch?:Date | Boolean
+        elevatorPitch?:Date | Boolean
+        hackDay?:Date | Boolean
+        reflection?:Date | Boolean
+        processLog?:Date | Boolean
+        demoVideo?:Date | Boolean
+        presentation?:Date | Boolean
+        demoDay?:Date | Boolean
+        exitForm?:Date | Boolean
+        interviewOffer?:Date | Boolean
+    }
     created: firebase.firestore.Timestamp | firebase.firestore.FieldValue
     lastUpdate: firebase.firestore.Timestamp | firebase.firestore.FieldValue
 }
+export namespace TeacherProgramData{
+    export type programSequence = {
+        programBrief?:Date | Boolean
+        introVideo?:Date | Boolean
+        train?:Date | Boolean
+        practice?:Date | Boolean
+        caseStudies?:Date | Boolean
+        bmc?:Date | Boolean
+        sentencePitch?:Date | Boolean
+        elevatorPitch?:Date | Boolean
+        hackDay?:Date | Boolean
+        reflection?:Date | Boolean
+        processLog?:Date | Boolean
+        demoVideo?:Date | Boolean
+        presentation?:Date | Boolean
+        demoDay?:Date | Boolean
+        exitForm?:Date | Boolean
+        interviewOffer?:Date | Boolean
+    }
+    export namespace programSequence{
+        export type programBrief = undefined| Date | Boolean
+        export type introVideo = undefined| Date | Boolean
+        export type train = undefined| Date | Boolean
+        export type practice = undefined| Date | Boolean
+        export type caseStudies = undefined| Date | Boolean
+        export type bmc = undefined| Date | Boolean
+        export type sentencePitch = undefined| Date | Boolean
+        export type elevatorPitch = undefined| Date | Boolean
+        export type hackDay = undefined| Date | Boolean
+        export type reflection = undefined| Date | Boolean
+        export type processLog = undefined| Date | Boolean
+        export type demoVideo = undefined| Date | Boolean
+        export type presentation = undefined| Date | Boolean
+        export type demoDay = undefined| Date | Boolean
+        export type exitForm = undefined| Date | Boolean
+        export type interviewOffer = undefined| Date | Boolean
+    }
+}
+
 //  StudentProject  should  be  an  extension  of  a  Team
 export interface Project {
     projectId: string
@@ -76,22 +150,21 @@ export interface Project {
     teamMembersIds: string[]
     teamName: string
     createdByTeacher: boolean
-    timeline: {
-        programBrief?: firebase.firestore.Timestamp
-        introVideo?: firebase.firestore.Timestamp
-        train?: firebase.firestore.Timestamp
-        practice?: firebase.firestore.Timestamp
-        caseStudies?: firebase.firestore.Timestamp
-        bmc?: firebase.firestore.Timestamp
-        sentencePitch?: firebase.firestore.Timestamp
-        elevatorPitch?: firebase.firestore.Timestamp
-        hackDay?: firebase.firestore.Timestamp
-        reflection?: firebase.firestore.Timestamp
-        demoVideo?: firebase.firestore.Timestamp
-        presentation?: firebase.firestore.Timestamp
-        demoDay?: firebase.firestore.Timestamp
-        exitForm?: firebase.firestore.Timestamp
-        interviewOffer?: firebase.firestore.Timestamp
+    programSequence: {
+        train?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+        practice?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+        caseStudies?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+        bmc?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+        sentencePitch?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+        elevatorPitch?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+        hackDay?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+        reflection?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+        processLog?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+        demoVideo?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+        presentation?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+        demoDay?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+        exitForm?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+        interviewOffer?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
     }
     caseStudiesReviewed?: boolean[]
     practiceLog: {

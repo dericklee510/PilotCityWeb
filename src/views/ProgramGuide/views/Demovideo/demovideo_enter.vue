@@ -74,38 +74,17 @@
         justify="center"
         class="mt-8 demovideo_enter__ratinglabel"
       >
-        No rating yet
+        {{ rating || `No rating yet` }}
       </v-row>
 
       <v-row
         justify="center"
         class="mt-3 mb-6"
       >
-        <i class="far fa-star demovideo_enter__unratedstar" />
-        <i class="far fa-star demovideo_enter__unratedstar" />
-        <i class="far fa-star demovideo_enter__unratedstar" />
-        <i class="far fa-star demovideo_enter__unratedstar" />
-        <i class="far fa-star demovideo_enter__unratedstar" />
-      </v-row>
-
-      <!-- RATING -->
-
-      <v-row
-        justify="center"
-        class="mt-8 demovideo_enter__ratinglabel"
-      >
-        Rating
-      </v-row>
-
-      <v-row
-        justify="center"
-        class="mt-3 mb-6"
-      >
-        <i class="fas fa-star demovideo_enter__ratedstar" />
-        <i class="fas fa-star demovideo_enter__ratedstar" />
-        <i class="fas fa-star demovideo_enter__ratedstar" />
-        <i class="fas fa-star demovideo_enter__ratedstar" />
-        <i class="fas fa-star demovideo_enter__ratedstar" />
+        <v-rating
+          v-model="rating"
+          readonly
+        />
       </v-row>
     </v-col>
   </v-row>
@@ -121,6 +100,7 @@ import Component from 'vue-class-component'
 import { FbStore } from '../../../../store'
 import { ValidationObserver } from 'vee-validate'
 import { LinkChecker } from '../../components'
+import {firebase} from '@/firebase/init'
 
 @Component({
   components:{
@@ -133,8 +113,10 @@ export default class demovideo_enter extends Vue{
     checkbox=false
     onSubmit(){
       FbStore.updateCurrentProject({
+        [`programSequence.${'demoVideo'}`]:firebase.firestore.FieldValue.serverTimestamp(),
         demoLink:this.url
       })
     }
+    rating:number = FbStore.currentProject!.demoRatingT || FbStore.currentProject!.demoRatingE || 0
 }
 </script>

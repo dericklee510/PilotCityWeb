@@ -50,7 +50,7 @@
             <span>
               {{ namedLink.linkName }}
             </span>
-            <a :ref="namedLink.link"><button class="viewcasestudies__exporticon"><img src="@/assets/exportbox.png"></button></a>
+            <a :href="namedLink.link"><button class="viewcasestudies__exporticon"><img src="@/assets/exportbox.png"></button></a>
           </span>
         </v-row>
         <v-row
@@ -64,6 +64,7 @@
             <v-btn
               class="viewcasestudies__savebutton"
               :disabled="!allReviewed"
+              @click="submit"
             >
               NEXT
             </v-btn>
@@ -82,12 +83,20 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { NamedLink, ReviewedLink } from '@/store/Database/types/utilities'
 import { FbStore } from '../../../../store'
+import  {firebase}  from '@/firebase/init'
 @Component
 export default class ViewCaseStudies extends Vue{
     namedLinks:NamedLink[] = FbStore.currentEmployerProgram?.caseStudies || [{} as NamedLink]
-    caseStudiesReviewed = FbStore.currentProject!.caseStudiesReviewed || []
+    caseStudiesReviewed = FbStore.currentProject?.caseStudiesReviewed || []
   get allReviewed(){
     return this.namedLinks.map((link,index) => this.caseStudiesReviewed[index]).every(isReviewed => isReviewed)
+  }
+  submit(){
+    FbStore.updateCurrentProject({
+      programSequence:{
+        caseStudies:firebase.firestore.FieldValue.serverTimestamp()
+      }
+    })
   }
 }
 </script>

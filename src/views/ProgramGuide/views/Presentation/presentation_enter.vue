@@ -70,38 +70,17 @@
         justify="center"
         class="mt-8 presentation_enter__ratinglabel"
       >
-        No rating yet
+        {{ rating || `No rating yet` }}
       </v-row>
 
       <v-row
         justify="center"
         class="mt-3 mb-6"
       >
-        <i class="far fa-star presentation_enter__unratedstar" />
-        <i class="far fa-star presentation_enter__unratedstar" />
-        <i class="far fa-star presentation_enter__unratedstar" />
-        <i class="far fa-star presentation_enter__unratedstar" />
-        <i class="far fa-star presentation_enter__unratedstar" />
-      </v-row>
-
-      <!-- RATING -->
-
-      <v-row
-        justify="center"
-        class="mt-8 presentation_enter__ratinglabel"
-      >
-        Rating
-      </v-row>
-
-      <v-row
-        justify="center"
-        class="mt-3 mb-6"
-      >
-        <i class="fas fa-star presentation_enter__ratedstar" />
-        <i class="fas fa-star presentation_enter__ratedstar" />
-        <i class="fas fa-star presentation_enter__ratedstar" />
-        <i class="fas fa-star presentation_enter__ratedstar" />
-        <i class="fas fa-star presentation_enter__ratedstar" />
+        <v-rating
+          v-model="rating"
+          readonly
+        />
       </v-row>
     </v-col>
   </v-row>
@@ -122,6 +101,7 @@ import { TextEnter, LinkChecker } from "../../components";
 import { filterByPromise } from "filter-async-rxjs-pipe";
 import { isLinkValid } from "../../../../api";
 import { FbStore } from "../../../../store";
+import {firebase} from '@/firebase/init'
 @Component<PresentationEnter>({
   components: {
     ValidationObserver,
@@ -134,8 +114,10 @@ export default class PresentationEnter extends TextEnter {
     checkbox=false
     onSubmit(){
       FbStore.updateCurrentProject({
+         [`programSequence.${'presentation'}`]:firebase.firestore.FieldValue.serverTimestamp(),
         presentationLink:this.url
       })
     }
+    rating:number = FbStore.currentProject!.presentationRatingE || FbStore.currentProject!.presentationRatingT || 0
 }
 </script>

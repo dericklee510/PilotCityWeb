@@ -60,7 +60,8 @@ import {
   EmployerProgram,
   TeacherProgramData,
   Classroom,
-  Project
+  Project,
+  studentClassroom
 } from "../../store/Database/types/types";
 import { Observable, empty, Subscription } from "rxjs";
 @Component<Guide>({
@@ -91,6 +92,7 @@ import { Observable, empty, Subscription } from "rxjs";
           }
         });
       });
+      await FbStore.initCurrentStudentClassroom(FbStore.currentClassroom!.classroomId+FbStore.currentUserProfile!.userId)
       await new Promise(async resolve => {
        await Promise.all(FbStore.currentUserProfile!.projectIds.map(async id => {
           let projectData = (
@@ -121,17 +123,6 @@ import { Observable, empty, Subscription } from "rxjs";
         skip(1),
         map(snapshot => {return snapshot.data<EmployerProgram>()})
       ),
-      teacherProgramData: doc(
-        FbStore.firestore
-          .collection("TeacherProgramData")
-          .doc(FbStore.currentTeacherProgramUID)
-      ).pipe(
-        skip(1),
-        filter(
-          snapshot => snapshot.exists && FbStore.userCitizenType != "employer"
-        ),
-        map(snapshot => snapshot.data<TeacherProgramData>())
-      ),
       classRoomData: FbStore.currentClassroom?.classroomId
         ? doc(
             FbStore.firestore
@@ -146,6 +137,16 @@ import { Observable, empty, Subscription } from "rxjs";
             map(snapshot => snapshot.data())
           )
         : empty(),
+      studentClassroomData: FbStore.currentStudentClassroom?.studentClassroomId
+      ? doc(
+        FbStore.firestore.collection("studentClassroom").doc(FbStore.currentStudentClassroom?.studentClassroomId)
+      ).pipe(
+        skip(1),
+        filter(
+          snapshot => snapshot.exists && FbStore.userCitizenType === "student"
+        ),
+        map(snapshot => snapshot.data())
+      ):empty(),
       projectData: FbStore.currentProject?.projectId
         ? doc(
             FbStore.firestore
@@ -169,15 +170,31 @@ import { Observable, empty, Subscription } from "rxjs";
         FbStore.initCurrentEmployerProgram(data);
       }
     );
+    if(FbStore.userCitizenType === "teacher"){
+      let teacherProgramDataObservable = doc(
+        FbStore.firestore
+          .collection("TeacherProgramData")
+          .doc(FbStore.currentTeacherProgramUID)
+      ).pipe(
+        skip(1),
+        filter(
+          snapshot => snapshot.exists && FbStore.userCitizenType != "employer"
+        ),
+        map(snapshot => snapshot.data<TeacherProgramData>())
+      )
     this.$subscribeTo(
-      this.$observables.teacherProgramData,
+      teacherProgramDataObservable,
       (data: TeacherProgramData) => {
         FbStore.initCurrentTeacherProgramData(data);
       }
     );
+}
     this.$subscribeTo(this.$observables.classRoomData, (data: Classroom) => {
       FbStore.initcurrentClassroom(data);
     });
+    this.$subscribeTo(this.$observables.studentClassroomData, (data:studentClassroom) => {
+      FbStore.initCurrentStudentClassroom(data)
+    })
     this.projectSubscriber = this.$observables.projectData.subscribe(
       (data: Project) => {
         FbStore.initCurrentProject(data);
@@ -197,7 +214,7 @@ export default class Guide extends Vue {
     Student: STUDENTMODULES
   };
   public xcurrentModule: string = "";
-  routeMap!: LinkedList<ProgramNode>;
+  // routeMap!: LinkedList<ProgramNode>;
   currentNode!: ProgramNode;
   get projectIds() {
     return FbStore.currentUserProfile!.projectIds;
@@ -263,7 +280,7 @@ export default class Guide extends Vue {
     // if(mod[length-1] == currentRoute)
     //   this.$router.push({name: this.sequence[this.nextModule][0]})
     let next = this.currentNode.next;
-    if (next) {
+    if (next && next.value.isUnlocked()) {
       this.currentNode = next;
       this.$router.push({ name: next.value.routeName });
     }
@@ -275,6 +292,9 @@ export default class Guide extends Vue {
       this.$router.push({ name: prev.value.routeName });
     }
   }
+  get routeMap(){
+    return new RouteList(FbStore.currentUserProfile!.citizenType!).linkedList
+  }
   public created() {
     // psuedo-code [could probably turn this into a util function]
     /* 
@@ -284,9 +304,6 @@ export default class Guide extends Vue {
         BIND THIS TO `XCURRENTMODULE`
     */
     let name = this.$route.name as string;
-    this.routeMap = new RouteList(
-      FbStore.currentUserProfile!.citizenType! 
-    ).createLinkedList();
     this.currentNode =
       this.routeMap.toArray().find(node => node.value.routeName === name) ||
       this.routeMap.head;

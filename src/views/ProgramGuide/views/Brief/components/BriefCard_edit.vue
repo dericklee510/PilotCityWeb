@@ -6,11 +6,13 @@
     >
       <!-- <img src="" alt="" id="programbrief__cover"> -->
       <multi-input
+        ref="multiInput"
+        :key="key"
         v-model="files"
-        v-slot="{entries,deleteEntry, newEntry}"
+        v-slot="{entries}"
       >
         <v-row
-          v-for="entry in entries"
+          v-for="(entry,index) in entries"
           id="briefcard__rowcontain"
           :key="entry.id"
         >
@@ -22,7 +24,7 @@
           >
             <iframe
               class="briefcard__cover"
-              :src="`https://docs.google.com/viewer?url=http://infolab.stanford.edu/pub/papers/google.pdf&embedded=true`"
+              :src="`https://drive.google.com/viewerng/viewer?url=${encodeURIComponent(entry.link)}?pid=explorer&efh=false&a=v&chrome=false&embedded=true&rm=minimal`"
             />
           </v-col>
 
@@ -36,7 +38,7 @@
             >
               <div class="briefcard__header">
                 {{
-                  entry.linkName || entry.file?entry.file.name:"Empty Program Brief"
+                  getName(entry)
                 }}
               </div>
 
@@ -45,24 +47,25 @@
                   v-if="entry.link"
                   class="briefcard__buton mr-3"
                 >
-                  <a :href="link">VIEW</a>
+                  <a :href="`https://drive.google.com/viewerng/viewer?url=${encodeURIComponent(entry.link)}?pid%3Dexplorer&efh=false&a=v&chrome=false&rm=minimal`">VIEW</a>
                 </button>
                 <button
                   class="briefcard__buton mr-3"
                   @click="triggerFileInput(entry.id)"
                 >
-                  {{ entry.file?"RE-UPLOAD":"UPlOAD" }}
+                  {{ entry.link?"RE-UPLOAD":"UPlOAD" }}
                 </button>
                 <v-file-input
                   :ref=" `fileInput${entry.id}`"
                   v-model="entry.file"
                   style="display: none;"
                   accept="image/*, .pdf"
+                  @change="onFilesChanged(entries)"
                 />
                 <button
                   v-if="entries.length>1"
                   class="briefcard__buton mr-3"
-                  @click="deleteEntry(entry.id)"
+                  @click="removeEntry(entry,index)"
                 >
                   DELETE
                 </button>
@@ -83,14 +86,6 @@
             </v-col>
           </v-col>
         </v-row>
-        <v-row>
-          <button
-            class="programbrief__addbrief"
-            @click="newEntry"
-          >
-            +
-          </button>
-        </v-row>
       </multi-input>
     </v-card>
   </div>
@@ -104,38 +99,50 @@ import { VFileInput } from "vuetify/lib";
 import { Watch } from 'vue-property-decorator';
 import { FbStore } from '../../../../../store';
 import { NamedLink } from '../../../../../store/Database/types/utilities';
+import { PCLoader } from '../../../../../components/utilities';
 
-const emptyBrief = {
-  linkName: undefined,
-  link: ""
-};
-const app = PCmultiinput.createMultiInput(emptyBrief);
+
+const app = PCmultiinput.createMultiInput<NamedLink>();
 @Component({
   components: {
-    multiInput: app
+    multiInput: app,
+    PCLoader
   }
 })
-export default class BriefCard extends app {
-  files: any = [{}];
-  @Watch('files')
+export default class BriefCard extends Vue {
+  key=0
+  files: NamedLink[] = FbStore.currentEmployerProgram!.programBrief || [{} as NamedLink];
+  
   async onFilesChanged(newFiles:{file?:File}&Partial<NamedLink>[]){
-    type test= {
-      file?:File
-      linkName?:string
-      link?:string
-    };
     let indexedFiles = newFiles.map((obj:Partial<NamedLink>&{file?:File},index) => ({...obj, index})).filter(obj => obj.file)
-    await Promise.all(indexedFiles.map((obj,index) => {
+    await Promise.all(indexedFiles.map((obj) => {
       return new Promise(async (resolve) => {
-        
+        const filePath = `program/${FbStore.currentEmployerProgramUID}/program_brief`
+        this.files[obj.index] = await FbStore.getFileLink({file:obj.file!,filePath})
         resolve()
       })
     }))
+    FbStore.updateCurrentEmployerProgram({
+      programBrief:this.files
+    })
+    this.key++
     // figure out which objects need to be processed
     // proccess the objects i.e. upload to the database then 
     // remove the file from the object
   }
-  
+  async removeEntry(entry:Partial<NamedLink & {file:File}>,index:number){
+    if(entry.link)
+      await FbStore.storage.refFromURL(entry.link).delete()
+    this.files.splice(index,1)
+    await FbStore.updateCurrentEmployerProgram({
+      programBrief:this.files
+    })
+    this.key++
+      
+  }
+  getName(entry:Partial<NamedLink & {file:File}>){
+    return entry.linkName || entry.file?.name || "Empty Program Brief"
+  }
   triggerFileInput(index: number) {
     let ref = `fileInput${index}`;
     let input = (this.$refs[ref] as typeof VFileInput[])[0];

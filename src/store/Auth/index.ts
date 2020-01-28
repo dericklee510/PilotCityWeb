@@ -1,3 +1,4 @@
+import  firestore  from '@/firebase/init';
 import {
   Module,
   VuexModule,
@@ -23,7 +24,6 @@ import {
     customResetPasswordResponse
 } from './helpers'
 import { lowerCase } from 'lodash'
-
 @Module({ namespaced: true, name: 'Auth' })
 export default class Auth extends VuexModule {
     public user: FirebaseUser | null = null
@@ -65,23 +65,30 @@ export default class Auth extends VuexModule {
         }
     }
 
-    @Action
+    @Action({rawError:true})
     public async createAccount(credentials: { email: string; password: string; firstName: string; lastName: string }): Promise<string> {
         let {
         email, password, firstName, lastName
         } = credentials
         try {
             let userResponse = await firebase.auth().createUserWithEmailAndPassword(email, password)
-            this.context.commit(SET_USER, userResponse)
+            this[SET_USER](userResponse.user)
             if (this.user) {
                 await this.user.updateProfile({
                     displayName: `${lowerCase(firstName)} ${lowerCase(lastName)}`
                 })
                 localStorage.first_name = firstName
                 localStorage.last_name = lastName
-                await this.context.rootState.Fb.firestore.collection('users').doc(this.user.uid).set({
+                await firestore.collection("GeneralUser").doc(this.user.uid).set({
+                    userId:this.user.uid,
+                    classroomIds:[],
+                    employerProgramIds:[],
+                    teacherProgramDataIds:{},
+                    projectIds:[],
+                    initializeProgram:{},
                     firstName,
-                    lastName
+                    lastName,
+                    lastUpdate:firebase.firestore.FieldValue.serverTimestamp()
                 })
             }
             return SUCCESSFUL_SIGNUP_RESP

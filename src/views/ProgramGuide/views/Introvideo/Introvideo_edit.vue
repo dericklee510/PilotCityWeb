@@ -89,7 +89,7 @@ import { FbStore } from '../../../../store'
   }
 })
 export default class introvideo_edit extends Vue{
-    url:string = FbStore.currentEmployerProgram?.introVideo || "other"
+    url:string = FbStore.currentEmployerProgram?.introVideo || ""
     success:boolean=false
     showerr = false
     checkbox = false

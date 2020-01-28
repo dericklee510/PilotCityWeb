@@ -3,70 +3,100 @@
         margin-top : 82.5px;
         height: 100%;
     }
-    &__topbuttons{
+    &__nav{
         width:100%;
         font-family: Raleway;
         font-style: normal;
         font-weight: 900;
         font-size: 17.1097px;
-        line-height: 20px;
         color: #231F20;
-
-    }
-    &__topbutton{
-        width: 11.8%;
-        height: 55.82px;
-        border: 0.428px solid #231F20;
-        margin-right: 3%;
-        background: #F1F2F2;
+        div{
+            line-height: 55.82px;
+            vertical-align: middle;
+            width: 100%;
+            height: 55.82px;
+            border: 0.428px solid #231F20;
+            margin-right: 3%;
+            &--active{
+                background: #F1F2F2;    
+            }
+            @media only screen and (max-width: 600px){
+                margin: 0;
+            }
+        }
     }
     &__title{
-
         width: 100%;
-
         font-family: Raleway;
         font-style: normal;
         font-weight: 800;
         font-size: 37.5px;
         line-height: 44px;
-
         color: #231F20;
-
         margin-top: 65.43px;
         padding-left: 17.84%;
         padding-bottom: 0;
 
     }
-
-    &__headtitle{
+    &__labels{
         font-family: Raleway;
         font-style: normal;
         font-weight: 800;
         font-size: 15px;
         line-height: 18px;
-        color: #231F20;
-        margin-top: 3.3%;
+        margin-top: 50px;
     }
-
-    &__classtitle{
-        // margin-left: 19.3%;
-        // padding-right: 43.5%;
-
-    }
-
-    &__codetitle{
-        padding-bottom: 68.62px;
-    }
-    
-    &__wholeline{
-        margin-top: .7%;
-    }
-
-    &__classinput{
+    &__button{
         width: 100%;
+        &-wrapper{
+            height: 55.88px;
+            &.first{
+                margin: 0 22px;
+                @media only screen and (max-width: 1264px){
+                    margin: 0;
+                }
+            }
+            .v-btn{
+                border-radius: 0px;
+            }
+        }
+        &.v-btn{
+            border-radius: 0px;
+        }
+        .v-btn{
+            
+            &__content{
+                width: 100%;
+                height: 55.88px;
+                font-family: Raleway;
+                font-style: normal;
+                font-weight: 900;
+                font-size: 17.1097px;
+                line-height: 20px;
+                color: #231F20;
+            }
+            
+        }
+        .v-btn--outlined{
+            border: 0.428px solid #231F20;
+        }
+        
+    }
+    &__input{
+        border: 0.428px solid #231F20;
         height: 55.88px;
-        border: 0.375px solid #000000;
-        &--field{
+        ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            opacity: 1; /* Firefox */
+        }
+          
+          :-ms-input-placeholder { /* Internet Explorer 10-11 */
+
+        }
+          
+          ::-ms-input-placeholder { /* Microsoft Edge */
+            
+        }
+        input{
             font-family: Raleway;
             font-style: normal;
             font-weight: 900;
@@ -77,83 +107,28 @@
             height: inherit;
             padding: 10px;
         }
-        margin-right: 22.9px;
     }
-
-    &__renamebutton{
-        width: 100%;
-        height: 55.88px;
-        border: 0.428px solid #231F20;
-        font-family: Raleway;
-        font-style: normal;
-        font-weight: 900;
-        font-size: 17.1097px;
-        line-height: 20px;
-        color: #231F20;
-        margin: 0px 22.9px;
+    &__class-input{
+        margin: 11.37px 0;
     }
-
-
-    &__deletebutton{
-        width: 100%;
-        height: 55.82px;
-
-        border: 0.428px solid #231F20;
-
-        font-family: Raleway;
-        font-style: normal;
-        font-weight: 900;
-        font-size: 17.1097px;
-        line-height: 20px;
-        color: #231F20;
-        margin:0 22.9px;
-    }
-
     &__sharecode{
-
         font-family: Raleway;
         font-style: normal;
         font-weight: 900;
-        font-size: 15px;
-        line-height: 18px;
+        font-size: 14px;
         color: #231F20;
         margin-left: 22.9px;
+        line-height: 55.88px;  
+        vertical-align: middle;
+        &-label{
+            margin-left: -22.74px;
+        }
     }
-
-
-    &__icon{
-
-        width: 25.01px;
-        height: 24.5px;
-
-    }
-
-
-    &__wholeline3{
-        width: 100%;
-        margin-left: 17.8% ;
-        margin-top: 0.7%;
-    }
-
-
-    &__createbutton{
-
-
-        width: 192.15px;
-        height: 55.82px;
-        margin-left: 18.2%;
-        border: 0.428px solid #231F20;
+    &__create-button{
         font-family: Raleway;
         font-style: normal;
-        font-weight: 900;
-        font-size: 17.1097px;
-        line-height: 20px;
-        color: #231F20;
-
-        margin-top: 5.7%;
-
+        font-weight: 800;
+        font-size: 15px;
+        margin-top: 70px;
     }
-    
-
-
 }

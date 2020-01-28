@@ -1,40 +1,47 @@
 <template>
-  <v-row justify="center">
-    <img
-      id="agenda__icon"
-      class="agenda__image"
-      src="@/assets/icons/agenda.png"
+  <div>
+    <v-row
+      justify="center"
+      no-gutters
     >
-
-    <v-col
-      id="agenda__contain"
-      cols="7"
-    >
-      <!-- TITLE -->
-
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto agenda__title"
+      <img
+        id="agenda__icon"
+        class="agenda__image"
+        src="@/assets/icons/agenda.png"
       >
-        HACK DAY AGENDA
-      </v-row>
-
-      <!-- BORDERLINE -->
-
       <v-col
-        cols="12"
-        class="agenda__borderline"
-      />
-
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto businessmodelcanvas_view2__description"
+        id="agenda__contain"
+        cols="10"
       >
-        Enter your agenda for the event or activity.
-      </v-row>
-      <Agenda v-model="entries" />
-    </v-col>
-  </v-row>
+        <!-- TITLE -->
+    
+        <v-row
+          justify="center"
+          class="mr-auto ml-auto agenda__title"
+        >
+          HACK DAY AGENDA
+        </v-row>
+    
+        <!-- BORDERLINE -->
+    
+        <v-col
+          cols="12"
+          class="agenda__borderline"
+        />
+    
+        <v-row
+          justify="center"
+          class="mr-auto ml-auto businessmodelcanvas_view2__description"
+        >
+          Enter your agenda for the event or activity.
+        </v-row>
+        <Agenda
+          v-model="entries"
+          v-stream:update:value="onAgendaChange$"
+        />
+      </v-col>
+    </v-row>
+  </div>
 </template>
 
 
@@ -73,6 +80,7 @@ const emptyAgenda:Omit<EventItem,'completed'> = {
 export default class HackAgenda extends Vue{
  mounted(){
     this.$subscribeTo(this.$observables.agendaEvents,async (events:EventItem[]) => {
+      if(FbStore.userCitizenType === "employer")
       await FbStore.updateCurrentEmployerProgram({
         masterHackDayAgenda:{
           events:events.filter(obj => Object.keys(obj).length !== 0),

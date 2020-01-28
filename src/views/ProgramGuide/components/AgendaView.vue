@@ -12,10 +12,10 @@
           cols="2"
           class="agenda-view__checkbox-input"
         >
-          <input
+          <v-checkbox
             v-model="item.completed"
             type="checkbox"
-          >
+          />
         </v-col>
         <v-col
           cols="10"
@@ -73,6 +73,7 @@
           class="agenda-view__button mb-10"
           :disabled="!isAgendaComplete"
           elevation="0"
+          @click="$emit('finish')"
         >
           FINISH
         </v-btn>

@@ -12,8 +12,6 @@
           class="pc-vh-center agenda-view__icon"
           src="@/assets/icons/agenda.png"
         >
-        <!-- TITLE -->
-    
         <v-row
           justify="center"
           class="agenda-view__title"
@@ -21,7 +19,6 @@
         >
           EXTERNSHIP DAY AGENDA
         </v-row>
-    
         <v-row
           justify="center"
           class="mr-auto ml-auto businessmodelcanvas_view2__description"
@@ -43,13 +40,19 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { EventItem } from '@/store/Database/types/utilities'
 import { FbStore } from '@/store'
-@Component
+import { AgendaView } from '../../components'
+@Component({
+components:{
+AgendaView
+
+}
+})
 export default class ExternshipAgenda extends Vue{
   created(){
     // const agendaItems
   }
   
-  agendaItems:EventItem[] = FbStore.currentEmployerProgram?.externshipDayAgenda?.events! || []
+  agendaItems:EventItem[] = FbStore.currentEmployerProgram?.externshipDayAgenda?.events || []
   get isAgendaComplete(){
     return this.agendaItems.map(item => item.completed).every(isTrue => isTrue)
   }

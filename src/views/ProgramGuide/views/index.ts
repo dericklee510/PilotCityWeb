@@ -19,6 +19,8 @@ import BusinessCanvasView1 from "@/views/ProgramGuide/views/Businessmodelcanvas/
 import BusinessCanvasView2 from "@/views/ProgramGuide/views/Businessmodelcanvas/businessmodelcanvas_view2.vue"
 import OSPitchView from "@/views/ProgramGuide/views/Pitch/pitch_view.vue"
 import ElevatorView from "@/views/ProgramGuide/views/Elevator/elevator_view.vue"
+import ElevatorView1 from "@/views/ProgramGuide/views/Elevator/elevator_view1.vue"
+import ElevatorView2 from "@/views/ProgramGuide/views/Elevator/elevator_view2.vue"
 import HackEdit from "@/views/ProgramGuide/views/Hack/hackagenda_edit.vue"
 import HackView from "@/views/ProgramGuide/views/Hack/hackagenda_view.vue"
 import DemoVideoView from "@/views/ProgramGuide/views/Demovideo/demovideo_view.vue"
@@ -45,6 +47,10 @@ import ProgramLaunch from "@/views/Myprograms/launcher.vue"
 export const MyPrograms = {
     ProgramList,
     ProgramLaunch
+}
+export const Elevator = {
+    ElevatorView1,
+    ElevatorView2
 }
 export const Canvas = {
     BusinessCanvasView1,
@@ -120,7 +126,7 @@ export const TEACHERMODULES = {
         'teach-project-elevator',
     ],
     'Hack Day': [
-        'teach-project-hack-edit',
+        // 'teach-project-hack-edit',
         'teach-project-hack',
     ],
     'Package': [
@@ -128,7 +134,7 @@ export const TEACHERMODULES = {
         'teach-project-presentation',
     ],
     'Demo Day': [
-        'teach-project-demoagenda-edit',
+        // 'teach-project-demoagenda-edit',
         'teach-project-demoagenda',
     ]
 }
@@ -221,8 +227,8 @@ export const TEACHERSEQUENCE = {
             'teach-project-intro'
         ],
         'Train': [
-            'teach-project-training',
             'teach-project-training-edit',
+            'teach-project-training',
         ],
         'Practice': [
             'teach-project-practicelog',
@@ -237,7 +243,7 @@ export const TEACHERSEQUENCE = {
         ],
         'Hack Day': [
             'teach-project-hack',
-            'teach-project-hack-edit',
+            // 'teach-project-hack-edit',
         ],
         'Package': [
             'teach-project-demo',
@@ -245,7 +251,7 @@ export const TEACHERSEQUENCE = {
         ],
         'Demo Day': [
             'teach-project-demoagenda',
-            'teach-project-demoagenda-edit',
+            // 'teach-project-demoagenda-edit',
         ]
     },
 }
@@ -264,8 +270,9 @@ export const EMPLOYERSEQUENCE = {
             'emp-project-intro-edit'
         ],
         'Research': [
-            'emp-project-casestudy',
             'emp-project-casestudy-edit',
+            'emp-project-casestudy',
+            
         ],
 
     },
@@ -275,16 +282,18 @@ export const EMPLOYERSEQUENCE = {
             'emp-project-ospitch',
         ],
         'Hack Day': [
-            'emp-project-hack',
             'emp-project-hack-edit',
+            'emp-project-hack',
+
         ],
         'Package': [
             'emp-project-demo',
             'emp-project-presentation',
         ],
         'Demo Day': [
-            'emp-project-demoagenda',
             'emp-project-demoagenda-edit',
+
+            'emp-project-demoagenda',
         ]
     },
 }
@@ -296,7 +305,7 @@ export const STUDENTSEQUENCE = {
             'stud-project-intro',
 
             'stud-project-team-join',
-            'stud-project-team',
+            // 'stud-project-team',
         ],
         'Train': [
             'stud-project-training',
