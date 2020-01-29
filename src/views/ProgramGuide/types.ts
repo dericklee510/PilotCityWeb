@@ -51,8 +51,8 @@ export class RouteList {
                         unlocked:(this.type == "student")?this.studentSequenceRouteHash[route]:true,
                         isUnlocked: () => {
                             const unlocked = (this.type == "student")?this.studentSequenceRouteHash[route]:true
-                            if(unlocked instanceof Date){
-                                return moment(unlocked).isBefore(moment())
+                            if(unlocked instanceof firebase.firestore.Timestamp){
+                                return moment(unlocked.toDate()).isBefore(moment())
                             }else{
                                 return !!unlocked
                             }

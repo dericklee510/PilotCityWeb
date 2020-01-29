@@ -68,6 +68,11 @@ const routes: RouteConfig[] = [
                 component: Guide.Program.ManageTeams,
             },
             {
+                path:'teacher/externship/manage/program',
+                name:'teach-externship-manage-program',
+                component:Guide.Program.ManageProgram
+            },
+            {
                 path: 'student/project/team/join',
                 name: 'stud-project-team-join',
                 component: Guide.Program.TeamJoin

@@ -84,22 +84,22 @@ export interface TeacherProgramData {
     promptTemplate?: "tech" | "solution" | "product" | "metric"
     finalPrompt?: string
     programSequence: {
-        programBrief?:Date | Boolean
-        introVideo?:Date | Boolean
-        train?:Date | Boolean
-        practice?:Date | Boolean
-        caseStudies?:Date | Boolean
-        bmc?:Date | Boolean
-        sentencePitch?:Date | Boolean
-        elevatorPitch?:Date | Boolean
-        hackDay?:Date | Boolean
-        reflection?:Date | Boolean
-        processLog?:Date | Boolean
-        demoVideo?:Date | Boolean
-        presentation?:Date | Boolean
-        demoDay?:Date | Boolean
-        exitForm?:Date | Boolean
-        interviewOffer?:Date | Boolean
+        programBrief?:Date | firebase.firestore.Timestamp  | Boolean
+        introVideo?:Date | firebase.firestore.Timestamp  | Boolean
+        train?:Date | firebase.firestore.Timestamp  | Boolean
+        practice?:Date | firebase.firestore.Timestamp  | Boolean
+        caseStudies?:Date | firebase.firestore.Timestamp  | Boolean
+        bmc?:Date | firebase.firestore.Timestamp  | Boolean
+        sentencePitch?:Date | firebase.firestore.Timestamp  | Boolean
+        elevatorPitch?:Date | firebase.firestore.Timestamp  | Boolean
+        hackDay?:Date | firebase.firestore.Timestamp  | Boolean
+        reflection?:Date | firebase.firestore.Timestamp  | Boolean
+        processLog?:Date | firebase.firestore.Timestamp  | Boolean
+        demoVideo?:Date | firebase.firestore.Timestamp  | Boolean
+        presentation?:Date | firebase.firestore.Timestamp  | Boolean
+        demoDay?:Date | firebase.firestore.Timestamp  | Boolean
+        exitForm?:Date | firebase.firestore.Timestamp  | Boolean
+        interviewOffer?:Date | firebase.firestore.Timestamp  | Boolean
     }
     created: firebase.firestore.Timestamp | firebase.firestore.FieldValue
     lastUpdate: firebase.firestore.Timestamp | firebase.firestore.FieldValue
