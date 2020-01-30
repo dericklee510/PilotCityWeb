@@ -5,7 +5,8 @@ import { STUDENTSEQUENCE, EMPLOYERSEQUENCE, TEACHERSEQUENCE } from './views/inde
 
 import { flatMapDeep, flatMap } from 'lodash'
 import { LinkedList, LinkedListItem } from 'linked-list-typescript';
-import { RequiredKeys } from "utility-types"
+
+import {firebase} from "@/firebase/init"
 import moment from 'moment'
 export class RouteList {
     private module:   typeof EMPLOYERSEQUENCE | typeof STUDENTSEQUENCE | typeof TEACHERSEQUENCE

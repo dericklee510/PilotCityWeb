@@ -35,14 +35,14 @@
           :num="index"
           :completion="latestCompletionPercent[key]"
         />
-        <v-row
+        <!-- <v-row
           no-gutters
           class="mt-12 mb-12"
         >
           <button class="manageprogram__savebutton">
             Save
           </button>
-        </v-row>
+        </v-row> -->
       </v-col>
     </v-row>
   </v-container>
@@ -133,18 +133,5 @@ export default class ManageProgram extends Vue {
   getCompletion(route: keyof TeacherProgramData.programSequence) {
 
   }
-//   parseType(trigger: trigger) {
-//     switch (trigger) {
-//       case undefined:
-//         return {
-//           unlock: "By Completion",
-
-//         }
-//         break;
-
-//       default:
-//         break;
-//     }
-//   }
 }
 </script>

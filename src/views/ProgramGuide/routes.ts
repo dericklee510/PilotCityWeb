@@ -1,6 +1,7 @@
 import { RouteConfig } from 'vue-router'
 import { AuthStore } from '@/store'
 import * as Guide from '.'
+import RFPGen from "@/views/ProgramGuide/views/RFP/Prompt.vue"
 
 const routes: RouteConfig[] = [
     {
@@ -51,6 +52,11 @@ const routes: RouteConfig[] = [
                 path: 'student/project/brief',
                 name: 'stud-project-brief',
                 component: Guide.Program.BriefView,
+            },
+            {
+                path:'teacher/externship/brief/generator',
+                name:'teach-externship-brief-gen',
+                component:RFPGen,
             },
             {
                 path: 'teacher/externship/manage/class',

@@ -219,6 +219,7 @@ export const TEACHERSEQUENCE = {
         ],
         'Brief': [
             'teach-externship-brief',
+            'teach-externship-brief-gen'
         ],
         'Manage': [
             'teach-externship-manage-class',

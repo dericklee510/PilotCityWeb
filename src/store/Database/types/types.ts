@@ -81,7 +81,7 @@ export interface TeacherProgramData {
     solution?: string
     keyMetric?: string
     productOrService?: string
-    promptTemplate?: "tech" | "solution" | "product" | "metric"
+    promptTemplate?: "tech" | "solution" | "problem" | "metric"
     finalPrompt?: string
     programSequence: {
         programBrief?:Date | firebase.firestore.Timestamp  | Boolean
