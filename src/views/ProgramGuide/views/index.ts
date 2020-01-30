@@ -1,3 +1,4 @@
+
 import DemoVideoEdit from "@/views/ProgramGuide/views/Demovideo/demovideo_enter.vue"
 
 /* TEACHER */
@@ -8,6 +9,7 @@ import ExternshipAgendaView from "@/views/ProgramGuide/views/Agenda/externshipag
 import ManageTeams from "@/views/ProgramGuide/views/Manage/Manageteam.vue"
 import ManageClass from "@/views/ProgramGuide/views/Manage/Manageclass.vue"
 import ManageStudents from "@/views/ProgramGuide/views/Manage/managestudents.vue"
+import {ManageProgram} from "@/views/ProgramGuide/views/Manage/ManageProgram"
 import IntroVideoView from "@/views/ProgramGuide/views/Introvideo/Introvideo.vue"
 import TrainingAgendaEdit from "@/views/ProgramGuide/views/TrainingAgenda/TrainingAgenda.vue"
 import TrainingAgendaView from "@/views/ProgramGuide/views/TrainingAgenda/agenda_view.vue"
@@ -41,6 +43,7 @@ import HackReflection from "@/views/ProgramGuide/views/Posthack/Posthack.vue"
 import ProcessLog from "@/views/ProgramGuide/views/Process/processlog.vue"
 import DemoVideoSubmit from "@/views/ProgramGuide/views/Demovideo/demovideo_enter.vue"
 
+
 import ProgramList from "@/views/Myprograms/myprograms.vue"
 import ProgramLaunch from "@/views/Myprograms/launcher.vue"
 
@@ -69,6 +72,7 @@ export const Program = {
     ManageClass,
     ManageTeams,
     ManageStudents,
+    ManageProgram,
     IntroVideoView,
     IntroVideoSubmit,
     TrainingAgendaView,
@@ -215,11 +219,13 @@ export const TEACHERSEQUENCE = {
         ],
         'Brief': [
             'teach-externship-brief',
+            'teach-externship-brief-gen'
         ],
         'Manage': [
             'teach-externship-manage-class',
             'teach-externship-manage-students',
             'teach-externship-manage-teams',
+            'teach-externship-manage-program'
         ]
     },
     Project: {

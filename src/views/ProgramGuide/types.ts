@@ -5,7 +5,8 @@ import { STUDENTSEQUENCE, EMPLOYERSEQUENCE, TEACHERSEQUENCE } from './views/inde
 
 import { flatMapDeep, flatMap } from 'lodash'
 import { LinkedList, LinkedListItem } from 'linked-list-typescript';
-import { RequiredKeys } from "utility-types"
+
+import {firebase} from "@/firebase/init"
 import moment from 'moment'
 export class RouteList {
     private module:   typeof EMPLOYERSEQUENCE | typeof STUDENTSEQUENCE | typeof TEACHERSEQUENCE
@@ -51,8 +52,8 @@ export class RouteList {
                         unlocked:(this.type == "student")?this.studentSequenceRouteHash[route]:true,
                         isUnlocked: () => {
                             const unlocked = (this.type == "student")?this.studentSequenceRouteHash[route]:true
-                            if(unlocked instanceof Date){
-                                return moment(unlocked).isBefore(moment())
+                            if(unlocked instanceof firebase.firestore.Timestamp){
+                                return moment(unlocked.toDate()).isBefore(moment())
                             }else{
                                 return !!unlocked
                             }
