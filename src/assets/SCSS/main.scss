@@ -289,28 +289,58 @@ h6{
 
 .pc-navbar{
 
+    &__avatartext{
+        font-family: "Raleway" !important;
+        font-weight: 900 !important;
+        text-transform: uppercase !important;
+        font-size: 1rem !important;
+        letter-spacing: .1rem;
+        cursor: pointer;
+
+    }
+
+    &__avatar{
+
+        &:hover{
+            cursor: pointer;
+        }
+
+    }
+
+    &__myprograms{
+
+        font-family: "Raleway" !important;
+
+        font-weight: 900 !important;
+
+
+    }
+
+    &__logout{
+
+        font-family: "Raleway" !important;
+
+        font-weight: 900 !important;
+
+
+    }
+
 
     &__signup{
-        // border: 1px solid #ffffff;
-        // margin: 0px 20px 0px 20px;
-        // height: 100px !important;
-        // border-radius: 20px !important;
-        font-family: "Raleway";
-        // font-size: 20px;
-        font-weight: 700;
-        // background-color: #414042 !important;
+
+        font-family: "Raleway" !important;
+
+        font-weight: 900 !important;
+
 
     }
 
     &__login{
-        // border: 1px solid #ffffff;
-        // margin: 0px 20px 0px 20px;
-        // height: 100px !important;
-        // border-radius: 20px !important;
-        font-family: "Raleway";
-        // font-size: 20px;
-        font-weight: 700;
-        // background-color: #414042 !important;
+
+        font-family: "Raleway" !important;
+
+        font-weight: 900 !important;
+
 
     }
     

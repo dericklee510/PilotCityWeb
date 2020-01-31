@@ -1,43 +1,138 @@
 <template>
-  <v-container
-    class="citizen-id"
-    fluid
-  >
-    <v-container
-      fluid 
-      style="margin-top: 80px;"
+  <v-row
+    justify="center"
+    class="mt-12"
+  > 
+    <img
+      id="citizenid__icon"
+      src="@/assets/citizen-id.png"
     >
-      <v-card class="pc-container">
-        <v-row
-          class=" citizen-id__header pc-background"
-        >
-          <v-col cols="12">
-            <img
-              id="citizen-id__icon"
-              src="@/assets/citizen-id.png"
-              class="pc-vh-center pc-icon"
-            >
-          </v-col>
-          <v-col
-            cols="12"
-            class="citizen-id__title"
+
+
+
+    <v-col
+      id="citizenid__containtop"
+      cols="8"
+    >
+
+      <v-row
+        justify="center"
+        class="mr-auto ml-auto citizenid__title"
+      >
+        GENERAL INFORMATION
+      </v-row>
+    </v-col>
+
+    <v-col
+      id="citizenid__containbottom"
+      cols="8"
+    >
+      <v-row
+        justify="center"
+        class="mr-auto ml-auto citizenid__description"
+      >
+        Confirm your information
+      </v-row>
+
+
+      <v-row justify="center" class="pt-10">
+        <v-col cols="7">
+
+          <v-row no-gutters justify="center">
+                  <v-col cols="12" sm="6">
+          <v-text-field
+            v-model="firstName"
+            label="First Name"
+            outlined
+          ></v-text-field>
+        </v-col>
+</v-row>
+
+
+          <v-row no-gutters justify="center">
+                  <v-col cols="12" sm="6">
+          <v-text-field
+            v-model="lastName"
+            label="Last Name"
+            outlined
+          ></v-text-field>
+        </v-col>
+</v-row>
+
+<v-row no-gutters justify="center">
+      <v-col class="d-flex" cols="12" sm="6">
+        <v-select
+          :items="items"
+          label="Who are you?"
+          outlined
+        ></v-select>
+      </v-col>
+</v-row>
+
+          <!-- <v-row no-gutters justify="center">
+                  <v-col cols="12" sm="6">
+          <v-text-field
+            v-model="phoneNumber"
+            v-mask="'(###) ###-####'"
+            label="Mobile Number"
+            outlined
+          ></v-text-field>
+        </v-col>
+</v-row> -->
+
+        </v-col>
+      </v-row>
+
+
+
+      <!-- <v-row
+        justify="center"
+        class="ml-auto mr-auto citizenid__check"
+      >
+        <span>
+          <input
+            v-model="existing"
+            type="checkbox"
+            class="citizenid__checkbox"
           >
-            <h2 class="text-center">
-              CREATE YOUR CITIZEN ID
-            </h2>
-          </v-col>
-        </v-row>
-        <router-view />
-      </v-card>
-    </v-container>
-  </v-container>
+        </span><span>
+          I agree to the following Terms & Conditions and Privacy Policy
+        </span>
+      </v-row> -->
+
+
+
+
+
+      <v-col
+        class="mr-auto ml-auto"
+        cols="5"
+      >
+        <button
+          class="citizenid__button mb-10"
+          @click="() => {setLoader(()=>{validate().then(val => {if(val)submit()} )})}"
+        >
+          SAVE
+        </button>
+      </v-col>
+    </v-col>
+  </v-row>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
+import { mask } from "vue-the-mask";
 
 @Component
-export default class CitizenID extends Vue {
-}
+
+
+  export default {
+    data: () => ({
+      items: ['Student', 'Teacher', 'Employer'],
+    }),
+  }
+
+
+
 </script>

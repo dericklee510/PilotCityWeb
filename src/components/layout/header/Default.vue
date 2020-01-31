@@ -3,7 +3,7 @@
     extension-heigh="0"
     dark
     style="height: fit-content"
-    max-height="64px;"
+    max-height="64px;" 
     class="pc-header pc-header--simple"
   >
     <router-link :to="{name: 'home'}">
@@ -22,7 +22,7 @@
       />
       <!-- :items="[{title: 'EXPLORE'},{title: 'MY PROGRAMS'}, {title: 'LOGOUT', action: logout}]" -->
     </v-toolbar-items>
-    <v-toolbar-items class="pc-toolbar__buttons d-none d-sm-block">
+    <!-- <v-toolbar-items class="pc-toolbar__buttons d-none d-sm-block"> -->
       <!-- <v-btn
         v-if="user"
         dark
@@ -33,31 +33,51 @@
         :disabled="loading"
       >
         Explore
-      </v-btn>
-      <v-btn
+      </v-btn> -->
+      <span class="ml-2 mr-2">
+        <v-btn
         v-if="user"
+      class="pc-navbar__myprograms"
         dark
-        text
         rounded
-        color="primary"
+        depressed
+        large
+        outlined
         :loading="loading"
         :disabled="loading"
+        @click="MyPrograms"
       >
         My Programs
-      </v-btn> -->
-      <v-btn
+      </v-btn></span>
+
+
+      <span class="ml-2 mr-2">
+        <v-btn
         v-if="user"
+      class="pc-navbar__logout"
         dark
-        text
         rounded
-        color="primary"
+        depressed
+        large
+        outlined
         :loading="loading"
         :disabled="loading"
         @click="logout()"
       >
         Logout
-      </v-btn>
-    </v-toolbar-items>
+      </v-btn></span>
+
+      <span class="ml-2 mr-2">
+          <v-avatar 
+            class="pc-navbar__avatar" 
+            color="blue"
+            size="45"
+            >
+      <span class="white--text pc-navbar__avatartext">PM</span>
+    </v-avatar></span>
+
+
+    <!-- </v-toolbar-items> -->
     <!-- in need of doka component -->
     <!-- <v-list-item-avatar size="50">
       <div class="pc-profile-picture pc-profile-picture--icon" />

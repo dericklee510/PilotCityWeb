@@ -22,35 +22,41 @@
       />
       <!-- :items="[{title: 'EXPLORE'},{title: 'MY PROGRAMS'}, {title: 'LOGOUT', action: logout}]" -->
     </v-toolbar-items>
-    <v-toolbar-items class="pc-toolbar__buttons d-none d-sm-block">
-
+    <!-- <v-toolbar-items class="pc-toolbar__buttons d-none d-sm-block"> -->
+      <span class="ml-2 mr-2">
       <v-btn
+      class="pc-navbar__login"
         dark
         rounded
         depressed
         large
+        outlined
         :loading="loading"
         :disabled="loading"
         @click="routeLogin"
 
+
       >
         Login
-      </v-btn>
+      </v-btn></span>
 
-      <span class="pc-navbar__signup my-2">
+      <span class="ml-2 mr-2">
       <v-btn
+            class="pc-navbar__signup"
         dark
         rounded
         depressed
         large
+        outlined
         :loading="loading"
         :disabled="loading"
         @click="routeSignup"
 
+
       >
-        Sign Up
+        Signup
       </v-btn></span>
-    </v-toolbar-items>
+    <!-- </v-toolbar-items> -->
   </v-toolbar>
 </template>
 

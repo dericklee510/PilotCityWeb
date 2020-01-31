@@ -5,7 +5,7 @@
         justify="center"
         no-gutters
       >
-        <v-col cols="4">
+        <v-col cols="4"> 
           <v-col
             class="text-center signup__header pa-0"
           >
@@ -67,10 +67,62 @@
               @keyup.enter="process()"
             >
           </v-col>
-          <v-col class="mt-10 pa-0">
+
+      <v-col
+        justify="center" class="pl-0 pr-0"
+      >
+      <v-row no-gutters>
+
+    <v-checkbox dark v-model="checkbox">
+      <template v-slot:label>
+        <div class="signup__termstext">
+          I agree to the following
+          <v-tooltip dark bottom>
+            <template v-slot:activator="{ on }">
+              <a
+                dark
+                small
+                target="_blank"
+                href="https://www.iubenda.com/terms-and-conditions/32542296"
+                @click.stop
+                v-on="on"
+              >
+                Terms & Conditions
+              </a>
+            </template>
+            Opens in new window
+          </v-tooltip>
+          and
+          <v-tooltip dark bottom>
+            <template v-slot:activator="{ on }">
+              <a
+                dark
+                small
+                target="_blank"
+                href="https://www.iubenda.com/privacy-policy/32542296"
+                @click.stop
+                v-on="on"
+              >
+                Privacy Policy
+              </a>
+            </template>
+            Opens in new window
+          </v-tooltip>
+
+
+        </div>
+      </template>
+    </v-checkbox>
+
+        </v-row>
+
+      </v-col>
+
+          <v-col class="mt-0 pa-0">
             <v-btn
               id="signup-button"
               block
+              depressed
               :loading="loading"  
               :disabled="loading"
               class="mb-6"
