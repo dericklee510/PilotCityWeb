@@ -11,42 +11,17 @@
       </v-row>
 
       <!-- ACTIVE CARD -->
-      <PCLoader v-slot="{loading, setLoader}">
-        <v-row
-          v-for="(program,index) in Programs"
-          :key="index"
-          class="myprograms__card"
-        >
-          <v-col cols="3">
-            <div class="myprograms__cardimage" />
-          </v-col>
-          <v-col cols="9">
-            <v-row class="myprograms__cardtitle">
-              {{ program.programName }}
-            </v-row>
-            <v-row class="myprograms__progresspercentage">
-              90%
-            </v-row>
-            <v-row>
-              <v-col cols="9">
-                <v-row class="myprograms__progressbaractive" />
-              </v-col>
-              <v-col cols="3">
-                <v-btn
-                  class="myprograms__cardbutton"
-                  :disabled="loading"
-                  @click="setLoader(() => openprogram(program))"
-                >
-                  Open
-                </v-btn>
-              </v-col>
-            </v-row>
-          </v-col>
-        </v-row>
-      </PCLoader>
+      <ProgramCard
+        v-for="(program,index) in Programs"
+        :key="index"
+        :program="program"
+      />
       <!-- ADD CARD -->
 
-      <v-dialog max-width="50vw">
+      <v-dialog
+        v-model="dialog"
+        max-width="50vw"
+      >
         <template v-slot:activator="{on}">
           <v-row
             justify="center"
@@ -197,9 +172,11 @@ import { from } from "rxjs";
 import { map, switchMap } from "rxjs/operators";
 import { PCLoader } from "../../components/utilities";
 import { Watch } from 'vue-property-decorator';
+import ProgramCard from "./ProgramCard.vue"
 @Component<myprograms>({
   components: {
-    PCLoader
+    PCLoader,
+    ProgramCard
   },
   subscriptions() {
     return {
@@ -211,6 +188,7 @@ export default class myprograms extends Vue {
   created(){
     this.onProgramChange()
   }
+  dialog:boolean = false
   Programs: EmployerProgram[] = [];
   get programIds() {
     switch(FbStore.userCitizenType!){
@@ -288,8 +266,10 @@ async onProgramChange(){
       let foundProgram = querySnapshot.docs[0]?.data() as
         | EmployerProgram
         | undefined;
-      if (foundProgram && !FbStore.currentUserProfile!.teacherProgramDataIds[foundProgramDoc.id])
+      if (foundProgram && !FbStore.currentUserProfile!.teacherProgramDataIds[foundProgramDoc.id]){
         await FbStore.createTeacherProgramData(foundProgram.employerProgramId)
+        this.dialog = false
+        }
       else this.result = "Could not verify share code";
     } else if (FbStore.userCitizenType === "student") {
       let querySnapshot = await FbStore.firestore
@@ -297,11 +277,13 @@ async onProgramChange(){
         .where("shareCode", "==", this.shareCode)
         .get();
       let foundProgram = querySnapshot.docs[0]?.data() as Classroom | undefined;
-      if (foundProgram)
+      if (foundProgram){
         FbStore.joinClassroom({
           classroomUid: foundProgram.classroomId,
           studentUid: FbStore.FBUser!.uid
         });
+        this.dialog = false
+        }
       else this.result = "Could not verify share code";
     } else if (FbStore.userCitizenType === "employer") {
       let ref = FbStore.firestore
@@ -312,11 +294,12 @@ async onProgramChange(){
         ref.update<EmployerProgram>({
           employerId: FbStore.FBUser!.uid
         });
-        FbStore.updateCurrentUserProfile({
+        await FbStore.updateCurrentUserProfile({
           employerProgramIds: (firebase.firestore.FieldValue.arrayUnion(
             doc.id
           ) as unknown) as string[]
         });
+        this.dialog = false
       }
     }
   }
@@ -325,14 +308,6 @@ async onProgramChange(){
   }
   get color() {
     return ["error", "warning", "success"][Math.floor(this.progress / 40)];
-  }
-  async openprogram(program: EmployerProgram) {
-    await FbStore.initCurrentEmployerProgram(program);
-    localStorage.PILOTCITY_EMPLOYERPROGRAMID = program.employerProgramId;
-    this.$router.push({
-      name: "program.launch"
-      // params: { citizenType: citizenKey }
-    });
   }
 }
 </script>

@@ -47,13 +47,13 @@
             Password
           </v-col>
           <v-col class="pa-0 mt-2">
-            <input
+            <Password
               v-model="password"
               type="password"
               placeholder="Password"
               class="signup__field-input"
               @keyup.enter="process()"
-            >
+            />
           </v-col>
           <v-col class="signup__label mt-5 pa-0">
             Confirm Password
@@ -117,13 +117,15 @@ import { AutoComplete } from '@/components/GoogleMaps'
 import Fb from '../../store/Database'
 import { GeneralUser } from '../../store/Database/types/types'
 import {firebase} from '@/firebase/init'
+import Password from 'vue-password-strength-meter'
 @Component({
     components: {
         pcSelect: PCselect,
         pcTextfield: PCtextfield,
         ValidationObserver,
         ValidationProvider,
-        AutoComplete
+        AutoComplete,
+        Password
     }
 })
 export default class Signup extends Vue {
