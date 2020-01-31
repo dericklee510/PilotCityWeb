@@ -56,7 +56,8 @@ export interface GeneralUser {
 export interface EmployerProgram {
     employerProgramId: string
     programName: string
-    employerId?: string
+    employerId?: string,
+    launchPicture?:string, // link
     programLauncher: ProgramEvent[]
     externshipDayAgenda?: AgendaTemplate
     demoDayAgenda?: AgendaTemplate
