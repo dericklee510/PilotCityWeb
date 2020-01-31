@@ -74,7 +74,7 @@
                     class="code-modal__title"
                     cols="12"
                   >
-                    <span>Enter your program code</span>
+                    <span>Enter program code</span> 
                   </v-col>
                 </v-row>
                 <v-row
@@ -100,8 +100,8 @@
                   justify="center"
                 >
                   <v-col
-                    cols="6"
-                    md="2"
+                    cols="8"
+                    md="4"
                     class="code-modal__button"
                   >
                     <v-btn
@@ -112,7 +112,7 @@
                       outlined
                       @click="joinProgram"
                     >
-                      ADD
+                      ADD PROGRAM
                     </v-btn>
                   </v-col>
                 </v-row>
@@ -290,7 +290,7 @@ async onProgramChange(){
         | undefined;
       if (foundProgram && !FbStore.currentUserProfile!.teacherProgramDataIds[foundProgramDoc.id])
         await FbStore.createTeacherProgramData(foundProgram.employerProgramId)
-      else this.result = "Could not verify share code";
+      else this.result = "Could not verify program code";
     } else if (FbStore.userCitizenType === "student") {
       let querySnapshot = await FbStore.firestore
         .collection("Classroom")

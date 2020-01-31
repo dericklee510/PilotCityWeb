@@ -3,13 +3,13 @@
     style="height:100%"
     no-gutters
     align="center"
-    justify="center"
+    justify="center" 
   >
     <v-col
       cols="1"
       class="guide__lock-wrapper"
     >
-      <i class="fas fa-lock-alt" />
+<i class="fas fa-lock-alt"></i>
     </v-col>
   </v-row>
 </template>
