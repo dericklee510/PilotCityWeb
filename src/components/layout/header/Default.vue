@@ -3,7 +3,7 @@
     extension-heigh="0"
     dark
     style="height: fit-content"
-    max-height="64px;"
+    max-height="64px;" 
     class="pc-header pc-header--simple"
   >
     <router-link :to="{name: 'home'}">
@@ -22,8 +22,8 @@
       />
       <!-- :items="[{title: 'EXPLORE'},{title: 'MY PROGRAMS'}, {title: 'LOGOUT', action: logout}]" -->
     </v-toolbar-items>
-    <v-toolbar-items class="pc-toolbar__buttons d-none d-sm-block">
-      <!-- <v-btn
+    <!-- <v-toolbar-items class="pc-toolbar__buttons d-none d-sm-block"> -->
+    <!-- <v-btn
         v-if="user"
         dark
         text
@@ -33,31 +33,52 @@
         :disabled="loading"
       >
         Explore
-      </v-btn>
+      </v-btn> -->
+    <span class="ml-2 mr-2">
       <v-btn
         v-if="user"
+        class="pc-navbar__myprograms"
         dark
-        text
         rounded
-        color="primary"
+        depressed
+        large
+        outlined
         :loading="loading"
         :disabled="loading"
+        @click="$router.push({ name: 'program.programlist' })"
       >
         My Programs
-      </v-btn> -->
+      </v-btn>
+    </span>
+
+
+    <span class="ml-2 mr-2">
       <v-btn
         v-if="user"
+        class="pc-navbar__logout"
         dark
-        text
         rounded
-        color="primary"
+        depressed
+        large
+        outlined
         :loading="loading"
         :disabled="loading"
         @click="logout()"
       >
         Logout
-      </v-btn>
-    </v-toolbar-items>
+      </v-btn></span>
+
+    <span class="ml-2 mr-2">
+      <v-avatar 
+        class="pc-navbar__avatar" 
+        color="blue"
+        size="45"
+      >
+        <span class="white--text pc-navbar__avatartext">{{ initials }}</span>
+      </v-avatar></span>
+
+
+    <!-- </v-toolbar-items> -->
     <!-- in need of doka component -->
     <!-- <v-list-item-avatar size="50">
       <div class="pc-profile-picture pc-profile-picture--icon" />
@@ -68,7 +89,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { AuthStore } from '@/store'
+import { AuthStore, FbStore } from '@/store'
 import PCdropdown from '@/components/inputs/PCdropdown.vue'
 
 
@@ -85,6 +106,11 @@ export default class Header extends Vue {
     get user() {
         return AuthStore.user
     }
+    
+    get initials(){
+     let str = FbStore.currentUserProfile!.firstName + " " + FbStore.currentUserProfile!.lastName
+      return str.split(" ").map((n)=>n[0]).join("");
+    }
 
     public route(): void {
         this.$router.push({
@@ -92,6 +118,9 @@ export default class Header extends Vue {
         })
     }
 
-    public logout: () => Promise<void> = AuthStore.logout
+    public async logout(){
+      await AuthStore.logout()
+      this.$router.push({name:'home'})
+    }
 }
 </script>

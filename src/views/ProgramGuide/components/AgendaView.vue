@@ -12,17 +12,22 @@
           cols="2"
           class="agenda-view__checkbox-input"
         >
-          <v-checkbox
+          <input
             v-model="item.completed"
             type="checkbox"
-          />
+          >
         </v-col>
         <v-col
           cols="10"
           class="agenda-view__checkbox-label pa-0"
         >
-          <v-col class="pa-0">
-            <label for="checkbox+index">
+          <v-col
+            class="pa-0"
+            :class="item.completed?'agenda-view__checkbox--box':''"
+          >
+            <label
+              for="checkbox+index"
+            >
               <input
                 v-model="item.name"
                 class="agenda-view__item"

@@ -259,14 +259,10 @@
             height: 18px;
             left: 50%;
             opacity: 0;
-            // opacity: get-opacity();
             position: absolute;
             top: 30%;
             width: 18px;
             z-index: 1;
-            &:checked{
-                // @include set-opacity(1)
-            }
             @media (max-width: 610px) {
                 left: 0%;
             }
@@ -284,14 +280,13 @@
                 left: -20%;
             }
         }
-        & label::after {
+        &--box label::after {
             content: "";
             height: 13.6px;
-            left: -9.6%;
-            // opacity: get-opacity();
-            opacity: 0;
+            left: -9.7%;
+            opacity: 1;
             position: absolute;
-            top: 33.7%;
+            top: 37%;
             background-color: black;
             transition: opacity 0.2s ease-in-out;
             width: 13.6px;

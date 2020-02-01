@@ -15,7 +15,10 @@ export default new Vuetify({
                 primary: '#4682b4',
                 secondary: '#b0bec5',
                 accent: '#8c9eff',
-                error: '#b71c1c'
+                error: '#b71c1c',
+                transparent:'transparent',
+                pink: '#eda1bf',
+                purple: '#b092b5'
             }
         }
     }

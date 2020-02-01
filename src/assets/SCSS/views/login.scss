@@ -65,9 +65,20 @@
     }
     &__forgotpassword{
         font-family: "Raleway";
-        font-size: 15px;
+        font-size: .7rem;
         font-weight: 700;
         color: #ffffff;
         font-style: italic;
+        text-align: right;
     }
+
+    &__noaccount{
+        font-family: "Raleway";
+        font-size: 1rem;
+        font-weight: 700;
+        color: #ffffff;
+        font-style: italic;
+        text-align: right;
+    }
+
 }

@@ -271,3 +271,87 @@ h6{
         font-size: .625em
     }
 }
+
+
+// NAVBAR STYLES
+
+.pc-toolbar{
+
+&__buttons{
+
+
+}
+}
+
+.pc-navbar{
+
+}
+
+.pc-navbar{
+
+    &__avatartext{
+        font-family: "Raleway" !important;
+        font-weight: 900 !important;
+        text-transform: uppercase !important;
+        font-size: 1rem !important;
+        letter-spacing: .1rem;
+        cursor: pointer;
+
+    }
+
+    &__avatar{
+
+        &:hover{
+            cursor: pointer;
+        }
+
+    }
+
+    &__myprograms{
+
+        font-family: "Raleway" !important;
+
+        font-weight: 900 !important;
+
+
+    }
+
+    &__logout{
+
+        font-family: "Raleway" !important;
+
+        font-weight: 900 !important;
+
+
+    }
+
+
+    &__signup{
+
+        font-family: "Raleway" !important;
+
+        font-weight: 900 !important;
+
+
+    }
+
+    &__login{
+
+        font-family: "Raleway" !important;
+
+        font-weight: 900 !important;
+
+
+    }
+    
+}
+
+
+// v-input-text-field
+
+.tester123{
+
+}
+
+
+

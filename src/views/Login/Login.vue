@@ -35,10 +35,17 @@
               @keyup.enter="process()"
             >
           </v-col>
-          <v-col class="mt-10 pa-0">
+          <v-col class="login__forgotpassword pl-0 pr-0">
+            Forgot Password
+          </v-col>
+
+
+
+          <v-col class="mt-5 pa-0">
             <v-btn
               id="login-button"
               block
+              depressed
               :loading="loading"  
               :disabled="loading"
               class="mb-6"
@@ -64,7 +71,7 @@
             </v-alert>
             <router-link :to="{name: 'signup'}">
               <h4
-                class="text-center login__forgotpassword"
+                class="text-center login__noaccount"
                 style="display: block"
               >
                 No account yet? Signup.

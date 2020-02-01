@@ -63,6 +63,9 @@
         padding: none;
         &:hover{
             cursor: pointer;
+            .guide__subtext{
+                color: lighten(#404142, 15);
+            }
         }
 
     }
@@ -92,6 +95,9 @@
         margin: 6px 0px 0px 10px;
         position: absolute;
         // text-align: center;
+        &--active{
+            color: #404142;
+        }
     }
 
     &__bridge{
@@ -217,7 +223,11 @@
     &__background_white{
         background-color: #ffffff;
     }
-
-
+    &__background--transparent{
+        background-color: transparent;
+    }
+    &__background--grey{
+        background-color: lighten(#939598, 15);
+    }
 
 }
