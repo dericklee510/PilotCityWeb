@@ -99,32 +99,28 @@ export default class Auth extends VuexModule {
     /* eslint-disable */
     @Action
     public async login({ email, password }: UserCredentials): Promise<string> {
-        try {
-            try{
-                let resp = await firebase.auth().signInWithEmailAndPassword(email, password)
-                this.context.commit(SET_USER, resp)
-            }
-            catch(err){
-                throw(err)
-            }
-            if (this.user && !this.user.emailVerified && this.user.email) {
-                firebase.auth().sendSignInLinkToEmail(this.user.email, { 
-                    url: `pilotcity.com` 
-                })
-                throw (EMAIL_NOT_VERIFIED_ERR)
-            }
-
-            // eslint-disable-next-line no-console 
-            console.info(" %c Successfully logged in!", [
-                'background: green',
-                'color: white',
-                'display: block',
-                'text-align: center'
-            ].join(';'))
-            return SUCCESSFUL_LOGIN_RESP
+        try{
+            let resp = await firebase.auth().signInWithEmailAndPassword(email, password)
+            this.context.commit(SET_USER, resp.user)
+                if (this.user && !this.user.emailVerified && this.user.email) {
+                            firebase.auth().sendSignInLinkToEmail(this.user.email, { 
+                                url: `pilotcity.com` 
+                            })
+                            throw (EMAIL_NOT_VERIFIED_ERR)
+                        }
+            
+                        // eslint-disable-next-line no-console 
+                        console.info(" %c Successfully logged in!", [
+                            'background: green',
+                            'color: white',
+                            'display: block',
+                            'text-align: center'
+                        ].join(';'))
+                        return SUCCESSFUL_LOGIN_RESP
         }
-        catch (err) {
-            return customLoginResponse(err)
+        catch(err){
+            // this.logout() // put this back after error is fixed
+            return (err)
         }
     }
 

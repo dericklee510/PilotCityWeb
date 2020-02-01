@@ -108,7 +108,7 @@ export default class Header extends Vue {
     }
     
     get initials(){
-     let str = FbStore.currentUserProfile!.firstName + " " + FbStore.currentUserProfile!.lastName
+     let str = FbStore.currentUserProfile?.firstName + " " + FbStore.currentUserProfile?.lastName
       return str.split(" ").map((n)=>n[0]).join("");
     }
 

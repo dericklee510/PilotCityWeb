@@ -36,7 +36,11 @@
             >
           </v-col>
           <v-col class="login__forgotpassword pl-0 pr-0">
+<<<<<<< HEAD
 Forgot Password
+=======
+            Forgot Password
+>>>>>>> feature/programguide.derick
           </v-col>
 
 
@@ -124,7 +128,7 @@ export default class Login extends Vue {
                 password: this.password
             }).then(resp => resp).catch(err => `The entered credentials do not exist`)
         // }
-        if (this.authResponse == SUCCESSFUL_LOGIN_RESP && AuthStore.user && !AuthStore.user.photoURL) {
+        if (this.authResponse == SUCCESSFUL_LOGIN_RESP && AuthStore.user) {
             await FbStore.initCurrentUserProfile(AuthStore.user.uid)
             this.$router.push({
                 name: 'signup.type'
