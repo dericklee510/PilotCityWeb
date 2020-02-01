@@ -184,11 +184,7 @@
       >
         <v-btn
           class="launcher__button mb-10"
-<<<<<<< HEAD
-          :disabled="check"
-=======
           :disabled="!check"
->>>>>>> feature/programguide.derick
           @click="launchProgram"
         >
           LAUNCH
