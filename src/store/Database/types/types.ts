@@ -67,6 +67,7 @@ export interface EmployerProgram {
     caseStudies?: NamedLink[]
     projectIds?: string[]
     shareCode: string
+    launched?:firebase.firestore.Timestamp | firebase.firestore.FieldValue
     lastUpdate: firebase.firestore.Timestamp | firebase.firestore.FieldValue
 }
 
