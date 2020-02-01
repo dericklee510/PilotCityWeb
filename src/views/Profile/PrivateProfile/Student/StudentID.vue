@@ -447,7 +447,6 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { mask } from "vue-the-mask";
-import { VMenu, VDatePicker } from 'vuetify/lib';
 @Component({
   data: () => ({
     citizentype: ["Student", "Teacher", "Employer"],
