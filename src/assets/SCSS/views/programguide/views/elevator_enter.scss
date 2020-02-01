@@ -14,6 +14,9 @@
         margin-bottom: 49.29px;
         padding-left: 0%;
         padding-right: 0%;
+        @media (max-width: 610px) {
+            border: none;
+        }
     }
 
     &__borderline{
@@ -63,13 +66,19 @@
 
     &__paragraph{
         height: 240px;
-        border: 1px solid #CCCCCC;
         width: 75%;
         font-size: 18px;
         font-family: "Raleway";
         padding-left: 20px;
         font-weight: 700;
         word-wrap: break-word;
+        .v-input__slot{
+            padding: 25px;
+            border: 1px solid #CCCCCC;
+            max-height: 232px;
+            font-size: .937rem;
+            line-height: 18px;
+        }
     }
 
     
@@ -153,21 +162,13 @@
     // background-color: #E6E7E8;
     border: 1px solid #000000;
     word-wrap: break-word;
-
-
+        .v-btn__content{
+            font-family: Raleway;
+            font-style: normal;
+            font-weight: 900;
+            font-size: 1.88rem;
+        }
     }
-
-    &__button:hover { 
-        background-color:#6FBA7F;
-        color: #ffffff;
-        border: 1px solid #6FBA7F;
-
-    }
-
-
-
-
-
 }
 
 

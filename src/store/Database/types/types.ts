@@ -56,7 +56,8 @@ export interface GeneralUser {
 export interface EmployerProgram {
     employerProgramId: string
     programName: string
-    employerId?: string
+    employerId?: string,
+    launchImg?:string, // link
     programLauncher: ProgramEvent[]
     externshipDayAgenda?: AgendaTemplate
     demoDayAgenda?: AgendaTemplate
@@ -66,6 +67,7 @@ export interface EmployerProgram {
     caseStudies?: NamedLink[]
     projectIds?: string[]
     shareCode: string
+    launched?:firebase.firestore.Timestamp | firebase.firestore.FieldValue
     lastUpdate: firebase.firestore.Timestamp | firebase.firestore.FieldValue
 }
 

@@ -25,6 +25,9 @@
         margin-bottom: 49.29px;
         padding-left: 0%;
         padding-right: 0%;
+        @media (max-width: 610px) {
+            border: none;
+        }
     }
 
     &__borderline{
@@ -81,7 +84,9 @@
         font-weight: 900;
         letter-spacing: 1px;
         font-family: "Raleway";
-
+        display: inline-block;
+        height: 100%;
+        line-height: 100%;
     }
 
     &__copyicon{
@@ -96,10 +101,10 @@
         height: 240px;
         border: 1px solid #CCCCCC;
         // border: 1px solid transparent;
-        width: 75%;
+        width: 100%;
         font-size: 18px;
         font-family: "Raleway";
-        padding-left: 20px;
+        padding: 20px;
         font-weight: 700;
         word-wrap: break-word;
 
@@ -126,28 +131,27 @@
     }
 
     &__description{
-
-    margin-top: 5%;
-    font-family: Raleway;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 1.41rem;
-    color: #949598;
-    width: 75%;
-    text-align: center;
-    line-height: unset;
-
-    &__label{
         margin-top: 5%;
         font-family: Raleway;
         font-style: normal;
-        font-weight: 800;
+        font-weight: 500;
         font-size: 1.41rem;
-        color: #000000;
-        width: 75%;
-        text-align: left;
+        color: #949598;
+        width: 100%;
+        text-align: center;
         line-height: unset;
-    }
+
+        &__label{
+            margin-top: 5%;
+            font-family: Raleway;
+            font-style: normal;
+            font-weight: 800;
+            font-size: 1.41rem;
+            color: #000000;
+            width: 100%;
+            text-align: left;
+            line-height: unset;
+        }
 
     }
 

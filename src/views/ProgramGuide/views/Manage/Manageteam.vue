@@ -85,9 +85,10 @@
                   <v-btn
                     class="manageteam__button"
                     outlined
+                    height="55.88px"
                     :loading="loading"
                     depressed
-                    height="100%"
+                    text
                     @click="setLoader(() =>renameTeam(entry,index))"
                   >
                     RENAME
@@ -102,10 +103,11 @@
                 <PCLoader v-slot="{loading,setLoader}">
                   <v-btn
                     class="manageteam__button"
-                    :loading="loading"
                     outlined
+                    height="55.88px"
+                    :loading="loading"
                     depressed
-                    height="100%"
+                    text
                     @click="setLoader(()=>deleteTeam(entry))"
                   >
                     DELETE
@@ -162,19 +164,21 @@
                     solo
                     flat
                     depressed
+                    background-color="transparent"
                     height="100%"
                     :error-messages="errors"
                     placeholder="TEAM NAME 3"
                   />
                 </ValidationProvider>
               </v-col>
-              <v-col>
+              <v-col class="manageteam__input problem-child pa-0">
                 <ValidationProvider
                   v-slot="{errors}"
                   rules="required"
                 >
                   <PCselect
                     v-model="selectedClassroom"
+                    style="height: inherit !important;"
                     :error-messages="errors"
                     :document-refs="CurrentClassroomsRefs"
                     live-text="className"
@@ -184,14 +188,14 @@
               </v-col>
               <v-col
                 cols="2"
-                class="manageteam__create-button-wrapper"
+                class="manageteam__create-button-wrapper manageteam__input problem-child pa-0"
               >
                 <PCLoader v-slot="{loading, setLoader}">
                   <v-btn
                     :loading="loading"
                     :disabled="loading || invalid"
                     height="100%"
-                    flat
+                    text
                     depressed
                     outlined
                     class="manageteam__create-button"

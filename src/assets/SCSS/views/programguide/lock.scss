@@ -1,14 +1,82 @@
-.guide{
-    &__lock-wrapper{
-
+.guide__locks{
+    i{
+        transition: ease 0.3s;
+        color: #dbdcde;
+        font-size: 1.5em;
+        &[class*="lock"]{
+            font-size: 2em;
+        }
     }
-    &__lock-wrapper i{
-        background-color: #dbdcde;
+    &-wrapper{
+        position: sticky;
+        top: 0px;
+        height: calc(75vh + 66px);
+        max-height: 100%;
+        &:hover, &:focus{
+            & .fa-lock-alt{
+                color: $pc-red;
+            }
+            & .fa-unlock-alt{
+                color: $pc-green;
+            }
+            & .fa-chevron-right, .fa-chevron-left{
+                color: darken(#dbdcde, 20);
+            }
+        }
+        &:active{
+            & .fa-lock-alt{
+                color: darken($pc-red, 10);
+            }
+            & .fa-unlock-alt{
+                color: darken($pc-green, 10);
+            }
+            & .fa-chevron-right, .fa-chevron-left{
+                color: darken(#dbdcde, 30);
+            }
+        }
     }
-    &__lock-wrapper .fa-lock-alt{
+    & .right{
+        text-align: right;
+        margin-right: 20px;
+        i[class*="lock"]{
+            margin-left: 20px;
+        }
+    }
+    & .left{
+        text-align: left;
+        margin-left: 20px;
+        i[class*="lock"]{
+            margin-right: 20px;
+        }
+    }
+    & .fa-lock-alt{
+        &::before{
+            color: inherit;
+        }
+        &:hover, &:focus{
+            color: $pc-red;
+        }
+        &:active{
+            color: darken($pc-red, 10);
+        }
         
     }
-    &__lock-wrapper .fa-lock-alt{
-        
-    }    
+    & .fa-unlock-alt{
+        &::before{
+            color: inherit;
+        }
+        &:hover, &:focus{
+            color: $pc-green;
+        }
+        &:active{
+            color: darken($pc-green, 10);
+        }
+    }
+    
+    @media only screen and (max-width: 600px) {
+        height: 100%;
+        & .right, & .left{
+            margin: 0;
+        }
+    }
 }

@@ -5,7 +5,7 @@
         justify="center"
         no-gutters
       >
-        <v-col cols="4">
+        <v-col cols="4"> 
           <v-col
             class="text-center signup__header pa-0"
           >
@@ -47,13 +47,13 @@
             Password
           </v-col>
           <v-col class="pa-0 mt-2">
-            <input
+            <Password
               v-model="password"
               type="password"
               placeholder="Password"
               class="signup__field-input"
               @keyup.enter="process()"
-            >
+            />
           </v-col>
           <v-col class="signup__label mt-5 pa-0">
             Confirm Password
@@ -67,12 +67,69 @@
               @keyup.enter="process()"
             >
           </v-col>
-          <v-col class="mt-10 pa-0">
+
+          <v-col
+            justify="center"
+            class="pl-0 pr-0"
+          >
+            <v-row no-gutters>
+              <v-checkbox
+                v-model="checkbox"
+                dark
+              >
+                <template v-slot:label>
+                  <div class="signup__termstext">
+                    I agree to the following
+                    <v-tooltip
+                      dark
+                      bottom
+                    >
+                      <template v-slot:activator="{ on }">
+                        <a
+                          dark
+                          small
+                          target="_blank"
+                          href="https://www.iubenda.com/terms-and-conditions/32542296"
+                          @click.stop
+                          v-on="on"
+                        >
+                          Terms & Conditions
+                        </a>
+                      </template>
+                      Opens in new window
+                    </v-tooltip>
+                    and
+                    <v-tooltip
+                      dark
+                      bottom
+                    >
+                      <template v-slot:activator="{ on }">
+                        <a
+                          dark
+                          small
+                          target="_blank"
+                          href="https://www.iubenda.com/privacy-policy/32542296"
+                          @click.stop
+                          v-on="on"
+                        >
+                          Privacy Policy
+                        </a>
+                      </template>
+                      Opens in new window
+                    </v-tooltip>
+                  </div>
+                </template>
+              </v-checkbox>
+            </v-row>
+          </v-col>
+
+          <v-col class="mt-0 pa-0">
             <v-btn
               id="signup-button"
               block
+              depressed
               :loading="loading"  
-              :disabled="loading"
+              :disabled="loading || !checkbox"
               class="mb-6"
               @click="process()"
             >
@@ -117,13 +174,16 @@ import { AutoComplete } from '@/components/GoogleMaps'
 import Fb from '../../store/Database'
 import { GeneralUser } from '../../store/Database/types/types'
 import {firebase} from '@/firebase/init'
-@Component({
+import { Watch } from 'vue-property-decorator'
+import Password from 'vue-password-strength-meter'
+@Component<Signup>({
     components: {
         pcSelect: PCselect,
         pcTextfield: PCtextfield,
         ValidationObserver,
         ValidationProvider,
-        AutoComplete
+        AutoComplete,
+        Password
     }
 })
 export default class Signup extends Vue {
@@ -134,6 +194,7 @@ export default class Signup extends Vue {
     public lastName: string = '';
     public loading: boolean = false;
     public authResponse: string = ''
+    checkbox = false
     public async process(): Promise<void> {
         this.loading = true
         // if (await (this.$refs.Observer as ObserverInstance).validate()) {

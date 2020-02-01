@@ -39,7 +39,7 @@
             cols="12"
             class="manageclass__title"
           >
-            <span>Manage Student</span>
+            <span>Manage Students</span>
           </v-col>
         </v-row>
         <v-row
@@ -64,7 +64,7 @@
             <span> Team </span>
           </v-col>
         </v-row>
-        <v-row>
+        <v-row no-gutters>
           <v-col cols="12">
             <v-row
               v-for="(entry,index) in entries"
@@ -74,6 +74,7 @@
                 cols="12"
                 lg="5"
                 xl="6"
+                class="managestudents__name"
               >
                 {{ entry.name }}
               </v-col>
@@ -85,7 +86,8 @@
                 />
               </v-col>
               <v-col
-                cols="2"
+                cols="12"
+                lg="4"
                 xl="1"
               >
                 <pc-select

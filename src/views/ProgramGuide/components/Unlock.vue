@@ -1,13 +1,13 @@
 <template>
   <v-row
     style="height:100%"
-    no-gutters
+    no-gutters 
     align="center"
     justify="center"
   >
     <v-col
       cols="1"
-      class="guide__lock-wrapper"
+      class="guide__unlock-wrapper"
     >
       <i class="fas fa-unlock-alt" />
     </v-col>

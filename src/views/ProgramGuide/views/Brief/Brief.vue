@@ -1,6 +1,12 @@
 <template>
-  <div class="programbrief__dark">
-    <v-row class="programbrief__container">
+  <v-container
+    fluid
+    class="programbrief__dark"
+  >
+    <v-row
+      class="programbrief__container"
+      justify="center"
+    >
       <v-col
         cols="2"
         md="1"
@@ -23,17 +29,13 @@
             @confirm="onConfirmed"
           />
         </v-col>
-
-        <!-- <v-col>
-          <BriefCard />
-        </v-col> -->
       </v-col>
       <v-col
         cols="2"
         md="1"
       />
     </v-row>
-  </div>
+  </v-container>
 </template>
  
     

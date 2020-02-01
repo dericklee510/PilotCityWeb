@@ -42,9 +42,14 @@
           </v-row>
         </slot>
       </v-col>
-      <v-col cols="2">
+      <v-col
+        cols="2"
+        class="pc-rating"
+      >
         <v-rating
           v-model="team.rating"
+          dense
+          size="30px"
           @input="ratingChange($event,team.projectId)"
         />
       </v-col>

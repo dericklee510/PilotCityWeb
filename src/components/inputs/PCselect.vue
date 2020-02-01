@@ -19,8 +19,6 @@
       append-icon="mdi-chevron-down"
       flat
       :menu-props="{offsetY: true, 'close-on-click': true, 'offset-overflow':true}"
-      height="70px"
-      outlined
       :placeholder="placeholder"
       class="pc-input__select"
       background-color="transparent"

@@ -4,26 +4,26 @@
         background-color: #fff;
         border: 0.428px solid #231F20;
     }
-    &__container{
-        background-color: #fff;
-        border: 0.428px solid #231F20;
-        border-left: none;
-        border-right: none;
+    &__container{ 
+        // background-color: #fff;
+        // border: 0.428px solid #231F20;
+        // border-left: none;
+        // border-right: none;
         width: 584px;
         height: 322px;
         max-height: 100%;
         max-width: 100%;
     }
     &__title{
-        margin: 56.78px;
+        margin: 56.78px 0px 40px 0px;
         font-family: 'Raleway';
         font-style: normal;
-        font-weight: 900;
-        font-size: 1.41rem;
-        line-height: 26px;
+        font-weight: 800;
+        font-size: 1.75rem;
+        line-height: 2rem;
         width: 100%;
         text-align: center;
-        letter-spacing: .05rem;
+        // letter-spacing: .05rem;
     }
     &__input{
         margin-bottom: 40px;
@@ -40,13 +40,15 @@
         input{
             font-family: Raleway;
             font-style: normal;
-            font-weight: 900;
-            font-size: 17.1097px;
+            font-weight: 800;
+            font-size: 27.1097px;
             line-height: 20px;
             color: #231F20;
             width: inherit;
             height: inherit;
             padding: 10px;
+            text-align: center;
+            
         }
     }
     &__button{
@@ -57,6 +59,7 @@
             font-weight: 800;
             font-size: 15px;
             color: #231F20;
+            // width: fit-content;
         }
     }
 }

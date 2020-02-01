@@ -101,17 +101,12 @@ export default class Auth extends VuexModule {
     /* eslint-disable */
     @Action
     public async login({ email, password }: UserCredentials): Promise<string> {
-        try {
+        try{
+            let resp = await firebase.auth().signInWithEmailAndPassword(email, password)
+            this.context.commit(SET_USER, resp.user);
             if (this.user && !this.user.emailVerified) {
                 alert("email not verified!");
                 throw (EMAIL_NOT_VERIFIED_ERR)
-            }
-            try{
-                let resp = await firebase.auth().signInWithEmailAndPassword(email, password)
-                this.context.commit(SET_USER, resp)
-            }
-            catch(err){
-                throw(err)
             }
             // eslint-disable-next-line no-console 
             console.info(" %c Successfully logged in!", [
@@ -122,8 +117,9 @@ export default class Auth extends VuexModule {
             ].join(';'))
             return SUCCESSFUL_LOGIN_RESP
         }
-        catch (err) {
-            return customLoginResponse(err)
+        catch(err){
+            // this.logout() // put this back after error is fixed
+            return (err)
         }
     }
 

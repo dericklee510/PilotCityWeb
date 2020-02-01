@@ -130,7 +130,10 @@
             cols="4"
             @click="submit"
           >
-            <span> SAVE </span>
+            <span
+              style="
+            vertical-align: middle;"
+            > SAVE </span>
           </v-col>
         </v-row>
       </v-col>

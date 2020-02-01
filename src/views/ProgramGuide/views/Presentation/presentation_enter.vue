@@ -7,7 +7,7 @@
 
     <v-col
       id="presentation_enter__contain"
-      cols="7"
+      cols="10"
     >
       <v-row
         justify="center"
@@ -31,24 +31,43 @@
         <v-row
           justify="center"
           class="mr-auto ml-auto mt-12 mb-12"
+          no-gutters
         >
-          <LinkChecker
-            v-model="url"
-            class="presentation_enter__videolink"
-          />
+          <v-col
+            cols="9"
+            md="7"
+          >
+            <LinkChecker
+              v-model="url"
+              placeholder="https://"
+              class="presentation_enter__videolink"
+            />
+          </v-col>
         </v-row>
         <v-row
           justify="center"
-          class="ml-auto mr-auto presentation_enter__check"
+          align="center"
+          class="presentation_enter__check"
+          no-gutters
         >
-          <v-checkbox
-            v-model="checkbox"
-            :disabled="invalid"
-            type="checkbox"
-            class="presentation_enter__checkbox"
-          />
-
-          <span>I acknowledge this link is set for the public to view</span>
+          <v-col cols="9" md="6">
+            <v-row
+              justify="center"
+              align="center"
+              no-gutters
+            >
+              <v-col cols="1">
+                <v-checkbox
+                  v-model="checkbox"
+                  :readonly="invalid"
+                  class="presentation_enter__checkbox"
+                />
+              </v-col>
+              <v-col cols="11">
+                I acknowledge this link is set for the public to view and video length is within a reasonable range.
+              </v-col>
+            </v-row>
+          </v-col>
         </v-row>
 
         <v-col
@@ -56,8 +75,12 @@
           cols="5"
         >
           <v-btn
-            class="presentation_enter__button"
+            solo
+            depressed
+            text
+            height="55.88px"
             :disabled="invalid || !checkbox"
+            class="presentation_enter__button"
             @click="onSubmit"
           >
             SAVE
@@ -75,10 +98,12 @@
 
       <v-row
         justify="center"
-        class="mt-3 mb-6"
+        class="mt-3 mb-6 pc-rating"
       >
         <v-rating
           v-model="rating"
+          dense
+          size="30px"
           readonly
         />
       </v-row>

@@ -24,6 +24,8 @@
 
     &__trashicon{
         color: darken($color: $pc-red, $amount: 20);
+        display: block;
+        text-align: center;
         &:hover{
             color: $pc-red;
         }

@@ -1,93 +1,93 @@
 <template>
   <div class="briefcard__sontaincontainer">
-    <v-card
-      id="Contain"
-      class="briefcard__container"
+    <!-- <img src="" alt="" id="programbrief__cover"> -->
+    <multi-input
+      ref="multiInput"
+      :key="key"
+      v-model="files"
+      v-slot="{entries}"
     >
-      <!-- <img src="" alt="" id="programbrief__cover"> -->
-      <multi-input
-        ref="multiInput"
-        :key="key"
-        v-model="files"
-        v-slot="{entries}"
+      <v-card
+        v-for="(entry,index) in entries"
+        id="Contain"
+        :key="entry.id"
+        class="briefcard__container mb-6"
       >
-        <v-row
-          v-for="(entry,index) in entries"
-          id="briefcard__rowcontain"
-          :key="entry.id"
-        >
-          <v-col
-            class="mr-5"
-            cols="12"
-            md="2"
-            xl="1"
-          >
-            <iframe
-              class="briefcard__cover"
-              :src="`https://drive.google.com/viewerng/viewer?url=${encodeURIComponent(entry.link)}?pid=explorer&efh=false&a=v&chrome=false&embedded=true&rm=minimal`"
-            />
-          </v-col>
-
-          <v-col
-            class
-            cols
+        <v-col>
+          <v-row
+            id="briefcard__rowcontain"
+            no-gutters
           >
             <v-col
-              class
+              class="mr-5"
               cols="12"
+              md="3"
+              lg="2"
+              xl="1"
             >
-              <div class="briefcard__header">
-                {{
-                  getName(entry)
-                }}
-              </div>
-
-              <v-row class="mt-5 pl-3">
-                <button
-                  v-if="entry.link"
-                  class="briefcard__buton mr-3"
-                >
-                  <a :href="`https://drive.google.com/viewerng/viewer?url=${encodeURIComponent(entry.link)}?pid%3Dexplorer&efh=false&a=v&chrome=false&rm=minimal`">VIEW</a>
-                </button>
-                <button
-                  class="briefcard__buton mr-3"
-                  @click="triggerFileInput(entry.id)"
-                >
-                  {{ entry.link?"RE-UPLOAD":"UPlOAD" }}
-                </button>
-                <v-file-input
-                  :ref=" `fileInput${entry.id}`"
-                  v-model="entry.file"
-                  style="display: none;"
-                  accept="image/*, .pdf"
-                  @change="onFilesChanged(entries)"
-                />
-                <button
-                  v-if="entries.length>1"
-                  class="briefcard__buton mr-3"
-                  @click="removeEntry(entry,index)"
-                >
-                  DELETE
-                </button>
-
-                <v-col
-                  cols="2"
-                  style="padding:0"
-                />
-                <v-col
-                  cols="2"
-                  style="padding:0"
-                />
-                <v-col
-                  cols="2"
-                  style="padding:0"
-                />
-              </v-row>
+              <iframe
+                class="briefcard__cover"
+                :src="`https://drive.google.com/viewerng/viewer?url=${encodeURIComponent(entry.link)}?pid=explorer&efh=false&a=v&chrome=false&embedded=true&rm=minimal`"
+              />
             </v-col>
-          </v-col>
-        </v-row>
-      </multi-input>
-    </v-card>
+          
+            <v-col>
+              <v-col
+                cols="12"
+              >
+                <div class="briefcard__header">
+                  {{
+                    getName(entry)
+                  }}
+                </div>
+          
+                <v-row class="mt-5 pl-3">
+                  <button
+                    v-if="entry.link"
+                    class="briefcard__buton mr-3"
+                  >
+                    <a :href="`https://drive.google.com/viewerng/viewer?url=${encodeURIComponent(entry.link)}?pid%3Dexplorer&efh=false&a=v&chrome=false&rm=minimal`">VIEW</a>
+                  </button>
+                  <button
+                    class="briefcard__buton mr-3"
+                    @click="triggerFileInput(entry.id)"
+                  >
+                    {{ entry.link?"RE-UPLOAD":"UPlOAD" }}
+                  </button>
+                  <v-file-input
+                    :ref=" `fileInput${entry.id}`"
+                    v-model="entry.file"
+                    style="display: none;"
+                    accept="image/*, .pdf"
+                    @change="onFilesChanged(entries)"
+                  />
+                  <button
+                    v-if="entries.length>1"
+                    class="briefcard__buton mr-3"
+                    @click="removeEntry(entry,index)"
+                  >
+                    DELETE
+                  </button>
+          
+                  <v-col
+                    cols="2"
+                    style="padding:0"
+                  />
+                  <v-col
+                    cols="2"
+                    style="padding:0"
+                  />
+                  <v-col
+                    cols="2"
+                    style="padding:0"
+                  />
+                </v-row>
+              </v-col>
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-card>
+    </multi-input>
   </div>
 </template>
 

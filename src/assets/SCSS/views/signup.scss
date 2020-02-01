@@ -14,6 +14,39 @@
     }
 }
 .signup{
+
+    &__termstext{
+        font-size: .75rem;
+        font-family: "Raleway";
+        font-weight: 500;
+    }
+
+    &__termscheck{
+
+        margin-bottom: 3%;
+        font-family: Raleway;
+        font-style: normal;
+        font-weight: 500;
+        font-size: .75rem;
+        line-height: 30px;
+        color: #949598;
+        width: 75%;
+        text-align: left;
+        margin-left: 10%;
+    
+        }
+    
+        &__termscheckbox{
+            width: 18px;
+            height: 18px;
+            margin-right: 2%;
+            border: 1.5px;
+            border-color: #C7C8CA;
+            
+        }
+
+
+
     &__header{
         font-family: "Raleway";
         font-size: 30px;

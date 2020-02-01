@@ -11,7 +11,7 @@
 
       <v-col
         id="prompt__contain"
-        cols="8"
+        cols="10"
       >
         <v-row
           justify="center"

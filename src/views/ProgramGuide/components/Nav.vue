@@ -19,9 +19,20 @@
           <v-col class="guide__mainrow">
             <span
               class="guide__bigdot guide__bigdot--active"
-              :class="unlocked&&index==0?'guide__background_blue':unlocked&&index==1?'guide__background_green':''"
+              :class="unlocked?unlocked&&index==0?'guide__background_blue':unlocked&&index==1?'guide__background_green':'':'guide__background--grey'"
             >
-              <i class="guide__icon_white fas fa-chalkboard-teacher guide__programicon" />
+              <i
+                v-if="main=='Externship'"
+                class="guide__icon_white fas fa-chalkboard-teacher guide__programicon"
+              />
+              <i
+                v-if="main=='Project'"
+                class="guide__icon_white fas fa-project-diagram guide__programicon"
+              />
+              <i
+                v-if="main=='Internship'"
+                class="guide__icon_white fas fa-seedling guide__programicon"
+              />
             </span>
 
             <!-- <span
@@ -47,7 +58,7 @@
           <span class="guide__smalldot" />
           <span
             class="guide__smalldotfilled"
-            :class="unlocked&&index==0?'guide__background_blue':unlocked&&index==1?'guide__background_green':''"
+            :class="unlocked?unlocked&&index==0?'guide__background_blue':unlocked&&index==1?'guide__background_green':'':'guide__background--transparent'"
           />
           <span class="guide__subtext">{{ subitem }}</span>
         </v-col>
@@ -71,7 +82,7 @@ import {startCase} from 'lodash'
 export default class Nav extends Vue {
   @Prop()
   public value!: LinkedList<ProgramNode>;
-  public unlocked = true;
+  public unlocked = false;
   public sequenceHash: Record<string, any> = {
     Teacher: TEACHERSEQUENCE,
     Employer: EMPLOYERSEQUENCE,

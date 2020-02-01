@@ -3,7 +3,7 @@
     <business-model-canvas-comp
       :value="syncedCanvas"
       :stars="stars"
-      readonly
+      :readonly="true"
       @starsChanged="onStarsChanged"
     />
   </v-row>

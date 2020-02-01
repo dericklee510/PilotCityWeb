@@ -1,7 +1,6 @@
 export {default as Agenda} from "./Agenda.vue"
-export {default as Lock} from "./Lock.vue"
+export {default as Locks} from "./Locks.vue"
 export {default as Nav} from "./Nav.vue"
-export {default as Unlock} from "./Unlock.vue"
 export {default as Rating} from "./Rating.vue"
 export {default as TextEnter} from "./TextEnter.vue"
 export {default as AgendaView} from "./AgendaView.vue"

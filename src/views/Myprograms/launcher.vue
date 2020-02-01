@@ -165,7 +165,7 @@
       >
         <v-col cols="1">
           <input
-            v-model="existing"
+            v-model="check"
             type="checkbox"
             class="launcher__checkbox"
           >
@@ -182,12 +182,13 @@
         class="mr-auto ml-auto"
         cols="5"
       >
-        <button
+        <v-btn
           class="launcher__button mb-10"
+          :disabled="!check"
           @click="launchProgram"
         >
           LAUNCH
-        </button>
+        </v-btn>
       </v-col>
     </v-col>
   </v-row>
@@ -202,6 +203,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { FbStore } from '../../store'
 import { RouteList } from '../ProgramGuide/types'
+import { firebase } from "@/firebase/init";
 @Component({
   async beforeRouteEnter(to,from,next){
     if(localStorage.PILOTCITY_EMPLOYERPROGRAMID)
@@ -211,11 +213,13 @@ import { RouteList } from '../ProgramGuide/types'
 })
 export default class ProgramLauncher extends Vue{
     check = false 
-    get existing(){return FbStore.currentUserProfile!.teacherProgramDataIds?!!FbStore.currentUserProfile!.teacherProgramDataIds[FbStore.currentEmployerProgramUID!] || this.check: false}
-    set existing(val) { this.check =val}
     async launchProgram() {
       if(FbStore.userCitizenType === "teacher")
         await FbStore.createTeacherProgramData(FbStore.currentEmployerProgramUID!)
+      else if(FbStore.userCitizenType === "employer")
+        await FbStore.updateCurrentEmployerProgram({
+          launched:firebase.firestore.FieldValue.serverTimestamp()
+        })
         let route = new RouteList(
       FbStore.currentUserProfile!.citizenType!
     ).linkedList.head.value.routeName

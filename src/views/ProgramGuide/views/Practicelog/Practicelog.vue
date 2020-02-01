@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <v-row justify="center">
       <img
         id="logtime__icon"
@@ -9,7 +9,7 @@
     
       <v-col
         id="logtime__contain"
-        cols="7"
+        cols="10"
       >
         <v-row
           justify="center"
@@ -31,48 +31,60 @@
         </v-row>
     
         <ValidationObserver v-slot="{invalid, reset}">
-          <v-row
-            justify="center"
-            class
-          >
-            <v-col
-              align-self="center"
-              cols="8"
-              sm="6"
-              md="4"
+          <v-col cols="12">
+            <v-row
+              justify="center"
+              class="mt-10"
             >
-              <ValidationProvider
-                v-slot="{errors}"
-                rules="required|min:2|max:3|isTimeNumerical|isTime"
-                class="logtime__input"
+              <v-col
+                cols="12"
+                sm="6"
+                md="4"
               >
-                <v-text-field
-                  v-model="timeInput"
-                  label="Enter Time"
-                  :error-messages="errors"
-                  outlined
-                  height="100px"
-                  placeholder="0m"
-                />
-              </ValidationProvider>
-            </v-col>
-          </v-row>
-    
-          <v-row
-            justify="center"
-            class="mr-auto ml-auto mt-2 mb-7 logtime__calculated"
-          >
-            <PCLoader v-slot="{loading,setLoader}">
-              <v-btn
-                class="logtime__button"
-                :disabled="invalid"
-                :loading="loading"
-                @click="setLoader( ()=> { addTime().then(()=>{reset()})})"
+                <ValidationProvider
+                  v-slot="{errors}"
+                  rules="required|min:2|max:3|isTimeNumerical|isTime"
+                  class="logtime__input"
+                >
+                  <v-text-field
+                    v-model="timeInput"
+                    label="Enter Minutes"
+                    :error-messages="errors"
+                    outlined
+                    style="font-family='Raleway'"
+                    height="100px"
+                    placeholder="0"
+                  />
+                </ValidationProvider>
+              </v-col>
+            </v-row>
+            
+            <v-row
+              justify="center"
+              class="mb-7 logtime__calculated"
+            >
+              <v-col
+                cols="12"
+                sm="6"
+                md="4"
               >
-                LOG TIME
-              </v-btn>
-            </PCLoader>
-          </v-row>
+                <PCLoader v-slot="{loading,setLoader}">
+                  <v-btn
+                    class="logtime__button"
+                    outlined
+                    solo
+                    text
+                    depressed
+                    :disabled="invalid"
+                    :loading="loading"
+                    @click="setLoader( ()=> { addTime().then(()=>{reset()})})"
+                  >
+                    LOG TIME
+                  </v-btn>
+                </PCLoader>
+              </v-col>
+            </v-row>
+          </v-col>
         </ValidationObserver>
         <v-row
           justify="center"

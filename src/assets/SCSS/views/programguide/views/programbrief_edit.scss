@@ -1,5 +1,4 @@
 .programbrief{
-
     &__addbrief{
         width: 100%;
         border: 1px dashed #ffffff;
@@ -7,7 +6,7 @@
 
         &:hover{
             width: 100%;
-            border: 1px dashed transparent;
+            border: 1px dashed transparent; 
             background-color: #404142;
             height: 70px;
         }
@@ -17,6 +16,7 @@
         height: 100%;
         padding-left: 0px;
         font-size: 2.35rem; 
+        
     }
 
     &__dark{
@@ -38,29 +38,22 @@
     background-color: #636466;
 }
 
-.briefcard__sontaincontainer
-{
-
-    .briefcard{
-        
-    
+.briefcard__sontaincontainer{
+    .briefcard-edit{
         &__container{
             // width: 1091.5px;
             width: 100vw;
             box-shadow: none;
-            
+            &--cards{
+                &:hover{
+                    width: 100%;
+                    border: 1px dashed transparent; 
+                    background-color: #404142;
+                    height: 70px;
+                }
+            }
 
         }
-        
-        &__container:hover { 
-            width: 100vw;
-            border-radius: 0px;
-            
-            border: 1px dashed #ffffff;
-            //  border-color: #FFFFFF;   
-        }
-
-
     }   
 }
 

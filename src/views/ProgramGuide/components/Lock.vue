@@ -3,7 +3,7 @@
     style="height:100%"
     no-gutters
     align="center"
-    justify="center"
+    justify="center" 
   >
     <v-col
       cols="1"

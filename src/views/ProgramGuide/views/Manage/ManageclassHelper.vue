@@ -72,7 +72,7 @@
           <button
             v-if="entry.shareCode"
             class="manageclass__icon"
-          /></button>
+          />
         </v-col>
       </v-row>
     </v-col>

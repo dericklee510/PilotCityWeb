@@ -7,7 +7,7 @@
 
     <v-col
       id="demovideo_enter__contain"
-      cols="7"
+      cols="10"
     >
       <v-row
         justify="center"
@@ -31,17 +31,21 @@
         <v-row
           justify="center"
           class="mr-auto ml-auto mt-12 mb-12"
+          no-gutters
         >
-          <LinkChecker
-            v-model="url"
-            placeholder="https://"
-            class="demovideo_enter__videolink"
-          />
+          <v-col cols="9" md="7">
+            <LinkChecker
+              v-model="url"
+              placeholder="https://"
+              class="demovideo_enter__videolink"
+            />
+          </v-col>
         </v-row>
   
   
         <v-row
           justify="center"
+          align="center"
           class="ml-auto mr-auto demovideo_enter__check"
         >
           <v-col cols="1">
@@ -51,7 +55,7 @@
               class="demovideo_enter__checkbox"
             />
           </v-col><v-col cols="11">
-            I acknowledge this link is set for the public to view and video length is within reasonable range.
+            I acknowledge this link is set for the public to view and video length is within a reasonable range.
           </v-col>
         </v-row>
   
@@ -60,6 +64,10 @@
           cols="5"
         >
           <v-btn
+            solo
+            depressed
+            text
+            height="55.88px"
             :disabled="invalid || !checkbox"
             class="demovideo_enter__button"
             @click="onSubmit"
@@ -79,10 +87,12 @@
 
       <v-row
         justify="center"
-        class="mt-3 mb-6"
+        class="mt-3 mb-6 pc-rating"
       >
         <v-rating
           v-model="rating"
+          dense
+          size="30px"
           readonly
         />
       </v-row>

@@ -35,10 +35,17 @@
               @keyup.enter="process()"
             >
           </v-col>
-          <v-col class="mt-10 pa-0">
+          <v-col class="login__forgotpassword pl-0 pr-0">
+            Forgot Password
+          </v-col>
+
+
+
+          <v-col class="mt-5 pa-0">
             <v-btn
               id="login-button"
               block
+              depressed
               :loading="loading"  
               :disabled="loading"
               class="mb-6"
@@ -64,7 +71,7 @@
             </v-alert>
             <router-link :to="{name: 'signup'}">
               <h4
-                class="text-center login__forgotpassword"
+                class="text-center login__noaccount"
                 style="display: block"
               >
                 No account yet? Signup.
@@ -117,7 +124,7 @@ export default class Login extends Vue {
                 password: this.password
             }).then(resp => resp).catch(err => `The entered credentials do not exist`)
         // }
-        if (this.authResponse == SUCCESSFUL_LOGIN_RESP && AuthStore.user && !AuthStore.user.photoURL) {
+        if (this.authResponse == SUCCESSFUL_LOGIN_RESP && AuthStore.user) {
             await FbStore.initCurrentUserProfile(AuthStore.user.uid)
             this.$router.push({
                 name: 'signup.type'
