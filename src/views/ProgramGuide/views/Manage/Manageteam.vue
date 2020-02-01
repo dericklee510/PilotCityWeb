@@ -85,9 +85,10 @@
                   <v-btn
                     class="manageteam__button"
                     outlined
+                    height="55.88px"
                     :loading="loading"
                     depressed
-                    height="100%"
+                    text
                     @click="setLoader(() =>renameTeam(entry,index))"
                   >
                     RENAME
@@ -102,10 +103,11 @@
                 <PCLoader v-slot="{loading,setLoader}">
                   <v-btn
                     class="manageteam__button"
-                    :loading="loading"
                     outlined
+                    height="55.88px"
+                    :loading="loading"
                     depressed
-                    height="100%"
+                    text
                     @click="setLoader(()=>deleteTeam(entry))"
                   >
                     DELETE
@@ -193,7 +195,7 @@
                     :loading="loading"
                     :disabled="loading || invalid"
                     height="100%"
-                    flat
+                    text
                     depressed
                     outlined
                     class="manageteam__create-button"

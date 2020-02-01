@@ -50,8 +50,7 @@
         </v-col>
 
         <v-col
-          cols="1"
-          sm="2"
+          cols="2"
           class="agenda__trashicon"
         >
           <i

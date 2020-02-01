@@ -8,10 +8,14 @@
       >
         <v-col cols="1" />
         <v-col
-          cols="11"
+          cols="12"
           class="pa-0"
         >
-          <v-row no-gutters>
+          <v-row
+            no-gutters
+            justify="start"
+          >
+            <v-col cols="1" />
             <v-col
               cols="12"
               md="8"
@@ -20,7 +24,8 @@
             </v-col>
             <v-col
               cols="12"
-              md="3"
+              md="1"
+              class="text-center"
             >
               Rating
             </v-col>
@@ -52,9 +57,12 @@
         <v-col
           cols="12"
           md="3"
+          class="pc-rating"
         >
           <v-rating
             v-model="team.averageRating"
+            size="30px"
+            dense
             readonly
           />
         </v-col>

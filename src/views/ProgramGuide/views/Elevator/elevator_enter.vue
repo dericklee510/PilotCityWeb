@@ -88,6 +88,7 @@
         <v-rating
           v-model="rating"
           size="30"
+          dense
           readonly
         />
       </v-row>
