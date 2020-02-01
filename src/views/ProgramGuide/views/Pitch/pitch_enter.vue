@@ -7,7 +7,7 @@
 
     <v-col
       id="pitch_enter__contain"
-      cols="7"
+      cols="10"
     >
       <v-row
         justify="center"
@@ -34,11 +34,12 @@
         >
           <ValidationProvider
             v-slot="{errors}"
-            class="pt-1 pb-12 pl-5 pr-4 pitch_enter__onesentence"
+            class="pt-1 pb-6 pl-5 pr-4 pitch_enter__onesentence"
             rules="required|max:255"
           >
             <v-textarea
               v-model="pitch"
+              no-resize
               :error-messages="errors"
               placeholder="My pitch is..."
             />
@@ -51,7 +52,12 @@
         >
           <v-btn
             class="pitch_enter__button"
+            solo
+            depressed
+            text
+            height="55.88px"
             :loading="loading"
+            :disabled="invalid"
             @click="validate().then(valid => {if(valid) submit()})"
           >
             SAVE
@@ -69,10 +75,12 @@
 
       <v-row
         justify="center"
-        class="mt-3 mb-6"
+        class="mt-3 mb-6 pc-rating"
       >
         <v-rating
           v-model="rating"
+          size="30"
+          dense
           readonly=""
         />
       </v-row>

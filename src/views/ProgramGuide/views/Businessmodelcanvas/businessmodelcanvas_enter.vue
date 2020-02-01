@@ -7,7 +7,7 @@
 
     <v-col
       id="businessmodelcanvas_enter__contain"
-      cols="10"
+      cols="8"
     >
       <!-- <v-row><i clas s="fas fa-chevron-left" id="businessmodelcanvas_enter__backbuttonicon"><button class="businessmodelcanvas_enter__backbutton">Back</button></i></v-row> -->
 

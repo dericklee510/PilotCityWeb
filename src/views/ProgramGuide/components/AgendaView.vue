@@ -28,12 +28,9 @@
             <label
               for="checkbox+index"
             >
-              <input
-                v-model="item.name"
+              <span
                 class="agenda-view__item"
-                disabled="true"
-                placeholder="Item"
-              >
+              >{{ item.name }}</span>
             </label>
           </v-col>
         </v-col> 

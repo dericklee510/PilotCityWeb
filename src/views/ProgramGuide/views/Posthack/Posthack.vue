@@ -5,10 +5,9 @@
       class="posthack__image"
       src="@/assets/Posthack.png"
     >
-
     <v-col
       id="posthack__contain"
-      cols="7"
+      cols="10"
     >
       <v-row
         justify="center"
@@ -29,79 +28,165 @@
         Now that you’ve received feedback from your employer, it is time to evolve, iterate or pivot your project if necessary.
       </v-row>
 
-      <v-row id="posthack__check1">
-        <span class="posthack__wholeline">
-          <input
-            v-model="canvas"
-            class="posthack__check"
-            type="checkbox"
-          >
-          Update Business Model Canvas
-          <span class="posthack__error">*</span>
-          <span>
-            <button class="posthack__exporticon">
-              <img src="@/assets/greenexport.png">
-            </button>
-          </span>
-        </span>
-      </v-row>
-
-      <v-row>
-        <span class="posthack__descriptionline">Description of business model canvas</span>
-      </v-row>
-
-      <v-row id="posthack__check2">
-        <span class="posthack__wholeline">
-          <input
-            v-model="sentencePitch"
-            class="posthack__check"
-            type="checkbox"
-          >
-          Update One Sentence Pitch
-          <span class="posthack__error">*</span>
-          <span>
-            <button class="posthack__exporticon">
-              <img src="@/assets/greenexport.png">
-            </button>
-          </span>
-        </span>
-      </v-row>
-
-      <v-row>
-        <span class="posthack__descriptionline">Description of one sentence pitch</span>
-      </v-row>
-
-      <v-row id="posthack__check2">
-        <span class="posthack__wholeline">
-          <input
-            v-model="elevatorPitch"
-            class="posthack__check"
-            type="checkbox"
-          >
-          Update Written Elevator Pitch
-          <span class="posthack__error">*</span>
-          <span>
-            <button class="posthack__exporticon">
-              <img src="@/assets/greenexport.png">
-            </button>
-          </span>
-        </span>
-      </v-row>
-
-      <v-row>
-        <span class="posthack__descriptionline">Description of written elevator pitch</span>
-      </v-row>
-
-      <v-row>
-        <v-btn
-          class="posthack__acknowledgebutton"
-          :disabled="!pivotReady"
-          @click="submit"
+      <v-col cols="12">
+        <v-row
+          id="posthack__check1"
+          justify="center"
+          no-gutters
         >
-          ACKNOWLEDGE
-        </v-btn>
+          <v-col
+            cols="12"
+            md="6"
+            lg="5"
+            xl="4"
+            class="posthack__wholeline"
+          >
+            <input
+              v-model="canvas"
+              class="posthack__check"
+              type="checkbox"
+            >
+            Update Business Model Canvas
+            <span class="posthack__error">*</span>
+            <span>
+              <button class="posthack__exporticon">
+                <img src="@/assets/greenexport.png">
+              </button>
+            </span>
+          </v-col>
+        </v-row>
+        <v-row
+          no-gutters
+          justify="center"
+        >
+          <v-col
+            class="posthack__descriptionline"
+            cols="12"
+            md="6"
+            lg="5"
+            xl="4"
+          >
+            Description of business model canvas
+          </v-col>
+        </v-row>
+      </v-col>
+
+      
+
+      <v-col cols="12">
+        <v-row
+          id="posthack__check2"
+          justify="center"
+          no-gutters
+        >
+          <v-col
+            class="posthack__wholeline"
+            cols="12"
+            md="6"
+            lg="5"
+            xl="4"
+          >
+            <input
+              v-model="sentencePitch"
+              class="posthack__check"
+              type="checkbox"
+            >
+            Update One Sentence Pitch
+            <span class="posthack__error">*</span>
+            <span>
+              <button class="posthack__exporticon">
+                <img src="@/assets/greenexport.png">
+              </button>
+            </span>
+          </v-col>
+        </v-row>
+        <v-row
+          justify="center"
+          no-gutters
+        >
+          <v-col
+            class="posthack__descriptionline"
+            cols="10"
+            md="6"
+            lg="5"
+            xl="4"
+          >
+            Description of one sentence pitch
+          </v-col>
+        </v-row>
+      </v-col>
+
+      
+
+      <v-col cols="12">
+        <v-row
+          id="posthack__check2"
+          justify="center"
+          no-gutters
+        >
+          <v-col
+            class="posthack__wholeline"
+            cols="12"
+            md="6"
+            lg="5"
+            xl="4"
+          >
+            <input
+              v-model="elevatorPitch"
+              class="posthack__check"
+              type="checkbox"
+            >
+            Update Written Elevator Pitch
+            <span class="posthack__error">*</span>
+            <span>
+              <button class="posthack__exporticon">
+                <img src="@/assets/greenexport.png">
+              </button>
+            </span>
+          </v-col>
+        </v-row>
+        <v-row
+          no-gutters
+          justify="center"
+        >
+          <v-col
+            class="posthack__descriptionline"
+            cols="12"
+            md="6"
+            lg="5"
+            xl="4"
+          >
+            Description of written elevator pitch
+          </v-col>
+        </v-row>
+      </v-col>
+
+      
+
+      <v-row
+        justify="center"
+        class="mt-6"
+      >
+        <v-col
+          cols="10"
+          md="3"
+        >
+          <v-btn
+            class="posthack__button"
+            :disabled="!pivotReady"
+            solo
+            depressed
+            text
+            height="55.88px"
+            @click="submit"
+          >
+            Acknowledge
+          </v-btn>
+        </v-col>
       </v-row>
     </v-col>
+  </v-row>
+  </v-col>
   </v-row>
 </template>
 

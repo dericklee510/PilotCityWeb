@@ -109,6 +109,10 @@ h6{
 
 
 /* APPLICATION STYLES */
+#pc-app .v-text-center{
+    height: 100%;
+    line-height: 100%;
+}
 #pc-app{
     .primary--text{
         color: #000 !important;

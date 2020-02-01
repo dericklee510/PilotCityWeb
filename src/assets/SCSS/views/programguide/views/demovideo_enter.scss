@@ -14,6 +14,9 @@
         margin-bottom: 49.29px;
         padding-left: 0%;
         padding-right: 0%;
+        @media (max-width: 610px) {
+            border: none;
+        }
     }
 
     &__borderline{
@@ -64,11 +67,14 @@
     &__videolink{
         height: 60px;
         border: 1px solid #CCCCCC;
-        width: 75%;
-        font-size: 22px;
+        width: 100%;
         font-family: "Raleway";
         padding-left: 20px;
-        font-weight: 700;
+        .v-input__slot{
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-top: 4px;
+        }
     }
 
     
@@ -104,50 +110,50 @@
 
     &__check{
 
-    margin-top: 5%;
-    margin-bottom: 3%;
-    font-family: Raleway;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 1.41rem;
-    line-height: 30px;
-    color: #949598;
-    width: 75%;
-    text-align: left;
+        margin-top: 5%;
+        margin-bottom: 3%;
+        font-family: Raleway;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 1.2rem;
+        line-height: 30px;
+        color: #949598;
+        width: 75%;
+        text-align: left;
 
     }
 
     &__checkbox{
         width: 18px;
         height: 18px;
-        margin-top: .5%;
-        margin-right: 2%;
         border: 1.5px;
         border-color: #C7C8CA;
-        
+        &.v-input--selection-controls{
+            margin: 0px;
+            padding: 0px;
+        }
     }
 
     &__button{
-    // margin-top: 2%;
-    width: 100%;
-    height: 73.5px;
-    font-family: Raleway;
-    font-style: normal;
-    font-weight: 900;
-    font-size: 1.88rem;
-    line-height: 35px;
-    color: #BCBEC0;
-    background-color: #E6E7E8;
-
-
+        // margin-top: 2%;
+        width: 100%;
+        height: 73.5px;
+        font-family: Raleway;
+        font-style: normal;
+        font-weight: 900;
+        font-size: 1.88rem;
+        line-height: 35px;
+        color: #000000;
+        // background-color: #E6E7E8;
+        border: 1px solid #000000;
+        word-wrap: break-word;
+        .v-btn__content{
+            font-family: Raleway;
+            font-style: normal;
+            font-weight: 900;
+            font-size: 1.88rem;
+        }
     }
-
-    &__button:hover { 
-        background-color:#6FBA7F;
-        color: #ffffff;
-
-    }
-
 
 
 

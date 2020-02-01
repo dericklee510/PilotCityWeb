@@ -14,6 +14,9 @@
         margin-bottom: 49.29px;
         padding-left: 0%;
         padding-right: 0%;
+        @media (max-width: 610px) {
+            border: none;
+        }
     }
 
     &__borderline{
@@ -62,14 +65,16 @@
     }
 
     &__onesentence{
-        height: 120px;
-        border: 1px solid #CCCCCC;
         width: 75%;
         font-size: 22px;
         font-family: "Raleway";
         padding-left: 20px;
         font-weight: 700;
         word-wrap: break-word;
+        .v-input__slot{
+            border: 1px solid #CCCCCC;
+            padding: 20px;
+        }
     }
 
     
@@ -129,33 +134,25 @@
     }
 
     &__button{
-    // margin-top: 2%;
-    width: 100%;
-    height: 73.5px;
-    font-family: Raleway;
-    font-style: normal;
-    font-weight: 900;
-    font-size: 1.88rem;
-    line-height: 35px;
-    color: #000000;
-    // background-color: #E6E7E8;
-    border: 1px solid #000000;
-    word-wrap: break-word;
-
-
+        // margin-top: 2%;
+        width: 100%;
+        height: 73.5px;
+        font-family: Raleway;
+        font-style: normal;
+        font-weight: 900;
+        font-size: 1.88rem;
+        line-height: 35px;
+        color: #000000;
+        // background-color: #E6E7E8;
+        border: 1px solid #000000;
+        word-wrap: break-word;
+        .v-btn__content{
+            font-family: Raleway;
+            font-style: normal;
+            font-weight: 900;
+            font-size: 1.88rem;
+        }
     }
-
-    &__button:hover { 
-        background-color:#6FBA7F;
-        color: #ffffff;
-        border: 1px solid #6FBA7F;
-
-    }
-
-
-
-
-
 }
 
 

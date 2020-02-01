@@ -13,7 +13,7 @@
       />
       <v-col
         cols="8"
-        md="7"
+        md="10"
       >
         <v-col class="programbrief__tile">
           Program Briefs
@@ -29,10 +29,6 @@
             @confirm="onConfirmed"
           />
         </v-col>
-
-        <!-- <v-col>
-          <BriefCard />
-        </v-col> -->
       </v-col>
       <v-col
         cols="2"

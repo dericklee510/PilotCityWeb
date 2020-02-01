@@ -14,6 +14,9 @@
         margin-bottom: 49.29px;
         padding-left: 0%;
         padding-right: 0%;
+        @media (max-width: 610px) {
+            border: none;
+        }
         .video-player .vjs_video_3-dimensions{
             width: 49vw;
             height: calc(49vw / 2.4);

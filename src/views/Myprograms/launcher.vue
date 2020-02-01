@@ -184,7 +184,11 @@
       >
         <v-btn
           class="launcher__button mb-10"
+<<<<<<< HEAD
           :disabled="check"
+=======
+          :disabled="!check"
+>>>>>>> feature/programguide.derick
           @click="launchProgram"
         >
           LAUNCH
@@ -203,6 +207,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { FbStore } from '../../store'
 import { RouteList } from '../ProgramGuide/types'
+import { firebase } from "@/firebase/init";
 @Component({
   async beforeRouteEnter(to,from,next){
     if(localStorage.PILOTCITY_EMPLOYERPROGRAMID)
@@ -215,6 +220,10 @@ export default class ProgramLauncher extends Vue{
     async launchProgram() {
       if(FbStore.userCitizenType === "teacher")
         await FbStore.createTeacherProgramData(FbStore.currentEmployerProgramUID!)
+      else if(FbStore.userCitizenType === "employer")
+        await FbStore.updateCurrentEmployerProgram({
+          launched:firebase.firestore.FieldValue.serverTimestamp()
+        })
         let route = new RouteList(
       FbStore.currentUserProfile!.citizenType!
     ).linkedList.head.value.routeName

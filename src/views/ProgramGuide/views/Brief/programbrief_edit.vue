@@ -4,8 +4,8 @@
     class="programbrief__dark"
   >
     <v-row
-      class="programbrief__container"
-      no-gutters
+      class="programbrief__container" 
+      justify="center"
     >
       <v-col
         cols="2"
@@ -25,14 +25,25 @@
           />
         </v-col>
         <v-col>
-          <button
-            class="programbrief__addbrief"
-            @click="addEntry"
+          <v-row
+            no-gutters
+            justify="center"
           >
-            +
-          </button>
+            <v-col cols="12">
+              <button
+                class="programbrief__addbrief"
+                @click="addEntry"
+              >
+                +
+              </button>
+            </v-col>
+          </v-row>
         </v-col>
       </v-col>
+      <v-col
+        cols="2"
+        md="1"
+      />
     </v-row>
   </v-container>
 </template>

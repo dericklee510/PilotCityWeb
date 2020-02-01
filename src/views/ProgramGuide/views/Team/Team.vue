@@ -1,66 +1,87 @@
 <template>
   <v-container>
-    <v-row> 
-      <span class="Team__title">
-        TEAM 
-      </span>
-    </v-row>
-    <v-row
-      v-for="(name,index) in names"
-      :key="index"
-    > 
-      <span class="Team__name">
-        {{ name }}
-      </span>
-    </v-row>
-    <v-row> 
-      <span class="Team__Settings">
-        Settings
-      </span>
-    </v-row>
-    <v-row> 
-      <span class="Team__teamname">
-        Team Name
-      </span>
-
-      
-      <v-row> 
-        <ValidationObserver v-slot="{invalid}">
-          <span class="Team__buttons">
-            <ValidationProvider
-              v-slot="{errors}"
-              slim
-              rules="required"
-            >
-              <v-text-field
-                v-model="newTeamName"
-                :error-messages="errors"
-                class="Team__newteamname"
-                :placeholder="teamName"
-              />
-            </ValidationProvider>
+    <v-row no-gutters justify="center">
+      <v-col cols="8">
+        <v-col class="Team__title"> 
+          <span>
+            TEAM 
+          </span>
+        </v-col>
+        <v-col
+          v-for="(name,index) in names"
+          :key="index"
+        > 
+          <span class="Team__name">
+            {{ name }}
+          </span>
+        </v-col>
+        <v-col class="Team__Settings"> 
+          <span>
+            Settings
+          </span>
+        </v-col>
+        <v-col class="Team__teamname"> 
+          <span>
+            Team Name
+          </span>
+          
+          <ValidationObserver v-slot="{invalid}">
+            <v-row no-gutters> 
+              <v-col>
+                <v-row class="Team__buttons">
+                  <ValidationProvider
+                    v-slot="{errors}"
+                    slim
+                    rules="required"
+                  >
+                    <v-col cols="6">
+                      <v-text-field
+                        v-model="newTeamName"
+                        :error-messages="errors"
+                        class="Team__newteamname"
+                        :placeholder="teamName"
+                      />
+                    </v-col>
+                  </ValidationProvider>
+                  <PCLoader v-slot="{loading,setLoader}">
+                    <v-col cols="12">
+                      <v-btn
+                        :loading="loading"
+                        :disabled="invalid"
+                        solo
+                        depressed
+                        text
+                        height="55.88px"
+                        outlined
+                        class="Team__renamebutton"
+                        @click="setLoader(renameTeam)"
+                      >
+                        RENAME
+                      </v-btn>
+                    </v-col>
+                  </PCLoader>
+                </v-row>
+              </v-col>
+            </v-row>
+          </ValidationObserver>
+          <v-row> 
             <PCLoader v-slot="{loading,setLoader}">
-              <v-btn
-                :loading="loading"
-                :disabled="invalid"
-                class="Team__renamebutton"
-                @click="setLoader(renameTeam)"
-              >RENAME</v-btn>
+              <span class="Team__buttons1">
+                <v-btn
+                  :loading="loading"
+                  solo
+                  depressed
+                  text
+                  height="55.88px"
+                  outlined
+                  class="Team__leavebutton"
+                  @click="setLoader(leaveTeam)"
+                >LEAVE TEAM</v-btn>
+              </span>
             </PCLoader>
-          </span>
-        </ValidationObserver>
-      </v-row>
-      <v-row> 
-        <PCLoader v-slot="{loading,setLoader}">
-          <span class="Team__buttons1">
-            <v-btn
-              :loading="loading"
-              class="Team__leavebutton"
-              @click="setLoader(leaveTeam)"
-            >LEAVE</v-btn>
-          </span>
-        </PCLoader>
-      </v-row>
+          </v-row>
+        </v-col>
+      </v-col>
     </v-row>
   </v-container>
 </template>

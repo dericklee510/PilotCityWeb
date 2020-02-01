@@ -24,15 +24,24 @@
               <v-row
                 v-for="(project,index) in projects"
                 :key="index"
+                no-gutters
+                style="margin-bottom: 35px;"
               >
-                <span class="jointeam__name1">
+                <v-col
+                  cols="2"
+                  style="margin-right: 41.6px;"
+                >
                   <v-btn
                     :loading="loading"
-                    class="jointeam__button1 manageclass__button"
+                    class="manageteam__button"
                     @click="setLoader(joinTeam(project))"
-                  >JOIN</v-btn>
+                  >
+                    JOIN
+                  </v-btn>
+                </v-col>
+                <v-col class="join-team__team-name text-uppercase">
                   {{ project.teamName }}
-                </span>
+                </v-col>
               </v-row>
             </PCLoader>
           </v-col>
@@ -57,14 +66,14 @@
             <span>Team Name</span>
           </v-col>
         </v-row>
+          <ValidationObserver v-slot="{invalid}">
         <v-row>
-          <v-col
-            cols="12"
-            class="jointeam__buttons"
-          >
-            <v-row no-gutters>
-              <ValidationObserver v-slot="{invalid}">
-                <v-col cols="5">
+            <v-col
+              cols="12"
+              class="join-team__buttons"
+            >
+              <v-row no-gutters>
+                <v-col cols="6">
                   <ValidationProvider
                     v-slot="{errors}"
                     rules="required"
@@ -74,31 +83,34 @@
                       flat
                       solo
                       depressed
+                      outlined
                       :error-messages="errors"
-                      class="jointeam__dreamteam"
+                      class="join-team__dreamteam manageteam__input"
                       placeholder="Dream Team"
                     />
                   </ValidationProvider>
                 </v-col>
-                <v-col cols="3">
+                <v-col cols="2">
                   <PCLoader v-slot="{loading,setLoader}">
                     <v-btn
                       text
                       solo
                       depressed
+                      outlined
+                      height="55.88px"
                       :loading="loading"
                       :disabled="invalid"
-                      class="jointeam__createbutton manageclass__button"
+                      class="jointeam__createbutton manageclass__button ml-6"
                       @click="setLoader(createProject)"
                     >
                       CREATE
                     </v-btn>
                   </PCLoader>
                 </v-col>
-              </ValidationObserver>
-            </v-row>
-          </v-col>
+              </v-row>
+            </v-col>
         </v-row>
+          </ValidationObserver>
       </v-col>
     </v-row>
   </v-container>

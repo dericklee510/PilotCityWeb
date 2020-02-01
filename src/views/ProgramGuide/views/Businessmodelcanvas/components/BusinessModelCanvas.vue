@@ -3,214 +3,321 @@
     <v-container>
       <v-row
         justify="center"
-        class="businessmodelcanvas_enter__description__label mt-12 mr-auto ml-auto pl-2 mb-1"
+        no-gutters
       >
-        <v-col
-          cols="8"
-          class
-        >
-          Problem
-        </v-col>
-      
-        <v-col cols="4">
-          <v-row v-if="stars">
-            <div class="businessmodelcanvas_enter__ratinglabel pt-2 pr-3">
-              Rating
-            </div>
-            <v-rating
-              v-model="stars.problem"
-              :readonly="readonly===undefined"
-              @input="onStarsChanged($event,'problem')"
-            />
+        <v-col cols="8">
+          <v-row
+            justify="center"
+            class="businessmodelcanvas_enter__description__label mt-12 mr-auto ml-auto mb-1"
+          >
+            <v-col
+              cols="12"
+              md="5"
+              class
+            >
+              Problem
+            </v-col>
+            <v-spacer />
+            <v-col
+              cols="12"
+              md="6"
+              lg="5"
+              xl="4"
+            >
+              <v-row
+                v-if="stars"
+                justify-md="end"
+                justify="start"
+                align="center"
+                no-gutters
+              >
+                <v-col
+                  cols="12"
+                  sm="6"
+                  md="5"
+                  xl="3"
+                  class="businessmodelcanvas_enter__ratinglabel"
+                >
+                  <span>Rating</span>
+                </v-col>
+                <v-col
+                  cols="12"
+                  sm="6"
+                  class="pc-rating"
+                >
+                  <v-rating
+                    v-model="stars.problem"
+                    dense
+                    :readonly="readonly===undefined"
+                    @input="onStarsChanged($event,'problem')"
+                  />
+                </v-col>
+              </v-row>
+            </v-col>
+          </v-row>
+          <v-row
+            v-if="readonly==true"
+            justify="center"
+            class="mr-auto ml-auto mb-12"
+          >
+            {{ syncedCanvas.problem }}
+          </v-row>
+          <v-row
+            v-else
+            justify="center"
+            class="mr-auto ml-auto mb-12"
+          >
+            <ValidationProvider
+              v-slot="{errors,failedRules}"
+              name="Problem"
+              class="pt-1 pb-12 pl-5 pr-4 businessmodelcanvas_enter__paragraph"
+              rules="required|max:255"
+            >
+              <v-textarea
+                v-model="syncedCanvas.problem"
+                :disabled="readonly"
+                :error-messages="failedRules.max?`Must not be longer than 280 Characters`:errors"
+                counter
+                placeholder="My pitch is..."
+                @input="$emit('input',syncedCanvas)"
+              />
+            </ValidationProvider>
+          </v-row>
+          
+          <!-- COMPONENT -->
+          <v-row
+            justify="center"
+            class="businessmodelcanvas_enter__description__label mt-12 mr-auto ml-auto mb-1"
+          >
+            <v-col
+              cols="12"
+              md="5"
+              class
+            >
+              Solution
+            </v-col>
+            <v-spacer />
+            <v-col
+              cols="12"
+              md="6"
+              lg="5"
+              xl="4"
+            >
+              <v-row
+                v-if="stars"
+                justify-md="end"
+                justify="start"
+                align="center"
+                no-gutters
+              >
+                <v-col
+                  cols="12"
+                  sm="6"
+                  md="5"
+                  xl="3"
+                  class="businessmodelcanvas_enter__ratinglabel"
+                >
+                  <span>Rating</span>
+                </v-col>
+                <v-col
+                  cols="12"
+                  sm="6"
+                  class="pc-rating"
+                >
+                  <v-rating
+                    v-model="stars.solution"
+                    dense
+                    :readonly="readonly===undefined"
+                    @input="onStarsChanged($event,'problem')"
+                  />
+                </v-col>
+              </v-row>
+            </v-col>
+          </v-row>
+          <v-row
+            v-if="readonly==true"
+            justify="center"
+            class="mr-auto ml-auto mb-12"
+          >
+            {{ syncedCanvas.solution }}
+          </v-row>
+          <v-row
+            v-else
+            justify="center"
+            class="mr-auto ml-auto mb-12"
+          >
+            <ValidationProvider
+              v-slot="{errors,failedRules}"
+              class="pt-1 pb-12 pl-5 pr-4 businessmodelcanvas_enter__paragraph"
+              rules="required|max:255"
+            >
+              <v-textarea
+                v-model="syncedCanvas.solution"
+                :disabled="readonly"
+                :error-messages="failedRules.max?`Must not be longer than 280 Characters`:errors"
+                counter
+                placeholder="My pitch is..."
+                @input="$emit('input',syncedCanvas)"
+              />
+            </ValidationProvider>
+          </v-row>
+          
+          <!-- COMPONENT -->
+          <v-row
+            justify="center"
+            class="businessmodelcanvas_enter__description__label mt-12 mr-auto ml-auto mb-1"
+          >
+            <v-col
+              cols="12"
+              md="5"
+              class
+            >
+              Unique Value Proposition
+            </v-col>
+            <v-spacer />
+            <v-col
+              cols="12"
+              md="6"
+              lg="5"
+              xl="4"
+            >
+              <v-row
+                v-if="stars"
+                justify-md="end"
+                justify="start"
+                align="center"
+                no-gutters
+              >
+                <v-col
+                  cols="12"
+                  sm="6"
+                  md="5"
+                  xl="3"
+                  class="businessmodelcanvas_enter__ratinglabel"
+                >
+                  <span>Rating</span>
+                </v-col>
+                <v-col
+                  cols="12"
+                  sm="6"
+                  class="pc-rating"
+                >
+                  <v-rating
+                    v-model="stars.innovation"
+                    dense
+                    :readonly="readonly===undefined"
+                    @input="onStarsChanged($event,'problem')"
+                  />
+                </v-col>
+              </v-row>
+            </v-col>
+          </v-row>
+          <v-row
+            v-if="readonly==true"
+            justify="center"
+            class="mr-auto ml-auto mb-12"
+          >
+            {{ syncedCanvas.innovation }}
+          </v-row>
+          <v-row
+            v-else
+            justify="center"
+            class="mr-auto ml-auto mb-12"
+          >
+            <ValidationProvider
+              v-slot="{errors,failedRules}"
+              class="pt-1 pb-12 pl-5 pr-4 businessmodelcanvas_enter__paragraph"
+              rules="required|max:255"
+            >
+              <v-textarea
+                v-model="syncedCanvas.innovation"
+                :disabled="readonly"
+                :error-messages="failedRules.max?`Must not be longer than 280 Characters`:errors"
+                counter
+                placeholder="My pitch is..."
+                @input="$emit('input',syncedCanvas)"
+              />
+            </ValidationProvider>
+          </v-row>
+          
+          <!-- COMPONENT -->
+          <v-row
+            justify="center"
+            class="businessmodelcanvas_enter__description__label mt-12 mr-auto ml-auto mb-1"
+          >
+            <v-col
+              cols="12"
+              md="5"
+              class
+            >
+              Customer
+            </v-col>
+            <v-spacer />
+            <v-col
+              cols="12"
+              md="6"
+              lg="5"
+              xl="4"
+            >
+              <v-row
+                v-if="stars"
+                justify-md="end"
+                justify="start"
+                align="center"
+                no-gutters
+              >
+                <v-col
+                  cols="12"
+                  sm="6"
+                  md="5"
+                  xl="3"
+                  class="businessmodelcanvas_enter__ratinglabel"
+                >
+                  <span>Rating</span>
+                </v-col>
+                <v-col
+                  cols="12"
+                  sm="6"
+                  class="pc-rating"
+                >
+                  <v-rating
+                    v-model="stars.cost"
+                    dense
+                    :readonly="readonly===undefined"
+                    @input="onStarsChanged($event,'problem')"
+                  />
+                </v-col>
+              </v-row>
+            </v-col>
+          </v-row>
+          <v-row
+            v-if="readonly==true"
+            justify="center"
+            class="mr-auto ml-auto mb-12"
+          >
+            {{ syncedCanvas.customer }}
+          </v-row>
+          <v-row
+            v-else
+            justify="center"
+            class="mr-auto ml-auto mb-12"
+          >
+            <ValidationProvider
+              v-slot="{errors,failedRules}"
+              rules="required|max:255"
+              class="pt-1 pb-12 pl-5 pr-4 businessmodelcanvas_enter__paragraph"
+            >
+              <v-textarea
+                v-model="syncedCanvas.customer"
+                :disabled="readonly"
+                :error-messages="failedRules.max?`Must not be longer than 280 Characters`:errors"
+                counter
+                placeholder="My pitch is..."
+                @input="$emit('input',syncedCanvas)"
+              />
+            </ValidationProvider>
           </v-row>
         </v-col>
-      </v-row>
-      <v-row
-        v-if="readonly==true"
-        justify="center"
-        class="mr-auto ml-auto mb-12"
-      >
-        {{ syncedCanvas.problem }}
-      </v-row>
-      <v-row
-        v-else
-        justifv-elsey="center"
-        class="mr-auto ml-auto mb-12"
-      >
-        <ValidationProvider
-          v-slot="{errors,failedRules}"
-          name="Problem"
-          class="pt-1 pb-12 pl-5 pr-4 businessmodelcanvas_enter__paragraph"
-          rules="required|max:255"
-        >
-          <v-textarea
-            v-model="syncedCanvas.problem"
-            :disabled="readonly"
-            :error-messages="failedRules.max?`Must not be longer than 280 Characters`:errors"
-            counter
-            placeholder="My pitch is..."
-            @input="$emit('input',syncedCanvas)"
-          />
-        </ValidationProvider>
-      </v-row>
-      
-      <!-- COMPONENT -->
-      <v-row
-        justify="center"
-        class="businessmodelcanvas_enter__description__label mt-12 mr-auto ml-auto pl-2 mb-1"
-      >
-        <v-col
-          cols="8"
-          class
-        >
-          Solution
-        </v-col>
-      
-        <v-col cols="4">
-          <v-row v-if="stars">
-            <div class="businessmodelcanvas_enter__ratinglabel pt-2 pr-3">
-              Rating
-            </div>
-            <v-rating
-              v-model="stars.solution"
-              :readonly="readonly===undefined"
-              @input="onStarsChanged($event,'solution')"
-            />
-          </v-row>
-        </v-col>
-      </v-row>
-      <v-row
-        v-if="readonly==true"
-        justify="center"
-        class="mr-auto ml-auto mb-12"
-      >
-        {{ syncedCanvas.solution }}
-      </v-row>
-      <v-row
-        v-else
-        justify="center"
-        class="mr-auto ml-auto mb-12"
-      >
-        <ValidationProvider
-          v-slot="{errors,failedRules}"
-          class="pt-1 pb-12 pl-5 pr-4 businessmodelcanvas_enter__paragraph"
-          rules="required|max:255"
-        >
-          <v-textarea
-            v-model="syncedCanvas.solution"
-            :disabled="readonly"
-            :error-messages="failedRules.max?`Must not be longer than 280 Characters`:errors"
-            counter
-            placeholder="My pitch is..."
-            @input="$emit('input',syncedCanvas)"
-          />
-        </ValidationProvider>
-      </v-row>
-      
-      <!-- COMPONENT -->
-      <v-row
-        justify="center"
-        class="businessmodelcanvas_enter__description__label mt-12 mr-auto ml-auto pl-2 mb-1"
-      >
-        <v-col
-          cols="8"
-          class
-        >
-          Innovation
-        </v-col>
-      
-        <v-col cols="4">
-          <v-row v-if="stars">
-            <div class="businessmodelcanvas_enter__ratinglabel pt-2 pr-3">
-              Rating
-            </div>
-            <v-rating
-              v-model="stars.innovation"
-              :readonly="readonly===undefined"
-              @input="onStarsChanged($event,'innovation')"
-            />
-          </v-row>
-        </v-col>
-      </v-row>
-      <v-row
-        v-if="readonly==true"
-        justify="center"
-        class="mr-auto ml-auto mb-12"
-      >
-        {{ syncedCanvas.innovation }}
-      </v-row>
-      <v-row
-        v-else
-        justify="center"
-        class="mr-auto ml-auto mb-12"
-      >
-        <ValidationProvider
-          v-slot="{errors,failedRules}"
-          class="pt-1 pb-12 pl-5 pr-4 businessmodelcanvas_enter__paragraph"
-          rules="required|max:255"
-        >
-          <v-textarea
-            v-model="syncedCanvas.innovation"
-            :disabled="readonly"
-            :error-messages="failedRules.max?`Must not be longer than 280 Characters`:errors"
-            counter
-            placeholder="My pitch is..."
-            @input="$emit('input',syncedCanvas)"
-          />
-        </ValidationProvider>
-      </v-row>
-      
-      <!-- COMPONENT -->
-      <v-row
-        justify="center"
-        class="businessmodelcanvas_enter__description__label mt-12 mr-auto ml-auto pl-2 mb-1"
-      >
-        <v-col
-          cols="8"
-          class
-        >
-          Cost
-        </v-col>
-      
-        <v-col cols="4">
-          <v-row v-if="stars">
-            <div class="businessmodelcanvas_enter__ratinglabel pt-2 pr-3">
-              Rating
-            </div>
-            <v-rating
-              v-model="stars.customer"
-              :readonly="readonly===undefined"
-              @input="onStarsChanged($event,'customer')"
-            />
-          </v-row>
-        </v-col>
-      </v-row>
-      <v-row
-        v-if="readonly==true"
-        justify="center"
-        class="mr-auto ml-auto mb-12"
-      >
-        {{ syncedCanvas.customer }}
-      </v-row>
-      <v-row
-        v-else
-        justify="center"
-        class="mr-auto ml-auto mb-12"
-      >
-        <ValidationProvider
-          v-slot="{errors,failedRules}"
-          rules="required|max:255"
-          class="pt-1 pb-12 pl-5 pr-4 businessmodelcanvas_enter__paragraph"
-        >
-          <v-textarea
-            v-model="syncedCanvas.customer"
-            :disabled="readonly"
-            :error-messages="failedRules.max?`Must not be longer than 280 Characters`:errors"
-            counter
-            placeholder="My pitch is..."
-            @input="$emit('input',syncedCanvas)"
-          />
-        </ValidationProvider>
       </v-row>
     </v-container>
   </ValidationObserver>

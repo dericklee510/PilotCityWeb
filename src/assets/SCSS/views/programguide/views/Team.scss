@@ -8,11 +8,8 @@
         font-weight: 800;
         font-size: 37.5px;
         line-height: 44px;
-
         color: #231F20;
-
-        margin-left: 24.5%;
-        margin-top: 6%;
+        margin-top: 68.07px;
 
     }
 
@@ -24,81 +21,7 @@
         font-weight: 900;
         font-size: 15px;
         line-height: 18px;
-        
         color: #231F20;
-        
-
-        margin-left: 25.0%;
-        margin-top: 41.59px;
-
-    }
-
-    &__name1{
-        width: 100%;
-
-        font-family: Raleway;
-        font-style: normal;
-        font-weight: 900;
-        font-size: 15px;
-        line-height: 18px;
-        
-        color: #231F20;
-        
-
-        margin-left: 25.3%;
-        margin-top: 41.59px;
-
-    }
-
-    &__name2{
-        width: 100%;
-
-        font-family: Raleway;
-        font-style: normal;
-        font-weight: 900;
-        font-size: 15px;
-        line-height: 18px;
-        
-        color: #231F20;
-        
-
-        margin-left: 25.7%;
-        margin-top: 41.59px;
-
-    }
-
-
-    &__name3{
-        width: 100%;
-
-        font-family: Raleway;
-        font-style: normal;
-        font-weight: 900;
-        font-size: 15px;
-        line-height: 18px;
-        
-        color: #231F20;
-        
-
-        margin-left: 26.1%;
-        margin-top: 41.59px;
-
-    }
-
-
-    &__name4{
-        width: 100%;
-
-        font-family: Raleway;
-        font-style: normal;
-        font-weight: 900;
-        font-size: 15px;
-        line-height: 18px;
-        
-        color: #231F20;
-        
-
-        margin-left: 26.4%;
         margin-top: 41.59px;
 
     }
@@ -111,10 +34,7 @@
         font-weight: 800;
         font-size: 37.5px;
         line-height: 44px;
-
         color: #231F20;
-
-        margin-left: 26.4%;
         margin-top: 41.59px;
 
 
@@ -122,17 +42,12 @@
 
     &__teamname{
         width: 100%;
-
         font-family: Raleway;
         font-style: normal;
         font-weight: 800;
         font-size: 15px;
         line-height: 18px;
-
         color: #231F20;
-
-
-        margin-left: 26.7%;
         margin-top: 40.24px;
 
 
@@ -143,20 +58,13 @@
     }
 
     &__newteamname{
-        width: 384.77px;
         height: 55.88px;
-
         font-family: Raleway;
         font-style: normal;
         font-weight: 900;
         font-size: 15px;
         line-height: 18px;
-        border: 0.375px solid #000000;
-
-
         color: #231F20;
-
-        margin-left: 27.0%;
         margin-top: 1%;
         padding-left: 1%;
 
@@ -164,62 +72,17 @@
     }
 
     &__renamebutton{
-        width: 141.85px;
-
         height: 55.88px;
-
+        margin-left: 22px;
         font-family: Raleway;
         font-style: normal;
         font-weight: 900;
         font-size: 17.1097px;
         line-height: 20px;
-        border: 0.428px solid #231F20;
-
         color: #231F20;
-
-        margin-left: 1.9%;
-  
-
-    }
-
-    &__newteamname1{
-        width: 384.77px;
-        height: 55.88px;
-
-        font-family: Raleway;
-        font-style: normal;
-        font-weight: 900;
-        font-size: 15px;
-        line-height: 18px;
-        border: 0.375px solid #000000;
-
-
-        color: #231F20;
-
-        margin-left: 27.25%;
-        margin-top: 1%;
-        padding-left: 1%;
-
-
-    }
-
-    &__renamebutton1{
-        width: 141.85px;
-
-        height: 55.88px;
-
-        font-family: Raleway;
-        font-style: normal;
-        font-weight: 900;
-        font-size: 17.1097px;
-        line-height: 20px;
-        border: 0.428px solid #231F20;
-
-        color: #231F20;
-
-        margin-left: 1.9%;
-  
-
+        .v-text-field > .v-input__control > .v-input__slot{
+            border: 0.428px solid #231F20;   
+        }
     }
 
     &__leavebutton{
@@ -232,19 +95,13 @@
         font-weight: 900;
         font-size: 17.1097px;
         line-height: 20px;
-        background: #939598;
+        background-color: #939598;
 
         color: #FFFFFF;
 
 
-        margin-left: 243.6%;
         margin-top: 71.9px;
   
 
     }
-
-
-
-
-
 }

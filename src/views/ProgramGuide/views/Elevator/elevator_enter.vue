@@ -7,7 +7,7 @@
 
     <v-col
       id="elevator_enter__contain"
-      cols="7"
+      cols="10"
     >
       <v-row
         justify="center"
@@ -37,7 +37,7 @@
       <ValidationObserver v-slot="{invalid, validate}">
         <v-row
           justify="center"
-          class="mr-auto ml-auto mt-12 mb-12"
+          class="mr-auto ml-auto mt-6 mb-12"
         >
           <ValidationProvider
             v-slot="{errors}"
@@ -46,6 +46,7 @@
           >
             <v-textarea
               v-model="text"
+              no-resize
               :error-messages="errors"
               placeholder="My pitch is..."
             />
@@ -58,6 +59,10 @@
         >
           <v-btn
             class="elevator_enter__button"
+            solo
+            depressed
+            text
+            height="55.88px"
             :loading="loading"
             :disabled="invalid"
             @click="validate().then(valid => {if(valid) submit()})"
@@ -78,10 +83,11 @@
 
       <v-row
         justify="center"
-        class="mt-3 mb-6"
+        class="mt-3 mb-6 pc-rating"
       >
         <v-rating
           v-model="rating"
+          size="30"
           readonly
         />
       </v-row>

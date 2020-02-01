@@ -174,3 +174,13 @@
     margin: .5em 0em;
 }
 
+
+// pc-rating
+// #pc-app .v-application .accent--text{}
+#pc-app .pc-rating{
+    & .v-rating{
+        .accent--text{
+            color: #272727 !important;
+        }
+    }
+}
