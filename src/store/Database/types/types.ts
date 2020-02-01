@@ -57,11 +57,7 @@ export interface EmployerProgram {
     employerProgramId: string
     programName: string
     employerId?: string,
-<<<<<<< HEAD
-    launchPicture?:string, // link
-=======
     launchImg?:string, // link
->>>>>>> feature/programguide.derick
     programLauncher: ProgramEvent[]
     externshipDayAgenda?: AgendaTemplate
     demoDayAgenda?: AgendaTemplate
