@@ -234,11 +234,192 @@
           </v-row>
           </template>
 
-          <!-- PROGRAM INFORMATION
+          <!-- PROGRAM INFORMATION -->
           <v-row
             justify="center"
             class="mr-auto ml-auto mt-5 mb-5 studentid__categorytitle"
-          >Program</v-row>-->
+          >Program</v-row>
+
+
+<!-- INTERNSHIP INTEREST LEVEL -->
+          <template>
+                          <v-row class="studentid__questiontitle mt-10" justify="center">What's your interest level in an internship?</v-row>
+          <v-row no-gutters justify="center">
+            <v-col cols="12" sm="7">
+
+              <v-radio-group v-model="internshipinterest" column>
+      <v-radio label="Highly Interested" value="2"></v-radio>
+      <v-radio label="Interested" value="1"></v-radio>
+      <v-radio label="Not Interested" value="0"></v-radio>
+    </v-radio-group>
+                </v-col>
+          </v-row>
+                    </template>
+
+<!-- UNPAID AND/OR PAID? -->
+          <template>
+                          <v-row class="studentid__questiontitle mt-10" justify="center">What compensation types are you open to?</v-row>
+          <v-row no-gutters justify="center">
+            <v-col cols="12" sm="7">
+
+    <v-checkbox v-model="unpaid" hide-details label="Unpaid Experience"></v-checkbox>
+    <v-checkbox v-model="paid" hide-details label="Paid"></v-checkbox>
+                </v-col>
+          </v-row>
+                    </template>
+
+
+<!-- FREE OR REDUCED LUNCH -->
+          <template>
+                          <v-row class="studentid__questiontitle mt-10" justify="center">Do you get free or reduced lunch at school?</v-row>
+          <v-row no-gutters justify="center">
+            <v-col cols="12" sm="7">
+
+              <v-radio-group v-model="lunchstatus" column>
+      <v-radio label="Yes" value="1"></v-radio>
+      <v-radio label="No" value="0"></v-radio>
+      <v-radio label="I'm not sure" value="I'm not sure"></v-radio>
+      <v-radio label="Decline to answer" value="Decline to answer"></v-radio>
+    </v-radio-group>
+                </v-col>
+          </v-row>
+                    </template>
+
+<!-- RESUME STATUS -->
+          <template>
+                          <v-row class="studentid__questiontitle mt-10" justify="center">Do you have a resume?</v-row>
+          <v-row no-gutters justify="center">
+            <v-col cols="12" sm="7">
+
+    <v-checkbox v-model="resume" hide-details label="Yes"></v-checkbox>
+    <v-checkbox v-model="noresume" hide-details label="No"></v-checkbox>
+    <v-checkbox v-model="linkedin" hide-details label="LinkedIn.com Resume"></v-checkbox>
+                </v-col>
+          </v-row>
+                    </template>
+
+
+<!-- RATE PATHWAY INTEREST -->
+          <template>
+                          <v-row class="studentid__questiontitle mt-10 mb-5" justify="center">Rate your interest in the following pathways</v-row>
+                          </template>
+
+
+<!-- PATHWAY 1 -->
+          <template>
+
+          <v-row no-gutters justify="center">
+                          <v-row class="studentid__questionsubtitle mt-1 mr-3">Arts, Media and Entertainment</v-row>
+            <v-row>
+    <v-rating
+      v-model="rating1"
+      :length="length"
+      :empty-icon="emptyIcon"
+      :full-icon="fullIcon"
+      :half-icon="halfIcon"
+      :half-increments="halfIncrements"
+      :hover="hover"
+      :readonly="readonly"
+      :size="size"
+      :dense="dense"
+      :color="color"
+      :background-color="bgColor"
+    ></v-rating>
+                </v-row>
+
+
+
+          </v-row>
+                    </template>
+
+
+<!-- PATHWAY 2 -->
+          <template>
+
+          <v-row no-gutters justify="center">
+                          <span class="studentid__questionsubtitle mt-1 mr-3">Building and Construction Trades</span>
+            <span>
+    <v-rating
+      v-model="rating2"
+      :length="length"
+      :empty-icon="emptyIcon"
+      :full-icon="fullIcon"
+      :half-icon="halfIcon"
+      :half-increments="halfIncrements"
+      :hover="hover"
+      :readonly="readonly"
+      :size="size"
+      :dense="dense"
+      :color="color"
+      :background-color="bgColor"
+    ></v-rating>
+                </span>
+
+
+
+          </v-row>
+                    </template>
+
+
+<!-- PATHWAY 3 -->
+          <template>
+
+          <v-row no-gutters justify="center">
+                          <span class="studentid__questionsubtitle mt-1 mr-3">Business and Finance</span>
+            <span>
+    <v-rating
+      v-model="rating3"
+      :length="length"
+      :empty-icon="emptyIcon"
+      :full-icon="fullIcon"
+      :half-icon="halfIcon"
+      :half-increments="halfIncrements"
+      :hover="hover"
+      :readonly="readonly"
+      :size="size"
+      :dense="dense"
+      :color="color"
+      :background-color="bgColor"
+    ></v-rating>
+                </span>
+
+
+
+          </v-row>
+                    </template>
+
+
+
+<!-- PATHWAY 4 -->
+          <template>
+
+          <v-row no-gutters justify="center">
+                          <span class="studentid__questionsubtitle mt-1 mr-3">Education, Childhood Development & Family Services</span>
+            <span>
+    <v-rating
+      v-model="rating4"
+      :length="length"
+      :empty-icon="emptyIcon"
+      :full-icon="fullIcon"
+      :half-icon="halfIcon"
+      :half-increments="halfIncrements"
+      :hover="hover"
+      :readonly="readonly"
+      :size="size"
+      :dense="dense"
+      :color="color"
+      :background-color="bgColor"
+    ></v-rating>
+                </span>
+
+
+
+          </v-row>
+                    </template>
+
+
+
+
 
           <!-- END -->
           </v-col>
@@ -428,7 +609,43 @@ import { startCase } from "lodash";
       "Urdu",
       "Vietnamese",
       "None of the above"
-    ]
+    ],
+
+// HEART RATING
+          emptyIcon: 'mdi-heart-outline',
+      fullIcon: 'mdi-heart',
+      halfIcon: 'mdi-heart-half-full',
+      hover: false,
+      length: 5,
+      rating1: 0,
+      rating2: 0,
+      size: 22,
+      dense: true,
+      color: 'red lighten-3',
+      colors: [
+        'primary',
+        'warning',
+        'green',
+        'red',
+        'blue',
+        'error',
+        'teal',
+        'red lighten-3',
+      ],
+      bgColor: 'grey lighten-1',
+      bgColors: [
+        'grey lighten-2',
+        'warning lighten-1',
+        'green lighten-2',
+        'red lighten-2',
+        'grey',
+        '#eee',
+        'cyan lighten-2',
+        'grey lighten-1',
+      ],
+
+// HEART RATING END
+    
 
     // END
   }),
@@ -474,6 +691,17 @@ export default class CitizenID extends Vue {
 
 
     });
+
+          return {
+        internshipinterest: null,
+        unpaid:null,
+        paid:null,
+        lunchstatus:null,
+        resume:null,
+        noresume:null,
+        linkedin:null,
+
+      }
     
     this.$router.push({ name: "program.programlist" });
   }
