@@ -118,7 +118,16 @@ import { PCLoader } from "../../../../components/utilities";
 import { ValidationProvider, ValidationObserver } from "vee-validate";
 import { Watch } from "vue-property-decorator";
 import { Subscription } from "rxjs";
-ValidationObserver;
+import {startCase, toLower} from 'lodash'
+import { GeneralUser } from '../../../../store/Database/types/types'
+function getNames(){
+  if(FbStore.currentProject)
+   return Promise.all(FbStore.currentProject.teamMembersIds.map(async (id) =>{
+           let {firstName, lastName} = (await FbStore.firestore.collection("GeneralUser").doc(id).get()).data<GeneralUser>()
+        return startCase(toLower(`${firstName} ${lastName}`))
+     }))
+     return []
+}
 @Component<jointeam>({
   asyncComputed: {
     // async projectObservables(){
@@ -171,14 +180,14 @@ export default class jointeam extends Vue {
     this.subscribers.forEach(subscriber => subscriber.unsubscribe());
   }
   subscribers: Subscription[] = [];
-  teamName: string = "";
+  createTeamName: string = "";
   async createProject() {
     let projectId = await FbStore.createProject({
-      teamName: this.teamName,
+      teamName: this.createTeamName,
       classroomId: FbStore.currentClassroom!.classroomId
     });
     await FbStore.joinProject({projectId})
-    this.teamName = "";
+    this.createTeamName = "";
     this.$forceUpdate()
   }
   async joinTeam(project:Project){
@@ -186,5 +195,28 @@ export default class jointeam extends Vue {
     // push to team settings after
   }
   projects: Project[] = [];
+    get teamIds(){
+    return FbStore.currentProject?.teamMembersIds || []
+  }
+  get teamName(){
+    return FbStore.currentProject?.teamName || ""
+  }
+  get currentProject(){
+    return FbStore.currentProject
+  }
+  @Watch('teamIds')
+  async onIdsChange(){
+    this.names = await getNames()
+  }
+  async renameTeam(){
+    await FbStore.renameProject({newProjectName:this.newTeamName,projectId:FbStore.currentProject!.projectId})
+    this.newTeamName = ""
+  }
+  async leaveTeam(){
+    await FbStore.leaveProject({projectId:FbStore.currentProject!.projectId})
+    //push back to join team after
+  }
+  names:string[] = []
+    newTeamName:string = ""
 }
 </script>

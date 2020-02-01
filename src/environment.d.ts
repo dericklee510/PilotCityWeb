@@ -22,10 +22,12 @@ declare global {
       | "EmployerProgram"
       | "TeacherProgramData"
       | "Project"
-      | "Classroom";
+      | "Classroom"
+      | "studentClassroom"
     interface DocumentSnapshot {
       data<RetrievedClass>(options?: SnapshotOptions): (RetrievedClass & Record<string, any>)
     }
+  
     interface DocumentReference {
       update<UpdateClass>(data: Partial<UpdateClass>): Promise<void>
       set<UpdateClass>(data: UpdateClass): Promise<void>

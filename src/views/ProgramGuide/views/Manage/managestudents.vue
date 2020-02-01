@@ -157,7 +157,6 @@ export default class managestudents extends Vue {
         // handle list of projects here
         classroomData.projectIds.forEach(projectId => {
           this.$subscribeTo(doc(FbStore.firestore.collection("Project").doc(projectId)), projectsnapshot => {
-            console.log(projectsnapshot.data(), projectsnapshot.id)
             spliceOrPush(this.availableProjects[id],{
               text:projectsnapshot.data<Project>().teamName,
               value:projectsnapshot.id

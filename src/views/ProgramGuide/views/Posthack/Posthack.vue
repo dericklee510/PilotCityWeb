@@ -121,14 +121,15 @@ export default class posthack extends Vue {
       this.elevatorPitch = true
     }
   }
-  canvas: boolean = false;
-  sentencePitch: boolean = false;
-  elevatorPitch: boolean = false;
+  canvas: boolean = !!FbStore.currentProject!.programSequence.reflection ||false;
+  sentencePitch: boolean = !!FbStore.currentProject!.programSequence.reflection || false;
+  elevatorPitch: boolean = !!FbStore.currentProject!.programSequence.reflection || false;
   get pivotReady(){
     return [this.canvas, this.sentencePitch, this.elevatorPitch].every(val => val)
   }
   submit(){
     FbStore.updateCurrentProject({
+      [`programSequence.${'reflection'}`]:firebase.firestore.FieldValue.serverTimestamp(),
       postHackReflection:firebase.firestore.FieldValue.serverTimestamp()
     })
   }

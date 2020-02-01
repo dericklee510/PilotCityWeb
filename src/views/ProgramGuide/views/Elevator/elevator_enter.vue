@@ -59,6 +59,7 @@
           <v-btn
             class="elevator_enter__button"
             :loading="loading"
+            :disabled="invalid"
             @click="validate().then(valid => {if(valid) submit()})"
           >
             SAVE
@@ -99,13 +100,15 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import { TextEnter } from "../../components";
 import { FbStore } from "../../../../store";
-
+import {firebase} from "@/firebase/init"
 @Component
 export default class elevator_enter extends TextEnter {
   text: string = FbStore.currentProject!.elevatorPitch || "";
   async submit(){
     this.loading=true
+
     await FbStore.updateCurrentProject({
+      [`programSequence.${'elevatorPitch'}`]:firebase.firestore.FieldValue.serverTimestamp(),
       elevatorPitch: this.text
     });
     this.loading = false

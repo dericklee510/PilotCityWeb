@@ -27,7 +27,10 @@
         </v-row>
     
     
-        <agenda-view v-model="agendaItems" />
+        <agenda-view
+          v-model="agendaItems"
+          @finish="onFinish"
+        />
       </v-col>
     </v-row>
   </v-container>
@@ -42,6 +45,7 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import { AgendaView } from "../../components";
 import { FbStore } from '../../../../store';
+import {firebase} from '@/firebase/init';
 @Component({
   components: {
     AgendaView
@@ -60,6 +64,11 @@ export default class agenda extends Vue {
   //   duration:"",
   //   completed:true
   // }];
+  onFinish(){
+    FbStore.updateCurrentProject({
+      [`programSequence.${'hackDay'}`]:firebase.firestore.FieldValue.serverTimestamp()
+    })
+  }
   get agendaItems(){
     return FbStore.currentEmployerProgram!.masterHackDayAgenda?.events
   }

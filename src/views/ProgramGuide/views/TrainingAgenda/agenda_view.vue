@@ -28,7 +28,10 @@
         >
           Mark agenda items as you complete them.
         </v-row>
-        <AgendaView v-model="agendaItems" />
+        <AgendaView
+          v-model="agendaItems"
+          @finish="onFinish"
+        />
       </v-col>
     </v-row>
   </v-container>
@@ -43,6 +46,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import {AgendaView} from "@/views/ProgramGuide/components/"
 import { FbStore } from '../../../../store';
+import {firebase} from '@/firebase/init'
 @Component({
   components: {
     AgendaView
@@ -50,5 +54,11 @@ import { FbStore } from '../../../../store';
 })
 export default class TrainingDayAgendaView extends Vue{
   agendaItems = FbStore.currentTeacherProgramData!.trainingDayAgenda?.events || []
+  onFinish(){
+    FbStore.updateCurrentProject({
+      [`programSequence.${'train'}`]:firebase.firestore.FieldValue.serverTimestamp()
+      
+    })
+  }
 }
 </script>

@@ -73,6 +73,7 @@
           class="agenda-view__button mb-10"
           :disabled="!isAgendaComplete"
           elevation="0"
+          @click="$emit('finish')"
         >
           FINISH
         </v-btn>

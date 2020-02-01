@@ -52,6 +52,7 @@ import { FbStore } from "../../../../store";
 import { debounce } from "lodash";
 import { Watch } from "vue-property-decorator";
 import { debounceTime } from "rxjs/operators";
+import {firebase} from "@/firebase/init"
 @Component({
   components: {
     ValidationProvider,
@@ -72,9 +73,22 @@ export default class businessmodelcanvas_enter extends Vue {
     };
   }
   set canvas(value: BusinessModelCanvas) {
-    debounce(() => FbStore.firestore.collection("Project").doc(FbStore.currentProject!.projectId).update({
-      ...value
-    }),300)()
+    if (!FbStore.currentProject!.programSequence.bmc) {
+      if ((value.problem, value.solution, value.innovation, value.customer))
+        FbStore.updateCurrentProject({
+          [`programSequence.${'bmc'}`]: firebase.firestore.FieldValue.serverTimestamp()
+        });
+    }
+    debounce(
+      () =>
+        FbStore.firestore
+          .collection("Project")
+          .doc(FbStore.currentProject!.projectId)
+          .update({
+            ...value
+          }),
+      300
+    )();
     // FbStore.updateCurrentProject({
     //   ...value
     // });
