@@ -90,6 +90,8 @@ export default class Auth extends VuexModule {
                     lastName,
                     lastUpdate:firebase.firestore.FieldValue.serverTimestamp()
                 })
+                await this.user.sendEmailVerification();
+                alert("Email verification sent out!");
             }
             return SUCCESSFUL_SIGNUP_RESP
         } catch (err) {
@@ -100,6 +102,10 @@ export default class Auth extends VuexModule {
     @Action
     public async login({ email, password }: UserCredentials): Promise<string> {
         try {
+            if (this.user && !this.user.emailVerified) {
+                alert("email not verified!");
+                throw (EMAIL_NOT_VERIFIED_ERR)
+            }
             try{
                 let resp = await firebase.auth().signInWithEmailAndPassword(email, password)
                 this.context.commit(SET_USER, resp)
@@ -107,13 +113,6 @@ export default class Auth extends VuexModule {
             catch(err){
                 throw(err)
             }
-            if (this.user && !this.user.emailVerified && this.user.email) {
-                firebase.auth().sendSignInLinkToEmail(this.user.email, { 
-                    url: `pilotcity.com` 
-                })
-                throw (EMAIL_NOT_VERIFIED_ERR)
-            }
-
             // eslint-disable-next-line no-console 
             console.info(" %c Successfully logged in!", [
                 'background: green',
