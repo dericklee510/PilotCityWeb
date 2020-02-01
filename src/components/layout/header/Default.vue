@@ -69,13 +69,16 @@
       </v-btn></span>
 
     <span class="ml-2 mr-2">
-      <v-avatar 
-        class="pc-navbar__avatar" 
-        color="blue"
-        size="45"
-      >
-        <span class="white--text pc-navbar__avatartext">{{ initials }}</span>
-      </v-avatar></span>
+      <router-link :to="{name:'signup.type'}">
+        <v-avatar 
+          class="pc-navbar__avatar" 
+          color="blue"
+          size="45"
+        >
+          <span class="white--text pc-navbar__avatartext">{{ initials }}</span>
+        </v-avatar>
+      </router-link>
+    </span>
 
 
     <!-- </v-toolbar-items> -->
