@@ -22,30 +22,41 @@
       />
       <!-- :items="[{title: 'EXPLORE'},{title: 'MY PROGRAMS'}, {title: 'LOGOUT', action: logout}]" -->
     </v-toolbar-items>
-    <v-toolbar-items class="pc-toolbar__buttons d-none d-sm-block">
+    <!-- <v-toolbar-items class="pc-toolbar__buttons d-none d-sm-block"> -->
+      <span class="ml-2 mr-2">
       <v-btn
+      class="pc-navbar__login"
         dark
-        text
         rounded
-        color="primary"
+        depressed
+        large
+        outlined
         :loading="loading"
         :disabled="loading"
         @click="routeLogin"
+
+
       >
         Login
-      </v-btn>
+      </v-btn></span>
+
+      <span class="ml-2 mr-2">
       <v-btn
+            class="pc-navbar__signup"
         dark
-        text
         rounded
-        color="primary"
+        depressed
+        large
+        outlined
         :loading="loading"
         :disabled="loading"
         @click="routeSignup"
+
+
       >
-        Sign Up
-      </v-btn>
-    </v-toolbar-items>
+        Signup
+      </v-btn></span>
+    <!-- </v-toolbar-items> -->
   </v-toolbar>
 </template>
 
@@ -54,7 +65,6 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { AuthStore } from '@/store'
 import PCdropdown from '@/components/inputs/PCdropdown.vue'
-
 
 @Component({
     components: {

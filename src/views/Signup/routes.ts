@@ -12,23 +12,20 @@ const routes: RouteConfig[] = [
         }
     },
     {
+        name: 'signup.type',
         path: '/signup/citizen-id',
         component: Signup.children.CitizenID,
-        children: [
-            {
-                name: 'signup.type',
-                path: '',
-                component: Signup.children.CitizenType
-            },
-            {
-                name: 'signup.data',
-                path: 'data',
-                component: Signup.children.CitizenData
-            }
-        ],
         beforeEnter(to, from, next): void{
             AuthStore.user ? next() : next({ name: 'signup' })
         }
-    }
+    },
+    // {
+    //     name: 'signup.data',
+    //     path: 'data',
+    //     component: Signup.children.CitizenData,
+    //     beforeEnter(to, from, next): void{
+    //         AuthStore.user ? next() : next({ name: 'signup' })
+    //     }
+    // }
 ]
 export default routes

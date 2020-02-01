@@ -1,14 +1,36 @@
 .guide{
-    &__lock-wrapper{
+    &__unlock-wrapper{ 
+        position: fixed;
+        // align-content: center;
+        text-align: center;
+        // vertical-align: middle;
+
+    }
+    &__unlock-wrapper i{
+        color: #dbdcde;
+        font-size: 20px;
+
+        &:hover{
+            color: #6fba7f;
+        }
+    }
+
+    &__lock-wrapper{ 
+        position: fixed;
+        // align-content: center;
+        text-align: center;
+        // vertical-align: middle;
 
     }
     &__lock-wrapper i{
-        background-color: #dbdcde;
+        color: #dbdcde;
+        font-size: 20px;
+
+        &:hover{
+            color: #ea6764;
+        }
     }
-    &__lock-wrapper .fa-lock-alt{
-        
-    }
-    &__lock-wrapper .fa-lock-alt{
-        
-    }    
+
+
+
 }
