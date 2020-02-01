@@ -7,7 +7,10 @@
         class="programguide__labels d-sm-block d-none"
       >
         <v-col cols="1" />
-        <v-col cols="11" class="pa-0">
+        <v-col
+          cols="11"
+          class="pa-0"
+        >
           <v-row no-gutters>
             <v-col
               cols="12"

@@ -37,7 +37,7 @@
           class="guide__locks guide__locks--right"
           @click="navForward"
         >
-          <Locks :orientation="'right'"/>
+          <Locks :orientation="'right'" />
         </v-col>
       </v-row>
     </v-col>

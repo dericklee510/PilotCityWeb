@@ -10,6 +10,28 @@
     &-wrapper{
         height: calc(75vh + 66px);
         max-height: 100%;
+        &:hover, &:focus{
+            & .fa-lock-alt{
+                color: $pc-red;
+            }
+            & .fa-unlock-alt{
+                color: $pc-green;
+            }
+            & .fa-chevron-right, .fa-chevron-left{
+                color: darken(#dbdcde, 20);
+            }
+        }
+        &:active{
+            & .fa-lock-alt{
+                color: darken($pc-red, 10);
+            }
+            & .fa-unlock-alt{
+                color: darken($pc-green, 10);
+            }
+            & .fa-chevron-right, .fa-chevron-left{
+                color: darken(#dbdcde, 30);
+            }
+        }
     }
     & .right{
         text-align: right;

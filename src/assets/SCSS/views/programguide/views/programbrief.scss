@@ -4,6 +4,10 @@
         height: 100%;
         padding-left: 0px;
         font-size: 2.35rem; 
+        
+        .theme--light.v-sheet{
+            border-color: transparent;
+        }
     }
 
     &__dark{
@@ -17,7 +21,6 @@
         font-family: "Raleway";
         font-weight: 800;
     }
-    
 
 }
 
@@ -25,18 +28,15 @@
     background-color: #636466;
 }
 
-.briefcard__sontaincontainer
-{
 
+.briefcard__sontaincontainer{
     .briefcard{
-        
-    
         &__container{
             // width: 1091.5px;
             width: 100vw;
-            box-shadow: none;
-            
-
+            transition: ease 0.3s;
+            // box-sizing:border-box
+            border: 1px dashed #636466;
         }
         
         &__container:hover { 
@@ -78,6 +78,7 @@
         font-size: .8rem;
         color: white;
         position: relative;
+        cursor: pointer;
 
     }
 
@@ -88,7 +89,9 @@
         font-weight: 900;
         border: 1px solid black;
         letter-spacing: 1px;
+        cursor: pointer;
         &.v-btn--disabled{
+            cursor: cursor;
             border: none;
         }
     } 

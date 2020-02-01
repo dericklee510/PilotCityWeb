@@ -8,7 +8,7 @@
     <v-col
       cols="12"
       
-        :class="{ right: orientation=='right', left: orientation=='left'}"
+      :class="{ right: orientation=='right', left: orientation=='left'}"
     >
       <span>
         <i

@@ -4,7 +4,7 @@
     fluid
   >
     <v-container
-      fluid
+      fluid 
       style="margin-top: 80px;"
     >
       <v-card class="pc-container">

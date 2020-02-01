@@ -13,8 +13,8 @@ import { routes as ProfileRoutes } from '@/views/Profile'
 import { routes as SignupRoutes } from '@/views/Signup'
 import { routes as ProgramRoutes } from '@/views/ProgramGuide'
 import myprograms from "@/views/Myprograms/myprograms.vue"
-import RFP from "@/views/RFP/RFP.vue"
-import ManageProgram from "@/views/ProgramGuide/views/ManageProgram/ManageProgram.vue"
+import RFPPrompt from "@/views/ProgramGuide/views/RFP/Prompt.vue"
+import RFPRequirements from "@/views/ProgramGuide/views/RFP/Requirements.vue"
 import test from '@/views/Test'
 import Home from '@/views/Home.vue'
 import login2 from "@/views/Login/Login2.vue"
@@ -56,6 +56,18 @@ const routes: RouteConfig [] = [
         component: signup2
     },
     {
+        path: '/rfp/prompt',
+        name: 'rfp-prompt',
+        component: RFPPrompt
+    },
+
+    {
+        path: '/rfp/requirements',
+        name: 'rfp-requirements',
+        component: RFPRequirements
+    },
+
+    {
         path: '/',
         name: 'home',
         component: Home
@@ -67,14 +79,6 @@ const routes: RouteConfig [] = [
     {
         path: '*',
         redirect: '/'
-    },
-    {
-        path: '/tools/promptgenerator',
-        component: RFP
-    },
-    {
-        path: '/program/manage',
-        component: ManageProgram
     },
 ]
 

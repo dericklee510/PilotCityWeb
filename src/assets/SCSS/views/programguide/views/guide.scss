@@ -72,7 +72,9 @@
         font-weight: 800;
         font-size: 15px;
         color: #939598;
-        padding-top: 5px;
+        margin-top: 5px;
+        margin-left: 10px;
+        position: absolute;
         // margin: 15px 0px 15px 0px;
         &--active{
             color: #404142;
@@ -87,7 +89,8 @@
         text-transform: uppercase;
         letter-spacing: 1.5px;
         padding-top: 2px;
-        margin: 10px 0px;
+        margin: 6px 0px 0px 10px;
+        position: absolute;
         // text-align: center;
     }
 
@@ -115,8 +118,8 @@
         border-radius: 50%;
         display: inline-block;
         position: relative;
-        left:-5px;
-        top: .5px;
+        left:-4.9392px;
+        top: 0.74px;
     }
 
     &__smalldotunfilled{
@@ -138,7 +141,6 @@
         border-radius: 50%;
         display: inline-block;
         margin-left: -16px;
-        margin-right:10px;
         // Makes it so that dot stays put | BAD
         // position: absolute;
         &--active{

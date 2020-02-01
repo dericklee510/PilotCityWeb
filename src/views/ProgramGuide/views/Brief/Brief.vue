@@ -1,6 +1,9 @@
 <template>
-  <v-container fluid class="programbrief__dark">
-    <v-row class="programbrief__container">
+  <v-container
+    fluid
+    class="programbrief__dark"
+  >
+    <v-row class="programbrief__container" justify="center">
       <v-col
         cols="2"
         md="1"

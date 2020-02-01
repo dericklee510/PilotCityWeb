@@ -76,7 +76,10 @@
                   </v-col>
                 </v-row>
               </v-col>
-              <v-col cols="12" class="mt-10">
+              <v-col
+                cols="12"
+                class="mt-10"
+              >
                 <v-row
                   no-gutters
                   justify="center"

@@ -1,15 +1,69 @@
+<template>
+  <v-container>
+    <v-row no-gutters>
+      <v-col cols="12">
+        <div class="manageprogram__header mt-10">
+          Manage Program
+        </div>
+
+        <v-row
+          class="mb-10 mt-12"
+          no-gutters
+        >
+          <v-col
+            cols="4"
+            class="manageprogram__title"
+          >
+            Experience
+          </v-col>
+          <v-col class="manageprogram__title">
+            Unlock
+          </v-col>
+          <v-col class="manageprogram__title">
+            Trigger
+          </v-col>
+          <v-col class="manageprogram__title">
+            Status
+          </v-col>
+        </v-row>
+        <!-- LAUNCH DAY -->
+        <ProgramBlock
+          v-for="(sequence,key,index) in routeHash"
+          :key="key"
+          :sequence="sequence"
+          :name="key"
+          :num="index"
+          :completion="latestCompletionPercent[key]"
+        />
+        <!-- <v-row
+          no-gutters
+          class="mt-12 mb-12"
+        >
+          <button class="manageprogram__savebutton">
+            Save
+          </button>
+        </v-row> -->
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
+
+
 <script lang="ts">
 import Vue from 'vue'
 import Component from "vue-class-component";
-import { TeacherProgramData, Classroom, Project, studentClassroom } from '../../../../store/Database/types/types';
-import { FbStore } from '../../../../store';
+import { TeacherProgramData, Classroom, Project, studentClassroom } from '@/store/Database/types/types';
+import { FbStore } from '@/store';
 import { BehaviorSubject, of, combineLatest, Observable } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
-import { doc } from 'rxfire/firestore/dist/firestore';
+import { doc } from 'rxfire/firestore'
 import { flatten,get, Many} from 'lodash'
-import undefined from 'firebase/empty-import';
+import ProgramBlock from "./ProgramBlock.vue"
 type trigger = undefined | Date | boolean;
 @Component<ManageProgram>({
+  components:{
+    ProgramBlock
+  },
   subscriptions() {
     this.classroomIdsSubject$ = new BehaviorSubject(FbStore.currentTeacherProgramData!.classroomIds)
     this.latestClassroomData$ = this.classroomIdsSubject$.pipe(
@@ -64,6 +118,8 @@ export default class ManageProgram extends Vue {
     }
   }
   getAverage<TObject extends object, TKey extends keyof TObject>(arr:TObject[],field:TKey | [TKey] | Many<string | number | symbol> ){
+    if(!arr)
+      return 0
       let total = arr.reduce((sum, entry)=> {
           return sum += get(entry,field,undefined)?1:0
       },0)
@@ -77,18 +133,5 @@ export default class ManageProgram extends Vue {
   getCompletion(route: keyof TeacherProgramData.programSequence) {
 
   }
-//   parseType(trigger: trigger) {
-//     switch (trigger) {
-//       case undefined:
-//         return {
-//           unlock: "By Completion",
-
-//         }
-//         break;
-
-//       default:
-//         break;
-//     }
-//   }
 }
 </script>

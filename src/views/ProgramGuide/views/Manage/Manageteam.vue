@@ -175,8 +175,8 @@
                   rules="required"
                 >
                   <PCselect
-                  style="height: inherit !important;"
                     v-model="selectedClassroom"
+                    style="height: inherit !important;"
                     :error-messages="errors"
                     :document-refs="CurrentClassroomsRefs"
                     live-text="className"
