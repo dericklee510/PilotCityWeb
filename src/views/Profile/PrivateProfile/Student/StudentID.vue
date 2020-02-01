@@ -200,11 +200,11 @@
           </v-row>
 
 
-          <!-- PROGRAM INFORMATION -->
+          <!-- PROGRAM INFORMATION
           <v-row
             justify="center"
             class="mr-auto ml-auto mt-5 mb-5 studentid__categorytitle"
-          >Program</v-row>
+          >Program</v-row> -->
 
 
 
