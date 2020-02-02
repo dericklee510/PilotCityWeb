@@ -11,7 +11,7 @@
 
       <v-col
         id="prompt__contain"
-        cols="10"
+        cols="8"
       >
         <v-row
           justify="center"
@@ -144,7 +144,7 @@
             class="prompt__generated mt-5 mb-12"
             justify="center"
           >
-            Use programmable drones to conceptualize, design or prototype an autonomous solution that solves the manual assessment of road conditions to reach savings in city engineers' time, resource and tax-payer dollars.
+            {{ promptTech }}
           </v-row>
 
           <v-row
@@ -160,7 +160,7 @@
             class="prompt__generated mt-5 mb-12"
             justify="center"
           >
-            Conceptualize, design or prototype an autonomous solution using programmable drones that solves the manual assessment of road conditions to reach savings in city engineer's time, resources and tax-payer dollars.
+            {{ promptSolution }}
           </v-row>
 
           <v-row
@@ -176,7 +176,7 @@
             class="prompt__generated mt-5 mb-12"
             justify="center"
           >
-            Utilizing programmable drones, solve the manual assessment of road conditions by conceptualizing, designing or prototyping an autonomous solution that reaches savings in city engineer's time, resources and tax-payer dollars.
+            {{ promptProblem }}
           </v-row>
 
           <v-row
@@ -192,7 +192,7 @@
             class="prompt__generated mt-5 mb-12"
             justify="center"
           >
-            Utilizing programmable drones, reach savings in city engineer's time, resources and tax-payer dollars by conceptualizing, designing or prototyping an autonomous solution that addresses the manual assessment of road conditions.
+            {{ promptMetric }}
           </v-row>
         </v-col>
 
@@ -264,24 +264,36 @@ export default class ProjectPrompt extends Vue {
     this.generatePrompt()
     this.$forceUpdate()
   }
+  get promptTech(){
+    return `Use ${this.productOrService} to conceptualize, design or prototype
+${this.solution} that solves ${this.problemOrOpportunity} to reach ${this.keyMetric}`
+  }
+get promptSolution(){
+  return `Conceptualize, design or prototype ${this.solution} using ${this.productOrService} that solves ${this.problemOrOpportunity} to reach ${this.keyMetric}`
+}
+get promptProblem(){
+  return `Utilizing ${this.productOrService}, solve or explore
+${this.problemOrOpportunity} by conceptualizing, designing or prototyping
+${this.solution} that reaches ${this.keyMetric}`
+}
+get promptMetric(){
+  return `Utilizing ${this.productOrService}, reach ${this.keyMetric} by
+conceptualizing, designing or prototyping ${this.solution} that addresses
+${this.problemOrOpportunity}`
+}
   generatePrompt() {
     switch (this.promptTemplate) {
       case "tech":
-        this.finalPrompt = `Use ${this.productOrService} to conceptualize, design or prototype
-${this.solution} that solves ${this.problemOrOpportunity} to reach ${this.keyMetric}`
+        this.finalPrompt = this.promptTech
         break;
       case "solution":
-        this.finalPrompt = `Conceptualize, design or prototype ${this.solution} using ${this.productOrService} that solves ${this.problemOrOpportunity} to reach ${this.keyMetric}`
+        this.finalPrompt = this.promptSolution
         break;
       case "problem":
-        this.finalPrompt = `Utilizing ${this.productOrService}, solve or explore
-${this.problemOrOpportunity} by conceptualizing, designing or prototyping
-${this.solution} that reaches ${this.keyMetric}`
+        this.finalPrompt = this.promptProblem
         break;
       case "metric":
-        this.finalPrompt = `Utilizing ${this.productOrService}, reach ${this.keyMetric} by
-conceptualizing, designing or prototyping ${this.solution} that addresses
-${this.problemOrOpportunity}`
+        this.finalPrompt = this.promptMetric
         break;
 
     }
