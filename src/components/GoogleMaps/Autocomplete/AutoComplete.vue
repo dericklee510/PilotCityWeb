@@ -1,36 +1,36 @@
 <template>
-  <div>
-    <label class="pc-input__label">
-      <h4 class="text-uppercase">
-        {{ `Your Address` }}
-      </h4>
-    </label>
-    <vuetify-google-autocomplete
-      id="map"
-      ref="address"
-      :enable-geolocation="true"
-      types=""
-      :hide-details="true"
-      class="pc-input__autocomplete"
-      :error-messages="error"
-      classname="form-control"
-      placeholder="Please type your address"
-      @placechanged="getAddressData"
-    />
-  </div>
+  <vuetify-google-autocomplete
+    id="map"
+    ref="address"
+    :enable-geolocation="true"
+    
+    classname="form-control"
+    placeholder="Please type your address"
+    :outlined="outlined"
+    :value="address"
+    :selection-required="true"
+    @placechanged="getAddressData"
+  />
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import 'reflect-metadata'
 import Component from 'vue-class-component'
 /* eslint-disable-next-line */
 import VuetifyGoogleAutocomplete from 'vuetify-google-autocomplete'
-import 'reflect-metadata'
+import googleMaps from "node_modules/@types/google__maps/"
 import { Prop } from 'vue-property-decorator'
-
+Vue.use(VuetifyGoogleAutocomplete, {
+  apiKey:process.env.VUE_APP_MAPS_API_KEY
+})
 @Component({
 })
 export default class AutoComplete extends Vue {
+  created(){
+    if(this.value)
+      this.address = this.value
+  }
     $refs!: {
         vue: Vue;
         element: HTMLInputElement;
@@ -46,24 +46,21 @@ export default class AutoComplete extends Vue {
   public value?: string
 
   @Prop()
-  public errorMessages?: string | string[] | {errors: string[]}
-
-  get errorMessage() {
-      return (this.errorMessages as {errors: string[]}).errors
+  public errorMessages?: string | string[] 
+  @Prop()
+  outlined?:""
+  
+  get address(){
+    return this.value
   }
-
-  get error(): string[] | undefined {
-      return this.errorMessage
+  set address(newVal){
+    this.$emit('input', newVal)
   }
-
-  address: string | Record<string, any> = ''
   /* eslint-disable-next-line */
-  getAddressData(addressData: Record<string, any>, placeResultData: Record<string, any>, id: string) {
-      this.address = addressData
-      this.$emit('input', this.address)
-  }
+  getAddressData(addressData: Record<string, any>, placeResultData:googleMaps.PlaceDetailsResult, id: string) {
+      this.address = placeResultData.formatted_address
 
-  created() {
   }
+  
 }
 </script>
