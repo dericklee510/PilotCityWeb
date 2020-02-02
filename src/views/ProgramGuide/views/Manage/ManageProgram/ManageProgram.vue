@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container> 
     <v-row no-gutters justify="center">
       <v-col cols="9">
         <div class="manageprogram__header mt-10">

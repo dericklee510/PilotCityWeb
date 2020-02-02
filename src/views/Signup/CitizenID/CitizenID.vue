@@ -5,7 +5,7 @@
       <img id="citizenid__icon" src="@/assets/citizen-id.png" />
 
       <v-col id="citizenid__containtop" cols="8">
-        <v-row justify="center" class="mr-auto ml-auto citizenid__title">MY COMMUNITY ID</v-row>
+        <v-row justify="center" class="mr-auto ml-auto citizenid__title">YOUR PILOTCITY ID</v-row>
       </v-col>
 
       <v-col id="citizenid__containbottom" cols="8">
@@ -1110,51 +1110,6 @@ import { startCase } from "lodash";
       "None of the above"
     ],
 
-// HEART RATING
-          emptyIcon: 'mdi-heart-outline',
-      fullIcon: 'mdi-heart',
-      halfIcon: 'mdi-heart-half-full',
-      hover: false,
-      length: 5,
-      pathway1: 0,
-      pathway2: 0,
-      pathway3: 0,
-      pathway4: 0,
-      pathway5: 0,
-      pathway6: 0,
-      pathway7: 0,
-      pathway8: 0,
-      pathway9: 0,
-      pathway10: 0,
-      pathway11: 0,
-      pathway12: 0,
-      pathway13: 0,
-      pathway14: 0,
-      pathway15: 0,
-      size: 22,
-      dense: true,
-      color: 'red lighten-3',
-      colors: [
-        'primary',
-        'warning',
-        'green',
-        'red',
-        'blue',
-        'error',
-        'teal',
-        'red lighten-3',
-      ],
-      bgColor: 'grey lighten-1',
-      bgColors: [
-        'grey lighten-2',
-        'warning lighten-1',
-        'green lighten-2',
-        'red lighten-2',
-        'grey',
-        '#eee',
-        'cyan lighten-2',
-        'grey lighten-1',
-      ],
 
 
             postsecondary: ['Career Technical School', 'Community College', 'Transfer to University', 'University', 'Part-Time Work', 'Full-Time Work'],
@@ -1167,7 +1122,7 @@ import { startCase } from "lodash";
             internetaccessvalue: null,
 
 
-// HEART RATING END
+
 
       position1: 0,
       position2: 0,
@@ -1191,6 +1146,17 @@ import { startCase } from "lodash";
 })
 
 
+
+
+
+
+
+
+
+
+
+
+
 export default class CitizenID extends Vue {
   created(){
     console.log("creating", FbStore.currentUserProfile)
@@ -1208,21 +1174,23 @@ export default class CitizenID extends Vue {
         | "employer"
         | "teacher"
         | "student"
+
+
+
     });
 
           return {
-            internshipinterest: null,
-            unpaid:null,
-            paid:null,
-            lunchstatus:null,
-            resume:null,
-            noresume:null,
-            linkedin:null,
-            transport:null,
-        },
+        internshipinterest: null,
+        unpaid:null,
+        paid:null,
+        lunchstatus:null,
+        resume:null,
+        noresume:null,
+        linkedin:null,
+        transport:null,
 
-      
-    
+      },
+
     this.$router.push({ name: "program.programlist" });
   }
 }

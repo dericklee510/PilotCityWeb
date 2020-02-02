@@ -18,7 +18,7 @@
       <PCselect
         v-model="unlockType"
         :items="items"
-      />
+      /> 
     </v-col>
 
     <v-col
