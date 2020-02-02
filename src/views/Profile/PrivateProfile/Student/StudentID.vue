@@ -1,175 +1,68 @@
 <template>
-  <v-row
-    justify="center"
-    class="mt-12"
-  >
-    <img
-      id="studentid__icon"
-      src="@/assets/citizen-id.png"
-    >
+  <v-row justify="center" class="mt-12">
+    <img id="studentid__icon" src="@/assets/citizen-id.png" />
 
-    <v-col
-      id="studentid__containtop"
-      cols="8"
-    >
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto studentid__title"
-      >
-        YOUR STUDENT ID
-      </v-row>
+    <v-col id="studentid__containtop" cols="8">
+      <v-row justify="center" class="mr-auto ml-auto studentid__title">PROGRAM SETUP</v-row>
     </v-col>
 
-    <v-col
-      id="studentid__containbottom"
-      cols="8"
-    >
+    <v-col id="studentid__containbottom" cols="8">
       <v-row
         justify="center"
         class="mr-auto ml-auto studentid__description"
-      >
-        Confirm your information
-      </v-row>
+      >Confirm your information</v-row>
 
       <!-- GENERAL INFORMATION -->
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto mt-5 mb-5 studentid__categorytitle"
-      >
-        General
-      </v-row>
+      <v-row justify="center" class="mr-auto ml-auto mt-5 mb-5 studentid__categorytitle">General</v-row>
       <!-- FIRST NAME -->
-      <v-row
-        justify="center"
-        class
-      >
+      <v-row justify="center" class>
         <v-col cols="7">
-          <v-row
-            no-gutters
-            justify="center"
-          >
-            <v-col
-              cols="12"
-              sm="7"
-            >
-              <v-text-field
-                v-model="firstName"
-                label="First Name"
-                outlined
-              />
+          <v-row no-gutters justify="center">
+            <v-col cols="12" sm="7">
+              <v-text-field v-model="firstName" label="First Name" outlined />
             </v-col>
           </v-row>
           <!-- LAST NAME -->
-          <v-row
-            no-gutters
-            justify="center"
-          >
-            <v-col
-              cols="12"
-              sm="7"
-            >
-              <v-text-field
-                v-model="lastName"
-                label="Last Name"
-                outlined
-              />
+          <v-row no-gutters justify="center">
+            <v-col cols="12" sm="7">
+              <v-text-field v-model="lastName" label="Last Name" outlined />
             </v-col>
           </v-row>
           <!-- CITIZEN TYPE -->
-          <v-row
-            no-gutters
-            justify="center"
-          >
-            <v-col
-              class="d-flex"
-              cols="12"
-              sm="7"
-            >
-              <v-select
-                :items="citizentype"
-                label="Who are you?"
-                outlined
-              />
+          <v-row no-gutters justify="center">
+            <v-col class="d-flex" cols="12" sm="7">
+              <v-select :items="citizentype" label="Who are you?" outlined />
             </v-col>
           </v-row>
           <!-- GRADE LEVEL -->
-          <v-row
-            no-gutters
-            justify="center"
-          >
-            <v-col
-              class="d-flex"
-              cols="12"
-              sm="7"
-            >
-              <v-select
-                :items="gradelevel"
-                label="Grade Level"
-                outlined
-              />
+          <v-row no-gutters justify="center">
+            <v-col class="d-flex" cols="12" sm="7">
+              <v-select :items="gradelevel" label="Grade Level" outlined />
             </v-col>
           </v-row>
 
           <!-- SCHOOL INFORMATION -->
-          <v-row
-            justify="center"
-            class="mr-auto ml-auto mt-5 mb-5 studentid__categorytitle"
-          >
-            School
-          </v-row>
+          <v-row justify="center" class="mr-auto ml-auto mt-5 mb-5 studentid__categorytitle">School</v-row>
 
           <!-- TEACHER -->
 
-          <v-row
-            no-gutters
-            justify="center"
-          >
-            <v-col
-              class="d-flex"
-              cols="12"
-              sm="7"
-            >
-              <v-autocomplete
-                v-model="value"
-                :items="teacher"
-                dense
-                filled
-                label="Teacher"
-              />
+          <v-row no-gutters justify="center">
+            <v-col class="d-flex" cols="12" sm="7">
+              <v-autocomplete v-model="value" :items="teacher" dense filled label="Teacher" />
             </v-col>
           </v-row>
 
           <!-- SCHOOL NAME -->
 
-          <v-row
-            no-gutters
-            justify="center"
-          >
-            <v-col
-              class="d-flex"
-              cols="12"
-              sm="7"
-            >
-              <v-autocomplete
-                v-model="value"
-                :items="schoolname"
-                dense
-                filled
-                label="School Name"
-              />
+          <v-row no-gutters justify="center">
+            <v-col class="d-flex" cols="12" sm="7">
+              <v-autocomplete v-model="value" :items="schoolname" dense filled label="School Name" />
             </v-col>
           </v-row>
           <!-- SCHOOL DISTRICT -->
 
-          <v-row
-            no-gutters
-            justify="center"
-          >
-            <v-col
-              class="d-flex"
-              cols="12"
-              sm="7"
-            >
+          <v-row no-gutters justify="center">
+            <v-col class="d-flex" cols="12" sm="7">
               <v-autocomplete
                 v-model="value"
                 :items="schooldistrict"
@@ -184,21 +77,12 @@
           <v-row
             justify="center"
             class="mr-auto ml-auto mt-5 mb-5 studentid__categorytitle"
-          >
-            Personal
-          </v-row>
+          >Personal</v-row>
 
           <!-- BIRTHDATE -->
 
-          <v-row
-            no-gutters
-            justify="center"
-          >
-            <v-col
-              class="d-flex"
-              cols="12"
-              sm="7"
-            >
+          <v-row no-gutters justify="center">
+            <v-col class="d-flex" cols="12" sm="7">
               <template>
                 <v-menu
                   ref="menu"
@@ -231,38 +115,16 @@
 
           <!-- SUPERGENDER -->
 
-          <v-row
-            no-gutters
-            justify="center"
-          >
-            <v-col
-              class="d-flex"
-              cols="12"
-              sm="7"
-            >
-              <v-select
-                :items="supergender"
-                label="Supergender"
-                outlined
-              />
+          <v-row no-gutters justify="center">
+            <v-col class="d-flex" cols="12" sm="7">
+              <v-select :items="supergender" label="Supergender" outlined />
             </v-col>
           </v-row>
           <!-- ETHNICITY & CULTURE -->
 
-          <v-row
-            no-gutters
-            justify="center"
-          >
-            <v-col
-              class="d-flex"
-              cols="12"
-              sm="7"
-            >
-              <v-select
-                :items="ethnicity"
-                label="Ethnicity & Culture"
-                outlined
-              />
+          <v-row no-gutters justify="center">
+            <v-col class="d-flex" cols="12" sm="7">
+              <v-select :items="ethnicity" label="Ethnicity & Culture" outlined />
             </v-col>
           </v-row>
 
@@ -270,74 +132,34 @@
           <v-row
             justify="center"
             class="mr-auto ml-auto mt-5 mb-5 studentid__categorytitle"
-          >
-            Guardian
-          </v-row>
+          >Guardian</v-row>
 
           <!-- GUARDIAN FIRST NAME -->
 
-          <v-row
-            no-gutters
-            justify="center"
-          >
-            <v-col
-              cols="12"
-              sm="7"
-            >
-              <v-text-field
-                v-model="guardianfirstName"
-                label="Guardian First Name"
-                outlined
-              />
+          <v-row no-gutters justify="center">
+            <v-col cols="12" sm="7">
+              <v-text-field v-model="guardianfirstName" label="Guardian First Name" outlined />
             </v-col>
           </v-row>
           <!-- GUARDIAN LAST NAME -->
-          <v-row
-            no-gutters
-            justify="center"
-          >
-            <v-col
-              cols="12"
-              sm="7"
-            >
-              <v-text-field
-                v-model="guardianlastName"
-                label="Guardian Last Name"
-                outlined
-              />
+          <v-row no-gutters justify="center">
+            <v-col cols="12" sm="7">
+              <v-text-field v-model="guardianlastName" label="Guardian Last Name" outlined />
             </v-col>
           </v-row>
 
           <!-- GUARDIAN RELATIONSHIP -->
 
-          <v-row
-            no-gutters
-            justify="center"
-          >
-            <v-col
-              class="d-flex"
-              cols="12"
-              sm="7"
-            >
-              <v-select
-                :items="guardianrelationship"
-                label="Relationship to Guardian"
-                outlined
-              />
+          <v-row no-gutters justify="center">
+            <v-col class="d-flex" cols="12" sm="7">
+              <v-select :items="guardianrelationship" label="Relationship to Guardian" outlined />
             </v-col>
           </v-row>
 
           <!-- PRIMARY HOME LANGUAGE -->
 
-          <v-row
-            no-gutters
-            justify="center"
-          >
-            <v-col
-              class="d-flex"
-              cols="12"
-              sm="7"
-            >
+          <v-row no-gutters justify="center">
+            <v-col class="d-flex" cols="12" sm="7">
               <v-autocomplete
                 v-model="value"
                 :items="homelanguage"
@@ -350,94 +172,47 @@
 
           <!-- STREET ADDRESS -->
 
-          <v-row
-            no-gutters
-            justify="center"
-          >
-            <v-col
-              cols="12"
-              sm="7"
-            >
-              <v-text-field
-                v-model="streetaddress"
-                label="Street Address"
-                outlined
-              />
+          <v-row no-gutters justify="center">
+            <v-col cols="12" sm="7">
+              <v-text-field v-model="streetaddress" label="Street Address" outlined />
             </v-col>
           </v-row>
           <!-- CITY -->
-          <v-row
-            no-gutters
-            justify="center"
-          >
-            <v-col
-              cols="12"
-              sm="7"
-            >
-              <v-text-field
-                v-model="city"
-                label="City"
-                outlined
-              />
+          <v-row no-gutters justify="center">
+            <v-col cols="12" sm="7">
+              <v-text-field v-model="city" label="City" outlined />
             </v-col>
           </v-row>
 
           <!-- STATE -->
-          <v-row
-            no-gutters
-            justify="center"
-          >
-            <v-col
-              cols="12"
-              sm="7"
-            >
-              <v-text-field
-                v-model="state"
-                label="State"
-                outlined
-              />
+          <v-row no-gutters justify="center">
+            <v-col cols="12" sm="7">
+              <v-text-field v-model="state" label="State" outlined />
             </v-col>
           </v-row>
 
           <!-- ZIPCODE -->
-          <v-row
-            no-gutters
-            justify="center"
-          >
-            <v-col
-              cols="12"
-              sm="7"
-            >
-              <v-text-field
-                v-model="zipcode"
-                label="Zipcode"
-                outlined
-              />
+          <v-row no-gutters justify="center">
+            <v-col cols="12" sm="7">
+              <v-text-field v-model="zipcode" label="Zipcode" outlined />
             </v-col>
           </v-row>
 
-          <!-- PROGRAM INFORMATION -->
+          <!-- PROGRAM INFORMATION
           <v-row
             justify="center"
             class="mr-auto ml-auto mt-5 mb-5 studentid__categorytitle"
-          >
-            Program
-          </v-row>
+          >Program</v-row>-->
 
           <!-- END -->
         </v-col>
       </v-row>
 
-      <v-col
-        class="mr-auto ml-auto"
-        cols="5"
-      >
+      <v-col class="mr-auto ml-auto" cols="5">
         <button
           class="studentid__button mb-10 mt-10"
           @click="() => {setLoader(()=>{validate().then(val => {if(val)submit()} )})}"
-        >
-          SAVE
-        </button>
+        >SAVE</button>
       </v-col>
     </v-col>
   </v-row>
@@ -447,6 +222,7 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { mask } from "vue-the-mask";
+import { VMenu, VDatePicker } from "vuetify/lib";
 @Component({
   data: () => ({
     citizentype: ["Student", "Teacher", "Employer"],
