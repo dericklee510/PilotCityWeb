@@ -1,4 +1,5 @@
 <template>
+
   <ValidationObserver v-slot="{validate}">
     <v-row justify="center" class="mt-12">
       <img id="citizenid__icon" src="@/assets/citizen-id.png" />
@@ -15,6 +16,7 @@
 
         <v-row justify="center" class="pt-10">
           <v-col cols="7">
+
             <v-row no-gutters justify="center">
               <v-col cols="12" sm="7">
                 <ValidationProvider v-slot="{errors}" rules="required">
@@ -46,10 +48,10 @@
                 <v-select v-model="citizenType" :items="items" label="Who are you?" outlined />
               </v-col>
             </v-row>
-            <template />
+
 
           <!-- GRADE LEVEL -->
-<template v-if="citizenType === student">
+<template v-if="citizenType == 'Student'">
           <v-row no-gutters justify="center">
             <v-col class="d-flex" cols="12" sm="7">
               <v-select :items="gradelevel" label="Grade Level" outlined />
@@ -58,11 +60,11 @@
           </template>
 
           <!-- SCHOOL INFORMATION -->
-          <template v-if="citizenType === student">
+<template v-if="citizenType == 'Student'">
           <v-row justify="center" class="mr-auto ml-auto mt-5 mb-5 studentid__categorytitle">School</v-row>
 </template>
           <!-- TEACHER -->
-<template v-if="citizenType === student">
+<template v-if="citizenType == 'Student'">
           <v-row no-gutters justify="center">
             <v-col class="d-flex" cols="12" sm="7">
               <v-autocomplete v-model="value" :items="teacher" dense filled label="Teacher" />
@@ -71,7 +73,7 @@
           </template>
 
           <!-- SCHOOL NAME -->
-<template v-if="citizenType === student">
+<template v-if="citizenType == 'Student'">
           <v-row no-gutters justify="center">
             <v-col class="d-flex" cols="12" sm="7">
               <v-autocomplete v-model="value" :items="schoolname" dense filled label="School Name" />
@@ -79,7 +81,7 @@
           </v-row>
           </template>
           <!-- SCHOOL DISTRICT -->
-<template v-if="citizenType === student">
+<template v-if="citizenType == 'Student'">
           <v-row no-gutters justify="center">
             <v-col class="d-flex" cols="12" sm="7">
               <v-autocomplete
@@ -94,7 +96,7 @@
           </template>
 
           <!-- PERSONAL INFORMATION -->
-          <template v-if="citizenType === student">
+<template v-if="citizenType == 'Student'">
           <v-row
             justify="center"
             class="mr-auto ml-auto mt-5 mb-5 studentid__categorytitle"
@@ -102,7 +104,7 @@
           </template>
 
           <!-- BIRTHDATE -->
-<template v-if="citizenType === student">
+<template v-if="citizenType == 'Student'">
           <v-row no-gutters justify="center">
             <v-col class="d-flex" cols="12" sm="7">
               <template>
@@ -137,7 +139,7 @@
           </template>
 
           <!-- SUPERGENDER -->
-<template v-if="citizenType === student">
+<template v-if="citizenType == 'Student'">
           <v-row no-gutters justify="center">
             <v-col class="d-flex" cols="12" sm="7">
               <v-select :items="supergender" label="Supergender" outlined />
@@ -145,7 +147,7 @@
           </v-row>
           </template>
           <!-- ETHNICITY & CULTURE -->
-<template v-if="citizenType === student">
+<template v-if="citizenType == 'Student'">
           <v-row no-gutters justify="center">
             <v-col class="d-flex" cols="12" sm="7">
               <v-select :items="ethnicity" label="Ethnicity & Culture" outlined />
@@ -154,7 +156,7 @@
           </template>
 
           <!-- GUARDIAN INFORMATION -->
-         <template v-if="citizenType === student">
+<template v-if="citizenType == 'Student'">
           <v-row
             justify="center"
             class="mr-auto ml-auto mt-5 mb-5 studentid__categorytitle"
@@ -162,7 +164,7 @@
           </template>
 
           <!-- GUARDIAN FIRST NAME -->
-<template v-if="citizenType === student">
+<template v-if="citizenType == 'Student'">
           <v-row no-gutters justify="center">
             <v-col cols="12" sm="7">
               <v-text-field v-model="guardianfirstName" label="Guardian First Name" outlined />
@@ -177,7 +179,7 @@
           </template>
 
           <!-- GUARDIAN RELATIONSHIP -->
-<template v-if="citizenType === student">
+<template v-if="citizenType == 'Student'">
           <v-row no-gutters justify="center">
             <v-col class="d-flex" cols="12" sm="7">
               <v-select :items="guardianrelationship" label="Relationship to Guardian" outlined />
@@ -186,7 +188,7 @@
           </template>
 
           <!-- PRIMARY HOME LANGUAGE -->
-<template v-if="citizenType === student">
+<template v-if="citizenType == 'Student'">
           <v-row no-gutters justify="center">
             <v-col class="d-flex" cols="12" sm="7">
               <v-autocomplete
@@ -201,7 +203,7 @@
           </template>
 
           <!-- STREET ADDRESS -->
-<template v-if="citizenType === student">
+<template v-if="citizenType == 'Student'">
           <v-row no-gutters justify="center">
             <v-col cols="12" sm="7">
               <v-text-field v-model="streetaddress" label="Street Address" outlined />
@@ -209,7 +211,7 @@
           </v-row>
           </template>
           <!-- CITY -->
-        <template v-if="citizenType === student">
+<template v-if="citizenType == 'Student'">
           <v-row no-gutters justify="center">
             <v-col cols="12" sm="7">
               <v-text-field v-model="city" label="City" outlined />
@@ -217,7 +219,7 @@
           </v-row>
 </template>
           <!-- STATE -->
-          <template v-if="citizenType === student">
+<template v-if="citizenType == 'Student'">
           <v-row no-gutters justify="center">
             <v-col cols="12" sm="7">
               <v-text-field v-model="state" label="State" outlined />
@@ -226,7 +228,7 @@
           </template>
 
           <!-- ZIPCODE -->
-          <template v-if="citizenType === student">
+<template v-if="citizenType == 'Student'">
           <v-row no-gutters justify="center">
             <v-col cols="12" sm="7">
               <v-text-field v-model="zipcode" label="Zipcode" outlined />
@@ -235,14 +237,15 @@
           </template>
 
           <!-- PROGRAM INFORMATION -->
+<template v-if="citizenType == 'Program'">
           <v-row
             justify="center"
             class="mr-auto ml-auto mt-5 mb-5 studentid__categorytitle"
           >Program</v-row>
-
+</template>
 
 <!-- INTERNSHIP INTEREST LEVEL -->
-          <template>
+<template v-if="citizenType == 'Program'">
                           <v-row class="studentid__questiontitle mt-10" justify="center">What's your interest level in an internship?</v-row>
           <v-row no-gutters justify="center">
             <v-col cols="12" sm="7">
@@ -257,7 +260,7 @@
                     </template>
 
 <!-- UNPAID AND/OR PAID? -->
-          <template>
+<template v-if="citizenType == 'Program'">
                           <v-row class="studentid__questiontitle mt-10" justify="center">What compensation types are you open to?</v-row>
           <v-row no-gutters justify="center">
             <v-col cols="12" sm="7">
@@ -270,7 +273,7 @@
 
 
 <!-- FREE OR REDUCED LUNCH -->
-          <template>
+<template v-if="citizenType == 'Program'">
                           <v-row class="studentid__questiontitle mt-10" justify="center">Do you get free or reduced lunch at school?</v-row>
           <v-row no-gutters justify="center">
             <v-col cols="12" sm="7">
@@ -286,7 +289,7 @@
                     </template>
 
 <!-- RESUME STATUS -->
-          <template>
+<template v-if="citizenType == 'Program'">
                           <v-row class="studentid__questiontitle mt-10" justify="center">Do you have a resume?</v-row>
           <v-row no-gutters justify="center">
             <v-col cols="12" sm="7">
@@ -299,123 +302,618 @@
                     </template>
 
 
-<!-- RATE PATHWAY INTEREST -->
-          <template>
-                          <v-row class="studentid__questiontitle mt-10 mb-5" justify="center">Rate your interest in the following pathways</v-row>
+<!-- PLANS AFTER HIGH SCHOOL? -->
+<template v-if="citizenType == 'Program'">
+                          <v-row class="studentid__questiontitle mt-12 mb-10" justify="center">What is your plan immediately after high school?</v-row>
                           </template>
 
+<!-- POST SECONDARY PLANS -->
+
+<template v-if="citizenType == 'Program'">
+          <v-row no-gutters justify="center mt-10">
+          <v-col cols="12" sm="10">
+          <v-select
+            v-model="postsecondaryvalue"
+            :items="postsecondary"
+            chips
+            label="What is your plan immediately after high school?"
+            multiple
+            outlined
+          ></v-select>
+          </v-col>
+          </v-row>
+  </template>
+
+
+
+
+
+<!-- RATE PATHWAY INTEREST -->
+<template v-if="citizenType == 'Program'">
+                          <v-row class="studentid__questiontitle mt-10 mb-10" justify="center">Rate your interest in the following pathways</v-row>
+                          </template>
 
 <!-- PATHWAY 1 -->
-          <template>
-
-          <v-row no-gutters justify="center">
-                          <v-row class="studentid__questionsubtitle mt-1 mr-3">Arts, Media and Entertainment</v-row>
-            <v-row>
-    <v-rating
-      v-model="rating1"
-      :length="length"
-      :empty-icon="emptyIcon"
-      :full-icon="fullIcon"
-      :half-icon="halfIcon"
-      :half-increments="halfIncrements"
-      :hover="hover"
-      :readonly="readonly"
-      :size="size"
-      :dense="dense"
-      :color="color"
-      :background-color="bgColor"
-    ></v-rating>
-                </v-row>
-
-
-
-          </v-row>
-                    </template>
+<template v-if="citizenType == 'Program'">
+  <v-row no-gutters justify="center" class="mt-5 mb-5">
+    <v-col cols="8" class="studentid__questionsubtitle mt-1">Agriculture & Natural Resources</v-col>
+    <v-col cols="3">
+      <v-rating
+        v-model="pathway1"
+        :length="length"
+        :empty-icon="emptyIcon"
+        :full-icon="fullIcon"
+        :half-icon="halfIcon"
+        :half-increments="halfIncrements"
+        :hover="hover"
+        :readonly="readonly"
+        :size="size"
+        :dense="dense"
+        :color="color"
+        :background-color="bgColor"
+      ></v-rating>
+    </v-col>
+  </v-row>
+</template>
 
 
 <!-- PATHWAY 2 -->
-          <template>
-
-          <v-row no-gutters justify="center">
-                          <span class="studentid__questionsubtitle mt-1 mr-3">Building and Construction Trades</span>
-            <span>
-    <v-rating
-      v-model="rating2"
-      :length="length"
-      :empty-icon="emptyIcon"
-      :full-icon="fullIcon"
-      :half-icon="halfIcon"
-      :half-increments="halfIncrements"
-      :hover="hover"
-      :readonly="readonly"
-      :size="size"
-      :dense="dense"
-      :color="color"
-      :background-color="bgColor"
-    ></v-rating>
-                </span>
-
-
-
-          </v-row>
-                    </template>
+<template v-if="citizenType == 'Program'">
+  <v-row no-gutters justify="center" class="mt-5 mb-5">
+    <v-col cols="8" class="studentid__questionsubtitle mt-1">Arts, Media and Entertainment</v-col>
+    <v-col cols="3">
+      <v-rating
+        v-model="pathway2"
+        :length="length"
+        :empty-icon="emptyIcon"
+        :full-icon="fullIcon"
+        :half-icon="halfIcon"
+        :half-increments="halfIncrements"
+        :hover="hover"
+        :readonly="readonly"
+        :size="size"
+        :dense="dense"
+        :color="color"
+        :background-color="bgColor"
+      ></v-rating>
+    </v-col>
+  </v-row>
+</template>
 
 
 <!-- PATHWAY 3 -->
-          <template>
-
-          <v-row no-gutters justify="center">
-                          <span class="studentid__questionsubtitle mt-1 mr-3">Business and Finance</span>
-            <span>
-    <v-rating
-      v-model="rating3"
-      :length="length"
-      :empty-icon="emptyIcon"
-      :full-icon="fullIcon"
-      :half-icon="halfIcon"
-      :half-increments="halfIncrements"
-      :hover="hover"
-      :readonly="readonly"
-      :size="size"
-      :dense="dense"
-      :color="color"
-      :background-color="bgColor"
-    ></v-rating>
-                </span>
-
-
-
-          </v-row>
-                    </template>
-
+<template v-if="citizenType == 'Program'">
+  <v-row no-gutters justify="center" class="mt-5 mb-5">
+    <v-col cols="8" class="studentid__questionsubtitle mt-1">Building and Construction Trades</v-col>
+    <v-col cols="3">
+      <v-rating
+        v-model="pathway3"
+        :length="length"
+        :empty-icon="emptyIcon"
+        :full-icon="fullIcon"
+        :half-icon="halfIcon"
+        :half-increments="halfIncrements"
+        :hover="hover"
+        :readonly="readonly"
+        :size="size"
+        :dense="dense"
+        :color="color"
+        :background-color="bgColor"
+      ></v-rating>
+    </v-col>
+  </v-row>
+</template>
 
 
 <!-- PATHWAY 4 -->
-          <template>
+<template v-if="citizenType == 'Program'">
+  <v-row no-gutters justify="center" class="mt-5 mb-5">
+    <v-col cols="8" class="studentid__questionsubtitle mt-1">Business and Finance</v-col>
+    <v-col cols="3">
+      <v-rating
+        v-model="pathway4"
+        :length="length"
+        :empty-icon="emptyIcon"
+        :full-icon="fullIcon"
+        :half-icon="halfIcon"
+        :half-increments="halfIncrements"
+        :hover="hover"
+        :readonly="readonly"
+        :size="size"
+        :dense="dense"
+        :color="color"
+        :background-color="bgColor"
+      ></v-rating>
+    </v-col>
+  </v-row>
+</template>
 
+
+
+<!-- PATHWAY 5 -->
+<template v-if="citizenType == 'Program'">
+  <v-row no-gutters justify="center" class="mt-5 mb-5">
+    <v-col
+      cols="8"
+      class="studentid__questionsubtitle mt-1"
+    >Education, Childhood Development & Family Services</v-col>
+    <v-col cols="3">
+      <v-rating
+        v-model="pathway5"
+        :length="length"
+        :empty-icon="emptyIcon"
+        :full-icon="fullIcon"
+        :half-icon="halfIcon"
+        :half-increments="halfIncrements"
+        :hover="hover"
+        :readonly="readonly"
+        :size="size"
+        :dense="dense"
+        :color="color"
+        :background-color="bgColor"
+      ></v-rating>
+    </v-col>
+  </v-row>
+</template>
+
+<!-- PATHWAY 6 -->
+<template v-if="citizenType == 'Program'">
+  <v-row no-gutters justify="center" class="mt-5 mb-5">
+    <v-col
+      cols="8"
+      class="studentid__questionsubtitle mt-1"
+    >Energy, Environment & Utilities</v-col>
+    <v-col cols="3">
+      <v-rating
+        v-model="pathway6"
+        :length="length"
+        :empty-icon="emptyIcon"
+        :full-icon="fullIcon"
+        :half-icon="halfIcon"
+        :half-increments="halfIncrements"
+        :hover="hover"
+        :readonly="readonly"
+        :size="size"
+        :dense="dense"
+        :color="color"
+        :background-color="bgColor"
+      ></v-rating>
+    </v-col>
+  </v-row>
+</template>
+
+<!-- PATHWAY 7 -->
+<template v-if="citizenType == 'Program'">
+  <v-row no-gutters justify="center" class="mt-5 mb-5">
+    <v-col
+      cols="8"
+      class="studentid__questionsubtitle mt-1"
+    >Engineering & Architecture</v-col>
+    <v-col cols="3">
+      <v-rating
+        v-model="pathway7"
+        :length="length"
+        :empty-icon="emptyIcon"
+        :full-icon="fullIcon"
+        :half-icon="halfIcon"
+        :half-increments="halfIncrements"
+        :hover="hover"
+        :readonly="readonly"
+        :size="size"
+        :dense="dense"
+        :color="color"
+        :background-color="bgColor"
+      ></v-rating>
+    </v-col>
+  </v-row>
+</template>
+
+<!-- PATHWAY 8 -->
+<template v-if="citizenType == 'Program'">
+  <v-row no-gutters justify="center" class="mt-5 mb-5">
+    <v-col
+      cols="8"
+      class="studentid__questionsubtitle mt-1"
+    >Fashion & Interior Design</v-col>
+    <v-col cols="3">
+      <v-rating
+        v-model="pathway8"
+        :length="length"
+        :empty-icon="emptyIcon"
+        :full-icon="fullIcon"
+        :half-icon="halfIcon"
+        :half-increments="halfIncrements"
+        :hover="hover"
+        :readonly="readonly"
+        :size="size"
+        :dense="dense"
+        :color="color"
+        :background-color="bgColor"
+      ></v-rating>
+    </v-col>
+  </v-row>
+</template>
+
+<!-- PATHWAY 9 -->
+<template v-if="citizenType == 'Program'">
+  <v-row no-gutters justify="center" class="mt-5 mb-5">
+    <v-col
+      cols="8"
+      class="studentid__questionsubtitle mt-1"
+    >Health Science & Medical Technology</v-col>
+    <v-col cols="3">
+      <v-rating
+        v-model="pathway9"
+        :length="length"
+        :empty-icon="emptyIcon"
+        :full-icon="fullIcon"
+        :half-icon="halfIcon"
+        :half-increments="halfIncrements"
+        :hover="hover"
+        :readonly="readonly"
+        :size="size"
+        :dense="dense"
+        :color="color"
+        :background-color="bgColor"
+      ></v-rating>
+    </v-col>
+  </v-row>
+</template>
+
+<!-- PATHWAY 10 -->
+<template v-if="citizenType == 'Program'">
+  <v-row no-gutters justify="center" class="mt-5 mb-5">
+    <v-col
+      cols="8"
+      class="studentid__questionsubtitle mt-1"
+    >Hospitality, Tourism & Recreation</v-col>
+    <v-col cols="3">
+      <v-rating
+        v-model="pathway10"
+        :length="length"
+        :empty-icon="emptyIcon"
+        :full-icon="fullIcon"
+        :half-icon="halfIcon"
+        :half-increments="halfIncrements"
+        :hover="hover"
+        :readonly="readonly"
+        :size="size"
+        :dense="dense"
+        :color="color"
+        :background-color="bgColor"
+      ></v-rating>
+    </v-col>
+  </v-row>
+</template>
+
+<!-- PATHWAY 11 -->
+<template v-if="citizenType == 'Program'">
+  <v-row no-gutters justify="center" class="mt-5 mb-5">
+    <v-col
+      cols="8"
+      class="studentid__questionsubtitle mt-1"
+    >Information & Communication Technologies</v-col>
+    <v-col cols="3">
+      <v-rating
+        v-model="pathway11"
+        :length="length"
+        :empty-icon="emptyIcon"
+        :full-icon="fullIcon"
+        :half-icon="halfIcon"
+        :half-increments="halfIncrements"
+        :hover="hover"
+        :readonly="readonly"
+        :size="size"
+        :dense="dense"
+        :color="color"
+        :background-color="bgColor"
+      ></v-rating>
+    </v-col>
+  </v-row>
+</template>
+
+<!-- PATHWAY 12 -->
+<template v-if="citizenType == 'Program'">
+  <v-row no-gutters justify="center" class="mt-5 mb-5">
+    <v-col
+      cols="8"
+      class="studentid__questionsubtitle mt-1"
+    >Manufacturing & Product Development</v-col>
+    <v-col cols="3">
+      <v-rating
+        v-model="pathway12"
+        :length="length"
+        :empty-icon="emptyIcon"
+        :full-icon="fullIcon"
+        :half-icon="halfIcon"
+        :half-increments="halfIncrements"
+        :hover="hover"
+        :readonly="readonly"
+        :size="size"
+        :dense="dense"
+        :color="color"
+        :background-color="bgColor"
+      ></v-rating>
+    </v-col>
+  </v-row>
+</template>
+
+<!-- PATHWAY 13 -->
+<template v-if="citizenType == 'Program'">
+  <v-row no-gutters justify="center" class="mt-5 mb-5">
+    <v-col
+      cols="8"
+      class="studentid__questionsubtitle mt-1"
+    >Marketing, Sales & Service</v-col>
+    <v-col cols="3">
+      <v-rating
+        v-model="pathway13"
+        :length="length"
+        :empty-icon="emptyIcon"
+        :full-icon="fullIcon"
+        :half-icon="halfIcon"
+        :half-increments="halfIncrements"
+        :hover="hover"
+        :readonly="readonly"
+        :size="size"
+        :dense="dense"
+        :color="color"
+        :background-color="bgColor"
+      ></v-rating>
+    </v-col>
+  </v-row>
+</template>
+
+<!-- PATHWAY 14 -->
+<template v-if="citizenType == 'Program'">
+  <v-row no-gutters justify="center" class="mt-5 mb-5">
+    <v-col
+      cols="8"
+      class="studentid__questionsubtitle mt-1"
+    >Public Services</v-col>
+    <v-col cols="3">
+      <v-rating
+        v-model="pathway14"
+        :length="length"
+        :empty-icon="emptyIcon"
+        :full-icon="fullIcon"
+        :half-icon="halfIcon"
+        :half-increments="halfIncrements"
+        :hover="hover"
+        :readonly="readonly"
+        :size="size"
+        :dense="dense"
+        :color="color"
+        :background-color="bgColor"
+      ></v-rating>
+    </v-col>
+  </v-row>
+</template>
+
+<!-- PATHWAY 15 -->
+<template v-if="citizenType == 'Program'">
+  <v-row no-gutters justify="center" class="mt-5 mb-5">
+    <v-col
+      cols="8"
+      class="studentid__questionsubtitle mt-1"
+    >Transportation</v-col>
+    <v-col cols="3">
+      <v-rating
+        v-model="pathway15"
+        :length="length"
+        :empty-icon="emptyIcon"
+        :full-icon="fullIcon"
+        :half-icon="halfIcon"
+        :half-increments="halfIncrements"
+        :hover="hover"
+        :readonly="readonly"
+        :size="size"
+        :dense="dense"
+        :color="color"
+        :background-color="bgColor"
+      ></v-rating>
+    </v-col>
+  </v-row>
+</template>
+
+
+
+
+<!-- RATE POSITION INTEREST -->
+<template v-if="citizenType == 'Program'">
+                          <v-row class="studentid__questiontitle mt-12 mb-10" justify="center">Rate your interest in the following positions</v-row>
+                          </template>
+
+<!-- POSITION 1 -->
+<template v-if="citizenType == 'Program'">
+  <v-row no-gutters justify="center" class="mt-5 mb-5">
+    <v-col cols="8" class="studentid__questionsubtitle mt-1">Technician & Engineer</v-col>
+    <v-col cols="3">
+      <v-rating
+        v-model="position1"
+        :length="length"
+        :empty-icon="emptyIcon"
+        :full-icon="fullIcon"
+        :half-icon="halfIcon"
+        :half-increments="halfIncrements"
+        :hover="hover"
+        :readonly="readonly"
+        :size="size"
+        :dense="dense"
+        :color="color"
+        :background-color="bgColor"
+      ></v-rating>
+    </v-col>
+  </v-row>
+</template>
+
+<!-- POSITION 2 -->
+<template v-if="citizenType == 'Program'">
+  <v-row no-gutters justify="center" class="mt-5 mb-5">
+    <v-col cols="8" class="studentid__questionsubtitle mt-1">Marketing & Sales</v-col>
+    <v-col cols="3">
+      <v-rating
+        v-model="position2"
+        :length="length"
+        :empty-icon="emptyIcon"
+        :full-icon="fullIcon"
+        :half-icon="halfIcon"
+        :half-increments="halfIncrements"
+        :hover="hover"
+        :readonly="readonly"
+        :size="size"
+        :dense="dense"
+        :color="color"
+        :background-color="bgColor"
+      ></v-rating>
+    </v-col>
+  </v-row>
+</template>
+
+<!-- POSITION 3 -->
+<template v-if="citizenType == 'Program'">
+  <v-row no-gutters justify="center" class="mt-5 mb-5">
+    <v-col cols="8" class="studentid__questionsubtitle mt-1">Research & Development</v-col>
+    <v-col cols="3">
+      <v-rating
+        v-model="position3"
+        :length="length"
+        :empty-icon="emptyIcon"
+        :full-icon="fullIcon"
+        :half-icon="halfIcon"
+        :half-increments="halfIncrements"
+        :hover="hover"
+        :readonly="readonly"
+        :size="size"
+        :dense="dense"
+        :color="color"
+        :background-color="bgColor"
+      ></v-rating>
+    </v-col>
+  </v-row>
+</template>
+
+
+<!-- POSITION 4 -->
+<template v-if="citizenType == 'Program'">
+  <v-row no-gutters justify="center" class="mt-5 mb-5">
+    <v-col cols="8" class="studentid__questionsubtitle mt-1">Operations & Management</v-col>
+    <v-col cols="3">
+      <v-rating
+        v-model="position4"
+        :length="length"
+        :empty-icon="emptyIcon"
+        :full-icon="fullIcon"
+        :half-icon="halfIcon"
+        :half-increments="halfIncrements"
+        :hover="hover"
+        :readonly="readonly"
+        :size="size"
+        :dense="dense"
+        :color="color"
+        :background-color="bgColor"
+      ></v-rating>
+    </v-col>
+  </v-row>
+</template>
+
+
+<!-- POSITION 5 -->
+<template v-if="citizenType == 'Program'">
+  <v-row no-gutters justify="center" class="mt-5 mb-5">
+    <v-col cols="8" class="studentid__questionsubtitle mt-1">Community & Customer Success</v-col>
+    <v-col cols="3">
+      <v-rating
+        v-model="position5"
+        :length="length"
+        :empty-icon="emptyIcon"
+        :full-icon="fullIcon"
+        :half-icon="halfIcon"
+        :half-increments="halfIncrements"
+        :hover="hover"
+        :readonly="readonly"
+        :size="size"
+        :dense="dense"
+        :color="color"
+        :background-color="bgColor"
+      ></v-rating>
+    </v-col>
+  </v-row>
+</template>
+
+
+
+
+
+<!-- TRANSPORTATION -->
+<template v-if="citizenType == 'Program'">
+                          <v-row class="studentid__questiontitle mt-10" justify="center">What is your primary mode of transport?</v-row>
           <v-row no-gutters justify="center">
-                          <span class="studentid__questionsubtitle mt-1 mr-3">Education, Childhood Development & Family Services</span>
-            <span>
-    <v-rating
-      v-model="rating4"
-      :length="length"
-      :empty-icon="emptyIcon"
-      :full-icon="fullIcon"
-      :half-icon="halfIcon"
-      :half-increments="halfIncrements"
-      :hover="hover"
-      :readonly="readonly"
-      :size="size"
-      :dense="dense"
-      :color="color"
-      :background-color="bgColor"
-    ></v-rating>
-                </span>
+            <v-col cols="12" sm="7">
 
-
-
+              <v-radio-group v-model="transport" column>
+      <v-radio label="I drive" value="Car"></v-radio>
+      <v-radio label="My family" value="Family"></v-radio>
+      <v-radio label="Public transit" value="Public"></v-radio>
+      <v-radio label="Ridesharing" value="Rideshare"></v-radio>
+      <v-radio label="Decline to answer" value="Decline"></v-radio>
+    </v-radio-group>
+                </v-col>
           </v-row>
                     </template>
+
+
+
+<!-- DIGITAL EQUITY -->
+<template v-if="citizenType == 'Program'">
+                          <v-row class="studentid__questiontitle mt-10 mb-10" justify="center">What is your access to technology?</v-row>
+                          </template>
+
+<!-- WHAT TECHNOLOGY DO YOU CURRENTLY OWN? -->
+
+<template v-if="citizenType == 'Program'">
+          <v-row no-gutters justify="center mt-10">
+          <v-col cols="12" sm="10">
+          <v-select
+            v-model="techownershipvalue"
+            :items="techownership"
+            chips
+            label="What technology do you currently own?"
+            multiple
+            outlined
+          ></v-select>
+          </v-col>
+          </v-row>
+  </template>
+
+  <!-- HOW DO YOU TYPICALLY GET ON THE INTERNET? -->
+
+<template v-if="citizenType == 'Program'">
+          <v-row no-gutters justify="center mt-10">
+          <v-col cols="12" sm="10">
+          <v-select
+            v-model="internetaccessvalue"
+            :items="internetaccess"
+            chips
+            label="How do you typically get on the internet?"
+            multiple
+            outlined
+          ></v-select>
+          </v-col>
+          </v-row>
+  </template>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -433,6 +931,7 @@
             @click="()=>{validate().then(val => {if(val)submit()} )}"
           >SAVE</button>
         </v-col>
+
       </v-col>
     </v-row>
   </ValidationObserver>
@@ -617,8 +1116,21 @@ import { startCase } from "lodash";
       halfIcon: 'mdi-heart-half-full',
       hover: false,
       length: 5,
-      rating1: 0,
-      rating2: 0,
+      pathway1: 0,
+      pathway2: 0,
+      pathway3: 0,
+      pathway4: 0,
+      pathway5: 0,
+      pathway6: 0,
+      pathway7: 0,
+      pathway8: 0,
+      pathway9: 0,
+      pathway10: 0,
+      pathway11: 0,
+      pathway12: 0,
+      pathway13: 0,
+      pathway14: 0,
+      pathway15: 0,
       size: 22,
       dense: true,
       color: 'red lighten-3',
@@ -644,7 +1156,24 @@ import { startCase } from "lodash";
         'grey lighten-1',
       ],
 
+
+            postsecondary: ['Career Technical School', 'Community College', 'Transfer to University', 'University', 'Part-Time Work', 'Full-Time Work'],
+            postsecondaryvalue: null,
+
+            techownership: ['Smartphone', 'Tablet', 'Laptop', 'Desktop'],
+            techownershipvalue: null,
+
+            internetaccess: ['Home Internet', 'Mobile Hotspot', 'Public WiFi'],
+            internetaccessvalue: null,
+
+
 // HEART RATING END
+
+      position1: 0,
+      position2: 0,
+      position3: 0,
+      position4: 0,
+      position5: 0,
     
 
     // END
@@ -674,7 +1203,7 @@ import { startCase } from "lodash";
 
 
 export default class CitizenID extends Vue {
-  items = ["Student", "Teacher", "Employer"];
+  items = ["Student", "Teacher", "Employer","Program"];
   firstName = FbStore.currentUserProfile!.firstName || "";
   lastName = FbStore.currentUserProfile!.lastName || "";
   citizenType = startCase(FbStore.currentUserProfile!.citizenType) || "";
@@ -700,8 +1229,11 @@ export default class CitizenID extends Vue {
         resume:null,
         noresume:null,
         linkedin:null,
+        transport:null,
 
-      }
+      },
+
+      
     
     this.$router.push({ name: "program.programlist" });
   }

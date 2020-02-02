@@ -3,7 +3,7 @@
     <img id="studentid__icon" src="@/assets/citizen-id.png" />
 
     <v-col id="studentid__containtop" cols="8">
-      <v-row justify="center" class="mr-auto ml-auto studentid__title">YOUR STUDENT ID</v-row>
+      <v-row justify="center" class="mr-auto ml-auto studentid__title">PROGRAM SETUP</v-row>
     </v-col>
 
     <v-col id="studentid__containbottom" cols="8">
