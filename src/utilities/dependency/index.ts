@@ -1,3 +1,5 @@
+import { RequiredKeys, NonFunctionKeys } from 'utility-types';
+
 /**
  * throw error when specific field is not found on the current class
  * @param messages a map that contains custom error messages to display when dependencies 
@@ -5,7 +7,7 @@
  * @param dependencies an array of dependencies, should be the name of the field that you 
  * want this class to have
  */
-export function Dependency(messages?: any, ...dependencies: string[]) {
+export function Dependency<T extends Object>(messages?: Record<keyof T,string>, ...dependencies: (NonFunctionKeys<T>)[]) {
     return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
         const originalMethod = descriptor.value;
         let pass = true;

@@ -17,7 +17,7 @@
           justify="center"
           class="mr-auto ml-auto citizenid__title"
         >
-          GENERAL INFORMATION
+          YOUR PILOTCITY ID
         </v-row>
       </v-col>
 
@@ -43,7 +43,7 @@
             >
               <v-col
                 cols="12"
-                sm="6"
+                sm="7"
               >
                 <ValidationProvider
                   v-slot="{errors}"
@@ -65,7 +65,7 @@
             >
               <v-col
                 cols="12"
-                sm="6"
+                sm="7"
               >
                 <ValidationProvider
                   v-slot="{errors}"
@@ -88,7 +88,7 @@
               <v-col
                 class="d-flex"
                 cols="12"
-                sm="6"
+                sm="7"
               >
                 <v-select
                   v-model="citizenType"
@@ -98,37 +98,16 @@
                 />
               </v-col>
             </v-row>
-            <template />
 
+            <!-- GRADE LEVEL -->
+            <StudentID
+              v-if="citizenType === `Student`"
+              ref="StudentID"
+            />
 
-
-            <!-- <v-row no-gutters justify="center">
-                    <v-col cols="12" sm="6">
-            <v-text-field
-              v-model="phoneNumber"
-              v-mask="'(###) ###-####'"
-              label="Mobile Number"
-              outlined
-            ></v-text-field>
-          </v-col>
-            </v-row>-->
+            <!-- END -->
           </v-col>
         </v-row>
-
-        <!-- <v-row
-          justify="center"
-          class="ml-auto mr-auto citizenid__check"
-        >
-          <span>
-            <input
-              v-model="existing"
-              type="checkbox"
-              class="citizenid__checkbox"
-            >
-          </span><span>
-            I agree to the following Terms & Conditions and Privacy Policy
-          </span>
-        </v-row>-->
 
         <v-col
           class="mr-auto ml-auto"
@@ -153,10 +132,13 @@ import { mask } from "vue-the-mask";
 import { FbStore } from "../../../store";
 import { ValidationObserver, ValidationProvider } from "vee-validate";
 import { startCase } from "lodash";
+import StudentID from "./StudentID.vue";
+import { StudentForm } from '../../../store/Database/types/types';
 @Component({
   components: {
     ValidationObserver,
-    ValidationProvider
+    ValidationProvider,
+    StudentID
   }
 })
 export default class CitizenID extends Vue {
@@ -164,6 +146,7 @@ export default class CitizenID extends Vue {
   firstName = FbStore.currentUserProfile!.firstName || "";
   lastName = FbStore.currentUserProfile!.lastName || "";
   citizenType = startCase(FbStore.currentUserProfile!.citizenType) || "";
+  signupForm?:StudentForm.signupForm
   async submit() {
     let { firstName, lastName, citizenType } = this;
     await FbStore.updateCurrentUserProfile({
@@ -174,6 +157,7 @@ export default class CitizenID extends Vue {
         | "teacher"
         | "student"
     });
+    await (this.$refs.StudentID as  StudentID).submit()
     this.$router.push({ name: "program.programlist" });
   }
 }

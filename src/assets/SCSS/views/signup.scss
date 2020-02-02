@@ -76,6 +76,27 @@
         font-size: 18px;
         font-weight: 800;
         color: #ffffff;
+        .Password{
+            border: none;
+            max-width: 100%; 
+            margin: 0;
+            &__group{
+                height: 100%;
+            }
+        }
+        .Password____field{
+            background-color: inherit;
+            border: inherit;
+            padding: 0 0 0 15px;
+            font-family: "Raleway";
+            font-size: inherit;
+            font-weight: inherit;
+            color: inherit;
+            height: 100%;
+        }
+        &.Password{
+            padding-left: 0px;
+        }
     }
 
     &__forgotpassword{

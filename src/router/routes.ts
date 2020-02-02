@@ -87,7 +87,7 @@ const routes: RouteConfig [] = [
     {
         path: '*',
         redirect: '/'
-    },
+    }
 ]
 
 // import { AutoComplete } from '@/components/GoogleMaps/'

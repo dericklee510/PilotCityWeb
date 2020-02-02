@@ -24,6 +24,7 @@ declare global {
       | "Project"
       | "Classroom"
       | "studentClassroom"
+      | "StudentForm"
     interface DocumentSnapshot {
       data<RetrievedClass>(options?: SnapshotOptions): (RetrievedClass & Record<string, any>)
     }

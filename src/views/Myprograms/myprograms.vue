@@ -7,15 +7,16 @@
       <!-- ACTIVE -->
 
       <v-row class="myprograms__categorytitle mt-12 mb-6">
-        Active
+        My Programs
       </v-row>
 
       <!-- ACTIVE CARD -->
-      <ProgramCard
+      <div class="mt-5 mb-5"><ProgramCard
         v-for="(program,index) in Programs"
         :key="index"
         :program="program"
-      />
+
+      /></div>
       <!-- ADD CARD -->
 
       <v-dialog
