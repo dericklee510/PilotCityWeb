@@ -6,7 +6,7 @@
     >
       <v-col
         class="agenda-view__container"
-        cols="10"
+        cols="8"
       >
         <img
           class="pc-vh-center agenda-view__icon"

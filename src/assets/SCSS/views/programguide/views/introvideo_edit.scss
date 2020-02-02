@@ -46,10 +46,14 @@
     &__videolink{
         height: 60px;
         border: 1px solid #CCCCCC;
-        font-size: 22px;
+        width: 100%;
         font-family: "Raleway";
         padding-left: 20px;
-        font-weight: 700;
+        .v-input__slot{
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-top: 4px;
+        }
     }
 
     

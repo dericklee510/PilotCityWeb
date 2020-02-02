@@ -9,7 +9,7 @@
     
       <v-col
         id="agenda__contain"
-        cols="10"
+        cols="8"
       >
         Enter your agenda for the event or activity.
       </v-col>

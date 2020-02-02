@@ -66,8 +66,8 @@
             <span>Team Name</span>
           </v-col>
         </v-row>
-          <ValidationObserver v-slot="{invalid}">
-        <v-row>
+        <ValidationObserver v-slot="{invalid}">
+          <v-row>
             <v-col
               cols="12"
               class="join-team__buttons"
@@ -109,8 +109,8 @@
                 </v-col>
               </v-row>
             </v-col>
-        </v-row>
-          </ValidationObserver>
+          </v-row>
+        </ValidationObserver>
       </v-col>
     </v-row>
   </v-container>

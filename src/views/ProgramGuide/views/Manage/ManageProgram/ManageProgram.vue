@@ -1,6 +1,9 @@
 <template>
   <v-container>
-    <v-row no-gutters justify="center">
+    <v-row
+      no-gutters
+      justify="center"
+    >
       <v-col cols="9">
         <div class="manageprogram__header mt-10">
           Manage Program
@@ -22,7 +25,10 @@
           <v-col class="manageprogram__title">
             Trigger
           </v-col>
-          <v-col cols="1" class="manageprogram__title">
+          <v-col
+            cols="1"
+            class="manageprogram__title"
+          >
             Status
           </v-col>
         </v-row>

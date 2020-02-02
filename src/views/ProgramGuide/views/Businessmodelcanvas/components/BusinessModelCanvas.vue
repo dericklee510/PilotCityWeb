@@ -5,9 +5,13 @@
         justify="center"
         no-gutters
       >
-        <v-col cols="12">
+        <v-col
+          cols="10"
+          md="12"
+        >
           <v-row
-            justify="center"
+            justify="start"
+            justify-lg="center"
             no-gutters
             class="businessmodelcanvas_enter__description__label mt-12 mr-auto ml-auto mb-1"
           >
@@ -60,7 +64,7 @@
             v-if="readonly==true"
             justify="start"
             class="mr-auto ml-auto mb-12"
-            style="padding-left: 15px"
+            style="padding-left: 7px"
           >
             {{ syncedCanvas.problem }}
           </v-row>
@@ -140,7 +144,7 @@
             v-if="readonly==true"
             justify="start"
             class="mr-auto ml-auto mb-12"
-            style="padding-left: 15px"
+            style="padding-left: 7px"
           >
             {{ syncedCanvas.solution }}
           </v-row>
@@ -219,7 +223,7 @@
             v-if="readonly==true"
             justify="start"
             class="mr-auto ml-auto mb-12"
-            style="padding-left: 15px"
+            style="padding-left: 7px"
           >
             {{ syncedCanvas.innovation }}
           </v-row>
@@ -298,7 +302,7 @@
             v-if="readonly==true"
             justify="start"
             class="mr-auto ml-auto mb-12"
-            style="padding-left: 15px"
+            style="padding-left: 7px"
           >
             {{ syncedCanvas.customer }}
           </v-row>

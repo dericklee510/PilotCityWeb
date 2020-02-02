@@ -1,48 +1,50 @@
 <template>
-  <v-row justify="center">
-    <img
-      id="agenda__icon"
-      class="agenda__image"
-      src="@/assets/icons/agenda.png"
-    >
-
-    <v-col
-      id="agenda__contain"
-      cols="7"
-    >
-      <!-- TITLE -->
-
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto agenda__title"
+ <v-container>
+    <v-row justify="center">
+      <img
+        id="agenda__icon"
+        class="agenda__image"
+        src="@/assets/icons/agenda.png"
       >
-        DEMO DAY AGENDA
-        <i
+   
+      <v-col
+        id="agenda__contain"
+        cols="8"
+      >
+        <!-- TITLE -->
+   
+        <v-row
+          justify="center"
+          class="mr-auto ml-auto agenda__title"
+        >
+          DEMO DAY AGENDA
+          <i
             v-if="citizenType=='Teacher'|| citizenType=='Employer'"
             class="far fa-edit edit-icon__project"
             @click="toggleView"
           />
-      </v-row>
-
-      <!-- BORDERLINE -->
-
-      <v-col
-        cols="12"
-        class="agenda__borderline"
-      />
-
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto businessmodelcanvas_view2__description"
-      >
-        Enter your agenda for the event or activity.
-      </v-row>
-      <Agenda
-        v-model="agendaItems"
-        v-stream:update:value="onAgendaChange$"
-      />
-    </v-col>
-  </v-row>
+        </v-row>
+   
+        <!-- BORDERLINE -->
+   
+        <v-col
+          cols="12"
+          class="agenda__borderline"
+        />
+   
+        <v-row
+          justify="center"
+          class="mr-auto ml-auto businessmodelcanvas_view2__description"
+        >
+          Enter your agenda for the event or activity.
+        </v-row>
+        <Agenda
+          v-model="agendaItems"
+          v-stream:update:value="onAgendaChange$"
+        />
+      </v-col>
+    </v-row>
+ </v-container>
 </template>
 
 

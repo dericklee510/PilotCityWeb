@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-container>
     <v-row
       justify="center"
       no-gutters
@@ -46,7 +46,7 @@
         />
       </v-col>
     </v-row>
-  </div>
+  </v-container>
 </template>
 
 

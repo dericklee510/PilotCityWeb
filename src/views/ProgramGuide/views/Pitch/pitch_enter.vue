@@ -1,93 +1,95 @@
 <template>
-  <v-row justify="center">
-    <img
-      id="pitch_enter__icon"
-      src="@/assets/pitch_enter.png"
-    >
-
-    <v-col
-      id="pitch_enter__contain"
-      cols="10"
-    >
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto pitch_enter__title"
+  <v-container>
+    <v-row justify="center">
+      <img
+        id="pitch_enter__icon"
+        src="@/assets/pitch_enter.png"
       >
-        YOUR ONE SENTENCE PROJECT PITCH
-      </v-row>
-
+    
       <v-col
-        id="pitch_enter__borderline"
-        cols="12"
-      />
-
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto pitch_enter__description"
+        id="pitch_enter__contain"
+        cols="10"
       >
-        In a tweet or less, describe what your solution is so it is clearly and concisely defined for others to quickly understand.
-      </v-row>
-      <ValidationObserver v-slot="{invalid, validate}">
         <v-row
           justify="center"
-          class="mr-auto ml-auto mt-12 mb-12"
+          class="mr-auto ml-auto pitch_enter__title"
         >
-          <ValidationProvider
-            v-slot="{errors}"
-            class="pt-1 pb-6 pl-5 pr-4 pitch_enter__onesentence"
-            rules="required|max:255"
-          >
-            <v-textarea
-              v-model="pitch"
-              no-resize
-              :error-messages="errors"
-              placeholder="My pitch is..."
-            />
-          </ValidationProvider>
+          YOUR ONE SENTENCE PROJECT PITCH
         </v-row>
-  
+    
         <v-col
-          class="mr-auto ml-auto"
-          cols="5"
-        >
-          <v-btn
-            class="pitch_enter__button"
-            solo
-            depressed
-            text
-            height="55.88px"
-            :loading="loading"
-            :disabled="invalid"
-            @click="validate().then(valid => {if(valid) submit()})"
-          >
-            SAVE
-          </v-btn>
-        </v-col>
-      </ValidationObserver>
-      <!-- NO RATING YET -->
-
-      <v-row
-        justify="center"
-        class="mt-8 pitch_enter__ratinglabel"
-      >
-        {{ rating || `No rating yet` }}
-      </v-row>
-
-      <v-row
-        justify="center"
-        class="mt-3 mb-6 pc-rating"
-      >
-        <v-rating
-          v-model="rating"
-          size="30"
-          dense
-          readonly=""
+          id="pitch_enter__borderline"
+          cols="12"
         />
-      </v-row>
-
-      <!-- RATING -->
-    </v-col>
-  </v-row>
+    
+        <v-row
+          justify="center"
+          class="mr-auto ml-auto pitch_enter__description"
+        >
+          In a tweet or less, describe what your solution is so it is clearly and concisely defined for others to quickly understand.
+        </v-row>
+        <ValidationObserver v-slot="{invalid, validate}">
+          <v-row
+            justify="center"
+            class="mr-auto ml-auto mt-12 mb-12"
+          >
+            <ValidationProvider
+              v-slot="{errors}"
+              class="pt-1 pb-6 pl-5 pr-4 pitch_enter__onesentence"
+              rules="required|max:255"
+            >
+              <v-textarea
+                v-model="pitch"
+                no-resize
+                :error-messages="errors"
+                placeholder="My pitch is..."
+              />
+            </ValidationProvider>
+          </v-row>
+    
+          <v-col
+            class="mr-auto ml-auto"
+            cols="5"
+          >
+            <v-btn
+              class="pitch_enter__button"
+              solo
+              depressed
+              text
+              height="55.88px"
+              :loading="loading"
+              :disabled="invalid"
+              @click="validate().then(valid => {if(valid) submit()})"
+            >
+              SAVE
+            </v-btn>
+          </v-col>
+        </ValidationObserver>
+        <!-- NO RATING YET -->
+    
+        <v-row
+          justify="center"
+          class="mt-8 pitch_enter__ratinglabel"
+        >
+          {{ rating || `No rating yet` }}
+        </v-row>
+    
+        <v-row
+          justify="center"
+          class="mt-3 mb-6 pc-rating"
+        >
+          <v-rating
+            v-model="rating"
+            size="30"
+            dense
+            readonly=""
+          />
+        </v-row>
+    
+        <!-- RATING -->
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 

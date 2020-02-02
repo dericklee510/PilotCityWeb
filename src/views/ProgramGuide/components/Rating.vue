@@ -22,6 +22,7 @@
           <a
             v-else-if="team.href"
             :href="team.href"
+            target="_blank"
           >
             <i class="fas fa-external-link-alt" />
           </a>

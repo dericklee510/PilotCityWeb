@@ -8,7 +8,7 @@
 
     <v-col
       id="processlog__contain"
-      cols="7"
+      cols="8"
     >
       <v-row
         justify="center"
@@ -51,6 +51,7 @@
           
             <i
               class="processlog__fileattachment fas fa-paperclip pt-3 pb-3 pl-3 pr-4"
+              style="cursor: pointer"
               @click="triggerFileInput"
             />
             <v-file-input
