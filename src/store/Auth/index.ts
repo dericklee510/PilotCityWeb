@@ -105,7 +105,6 @@ export default class Auth extends VuexModule {
             let resp = await firebase.auth().signInWithEmailAndPassword(email, password)
             this.context.commit(SET_USER, resp.user);
             if (this.user && !this.user.emailVerified) {
-                alert("email not verified!");
                 throw (EMAIL_NOT_VERIFIED_ERR)
             }
             // eslint-disable-next-line no-console 
