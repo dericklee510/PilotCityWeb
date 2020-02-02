@@ -1,7 +1,7 @@
 <template>
-  <v-container> 
-    <v-row no-gutters justify="center">
-      <v-col cols="9">
+  <v-container>
+    <v-row no-gutters>
+      <v-col cols="12">
         <div class="manageprogram__header mt-10">
           Manage Program
         </div>
@@ -22,7 +22,7 @@
           <v-col class="manageprogram__title">
             Trigger
           </v-col>
-          <v-col cols="1" class="manageprogram__title">
+          <v-col class="manageprogram__title">
             Status
           </v-col>
         </v-row>
@@ -34,6 +34,7 @@
           :name="key"
           :num="index"
           :completion="latestCompletionPercent[key]"
+          :unlock-prop="unlockHash[key]"
         />
         <!-- <v-row
           no-gutters
@@ -101,6 +102,18 @@ export default class ManageProgram extends Vue {
     [`package`]: "demoVideo",
     [`demo day`]: "demoDay",
     [`exit survey`]: "exitForm",
+  }
+  unlockHash:Record<string, "By Date"|"Manually"| "By Completion"> = {
+    [`launch day`]: "By Date",
+    [`training`]: "By Completion",
+    [`practice & research`]: "By Completion",
+    [`ideate`]: "By Completion",
+    [`hack day`]: "By Date",
+    [`reflection`]: "By Completion",
+    [`design & prototype`]: "Manually",
+    [`package`]: "By Completion",
+    [`demo day`]: "By Date",
+    [`exit survey`]: "By Completion",
   }
   get latestCompletionPercent(): Record<keyof typeof routeHash, number> {
     const { routeHash } = this

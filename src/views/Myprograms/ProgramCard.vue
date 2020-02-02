@@ -1,6 +1,6 @@
 <template>
   <PCLoader v-slot="{loading, setLoader}">
-    <v-row class="myprograms__card mt-9">
+    <v-row class="myprograms__card">
       <v-col cols="3">
         <div class="myprograms__cardimage" />
       </v-col>
@@ -22,7 +22,7 @@
               v-model="completion"
               color="success"
               rounded
-              height="8"
+              height="25"
             />
           </v-col>
           <v-col cols="3">

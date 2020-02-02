@@ -205,7 +205,8 @@ export default class Signup extends Vue {
                 lastName: this.lastName
             })
             this.$router.push({
-              name:"signup.type"
+              name:"login",
+              params: { email: this.email, password: this.password }
             })
         // }
         // this.loading = false
