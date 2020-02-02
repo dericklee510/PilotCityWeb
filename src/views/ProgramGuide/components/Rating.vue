@@ -4,6 +4,8 @@
       v-for="(team,index) in syncedSnippet"
       :key="index"
       justify="center"
+      class="pt-3 pb-3"
+      no-gutters
     >
       <slot name="link">
         <v-col
@@ -49,7 +51,7 @@
         <v-rating
           v-model="team.rating"
           dense
-          size="30px"
+          size="20px"
           @input="ratingChange($event,team.projectId)"
         />
       </v-col>

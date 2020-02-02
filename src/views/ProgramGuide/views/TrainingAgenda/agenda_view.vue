@@ -20,6 +20,11 @@
           no-gutters
         >
           TRAINING DAY AGENDA
+          <i
+            v-if="citizenType=='Teacher'"
+            class="far fa-edit edit-icon__project"
+            @click="toggleView"
+          />
         </v-row>
     
         <v-row
@@ -54,6 +59,12 @@ import {firebase} from '@/firebase/init'
 })
 export default class TrainingDayAgendaView extends Vue{
   agendaItems = FbStore.currentTeacherProgramData!.trainingDayAgenda?.events || []
+  get citizenType(): string {
+    return localStorage.citizenType;
+  }
+  toggleView(){
+    this.$router.push({name: 'teach-project-training-edit'})
+  }
   onFinish(){
     FbStore.updateCurrentProject({
       [`programSequence.${'train'}`]:firebase.firestore.FieldValue.serverTimestamp()

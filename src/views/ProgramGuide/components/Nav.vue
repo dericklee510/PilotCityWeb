@@ -19,7 +19,10 @@
           <v-col class="guide__mainrow">
             <span
               class="guide__bigdot guide__bigdot--active"
-              :class="unlocked?unlocked&&index==0?'guide__background_blue':unlocked&&index==1?'guide__background_green':'':'guide__background--grey'"
+              :class="isUnlocked('Externship')&&main=='Externship'?
+                'guide__background_blue':isUnlocked('Project')&&main=='Project'?
+                  'guide__background_green':isUnlocked('Internship')&&main=='Internship'?
+                    'guide__background_purple':'guide__background--grey'"
             >
               <i
                 v-if="main=='Externship'"
@@ -37,15 +40,15 @@
 
             <!-- <span
               class="guide__maintext"
-              :class=" isActive?'guide__maintext--active':''"
+              :class=" isActive?'guide__maintext--active':unlocked&&main=='Internship'"
             >{{ main }}</span>-->
             <span class="guide__maintext">{{ main }}</span>
           </v-col>
         </v-col>
       </div>
       <v-col
-        v-for="(arr, subitem, key) in obj"
-        :key="subitem+key"
+        v-for="(val, mod, key) in obj"
+        :key="mod+key"
         class="guide__sub-container"
       >
         <v-col>
@@ -53,14 +56,20 @@
         </v-col>
         <v-col
           class="guide__subrow"
-          @click="updateProgram(subitem)"
+          @click="updateProgram(val.routeName)"
         >
           <span class="guide__smalldot" />
           <span
             class="guide__smalldotfilled"
-            :class="unlocked?unlocked&&index==0?'guide__background_blue':unlocked&&index==1?'guide__background_green':'':'guide__background--transparent'"
+            :class="val.unlocked&&main=='Externship'?
+              'guide__background_blue': val.unlocked&&main=='Project'?
+                'guide__background_green': val.unlocked&&main=='Internship'?
+                  'guide__background_purple':'guide__background--grey'"
           />
-          <span class="guide__subtext">{{ subitem }}</span>
+          <span
+            class="guide__subtext"
+            :class="value==val.routeName?'guide__subtext--active':''"
+          >{{ mod }}</span>
         </v-col>
       </v-col>
     </v-col>
@@ -72,27 +81,41 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import { Prop } from "vue-property-decorator";
 import { forEachField } from "graphql-tools";
-import { TEACHERSEQUENCE, EMPLOYERSEQUENCE, STUDENTSEQUENCE } from "../views";
 import { LinkedList, LinkedListItem } from "linked-list-typescript";
 import { ProgramNode, RouteList } from "../types";
-import { STUDENTMODULES, EMPLOYERMODULES, TEACHERMODULES } from "../views";
 import { FbStore } from '../../../store';
 import {startCase} from 'lodash'
+type Sequence = {
+  Externship:{[key:string]: {unlocked: () => boolean, routeName: string}}, 
+  Project:{[key:string]: {unlocked: () => boolean, routeName: string}}
+}
 @Component
 export default class Nav extends Vue {
   @Prop()
   public value!: LinkedList<ProgramNode>;
-  public unlocked = false;
-  public sequenceHash: Record<string, any> = {
-    Teacher: TEACHERSEQUENCE,
-    Employer: EMPLOYERSEQUENCE,
-    Student: STUDENTSEQUENCE
-  };
+  @Prop({required: true})
+  public routeMap!:  LinkedList<ProgramNode>;
+
+  isUnlocked(val: string){
+    // let arr = this.sequence[val];
+    // return arr[0][Object.keys(arr[0])[0]]
+    return true;
+  }
   get citizenType() {
     return startCase(FbStore.userCitizenType!)
   }
-  get sequence() {
-    return this.sequenceHash[this.citizenType]
+  get sequence(){
+    let seq = {} as Sequence;
+    seq.Externship = {};
+    seq.Project = {};
+    this.routeMap.toArray().forEach(obj => {
+      if(obj.value.sequence == "Externship"){
+        seq.Externship[obj.value.page] =  {unlocked: obj.value.isUnlocked, routeName: obj.value.routeName}
+      }if(obj.value.sequence == "Project"){
+        seq.Project[obj.value.page] =  {unlocked: obj.value.isUnlocked, routeName: obj.value.routeName}
+      }
+    })
+    return seq;
   }
   public updateProgram(name: string) {
     this.$emit("input", name);

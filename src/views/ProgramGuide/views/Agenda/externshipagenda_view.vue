@@ -18,6 +18,10 @@
           no-gutters
         >
           EXTERNSHIP DAY AGENDA
+          <i
+            class="far fa-edit edit-icon__externship"
+            @click="toggleView"
+          />
         </v-row>
         <v-row
           justify="center"
@@ -55,6 +59,9 @@ export default class ExternshipAgenda extends Vue{
   agendaItems:EventItem[] = FbStore.currentEmployerProgram?.externshipDayAgenda?.events || []
   get isAgendaComplete(){
     return this.agendaItems.map(item => item.completed).every(isTrue => isTrue)
+  }
+  toggleView(){
+    this.$router.push({name: 'emp-externship-agenda-edit'})
   }
 }
 </script>

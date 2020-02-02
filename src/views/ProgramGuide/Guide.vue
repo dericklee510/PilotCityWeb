@@ -10,7 +10,10 @@
       xl="1"
       class="d-sm-block d-none"
     >
-      <Nav v-model="currentModule" />
+      <Nav
+        v-model="currentModule"
+        :route-map="routeMap"
+      />
     </v-col>
     <v-col
       xl="11"
@@ -27,7 +30,10 @@
           class="guide__locks guide__locks--left"
           @click="navBackward"
         >
-          <Locks :orientation="'left'" />
+          <Locks
+            :module="prevModule"
+            :orientation="'left'"
+          />
         </v-col>
         <v-col cols="12">
           <router-view />
@@ -37,7 +43,10 @@
           class="guide__locks guide__locks--right"
           @click="navForward"
         >
-          <Locks :orientation="'right'" />
+          <Locks
+            :module="nextModule"
+            :orientation="'right'"
+          />
         </v-col>
       </v-row>
     </v-col>
@@ -207,18 +216,17 @@ import { Observable, empty, Subscription } from "rxjs";
   }
 })
 export default class Guide extends Vue {
-  public sequenceHash: Record<string, Record<string, string[]>> = {
-    Teacher: TEACHERMODULES,
-    Employer: EMPLOYERMODULES,
-    Student: STUDENTMODULES
-  };
-  public xcurrentModule: string = "";
+  public currentModule: string = "";
   // routeMap!: LinkedList<ProgramNode>;
   currentNode!: ProgramNode;
   get projectIds() {
     return FbStore.currentUserProfile!.projectIds;
   }
   public projectSubscriber: Subscription|null = null
+  @Watch("currentModule")
+  changePage(){
+    this.$router.push({ name: this.currentModule})
+  }
   @Watch("projectIds")
   async onProjectChange() {
     this.projectSubscriber?.unsubscribe();
@@ -253,9 +261,6 @@ export default class Guide extends Vue {
   get citizenType(): string {
     return localStorage.citizenType;
   }
-  get sequence() {
-    return this.sequenceHash[this.citizenType];
-  }
   get nextModule() {
     if (this.currentNode) return this.currentNode.next;
     else return null;
@@ -263,9 +268,6 @@ export default class Guide extends Vue {
   get prevModule() {
     if (this.currentNode) return this.currentNode.prev;
     else return null;
-  }
-  get currentModule() {
-    return this.currentNode;
   }
 
   public navForward() {

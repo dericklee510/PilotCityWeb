@@ -17,6 +17,11 @@
         class="mr-auto ml-auto agenda__title"
       >
         DEMO DAY AGENDA
+        <i
+            v-if="citizenType=='Teacher'|| citizenType=='Employer'"
+            class="far fa-edit edit-icon__project"
+            @click="toggleView"
+          />
       </v-row>
 
       <!-- BORDERLINE -->
@@ -75,6 +80,15 @@ const emptyAgenda:EventItem = {
   }
 })
 export default class DemoAgendaEdit extends Vue{
+  get citizenType(): string {
+    return localStorage.citizenType;
+  }
+  toggleView(){
+    if(localStorage.citizenType == 'Employer')
+      this.$router.push({name: 'emp-project-demoagenda'})
+    if(localStorage.citizenType == 'Teacher')
+      this.$router.push({name: 'teach-project-demoagenda'})
+  }
   mounted(){
     this.$subscribeTo(this.$observables.agendaEvents,async (events:EventItem[]) => {
       await FbStore.updateCurrentEmployerProgram({

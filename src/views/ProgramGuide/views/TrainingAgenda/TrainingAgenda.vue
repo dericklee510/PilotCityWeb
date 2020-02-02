@@ -18,6 +18,10 @@
           class="mr-auto ml-auto agenda__title"
         >
           TRAINING DAY AGENDA
+          <i
+            class="far fa-edit edit-icon__project"
+            @click="toggleView"
+          />
         </v-row>
     
         <!-- BORDERLINE -->
@@ -75,6 +79,9 @@ const emptyAgenda:Omit<EventItem,'completed'> = {
   }
 })
 export default class TrainingDayEdit extends Vue{
+  toggleView(){
+    this.$router.push({name: 'teach-project-training'})
+  }
   mounted(){
     this.$subscribeTo(this.$observables.agendaEvents,async (events:EventItem[]) => {
       await FbStore.updateCurrentTeacherProgramData({

@@ -7,7 +7,7 @@
 
     <v-col
       id="presentation_view__contain"
-      cols="7"
+      cols="8"
     >
       <v-row
         justify="center"
@@ -22,27 +22,30 @@
       />
 
 
-      <v-row
-        class="mt-5"
-        justify="center"
-      >
-        <v-col
-          class="presentation_view__label"
-          cols="1"
-        />
-        <v-col
-          class="presentation_view__label"
-          cols="6"
+      <v-container>
+        <v-row
+          class="mt-5"
+          justify="center"
+          no-gutters
         >
-          Name
-        </v-col>
-        <v-col
-          class="presentation_view__label"
-          cols="3"
-        >
-          Rate
-        </v-col>
-      </v-row>
+          <v-col
+            class="presentation_view__label"
+            cols="1"
+          />
+          <v-col
+            class="presentation_view__label"
+            cols="8"
+          >
+            Name
+          </v-col>
+          <v-col
+            class="presentation_view__label"
+            cols="2"
+          >
+            Rate
+          </v-col>
+        </v-row>
+      </v-container>
 
       <!-- TEAM -->
 

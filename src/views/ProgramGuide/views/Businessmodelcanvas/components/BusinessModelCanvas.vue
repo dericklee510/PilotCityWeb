@@ -5,9 +5,10 @@
         justify="center"
         no-gutters
       >
-        <v-col cols="8">
+        <v-col cols="12">
           <v-row
             justify="center"
+            no-gutters
             class="businessmodelcanvas_enter__description__label mt-12 mr-auto ml-auto mb-1"
           >
             <v-col
@@ -20,9 +21,9 @@
             <v-spacer />
             <v-col
               cols="12"
-              md="6"
-              lg="5"
-              xl="4"
+              md="8"
+              lg="7"
+              xl="6"
             >
               <v-row
                 v-if="stars"
@@ -33,10 +34,10 @@
               >
                 <v-col
                   cols="12"
-                  sm="6"
-                  md="5"
-                  xl="3"
-                  class="businessmodelcanvas_enter__ratinglabel"
+                  sm="8"
+                  md="7"
+                  xl="5"
+                  class="businessmodelcanvas_enter__ratinglabel d-none d-lg-inline-block"
                 >
                   <span>Rating</span>
                 </v-col>
@@ -57,8 +58,9 @@
           </v-row>
           <v-row
             v-if="readonly==true"
-            justify="center"
+            justify="start"
             class="mr-auto ml-auto mb-12"
+            style="padding-left: 15px"
           >
             {{ syncedCanvas.problem }}
           </v-row>
@@ -99,9 +101,9 @@
             <v-spacer />
             <v-col
               cols="12"
-              md="6"
-              lg="5"
-              xl="4"
+              md="8"
+              lg="7"
+              xl="6"
             >
               <v-row
                 v-if="stars"
@@ -112,10 +114,10 @@
               >
                 <v-col
                   cols="12"
-                  sm="6"
-                  md="5"
-                  xl="3"
-                  class="businessmodelcanvas_enter__ratinglabel"
+                  sm="8"
+                  md="7"
+                  xl="5"
+                  class="businessmodelcanvas_enter__ratinglabel d-none d-lg-inline-block"
                 >
                   <span>Rating</span>
                 </v-col>
@@ -136,8 +138,9 @@
           </v-row>
           <v-row
             v-if="readonly==true"
-            justify="center"
+            justify="start"
             class="mr-auto ml-auto mb-12"
+            style="padding-left: 15px"
           >
             {{ syncedCanvas.solution }}
           </v-row>
@@ -177,9 +180,9 @@
             <v-spacer />
             <v-col
               cols="12"
-              md="6"
-              lg="5"
-              xl="4"
+              md="8"
+              lg="7"
+              xl="6"
             >
               <v-row
                 v-if="stars"
@@ -190,10 +193,10 @@
               >
                 <v-col
                   cols="12"
-                  sm="6"
-                  md="5"
-                  xl="3"
-                  class="businessmodelcanvas_enter__ratinglabel"
+                  sm="8"
+                  md="7"
+                  xl="5"
+                  class="businessmodelcanvas_enter__ratinglabel d-none d-lg-inline-block"
                 >
                   <span>Rating</span>
                 </v-col>
@@ -214,8 +217,9 @@
           </v-row>
           <v-row
             v-if="readonly==true"
-            justify="center"
+            justify="start"
             class="mr-auto ml-auto mb-12"
+            style="padding-left: 15px"
           >
             {{ syncedCanvas.innovation }}
           </v-row>
@@ -255,9 +259,9 @@
             <v-spacer />
             <v-col
               cols="12"
-              md="6"
-              lg="5"
-              xl="4"
+              md="8"
+              lg="7"
+              xl="6"
             >
               <v-row
                 v-if="stars"
@@ -268,10 +272,10 @@
               >
                 <v-col
                   cols="12"
-                  sm="6"
-                  md="5"
-                  xl="3"
-                  class="businessmodelcanvas_enter__ratinglabel"
+                  sm="8"
+                  md="7"
+                  xl="5"
+                  class="businessmodelcanvas_enter__ratinglabel d-none d-lg-inline-block"
                 >
                   <span>Rating</span>
                 </v-col>
@@ -292,8 +296,9 @@
           </v-row>
           <v-row
             v-if="readonly==true"
-            justify="center"
+            justify="start"
             class="mr-auto ml-auto mb-12"
+            style="padding-left: 15px"
           >
             {{ syncedCanvas.customer }}
           </v-row>

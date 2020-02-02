@@ -16,14 +16,12 @@
           class="fas fa-chevron-right d-none d-lg-inline"
         />
         <i
-        
-          v-if="xlocked"
-          class="fas fa-lock-alt guide__locks-locked"
+          v-if="isUnlocked"
+          class="fas fa-unlock-alt guide__locks-unlocked"
         />
         <i
-        
           v-else
-          class="fas fa-unlock-alt guide__locks-unlocked"
+          class="fas fa-lock-alt guide__locks-locked"
         />
         <i
           v-if="orientation=='left'"
@@ -37,16 +35,18 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator';
+import { ProgramNode } from '../types';
 
 @Component
 export default class Lock extends Vue{
     @Prop()
-    public locked?: boolean
+    public module?: ProgramNode
     @Prop()
     public orientation?: string;
 
-    public get xlocked(){
-      return false;
+    get isUnlocked(){
+      if(this.module) return this.module.value.unlocked;
+      else return false
     }
 
 }
