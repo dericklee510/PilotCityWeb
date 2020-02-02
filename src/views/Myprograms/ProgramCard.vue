@@ -5,13 +5,25 @@
         <div class="myprograms__cardimage" />
       </v-col>
       <v-col cols="9">
-        <v-row class="myprograms__cardtitle">{{ program.programName }}</v-row>
-        <v-row class="myprograms__progresspercentage">{{ completion }}%</v-row>
-
+        <v-row class="myprograms__cardtitle">
+          {{ program.programName }}
+        </v-row>
+        <v-row
+          v-if="isStudent"
+          class="myprograms__progresspercentage"
+        >
+          {{ completion }}%
+        </v-row>
         <v-row>
           <v-col cols="9">
             <!-- <v-row class="myprograms__progressbaractive" /> -->
-            <v-progress-linear v-model="completion" color="success" rounded height="8" />
+            <v-progress-linear
+              v-if="isStudent"
+              v-model="completion"
+              color="success"
+              rounded
+              height="8"
+            />
           </v-col>
           <v-col cols="3">
             <v-btn
@@ -19,7 +31,9 @@
               :disabled="loading"
               :loading="loader"
               @click="setLoader(() => openprogram(program))"
-            >{{ completion?`Open`:`Launch` }}</v-btn>
+            >
+              {{ openCondition?`Open`:`Launch` }}
+            </v-btn>
           </v-col>
         </v-row>
       </v-col>
@@ -49,47 +63,54 @@ export default class ProgramCard extends Vue {
   program!: EmployerProgram;
   @Watch("program", { immediate: true })
   async onProgramChange() {
-    this.loader = true;
-    const classroomData = await FbStore.findRelativeClassroom({
-      employerProgramId: this.program.employerProgramId,
-      studentId: FbStore.FBUser!.uid
-    });
-    const studentClassroomData = (
-      await FbStore.firestore
-        .collection("studentClassroom")
-        .doc(classroomData.classroomId + FbStore.FBUser!.uid)
-        .get()
-    ).data<studentClassroom>();
-    const project = await FbStore.findRelativeProject({
-      classroomId: classroomData.classroomId,
-      studentId: FbStore.FBUser!.uid
-    });
-    const keysOfSequence = {
-      programBrief: studentClassroomData?.finishedIntrovideo,
-      introVideo: studentClassroomData?.finishedProgramBrief,
-      train: project?.programSequence.train,
-      practice: project?.programSequence.practice,
-      caseStudies: project?.programSequence.caseStudies,
-      bmc: project?.programSequence.bmc,
-      sentencePitch: project?.programSequence.sentencePitch,
-      elevatorPitch: project?.programSequence.elevatorPitch,
-      hackDay: project?.programSequence.hackDay,
-      reflection: project?.programSequence.reflection,
-      processLog: project?.programSequence.processLog,
-      demoVideo: project?.programSequence.demoVideo,
-      presentation: project?.programSequence.presentation,
-      demoDay: project?.programSequence.demoDay,
-      exitForm: project?.programSequence.exitForm,
-      interviewOffer: project?.programSequence.interviewOffer
-    };
-    let progress = [...Object.values(keysOfSequence)].reduce(
-      (total, current) => {
-        return (total += current ? 1 : 0);
-      },
-      0
-    );
-    this.completion = (progress / Object.keys(keysOfSequence).length) * 100;
-    this.loader = false;
+    if (FbStore.userCitizenType === "student") {
+      this.loader = true;
+      const classroomData = await FbStore.findRelativeClassroom({
+        employerProgramId: this.program.employerProgramId,
+        studentId: FbStore.FBUser!.uid
+      });
+      const studentClassroomData = (
+        await FbStore.firestore
+          .collection("studentClassroom")
+          .doc(classroomData.classroomId + FbStore.FBUser!.uid)
+          .get()
+      ).data<studentClassroom>();
+      const project = await FbStore.findRelativeProject({
+        classroomId: classroomData.classroomId,
+        studentId: FbStore.FBUser!.uid
+      });
+      console.log({
+        classroomData,
+        studentClassroomData,
+        project
+      });
+      const keysOfSequence = {
+        programBrief: studentClassroomData?.finishedIntrovideo,
+        introVideo: studentClassroomData?.finishedProgramBrief,
+        train: project?.programSequence?.train,
+        practice: project?.programSequence?.practice,
+        caseStudies: project?.programSequence?.caseStudies,
+        bmc: project?.programSequence?.bmc,
+        sentencePitch: project?.programSequence?.sentencePitch,
+        elevatorPitch: project?.programSequence?.elevatorPitch,
+        hackDay: project?.programSequence?.hackDay,
+        reflection: project?.programSequence?.reflection,
+        processLog: project?.programSequence?.processLog,
+        demoVideo: project?.programSequence?.demoVideo,
+        presentation: project?.programSequence?.presentation,
+        demoDay: project?.programSequence?.demoDay,
+        exitForm: project?.programSequence?.exitForm,
+        interviewOffer: project?.programSequence?.interviewOffer
+      };
+      let progress = [...Object.values(keysOfSequence)].reduce(
+        (total, current) => {
+          return (total += current ? 1 : 0);
+        },
+        0
+      );
+      this.completion = (progress / Object.keys(keysOfSequence).length) * 100;
+      this.loader = false;
+    }
   }
   completion: number = 0;
   async openprogram(program: EmployerProgram) {
@@ -98,9 +119,25 @@ export default class ProgramCard extends Vue {
     let route = new RouteList(FbStore.currentUserProfile!.citizenType!)
       .linkedList.head.value.routeName;
     this.$router.push({
-      name: this.completion ? route : "program.launch"
+      name: this.openCondition ? route : "program.launch"
       // params: { citizenType: citizenKey }
     });
+  }
+  get isStudent() {
+    return FbStore.userCitizenType == "student";
+  }
+  get openCondition() {
+    switch (FbStore.userCitizenType) {
+      case "employer":
+        return this.program.launched
+      case "student":
+        return this.completion
+      case "teacher":
+        return FbStore.currentUserProfile!.teacherProgramDataIds[
+        this.program.employerProgramId
+      ]
+    }
+    return false
   }
 }
 </script>

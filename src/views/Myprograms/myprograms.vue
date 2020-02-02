@@ -293,7 +293,8 @@ async onProgramChange(){
       let doc = await ref.get();
       if (doc.exists) {
         ref.update<EmployerProgram>({
-          employerId: FbStore.FBUser!.uid
+          employerId: FbStore.FBUser!.uid,
+          launched: firebase.firestore.FieldValue.delete()
         });
         await FbStore.updateCurrentUserProfile({
           employerProgramIds: (firebase.firestore.FieldValue.arrayUnion(

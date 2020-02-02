@@ -1203,6 +1203,9 @@ import { startCase } from "lodash";
 
 
 export default class CitizenID extends Vue {
+  created(){
+    console.log("creating", FbStore.currentUserProfile)
+  }
   items = ["Student", "Teacher", "Employer","Program"];
   firstName = FbStore.currentUserProfile!.firstName || "";
   lastName = FbStore.currentUserProfile!.lastName || "";
