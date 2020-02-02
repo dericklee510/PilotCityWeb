@@ -76,7 +76,7 @@ export class RouteList {
         return new LinkedList<ProgramNode>(...map)
     }
 
-    constructor(private type: "employer" | "teacher" | "student", private teacherProgramData?: TeacherProgramData | null,
+     constructor(private type: "employer" | "teacher" | "student", private teacherProgramData?: TeacherProgramData | null,
     private studentClassroom?: studentClassroom | null,
     private project?:Project | null) {
         switch (type) {
