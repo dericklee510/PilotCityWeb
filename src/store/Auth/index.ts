@@ -90,6 +90,8 @@ export default class Auth extends VuexModule {
                     lastName,
                     lastUpdate:firebase.firestore.FieldValue.serverTimestamp()
                 })
+                await this.user.sendEmailVerification();
+                alert("Email verification sent out!");
             }
             return SUCCESSFUL_SIGNUP_RESP
         } catch (err) {
@@ -101,22 +103,18 @@ export default class Auth extends VuexModule {
     public async login({ email, password }: UserCredentials): Promise<string> {
         try{
             let resp = await firebase.auth().signInWithEmailAndPassword(email, password)
-            this.context.commit(SET_USER, resp.user)
-                if (this.user && !this.user.emailVerified && this.user.email) {
-                            firebase.auth().sendSignInLinkToEmail(this.user.email, { 
-                                url: `pilotcity.com` 
-                            })
-                            throw (EMAIL_NOT_VERIFIED_ERR)
-                        }
-            
-                        // eslint-disable-next-line no-console 
-                        console.info(" %c Successfully logged in!", [
-                            'background: green',
-                            'color: white',
-                            'display: block',
-                            'text-align: center'
-                        ].join(';'))
-                        return SUCCESSFUL_LOGIN_RESP
+            this.context.commit(SET_USER, resp.user);
+            if (this.user && !this.user.emailVerified) {
+                throw (EMAIL_NOT_VERIFIED_ERR)
+            }
+            // eslint-disable-next-line no-console 
+            console.info(" %c Successfully logged in!", [
+                'background: green',
+                'color: white',
+                'display: block',
+                'text-align: center'
+            ].join(';'))
+            return SUCCESSFUL_LOGIN_RESP
         }
         catch(err){
             // this.logout() // put this back after error is fixed

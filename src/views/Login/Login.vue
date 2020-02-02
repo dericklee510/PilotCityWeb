@@ -88,6 +88,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
+import { Prop } from 'vue-property-decorator'
 import { ValidationProvider, ValidationObserver } from 'vee-validate'
 import { AuthStore, FbStore } from '@/store'
 import {
@@ -99,18 +100,18 @@ import PCselect from '@/components/inputs/PCselect.vue'
 import PCtextfield from '@/components/inputs/PCtextfield.vue'
 import { ObserverInstance } from '@/utilities/validation'
 
-@Component({
+@Component<Login>({
     components: {
         pcSelect: PCselect,
         pcTextfield: PCtextfield,
         ValidationProvider,
         ValidationObserver
-    }
+    }, 
 })
 export default class Login extends Vue {
-    private password: string = '';
+    private password: string = "";
 
-    public email: string = '';
+    public email: string = "";
 
     public loading: boolean = false;
 
