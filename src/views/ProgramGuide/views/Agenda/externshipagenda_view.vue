@@ -19,17 +19,27 @@
         >
           EXTERNSHIP DAY AGENDA
           <i
+            v-if="citizenType == 'employer'"
             class="far fa-edit edit-icon__externship"
             @click="toggleView"
           />
         </v-row>
         <v-row
           justify="center"
-          class="mr-auto ml-auto businessmodelcanvas_view2__description"
+          no-gutters
+          class="businessmodelcanvas_view2__description"
         >
-          Mark agenda items as you complete them.
+          <v-col
+            cols="9"
+            class="pt-3 pb-3 text-center"
+          >
+            Mark agenda items as you complete them.
+          </v-col>
         </v-row>
-        <AgendaView v-model="agendaItems" />
+        <AgendaView
+          v-model="agendaItems"
+          class="pc-externship"
+        />
       </v-col>
     </v-row>
   </v-container>
@@ -59,6 +69,9 @@ export default class ExternshipAgenda extends Vue{
   agendaItems:EventItem[] = FbStore.currentEmployerProgram?.externshipDayAgenda?.events || []
   get isAgendaComplete(){
     return this.agendaItems.map(item => item.completed).every(isTrue => isTrue)
+  }
+  get citizenType() {
+    return FbStore.userCitizenType;
   }
   toggleView(){
     this.$router.push({name: 'emp-externship-agenda-edit'})

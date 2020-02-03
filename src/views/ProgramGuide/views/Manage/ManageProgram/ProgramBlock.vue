@@ -48,6 +48,8 @@
         <v-date-picker
           v-model="syncValue"
           no-title
+          min="2020-02-10"
+          max="2020-06-12"
         />
       </v-menu>
     </v-col>
@@ -73,7 +75,7 @@
         {{ syncValue?'Lock':'Unlock' }}
       </v-btn>
     </v-col>
-    <v-col>
+    <v-col cols="1">
       <i
         class="fas ml-4"
         :class="{'fa-unlock':isUnlocked, 'fa-lock':!isUnlocked,'manageprogram__unlock':isUnlocked,'manageprogram__lock':!isUnlocked}"

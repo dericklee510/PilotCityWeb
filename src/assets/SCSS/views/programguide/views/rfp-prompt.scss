@@ -28,7 +28,27 @@
         border-left-color: transparent;
         border-right-color: transparent;
     }
-
+    &__button{
+        // margin-top: 2%;
+        font-family: Raleway;
+        font-style: normal;
+        font-weight: 900 !important;
+        font-size: 1.88rem;
+        line-height: 35px;
+        color: #000000;
+        // background-color: #E6E7E8;
+        border: 1px solid #000000;
+        word-wrap: break-word;
+        width: 100%;
+        }
+    
+        &__button:hover { 
+            background-color: $pc-green;
+            color: #ffffff;
+            border: 1px solid $pc-green;
+    
+        }
+    
 
 }
 
@@ -36,7 +56,7 @@
 
     &__finalize{
         border: 1px solid #000000;
-        width: 75%;
+        width: 100%;
         height: 175px;
         padding: 10px 10px 10px 10px;
         font-family: "Raleway";
@@ -176,11 +196,11 @@
     }
 
     &__generatetitle{
-font-family: "Raleway";
-font-size: 16px;
-color: #000000;
-font-weight: 700;
-margin-top: 9px;
+        font-family: "Raleway";
+        font-size: 16px;
+        color: #000000;
+        font-weight: 700;
+        margin-top: 9px;
     }
 
     &__generateinput{
@@ -225,7 +245,7 @@ margin-top: 9px;
     &__onesentence{
         height: 120px;
         border: 1px solid #CCCCCC;
-        width: 75%;
+        width: 100%;
         font-size: 22px;
         font-family: "Raleway";
         padding-left: 20px;
@@ -244,7 +264,7 @@ margin-top: 9px;
     font-size: 1.41rem;
     line-height: 26px;
     color: #000000;
-    width: 75%;
+    width: 100%;
     text-align: center;
     letter-spacing: .05rem;
 
@@ -258,7 +278,7 @@ margin-top: 9px;
     font-weight: 500;
     font-size: 1.41rem;
     color: #949598;
-    width: 75%;
+    width: 100%;
     text-align: center;
     line-height: unset;
 
@@ -274,7 +294,7 @@ margin-top: 9px;
     font-size: 1.41rem;
     line-height: 30px;
     color: #949598;
-    width: 75%;
+    width: 100%;
     text-align: left;
 
     }
@@ -288,35 +308,6 @@ margin-top: 9px;
         border-color: #C7C8CA;
         
     }
-
-    &__button{
-    // margin-top: 2%;
-    height: 73.5px;
-    font-family: Raleway;
-    font-style: normal;
-    font-weight: 900 !important;
-    font-size: 1.88rem;
-    line-height: 35px;
-    color: #000000;
-    // background-color: #E6E7E8;
-    border: 1px solid #000000;
-    word-wrap: break-word;
-
-
-
-    }
-
-    &__button:hover { 
-        background-color:#6FBA7F;
-        color: #ffffff;
-        border: 1px solid #6FBA7F;
-
-    }
-
-
-
-
-
 }
 
 

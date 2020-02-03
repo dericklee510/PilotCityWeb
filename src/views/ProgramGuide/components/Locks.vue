@@ -1,5 +1,8 @@
 <template>
-  <router-link :to="nextModule && nextModule.value.isUnlocked?{name:nextModule.value.routeName}:'#'">
+  <router-link
+    style="textDecoration: none"
+    :to="nextModule.value.isUnlocked?{name:nextModule.value.routeName}:'#'"
+  >
     <v-row
       v-if="nextModule"
       no-gutters
@@ -9,7 +12,6 @@
     >
       <v-col
         cols="12"
-        
         :class="{ right: orientation=='right', left: orientation=='left'}"
       >
         <span>
@@ -18,7 +20,7 @@
             class="fa fa-chevron-right d-none d-lg-inline"
           />
           <i
-            v-if="nextModule.isUnlocked"
+            v-if="nextModule.value.unlocked"
             class="fa fa-unlock guide__locks-unlocked"
           />
           <i
@@ -44,7 +46,7 @@ import { LinkedList } from 'linked-list-typescript';
 @Component
 export default class Locks extends Vue{
     @Prop({required:true})
-  routeMap!:LinkedList<ProgramNode>
+    routeMap!:LinkedList<ProgramNode>
     @Prop()
     public orientation!: string;
 

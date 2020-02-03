@@ -15,11 +15,11 @@
     </router-link>
     <v-spacer />
     <v-toolbar-items class="pc-toolbar__buttons d-sm-none">
-      <pcdropdown
+      <!-- <pcdropdown
         v-model="dropdownselect"
         :items="[{title: 'LOGOUT', action: logout}]"
         icon="mdi-menu"
-      />
+      /> -->
       <!-- :items="[{title: 'EXPLORE'},{title: 'MY PROGRAMS'}, {title: 'LOGOUT', action: logout}]" -->
     </v-toolbar-items>
     <!-- <v-toolbar-items class="pc-toolbar__buttons d-none d-sm-block"> -->

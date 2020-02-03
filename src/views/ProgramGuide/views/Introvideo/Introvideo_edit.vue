@@ -13,18 +13,31 @@
         id="introvideo_edit__contain"
         cols="8"
       >
-        <v-col
+        <v-row 
           justify="center"
-          class="programguide__title"
+          no-gutters
+          style="border-bottom: solid 0.75px #404142;"
         >
-          EDIT INTRODUCTION VIDEO
-        </v-col>
+          <v-col
+            cols="9"
+            class="programguide__title"
+            style="border-bottom: 0px;"
+          >
+            EDIT INTRODUCTION VIDEO
+          </v-col>
+        </v-row>
     
-        <v-col
-          class="programguide__description"
+        <v-row
+          justify="center"
+          no-gutters
         >
-          Record, upload and enter link for an introduction video to your project challenge for students to view.
-        </v-col>
+          <v-col
+            cols="9"
+            class="programguide__description"
+          >
+            Record, upload and enter link for an introduction video to your project challenge for students to view.
+          </v-col>
+        </v-row>
 
         <ValidationObserver v-slot="{invalid}">
           <v-row
@@ -45,26 +58,28 @@
               />
             </v-col>
           </v-row>
-                
-                
           <v-row
             no-gutters
             justify="center"
             align="center"
           >
-            <v-col cols="1">
-              <v-checkbox
-                v-model="checkbox"
-                type="checkbox"
-                :readonly="invalid"
-              />
-            </v-col>
-                
             <v-col
-              cols="11"
+              cols="9" 
               class="introvideo_edit__check"
             >
-              I confirm this video is set for public view
+              <v-row
+                justify="center"
+                align="center"
+              >
+                <v-checkbox
+                  v-model="checkbox"
+                  type="checkbox"
+                  :readonly="invalid"
+                  :ripple="false"
+                  dense
+                />
+                I confirm this video is set for public view
+              </v-row>
             </v-col>
           </v-row>
           <v-row
@@ -72,13 +87,16 @@
             justify="center"
           >
             <v-col
-              cols="5"
+              cols="4"
             >
               <v-btn
+                id="introvideo_edit__button"
+                class="mb-10"
                 text
                 solo
                 depressed
-                class="introvideo_edit__button"
+                outlined
+                height="73.5px"
                 :disabled="invalid || !checkbox"
                 @click="onSubmit"
               >

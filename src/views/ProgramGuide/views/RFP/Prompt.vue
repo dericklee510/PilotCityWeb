@@ -27,9 +27,15 @@
 
         <v-row
           justify="center"
-          class="mr-auto ml-auto prompt__description mb-10"
+          no-gutters
+          class=" prompt__description mb-10"
         >
-          Generate project prompts that best represent employer requirements and your course curriculum by tweaking key information in the mission.
+          <v-col
+            class="text-center"
+            cols="9"
+          >
+            Generate project prompts that best represent employer requirements and your course curriculum by tweaking key information in the mission.
+          </v-col>
         </v-row>
 
         <v-row
@@ -46,9 +52,15 @@
 
         <v-row
           justify="center"
+          no-gutters
           class="prompt__headerdescription mb-12"
         >
-          Enter the parameters of the employer's project
+          <v-col
+            class="text-center"
+            cols="9"
+          >
+            Enter the parameters of the employer's project
+          </v-col>
         </v-row>
 
         <v-row>
@@ -125,9 +137,15 @@
 
         <v-row
           justify="center"
+          no-gutters
           class="prompt__headerdescription mb-12"
         >
-          Choose an option you'd like to edit and finalize
+          <v-col
+            class="text-center"
+            cols="9"
+          >
+            Choose an option you'd like to edit and finalize
+          </v-col>
         </v-row>
 
         <v-col>
@@ -209,31 +227,50 @@
 
         <v-row
           justify="center"
+          no-gutters
           class="prompt__headerdescription mb-12"
         >
-          Fine-tune and finalize your project prompt with employer
+          <v-col
+            class="text-center"
+            cols="9"
+          >
+            Fine-tune and finalize your project prompt with employer
+          </v-col>
         </v-row>
 
-        <v-row justify="center">
-          <textarea
-            v-model="finalPrompt"
-            class="prompt__finalize"
-          />
+        <v-row
+          justify="center"
+          no-gutters
+        >
+          <v-col cols="9">
+            <textarea
+              v-model="finalPrompt"
+              class="prompt__finalize"
+            />
+          </v-col>
         </v-row>
 
 
 
         <v-row
           class="mt-10 mb-10"
+          no-gutters
           justify="center"
         >
-          <v-btn
-            large
-            class="prompt__button"
-            @click="submit"
-          >
-            Save
-          </v-btn>
+          <v-col cols="4">
+            <v-btn
+              id="prompt__button"
+              depressed
+              text
+              outlined
+              solo
+              height="73.5px"
+              class="mb-6"
+              @click="submit"
+            >
+              Save
+            </v-btn>
+          </v-col>
         </v-row>
       </v-col>
     </v-row>

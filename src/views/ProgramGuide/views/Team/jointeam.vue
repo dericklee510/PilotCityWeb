@@ -75,7 +75,7 @@
                     >
                       <v-text-field
                         v-model="teamName" 
-                        flat
+                        text
                         solo
                         depressed
                         :error-messages="errors"

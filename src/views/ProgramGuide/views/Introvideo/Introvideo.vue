@@ -12,9 +12,14 @@
       >
         <v-row
           justify="center"
-          class="mr-auto ml-auto introvideo__watchintro"
+          class="introvideo__watchintro"
         >
-          WATCH INTRODUCTION VIDEO
+          <v-col
+            cols="9"
+            class="text-center"
+          >
+            WATCH INTRODUCTION VIDEO
+          </v-col>
         </v-row>
     
         <v-col
@@ -24,9 +29,14 @@
     
         <v-row
           justify="center"
-          class="mr-auto ml-auto introvideo__description"
+          class="introvideo__description"
         >
-          Watch the following introduction video by your employer to get warmed up on what we’re doing.
+          <v-col
+            cols="9"
+            class="text-center"
+          >
+            Watch the following introduction video by your employer to get warmed up on what we’re doing.
+          </v-col>
         </v-row>
         <v-row
           justify="center"
@@ -50,19 +60,30 @@
             class="introvideo__checkbox"
           > I have finished watching the video
         </v-row>
-    
-        <v-col
-          class="mr-auto ml-auto"
-          cols="5"
+
+        <v-row
+          no-gutters
+          justify="center"
+          class="mt-6"
         >
-          <v-btn
-            class="introvideo__button"
-            :disabled="!acknowledged"
-            @click="onSubmit"
+          <v-col
+            cols="6"
+            sm="4"
           >
-            NEXT
-          </v-btn>
-        </v-col>
+            <v-btn
+              id="introvideo__button"
+              :disabled="!acknowledged"
+              class="mb-10"
+              solo
+              text
+              outlined
+              height="73.5px"
+              @click="onSubmit"
+            >
+              CONTINUE
+            </v-btn>
+          </v-col>  
+        </v-row>
       </v-col>
     </v-row>
   </v-container>
@@ -102,6 +123,7 @@ export default class Introvideo extends Vue {
     FbStore.updateCurrentStudentClassroom({
       finishedIntrovideo:firebase.firestore.FieldValue.serverTimestamp()
     })
+    this.$emit('nextNode');
   }
   get playerOptions(){
    return { responsive: true,
