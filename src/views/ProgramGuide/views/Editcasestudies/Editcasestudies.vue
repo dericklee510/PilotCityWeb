@@ -13,9 +13,15 @@
       >
         <v-row
           justify="center"
-          class="mr-auto ml-auto editcasestudies__title"
+          no-gutters
+          class="editcasestudies__title"
         >
-          ENTER CASE STUDIES & USE CASES
+          <v-col
+            class="text-center"
+            cols="9"
+          >
+            ENTER CASE STUDIES & USE CASES
+          </v-col>
         </v-row>
     
         <v-col
@@ -25,9 +31,15 @@
     
         <v-row
           justify="center"
-          class="mr-auto ml-auto editcasestudies__description"
+          no-gutters
+          class="editcasestudies__description"
         >
-          Share key articles, publications and links that support the student’s understanding of the technology, product or service.
+          <v-col
+            class="text-center"
+            cols="9"
+          >
+            Share key articles, publications and links that support the student’s understanding of the technology, product or service.
+          </v-col>
         </v-row>
     
         <v-row
@@ -121,19 +133,24 @@
           </v-row>
         </multi-input>
         <v-row
-          
           no-gutters
           justify="center"
         >
           <v-col
-            class="editcasestudies__savebutton"
             cols="4"
-            @click="submit"
           >
-            <span
-              style="
-            vertical-align: middle;"
-            > SAVE </span>
+            <v-btn
+              id="editcasestudies__button"
+              class="mb-10"
+              text
+              solo
+              depressed
+              outlined
+              height="73.5px"
+              @click="submit"
+            >
+            SAVE
+            </v-btn>
           </v-col>
         </v-row>
       </v-col>

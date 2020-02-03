@@ -226,6 +226,12 @@
                   >
                     <span>Email Verification Sent!</span> 
                   </v-col>
+                  <v-col
+                    class="code-modal__title"
+                    cols="12"
+                  >
+                    <span>Verify your email to Login!</span> 
+                  </v-col>
                 </v-row>
                 <v-row
                   no-gutters

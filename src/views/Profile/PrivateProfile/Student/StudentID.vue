@@ -1101,14 +1101,14 @@ import { startCase } from "lodash";
     // END
   }),
   watch: {
-    menu(val) {
-      val && setTimeout(() => (this.$refs.picker.activePicker = "YEAR"));
-    }
+    // menu(val) {
+    //   val && setTimeout(() => (this.$refs.picker.activePicker = "YEAR"));
+    // }
   },
   methods: {
-    save(date) {
-      this.$refs.menu.save(date);
-    }
+    // save(date) {
+    //   this.$refs.menu.save(date);
+    // }
   }
 })
 
@@ -1146,17 +1146,17 @@ export default class StudentID extends Vue {
 
     });
 
-          return {
-        internshipinterest: null,
-        unpaid:null,
-        paid:null,
-        lunchstatus:null,
-        resume:null,
-        noresume:null,
-        linkedin:null,
-        transport:null,
+      //     return {
+      //   internshipinterest: null,
+      //   unpaid:null,
+      //   paid:null,
+      //   lunchstatus:null,
+      //   resume:null,
+      //   noresume:null,
+      //   linkedin:null,
+      //   transport:null,
 
-      },
+      // },
 
     this.$router.push({ name: "program.programlist" });
   }

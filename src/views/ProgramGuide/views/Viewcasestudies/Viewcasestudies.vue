@@ -13,9 +13,14 @@
       >
         <v-row
           justify="center"
-          class="mr-auto ml-auto viewcasestudies__title"
+          class="viewcasestudies__title"
         >
-          REVIEW CASE STUDIES & USE CASES
+          <v-col
+            class="text-center"
+            cols="9"
+          >
+            REVIEW CASE STUDIES & USE CASES
+          </v-col>
         </v-row>
     
         <v-col
@@ -25,51 +30,78 @@
     
         <v-row
           justify="center"
-          class="mr-auto ml-auto viewcasestudies__description"
+          class="viewcasestudies__description"
         >
-          It is important to create unique and innovative solutions. Review what’s been done before so you don’t reinvent the wheel.
+          <v-col
+            cols="9"
+            class="text-center"
+          >
+            It is important to create unique and innovative solutions. Review what’s been done before so you don’t reinvent the wheel.
+          </v-col>
         </v-row>
         <v-row
           class="viewcasestudies__reviewtitle"
           no-gutters
+          justify="end"
         >
-          Reviewed
+          <v-col
+            class="text-start"
+            cols="10"
+          >
+            Reviewed
+          </v-col>
         </v-row>
+        
         <v-row
           v-for="(namedLink,index) in namedLinks"
           id="viewcasestudies__check1"
           :key="index"
+          justify="end"
+          no-gutters
         >
-          <span
-            class="viewcasestudies__wholeline"
-          ><input
-             v-model="caseStudiesReviewed[index]"
-             class="viewcasestudies__check"
-             type="checkbox"
-           >
-            <span>
-              {{ namedLink.linkName }}
-            </span>
-            <a :href="namedLink.link"><button class="viewcasestudies__exporticon"><img src="@/assets/exportbox.png"></button></a>
-          </span>
+          <v-col
+            cols="10"
+            class="text-start viewcasestudies__wholeline"
+          >
+            <input
+              v-model="caseStudiesReviewed[index]"
+              class="viewcasestudies__check"
+              type="checkbox"
+            >
+            {{ namedLink.linkName }}
+            <a
+              :href="namedLink.link"
+              target="_blank"
+            ><button class="viewcasestudies__exporticon"><img src="@/assets/exportbox.png"></button></a>
+          </v-col>
         </v-row>
-        <v-row
+        <!-- BUTTON DOES NOT LOOK LIKE IN USE -->
+        <!-- <v-row
           no-gutters
           justify="center"
         >
           <v-col
             cols="4"
-            class="viewcasestudies__savebuttonrow"
           >
             <v-btn
-              class="viewcasestudies__savebutton"
+              id="viewcasestudies__savebutton"
+              class="mb-10"
               :disabled="!allReviewed"
+              height="73.5px"
+              solo
+              text
+              depressed
+              outlined
               @click="submit"
             >
               NEXT
             </v-btn>
           </v-col>
-        </v-row>
+        </v-row> -->
+        <v-row
+          no-gutters
+          class="mb-10"
+        />
       </v-col>
     </v-row>
   </v-container>

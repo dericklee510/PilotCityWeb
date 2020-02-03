@@ -34,7 +34,7 @@
           />
         </v-col>
         <v-col cols="12">
-          <router-view />
+          <router-view @nextNode="$router.push({name: nextModule.value.routeName})" />
         </v-col>
         <v-col
           cols="1"
@@ -213,7 +213,6 @@ import { Observable, empty, Subscription } from "rxjs";
   }
 })
 export default class Guide extends Vue {
-  public currentModule: string = "";
   get projectIds() {
     return FbStore.currentUserProfile!.projectIds;
   }
@@ -254,7 +253,10 @@ export default class Guide extends Vue {
   }
   get nextModule() {
     if (this.currentNode) return this.currentNode.next;
-    else return null;
+    else return null; 
+  }
+  get currentNode(){
+      return this.routeMap.toArray().find((node) => this.$route.name === node.value.routeName) as ProgramNode
   }
   get prevModule() {
     if (this.currentNode) return this.currentNode.prev;

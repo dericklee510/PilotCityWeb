@@ -43,7 +43,7 @@ import { LinkedList } from 'linked-list-typescript';
 @Component
 export default class Lock extends Vue{
     @Prop({required:true})
-  routeMap!:LinkedList<ProgramNode>
+    routeMap!:LinkedList<ProgramNode>
     @Prop()
     public orientation!: string;
 

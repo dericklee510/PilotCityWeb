@@ -36,6 +36,7 @@
         <AgendaView
           v-model="agendaItems"
           @finish="onFinish"
+          class="pc-project"
         />
       </v-col>
     </v-row>
