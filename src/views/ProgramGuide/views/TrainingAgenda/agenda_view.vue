@@ -53,13 +53,14 @@ import Component from 'vue-class-component'
 import {AgendaView} from "@/views/ProgramGuide/components/"
 import { FbStore } from '../../../../store';
 import {firebase} from '@/firebase/init'
+import { EventItem } from '../../../../store/Database/types/utilities';
 @Component({
   components: {
     AgendaView
   }
 })
 export default class TrainingDayAgendaView extends Vue{
-  agendaItems = FbStore.currentTeacherProgramData!.trainingDayAgenda?.events || []
+  agendaItems:EventItem[] = FbStore.currentTeacherProgramData?.trainingDayAgenda?.events || FbStore.currentEmployerProgram!.trainingDayTemplate?.events || []
   get citizenType(): string {
     return localStorage.citizenType;
   }
