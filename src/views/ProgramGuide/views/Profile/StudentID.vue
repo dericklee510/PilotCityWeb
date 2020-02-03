@@ -926,7 +926,6 @@
         >
           <v-btn
             class="citizenid__button mb-10"
-            
             @click="submit"
           >
             SAVE
