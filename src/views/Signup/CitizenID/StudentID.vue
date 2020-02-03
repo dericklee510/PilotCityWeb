@@ -455,8 +455,8 @@ import { ValidationProvider } from "vee-validate";
     ValidationProvider
   },
   async created() {
-    let form = (await FbStore.firestore.collection("StudentForm").doc(FbStore.FBUser!.uid).get()).data<StudentForm>().signupForm
-   
+    let form = (await FbStore.firestore.collection("StudentForm").doc(FbStore.FBUser!.uid).get()).data<StudentForm>()?.signupForm
+    if(form)
       Object.keys(form).forEach(key => {
         (this as Record<string,any>)[key] = form[key as keyof StudentForm.signupForm]
      
@@ -686,7 +686,13 @@ export default class StudentID extends Vue {
     }))(this)
   }
   async submit(){
+    const studentFormRef = await FbStore.firestore.collection("StudentForm").doc(FbStore.FBUser!.uid).get()
+    if (studentFormRef.exists)
     await FbStore.firestore.collection("StudentForm").doc(FbStore.FBUser!.uid).update<StudentForm>({
+      signupForm:this.signupForm
+    })
+    else
+    await studentFormRef.ref.set<StudentForm>({
       signupForm:this.signupForm
     })
   }

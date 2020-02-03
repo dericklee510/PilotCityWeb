@@ -960,9 +960,9 @@ import {firebase} from "@/firebase/init"
       let programForm = form.data<StudentForm>().programForm
       if(programForm){
       Object.keys(programForm).forEach(key => {
-        (vm as Record<string,any>)[key] = programForm[key as keyof StudentForm.programForm]
+        (vm as Record<string,any>)[key] = programForm![key as keyof StudentForm.programForm]
       })
-      vm.programForm = form.data<StudentForm>().programForm
+      vm.programForm = form.data<StudentForm>().programForm!
       }
     });
   },
