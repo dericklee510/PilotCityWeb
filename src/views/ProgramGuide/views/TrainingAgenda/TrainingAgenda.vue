@@ -94,6 +94,6 @@ export default class TrainingDayEdit extends Vue{
   }
    onAgendaChange$!:Subject<{event:{name:string,msg:EventItem[]},data:undefined}>;
   ref!:firebase.firestore.DocumentReference
-    agendaItems:EventItem[] = FbStore.currentTeacherProgramData?.trainingDayAgenda?.events || [emptyAgenda]
+    agendaItems:EventItem[] = FbStore.currentTeacherProgramData?.trainingDayAgenda?.events || FbStore.currentEmployerProgram!.trainingDayTemplate?.events || [emptyAgenda]
 }
 </script>

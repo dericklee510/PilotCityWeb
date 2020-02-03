@@ -1,5 +1,5 @@
 <template>
-  <div :key="key">
+  <div>
     <link 
       href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" 
       rel="stylesheet"
@@ -28,11 +28,6 @@ export default class App extends Vue {
     get layout() {
     if (!AuthStore.user) return `${this.$route.meta.layout ? this.$route.meta.layout : NORMAL_LAYOUT}-layout`
     return `${this.$route.meta.layout ? this.$route.meta.layout : DEFAULT_LAYOUT}-layout`
-  }
-  get currentUserProfile(){
-    this.key++
-    this.$forceUpdate()
-    return FbStore.currentUserProfile
   }
 }
 </script>

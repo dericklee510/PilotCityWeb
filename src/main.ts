@@ -64,6 +64,7 @@ let instanceCreated = false
 
 AuthObserver.pipe(
     switchMap(user => {
+        console.log(user)
         store.commit(`Auth/${SET_USER}`, user)
         store.commit(`Fb/${SET_USER}`, user)
         if(user)

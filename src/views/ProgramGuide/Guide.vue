@@ -251,17 +251,6 @@ export default class Guide extends Vue {
   get citizenType(): string {
     return localStorage.citizenType;
   }
-  get nextModule() {
-    if (this.currentNode) return this.currentNode.next;
-    else return null; 
-  }
-  get currentNode(){
-      return this.routeMap.toArray().find((node) => this.$route.name === node.value.routeName) as ProgramNode
-  }
-  get prevModule() {
-    if (this.currentNode) return this.currentNode.prev;
-    else return null;
-  }
 
   get routeMap(){
     return new RouteList(FbStore.currentUserProfile!.citizenType!).linkedList
