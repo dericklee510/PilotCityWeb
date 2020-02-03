@@ -1,5 +1,8 @@
 <template>
-  <router-link style="textDecoration: none" :to="nextModule.value.isUnlocked?{name:nextModule.value.routeName}:'#'">
+  <router-link
+    style="textDecoration: none"
+    :to="nextModule.value.isUnlocked?{name:nextModule.value.routeName}:'#'"
+  >
     <v-row
       v-if="nextModule"
       no-gutters

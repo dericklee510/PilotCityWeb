@@ -155,7 +155,10 @@
           </v-row>
 
           <ValidationObserver v-slot="{invalid, reset}">
-            <v-row no-gutters class="mt-4">
+            <v-row
+              no-gutters
+              class="mt-4"
+            >
               <v-col
                 cols="12"
                 lg="5"
@@ -168,7 +171,7 @@
                 >
                   <v-text-field
                     v-model="currentName"
-                    flat
+                    text
                     depressed
                     height="55.87px"
                     :error-messages="errors"

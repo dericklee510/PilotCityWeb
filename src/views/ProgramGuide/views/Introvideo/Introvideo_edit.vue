@@ -13,18 +13,31 @@
         id="introvideo_edit__contain"
         cols="8"
       >
-        <v-col
+        <v-row 
           justify="center"
-          class="programguide__title"
+          no-gutters
+          style="border-bottom: solid 0.75px #404142;"
         >
-          EDIT INTRODUCTION VIDEO
-        </v-col>
+          <v-col
+            cols="9"
+            class="programguide__title"
+            style="border-bottom: 0px;"
+          >
+            EDIT INTRODUCTION VIDEO
+          </v-col>
+        </v-row>
     
-        <v-col
-          class="programguide__description"
+        <v-row
+          justify="center"
+          no-gutters
         >
-          Record, upload and enter link for an introduction video to your project challenge for students to view.
-        </v-col>
+          <v-col
+            cols="9"
+            class="programguide__description"
+          >
+            Record, upload and enter link for an introduction video to your project challenge for students to view.
+          </v-col>
+        </v-row>
 
         <ValidationObserver v-slot="{invalid}">
           <v-row

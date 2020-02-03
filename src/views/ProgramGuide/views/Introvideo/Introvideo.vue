@@ -75,7 +75,6 @@
               :disabled="!acknowledged"
               class="mb-10"
               solo
-              flat
               text
               outlined
               height="73.5px"

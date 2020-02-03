@@ -44,7 +44,7 @@
               background-color="transparent"
               no-resize
               solo
-              flat
+              text
             />
           </v-row>
         </v-col>

@@ -35,7 +35,7 @@
             />
             <v-col
               class="presentation_view__label"
-              cols="8"
+              cols="6"
             >
               Name
             </v-col>

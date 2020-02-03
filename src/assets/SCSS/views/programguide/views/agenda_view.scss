@@ -11,9 +11,9 @@
     }
 
     &:hover { 
-        background-color: #dbdcde;
+        background-color: $pc-blue;
         color: #ffffff;
-        border: 1px solid #dbdcde;
+        border: 1px solid $pc-blue;
 
     }
 }
@@ -31,9 +31,9 @@
     }
 
     &:hover { 
-        background-color: #dbdcde;
+        background-color: $pc-green;
         color: #ffffff;
-        border: 1px solid #dbdcde;
+        border: 1px solid $pc-green;
 
     }
 }

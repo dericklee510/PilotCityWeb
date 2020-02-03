@@ -76,7 +76,6 @@
           class="mb-10"
           :disabled="!isAgendaComplete"
           solo
-          flat
           text
           outlined
           height="50px"
