@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-container>
     <v-row
       justify="center"
       no-gutters
@@ -11,7 +11,7 @@
       >
       <v-col
         id="agenda__contain"
-        cols="10"
+        cols="8"
       >
         <!-- TITLE -->
     
@@ -20,6 +20,11 @@
           class="mr-auto ml-auto agenda__title"
         >
           HACK DAY AGENDA
+          <i
+            v-if="citizenType=='Teacher'|| citizenType=='Employer'"
+            class="far fa-edit edit-icon__project"
+            @click="toggleView"
+          />
         </v-row>
     
         <!-- BORDERLINE -->
@@ -41,7 +46,7 @@
         />
       </v-col>
     </v-row>
-  </div>
+  </v-container>
 </template>
 
 
@@ -78,6 +83,15 @@ const emptyAgenda:Omit<EventItem,'completed'> = {
   }
 })
 export default class HackAgenda extends Vue{
+  get citizenType(): string {
+    return localStorage.citizenType;
+  }
+  toggleView(){
+    if(localStorage.citizenType == 'Employer')
+      this.$router.push({name: 'emp-project-hack'})
+    if(localStorage.citizenType == 'Teacher')
+      this.$router.push({name: 'teach-project-hack'})
+  }
  mounted(){
     this.$subscribeTo(this.$observables.agendaEvents,async (events:EventItem[]) => {
       if(FbStore.userCitizenType === "employer")

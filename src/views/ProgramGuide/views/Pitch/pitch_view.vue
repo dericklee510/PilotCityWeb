@@ -1,55 +1,63 @@
 <template>
-  <v-row justify="center">
-    <img
-      id="pitch_view__icon"
-      src="@/assets/pitch_view.png"
-    >
-
-    <v-col
-      id="pitch_view__contain"
-      cols="7"
-    >
-      <v-row
-        justify="center"
-        class="mr-auto ml-auto pitch_view__title"
+  <v-container>
+    <v-row justify="center">
+      <img
+        id="pitch_view__icon"
+        src="@/assets/pitch_view.png"
       >
-        VIEW ONE SENTENCE PROJECT PITCHES
-      </v-row>
-
+    
       <v-col
-        id="pitch_view__borderline"
-        cols="12"
-      />
-
-
-      <v-row
-        class="mt-5"
-        justify="center"
+        id="pitch_view__contain"
+        cols="8"
       >
-        <!-- <v-col class="pitch_view__label" cols="1"></v-col> -->
-        <v-col
-          class="pitch_view__label"
-          cols="8"
+        <v-row
+          justify="center"
+          class="mr-auto ml-auto pitch_view__title"
         >
-          Name
-        </v-col>
+          VIEW ONE SENTENCE PROJECT PITCHES
+        </v-row>
+    
         <v-col
-          class="pitch_view__label"
-          cols="2"
-        >
-          Rate
-        </v-col>
-      </v-row>
-
-      <!-- TEAM -->
-
-      <Rating
-        v-model="entries"
-        preview
-        @ratingChange="onRatingChange"
-      />
-    </v-col>
-  </v-row>
+          id="pitch_view__borderline"
+          cols="12"
+        />
+    
+    
+        <v-container>
+          <v-row
+            class="mt-5"
+            justify="start"
+            no-gutters
+          >
+            <v-col
+              class="pitch_view__label"
+              cols="1"
+            />
+            <v-col
+              class="pitch_view__label"
+              cols="8"
+            >
+              Name
+            </v-col>
+            <v-col
+              class="pitch_view__label"
+              cols="2"
+            >
+              Rate
+            </v-col>
+          </v-row>
+        </v-container>
+    
+        <!-- TEAM -->
+    
+        <Rating
+          v-model="entries"
+          preview
+          @ratingChange="onRatingChange"
+        />
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 

@@ -11,12 +11,13 @@
       </v-row>
 
       <!-- ACTIVE CARD -->
-      <div class="mt-5 mb-5"><ProgramCard
-        v-for="(program,index) in Programs"
-        :key="index"
-        :program="program"
-
-      /></div>
+      <div class="mt-5 mb-5">
+        <ProgramCard
+          v-for="(program,index) in Programs"
+          :key="index"
+          :program="program"
+        />
+      </div>
       <!-- ADD CARD -->
 
       <v-dialog

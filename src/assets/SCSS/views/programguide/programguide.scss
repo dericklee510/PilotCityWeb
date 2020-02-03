@@ -113,6 +113,27 @@
     }
 }
 
+.edit-icon{
+   &__externship{
+        margin-left: 15px;
+        color: $pc-blue;
+        i.fa-edit{
+        }
+   }
+   &__project{
+        margin-left: 15px;
+        color: $pc-green;
+        i.fa-edit{
+        }
+    }
+    &__internship{
+        margin-left: 15px;
+        color: $pc-purple;
+        i.fa-edit{
+        }
+    }
+}
+
 .businesscanvas{
     &__actnbtn{
         height: 16.54px;
@@ -129,14 +150,6 @@
             color: #231F20;
             text-align: center;
         }
-    }
-    .programguide__labels div{
-        &:first-child{
-            margin: 0 33px;
-        }
-    }
-    .programguide__content .v-rating i{
-        padding: 0;
     }
     
 }

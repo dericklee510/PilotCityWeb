@@ -9,7 +9,7 @@
     
       <v-col
         id="editcasestudies__contain"
-        cols="10"
+        cols="8"
       >
         <v-row
           justify="center"

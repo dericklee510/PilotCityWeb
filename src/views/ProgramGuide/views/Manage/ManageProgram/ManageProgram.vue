@@ -1,7 +1,10 @@
 <template>
   <v-container>
-    <v-row no-gutters>
-      <v-col cols="12">
+    <v-row
+      no-gutters
+      justify="center"
+    >
+      <v-col cols="9">
         <div class="manageprogram__header mt-10">
           Manage Program
         </div>
@@ -22,7 +25,10 @@
           <v-col class="manageprogram__title">
             Trigger
           </v-col>
-          <v-col class="manageprogram__title">
+          <v-col
+            cols="1"
+            class="manageprogram__title"
+          >
             Status
           </v-col>
         </v-row>
@@ -103,18 +109,6 @@ export default class ManageProgram extends Vue {
     [`demo day`]: "demoDay",
     [`exit survey`]: "exitForm",
   }
-  unlockHash:Record<string, "By Date"|"Manually"| "By Completion"> = {
-    [`launch day`]: "By Date",
-    [`training`]: "By Completion",
-    [`practice & research`]: "By Completion",
-    [`ideate`]: "By Completion",
-    [`hack day`]: "By Date",
-    [`reflection`]: "By Completion",
-    [`design & prototype`]: "Manually",
-    [`package`]: "By Completion",
-    [`demo day`]: "By Date",
-    [`exit survey`]: "By Completion",
-  }
   get latestCompletionPercent(): Record<keyof typeof routeHash, number> {
     const { routeHash } = this
     return {
@@ -129,6 +123,18 @@ export default class ManageProgram extends Vue {
         "demo day":this.getAverage(this.latestProjectData,"programSequence.demoDay"),
         "exit survey":this.getAverage(this.latestProjectData,"programSequence.exitForm")
     }
+  }
+  unlockHash:Record<string, "By Date"|"Manually"| "By Completion"> = {
+    [`launch day`]: "By Date",
+    [`training`]: "By Completion",
+    [`practice & research`]: "By Completion",
+    [`ideate`]: "By Completion",
+    [`hack day`]: "By Date",
+    [`reflection`]: "By Completion",
+    [`design & prototype`]: "Manually",
+    [`package`]: "By Completion",
+    [`demo day`]: "By Date",
+    [`exit survey`]: "By Completion",
   }
   getAverage<TObject extends object, TKey extends keyof TObject>(arr:TObject[],field:TKey | [TKey] | Many<string | number | symbol> ){
     if(!arr)

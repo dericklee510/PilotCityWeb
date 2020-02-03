@@ -7,7 +7,7 @@
 
     <v-col
       id="demovideo_enter__contain"
-      cols="10"
+      cols="8"
     >
       <v-row
         justify="center"
@@ -33,7 +33,10 @@
           class="mr-auto ml-auto mt-12 mb-12"
           no-gutters
         >
-          <v-col cols="9" md="7">
+          <v-col
+            cols="9"
+            md="7"
+          >
             <LinkChecker
               v-model="url"
               placeholder="https://"

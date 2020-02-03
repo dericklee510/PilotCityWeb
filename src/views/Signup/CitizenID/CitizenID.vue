@@ -8,33 +8,44 @@
         id="citizenid__icon"
         src="@/assets/citizen-id.png"
       >
-
       <v-col
         id="citizenid__containtop"
         cols="8"
       >
         <v-row
           justify="center"
-          class="mr-auto ml-auto citizenid__title"
+          no-gutters
+          class="citizenid__title"
         >
-          YOUR PILOTCITY ID
+          <v-col
+            cols="9"
+            class="text-center"
+          >
+            YOUR PILOTCITY ID
+          </v-col>
+        </v-row>
+
+        <v-row
+          justify="center"
+          no-gutters
+          class="citizenid__description"
+        >
+          <v-col
+            cols="9"
+            class="text-center"
+          >
+            Confirm your information
+          </v-col>
         </v-row>
       </v-col>
-
       <v-col
         id="citizenid__containbottom"
         cols="8"
       >
         <v-row
           justify="center"
-          class="mr-auto ml-auto citizenid__description"
-        >
-          Confirm your information
-        </v-row>
-
-        <v-row
-          justify="center"
-          class="pt-10"
+          no-gutters
+          class="mt-10 pt-3 pb-3"
         >
           <v-col cols="7">
             <v-row
@@ -109,17 +120,22 @@
           </v-col>
         </v-row>
 
-        <v-col
-          class="mr-auto ml-auto"
-          cols="5"
+        <v-row
+          no-gutters
+          justify="center"
+          class="pt-3"
         >
-          <button
-            class="citizenid__button mb-10"
-            @click="()=>{validate().then(val => {if(val)submit()} )}"
+          <v-col
+            cols="5"
           >
-            SAVE
-          </button>
-        </v-col>
+            <button
+              class="citizenid__button mb-10"
+              @click="()=>{validate().then(val => {if(val)submit()} )}"
+            >
+              SAVE
+            </button>
+          </v-col>
+        </v-row>
       </v-col>
     </v-row>
   </ValidationObserver>

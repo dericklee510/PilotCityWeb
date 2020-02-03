@@ -1,6 +1,9 @@
 <template>
   <v-container>
-    <v-row no-gutters justify="center">
+    <v-row
+      no-gutters
+      justify="center"
+    >
       <v-col cols="8">
         <v-col class="Team__title"> 
           <span>
