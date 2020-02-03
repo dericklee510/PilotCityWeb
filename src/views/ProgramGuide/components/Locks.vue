@@ -41,7 +41,7 @@ import { ProgramNode } from '../types';
 import { LinkedList } from 'linked-list-typescript';
 
 @Component
-export default class Lock extends Vue{
+export default class Locks extends Vue{
     @Prop({required:true})
     routeMap!:LinkedList<ProgramNode>
     @Prop()

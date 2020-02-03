@@ -5,9 +5,23 @@
       no-gutters
       class="mt-12"
     >
-      <img
-        id="launcher__icon"
-        src="@/assets/launcher.png"
+    <v-col
+      id="launcher__containtop"
+      cols="8"
+    >
+      <v-row>
+        <i
+          id="launcher__backbuttonicon"
+          class="fas fa-chevron-left"
+        ><button 
+      
+        @click="$router.push({ name: 'program.programlist' })"
+        class="launcher__backbutton">My Programs</button></i>
+      </v-row>
+
+      <v-row
+        justify="center"
+        class="mr-auto ml-auto launcher__title"
       >
       <v-col
         id="launcher__containtop"
