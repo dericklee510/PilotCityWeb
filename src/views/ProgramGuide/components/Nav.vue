@@ -96,11 +96,6 @@ export default class Nav extends Vue {
   @Prop({required: true})
   public routeMap!:  LinkedList<ProgramNode>;
 
-  isUnlocked(val: string){
-    // let arr = this.sequence[val];
-    // return arr[0][Object.keys(arr[0])[0]]
-    return true;
-  }
   get citizenType() {
     return startCase(FbStore.userCitizenType!)
   }

@@ -45,26 +45,28 @@
               />
             </v-col>
           </v-row>
-                
-                
           <v-row
             no-gutters
             justify="center"
             align="center"
           >
-            <v-col cols="1">
-              <v-checkbox
-                v-model="checkbox"
-                type="checkbox"
-                :readonly="invalid"
-              />
-            </v-col>
-                
             <v-col
-              cols="11"
+              cols="9" 
               class="introvideo_edit__check"
             >
-              I confirm this video is set for public view
+              <v-row
+                justify="center"
+                align="center"
+              >
+                <v-checkbox
+                  v-model="checkbox"
+                  type="checkbox"
+                  :readonly="invalid"
+                  :ripple="false"
+                  dense
+                />
+                I confirm this video is set for public view
+              </v-row>
             </v-col>
           </v-row>
           <v-row
@@ -72,13 +74,16 @@
             justify="center"
           >
             <v-col
-              cols="5"
+              cols="4"
             >
               <v-btn
+                id="introvideo_edit__button"
+                class="mb-10"
                 text
                 solo
                 depressed
-                class="introvideo_edit__button"
+                outlined
+                height="73.5px"
                 :disabled="invalid || !checkbox"
                 @click="onSubmit"
               >
