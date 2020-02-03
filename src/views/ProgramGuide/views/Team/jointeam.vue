@@ -74,7 +74,7 @@
                       rules="required"
                     >
                       <v-text-field
-                        v-model="teamName" 
+                        v-model="createTeamName" 
                         text
                         solo
                         depressed

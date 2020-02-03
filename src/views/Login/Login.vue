@@ -35,9 +35,9 @@
               @keyup.enter="process()"
             >
           </v-col>
-          <v-col class="login__forgotpassword pl-0 pr-0">
+          <!-- <v-col class="login__forgotpassword pl-0 pr-0">
             Forgot Password
-          </v-col>
+          </v-col> -->
 
 
 

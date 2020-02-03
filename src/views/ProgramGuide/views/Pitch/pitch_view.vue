@@ -31,10 +31,6 @@
           >
             <v-col
               class="pitch_view__label"
-              cols="1"
-            />
-            <v-col
-              class="pitch_view__label"
               cols="6"
             >
               Name
