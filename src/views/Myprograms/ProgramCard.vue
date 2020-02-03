@@ -2,7 +2,10 @@
   <PCLoader v-slot="{loading, setLoader}">
     <v-row class="myprograms__card">
       <v-col cols="3">
-        <div class="myprograms__cardimage" />
+        <v-img
+          :src="program.launchImg"
+          class="myprograms__cardimage"
+        />
       </v-col>
       <v-col cols="9">
         <v-row class="myprograms__cardtitle">
