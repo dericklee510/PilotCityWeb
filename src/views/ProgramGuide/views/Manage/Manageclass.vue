@@ -16,6 +16,8 @@
             cols="4"
             sm="3"
             lg="2"
+            class="manageclass__nav--active"
+            style="cursor: normal"
           >
             CLASSES
           </v-col>
@@ -23,6 +25,8 @@
             cols="4"
             sm="3"
             lg="2"
+            style="cursor: pointer"
+            @click="$router.push({name: 'teach-externship-manage-students'})"
           >
             STUDENTS
           </v-col>
@@ -30,6 +34,8 @@
             cols="4"
             sm="3"
             lg="2"
+            style="cursor: pointer"
+            @click="$router.push({name: 'teach-externship-manage-teams'})"
           >
             TEAMS
           </v-col>
@@ -48,18 +54,21 @@
         >
           <v-col
             cols="12"
-            lg="5"
-            xl="6"
+            lg="4"
+            xl="5"
           >
             <span>Class Name</span>
           </v-col>
           <v-spacer />
           <v-col
-            cols="2"
-            xl="1"
+            cols="12"
+            lg="3"
+            xl="2"
             class="manageclass__sharecode-label d-none d-lg-block "
+            
+            style="padding-left: 67px"
           >
-            <span> Share Code</span>
+            <span class> Share Code</span>
           </v-col>
           <v-col cols="1" />
         </v-row>

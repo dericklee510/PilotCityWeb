@@ -226,6 +226,12 @@
                   >
                     <span>Email Verification Sent!</span> 
                   </v-col>
+                  <v-col
+                    class="code-modal__title"
+                    cols="12"
+                  >
+                    <span>Verify your email to Login!</span> 
+                  </v-col>
                 </v-row>
                 <v-row
                   no-gutters
@@ -239,7 +245,7 @@
                     <v-btn
                       width="100%"
                       height="100%"
-                      flat
+                      text
                       depressed
                       outlined
                       @click="$router.push({name:'login'})"
@@ -286,7 +292,7 @@ import Password from 'vue-password-strength-meter'
     }
 })
 export default class Signup extends Vue {
-  dialog= false
+    dialog = false
     private confirmPassword: string = '';
     private password: string = ''
     public email: string = '';
@@ -304,8 +310,8 @@ export default class Signup extends Vue {
                 firstName: this.firstName,
                 lastName: this.lastName
             })
-           this.dialog=true
-            
+
+            this.dialog = true
         }
         this.loading = false
     }

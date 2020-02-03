@@ -9,13 +9,15 @@
         cols="10"
       >
         <v-row
-          class="manageteam__nav text-center"
+          class="manageclass__nav text-center"
           no-gutters
         >
           <v-col
             cols="4"
             sm="3"
             lg="2"
+            style="cursor: pointer"
+            @click="$router.push({name: 'teach-externship-manage-class'})"
           >
             CLASSES
           </v-col>
@@ -23,6 +25,8 @@
             cols="4"
             sm="3"
             lg="2"
+            style="cursor: pointer"
+            @click="$router.push({name: 'teach-externship-manage-students'})"
           >
             STUDENTS
           </v-col>
@@ -30,6 +34,8 @@
             cols="4"
             sm="3"
             lg="2"
+            class="manageclass__nav--active"
+            style="cursor: normal"
           >
             TEAMS
           </v-col>
@@ -61,12 +67,13 @@
           <v-row
             v-for="(entry,index) in entries"
             :key="entry.id"
-            class="manageteam__class-input"
+            no-gutters
+            class="manageteam__class-input "
           >
             <v-col
               cols="12"
-              lg="4"
-              xl="5"
+              lg="5"
+              xl="6"
               class="manageteam__input"
             >
               <input
@@ -148,12 +155,15 @@
           </v-row>
 
           <ValidationObserver v-slot="{invalid, reset}">
-            <v-row>
+            <v-row
+              no-gutters
+              class="mt-4"
+            >
               <v-col
                 cols="12"
-                lg="4"
-                xl="5"
-                class="manageteam__input problem-child pa-0"
+                lg="5"
+                xl="6"
+                class="manageteam__input pa-0"
               >
                 <ValidationProvider
                   v-slot="{errors}"
@@ -161,17 +171,20 @@
                 >
                   <v-text-field
                     v-model="currentName"
-                    solo
-                    flat
+                    text
                     depressed
-                    background-color="transparent"
-                    height="100%"
+                    height="55.87px"
                     :error-messages="errors"
-                    placeholder="TEAM NAME 3"
+                    placeholder="Team Name"
                   />
                 </ValidationProvider>
               </v-col>
-              <v-col class="manageteam__input problem-child pa-0">
+              <v-col
+                cols="12"
+                lg="4"
+                xl="1" 
+                class="manageteam__input"
+              >
                 <ValidationProvider
                   v-slot="{errors}"
                   rules="required"
@@ -180,6 +193,7 @@
                     v-model="selectedClassroom"
                     style="height: inherit !important;"
                     :error-messages="errors"
+                    placeholder="Class Name"
                     :document-refs="CurrentClassroomsRefs"
                     live-text="className"
                     live-value="classroomId"
@@ -188,7 +202,7 @@
               </v-col>
               <v-col
                 cols="2"
-                class="manageteam__create-button-wrapper manageteam__input problem-child pa-0"
+                class="manageteam__button-wrapper"
               >
                 <PCLoader v-slot="{loading, setLoader}">
                   <v-btn
@@ -198,7 +212,7 @@
                     text
                     depressed
                     outlined
-                    class="manageteam__create-button"
+                    class="manageteam__button"
                     @click="setLoader(()=>{
                       reset()
                       createNewTeam()

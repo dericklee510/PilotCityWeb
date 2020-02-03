@@ -233,7 +233,7 @@ export const TEACHERSEQUENCE = {
             'teach-project-intro'
         ],
         'Train': [
-            'teach-project-training-edit',
+            // 'teach-project-training-edit',
             'teach-project-training',
         ],
         'Practice': [
@@ -265,7 +265,7 @@ export const TEACHERSEQUENCE = {
 export const EMPLOYERSEQUENCE = {
     Externship: {
         'Agenda': [
-            'emp-externship-agenda-edit',
+            // 'emp-externship-agenda-edit',
             'emp-externship-agenda',
             
         ],
@@ -288,7 +288,7 @@ export const EMPLOYERSEQUENCE = {
             'emp-project-ospitch',
         ],
         'Hack Day': [
-            'emp-project-hack-edit',
+            // 'emp-project-hack-edit',
             'emp-project-hack',
 
         ],
@@ -297,7 +297,7 @@ export const EMPLOYERSEQUENCE = {
             'emp-project-presentation',
         ],
         'Demo Day': [
-            'emp-project-demoagenda-edit',
+            // 'emp-project-demoagenda-edit',
 
             'emp-project-demoagenda',
         ]

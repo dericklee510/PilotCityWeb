@@ -14,6 +14,7 @@
         >
         <v-row
           justify="center"
+          no-gutters
           class="agenda-view__title"
         >
           HACK DAY AGENDA

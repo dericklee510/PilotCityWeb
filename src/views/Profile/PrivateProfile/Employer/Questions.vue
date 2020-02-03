@@ -1164,7 +1164,7 @@
                       id="save_profile-button"
                       block
                       background-color="transparent"
-                      flat
+                      text
                       :loading="loading"
                       :disabled="loading"
                       class="mb-6 pc-button"

@@ -17,7 +17,7 @@
       v-model="syncValue"
       :multiple="multiselect"
       append-icon="mdi-chevron-down"
-      flat
+      text
       :menu-props="{offsetY: true, 'close-on-click': true, 'offset-overflow':true}"
       :placeholder="placeholder"
       class="pc-input__select"

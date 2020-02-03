@@ -26,7 +26,7 @@
         <v-container>
           <v-row
             class="mt-5"
-            justify="start"
+            justify="center"
             no-gutters
           >
             <v-col
@@ -35,7 +35,7 @@
             />
             <v-col
               class="pitch_view__label"
-              cols="8"
+              cols="6"
             >
               Name
             </v-col>

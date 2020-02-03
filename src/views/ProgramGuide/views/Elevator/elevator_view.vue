@@ -1,26 +1,26 @@
 <template>
   <v-container>
-    <v-row justify="center">
+    <v-row justify="center" no-gutters>
       <img
         id="elevator_view2__icon"
         src="@/assets/elevator_view.png"
       >
       <v-col
-        cols="10"
+        cols="8"
         class="programguide__container"
       >
-        <v-col cols="12">
+        <v-row
+          v-show="page!='view'"
+        >
           <i
-            v-if="page!='view'"
-            id="businessmodelcanvas_view2__backbuttonicon"
+            id="launcher__backbuttonicon"
             class="fas fa-chevron-left"
-          >
-            <v-btn
-              class="businessmodelcanvas_view2__backbutton"
-              @click="changePage"
-            >Back</v-btn>
-          </i>
-        </v-col>
+          ><button
+            style="textDecoration: none; cursor: pointer"
+            class="launcher__backbutton"
+            @click="changePage"
+          >Back</button></i>
+        </v-row>
         <v-col
           cols="12"
           class="programguide__title"

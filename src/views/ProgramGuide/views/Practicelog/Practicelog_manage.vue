@@ -13,7 +13,7 @@
     
       <v-col
         class="practicelog-manage__contain"
-        cols="10"
+        cols="8"
       >
         <v-row
           no-gutters
@@ -24,7 +24,7 @@
         </v-row>
         <v-row
           justify="center"
-          class="practicelog-manage__label mt-5"
+          class="practicelog-manage__label mt-12 mb-6"
         >
           <v-col
             cols="4"
@@ -39,6 +39,7 @@
             md="4"
             lg="3"
             xl="2"
+            class="pl-0"
           >
             Name
           </v-col>

@@ -6,7 +6,7 @@
   >
     <v-col
       cols="1"
-      class="businesscanvas__actnbtn"
+      class="businesscanvas__actnbtn ml-0"
       @click="$emit('changePage')"
     >
       <div>View</div>
