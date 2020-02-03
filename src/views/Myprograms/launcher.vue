@@ -18,7 +18,10 @@
         <i
           id="launcher__backbuttonicon"
           class="fas fa-chevron-left"
-        ><button class="launcher__backbutton">My Programs</button></i>
+        ><button 
+      
+        @click="$router.push({ name: 'program.programlist' })"
+        class="launcher__backbutton">My Programs</button></i>
       </v-row>
 
       <v-row

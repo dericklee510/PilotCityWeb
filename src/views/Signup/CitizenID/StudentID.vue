@@ -223,13 +223,14 @@
           v-slot="{errors}"
           slim
           rules="required"
-        >
+        > 
           <v-select
             v-model="ethnicity"
             :error-messages="errors"
             :items="ethnicityOptions"
             label="Ethnicity & Culture"
             outlined
+            multiple
           />
         </ValidationProvider>
       </v-col>

@@ -51,7 +51,7 @@
               v-model="password"
               type="password"
               placeholder="Password"
-              class="signup__field-input"
+              class=""
               @keyup.enter="process()"
             />
           </v-col>
