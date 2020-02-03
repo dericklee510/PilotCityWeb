@@ -304,7 +304,8 @@ export default class Signup extends Vue {
                 firstName: this.firstName,
                 lastName: this.lastName
             })
-            this.dialog =true
+           this.dialog=true
+            
         }
         this.loading = false
     }
