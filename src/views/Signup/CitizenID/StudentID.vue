@@ -347,7 +347,7 @@
         </ValidationProvider>
       </v-col>
     </v-row>
-    <v-row
+    <!-- <v-row
       no-gutters
       justify="center"
     >
@@ -361,7 +361,7 @@
           types="street_address"
         />
       </v-col>
-    </v-row>
+    </v-row> -->
 
     <!-- STREET ADDRESS -->
 

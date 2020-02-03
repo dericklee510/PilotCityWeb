@@ -14,7 +14,7 @@
             class="mr-5"
             cols="12"
             md="3"
-            xl="1"
+            lg="2"
           >
             <iframe
               class="briefcard__cover"

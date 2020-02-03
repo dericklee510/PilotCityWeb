@@ -76,7 +76,7 @@
           </v-col>
         </v-row>
         <!-- BUTTON DOES NOT LOOK LIKE IN USE -->
-        <!-- <v-row
+        <v-row
           no-gutters
           justify="center"
         >
@@ -97,7 +97,7 @@
               NEXT
             </v-btn>
           </v-col>
-        </v-row> -->
+        </v-row>
         <v-row
           no-gutters
           class="mb-10"
@@ -129,6 +129,7 @@ export default class ViewCaseStudies extends Vue{
         caseStudies:firebase.firestore.FieldValue.serverTimestamp()
       }
     })
+    this.$emit('nextNode')
   }
 }
 </script>
