@@ -1,6 +1,9 @@
 <template>
   <v-container>
-    <v-row no-gutters justify="center">
+    <v-row
+      no-gutters
+      justify="center"
+    >
       <v-col
         cols="8"
       >
