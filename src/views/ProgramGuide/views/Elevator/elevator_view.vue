@@ -1,6 +1,9 @@
 <template>
   <v-container>
-    <v-row justify="center" no-gutters>
+    <v-row
+      justify="center"
+      no-gutters
+    >
       <img
         id="elevator_view2__icon"
         src="@/assets/elevator_view.png"

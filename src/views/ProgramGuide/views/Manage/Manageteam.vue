@@ -182,7 +182,7 @@
               <v-col
                 cols="12"
                 lg="4"
-                xl="1" 
+                xl="3" 
                 class="manageteam__input"
               >
                 <ValidationProvider

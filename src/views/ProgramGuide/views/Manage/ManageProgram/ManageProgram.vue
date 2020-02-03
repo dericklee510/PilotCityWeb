@@ -1,9 +1,8 @@
 <template>
   <v-container>
-    <v-row no-gutters>
+    <v-row no-gutters justify="center">
       <v-col
-        cols="11"
-        class="ml-12"
+        cols="8"
       >
         <div class="manageprogram__header mt-10">
           Manage Program

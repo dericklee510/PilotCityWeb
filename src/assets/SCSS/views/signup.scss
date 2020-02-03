@@ -57,7 +57,17 @@
 
 
 .signup{
-
+    &-container{
+        .v-text-field > .v-input__control > .v-input__slot:before, .v-text-field > .v-input__control > .v-input__slot:after{
+            content: none;
+        }
+        .theme--light.v-text-field:not(.v-input--has-state):hover{
+            border-color: #fff;
+        }
+        .Password__strength-meter{
+            margin: 10px auto 4px;
+        }
+    }
     &__termstext{
         font-size: .75rem;
         font-family: "Raleway";
@@ -65,7 +75,6 @@
     }
 
     &__termscheck{
-
         margin-bottom: 3%;
         font-family: Raleway;
         font-style: normal;
@@ -76,20 +85,14 @@
         width: 75%;
         text-align: left;
         margin-left: 10%;
-    
         }
-    
         &__termscheckbox{
             width: 18px;
             height: 18px;
             margin-right: 2%;
             border: 1.5px;
             border-color: #C7C8CA;
-            
         }
-
-
-
     &__header{
         font-family: "Raleway";
         font-size: 30px;
@@ -109,16 +112,27 @@
         padding-left:15px;
 
     }
-
-    &__field-input{
+    &__field-input.theme--light.v-text-field{
+        color: #ffffff;
         border: 1px solid #ffffff;
+    }
+    &__field-input{
         width: 100%;
-        height: 50px;
         padding-left:15px;
         font-family: "Raleway";
         font-size: 18px;
         font-weight: 800;
-        color: #ffffff;
+        &.theme--light.v-input {
+            height: 48px;
+        }
+        &.theme--light.v-input input{
+            caret-color: #fff;
+            color: #fff;
+            &::placeholder{
+                color: darken(#dbdcde, 15);
+            }
+        }
+
         .Password{
             border: none;
             max-width: 100%; 
@@ -128,7 +142,7 @@
             }
         }
 
-        &.Password{
+        & .Password{
             padding-left: 0px;
         }
     }

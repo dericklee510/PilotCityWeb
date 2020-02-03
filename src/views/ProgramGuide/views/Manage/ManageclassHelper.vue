@@ -178,7 +178,7 @@ export default class ManageClassHelper extends app {
       .teacherProgramId;
     const employerProgramId = FbStore.currentEmployerProgram!.employerProgramId;
     const classroomDoc = await FbStore.createClassroom({
-      className: `CLASS NAME ${this.entries.length + 1}`,
+      className: `P${this.entries.length + 1}: Class Name`,
       teacherProgramId,
       employerProgramId
     });

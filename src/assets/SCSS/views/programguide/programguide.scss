@@ -119,17 +119,29 @@
         color: #dbdcde;
         i.fa-edit{
         }
+        &:hover{
+            cursor: pointer;
+            color: darken(#dbdcde, 15);
+        }
    }
    &__project{
         margin-left: 15px;
         color: #dbdcde;
         i.fa-edit{
         }
+        &:hover{
+            cursor: pointer;
+            color: darken(#dbdcde, 15);
+        }
     }
     &__internship{
         margin-left: 15px;
         color: #dbdcde;
         i.fa-edit{
+        }
+        &:hover{
+            cursor: pointer;
+            color: darken(#dbdcde, 15);
         }
     }
 }

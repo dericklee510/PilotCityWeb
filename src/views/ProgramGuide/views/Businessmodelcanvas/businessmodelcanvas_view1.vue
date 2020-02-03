@@ -4,7 +4,7 @@
   <v-row no-gutters>
     <v-col>
       <v-row
-        class="programguide__labels d-sm-block d-none pl-6"
+        class="programguide__labels d-sm-block d-none"
         align="center"
         no-gutters
       >
@@ -23,6 +23,7 @@
             <v-col
               cols="12"
               md="2"
+              class="d-none d-lg-inline-block"
             >
               Rating
             </v-col>
@@ -38,7 +39,8 @@
       >
         <!-- insert v-for here -->
         <v-col
-          cols="1"
+          cols="3"
+          md="1"
           class="businesscanvas__actnbtn"
           @click="$emit('changePage',team)"
         >
@@ -46,6 +48,7 @@
         </v-col>
         <v-col
           cols="12"
+          sm="5"
           md="7"
           class="programguide__header"
         >

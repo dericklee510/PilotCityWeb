@@ -3,6 +3,9 @@
     &__container{
         margin-top : 82.5px;
         height: 100%;
+        .v-application--is-ltr .v-text-field .v-input__append-inner{
+            margin-top: 16px;
+        }
         .v-text-field{
             margin-top: 0px;
             padding-top: 0px;

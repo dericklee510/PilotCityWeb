@@ -30,7 +30,7 @@
                 {{ syncValue.linkName }}
               </div>
               <v-row
-                class="briefcard__check"
+                class="briefcard__check mt-2"
                 no-gutters
               >
                 <input

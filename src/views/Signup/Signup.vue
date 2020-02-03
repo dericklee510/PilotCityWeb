@@ -1,6 +1,6 @@
 <template>
   <ValidationObserver ref="Observer">
-    <div class="pc-background--dark">
+    <div class="pc-background--dark signup-container">
       <v-container style="padding-top: 48px; padding-bottom: 25vh">
         <v-row
           justify="center"
@@ -84,13 +84,21 @@
                     type="password"
                     placeholder="Password"
                     class="signup__field-input"
-                    :error-messages="errors"
                     @keyup.enter="process()"
                   />
                   <Password
                     v-model="password"
                     :strength-meter-only="true"
-                  />
+                  /><div style="padding-left: 15px">
+                    <span
+                      style="color: #B71C1C; font-size: 12px; font-family: Raleway; font-weight: 800"
+                    >
+                      {{
+                        errors[0]
+                      }}
+                      <span />
+                    </span>
+                  </div>
                 </div>
               </ValidationProvider>
             </v-col>
@@ -185,12 +193,12 @@
                 </h3>
               </v-btn>
               <router-link :to="{name: 'login'}">
-                <h4
+                <!-- <h4
                   class="text-center pc-background--dark"
                   style="display: block"
                 >
                   {{ authResponse }}
-                </h4>
+                </h4> -->
                 <h4
                   class="text-center signup__forgotpassword"
                   style="display: block"
@@ -204,17 +212,23 @@
       </v-container> 
       <v-dialog
         v-model="dialog"
+        max-width="50vw"
         persistent
       >
         <template>
-          <v-container class="code-modal pa-0">
+          <v-container
+            class="code-modal pa-0" 
+            style="color: #fff"
+          >
             <v-row
               no-gutters
               justify="center"
+              style="background-color: #404142"
             >
               <v-col
                 cols="10"
                 class="code-modal__container"
+                style="height: 285px"
               >
                 <v-row
                   no-gutters
@@ -224,18 +238,20 @@
                     class="code-modal__title"
                     cols="12"
                   >
-                    <span>Email Verification Sent!</span> 
+                    <span>Email verification sent.</span> 
                   </v-col>
                   <v-col
-                    class="code-modal__title"
+                    class="code-modal__subtitle text-center"
+                    style="font-size: .8em"
                     cols="12"
                   >
-                    <span>Verify your email to Login!</span> 
+                    Please verify through the link sent to your email to proceed with logging in.
                   </v-col>
                 </v-row>
                 <v-row
                   no-gutters
                   justify="center"
+                  class="mt-12"
                 >
                   <v-col
                     cols="8"
@@ -243,6 +259,7 @@
                     class="code-modal__button"
                   >
                     <v-btn
+                      style="color: #fff; background-color: #6eba7f"
                       width="100%"
                       height="100%"
                       text
@@ -250,7 +267,7 @@
                       outlined
                       @click="$router.push({name:'login'})"
                     >
-                      Go to Login
+                      Close
                     </v-btn>
                   </v-col>
                 </v-row>
@@ -310,7 +327,6 @@ export default class Signup extends Vue {
                 firstName: this.firstName,
                 lastName: this.lastName
             })
-
             this.dialog = true
         }
         this.loading = false
