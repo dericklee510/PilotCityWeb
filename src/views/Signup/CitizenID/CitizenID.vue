@@ -157,6 +157,7 @@ export default class CitizenID extends Vue {
         | "teacher"
         | "student"
     });
+    if(this.$refs.StudentID)
     await (this.$refs.StudentID as  StudentID).submit()
     this.$router.push({ name: "program.programlist" });
   }
