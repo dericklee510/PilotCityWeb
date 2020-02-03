@@ -20,7 +20,6 @@ import Home from '@/views/Home.vue'
 import login2 from "@/views/Login/Login2.vue"
 import signup2 from "@/views/Signup/Signup2.vue"
 import launcher from "@/views/Myprograms/launcher.vue"
-import StudentID from "@/views/Profile/PrivateProfile/Student/StudentID.vue"
 
 const routes: RouteConfig [] = [
     ...SignupRoutes,
@@ -67,12 +66,6 @@ const routes: RouteConfig [] = [
         path: '/rfp/requirements',
         name: 'rfp-requirements',
         component: RFPRequirements
-    },
-
-    {
-        path: '/student/studentid',
-        name: 'student-id',
-        component: StudentID
     },
 
     {

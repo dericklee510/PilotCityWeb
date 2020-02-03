@@ -19,6 +19,7 @@ export interface studentClassroom {
     classroomId: string
     finishedProgramBrief?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
     finishedIntrovideo?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+    finishedSignupForm?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
 }
 export interface GeneralUser {
     userId: string
@@ -202,7 +203,7 @@ export interface Project {
 }
 export interface StudentForm {
     signupForm: {
-        gradeLevel:string
+        gradeLevel: string
         teacher: string,
         schoolName: string,
         schoolDistrict: string,
@@ -215,10 +216,40 @@ export interface StudentForm {
         primaryHomeLanguage: string
         address: string
     }
+    programForm: {
+        internshipInterest: string
+        compensationType: string[],
+        freeLunch: string,
+        resume: string[],
+        postHighPlan: string
+        agricultureNaturalResources: number
+        artsMediaAndEntertainment: number
+        buildingAndConstructionTrades: number
+        businessAndFinance: number
+        educationChildhoodDevelopmentFamilyServices: number
+        energyEnvironmentUtilities: number
+        engineeringArchitecture: number
+        fashionInteriorDesign: number
+        healthScienceMedicalTechnology: number
+        hospitalityTourismRecreation: number
+        informationCommunicationTechnologies: number
+        manufacturingProductDevelopment: number
+        marketingSalesService: number
+        publicServices: number
+        transportation: number
+        technicianEngineer: number
+        marketingSales: number
+        researchDevelopment: number
+        operationsManagement: number
+        communityCustomerSuccess: number
+        transport: string
+        ownedTech: string
+        internetAccessMethod: string
+    }
 }
 export namespace StudentForm {
     export type signupForm = {
-        gradeLevel:string
+        gradeLevel: string
         teacher: string
         schoolName: string
         schoolDistrict: string
@@ -230,6 +261,36 @@ export namespace StudentForm {
         guardianRelationship: string
         primaryHomeLanguage: string
         address: string
+    }
+    export type programForm = {
+        internshipInterest: string
+        compensationType: string[],
+        freeLunch: string,
+        resume: string[],
+        postHighPlan: string
+        agricultureNaturalResources: number
+        artsMediaAndEntertainment: number
+        buildingAndConstructionTrades: number
+        businessAndFinance: number
+        educationChildhoodDevelopmentFamilyServices: number
+        energyEnvironmentUtilities: number
+        engineeringArchitecture: number
+        fashionInteriorDesign: number
+        healthScienceMedicalTechnology: number
+        hospitalityTourismRecreation: number
+        informationCommunicationTechnologies: number
+        manufacturingProductDevelopment: number
+        marketingSalesService: number
+        publicServices: number
+        transportation: number
+        technicianEngineer: number
+        marketingSales: number
+        researchDevelopment: number
+        operationsManagement: number
+        communityCustomerSuccess: number
+        transport: string
+        ownedTech: string
+        internetAccessMethod: string
     }
     export namespace signupForm {
         export type teacher = string
@@ -243,5 +304,35 @@ export namespace StudentForm {
         export type guardianRelationship = string
         export type primaryHomeLanguage = string
         export type address = string
+    }
+    export namespace programForm {
+        export type internshipInterest = string
+        export type compensationType = string[]
+        export type freeLunch = string
+        export type resume = string[]
+        export type postHighPlan = string
+        export type agricultureNaturalResources = number
+        export type artsMediaAndEntertainment = number
+        export type buildingAndConstructionTrades = number
+        export type businessAndFinance = number
+        export type educationChildhoodDevelopmentFamilyServices = number
+        export type energyEnvironmentUtilities = number
+        export type engineeringArchitecture = number
+        export type fashionInteriorDesign = number
+        export type healthScienceMedicalTechnology = number
+        export type hospitalityTourismRecreation = number
+        export type informationCommunicationTechnologies = number
+        export type manufacturingProductDevelopment = number
+        export type marketingSalesService = number
+        export type publicServices = number
+        export type transportation = number
+        export type technicianEngineer= number
+        export type marketingSales = number
+        export type researchDevelopment = number
+        export type operationsManagement = number
+        export type communityCustomerSuccess = number
+        export type transport = string
+        export type ownedTech = string
+        export type internetAccessMethod = string
     }
 }

@@ -4,21 +4,29 @@
   <v-row no-gutters>
     <v-col>
       <v-row
-        class="programguide__labels d-sm-block d-none"
+        class="programguide__labels d-sm-block d-none pl-6"
+        align="center"
         no-gutters
       >
-        <v-col cols="1" />
-        <v-col
-          cols="12"
-          md="7"
-        >
-          Name
-        </v-col>
-        <v-col
-          cols="12"
-          md="3"
-        >
-          Rating
+        <v-col cols="12">
+          <v-row no-gutters>
+            <v-col
+              cols="1"
+              style="margin: 0px 33px;"
+            />
+            <v-col
+              cols="12"
+              md="7"
+            >
+              Name
+            </v-col>
+            <v-col
+              cols="12"
+              md="2"
+            >
+              Rating
+            </v-col>
+          </v-row>
         </v-col>
       </v-row>
       <v-row
@@ -45,10 +53,13 @@
         </v-col>
         <v-col
           cols="12"
-          md="3"
+          md="2"
+          class="pc-rating"
         >
           <v-rating
             v-model="team.averageRating"
+            size="20px"
+            dense
             readonly
           />
         </v-col>

@@ -10,19 +10,19 @@
         src="@/assets/businessmodelcanvas_view2.png"
       >
       <v-col
-        cols="10"
+        cols="8"
         class="programguide__container"
       >
-        <v-col cols="12">
+        <v-col
+          cols="12"
+          @click="changePage"
+        >
           <i
             v-if="page!='view'"
             id="businessmodelcanvas_view2__backbuttonicon"
+            style="color: #dbdcde; font-weight: 900; font-family: Raleway; font-size: 15px;"
             class="fas fa-chevron-left"
-          >
-            <v-btn
-              class="businessmodelcanvas_view2__backbutton"
-              @click="changePage"
-            >Back</v-btn>
+          ><span><nbsp>Back</nbsp></span>
           </i>
         </v-col>
         <v-col

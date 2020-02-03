@@ -6,7 +6,7 @@
     >
       <v-col
         class="agenda-view__container"
-        cols="10"
+        cols="8"
       >
         <img
           class="pc-vh-center agenda-view__icon"
@@ -18,6 +18,11 @@
           no-gutters
         >
           DEMO DAY AGENDA
+          <i
+            v-if="citizenType=='Teacher'|| citizenType=='Employer'"
+            class="far fa-edit edit-icon__project"
+            @click="toggleView"
+          />
         </v-row>
         <v-row
           justify="center"
@@ -51,6 +56,15 @@ import {firebase} from '@/firebase/init'
 })
 export default class DemoAgendaView extends Vue {
   agendaItems = FbStore.currentEmployerProgram?.demoDayAgenda?.events || []
+  get citizenType(): string {
+    return localStorage.citizenType;
+  }
+  toggleView(){
+    if(localStorage.citizenType == 'Employer')
+      this.$router.push({name: 'emp-project-demoagenda-edit'})
+    if(localStorage.citizenType == 'Teacher')
+      this.$router.push({name: 'teach-project-demoagenda-edit'})
+  }
   onSubmit(){
       FbStore.updateCurrentProject({
          [`programSequence.${'demoDay'}`]:firebase.firestore.FieldValue.serverTimestamp(),

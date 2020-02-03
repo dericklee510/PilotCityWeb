@@ -9,7 +9,7 @@
     
       <v-col
         id="agenda__contain"
-        cols="10"
+        cols="8"
       >
         <!-- TITLE -->
     
@@ -18,6 +18,10 @@
           class="mr-auto ml-auto agenda__title"
         >
           EXTERNSHIP DAY AGENDA
+          <i
+            class="far fa-edit edit-icon__externship"
+            @click="toggleView"
+          />
         </v-row>
     
         <!-- BORDERLINE -->
@@ -85,6 +89,9 @@ export default class ExternshipAgendaEdit extends Vue{
         }
       })
     })
+  }
+  toggleView(){
+    this.$router.push({name: 'emp-externship-agenda'})
   }
   created(){
     // set ref to update based on user type

@@ -8,7 +8,7 @@
     
       <v-col
         id="introvideo__contain"
-        cols="10"
+        cols="8"
       >
         <v-row
           justify="center"

@@ -686,7 +686,7 @@ export default class StudentID extends Vue {
     }))(this)
   }
   async submit(){
-    await FbStore.firestore.collection("StudentForm").doc(FbStore.FBUser!.uid).set<StudentForm>({
+    await FbStore.firestore.collection("StudentForm").doc(FbStore.FBUser!.uid).update<StudentForm>({
       signupForm:this.signupForm
     })
   }

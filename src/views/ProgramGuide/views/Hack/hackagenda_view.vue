@@ -6,7 +6,7 @@
     >
       <v-col
         class="agenda-view__container"
-        cols="10"
+        cols="8"
       >
         <img
           class="pc-vh-center agenda-view__icon"
@@ -17,6 +17,11 @@
           class="agenda-view__title"
         >
           HACK DAY AGENDA
+          <i
+            v-if="citizenType=='Teacher'|| citizenType=='Employer'"
+            class="far fa-edit edit-icon__project"
+            @click="toggleView"
+          />
         </v-row>
     
         <v-row
@@ -52,18 +57,15 @@ import {firebase} from '@/firebase/init';
   }
 })
 export default class agenda extends Vue {
-  // agendaItems = [...AgendaView.emptyAgenda,{
-  //   name:"stuff",
-  //   description:"",
-  //   duration:"",
-  //   completed:true
-  // }
-  // ,{
-  //   name:"stuff",
-  //   description:"",
-  //   duration:"",
-  //   completed:true
-  // }];
+  get citizenType(): string {
+    return localStorage.citizenType;
+  }
+  toggleView(){
+    if(localStorage.citizenType == 'Employer')
+      this.$router.push({name: 'emp-project-hack-edit'})
+    if(localStorage.citizenType == 'Teacher')
+      this.$router.push({name: 'teach-project-hack-edit'})
+  }
   onFinish(){
     FbStore.updateCurrentProject({
       [`programSequence.${'hackDay'}`]:firebase.firestore.FieldValue.serverTimestamp()
