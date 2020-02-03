@@ -91,7 +91,8 @@ export default class Auth extends VuexModule {
                     lastUpdate:firebase.firestore.FieldValue.serverTimestamp()
                 })
                 await this.user.sendEmailVerification();
-                alert("Email verification sent out!");
+                this.logout()
+                console.log("Email verification sent out!");
             }
             return SUCCESSFUL_SIGNUP_RESP
         } catch (err) {
@@ -105,6 +106,7 @@ export default class Auth extends VuexModule {
             let resp = await firebase.auth().signInWithEmailAndPassword(email, password)
             this.context.commit(SET_USER, resp.user);
             if (this.user && !this.user.emailVerified) {
+                this.user.sendEmailVerification()
                 throw (EMAIL_NOT_VERIFIED_ERR)
             }
             // eslint-disable-next-line no-console 
@@ -117,11 +119,10 @@ export default class Auth extends VuexModule {
             return SUCCESSFUL_LOGIN_RESP
         }
         catch(err){
-            // this.logout() // put this back after error is fixed
+            this.logout() // put this back after error is fixed
             return (err)
         }
     }
-
     /* eslint-enable */
     @Action
     public async logout(): Promise<void> {
