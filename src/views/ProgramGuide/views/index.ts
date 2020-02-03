@@ -307,6 +307,7 @@ export const EMPLOYERSEQUENCE = {
 export const STUDENTSEQUENCE = {
     Project: {
         'Launch Day': [
+            'stud-project-profile',
             'stud-project-brief',
             'stud-project-intro',
             'stud-project-team-join',

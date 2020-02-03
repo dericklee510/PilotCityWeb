@@ -11,7 +11,9 @@ import moment from 'moment'
 export class RouteList {
     private module:   typeof EMPLOYERSEQUENCE | typeof STUDENTSEQUENCE | typeof TEACHERSEQUENCE
     public get studentSequenceRouteHash():Record<string,Boolean | firebase.firestore.Timestamp | firebase.firestore.FieldValue | Date | undefined>{
-        return {'stud-project-brief':(FbStore.currentTeacherProgramData?.programSequence?.programBrief) || true ,
+        return {
+            'stud-project-profile':true,
+            'stud-project-brief':(FbStore.currentTeacherProgramData?.programSequence?.programBrief) || true ,
     'stud-project-intro':FbStore.currentStudentClassroom?.finishedProgramBrief,
     'stud-project-team-join':FbStore.currentStudentClassroom?.finishedIntrovideo,
     // 'stud-project-team':FbStore.currentStudentClassroom!.finishedIntrovideo && !!FbStore.currentProject,
@@ -24,6 +26,7 @@ export class RouteList {
     'stud-project-hack':FbStore.currentTeacherProgramData?.programSequence?.hackDay || FbStore.currentProject?.programSequence?.elevatorPitch,
     'stud-project-hack-reflect':FbStore.currentTeacherProgramData?.programSequence?.reflection || FbStore.currentProject?.programSequence?.hackDay,
     'stud-project-processlog':FbStore.currentTeacherProgramData?.programSequence?.processLog || FbStore.currentProject?.programSequence?.reflection,
+
     'stud-project-demo-edit':FbStore.currentTeacherProgramData?.programSequence?.demoVideo || FbStore.currentProject?.programSequence?.reflection,
     'stud-project-presentation-edit':FbStore.currentTeacherProgramData?.programSequence?.presentation || FbStore.currentProject?.programSequence?.demoVideo,
     'stud-project-demoagenda':FbStore.currentTeacherProgramData?.programSequence?.demoDay || FbStore.currentProject?.programSequence?.presentation,}
