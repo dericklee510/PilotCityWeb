@@ -945,6 +945,7 @@ import { FbStore } from "@/store";
 import { ValidationObserver, ValidationProvider } from "vee-validate";
 import { startCase } from "lodash";
 import { StudentForm } from "../../../../store/Database/types/types";
+import {firebase} from "@/firebase/init"
 @Component<StudentID>({
   components: {
     ValidationObserver,
@@ -957,10 +958,12 @@ import { StudentForm } from "../../../../store/Database/types/types";
       .get();
     next(vm => {
       let programForm = form.data<StudentForm>().programForm
+      if(programForm){
       Object.keys(programForm).forEach(key => {
         (vm as Record<string,any>)[key] = programForm[key as keyof StudentForm.programForm]
       })
-      vm.programForm = form.data<StudentForm>().programForm;
+      vm.programForm = form.data<StudentForm>().programForm
+      }
     });
   },
   data: () => ({
@@ -1113,7 +1116,9 @@ export default class StudentID extends Vue {
       .update<StudentForm>({
         programForm
       });
-    console.log("Submitted")
+      await FbStore.updateCurrentStudentClassroom({
+        finishedSignupForm:firebase.firestore.FieldValue.serverTimestamp()
+      })
   }
 }
 </script>

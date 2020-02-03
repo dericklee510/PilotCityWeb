@@ -13,7 +13,7 @@ export class RouteList {
     public get studentSequenceRouteHash():Record<string,Boolean | firebase.firestore.Timestamp | firebase.firestore.FieldValue | Date | undefined>{
         return {
             'stud-project-profile':true,
-            'stud-project-brief':(FbStore.currentTeacherProgramData?.programSequence?.programBrief) || true ,
+            'stud-project-brief':(FbStore.currentTeacherProgramData?.programSequence?.programBrief) || FbStore.currentStudentClassroom?.finishedSignupForm ,
     'stud-project-intro':FbStore.currentStudentClassroom?.finishedProgramBrief,
     'stud-project-team-join':FbStore.currentStudentClassroom?.finishedIntrovideo,
     // 'stud-project-team':FbStore.currentStudentClassroom!.finishedIntrovideo && !!FbStore.currentProject,
@@ -46,25 +46,20 @@ export class RouteList {
         // })
         var map: ProgramNode[] = flatMapDeep(this.module, (sequence, key) => {
             return flatMap(sequence, (page,pageName) => {
-                return page.map((route):ProgramNode => ({
+                return page.map((route):ProgramNode => {
+                    let unlocked = (this.type == "student")?this.studentSequenceRouteHash[route]:true
+                    return ({
                     value: {
                         sequence:key,
                         type: this.type,
                         page: pageName,
                         routeName: route,
                         unlocked:(this.type == "student")?this.studentSequenceRouteHash[route]:true,
-                        isUnlocked: () => {
-                            const unlocked = (this.type == "student")?this.studentSequenceRouteHash[route]:true
-                            if(unlocked instanceof firebase.firestore.Timestamp){
-                                return moment(unlocked.toDate()).isBefore(moment())
-                            }else{
-                                return !!unlocked
-                            }
-                        }
+                        isUnlocked: unlocked instanceof firebase.firestore.Timestamp?moment(unlocked.toDate()).isBefore(moment()):!!unlocked
                     },
                     next: null,
                     prev: null
-                }))
+                })})
             })
         })
         for (let index = 0; index < map.length; index++) {
@@ -103,7 +98,7 @@ export interface ProgramNode {
         page: string // i.e. Agenda Brief
         routeName: string // i.e.emp-externship-agenda
         unlocked:Boolean | firebase.firestore.Timestamp | firebase.firestore.FieldValue | Date | undefined
-        isUnlocked: () => boolean
+        isUnlocked: boolean
     }
     next: ProgramNode | null
     prev: ProgramNode | null

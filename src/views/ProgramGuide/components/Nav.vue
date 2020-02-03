@@ -82,12 +82,17 @@ import {startCase} from 'lodash'
 export default class Nav extends Vue {
   @Prop()
   public value!: LinkedList<ProgramNode>;
+  @Prop({required:true})
+  routeMap!:RouteList
   public unlocked = false;
   public sequenceHash: Record<string, any> = {
     Teacher: TEACHERSEQUENCE,
     Employer: EMPLOYERSEQUENCE,
     Student: STUDENTSEQUENCE
   };
+  get routeMapArr(){
+    return this.routeMap.linkedList.toArray()
+  }
   get citizenType() {
     return startCase(FbStore.userCitizenType!)
   }

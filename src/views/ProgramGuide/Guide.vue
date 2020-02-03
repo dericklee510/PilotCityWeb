@@ -10,7 +10,10 @@
       xl="1"
       class="d-sm-block d-none"
     >
-      <Nav v-model="currentModule" />
+      <Nav
+        v-model="currentModule"
+        :route-map="routeMap"
+      />
     </v-col>
     <v-col
       xl="11"
@@ -279,7 +282,7 @@ export default class Guide extends Vue {
     // if(mod[length-1] == currentRoute)
     //   this.$router.push({name: this.sequence[this.nextModule][0]})
     let next = this.currentNode.next;
-    if (next && next.value.isUnlocked()) {
+    if (next && next.value.isUnlocked) {
       this.currentNode = next;
       this.$router.push({ name: next.value.routeName });
     }
