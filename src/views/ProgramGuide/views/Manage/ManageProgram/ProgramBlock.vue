@@ -15,10 +15,11 @@
     </v-col>
 
     <v-col>
-      <PCselect
-        v-model="unlockType"
-        :items="items"
-      />
+      <v-btn
+        disabled
+      >
+        {{ unlockType }}
+      </v-btn>
     </v-col>
 
     <v-col
@@ -72,7 +73,7 @@
         {{ syncValue?'Lock':'Unlock' }}
       </v-btn>
     </v-col>
-    <v-col cols="1">
+    <v-col>
       <i
         class="fas ml-4"
         :class="{'fa-unlock':isUnlocked, 'fa-lock':!isUnlocked,'manageprogram__unlock':isUnlocked,'manageprogram__lock':!isUnlocked}"
@@ -90,12 +91,18 @@ import { FbStore } from '../../../../../store';
 import {firebase} from "@/firebase/init"
 import moment from 'moment'
 type Unlock = "By Date" | "By Completion" | "Manually";
-@Component({
+@Component<ProgramBlock>({
     components:{
         PCselect
+    },
+    created(){
+      if(this.unlockType != this.unlockProp)
+        this.unlockType = this.unlockProp
     }
 })
 export default class ProgramBlock extends Vue {
+  @Prop()
+  unlockProp!:"By Date"|"Manually"| "By Completion"
     @Prop()
     experience!:string
     // @Prop({required:true})

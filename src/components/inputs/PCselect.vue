@@ -2,7 +2,7 @@
   <div
     cols="12"
     class="pc-input"
-  >
+  > 
     <label
       for="citizen-title"
       class="pc-input__label"
@@ -13,7 +13,7 @@
         {{ title }}
       </h5>
     </label>
-    <v-select
+    <v-select 
       v-model="syncValue"
       :multiple="multiselect"
       append-icon="mdi-chevron-down"

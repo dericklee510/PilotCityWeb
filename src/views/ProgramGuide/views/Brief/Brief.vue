@@ -66,7 +66,7 @@ created(){
   }
    acknowledgedBriefs:boolean[] = []
   get confirmed(){
-    return FbStore.currentStudentClassroom!.finishedProgramBrief
+    return FbStore.currentStudentClassroom?.finishedProgramBrief || false
   }
   @Watch('confirmed')
   onConfirm(){

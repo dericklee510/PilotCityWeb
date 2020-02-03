@@ -6,9 +6,12 @@ import { AgendaTemplate, NamedLink } from './types/utilities';
 /* eslint-disable-next-line */
 import { Module, VuexModule, Action, Mutation, MutationAction } from "vuex-module-decorators"
 import firestore, { firebaseApp as fb, firebase } from '@/firebase/init'
-import { Classroom, EmployerProgram, GeneralUser, Project, RatingTag, TeacherProgramData, studentClassroom } from './types/types'
+import { Classroom, EmployerProgram, GeneralUser, Project, TeacherProgramData, studentClassroom } from './types/types'
 const _ = require('lodash');
 const assert = require('assert')
+import * as collections from '@/store/Database/types/types.ts'
+type coll = typeof  collections
+let col:coll = ""
 
 @Module({ namespaced: true, name: 'Fb' })
 export default class Fb extends VuexModule {
@@ -153,7 +156,10 @@ export default class Fb extends VuexModule {
         await firestore.collection('studentClassroom').doc(uid).update<studentClassroom>(Object.assign({}, { ...property, lastUpdate: firebase.firestore.FieldValue.serverTimestamp() }));
         return { currentStudentClassroom: Object.assign(property, state.currentStudentClassroom) }
     }
-
+    @Action({rawError:true})
+    getMyDoc(collection:firebase.firestore.Collection){
+        return firestore.collection(collection).doc(this.FBUser!.uid)
+    }
     @Action({ commit: 'initCurrentEmployerProgram ' })
     async fetchEmployerProgram(employerProgramUID: string) {
         const snapshot = await firestore.collection('EmployerProgram').doc(employerProgramUID).get();
@@ -210,10 +216,6 @@ export default class Fb extends VuexModule {
     async renameBrief(newFile: File, originalFileName: string) {
         await this.createProgramBrief(newFile);
         await this.deleteProgramBrief(originalFileName);
-    }
-    @Action
-    async addRating(ratingName: RatingTag, rating: number) {
-        await this.updateCurrentProject({ [ratingName]: rating })
     }
 
 
@@ -453,7 +455,7 @@ export default class Fb extends VuexModule {
      * @param {string} classroomId
      * @param null uid
      */
-    @Dependency('currentUserProfile')
+    // @Dependency('currentUserProfile')
     @Action({ rawError: true }) 
     async switchClassroom({ oldClassroomId, newClassroomId, studentId }: { oldClassroomId: string, newClassroomId: string, studentId: string }) {
         // kick student from project
@@ -624,7 +626,7 @@ export default class Fb extends VuexModule {
      * @param {string} uid
      * @returns {Promise<void>}
      */
-    @Dependency('currentUserProfile')
+    // @Dependency('currentUserProfile')
     @Action({ rawError: true }) 
     async deleteProject(projectId: string) {
         // remove projectId from every student's student.projectId interface X 
@@ -667,7 +669,7 @@ export default class Fb extends VuexModule {
      * @param {string} uid
      * @returns {Promise<void>}
      */
-    @Dependency('currentUserProfile')
+    // @Dependency('currentUserProfile')
     @Action({ rawError: true }) 
     async joinProject({ projectId, uid }: { projectId: string, uid?: string }) {
         // append Student.id to Project.teamMembers where Project.Id = projectId 
@@ -695,7 +697,7 @@ export default class Fb extends VuexModule {
      * @param {string} uid
      * @returns {Promise<void>}
      */
-    @Dependency('currentUserProfile')
+    // @Dependency('currentUserProfile')
     @Action({ rawError: true }) 
     async leaveProject({ projectId, uid }: { projectId: string, uid?: string }) {
         // remove student with Student.id = uid from Project.teamMembers where Project.id = projectId
