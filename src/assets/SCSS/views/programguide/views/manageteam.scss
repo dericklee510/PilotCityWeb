@@ -3,21 +3,18 @@
     &__container{
         margin-top : 82.5px;
         height: 100%;
+        .v-text-field{
+            margin-top: 0px;
+            padding-top: 0px;
+        }
         #pc-app .pc-input .theme--light.v-select .v-select__selections{
             color: #000;
-        }
-        .v-select > .v-input__control > .v-input__slot{
-            padding-left: 12px;
         }
         .v-text-field > .v-input__control > .v-input__slot:before {
             border: none;
         }
         .theme--light.v-text-field > .v-input__control > .v-input__slot:before{
             border: none;
-        }
-        .pc-input .v-text-field{
-            margin-top: -2px;
-            color: #000;
         }
         #pc-app .pc-input__select{
             letter-spacing: normal;
@@ -102,7 +99,6 @@
         
     }
     &__input{
-        border: 0.428px solid #231F20;
         height: 55.88px;
         ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
             opacity: 1; /* Firefox */
@@ -115,6 +111,33 @@
         ::-ms-input-placeholder { /* Microsoft Edge */
 
         }
+        .v-select__slot{
+            border: 0.428px solid #231F20;
+            height: 55.87px;
+            
+            margin: 0 23px;
+            .v-select__selection {
+                padding-left: 10px;
+            }
+        }
+        .input__slot:before, .v-text-field > .v-input__control > .v-input__slot:after{
+            content: none;
+        }
+        .v-input__slot{
+            border: 0.428px solid #231F20;
+            input{
+                padding-left: 10px;
+                font-family: Raleway;
+                font-style: normal;
+                font-weight: 900;
+                font-size: 17.1097px;
+                line-height: 20px;
+                color: #231F20;
+            }
+        }
+        & > input{
+            border: 0.428px solid #231F20;
+        }
         input{
             font-family: Raleway;
             font-style: normal;
@@ -125,9 +148,6 @@
             width: inherit;
             height: inherit;
             padding: 10px;
-        }
-        &.problem-child{
-            margin-left: 15px;
         }
     }
     &__class-input{
@@ -152,8 +172,5 @@
         font-weight: 800;
         font-size: 15px;
         width: 100%;
-        &-wrapper{
-            margin-left: 23px;
-        }
     }
 }

@@ -19,6 +19,7 @@ export interface studentClassroom {
     classroomId: string
     finishedProgramBrief?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
     finishedIntrovideo?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+    finishedSignupForm?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
 }
 export interface GeneralUser {
     userId: string

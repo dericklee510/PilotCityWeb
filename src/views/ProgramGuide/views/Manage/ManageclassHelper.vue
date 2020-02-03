@@ -33,7 +33,7 @@
               height="100%"
               @click="setLoader(renameClass(entry.id,index))"
             >
-              RENAME
+              UPDATE
             </v-btn>
           </PCLoader>
         </v-col>
@@ -66,7 +66,7 @@
             color="primary"
           />
           <span>
-            <span class="manageclass__sharecode__label ma-0 pa-0 d-lg-none">Share Code: </span>
+            <span class="manageclass__sharecode-label ma-0 pa-0 d-lg-none">Share Code: </span>
             <span class="manageclass__sharecode">{{ entry.shareCode?entry.shareCode:"GENERATING..." }}</span>
           </span>
           <button

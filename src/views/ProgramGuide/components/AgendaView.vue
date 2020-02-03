@@ -72,8 +72,14 @@
         md="2"
       >
         <v-btn
-          class="agenda-view__button mb-10"
+          id="agenda-view__button"
+          class="mb-10"
           :disabled="!isAgendaComplete"
+          solo
+          flat
+          text
+          outlined
+          height="50px"
           elevation="0"
           @click="$emit('finish')"
         >
@@ -82,7 +88,7 @@
       </v-col>  
     </v-row>
   </v-col>
-</template>
+</template> 
 <script lang="ts">
 import Vue from "vue";
 import "reflect-metadata";

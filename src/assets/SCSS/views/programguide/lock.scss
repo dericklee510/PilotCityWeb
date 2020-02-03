@@ -13,10 +13,10 @@
         height: calc(75vh + 66px);
         max-height: 100%;
         &:hover, &:focus{
-            & .fa-lock-alt{
+            & .fa-lock{
                 color: $pc-red;
             }
-            & .fa-unlock-alt{
+            & .fa-unlock{
                 color: $pc-green;
             }
             & .fa-chevron-right, .fa-chevron-left{
@@ -24,10 +24,10 @@
             }
         }
         &:active{
-            & .fa-lock-alt{
+            & .fa-lock{
                 color: darken($pc-red, 10);
             }
-            & .fa-unlock-alt{
+            & .fa-unlock{
                 color: darken($pc-green, 10);
             }
             & .fa-chevron-right, .fa-chevron-left{

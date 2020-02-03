@@ -1,7 +1,10 @@
-.manageclass{
+ .manageclass{
     &__container{
         margin-top : 82.5px;
         height: 100%;
+        .v-select__selections{
+            padding-left: 7px;
+        }
     }
     &__nav{
         width:100%;
@@ -17,12 +20,16 @@
             height: 55.82px;
             border: 0.428px solid #231F20;
             margin-right: 3%;
-            &--active{
-                background: #F1F2F2;    
-            }
+            
             @media only screen and (max-width: 600px){
                 margin: 0;
             }
+            &:not(.manageclass__nav--active):hover{
+                background: #dbdcde;
+            }
+        }
+        &--active{
+            background: #F1F2F2;
         }
     }
     &__title{
