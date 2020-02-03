@@ -91,8 +91,7 @@ export default class Auth extends VuexModule {
                     lastUpdate:firebase.firestore.FieldValue.serverTimestamp()
                 })
                 await this.user.sendEmailVerification();
-                this.logout()
-                console.log("Email verification sent out!");
+                await this.logout()
             }
             return SUCCESSFUL_SIGNUP_RESP
         } catch (err) {

@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="nextModule.value.isUnlocked?{name:nextModule.value.routeName}:'#'">
+  <router-link :to="nextModule && nextModule.value.isUnlocked?{name:nextModule.value.routeName}:'#'">
     <v-row
       v-if="nextModule"
       no-gutters
@@ -42,7 +42,7 @@ import { ProgramNode } from '../types';
 import { LinkedList } from 'linked-list-typescript';
 
 @Component
-export default class Lock extends Vue{
+export default class Locks extends Vue{
     @Prop({required:true})
   routeMap!:LinkedList<ProgramNode>
     @Prop()

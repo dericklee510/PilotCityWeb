@@ -25,7 +25,7 @@
               v-model="completion"
               color="success"
               rounded
-              height="25"
+              height="9"
             />
           </v-col>
           <v-col cols="3">
@@ -60,7 +60,11 @@ import { RouteList } from "../ProgramGuide/types";
     PCLoader
   }
 })
+
+
 export default class ProgramCard extends Vue {
+  
+  
   loader = false;
   @Prop({ required: true })
   program!: EmployerProgram;

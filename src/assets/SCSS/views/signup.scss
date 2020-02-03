@@ -12,7 +12,50 @@
     &:hover{
         border: 1px solid #ffffff;
     }
+
 }
+
+#password{
+    
+}
+
+
+.Password__badge--error{
+    background: none;
+    color:none;
+}
+
+.Password__badge{
+    background: none;
+    color:none;
+}
+
+.Password__badge--success{
+    background: none;
+    color:none;
+}
+
+.Password__strength-meter::before{
+
+}
+
+.Password__strength-meter--fill{
+    background-color: transparent;
+}
+
+.Password__field{
+    background-color: #404142 !important;
+    width: 100%;
+    height: 50px;
+    padding-left:15px;
+    font-family: "Raleway";
+    font-weight: 800 !important;
+    font-size: 18px !important;
+    color: #ffffff;
+}
+
+
+
 .signup{
 
     &__termstext{
@@ -84,16 +127,7 @@
                 height: 100%;
             }
         }
-        .Password____field{
-            background-color: inherit;
-            border: inherit;
-            padding: 0 0 0 15px;
-            font-family: "Raleway";
-            font-size: inherit;
-            font-weight: inherit;
-            color: inherit;
-            height: 100%;
-        }
+
         &.Password{
             padding-left: 0px;
         }

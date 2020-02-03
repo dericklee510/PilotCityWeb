@@ -1,10 +1,10 @@
 <template>
   <v-container>
-    <v-row
-      no-gutters
-      justify="center"
-    >
-      <v-col cols="9">
+    <v-row no-gutters>
+      <v-col
+        cols="11"
+        class="ml-12"
+      >
         <div class="manageprogram__header mt-10">
           Manage Program
         </div>
@@ -36,6 +36,7 @@
         <ProgramBlock
           v-for="(sequence,key,index) in routeHash"
           :key="key"
+          justify="center"
           :sequence="sequence"
           :name="key"
           :num="index"
