@@ -62,7 +62,7 @@ export default class DemoAgendaView extends Vue {
   toggleView(){
     if(this.citizenType == 'employer')
       this.$router.push({name: 'emp-project-demoagenda-edit'})
-    if(this.citizenType == 'employer')
+    if(this.citizenType == 'teacher')
       this.$router.push({name: 'teach-project-demoagenda-edit'})
   }
   onSubmit(){

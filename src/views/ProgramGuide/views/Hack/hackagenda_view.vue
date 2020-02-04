@@ -62,9 +62,9 @@ export default class agenda extends Vue {
     return FbStore.userCitizenType;
   }
   toggleView(){
-    if(localStorage.citizenType == 'Employer')
+    if(this.citizenType == 'employer')
       this.$router.push({name: 'emp-project-hack-edit'})
-    if(localStorage.citizenType == 'Teacher')
+    if(this.citizenType == 'teacher')
       this.$router.push({name: 'teach-project-hack-edit'})
   }
   onFinish(){
