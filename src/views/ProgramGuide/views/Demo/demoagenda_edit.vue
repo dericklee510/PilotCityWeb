@@ -86,9 +86,9 @@ export default class DemoAgendaEdit extends Vue{
     return FbStore.userCitizenType;
   }
   toggleView(){
-    if(localStorage.citizenType == 'Employer')
+    if(this.citizenType == 'employer')
       this.$router.push({name: 'emp-project-demoagenda'})
-    if(localStorage.citizenType == 'Teacher')
+    if(this.citizenType == 'teacher')
       this.$router.push({name: 'teach-project-demoagenda'})
   }
   mounted(){
