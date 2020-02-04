@@ -1,4 +1,4 @@
-<template>
+ <template>
   <v-container class="agenda-view">
     <v-row
       justify="center"
@@ -19,7 +19,7 @@
         >
           HACK DAY AGENDA
           <i
-            v-if="citizenType=='Teacher'|| citizenType=='Employer'"
+            v-if="citizenType=='teacher'|| citizenType=='employer'"
             class="far fa-edit edit-icon__project"
             @click="toggleView"
           />
@@ -58,8 +58,8 @@ import {firebase} from '@/firebase/init';
   }
 })
 export default class agenda extends Vue {
-  get citizenType(): string {
-    return localStorage.citizenType;
+  get citizenType() {
+    return FbStore.userCitizenType;
   }
   toggleView(){
     if(localStorage.citizenType == 'Employer')

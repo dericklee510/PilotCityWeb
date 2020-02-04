@@ -21,7 +21,7 @@
         >
           HACK DAY AGENDA
           <i
-            v-if="citizenType=='Teacher'|| citizenType=='Employer'"
+            v-if="citizenType=='teacher'|| citizenType=='employer'"
             class="far fa-edit edit-icon__project"
             @click="toggleView"
           />
@@ -83,8 +83,8 @@ const emptyAgenda:Omit<EventItem,'completed'> = {
   }
 })
 export default class HackAgenda extends Vue{
-  get citizenType(): string {
-    return localStorage.citizenType;
+  get citizenType() {
+    return FbStore.userCitizenType;
   }
   toggleView(){
     if(localStorage.citizenType == 'Employer')

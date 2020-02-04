@@ -19,6 +19,7 @@
         >
           TRAINING DAY AGENDA
           <i
+            v-if="citizenType == 'teacher'"
             class="far fa-edit edit-icon__project"
             @click="toggleView"
           />
@@ -79,6 +80,9 @@ const emptyAgenda:Omit<EventItem,'completed'> = {
   }
 })
 export default class TrainingDayEdit extends Vue{
+  get citizenType() {
+    return FbStore.userCitizenType;
+  }
   toggleView(){
     this.$router.push({name: 'teach-project-training'})
   }

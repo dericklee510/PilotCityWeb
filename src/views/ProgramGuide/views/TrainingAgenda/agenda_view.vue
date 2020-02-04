@@ -21,7 +21,7 @@
         >
           TRAINING DAY AGENDA
           <i
-            v-if="citizenType=='Teacher'"
+            v-if="citizenType=='teacher'"
             class="far fa-edit edit-icon__project"
             @click="toggleView"
           />
@@ -61,8 +61,8 @@ import { EventItem } from '../../../../store/Database/types/utilities';
 })
 export default class TrainingDayAgendaView extends Vue{
   agendaItems:EventItem[] = FbStore.currentTeacherProgramData?.trainingDayAgenda?.events || FbStore.currentEmployerProgram!.trainingDayTemplate?.events || []
-  get citizenType(): string {
-    return localStorage.citizenType;
+  get citizenType() {
+    return FbStore.userCitizenType;
   }
   toggleView(){
     this.$router.push({name: 'teach-project-training-edit'})
