@@ -34,7 +34,10 @@
           />
         </v-col>
         <v-col cols="12">
-          <SnackTime v-slot="{updateSavedDate, saving}" style="width: 100%; height: 100%">
+          <SnackTime
+            v-slot="{updateSavedDate, saving}"
+            style="width: 100%; height: 100%"
+          >
             <router-view
               @nextNode="$router.push({name: $refs.nextLock.nextModule.value.routeName})"
               @updateSavedDate="updateSavedDate($event)"
@@ -61,7 +64,6 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { Watch } from "vue-property-decorator";
-import { STUDENTMODULES, EMPLOYERMODULES, TEACHERMODULES } from "./views";
 import { Nav, Locks, SnackTime } from "./components";
 import _ from "lodash";
 import { LinkedList, LinkedListItem } from "linked-list-typescript";

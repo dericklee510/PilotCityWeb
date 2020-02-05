@@ -27,7 +27,7 @@ export default class agenda extends Vue {
     })
   }
   get agendaItems(){
-    return FbStore.currentEmployerProgram!.masterHackDayAgenda?.events
+    return FbStore.currentTeacherProgramData?.hackDayAgenda?.events || FbStore.currentEmployerProgram?.masterHackDayAgenda?.events
   }
 }
 </script>

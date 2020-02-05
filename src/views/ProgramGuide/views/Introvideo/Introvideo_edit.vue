@@ -89,19 +89,24 @@
             <v-col
               cols="4"
             >
-              <v-btn
-                id="editcasestudies__button"
-                class="mb-10 mt-4"
-                :disabled="invalid || !checkbox"
-                text
-                solo
-                depressed
-                outlined
-                height="73.5px"
-                @click="[onSubmit, $emit('nextNode')]"
+              <NextNode
+                v-slot="{setNext}"
+                @CallbackComplete=" $emit('nextNode')"
               >
-                NEXT
-              </v-btn>
+                <v-btn
+                  id="editcasestudies__button"
+                  class="mb-10 mt-4"
+                  :disabled="invalid || !checkbox"
+                  text
+                  solo
+                  depressed
+                  outlined
+                  height="73.5px"
+                  @click="setNext(onSubmit)"
+                >
+                  NEXT
+                </v-btn>
+              </NextNode>
             </v-col>
           </v-row>
         </ValidationObserver>
@@ -117,14 +122,15 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { LinkChecker } from '../../components'
+import { LinkChecker, NextNode } from '../../components'
 import { ValidationObserver } from 'vee-validate'
 import { FbStore } from '../../../../store'
 
 @Component({
   components:{
     LinkChecker,
-    ValidationObserver
+    ValidationObserver,
+    NextNode
   }
 })
 export default class introvideo_edit extends Vue{

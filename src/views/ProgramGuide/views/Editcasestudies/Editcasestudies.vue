@@ -139,18 +139,23 @@
           <v-col
             cols="4"
           >
-            <v-btn
-              id="editcasestudies__button"
-              class="mb-10 mt-8"
-              text
-              solo
-              depressed
-              outlined
-              height="73.5px"
-              @click="[submit, $emit('nextNode')]"
+            <NextNode
+              v-slot="{setNext}"
+              @CallbackComplete="$emit('nextNode')"
             >
-              NEXT
-            </v-btn>
+              <v-btn
+                id="editcasestudies__button"
+                class="mb-10 mt-8"
+                text
+                solo
+                depressed
+                outlined
+                height="73.5px"
+                @click="setNext(submit)"
+              >
+                NEXT
+              </v-btn>
+            </NextNode>
           </v-col>
         </v-row>
       </v-col>
@@ -172,6 +177,7 @@ import {PCmultiinput} from "@/components/inputs"
 import { NamedLink } from '@/store/Database/types/utilities'
 import { LinkChecker } from '../../components'
 import { FbStore } from '../../../../store'
+import NextNode from '../../components/NextNode.vue'
 
 interface NamedLinkID extends NamedLink {
   id:number
@@ -192,7 +198,8 @@ const multiInput = PCmultiinput.createMultiInput<NamedLink>(namedLinkDefault,lin
 @Component({
   components:{
     LinkChecker,
-    multiInput
+    multiInput,
+    NextNode
   }
 })
 export default class editcasestudies extends Vue{
