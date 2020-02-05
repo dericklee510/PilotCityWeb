@@ -34,13 +34,14 @@
           />
         </v-col>
         <v-col cols="12">
-          <router-view @nextNode="$router.push({name: nextModule.value.routeName})" />
+          <router-view @nextNode="$router.push({name: $refs.nextLock.nextModule.value.routeName})" />
         </v-col>
         <v-col
           cols="1"
           class="guide__locks guide__locks--right"
         >
           <Locks
+            ref="nextLock"
             :orientation="'right'"
             :route-map="routeMap"
           />
