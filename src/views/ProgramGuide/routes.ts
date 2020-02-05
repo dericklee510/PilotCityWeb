@@ -19,24 +19,9 @@ const routes: RouteConfig[] = [
         component: Guide.Main,
         children: [
             {
-                path: 'teacher/externship/agenda',
-                name: 'teach-externship-agenda',
-                component: Guide.Program.ExternshipAgendaView,
-            },
-            {
-                path: 'employer/externship/agenda',
-                name: 'emp-externship-agenda',
-                component: Guide.Program.ExternshipAgendaView,
-            },
-            {
-                path: 'teacher/externship/agenda/edit',
-                name: 'teach-externship-agenda-edit',
-                component: Guide.Program.ExternshipAgendaEdit,
-            },
-            {
-                path: 'employer/externship/agenda/edit',
-                name: 'emp-externship-agenda-edit',
-                component: Guide.Program.ExternshipAgendaEdit,
+                path: 'externship/agenda',
+                name: 'externship-agenda',
+                component: Guide.Program.ExternshipAgenda,
             },
             {
                 path: 'teacher/externship/brief',
@@ -109,19 +94,9 @@ const routes: RouteConfig[] = [
                 component: Guide.Program.IntroVideoView
             },
             {
-                path: 'teacher/project/training',
-                name: 'teach-project-training',
-                component: Guide.Program.TrainingAgendaView
-            },
-            {
-                path: 'teacher/project/training/edit',
-                name: 'teach-project-training-edit',
-                component: Guide.Program.TrainingAgendaEdit
-            },
-            {
-                path: 'student/project/training',
-                name: 'stud-project-training',
-                component: Guide.Program.TrainingAgendaView
+                path: 'project/training/agenda',
+                name: 'project-training',
+                component: Guide.Program.TrainingAgenda
             },
             {
                 path: 'teacher/project/practice',
@@ -250,29 +225,9 @@ const routes: RouteConfig[] = [
                 component: Guide.Program.ElevatorSubmit
             },
             {
-                path: 'teacher/project/hack/edit',
-                name: 'teach-project-hack-edit',
-                component: Guide.Program.HackEdit
-            },
-            {
-                path: 'teacher/project/hack',
-                name: 'teach-project-hack',
-                component: Guide.Program.HackView
-            },
-            {
-                path: 'employer/project/hack/edit',
-                name: 'emp-project-hack-edit',
-                component: Guide.Program.HackEdit
-            },
-            {
-                path: 'employer/project/hack',
-                name: 'emp-project-hack',
-                component: Guide.Program.HackView
-            },
-            {
-                path: 'student/project/hack',
-                name: 'stud-project-hack',
-                component: Guide.Program.HackView
+                path: 'project/hack/agenda',
+                name: 'project-hack',
+                component: Guide.Program.HackAgenda
             },
             {
                 path: 'student/project/hack/reflect',
@@ -325,32 +280,10 @@ const routes: RouteConfig[] = [
             //     component: Guide.Program.PresentationView
             // },
             {
-                path: 'teacher/project/demoagenda/edit',
-                name: 'teach-project-demoagenda-edit',
-                component: Guide.Program.DemoAgendaEdit
+                path: 'project/demo/agenda',
+                name: 'project-demo-agenda',
+                component: Guide.Program.DemoAgenda
             },
-            {
-                path: 'teacher/project/demoagenda',
-                name: 'teach-project-demoagenda',
-                component: Guide.Program.DemoAgendaView
-            },
-            {
-                path: 'employer/project/demoagenda/edit',
-                name: 'emp-project-demoagenda-edit',
-                component: Guide.Program.DemoAgendaEdit
-            },
-            {
-                path: 'employer/project/demoagenda',
-                name: 'emp-project-demoagenda',
-                component: Guide.Program.DemoAgendaView
-            },
-            {
-                path: 'student/project/demoagenda',
-                name: 'stud-project-demoagenda',
-                component: Guide.Program.DemoAgendaView
-            }
-
-            
         ],
         meta: { layout: 'simple' },
         // beforeEnter(to, from, next): void{

@@ -141,15 +141,15 @@
           >
             <v-btn
               id="editcasestudies__button"
-              class="mb-10"
+              class="mb-10 mt-8"
               text
               solo
               depressed
               outlined
               height="73.5px"
-              @click="submit"
+              @click="[submit, $emit('nextNode')]"
             >
-              SAVE
+              NEXT
             </v-btn>
           </v-col>
         </v-row>

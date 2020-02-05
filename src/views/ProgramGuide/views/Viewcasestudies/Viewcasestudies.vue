@@ -75,7 +75,6 @@
             ><button class="viewcasestudies__exporticon"><img src="@/assets/exportbox.png"></button></a>
           </v-col>
         </v-row>
-        <!-- BUTTON DOES NOT LOOK LIKE IN USE -->
         <v-row
           no-gutters
           justify="center"
@@ -84,24 +83,20 @@
             cols="4"
           >
             <v-btn
-              id="viewcasestudies__savebutton"
-              class="mb-10"
+              id="editcasestudies__button"
+              class="mb-10 mt-10"
               :disabled="!allReviewed"
-              height="73.5px"
-              solo
               text
+              solo
               depressed
               outlined
-              @click="submit"
+              height="73.5px"
+              @click="[submit, $emit('nextNode')]"
             >
               NEXT
             </v-btn>
           </v-col>
         </v-row>
-        <v-row
-          no-gutters
-          class="mb-10"
-        />
       </v-col>
     </v-row>
   </v-container>

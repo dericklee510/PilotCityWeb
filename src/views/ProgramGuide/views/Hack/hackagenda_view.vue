@@ -1,45 +1,8 @@
- <template>
-  <v-container class="agenda-view">
-    <v-row
-      justify="center"
-      no-gutters
-    >
-      <v-col
-        class="agenda-view__container"
-        cols="8"
-      >
-        <img
-          class="pc-vh-center agenda-view__icon"
-          src="@/assets/icons/agenda.png"
-        >
-        <v-row
-          justify="center"
-          no-gutters
-          class="agenda-view__title"
-        >
-          HACK DAY AGENDA
-          <i
-            v-if="citizenType=='teacher'|| citizenType=='employer'"
-            class="far fa-edit edit-icon__project"
-            @click="toggleView"
-          />
-        </v-row>
-    
-        <v-row
-          justify="center"
-          class="mr-auto ml-auto businessmodelcanvas_view2__description"
-        >
-          Enter your agenda for the event or activity.
-        </v-row>
-    
-    
-        <agenda-view
-          v-model="agendaItems"
-          @finish="onFinish"
-        />
-      </v-col>
-    </v-row>
-  </v-container>
+<template>
+  <agenda-view
+    v-model="agendaItems"
+    @finish="[onFinish, $emit('nextNode')]"
+  />
 </template>
 
 
@@ -58,15 +21,6 @@ import {firebase} from '@/firebase/init';
   }
 })
 export default class agenda extends Vue {
-  get citizenType() {
-    return FbStore.userCitizenType;
-  }
-  toggleView(){
-    if(this.citizenType == 'employer')
-      this.$router.push({name: 'emp-project-hack-edit'})
-    if(this.citizenType == 'teacher')
-      this.$router.push({name: 'teach-project-hack-edit'})
-  }
   onFinish(){
     FbStore.updateCurrentProject({
       [`programSequence.${'hackDay'}`]:firebase.firestore.FieldValue.serverTimestamp()

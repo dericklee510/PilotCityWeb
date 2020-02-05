@@ -12,13 +12,13 @@
         top: 0px;
         height: calc(75vh + 66px);
         max-height: 100%;
+        & .fa-lock{
+            color: $pc-red;
+        }
+        & .fa-unlock{
+            color: $pc-green;
+        }
         &:hover, &:focus{
-            & .fa-lock{
-                color: $pc-red;
-            }
-            & .fa-unlock{
-                color: $pc-green;
-            }
             & .fa-chevron-right, .fa-chevron-left{
                 color: darken(#dbdcde, 20);
             }
