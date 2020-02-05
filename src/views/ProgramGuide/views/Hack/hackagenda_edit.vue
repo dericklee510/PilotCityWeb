@@ -94,6 +94,7 @@ export default class HackAgenda extends Vue{
   }
  mounted(){
     this.$subscribeTo(this.$observables.agendaEvents,async (events:EventItem[]) => {
+      this.$emit('saving',true)
       if(FbStore.userCitizenType === "employer")
       await FbStore.updateCurrentEmployerProgram({
         masterHackDayAgenda:{
@@ -108,22 +109,14 @@ export default class HackAgenda extends Vue{
           lastUpdate:firebase.firestore.FieldValue.serverTimestamp()
           }
         })
+        this.$emit('saving',false)
+        this.$emit('updateSavedDate', firebase.firestore.Timestamp.now())
     })
   }
-  get agenda(){
-     if(FbStore.userCitizenType === "employer"){
-      this.$emit('updateSavedDate',FbStore.currentEmployerProgram?.masterHackDayAgenda?.lastUpdate)
-      return FbStore.currentEmployerProgram?.masterHackDayAgenda?.events
-      }
-      else if(FbStore.userCitizenType==="teacher"){
-         this.$emit('updateSavedDate',FbStore.currentTeacherProgramData?.hackDayAgenda?.lastUpdate)
-         console.log("emiting")
-         return FbStore.currentTeacherProgramData?.hackDayAgenda?.lastUpdate
-         }
-      return ""
-  }
+ 
   onAgendaChange$!:Subject<{event:{name:string,msg:EventItem[]},data:undefined}>;
   ref!:firebase.firestore.DocumentReference
     entries:EventItem[] = FbStore.currentTeacherProgramData?.hackDayAgenda?.events || FbStore.currentEmployerProgram?.masterHackDayAgenda?.events || [emptyAgenda]
+
 }
 </script>
