@@ -6,8 +6,11 @@
     />
     <v-snackbar
       v-model="snackbar"
-      top
+      class="guide-snackbar"
+      left
       dark
+      multi-line
+      color="#f1f2f2"
     >
       <span v-if="(text instanceof Date)">
         {{ text | moment("calendar") }}
@@ -33,14 +36,14 @@ import { Prop, Watch } from 'vue-property-decorator'
 
 @Component
 export default class SnackTime extends Vue{
-snackbar:boolean = false
+snackbar:boolean = true;
 @Watch('snackbar')
 async onSnackbar(newVal:boolean){
     if(newVal){
        await new Promise(resolve => {
             setTimeout(() => {
                 this.snackbar = false
-            }, 3000)
+            }, 60000)
         })
     }
         
@@ -58,3 +61,9 @@ saving(bool:boolean){
 }
 }
  </script>   
+
+ <style lang="scss">
+ .guide-snackbar{
+   height: 5vh;
+ }
+ </style>

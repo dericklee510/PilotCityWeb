@@ -61,7 +61,6 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { Watch } from "vue-property-decorator";
-import { STUDENTMODULES, EMPLOYERMODULES, TEACHERMODULES } from "./views";
 import { Nav, Locks, SnackTime } from "./components";
 import _ from "lodash";
 import { LinkedList, LinkedListItem } from "linked-list-typescript";

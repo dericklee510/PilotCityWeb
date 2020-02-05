@@ -43,12 +43,6 @@ export default class HackAgenda extends Vue{
   get citizenType() {
     return FbStore.userCitizenType;
   }
-  toggleView(){
-    if(this.citizenType == 'employer')
-      this.$router.push({name: 'emp-project-hack'})
-    if(this.citizenType == 'teacher')
-      this.$router.push({name: 'teach-project-hack'})
-  }
  mounted(){
     this.$subscribeTo(this.$observables.agendaEvents,async (events:EventItem[]) => {
       this.$emit('saving',true)
