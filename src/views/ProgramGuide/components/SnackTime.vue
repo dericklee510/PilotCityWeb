@@ -30,7 +30,7 @@ import Vue from 'vue'
 import moment from "moment";
 import Component from 'vue-class-component'
 import { Prop, Watch } from 'vue-property-decorator'
-
+import {debounce} from 'lodash'
 @Component
 export default class SnackTime extends Vue{
 snackbar:boolean = false
@@ -40,7 +40,7 @@ async onSnackbar(newVal:boolean){
        await new Promise(resolve => {
             setTimeout(() => {
                 this.snackbar = false
-            }, 3000)
+            }, 4000)
         })
     }
         
@@ -48,13 +48,19 @@ async onSnackbar(newVal:boolean){
 text:Date | string = ""
 lastTimeStamp!:Date
 updateSavedDate(timestamp:firebase.firestore.Timestamp){
+  debounce(()=> {
+  this.saving(false)
     this.lastTimeStamp = timestamp.toDate()
     this.text = timestamp.toDate()
     this.snackbar=true
+     },1000)()
 }
 saving(bool:boolean){
+  
     this.text = bool?'Saving':this.lastTimeStamp
     this.snackbar=true
+  
+    
 }
 }
  </script>   

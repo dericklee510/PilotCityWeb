@@ -62,7 +62,7 @@ import { FbStore } from '../../../../store'
 import { Watch } from 'vue-property-decorator'
 import { Subject, pipe } from 'rxjs'
 import {firebase} from "@/firebase/init"
-import { pluck, debounceTime } from 'rxjs/operators'
+import { pluck, debounceTime, skip } from 'rxjs/operators'
 const emptyAgenda:Omit<EventItem,'completed'> = {
   name:"",
   duration:"",
@@ -73,6 +73,7 @@ const emptyAgenda:Omit<EventItem,'completed'> = {
   subscriptions(){
     return {
       agendaEvents: this.onAgendaChange$.pipe(
+        skip(1),
         debounceTime(300),
        pluck<{event:{name:string,msg:EventItem[]},data:undefined},EventItem[]>("event","msg")
       )
@@ -109,7 +110,6 @@ export default class HackAgenda extends Vue{
           lastUpdate:firebase.firestore.FieldValue.serverTimestamp()
           }
         })
-        this.$emit('saving',false)
         this.$emit('updateSavedDate', firebase.firestore.Timestamp.now())
     })
   }
