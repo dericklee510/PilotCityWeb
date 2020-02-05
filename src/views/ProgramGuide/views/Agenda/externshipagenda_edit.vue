@@ -1,50 +1,9 @@
 <template>
-  <v-container>
-    <v-row justify="center">
-      <img
-        id="agenda__icon"
-        class="agenda__image"
-        src="@/assets/icons/agenda.png"
-      >
-    
-      <v-col
-        id="agenda__contain"
-        cols="8"
-      >
-        <!-- TITLE -->
-    
-        <v-row
-          justify="center"
-          class="mr-auto ml-auto agenda__title"
-        >
-          EXTERNSHIP DAY AGENDA
-          <i
-            class="far fa-edit edit-icon__externship"
-            @click="toggleView"
-          />
-        </v-row>
-    
-        <!-- BORDERLINE -->
-    
-        <v-col
-          cols="12"
-          class="agenda__borderline"
-        />
-    
-        <v-row
-          justify="center"
-          class="mr-auto ml-auto businessmodelcanvas_view2__description"
-        >
-          Enter agenda for Externship event.
-        </v-row>
-    
-        <Agenda
-          v-model="entries"
-          v-stream:update:value="onAgendaChange$"
-        />
-      </v-col>
-    </v-row>
-  </v-container>
+  <Agenda
+    v-model="entries"
+    v-stream:update:value="onAgendaChange$"
+    @toggleView="$emit('toggleView')"
+  />
 </template>
 
 
@@ -81,6 +40,7 @@ const emptyAgenda:EventItem = {
 export default class ExternshipAgendaEdit extends Vue{
   mounted(){
     this.$subscribeTo(this.$observables.agendaEvents,async (events:EventItem[]) => {
+      this.$emit('saving',true)
       if(FbStore.userCitizenType === "employer")
       await FbStore.updateCurrentEmployerProgram({
         externshipDayAgenda:{
@@ -88,6 +48,8 @@ export default class ExternshipAgendaEdit extends Vue{
           lastUpdate:firebase.firestore.FieldValue.serverTimestamp()
         }
       })
+      this.$emit('saving',false)
+      this.$emit('updateSavedDate', firebase.firestore.Timestamp.now())
     })
   }
   toggleView(){

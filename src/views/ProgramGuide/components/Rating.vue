@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <v-row
       v-for="(team,index) in syncedSnippet"
       :key="index"

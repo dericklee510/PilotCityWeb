@@ -1,52 +1,9 @@
 <template>
-  <v-container>
-    <v-row
-      justify="center"
-      no-gutters
-    >
-      <img
-        id="agenda__icon"
-        class="agenda__image"
-        src="@/assets/icons/agenda.png"
-      >
-      <v-col
-        id="agenda__contain"
-        cols="8"
-      >
-        <!-- TITLE -->
-    
-        <v-row
-          justify="center"
-          class="mr-auto ml-auto agenda__title"
-        >
-          HACK DAY AGENDA
-          <i
-            v-if="citizenType=='teacher'|| citizenType=='employer'"
-            class="far fa-edit edit-icon__project"
-            @click="toggleView"
-          />
-        </v-row>
-    
-        <!-- BORDERLINE -->
-    
-        <v-col
-          cols="12"
-          class="agenda__borderline"
-        />
-    
-        <v-row
-          justify="center"
-          class="mr-auto ml-auto businessmodelcanvas_view2__description"
-        >
-          Enter your agenda for the event or activity.
-        </v-row>
-        <Agenda
-          v-model="entries"
-          v-stream:update:value="onAgendaChange$"
-        />
-      </v-col>
-    </v-row>
-  </v-container>
+  <Agenda
+    v-model="entries"
+    v-stream:update:value="onAgendaChange$"
+    @toggleView="$emit('toggleView')"
+  />
 </template>
 
 

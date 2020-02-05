@@ -10,6 +10,7 @@
       depressed
       solo
       text
+      flat
       :error-messages="color=='error'?result:errors"
       :success-messages="color!='sucess'?result:[]"
       :loading="loading"

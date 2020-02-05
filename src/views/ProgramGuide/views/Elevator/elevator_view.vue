@@ -26,7 +26,7 @@
         </v-row>
         <v-col
           cols="12"
-          class="programguide__title"
+          class="programguide__title mb-7"
         >
           VIEW 60-SECOND ELEVATOR PITCH
         </v-col>

@@ -67,6 +67,7 @@
           />
         </v-col>
       </v-row>
+      <Oops v-if="!entries.length" />
     </v-col>
   </v-row>
 </template>
@@ -87,8 +88,10 @@ import { Subscription } from "rxjs";
 import { Classroom, Project } from "../../../../store/Database/types/types";
 import { TeamInfo } from "./components";
 import { Watch } from "vue-property-decorator";
+import { Oops } from '../../components'
 @Component({
   components: {
+    Oops,
     BusinessModelCanvasComp
   }
 })

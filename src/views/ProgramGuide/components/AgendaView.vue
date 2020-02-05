@@ -1,5 +1,5 @@
 <template>
-  <v-col>
+  <v-container fluid>
     <v-col
       v-for="(item,index) in syncedAgenda"
       :key="index"
@@ -61,32 +61,29 @@
         </v-col>
       </v-row>
     </v-col>
-    
     <v-row
       no-gutters
       justify="center"
     >
       <v-col
-        cols="6"
-        sm="4"
-        md="2"
+        cols="4"
       >
         <v-btn
-          id="agenda-view__button"
+          id="editcasestudies__button"
           class="mb-10"
           :disabled="!isAgendaComplete"
-          solo
           text
+          solo
+          depressed
           outlined
-          height="50px"
-          elevation="0"
+          height="73.5px"
           @click="$emit('finish')"
         >
-          FINISH
+          NEXT
         </v-btn>
-      </v-col>  
+      </v-col>
     </v-row>
-  </v-col>
+  </v-container>
 </template> 
 <script lang="ts">
 import Vue from "vue";

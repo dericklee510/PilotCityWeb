@@ -6,7 +6,7 @@
     >
       <v-col
         class="manageteam__container"
-        cols="10"
+        cols="8"
       >
         <v-row
           class="manageclass__nav text-center"

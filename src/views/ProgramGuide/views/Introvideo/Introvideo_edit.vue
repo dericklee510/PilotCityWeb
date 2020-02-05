@@ -90,17 +90,17 @@
               cols="4"
             >
               <v-btn
-                id="introvideo_edit__button"
-                class="mb-10"
+                id="editcasestudies__button"
+                class="mb-10 mt-4"
+                :disabled="invalid || !checkbox"
                 text
                 solo
                 depressed
                 outlined
                 height="73.5px"
-                :disabled="invalid || !checkbox"
-                @click="onSubmit"
+                @click="[onSubmit, $emit('nextNode')]"
               >
-                CONFIRM
+                NEXT
               </v-btn>
             </v-col>
           </v-row>

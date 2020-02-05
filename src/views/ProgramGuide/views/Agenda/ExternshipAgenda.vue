@@ -17,9 +17,9 @@
           class="agenda-view__title"
           no-gutters
         >
-          TRAINING DAY AGENDA
+          EXTERNSHIP DAY AGENDA
           <i
-            v-if="citizenType == 'teacher'"
+            v-if="citizenType == 'employer'"
             class="far fa-edit edit-icon__externship"
             @click="toggleView"
           />
@@ -39,7 +39,7 @@
         <component
           :is="currentView"
           @toggleView="toggleView"
-          @nextNode="$emit('nextNode')"  
+          @nextNode="$emit('nextNode')"
           @updateSavedDate="$emit('updateSavedDate', $event.payload)"
           @saving="$emit('saving', $event.payload)"
         />
@@ -49,23 +49,25 @@
 </template>
 
 
+
+
+
 <script lang="ts">
-import TrainingAgendaEdit from "@/views/ProgramGuide/views/TrainingAgenda/TrainingAgendaEdit.vue"
-import TrainingAgendaView from "@/views/ProgramGuide/views/TrainingAgenda/TrainingAgendaView.vue"
+import Vue from 'vue'
 import Component from 'vue-class-component'
 import { FbStore } from '@/store'
-import Vue from 'vue'
-
+import ExternshipAgendaView from "./externshipagenda_view.vue"
+import ExternshipAgendaEdit from "./externshipagenda_edit.vue"
 @Component({
     components:{
-        TrainingAgendaView,
-        TrainingAgendaEdit
+        ExternshipAgendaView,
+        ExternshipAgendaEdit
     }
 })
 export default class ExternshipAgenda extends Vue{
     public edit: boolean = false;
     get currentView(): string{
-        return this.edit?'TrainingAgendaEdit':'TrainingAgendaView';
+        return this.edit?'ExternshipAgendaEdit':'ExternshipAgendaView';
     }
     get citizenType() {
         return FbStore.userCitizenType;
@@ -74,4 +76,4 @@ export default class ExternshipAgenda extends Vue{
         this.edit = !this.edit;
     }
 }
-</script>"
+</script>
