@@ -94,7 +94,7 @@ export default class HackAgenda extends Vue{
   }
  mounted(){
     this.$subscribeTo(this.$observables.agendaEvents,async (events:EventItem[]) => {
-      if(FbStore.userCitizenType === "employer")
+      if(FbStore.userCitizenType === "teacher")
       await FbStore.updateCurrentEmployerProgram({
         masterHackDayAgenda:{
           events:events.filter(obj => Object.keys(obj).length !== 0),
