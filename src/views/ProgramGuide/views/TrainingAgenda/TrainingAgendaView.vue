@@ -1,9 +1,13 @@
 <template>
-  <AgendaView
-    v-model="agendaItems"
-    class="pc-project"
-    @finish="onFinish"
-  />
+  <NextNode
+    v-slot="{setNext}"
+    @CallbackComplete="$emit('nextNode')"
+  > 
+    <AgendaView
+      v-model="agendaItems"
+      @finish="setNext(onFinish)"
+    />
+  </NextNode>
 </template>
 
 
@@ -17,9 +21,11 @@ import {AgendaView} from "@/views/ProgramGuide/components/"
 import { FbStore } from '../../../../store';
 import {firebase} from '@/firebase/init'
 import { EventItem } from '../../../../store/Database/types/utilities';
+import { NextNode } from "@/views/ProgramGuide/components"
 @Component({
   components: {
-    AgendaView
+    AgendaView,
+    NextNode
   }
 })
 export default class TrainingDayAgendaView extends Vue{

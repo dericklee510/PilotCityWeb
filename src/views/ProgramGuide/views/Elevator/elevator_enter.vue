@@ -57,18 +57,24 @@
           class="mr-auto ml-auto"
           cols="5"
         >
-          <v-btn
-            class="elevator_enter__button"
-            solo
-            depressed
-            text
-            height="55.88px"
-            :loading="loading"
-            :disabled="invalid"
-            @click="validate().then(valid => {if(valid) submit()})"
-          >
-            SAVE
-          </v-btn>
+          <NextNode
+              v-slot="{setNext}"
+              @CallbackComplete="$emit('nextNode')"
+            >
+              <v-btn
+                id="editcasestudies__button"
+                text
+                solo
+                depressed
+                outlined
+                :loading="loading"
+                :disabled="invalid"
+                height="73.5px"
+                @click="validate().then(valid => {if(valid) setNext(submit)})"
+              >
+                NEXT
+              </v-btn>
+            </NextNode>
         </v-col>
       </ValidationObserver>
 
@@ -108,7 +114,12 @@ import Component from "vue-class-component";
 import { TextEnter } from "../../components";
 import { FbStore } from "../../../../store";
 import {firebase} from "@/firebase/init"
-@Component
+import { NextNode } from "@/views/ProgramGuide/components"
+@Component({
+  components:{
+    NextNode
+  }
+})
 export default class elevator_enter extends TextEnter {
   text: string = FbStore.currentProject!.elevatorPitch || "";
   async submit(){

@@ -7,7 +7,7 @@
     >
     <v-col
       id="posthack__contain"
-      cols="10"
+      cols="8"
     >
       <v-row
         justify="center"
@@ -171,17 +171,23 @@
           cols="10"
           md="3"
         >
-          <v-btn
-            class="posthack__button"
-            :disabled="!pivotReady"
-            solo
-            depressed
-            text
-            height="55.88px"
-            @click="submit"
+          <NextNode
+            v-slot="{setNext}"
+            @CallbackComplete="$emit('nextNode')"
           >
-            Acknowledge
-          </v-btn>
+            <v-btn
+              id="editcasestudies__button"
+              text
+              solo
+              depressed
+              outlined
+              :disabled="!pivotReady"
+              height="73.5px"
+              @click=" setNext(submit)"
+            >
+              NEXT
+            </v-btn>
+          </NextNode>
         </v-col>
       </v-row>
     </v-col>
@@ -195,7 +201,12 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import { FbStore } from '../../../../store';
 import {firebase} from '@/firebase/init'
-@Component
+import { NextNode } from '@/views/ProgramGuide/components'
+@Component({
+  components:{
+    NextNode
+  }
+})
 export default class posthack extends Vue {
   created(){
     if(FbStore.currentProject!.postHackReflection){

@@ -62,7 +62,7 @@ import Vue from 'vue'
         TrainingAgendaEdit
     }
 })
-export default class ExternshipAgenda extends Vue{
+export default class TrainingAgenda extends Vue{
     public edit: boolean = false;
     get currentView(): string{
         return this.edit?'TrainingAgendaEdit':'TrainingAgendaView';

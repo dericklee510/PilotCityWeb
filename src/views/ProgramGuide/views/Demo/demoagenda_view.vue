@@ -1,8 +1,13 @@
 <template>
-  <agenda-view
-    v-model="agendaItems"
-    @finish="[onSubmit, $emit('nextNode')]"
-  />
+  <NextNode
+    v-slot="{setNext}"
+    @CallbackComplete="$emit('nextNode')"
+  > 
+    <AgendaView
+      v-model="agendaItems"
+      @finish="setNext(onSubmit)"
+    />
+  </NextNode>
 </template>
 
 
@@ -15,9 +20,11 @@ import Component from "vue-class-component";
 import { AgendaView } from "../../components";
 import { FbStore } from '../../../../store';
 import {firebase} from '@/firebase/init'
+import {NextNode} from '@/views/ProgramGuide/components'
 @Component({
   components: {
-    AgendaView
+    AgendaView,
+    NextNode
   }
 })
 export default class DemoAgendaView extends Vue {

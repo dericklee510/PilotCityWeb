@@ -82,19 +82,24 @@
           <v-col
             cols="4"
           >
-            <v-btn
-              id="editcasestudies__button"
-              class="mb-10 mt-10"
-              :disabled="!allReviewed"
-              text
-              solo
-              depressed
-              outlined
-              height="73.5px"
-              @click="[submit, $emit('nextNode')]"
+            <NextNode
+              v-slot="{setNext}"
+              @CallbackComplete="$emit('nextNode')"
             >
-              NEXT
-            </v-btn>
+              <v-btn
+                id="editcasestudies__button"
+                class="mb-10 mt-8"
+                text
+                solo
+                depressed
+                outlined
+                :disabled="!allReviewed"
+                height="73.5px"
+                @click="setNext(submit)"
+              >
+                NEXT
+              </v-btn>
+            </NextNode>
           </v-col>
         </v-row>
       </v-col>
@@ -111,7 +116,12 @@ import Component from 'vue-class-component'
 import { NamedLink, ReviewedLink } from '@/store/Database/types/utilities'
 import { FbStore } from '../../../../store'
 import  {firebase}  from '@/firebase/init'
-@Component
+import { NextNode } from "@/views/ProgramGuide/components"
+@Component({
+  components: {
+    NextNode
+  }
+})
 export default class ViewCaseStudies extends Vue{
     namedLinks:NamedLink[] = FbStore.currentEmployerProgram?.caseStudies || [{} as NamedLink]
     caseStudiesReviewed = FbStore.currentProject?.caseStudiesReviewed || []

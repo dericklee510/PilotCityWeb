@@ -104,9 +104,12 @@ export default class AgendaView extends Vue {
     }
   ];
   get isAgendaComplete() {
-    return this.syncedAgenda
+    if(this.syncedAgenda){
+      return this.syncedAgenda
       .map(item => item.completed)
       .every(isTrue => isTrue);
+      }
+    else console.error('Agenda not found!')
   }
 }
 </script>
