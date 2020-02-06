@@ -2,7 +2,7 @@
   <AgendaView
     v-model="agendaItems"
     class="pc-project"
-    @finish="[onFinish, $emit('nextNode')]"
+    @finish="onFinish"
   />
 </template>
 
@@ -24,11 +24,12 @@ import { EventItem } from '../../../../store/Database/types/utilities';
 })
 export default class TrainingDayAgendaView extends Vue{
   agendaItems:EventItem[] = FbStore.currentTeacherProgramData?.trainingDayAgenda?.events || FbStore.currentEmployerProgram!.trainingDayTemplate?.events || []
-  onFinish(){
-    FbStore.updateCurrentProject({
+  async onFinish(){
+    await FbStore.updateCurrentProject({
       [`programSequence.${'train'}`]:firebase.firestore.FieldValue.serverTimestamp()
       
     })
+    // this.$emit('nextNode')  
   }
 }
 </script>

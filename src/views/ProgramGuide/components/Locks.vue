@@ -1,7 +1,7 @@
 <template>
   <router-link
     style="textDecoration: none"
-    :to="nextModule.value.isUnlocked?{name:nextModule.value.routeName}:'#'"
+    :to="nextModule.value.isUnlocked?{name:nextModule.value.routeName}:''"
   >
     <v-row
       v-if="nextModule"
@@ -20,7 +20,7 @@
             class="fa fa-chevron-right d-none d-lg-inline"
           />
           <i
-            v-if="nextModule.value.unlocked"
+            v-if="nextModule.value.isUnlocked"
             class="fa fa-unlock guide__locks-unlocked"
           />
           <i
