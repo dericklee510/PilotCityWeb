@@ -8,30 +8,35 @@ import { LinkedList, LinkedListItem } from 'linked-list-typescript';
 
 import {firebase} from "@/firebase/init"
 import moment from 'moment'
+function isBoth(arg1:any,arg2:any){
+    return arg1?arg1&&arg2:arg2
+}
 export class RouteList {
     private module:   typeof EMPLOYERSEQUENCE | typeof STUDENTSEQUENCE | typeof TEACHERSEQUENCE
     public get studentSequenceRouteHash():Record<string,Boolean | firebase.firestore.Timestamp | firebase.firestore.FieldValue | Date | undefined>{
         return {
             'stud-project-profile':true,
-            'stud-project-brief':(FbStore.currentTeacherProgramData?.programSequence?.programBrief) || FbStore.currentStudentClassroom?.finishedSignupForm ,
+            'stud-project-brief':isBoth((FbStore.currentTeacherProgramData?.programSequence?.programBrief),FbStore.currentStudentClassroom?.finishedSignupForm) ,
     'stud-project-intro':FbStore.currentStudentClassroom?.finishedProgramBrief,
     'stud-project-team-join':FbStore.currentStudentClassroom?.finishedIntrovideo,
     // 'stud-project-team':FbStore.currentStudentClassroom!.finishedIntrovideo && !!FbStore.currentProject,
-    'stud-project-training':FbStore.currentTeacherProgramData?.programSequence?.train || !!FbStore.currentProject,
-    'stud-project-practicelog': FbStore.currentTeacherProgramData?.programSequence?.practice || FbStore.currentProject?.programSequence?.train,
-    'stud-project-casestudy':FbStore.currentTeacherProgramData?.programSequence?.caseStudies || true /*|| FbStore.currentProject?.programSequence?.practice ?*/,
-    'stud-project-canvas-edit':FbStore.currentTeacherProgramData?.programSequence?.bmc || FbStore.currentProject?.programSequence?.caseStudies,
-    'stud-project-ospitch-edit':FbStore.currentTeacherProgramData?.programSequence?.sentencePitch || FbStore.currentProject?.programSequence?.bmc,
-    'stud-project-elevator-edit':FbStore.currentTeacherProgramData?.programSequence?.elevatorPitch || FbStore.currentProject?.programSequence?.sentencePitch,
-    'stud-project-hack':FbStore.currentTeacherProgramData?.programSequence?.hackDay || FbStore.currentProject?.programSequence?.elevatorPitch,
-    'stud-project-hack-reflect':FbStore.currentTeacherProgramData?.programSequence?.reflection || FbStore.currentProject?.programSequence?.hackDay,
-    'stud-project-processlog':FbStore.currentTeacherProgramData?.programSequence?.processLog || FbStore.currentProject?.programSequence?.reflection,
-    'stud-project-demo-edit':FbStore.currentTeacherProgramData?.programSequence?.demoVideo || FbStore.currentProject?.programSequence?.reflection,
-    'stud-project-presentation-edit':FbStore.currentTeacherProgramData?.programSequence?.presentation || FbStore.currentProject?.programSequence?.demoVideo,
-    'stud-project-demoagenda':FbStore.currentTeacherProgramData?.programSequence?.demoDay || FbStore.currentProject?.programSequence?.presentation,}
+    'project-training':isBoth(FbStore.currentTeacherProgramData?.programSequence?.train, !!FbStore.currentProject),
+    'stud-project-practicelog':isBoth( FbStore.currentTeacherProgramData?.programSequence?.practice , FbStore.currentProject?.programSequence?.train),
+    'stud-project-casestudy':isBoth(FbStore.currentTeacherProgramData?.programSequence?.caseStudies , true /*|| FbStore.currentProject?.programSequence?.practice ?*/),
+    'stud-project-canvas-edit':isBoth(FbStore.currentTeacherProgramData?.programSequence?.bmc , FbStore.currentProject?.programSequence?.caseStudies),
+    'stud-project-ospitch-edit':isBoth(FbStore.currentTeacherProgramData?.programSequence?.sentencePitch , FbStore.currentProject?.programSequence?.bmc),
+    'stud-project-elevator-edit':isBoth(FbStore.currentTeacherProgramData?.programSequence?.elevatorPitch , FbStore.currentProject?.programSequence?.sentencePitch),
+    'project-hack':isBoth(FbStore.currentTeacherProgramData?.programSequence?.hackDay , FbStore.currentProject?.programSequence?.elevatorPitch),
+    'stud-project-hack-reflect':isBoth(FbStore.currentTeacherProgramData?.programSequence?.reflection , FbStore.currentProject?.programSequence?.hackDay),
+    'stud-project-processlog':isBoth(FbStore.currentTeacherProgramData?.programSequence?.processLog , FbStore.currentProject?.programSequence?.reflection),
+    'stud-project-demo-edit':isBoth(FbStore.currentTeacherProgramData?.programSequence?.demoVideo , FbStore.currentProject?.programSequence?.reflection),
+    'stud-project-presentation-edit':isBoth(FbStore.currentTeacherProgramData?.programSequence?.presentation , FbStore.currentProject?.programSequence?.demoVideo),
+    'project-demo-agenda':isBoth(FbStore.currentTeacherProgramData?.programSequence?.demoDay , FbStore.currentProject?.programSequence?.presentation),
+}
     }
     public get linkedList() {
         const module = this.module
+        console.log( FbStore.currentTeacherProgramData?.programSequence?.practice , FbStore.currentProject?.programSequence?.train)
         // var map: ProgramNode<typeof module>[] = flatMapDeep(this.module, (page, key) => {
         //     return page.map(route => ({
         //         value: {

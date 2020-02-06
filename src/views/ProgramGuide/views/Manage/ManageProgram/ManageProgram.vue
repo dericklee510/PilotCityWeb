@@ -75,7 +75,6 @@ type trigger = undefined | Date | boolean;
     ProgramBlock
   },
   subscriptions() {
-    this.classroomIdsSubject$ = new BehaviorSubject(FbStore.currentTeacherProgramData!.classroomIds)
     this.latestClassroomData$ = this.classroomIdsSubject$.pipe(
       map((ids) => ids.map(id => doc(FbStore.firestore.collection("Classroom").doc(id)))),
       switchMap(docs => combineLatest(...docs)),
@@ -97,6 +96,10 @@ type trigger = undefined | Date | boolean;
 })
 export default class ManageProgram extends Vue {
   classroomIdsSubject$ = new BehaviorSubject(FbStore.currentTeacherProgramData!.classroomIds)
+  get classroomIds(){
+    this.classroomIdsSubject$.next(FbStore.currentTeacherProgramData!.classroomIds) 
+    return FbStore.currentTeacherProgramData!.classroomIds 
+  }
   latestClassroomData$!: Observable<(Classroom & Record<string, any>)[]>
   latestProjectData!: (Project)[]
   latestStudentClassroomData!: (studentClassroom)[]

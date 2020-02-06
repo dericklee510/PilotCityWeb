@@ -78,7 +78,7 @@ import {
   Project,
   studentClassroom
 } from "../../store/Database/types/types";
-import { Observable, empty, Subscription } from "rxjs";
+import { Observable, empty, Subscription, BehaviorSubject } from "rxjs";
 @Component<Guide>({
   async beforeRouteEnter(to, from, next) {
     if (localStorage.PILOTCITY_EMPLOYERPROGRAMID)
@@ -103,6 +103,7 @@ import { Observable, empty, Subscription } from "rxjs";
             FbStore.currentEmployerProgramUID
           ) {
             await FbStore.initcurrentClassroom(classRoomData);
+            await FbStore.initCurrentTeacherProgramData(classRoomData.teacherProgramId)
             resolve();
           }
         });
@@ -185,7 +186,7 @@ import { Observable, empty, Subscription } from "rxjs";
         FbStore.initCurrentEmployerProgram(data);
       }
     );
-    if(FbStore.userCitizenType === "teacher"){
+    if(FbStore.userCitizenType != "employer"){
       let teacherProgramDataObservable = doc(
         FbStore.firestore
           .collection("TeacherProgramData")
