@@ -11,6 +11,16 @@ import moment from 'moment'
 function isBoth(arg1:any,arg2:any){
     return arg1?arg1&&arg2:arg2
 }
+function isUnlocked(arg:Boolean | firebase.firestore.Timestamp | firebase.firestore.FieldValue | Date | undefined){
+if(arg instanceof firebase.firestore.Timestamp){
+    return moment(arg.toDate()).isBefore(moment())
+}
+else if (arg instanceof firebase.firestore.FieldValue)
+    return true
+else
+    return !!arg
+}
+
 export class RouteList {
     private module:   typeof EMPLOYERSEQUENCE | typeof STUDENTSEQUENCE | typeof TEACHERSEQUENCE
     public get studentSequenceRouteHash():Record<string,Boolean | firebase.firestore.Timestamp | firebase.firestore.FieldValue | Date | undefined>{
@@ -36,7 +46,6 @@ export class RouteList {
     }
     public get linkedList() {
         const module = this.module
-        // console.log( FbStore.currentTeacherProgramData?.programSequence?.practice , FbStore.currentProject?.programSequence?.train)
         // var map: ProgramNode<typeof module>[] = flatMapDeep(this.module, (page, key) => {
         //     return page.map(route => ({
         //         value: {
@@ -59,7 +68,7 @@ export class RouteList {
                         page: pageName,
                         routeName: route,
                         unlocked:(this.type == "student")?this.studentSequenceRouteHash[route]:true,
-                        isUnlocked: unlocked instanceof firebase.firestore.Timestamp?moment(unlocked.toDate()).isBefore(moment()):!!unlocked
+                        isUnlocked: isUnlocked(unlocked)
                     },
                     next: null,
                     prev: null
