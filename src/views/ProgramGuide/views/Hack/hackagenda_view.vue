@@ -1,5 +1,5 @@
 <template>
-  <agenda-view
+  <AgendaView
     v-model="agendaItems"
     @finish="[onFinish, $emit('nextNode')]"
   />

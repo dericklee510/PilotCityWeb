@@ -125,7 +125,7 @@
         <v-col cols="8">
           <v-col class="Team__title"> 
             <span>
-              TEAM 
+              {{ "TEAM | " + teamName }}
             </span>
           </v-col>
           <v-col
