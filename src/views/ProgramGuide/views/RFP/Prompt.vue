@@ -250,26 +250,30 @@
           </v-col>
         </v-row>
 
-
-
+  
         <v-row
           class="mt-10 mb-10"
           no-gutters
           justify="center"
         >
           <v-col cols="4">
-            <v-btn
-              id="prompt__button"
-              depressed
-              text
-              outlined
-              solo
-              height="73.5px"
-              class="mb-6"
-              @click="submit"
+            <NextNode
+              v-slot="{setNext}"
+              @CallbackComplete="$emit('nextNode')"
             >
-              Save
-            </v-btn>
+              <v-btn
+                id="editcasestudies__button"
+                class="mb-10 mt-8"
+                text
+                solo
+                depressed
+                outlined
+                height="73.5px"
+                @click="setNext(submit)"
+              >
+                NEXT
+              </v-btn>
+            </NextNode>
           </v-col>
         </v-row>
       </v-col>
@@ -281,12 +285,15 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { FbStore } from "../../../../store";
+import {firebase} from "@/firebase/init"
 import { ValidationObserver, ValidationProvider } from 'vee-validate';
+import NextNode from '../../components/NextNode.vue'
 
 @Component({
   components:{
     ValidationObserver,
-    ValidationProvider
+    ValidationProvider,
+    NextNode
   }
 })
 export default class ProjectPrompt extends Vue {
@@ -337,6 +344,7 @@ ${this.problemOrOpportunity}`
 
   }
   submit() {
+    this.$emit('saving', true)
     let {
       problemOrOpportunity,
       solution,
@@ -353,6 +361,8 @@ ${this.problemOrOpportunity}`
       promptTemplate,
       finalPrompt
     });
+    this.$emit('saving', false)
+    this.$emit('updateSavedDate', firebase.firestore.Timestamp.now())
   }
 }
 </script>

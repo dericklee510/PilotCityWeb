@@ -119,8 +119,8 @@ export default class Introvideo extends Vue {
   }
   canBeAcknowldged: boolean = false;
   acknowledged: boolean =  !!FbStore.currentStudentClassroom?.finishedIntrovideo || false;
-  onSubmit(){
-    FbStore.updateCurrentStudentClassroom({
+  async onSubmit(){
+    await FbStore.updateCurrentStudentClassroom({
       finishedIntrovideo:firebase.firestore.FieldValue.serverTimestamp()
     })
     this.$emit('nextNode');

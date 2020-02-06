@@ -40,8 +40,8 @@
           :is="currentView"
           @toggleView="toggleView"
           @nextNode="$emit('nextNode')"  
-          @updateSavedDate="$emit('updateSavedDate', $event.payload)"
-          @saving="$emit('saving', $event.payload)"
+          @updateSavedDate="$emit('updateSavedDate', $event)"
+          @saving="$emit('saving', $event)"
         />
       </v-col>
     </v-row>

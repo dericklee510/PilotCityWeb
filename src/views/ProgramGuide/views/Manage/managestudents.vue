@@ -108,6 +108,7 @@
             </v-row>
           </v-col>
         </v-row>
+        <Oops v-if="!entries.length" />
       </v-col>
     </v-row>
   </v-container>
@@ -123,6 +124,7 @@ import { doc } from "rxfire/firestore";
 import { Classroom, Project, GeneralUser } from "../../../../store/Database/types/types";
 import { Watch } from "vue-property-decorator";
 import { findIndex } from "lodash";
+import { Oops } from '../../components' 
 interface studentInfo {
   studentId: string;
   name: string;
@@ -150,6 +152,7 @@ function spliceOrPush<T>(
     }
   },
   components: {
+    Oops,
     pcSelect: PCselect
   }
 })

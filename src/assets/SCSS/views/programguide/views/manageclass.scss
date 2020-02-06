@@ -125,12 +125,17 @@
         font-family: Raleway;
         font-style: normal;
         font-weight: 900;
-        font-size: 17px;
+        font-size: 20px;
         color: #231F20;
         margin-left: 22.9px;
         line-height: 55.88px;  
         vertical-align: middle;
         &-label{
+            font-family: Raleway;
+            font-style: normal;
+            font-weight: 800;
+            font-size: 15px;
+            line-height: 18px;
             margin-left: -22.74px;
         }
     }

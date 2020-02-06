@@ -34,7 +34,10 @@
           />
         </v-col>
         <v-col cols="12">
-          <SnackTime v-slot="{updateSavedDate, saving}" style="width: 100%; height: 100%">
+          <SnackTime
+            v-slot="{updateSavedDate, saving}"
+            style="width: 100%; height: 100%"
+          >
             <router-view
               @nextNode="$router.push({name: $refs.nextLock.nextModule.value.routeName})"
               @updateSavedDate="updateSavedDate($event)"
