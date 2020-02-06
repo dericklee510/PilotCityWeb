@@ -30,14 +30,13 @@ export default class TrainingDayAgendaView extends Vue{
       [`programSequence.${'train'}`]:firebase.firestore.FieldValue.serverTimestamp()
       
     });else{
-    const batch = FbStore.firestore.batch()
-     batch.update(FbStore.firestore.collection("Project").doc(FbStore.currentProject!.projectId),({
+    const ref = FbStore.firestore.collection("Project").doc(FbStore.currentProject!.projectId)
+     await ref.update(({
       programSequence:{train:true}
     }))
-    batch.update(FbStore.firestore.collection("Project").doc(FbStore.currentProject!.projectId),({
+    await ref.update(({
       programSequence:{train:firebase.firestore.FieldValue.serverTimestamp()}
     }))
-    await batch.commit()
     }
     this.$emit('nextNode')  
   }
