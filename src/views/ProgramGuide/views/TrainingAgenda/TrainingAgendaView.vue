@@ -25,11 +25,21 @@ import { EventItem } from '../../../../store/Database/types/utilities';
 export default class TrainingDayAgendaView extends Vue{
   agendaItems:EventItem[] = FbStore.currentTeacherProgramData?.trainingDayAgenda?.events || FbStore.currentEmployerProgram!.trainingDayTemplate?.events || []
   async onFinish(){
+    if(Object.keys(FbStore.currentProject!.programSequence).length)
     await FbStore.updateCurrentProject({
       [`programSequence.${'train'}`]:firebase.firestore.FieldValue.serverTimestamp()
       
-    })
-    // this.$emit('nextNode')  
+    });else{
+    const batch = FbStore.firestore.batch()
+     batch.update(FbStore.firestore.collection("Project").doc(FbStore.currentProject!.projectId),({
+      programSequence:{train:true}
+    }))
+    batch.update(FbStore.firestore.collection("Project").doc(FbStore.currentProject!.projectId),({
+      programSequence:{train:firebase.firestore.FieldValue.serverTimestamp()}
+    }))
+    await batch.commit()
+    }
+    this.$emit('nextNode')  
   }
 }
 </script>

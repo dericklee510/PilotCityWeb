@@ -146,7 +146,6 @@ export default class Fb extends VuexModule {
     async updateCurrentProject(property: Partial<Project>) {
         const state = (this.state as Pick<Fb, NonFunctionKeys<Fb>>)
         const uid = state.currentProject?.projectId
-        console.log(uid)
         await firestore.collection('Project').doc(uid).update<Project>({ ...property, lastUpdate: firebase.firestore.FieldValue.serverTimestamp() });
         return { currentProject: Object.assign(property, state.currentProject) }
     }
