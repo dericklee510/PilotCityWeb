@@ -26,16 +26,12 @@
         <v-container>
           <v-row
             class="mt-5"
-            justify="start"
+            justify="center"
             no-gutters
           >
             <v-col
               class="pitch_view__label"
-              cols="1"
-            />
-            <v-col
-              class="pitch_view__label"
-              cols="8"
+              cols="6"
             >
               Name
             </v-col>
@@ -55,6 +51,7 @@
           preview
           @ratingChange="onRatingChange"
         />
+        <Oops v-if="!entries.length" />
       </v-col>
     </v-row>
   </v-container>
@@ -76,6 +73,7 @@ import { spliceOrPush } from '../../../../utilities/array';
 import { Subscription } from 'rxjs';
 import {firebase} from "@/firebase/init"
 import { Watch } from 'vue-property-decorator';
+import { Oops } from "@/views/ProgramGuide/components"
 interface PitchInfo{
   projectId:string
   item_preview:string
@@ -84,7 +82,8 @@ interface PitchInfo{
 }
 @Component({
   components:{
-    Rating
+    Rating, 
+    Oops
   }
 })
 export default class pitch_view extends Vue{

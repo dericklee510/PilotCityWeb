@@ -1,9 +1,10 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <v-row
       v-for="(team,index) in syncedSnippet"
       :key="index"
       justify="center"
+      :align="preview===undefined?'center':'start'"
       class="pt-3 pb-3"
       no-gutters
     >
@@ -29,20 +30,20 @@
         </v-col>
       </slot>
       <!-- <v-col class="pitch_view__externallink" cols="1"><i class="fas fa-external-link-alt"></i></v-col> -->
-      <v-col cols="8">
+      <v-col cols="6">
         <slot name="header">
-          <v-row class="pitch_view__teamtitle ml-auto">
+          <span class="pitch_view__teamtitle">
             {{ team.name }}
-          </v-row>
+          </span>
         </slot>
         <slot name="body">
-          <v-row
+          <span
             
             v-if="preview !== undefined"
-            class="pitch_view__teampitch ml-auto"
+            class="pitch_view__teampitch"
           >
             {{ team.item_preview }}
-          </v-row>
+          </span>
         </slot>
       </v-col>
       <v-col

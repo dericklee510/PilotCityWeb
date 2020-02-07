@@ -15,7 +15,6 @@
             cols="12"
             md="3"
             lg="2"
-            xl="1"
           >
             <iframe
               class="briefcard__cover"
@@ -31,7 +30,7 @@
                 {{ syncValue.linkName }}
               </div>
               <v-row
-                class="briefcard__check"
+                class="briefcard__check mt-2"
                 no-gutters
               >
                 <input

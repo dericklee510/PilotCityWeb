@@ -1,5 +1,5 @@
 <template>
-  <v-col>
+  <v-container fluid>
     <v-col
       v-for="(item,index) in syncedAgenda"
       :key="index"
@@ -61,28 +61,30 @@
         </v-col>
       </v-row>
     </v-col>
-    
     <v-row
       no-gutters
       justify="center"
     >
       <v-col
-        cols="6"
-        sm="4"
-        md="2"
+        cols="4"
       >
         <v-btn
-          class="agenda-view__button mb-10"
+          id="editcasestudies__button"
+          class="mb-10"
           :disabled="!isAgendaComplete"
-          elevation="0"
+          text
+          solo
+          depressed
+          outlined
+          height="73.5px"
           @click="$emit('finish')"
         >
-          FINISH
+          NEXT
         </v-btn>
-      </v-col>  
+      </v-col>
     </v-row>
-  </v-col>
-</template>
+  </v-container>
+</template> 
 <script lang="ts">
 import Vue from "vue";
 import "reflect-metadata";
@@ -102,9 +104,12 @@ export default class AgendaView extends Vue {
     }
   ];
   get isAgendaComplete() {
-    return this.syncedAgenda
+    if(this.syncedAgenda){
+      return this.syncedAgenda
       .map(item => item.completed)
       .every(isTrue => isTrue);
+      }
+    else console.error('Agenda not found!')
   }
 }
 </script>

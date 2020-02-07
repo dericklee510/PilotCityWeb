@@ -4,12 +4,13 @@
   <v-container>
     <template v-if="!currentProject">
       <v-row
+        class="join-team"
         no-gutters
         justify="center"
       >
         <v-col
           class="manageteam__container"
-          cols="10"
+          cols="8"
         >
           <v-row no-gutters>
             <v-col
@@ -19,27 +20,35 @@
               <span>Join Teams</span>
             </v-col>
           </v-row>
-
           <v-row no-gutters>
             <v-col cols="12">
               <PCLoader v-slot="{loading,setLoader}">
                 <v-row
                   v-for="(project,index) in projects"
                   :key="index"
+                  no-gutters
+                  align="center"
+                  style="margin-bottom: 35px;"
                 >
-                  <span class="jointeam__name1">
+                  <v-col
+                    cols="2"
+                    style="margin-right: 41.6px;"
+                  >
                     <v-btn
                       :loading="loading"
-                      class="jointeam__button1 manageclass__button"
+                      class="manageteam__button"
                       @click="setLoader(joinTeam(project))"
-                    >JOIN</v-btn>
+                    >
+                      JOIN
+                    </v-btn>
+                  </v-col>
+                  <v-col class="join-team__team-name text-uppercase">
                     {{ project.teamName }}
-                  </span>
+                  </v-col>
                 </v-row>
               </PCLoader>
             </v-col>
           </v-row>
-
           <v-row no-gutters>
             <v-col
               cols="12"
@@ -60,114 +69,140 @@
               <span>Team Name</span>
             </v-col>
           </v-row>
-
-          <v-row>
-            <v-col
-              cols="12"
-              class="jointeam__buttons"
-            >
-              <v-row no-gutters>
-                <ValidationObserver v-slot="{invalid}">
-                  <v-col cols="5">
+          <ValidationObserver v-slot="{invalid}">
+            <v-row>
+              <v-col
+                cols="12"
+                class="join-team__buttons"
+              >
+                <v-row no-gutters>
+                  <v-col cols="6">
                     <ValidationProvider
                       v-slot="{errors}"
                       rules="required"
                     >
                       <v-text-field
-                        v-model="teamName" 
+                        v-model="createTeamName" 
                         flat
                         solo
                         depressed
+                        outlined
                         :error-messages="errors"
-                        class="jointeam__dreamteam"
+                        class="join-team__dreamteam manageteam__input"
                         placeholder="Dream Team"
                       />
                     </ValidationProvider>
                   </v-col>
-                  <v-col cols="3">
+                  <v-col cols="2">
                     <PCLoader v-slot="{loading,setLoader}">
                       <v-btn
                         text
                         solo
                         depressed
+                        outlined
+                        height="55.88px"
                         :loading="loading"
                         :disabled="invalid"
-                        class="jointeam__createbutton manageclass__button"
+                        class="jointeam__createbutton manageclass__button ml-6"
                         @click="setLoader(createProject)"
                       >
                         CREATE
                       </v-btn>
                     </PCLoader>
                   </v-col>
-                </ValidationObserver>
-              </v-row>
-            </v-col>
-          </v-row>
+                </v-row>
+              </v-col>
+            </v-row>
+          </ValidationObserver>
         </v-col>
       </v-row>
     </template>
     <template v-else>
-      <v-row> 
-        <span class="Team__title">
-          TEAM 
-        </span>
-      </v-row>
       <v-row
-        v-for="(name,index) in names"
-        :key="index"
-      > 
-        <span class="Team__name">
-          {{ name }}
-        </span>
-      </v-row>
-      <v-row> 
-        <span class="Team__Settings">
-          Settings
-        </span>
-      </v-row>
-      <v-row> 
-        <span class="Team__teamname">
-          Team Name
-        </span>
-      
-        
-        <v-row> 
-          <ValidationObserver v-slot="{invalid}">
-            <span class="Team__buttons">
-              <ValidationProvider
-                v-slot="{errors}"
-                slim
-                rules="required"
-              >
-                <v-text-field
-                  v-model="newTeamName"
-                  :error-messages="errors"
-                  class="Team__newteamname"
-                  :placeholder="teamName"
-                />
-              </ValidationProvider>
+        no-gutters
+        justify="center"
+      >
+        <v-col cols="8">
+          <v-col class="Team__title"> 
+            <span>
+              {{ "TEAM | " + teamName }}
+            </span>
+          </v-col>
+          <v-col
+            v-for="(name,index) in names"
+            :key="index"
+          > 
+            <span class="Team__name">
+              {{ name }}
+            </span>
+          </v-col>
+          <v-col class="Team__Settings"> 
+            <span>
+              Settings
+            </span>
+          </v-col>
+          <v-col class="Team__teamname"> 
+            <span>
+              Team Name
+            </span>
+          
+            <ValidationObserver v-slot="{invalid}">
+              <v-row no-gutters> 
+                <v-col>
+                  <v-row class="Team__buttons">
+                    <ValidationProvider
+                      v-slot="{errors}"
+                      slim
+                      rules="required"
+                    >
+                      <v-col cols="6">
+                        <v-text-field
+                          v-model="newTeamName"
+                          :error-messages="errors"
+                          class="Team__newteamname"
+                          :placeholder="teamName"
+                        />
+                      </v-col>
+                    </ValidationProvider>
+                    <PCLoader v-slot="{loading,setLoader}">
+                      <v-col cols="12">
+                        <v-btn
+                          :loading="loading"
+                          :disabled="invalid"
+                          solo
+                          depressed
+                          text
+                          height="55.88px"
+                          outlined
+                          class="Team__renamebutton"
+                          @click="setLoader(renameTeam)"
+                        >
+                          RENAME
+                        </v-btn>
+                      </v-col>
+                    </PCLoader>
+                  </v-row>
+                </v-col>
+              </v-row>
+            </ValidationObserver>
+            <v-row> 
               <PCLoader v-slot="{loading,setLoader}">
-                <v-btn
-                  :loading="loading"
-                  :disabled="invalid"
-                  class="Team__renamebutton"
-                  @click="setLoader(renameTeam)"
-                >RENAME</v-btn>
+                <span class="Team__buttons1">
+                  <v-btn
+                    :loading="loading"
+                    solo
+                    depressed
+                    text
+                    height="55.88px"
+                    outlined
+                    class="Team__leavebutton"
+                    @click="setLoader(leaveTeam)"
+                  >LEAVE TEAM</v-btn>
+                </span>
               </PCLoader>
-            </span>
-          </ValidationObserver>
-        </v-row>
-        <v-row> 
-          <PCLoader v-slot="{loading,setLoader}">
-            <span class="Team__buttons1">
-              <v-btn
-                :loading="loading"
-                class="Team__leavebutton"
-                @click="setLoader(leaveTeam)"
-              >LEAVE</v-btn>
-            </span>
-          </PCLoader>
-        </v-row>
+            </v-row>
+          </v-col>
+        </v-col>
       </v-row>
     </template>
   </v-container>

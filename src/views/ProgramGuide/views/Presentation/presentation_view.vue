@@ -14,7 +14,7 @@
           justify="center"
           class="mr-auto ml-auto presentation_view__title"
         >
-          ENTER LINK TO PRESENTATION
+          VIEW STUDENT PRESENTATION LINKS
         </v-row>
     
         <v-col
@@ -35,7 +35,7 @@
             />
             <v-col
               class="presentation_view__label"
-              cols="8"
+              cols="6"
             >
               Name
             </v-col>
@@ -54,6 +54,7 @@
           v-model="entries"
           @ratingChange="onRatingChange"
         />
+        <Oops v-if="!entries.length" />
       </v-col>
     </v-row>
   </v-container>
@@ -75,9 +76,11 @@ import { spliceOrPush } from '../../../../utilities/array';
 import { Subscription } from 'rxjs';
 import {firebase} from "@/firebase/init"
 import { Watch } from 'vue-property-decorator';
+import { Oops } from "@/views/ProgramGuide/components"
 @Component({
   components:{
-    Rating
+    Rating,
+    Oops
   }
 })
 export default class presentation_view extends Vue{

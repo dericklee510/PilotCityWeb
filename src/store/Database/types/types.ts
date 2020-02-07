@@ -63,6 +63,7 @@ export interface EmployerProgram {
     externshipDayAgenda?: AgendaTemplate
     demoDayAgenda?: AgendaTemplate
     masterHackDayAgenda?: AgendaTemplate    //  Employer  cannot  modify  this
+    trainingDayTemplate?: AgendaTemplate // Employer cannot modify this
     programBrief?: NamedLink[]
     introVideo?: string
     caseStudies?: NamedLink[]
@@ -216,7 +217,7 @@ export interface StudentForm {
         primaryHomeLanguage: string
         address: string
     }
-    programForm: {
+    programForm?: {
         internshipInterest: string
         compensationType: string[],
         freeLunch: string,

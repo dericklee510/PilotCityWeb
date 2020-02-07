@@ -1,7 +1,10 @@
-.manageclass{
+ .manageclass{
     &__container{
         margin-top : 82.5px;
         height: 100%;
+        .v-select__selections{
+            padding-left: 7px;
+        }
     }
     &__nav{
         width:100%;
@@ -17,12 +20,16 @@
             height: 55.82px;
             border: 0.428px solid #231F20;
             margin-right: 3%;
-            &--active{
-                background: #F1F2F2;    
-            }
+            
             @media only screen and (max-width: 600px){
                 margin: 0;
             }
+            &:not(.manageclass__nav--active):hover{
+                background: #dbdcde;
+            }
+        }
+        &--active{
+            background: #F1F2F2;
         }
     }
     &__title{
@@ -106,6 +113,9 @@
             width: inherit;
             height: inherit;
             padding: 10px;
+            &::placeholder{
+                color: #dbdcde;
+            }
         }
     }
     &__class-input{
@@ -115,12 +125,17 @@
         font-family: Raleway;
         font-style: normal;
         font-weight: 900;
-        font-size: 14px;
+        font-size: 20px;
         color: #231F20;
         margin-left: 22.9px;
         line-height: 55.88px;  
         vertical-align: middle;
         &-label{
+            font-family: Raleway;
+            font-style: normal;
+            font-weight: 800;
+            font-size: 15px;
+            line-height: 18px;
             margin-left: -22.74px;
         }
     }

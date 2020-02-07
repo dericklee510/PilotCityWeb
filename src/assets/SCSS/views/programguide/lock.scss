@@ -12,22 +12,22 @@
         top: 0px;
         height: calc(75vh + 66px);
         max-height: 100%;
+        & .fa-lock{
+            color: $pc-red;
+        }
+        & .fa-unlock{
+            color: $pc-green;
+        }
         &:hover, &:focus{
-            & .fa-lock-alt{
-                color: $pc-red;
-            }
-            & .fa-unlock-alt{
-                color: $pc-green;
-            }
             & .fa-chevron-right, .fa-chevron-left{
                 color: darken(#dbdcde, 20);
             }
         }
         &:active{
-            & .fa-lock-alt{
+            & .fa-lock{
                 color: darken($pc-red, 10);
             }
-            & .fa-unlock-alt{
+            & .fa-unlock{
                 color: darken($pc-green, 10);
             }
             & .fa-chevron-right, .fa-chevron-left{
@@ -40,12 +40,14 @@
         margin-right: 20px;
         i[class*="lock"]{
             margin-left: 20px;
+            margin-right: 20px;
         }
     }
     & .left{
         text-align: left;
         margin-left: 20px;
         i[class*="lock"]{
+            margin-left: 20px;
             margin-right: 20px;
         }
     }

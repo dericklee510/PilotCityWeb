@@ -13,7 +13,7 @@
     </label>
     <v-text-field
       :value="value"
-      flat
+      text
       height="70px"
       outlined
       :type="type"

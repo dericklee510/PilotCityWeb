@@ -1,17 +1,20 @@
 <template>
-  <Rating
-    v-model="entries"
-    v-slot:link
-    @ratingChange="onRatingChange"
-  >
-    <v-col
-      cols="1"
-      class="businesscanvas__actnbtn"
-      @click="$emit('changePage')"
+  <v-row no-gutters>
+    <Rating
+      v-model="entries"
+      v-slot:link
+      @ratingChange="onRatingChange"
     >
-      <div>View</div>
-    </v-col>
-  </Rating>
+      <v-col
+        cols="1"
+        class="businesscanvas__actnbtn ml-0"
+        @click="$emit('changePage')"
+      >
+        <div>View</div>
+      </v-col>
+    </Rating>
+    <Oops v-if="!entries.length" />
+  </v-row>
 </template>
 
 
@@ -29,9 +32,11 @@ import { Classroom, Project } from "../../../../store/Database/types/types";
 import { spliceOrPush } from "../../../../utilities/array";
 import { Subscription } from "rxjs";
 import { firebase } from "@/firebase/init";
+import { Oops } from "@/views/ProgramGuide/components"
 @Component({
   components:{
-    Rating
+    Rating, 
+    Oops
   }
 })
 export default class elevator_view extends Vue{

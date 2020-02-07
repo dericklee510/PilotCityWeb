@@ -4,15 +4,13 @@ import DemoVideoEdit from "@/views/ProgramGuide/views/Demovideo/demovideo_enter.
 /* TEACHER */
 import BriefEdit from "@/views/ProgramGuide/views/Brief/programbrief_edit.vue"
 import BriefView from "@/views/ProgramGuide/views/Brief/Brief.vue"
-import ExternshipAgendaEdit from "@/views/ProgramGuide/views/Agenda/externshipagenda_edit.vue"
-import ExternshipAgendaView from "@/views/ProgramGuide/views/Agenda/externshipagenda_view.vue"
+import ExternshipAgenda from "@/views/ProgramGuide/views/Agenda/ExternshipAgenda.vue"
 import ManageTeams from "@/views/ProgramGuide/views/Manage/Manageteam.vue"
 import ManageClass from "@/views/ProgramGuide/views/Manage/Manageclass.vue"
 import ManageStudents from "@/views/ProgramGuide/views/Manage/managestudents.vue"
 import {ManageProgram} from "@/views/ProgramGuide/views/Manage/ManageProgram"
 import IntroVideoView from "@/views/ProgramGuide/views/Introvideo/Introvideo.vue"
-import TrainingAgendaEdit from "@/views/ProgramGuide/views/TrainingAgenda/TrainingAgenda.vue"
-import TrainingAgendaView from "@/views/ProgramGuide/views/TrainingAgenda/agenda_view.vue"
+import TrainingAgenda from "@/views/ProgramGuide/views/TrainingAgenda/TrainingAgenda.vue"
 import PracticeLogManage from '@/views/ProgramGuide/views/Practicelog/Practicelog_manage.vue'
 import CaseStudyView from "@/views/ProgramGuide/views/Viewcasestudies/Viewcasestudies.vue"
 import CaseStudyEdit from "@/views/ProgramGuide/views/Editcasestudies/Editcasestudies.vue"
@@ -23,12 +21,10 @@ import OSPitchView from "@/views/ProgramGuide/views/Pitch/pitch_view.vue"
 import ElevatorView from "@/views/ProgramGuide/views/Elevator/elevator_view.vue"
 import ElevatorView1 from "@/views/ProgramGuide/views/Elevator/elevator_view1.vue"
 import ElevatorView2 from "@/views/ProgramGuide/views/Elevator/elevator_view2.vue"
-import HackEdit from "@/views/ProgramGuide/views/Hack/hackagenda_edit.vue"
-import HackView from "@/views/ProgramGuide/views/Hack/hackagenda_view.vue"
+import HackAgenda from "@/views/ProgramGuide/views/Hack/HackAgenda.vue"
 import DemoVideoView from "@/views/ProgramGuide/views/Demovideo/demovideo_view.vue"
 import PresentationView from "@/views/ProgramGuide/views/Presentation/presentation_view.vue"
-import DemoAgendaEdit from "@/views/ProgramGuide/views/Demo/demoagenda_edit.vue"
-import DemoAgendaView from "@/views/ProgramGuide/views/Demo/demoagenda_view.vue"
+import DemoAgenda from "@/views/ProgramGuide/views/Demo/DemoAgenda.vue"
 /* EMPLOYER */
 import IntroVideoSubmit from "@/views/ProgramGuide/views/Introvideo/Introvideo_edit.vue"
 /* STUDENT */
@@ -67,16 +63,14 @@ export const Program = {
     ManageTeam,
     BriefEdit,
     BriefView,
-    ExternshipAgendaEdit,
-    ExternshipAgendaView,
+    ExternshipAgenda,
     ManageClass,
     ManageTeams,
     ManageStudents,
     ManageProgram,
     IntroVideoView,
     IntroVideoSubmit,
-    TrainingAgendaView,
-    TrainingAgendaEdit,
+    TrainingAgenda,
     PracticeLogManage,
     PracticeLogEdit,
     CaseStudyView,
@@ -84,12 +78,10 @@ export const Program = {
     BusinessCanvasView,
     OSPitchView,
     ElevatorView,
-    HackEdit,
-    HackView,
+    HackAgenda,
     DemoVideoView,
     PresentationView,
-    DemoAgendaEdit,
-    DemoAgendaView,
+    DemoAgenda,
     PresentationSubmit,
     OSPitchSubmit,
     ElevatorSubmit,
@@ -97,125 +89,12 @@ export const Program = {
     DemoVideoSubmit,
     BusinessCanvasEdit,
 }
-
-export const TEACHERMODULES = {
-    'Agenda': [
-        'teach-externship-agenda',
-        // 'teach-externship-agenda-edit',
-    ],
-    'Brief': [
-        'teach-externship-brief',
-    ],
-    'Manage': [
-        'teach-externship-manage-class',
-        'teach-externship-manage-students',
-        'teach-externship-manage-teams',
-    ],
-    'Launch Day': [
-        'teach-project-intro'
-    ],
-    'Train': [
-        'teach-project-training-edit',
-        'teach-project-training',
-    ],
-    'Practice': [
-        'teach-project-practicelog',
-    ],
-    'Research': [
-        'teach-project-casestudy',
-    ],
-    'Ideate': [
-        'teach-project-canvas',
-        'teach-project-ospitch',
-        'teach-project-elevator',
-    ],
-    'Hack Day': [
-        // 'teach-project-hack-edit',
-        'teach-project-hack',
-    ],
-    'Package': [
-        'teach-project-demo',
-        'teach-project-presentation',
-    ],
-    'Demo Day': [
-        // 'teach-project-demoagenda-edit',
-        'teach-project-demoagenda',
-    ]
-}
-
-export const EMPLOYERMODULES = {
-    'Agenda': [
-        'emp-externship-agenda-edit',
-        'emp-externship-agenda',
-    ],
-    'Brief': [
-        'emp-externship-brief-edit',
-    ],
-    'Intro Video': [
-        'emp-project-intro-edit'
-    ],
-    'Research': [
-        'emp-project-casestudy-edit',
-    ],
-    'Ideate': [
-        'emp-project-canvas',
-        'emp-project-ospitch',
-    ],
-    'Hack Day': [
-        'emp-project-hack-edit',
-        'emp-project-hack',
-    ],
-    'Package': [
-        'emp-project-demo',
-        'emp-project-presentation',
-    ],
-    'Demo Day': [
-        'emp-project-demoagenda-edit',
-        'emp-project-demoagenda',
-    ]
-}
-
-export const STUDENTMODULES = {
-    'Launch Day': [
-        'stud-project-brief',
-        'stud-project-intro',
-        'stud-project-team',
-        'stud-project-team-join',
-    ],
-    'Train': [
-        'stud-project-training',
-    ],
-    'Practice & Research': [
-        'stud-project-practicelog',
-        'stud-project-casestudy',
-    ],
-    'Ideate': [
-        'stud-project-canvas-edit',
-        'stud-project-ospitch-edit',
-        'stud-project-elevator-edit',
-    ],
-    'Hack Day': [
-        'stud-project-hack',
-    ],
-    'Reflection': [
-        'stud-project-hack-reflect',
-    ],
-    'Design & Prototype': [
-        'stud-project-processlog',
-    ],
-    'Package': [
-        'stud-project-demo-edit',
-        'stud-project-presentation-edit',
-    ],
-    'Demo Day': [
-        'stud-project-demoagenda',
-    ]
-}
 export const TEACHERSEQUENCE = {
     Externship: {
         'Agenda': [
             // 'teach-externship-agenda-edit',
-            'teach-externship-agenda',
+            // 'teach-externship-agenda',
+            'externship-agenda'
         ],
         'Brief': [
             'teach-externship-brief',
@@ -233,8 +112,9 @@ export const TEACHERSEQUENCE = {
             'teach-project-intro'
         ],
         'Train': [
-            'teach-project-training-edit',
-            'teach-project-training',
+            // 'teach-project-training-edit',
+            // 'teach-project-training',
+            'project-training'
         ],
         'Practice': [
             'teach-project-practicelog',
@@ -248,7 +128,7 @@ export const TEACHERSEQUENCE = {
             'teach-project-elevator',
         ],
         'Hack Day': [
-            'teach-project-hack',
+            'project-hack',
             // 'teach-project-hack-edit',
         ],
         'Package': [
@@ -256,7 +136,7 @@ export const TEACHERSEQUENCE = {
             'teach-project-presentation',
         ],
         'Demo Day': [
-            'teach-project-demoagenda',
+            'project-demo-agenda',
             // 'teach-project-demoagenda-edit',
         ]
     },
@@ -265,8 +145,9 @@ export const TEACHERSEQUENCE = {
 export const EMPLOYERSEQUENCE = {
     Externship: {
         'Agenda': [
-            'emp-externship-agenda-edit',
-            'emp-externship-agenda',
+            // 'emp-externship-agenda-edit',
+            // 'emp-externship-agenda',
+            'externship-agenda',
             
         ],
         'Brief': [
@@ -288,8 +169,8 @@ export const EMPLOYERSEQUENCE = {
             'emp-project-ospitch',
         ],
         'Hack Day': [
-            'emp-project-hack-edit',
-            'emp-project-hack',
+            // 'emp-project-hack-edit',
+            'project-hack',
 
         ],
         'Package': [
@@ -297,9 +178,9 @@ export const EMPLOYERSEQUENCE = {
             'emp-project-presentation',
         ],
         'Demo Day': [
-            'emp-project-demoagenda-edit',
+            // 'emp-project-demoagenda-edit',
 
-            'emp-project-demoagenda',
+            'project-demo-agenda',
         ]
     },
 }
@@ -313,7 +194,8 @@ export const STUDENTSEQUENCE = {
             'stud-project-team-join',
         ],
         'Train': [
-            'stud-project-training',
+            // 'stud-project-training',
+            'project-training'
         ],
         'Practice & Research': [
             'stud-project-practicelog',
@@ -325,7 +207,7 @@ export const STUDENTSEQUENCE = {
             'stud-project-elevator-edit',
         ],
         'Hack Day': [
-            'stud-project-hack',
+            'project-hack',
         ],
         'Reflection': [
             'stud-project-hack-reflect',
@@ -338,7 +220,7 @@ export const STUDENTSEQUENCE = {
             'stud-project-presentation-edit',
         ],
         'Demo Day': [
-            'stud-project-demoagenda',
+            'project-demo-agenda',
         ]
     },
     Internship: {

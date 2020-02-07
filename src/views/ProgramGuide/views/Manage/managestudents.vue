@@ -6,7 +6,7 @@
     >
       <v-col
         class="manageclass__container"
-        cols="10"
+        cols="8"
       >
         <v-row
           class="manageclass__nav text-center"
@@ -16,6 +16,8 @@
             cols="4"
             sm="3"
             lg="2"
+            style="cursor: pointer"
+            @click="$router.push({name: 'teach-externship-manage-class'})"
           >
             CLASSES
           </v-col>
@@ -23,6 +25,8 @@
             cols="4"
             sm="3"
             lg="2"
+            style="cursor: normal"
+            class="manageclass__nav--active"
           >
             STUDENTS
           </v-col>
@@ -30,6 +34,8 @@
             cols="4"
             sm="3"
             lg="2"
+            style="cursor: pointer"
+            @click="$router.push({name: 'teach-externship-manage-teams'})"
           >
             TEAMS
           </v-col>
@@ -57,7 +63,8 @@
             <span> Classes </span>
           </v-col>
           <v-col
-            cols="2"
+            cols="12"
+            lg="4"
             xl="1"
             class="manageclass__sharecode-label d-none d-lg-block "
           >
@@ -69,6 +76,7 @@
             <v-row
               v-for="(entry,index) in entries"
               :key="index"
+              no-gutters
             >
               <v-col
                 cols="12"
@@ -100,6 +108,7 @@
             </v-row>
           </v-col>
         </v-row>
+        <Oops v-if="!entries.length" />
       </v-col>
     </v-row>
   </v-container>
@@ -115,6 +124,7 @@ import { doc } from "rxfire/firestore";
 import { Classroom, Project, GeneralUser } from "../../../../store/Database/types/types";
 import { Watch } from "vue-property-decorator";
 import { findIndex } from "lodash";
+import { Oops } from '../../components' 
 interface studentInfo {
   studentId: string;
   name: string;
@@ -142,6 +152,7 @@ function spliceOrPush<T>(
     }
   },
   components: {
+    Oops,
     pcSelect: PCselect
   }
 })

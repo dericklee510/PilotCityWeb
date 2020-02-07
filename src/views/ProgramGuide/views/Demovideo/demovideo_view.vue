@@ -38,7 +38,7 @@
             />
             <v-col
               class="demovideo_view__label"
-              cols="8"
+              cols="6"
             >
               Name
             </v-col>
@@ -58,7 +58,7 @@
           @ratingChange="onRatingChange"
         />
     
-       
+        <Oops v-if="!entries.length" />
         <!-- TEAM -->
       </v-col>
     </v-row>
@@ -81,10 +81,12 @@ import { spliceOrPush } from '../../../../utilities/array';
 import { Subscription } from 'rxjs';
 import {firebase} from "@/firebase/init"
 import { Watch } from 'vue-property-decorator';
+import { Oops } from "@/views/ProgramGuide/components"
 Rating
 @Component({
   components:{
-    Rating
+    Rating,
+    Oops
   }
 })
 export default class demovideo_view extends Vue{
