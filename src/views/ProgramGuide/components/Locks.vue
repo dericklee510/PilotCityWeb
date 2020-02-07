@@ -1,5 +1,8 @@
 <template>
-  <router-link :to="nextModule && nextModule.value.isUnlocked?{name:nextModule.value.routeName}:'#'">
+  <router-link
+    style="textDecoration: none"
+    :to="isUnlocked?{name:nextModule.value.routeName}:''"
+  >
     <v-row
       v-if="nextModule"
       no-gutters
@@ -9,7 +12,6 @@
     >
       <v-col
         cols="12"
-        
         :class="{ right: orientation=='right', left: orientation=='left'}"
       >
         <span>
@@ -18,7 +20,7 @@
             class="fa fa-chevron-right d-none d-lg-inline"
           />
           <i
-            v-if="nextModule.isUnlocked"
+            v-if="isUnlocked"
             class="fa fa-unlock guide__locks-unlocked"
           />
           <i
@@ -40,11 +42,23 @@ import Vue from 'vue'
 import { Component, Prop } from 'vue-property-decorator';
 import { ProgramNode } from '../types';
 import { LinkedList } from 'linked-list-typescript';
-
+import moment from 'moment'
+import {firebase} from "@/firebase/init"
+function isUnlocked(arg:Boolean | firebase.firestore.Timestamp | firebase.firestore.FieldValue | Date | undefined){
+if(arg instanceof firebase.firestore.Timestamp){
+    return moment(arg.toDate()).isBefore(moment()) || moment(arg.toDate()).isSame(moment(),'d')
+}
+else if (arg instanceof firebase.firestore.FieldValue)
+    return true
+else if (arg === null)
+  return true
+else
+    return !!arg
+}
 @Component
 export default class Locks extends Vue{
     @Prop({required:true})
-  routeMap!:LinkedList<ProgramNode>
+    routeMap!:LinkedList<ProgramNode>
     @Prop()
     public orientation!: string;
 
@@ -53,6 +67,9 @@ export default class Locks extends Vue{
     }
     get currentModule(){
       return this.routeMap.toArray().find((node) => this.$route.name === node.value.routeName) as ProgramNode
+    }
+    get isUnlocked(){
+      return isUnlocked(this.nextModule?.value.unlocked)
     }
 
 }

@@ -44,7 +44,7 @@
               background-color="transparent"
               no-resize
               solo
-              flat
+              text
             />
           </v-row>
         </v-col>
@@ -62,7 +62,6 @@
       </v-row>
 
       <!-- ADD AGENDA ITEM -->
-
       <v-row class="mt-10 pt-0 pb-0">
         <v-col
           class="agenda__item-box"
@@ -71,13 +70,35 @@
 
         <v-col
           cols="8"
-          class="agenda__item-add mb-8"
+          class="agenda__item-add mb-2"
           @click="newEntry"
         >
           +
         </v-col>
 
         <v-col cols="2" />
+      </v-row>
+      <v-row
+      class="mt-4"
+        no-gutters
+        justify="center"
+      >
+        <v-col
+          cols="4"
+        >
+          <v-btn
+            id="editcasestudies__button"
+            class="mb-10"
+            text
+            solo
+            depressed
+            outlined
+            height="73.5px"
+            @click="$emit('toggleView')"
+          >
+            FINISH
+          </v-btn>
+        </v-col>
       </v-row>
     </multiAgenda>
   </v-container>

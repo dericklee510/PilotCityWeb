@@ -13,7 +13,7 @@
     
       <v-col
         class="practicelog-manage__contain"
-        cols="10"
+        cols="8"
       >
         <v-row
           no-gutters
@@ -22,82 +22,85 @@
         >
           MANAGE PRACTICE LOGS
         </v-row>
-        <v-row
-          justify="center"
-          class="practicelog-manage__label mt-5"
-        >
-          <v-col
-            cols="4"
-            md="3"
-            lg="2"
-            xl="1"
+        <v-container v-if="Object.keys(practiceLogs).length">
+          <v-row
+            justify="center"
+            class="practicelog-manage__label mt-12 mb-6"
           >
-            Time
-          </v-col>
-          <v-col
-            cols="7"
-            md="4"
-            lg="3"
-            xl="2"
-          >
-            Name
-          </v-col>
-          <!-- <v-col class="practicelog_manage__label" cols="3"></v-col> -->
-        </v-row>
-    
-        <!-- LOGGER -->
-    
-        <v-row
-          v-for="(timeLogs,studentId) in practiceLogs"
-          :key="studentId"
-          justify="center"
-          class="practicelog-manage__logged"
-        >
-          <!-- <v-col class="practicelog_manage__externallink" cols="1"><i class="fas fa-external-link-alt"></i></v-col> -->
-          <v-col
-            class="practicelog-manage__log-header"
-            cols="4"
-            md="3"
-            lg="2"
-            xl="1"
-          >
-            {{ `${reduceEntry(timeLogs)}m` }}
-          </v-col>
-          <v-col
-            cols="7"
-            md="4"
-            lg="3"
-            xl="2"
-            style="padding: 0"
-          >
-            <v-col class="practicelog-manage__log-header">
-              {{ nameHash[studentId].name }}
-            </v-col>
-            <pc-timelog
-              :key="studentId+key"
-              v-model="practiceLogs[studentId]"
-              v-slot="{entries}"
+            <v-col
+              cols="4"
+              md="3"
+              lg="2"
+              xl="1"
             >
-              <v-col
-                v-for="(entry,index) in entries"
-                :key="entry.id"
-                style="padding: 0"
-              >
-                <span>
-                  <button
-                    class="practicelog_manage__rejectbutton"
-                    @click="rejectEntry(studentId,index)"
-                  >
-                    Reject
-                  </button><span class="practicelog_manage__singlelog">
-                    {{ `${entry.minutes}m` }}
-                  </span>
-                </span>
+              Time
+            </v-col>
+            <v-col
+              cols="7"
+              md="4"
+              lg="3"
+              xl="2"
+              class="pl-0"
+            >
+              Name
+            </v-col>
+            <!-- <v-col class="practicelog_manage__label" cols="3"></v-col> -->
+          </v-row>
+      
+          <!-- LOGGER -->
+      
+          <v-row
+            v-for="(timeLogs,studentId) in practiceLogs"
+            :key="studentId"
+            justify="center"
+            class="practicelog-manage__logged"
+          >
+            <!-- <v-col class="practicelog_manage__externallink" cols="1"><i class="fas fa-external-link-alt"></i></v-col> -->
+            <v-col
+              class="practicelog-manage__log-header"
+              cols="4"
+              md="3"
+              lg="2"
+              xl="1"
+            >
+              {{ `${reduceEntry(timeLogs)}m` }}
+            </v-col>
+            <v-col
+              cols="7"
+              md="4"
+              lg="3"
+              xl="2"
+              style="padding: 0"
+            >
+              <v-col class="practicelog-manage__log-header">
+                {{ nameHash[studentId].name }}
               </v-col>
-            </pc-timelog>
-          </v-col>
-        </v-row>
-          
+              <pc-timelog
+                :key="studentId+key"
+                v-model="practiceLogs[studentId]"
+                v-slot="{entries}"
+              >
+                <v-col
+                  v-for="(entry,index) in entries"
+                  :key="entry.id"
+                  style="padding: 0"
+                >
+                  <span>
+                    <button
+                      class="practicelog_manage__rejectbutton"
+                      @click="rejectEntry(studentId,index)"
+                    >
+                      Reject
+                    </button><span class="practicelog_manage__singlelog">
+                      {{ `${entry.minutes}m` }}
+                    </span>
+                  </span>
+                </v-col>
+              </pc-timelog>
+            </v-col>
+          </v-row>
+        </v-container>
+        <Oops v-else />
         <!-- LOGGER -->
       </v-col>
     </v-row>
@@ -118,16 +121,19 @@ import { FbStore } from '../../../../store'
 import { Subscription } from 'rxjs'
 import { Classroom, Project } from '../../../../store/Database/types/types'
 import { doc } from 'rxfire/firestore'
+import { Oops } from '../../components'
 export const pcTimelog = PCmultiinput.createMultiInput<TimeLog>({
   minutes:0,
   lastUpdate: firebase.firestore.Timestamp.fromDate(new Date())
 })
+
 @Component({
   components:{
-    pcTimelog
+    pcTimelog,
+    Oops
   }
 })
-export default class logtime extends Vue{
+export default class Logtime extends Vue{
   key = 0
   mounted(){
     FbStore.currentTeacherProgramData!.classroomIds.forEach(async classroomId => {

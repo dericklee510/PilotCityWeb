@@ -15,7 +15,7 @@
         >
           <input
             v-model="classNames[index]"
-            
+            @keypress.enter="renameClass(entry.id,index)"
             :placeholder="entry.className"
           >
         </v-col>
@@ -33,7 +33,7 @@
               height="100%"
               @click="setLoader(renameClass(entry.id,index))"
             >
-              RENAME
+              UPDATE
             </v-btn>
           </PCLoader>
         </v-col>
@@ -66,7 +66,7 @@
             color="primary"
           />
           <span>
-            <span class="manageclass__sharecode__label ma-0 pa-0 d-lg-none">Share Code: </span>
+            <span class="manageclass__sharecode-label ma-0 pa-0 d-lg-none">Share Code: </span>
             <span class="manageclass__sharecode">{{ entry.shareCode?entry.shareCode:"GENERATING..." }}</span>
           </span>
           <button
@@ -178,7 +178,7 @@ export default class ManageClassHelper extends app {
       .teacherProgramId;
     const employerProgramId = FbStore.currentEmployerProgram!.employerProgramId;
     const classroomDoc = await FbStore.createClassroom({
-      className: `CLASS NAME ${this.entries.length + 1}`,
+      className: `P${this.entries.length + 1}: Class Name`,
       teacherProgramId,
       employerProgramId
     });

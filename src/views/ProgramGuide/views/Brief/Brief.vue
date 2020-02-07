@@ -79,6 +79,7 @@ created(){
     FbStore.updateCurrentStudentClassroom({
       finishedProgramBrief: firebase.firestore.FieldValue.serverTimestamp()
     })
+    this.$emit('nextNode')
   }
 }
 </script>]

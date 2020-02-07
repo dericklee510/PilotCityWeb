@@ -13,9 +13,14 @@
       >
         <v-row
           justify="center"
-          class="mr-auto ml-auto viewcasestudies__title"
+          class="viewcasestudies__title"
         >
-          REVIEW CASE STUDIES & USE CASES
+          <v-col
+            class="text-center"
+            cols="9"
+          >
+            REVIEW CASE STUDIES & USE CASES
+          </v-col>
         </v-row>
     
         <v-col
@@ -25,33 +30,50 @@
     
         <v-row
           justify="center"
-          class="mr-auto ml-auto viewcasestudies__description"
+          class="viewcasestudies__description"
         >
-          It is important to create unique and innovative solutions. Review what’s been done before so you don’t reinvent the wheel.
+          <v-col
+            cols="9"
+            class="text-center"
+          >
+            It is important to create unique and innovative solutions. Review what’s been done before so you don’t reinvent the wheel.
+          </v-col>
         </v-row>
         <v-row
           class="viewcasestudies__reviewtitle"
           no-gutters
+          justify="end"
         >
-          Reviewed
+          <v-col
+            class="text-start"
+            cols="10"
+          >
+            Reviewed
+          </v-col>
         </v-row>
+        
         <v-row
           v-for="(namedLink,index) in namedLinks"
           id="viewcasestudies__check1"
           :key="index"
+          justify="end"
+          no-gutters
         >
-          <span
-            class="viewcasestudies__wholeline"
-          ><input
-             v-model="caseStudiesReviewed[index]"
-             class="viewcasestudies__check"
-             type="checkbox"
-           >
-            <span>
-              {{ namedLink.linkName }}
-            </span>
-            <a :href="namedLink.link"><button class="viewcasestudies__exporticon"><img src="@/assets/exportbox.png"></button></a>
-          </span>
+          <v-col
+            cols="10"
+            class="text-start viewcasestudies__wholeline"
+          >
+            <input
+              v-model="caseStudiesReviewed[index]"
+              class="viewcasestudies__check"
+              type="checkbox"
+            >
+            {{ namedLink.linkName }}
+            <a
+              :href="namedLink.link"
+              target="_blank"
+            ><button class="viewcasestudies__exporticon"><img src="@/assets/exportbox.png"></button></a>
+          </v-col>
         </v-row>
         <v-row
           no-gutters
@@ -59,15 +81,25 @@
         >
           <v-col
             cols="4"
-            class="viewcasestudies__savebuttonrow"
           >
-            <v-btn
-              class="viewcasestudies__savebutton"
-              :disabled="!allReviewed"
-              @click="submit"
+            <NextNode
+              v-slot="{setNext}"
+              @CallbackComplete="$emit('nextNode')"
             >
-              NEXT
-            </v-btn>
+              <v-btn
+                id="editcasestudies__button"
+                class="mb-10 mt-8"
+                text
+                solo
+                depressed
+                outlined
+                :disabled="!allReviewed"
+                height="73.5px"
+                @click="setNext(submit)"
+              >
+                NEXT
+              </v-btn>
+            </NextNode>
           </v-col>
         </v-row>
       </v-col>
@@ -84,7 +116,12 @@ import Component from 'vue-class-component'
 import { NamedLink, ReviewedLink } from '@/store/Database/types/utilities'
 import { FbStore } from '../../../../store'
 import  {firebase}  from '@/firebase/init'
-@Component
+import { NextNode } from "@/views/ProgramGuide/components"
+@Component({
+  components: {
+    NextNode
+  }
+})
 export default class ViewCaseStudies extends Vue{
     namedLinks:NamedLink[] = FbStore.currentEmployerProgram?.caseStudies || [{} as NamedLink]
     caseStudiesReviewed = FbStore.currentProject?.caseStudiesReviewed || []
@@ -97,6 +134,7 @@ export default class ViewCaseStudies extends Vue{
         caseStudies:firebase.firestore.FieldValue.serverTimestamp()
       }
     })
+    this.$emit('nextNode')
   }
 }
 </script>

@@ -38,9 +38,7 @@
               >
                 <v-col
                   cols="12"
-                  sm="8"
-                  md="7"
-                  xl="5"
+                  md="6"
                   class="businessmodelcanvas_enter__ratinglabel d-none d-lg-inline-block"
                 >
                   <span>Rating</span>

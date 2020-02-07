@@ -66,17 +66,23 @@
           class="mr-auto ml-auto"
           cols="5"
         >
-          <v-btn
-            solo
-            depressed
-            text
-            height="55.88px"
-            :disabled="invalid || !checkbox"
-            class="demovideo_enter__button"
-            @click="onSubmit"
+          <NextNode
+            v-slot="{setNext}"
+            @CallbackComplete="$emit('nextNode')"
           >
-            SAVE
-          </v-btn>
+            <v-btn
+              id="editcasestudies__button"
+              text
+              solo
+              depressed
+              outlined
+              :disabled="invalid || !checkbox"
+              height="73.5px"
+              @click="setNext(onSubmit)"
+            >
+              NEXT
+            </v-btn>
+          </NextNode>
         </v-col>
       </ValidationObserver>
       <!-- NO RATING YET -->
@@ -114,11 +120,12 @@ import { FbStore } from '../../../../store'
 import { ValidationObserver } from 'vee-validate'
 import { LinkChecker } from '../../components'
 import {firebase} from '@/firebase/init'
-
+import { NextNode } from '@/views/ProgramGuide/components'
 @Component({
   components:{
     ValidationObserver,
-LinkChecker
+    LinkChecker,
+    NextNode
   }
 })
 export default class demovideo_enter extends Vue{

@@ -66,7 +66,7 @@
                       v-model="shareCode"
                       solo
                       depressed
-                      flat
+                      text
                       outlined
                       :success-messages="result"
                     />
@@ -84,7 +84,7 @@
                     <v-btn
                       width="100%"
                       height="100%"
-                      flat
+                      text
                       depressed
                       outlined
                       @click="joinProgram"

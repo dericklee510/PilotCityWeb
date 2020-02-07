@@ -372,7 +372,7 @@
               class="mt-5 mb-5"
             >
               <v-col
-                cols="8"
+                cols="8"  
                 class="studentid__questionsubtitle mt-1"
               >
                 Energy, Environment & Utilities
@@ -384,9 +384,7 @@
                   :empty-icon="emptyIcon"
                   :full-icon="fullIcon"
                   :half-icon="halfIcon"
-                  
                   :hover="hover"
-                 
                   :size="size"
                   :dense="dense"
                   :color="color"
@@ -624,9 +622,7 @@
                   :empty-icon="emptyIcon"
                   :full-icon="fullIcon"
                   :half-icon="halfIcon"
-                  
                   :hover="hover"
-                 
                   :size="size"
                   :dense="dense"
                   :color="color"
@@ -919,19 +915,31 @@
             <!-- END -->
           </v-col>
         </v-row>
-
-        <v-col
-          class="mr-auto ml-auto"
-          cols="5"
+        <v-row
+          class="mt-10 mb-10"
+          no-gutters
+          justify="center"
         >
-          <v-btn
-            class="citizenid__button mb-10"
-            
-            @click="submit"
-          >
-            SAVE
-          </v-btn>
-        </v-col>
+          <v-col cols="4">
+            <NextNode
+              v-slot="{setNext}"
+              @CallbackComplete="$emit('nextNode')"
+            >
+              <v-btn
+                id="editcasestudies__button"
+                class="mb-10 mt-8"
+                text
+                solo
+                depressed
+                outlined
+                height="73.5px"
+                @click="setNext(submit)"
+              >
+                NEXT
+              </v-btn>
+            </NextNode>
+          </v-col>
+        </v-row>
       </v-col>
     </v-row>
   </ValidationObserver>
@@ -946,10 +954,12 @@ import { ValidationObserver, ValidationProvider } from "vee-validate";
 import { startCase } from "lodash";
 import { StudentForm } from "../../../../store/Database/types/types";
 import {firebase} from "@/firebase/init"
+import { NextNode } from "@/views/ProgramGuide/components"
 @Component<StudentID>({
   components: {
     ValidationObserver,
     ValidationProvider,
+    NextNode
   },
   async beforeRouteEnter(to, from, next) {
     let form = await FbStore.firestore
@@ -960,9 +970,9 @@ import {firebase} from "@/firebase/init"
       let programForm = form.data<StudentForm>().programForm
       if(programForm){
       Object.keys(programForm).forEach(key => {
-        (vm as Record<string,any>)[key] = programForm[key as keyof StudentForm.programForm]
+        (vm as Record<string,any>)[key] = programForm![key as keyof StudentForm.programForm]
       })
-      vm.programForm = form.data<StudentForm>().programForm
+      vm.programForm = form.data<StudentForm>().programForm!
       }
     });
   },

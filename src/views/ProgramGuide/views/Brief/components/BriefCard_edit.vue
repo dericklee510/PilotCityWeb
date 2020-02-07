@@ -23,7 +23,6 @@
               cols="12"
               md="3"
               lg="2"
-              xl="1"
             >
               <iframe
                 class="briefcard__cover"

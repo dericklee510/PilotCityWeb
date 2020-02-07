@@ -8,7 +8,7 @@
     
       <v-col
         id="pitch_enter__contain"
-        cols="10"
+        cols="8"
       >
         <v-row
           justify="center"
@@ -31,7 +31,7 @@
         <ValidationObserver v-slot="{invalid, validate}">
           <v-row
             justify="center"
-            class="mr-auto ml-auto mt-12 mb-12"
+            class="mr-auto ml-auto mt-12 mb-8"
           >
             <ValidationProvider
               v-slot="{errors}"
@@ -47,22 +47,30 @@
             </ValidationProvider>
           </v-row>
     
+    
           <v-col
             class="mr-auto ml-auto"
             cols="5"
           >
-            <v-btn
-              class="pitch_enter__button"
-              solo
-              depressed
-              text
-              height="55.88px"
-              :loading="loading"
-              :disabled="invalid"
-              @click="validate().then(valid => {if(valid) submit()})"
+            <NextNode
+              v-slot="{setNext}"
+              @CallbackComplete="$emit('nextNode')"
             >
-              SAVE
-            </v-btn>
+              <v-btn
+                id="editcasestudies__button"
+                class="mb-10 mt-8"
+                text
+                solo
+                depressed
+                outlined
+                :loading="loading"
+                :disabled="invalid"
+                height="73.5px"
+                @click="validate().then(valid => {if(valid) setNext(submit)})"
+              >
+                NEXT
+              </v-btn>
+            </NextNode>
           </v-col>
         </ValidationObserver>
         <!-- NO RATING YET -->
@@ -103,6 +111,7 @@ import {ValidationObserver, ValidationProvider, extend } from 'vee-validate'
 import {max} from 'vee-validate/dist/rules';
 import { FbStore } from '../../../../store';
 import {firebase} from "@/firebase/init"
+import { NextNode } from "@/views/ProgramGuide/components"
 extend('max',{
     ...max,
     message: "Must not be greater than {length} characters"
@@ -111,12 +120,16 @@ extend('max',{
 @Component({
   components:{
     ValidationObserver,
-    ValidationProvider
+    ValidationProvider,
+    NextNode
   }
 })
 export default class pitch_enter extends Vue{
     pitch:string = FbStore.currentProject!.sentencePitch || ""
     loading:boolean = false
+    upnext(){
+      
+    }
     async submit(){
       this.loading = true
       await FbStore.updateCurrentProject({

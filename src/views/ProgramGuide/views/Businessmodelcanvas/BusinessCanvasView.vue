@@ -46,7 +46,12 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import {TeamInfo} from './components'
-@Component
+import { Oops } from '../../components'
+@Component({
+  components: {
+    Oops,
+  }
+})
 export default class BusinessCanvasView extends Vue{
 
   public page: string = "view";
