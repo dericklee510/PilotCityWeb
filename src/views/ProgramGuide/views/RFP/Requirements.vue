@@ -1,107 +1,321 @@
 <template>
   <v-container>
-    <v-row justify="center">
+    <v-row
+      no-gutters
+      justify="center"
+    >
       <img
-        id="agenda__icon"
-        class="agenda__image"
-        src="@/assets/icons/agenda.png"
+        id="rfp__icon"
+        src="@/assets/pitch_enter.png"
       >
-    
+
       <v-col
-        id="agenda__contain"
-        cols="10"
+        id="rfp__contain"
+        cols="8"
       >
-        Enter your agenda for the event or activity.
+        <v-row
+          justify="center"
+          class="mr-auto ml-auto rfp__title"
+        >
+          PROJECT PROMPT GENERATOR
+        </v-row>
+
+        <v-col
+          id="rfp__borderline"
+          cols="12"
+        />
+
+        <v-row
+          justify="center"
+          class="mr-auto ml-auto rfp__description mb-10"
+        >
+          Generate project prompts that best represent employer requirements and your course curriculum by tweaking key information in the mission.
+        </v-row>
+
+        <v-row
+          justify="center"
+          class="rfp__header"
+        >
+          Step 1
+        </v-row>
+
+        <v-row
+          justify="center"
+          class="rfp__divider ml-auto mr-auto mt-5 mb-5"
+        />
+
+        <v-row
+          justify="center"
+          class="rfp__headerdescription mb-12"
+        >
+          Enter the parameters of the employer's project
+        </v-row>
+
+        <v-row>
+          <v-col
+            align="right"
+            cols="4"
+            class="rfp__generatetitle"
+          >
+            Problem or Opportunity
+          </v-col>
+          <v-col cols="7">
+            <input
+              v-model="problemOrOpportunity"
+              class="rfp__generateinput"
+            >
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col
+            align="right"
+            cols="4"
+            class="rfp__generatetitle"
+          >
+            Solution
+          </v-col>
+          <v-col cols="7">
+            <input
+              v-model="solution"
+              class="rfp__generateinput"
+            >
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col
+            align="right"
+            cols="4"
+            class="rfp__generatetitle"
+          >
+            Key Metric
+          </v-col>
+          <v-col cols="7">
+            <input
+              v-model="keyMetric"
+              class="rfp__generateinput"
+            >
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col
+            align="right"
+            cols="4"
+            class="rfp__generatetitle"
+          >
+            Product or Service
+          </v-col>
+          <v-col cols="7">
+            <input
+              v-model="productOrService"
+              class="rfp__generateinput"
+            >
+          </v-col>
+        </v-row>
+
+        <v-row
+          justify="center"
+          class="rfp__header mt-12"
+        >
+          Step 2
+        </v-row>
+        <v-row
+          justify="center"
+          class="rfp__divider ml-auto mr-auto mt-5 mb-5"
+        />
+
+        <v-row
+          justify="center"
+          class="rfp__headerdescription mb-12"
+        >
+          Choose an option you'd like to edit and finalize
+        </v-row>
+
+        <v-col>
+          <v-row
+            class="mt-5 mb-5"
+            justify="center"
+          >
+            <span class="rfp__generatedtitle--color1">TECH-DRIVEN</span><span
+              class="ml-3 rfp__choosebutton"
+              @click="changeTemplate('tech')"
+            >Choose</span>
+          </v-row>
+          <v-row
+            class="rfp__generated mt-5 mb-12"
+            justify="center"
+          >
+            {{ promptTech }}
+          </v-row>
+
+          <v-row
+            class="mt-5 mb-5"
+            justify="center"
+          >
+            <span class="rfp__generatedtitle--color2">SOLUTION-DRIVEN</span><span
+              class="ml-3 rfp__choosebutton"
+              @click="changeTemplate('solution')"
+            >Choose</span>
+          </v-row>
+          <v-row
+            class="rfp__generated mt-5 mb-12"
+            justify="center"
+          >
+            {{ promptSolution }}
+          </v-row>
+
+          <v-row
+            class="mt-5 mb-5"
+            justify="center"
+          >
+            <span class="rfp__generatedtitle--color3">PROBLEM-DRIVEN</span><span
+              class="ml-3 rfp__choosebutton"
+              @click="changeTemplate('problem')"
+            >Choose</span>
+          </v-row>
+          <v-row
+            class="rfp__generated mt-5 mb-12"
+            justify="center"
+          >
+            {{ promptProblem }}
+          </v-row>
+
+          <v-row
+            class="mt-5 mb-5"
+            justify="center"
+          >
+            <span class="rfp__generatedtitle--color4">METRIC-DRIVEN</span><span
+              class="ml-3 rfp__choosebutton"
+              @click="changeTemplate('metric')"
+            >Choose</span>
+          </v-row>
+          <v-row
+            class="rfp__generated mt-5 mb-12"
+            justify="center"
+          >
+            {{ promptMetric }}
+          </v-row>
+        </v-col>
+
+        <v-row
+          justify="center"
+          class="rfp__header mt-8"
+        >
+          Step 3
+        </v-row>
+        <v-row
+          justify="center"
+          class="rfp__divider ml-auto mr-auto mt-5 mb-5"
+        />
+
+        <v-row
+          justify="center"
+          class="rfp__headerdescription mb-12"
+        >
+          Fine-tune and finalize your project prompt with employer
+        </v-row>
+
+        <v-row justify="center">
+          <textarea
+            v-model="finalPrompt"
+            class="rfp__finalize"
+          />
+        </v-row>
+
+
+
+        <v-row
+          class="mt-10 mb-10"
+          justify="center"
+        >
+          <v-btn
+            large
+            class="rfp__button"
+            @click="submit"
+          >
+            Save
+          </v-btn>
+        </v-row>
       </v-col>
-
-
-      <!-- DESCRIPTION -->
-
-      <!-- <v-row 
-            justify="center" 
-            class="mr-auto ml-auto agenda__description">As you practice, use and apply the employer's product or service, log how many minutes you use it each time.
-        </v-row> -->
-
-
-
-      <!-- AGENDA LOGISTICS
-
-<v-row class="agenda__logistics col-8 mr-auto ml-auto mt-10 pr-auto pl-auto pt-0 pb-0">
-
-
-        <v-column class="agenda__poop">
-
-            <v-row id="agenda__borderline" class="agenda__logisticslabel pl-4 pt-4 pb-4">DATE:<input placeholder="Enter date here" class="ml-4 agenda__item-input"></v-row>
-
-            <v-row id="agenda__borderline" class="agenda__logisticslabel pl-4 pt-4 pb-4">TIME:<input placeholder="Enter time here" class="ml-4 agenda__item-input"></v-row>
-
-            <v-row class="agenda__logisticslabel pl-4 pb-4 pt-4">LOCATION:<input placeholder="Enter location here" class="ml-4 agenda__item-input"></v-row>
-        
-        </v-column>
-
-        </v-row> -->
-
-      <!-- AGENDA ITEM -->
-
-      <Agenda
-        v-model="entries"
-        v-stream:update:value="onAgendaChange$"
-      />
     </v-row>
   </v-container>
 </template>
 
-
 <script lang="ts">
+import Vue from "vue";
+import Component from "vue-class-component";
+import { FbStore } from "../../../../store";
+import { ValidationObserver, ValidationProvider } from 'vee-validate';
 
-import Vue from 'vue'
-import Component from 'vue-class-component'
-import { PCmultiinput } from '@/components/inputs'
-import {EventItem} from "@/store/Database/types/utilities"
-import {Agenda} from "@/views/ProgramGuide/components/"
-import { FbStore } from '../../../../store'
-import { Subject, pipe } from 'rxjs'
-import { pluck, debounceTime } from 'rxjs/operators'
-import {firebase} from "@/firebase/init"
-const emptyAgenda:EventItem = {
-  name:"",
-  duration:"",
-  description:"",
-
-
-}
-
-@Component<ExternshipAgendaEdit>({
-  domStreams:['onAgendaChange$'],
-  subscriptions(){
-    return {
-      agendaEvents: this.onAgendaChange$.pipe(
-        debounceTime(300),
-       pluck<{event:{name:string,msg:EventItem[]},data:undefined},EventItem[]>("event","msg")
-      )
-    }
-  },
+@Component({
   components:{
-    Agenda
+    ValidationObserver,
+    ValidationProvider
   }
 })
-export default class ExternshipAgendaEdit extends Vue{
-  mounted(){
-    this.$subscribeTo(this.$observables.agendaEvents,async (events:EventItem[]) => {
-      if(FbStore.userCitizenType === "employer")
-      await FbStore.updateCurrentEmployerProgram({
-        externshipDayAgenda:{
-          events:events.filter(obj => Object.keys(obj).length !== 0),
-          lastUpdate:firebase.firestore.FieldValue.serverTimestamp()
-        }
-      })
-    })
+export default class ProjectPrompt extends Vue {
+  finalPrompt: string = FbStore.currentTeacherProgramData!.finalPrompt || "";
+  keyMetric: string = FbStore.currentTeacherProgramData!.keyMetric || "";
+  problemOrOpportunity?: string = FbStore.currentTeacherProgramData!.problemOrOpportunity || "";
+  productOrService: string = FbStore.currentTeacherProgramData!.productOrService || "";
+  promptTemplate: "tech" | "solution" | "problem" | "metric" = FbStore.currentTeacherProgramData!.promptTemplate || "tech"
+  solution: string = FbStore.currentTeacherProgramData!.solution || "";
+  changeTemplate(template: "tech" | "solution" | "problem" | "metric") {
+    this.promptTemplate = template;
+    this.generatePrompt()
+    this.$forceUpdate()
   }
-  created(){
-    // set ref to update based on user type
+  get promptTech(){
+    return `Use ${this.productOrService} to conceptualize, design or prototype
+${this.solution} that solves ${this.problemOrOpportunity} to reach ${this.keyMetric}`
   }
-  onAgendaChange$!:Subject<{event:{name:string,msg:EventItem[]},data:undefined}>;
-  ref!:firebase.firestore.DocumentReference
-    entries:EventItem[] = FbStore.currentEmployerProgram?.externshipDayAgenda?.events || [emptyAgenda]
+get promptSolution(){
+  return `Conceptualize, design or prototype ${this.solution} using ${this.productOrService} that solves ${this.problemOrOpportunity} to reach ${this.keyMetric}`
+}
+get promptProblem(){
+  return `Utilizing ${this.productOrService}, solve or explore
+${this.problemOrOpportunity} by conceptualizing, designing or prototyping
+${this.solution} that reaches ${this.keyMetric}`
+}
+get promptMetric(){
+  return `Utilizing ${this.productOrService}, reach ${this.keyMetric} by
+conceptualizing, designing or prototyping ${this.solution} that addresses
+${this.problemOrOpportunity}`
+}
+  generatePrompt() {
+    switch (this.promptTemplate) {
+      case "tech":
+        this.finalPrompt = this.promptTech
+        break;
+      case "solution":
+        this.finalPrompt = this.promptSolution
+        break;
+      case "problem":
+        this.finalPrompt = this.promptProblem
+        break;
+      case "metric":
+        this.finalPrompt = this.promptMetric
+        break;
+
+    }
+
+  }
+  submit() {
+    let {
+      problemOrOpportunity,
+      solution,
+      keyMetric,
+      productOrService,
+      promptTemplate,
+      finalPrompt
+    } = this;
+    FbStore.updateCurrentTeacherProgramData({
+      problemOrOpportunity,
+      solution,
+      keyMetric,
+      productOrService,
+      promptTemplate,
+      finalPrompt
+    });
+  }
 }
 </script>

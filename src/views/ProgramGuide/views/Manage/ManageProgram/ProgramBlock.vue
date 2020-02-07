@@ -48,6 +48,10 @@
         <v-date-picker
           v-model="syncValue"
           no-title
+            min="2020-02-10"
+            max="2020-06-12"
+            title-date-format="mm-dd-yyyy"
+           default-value="2020-06-12"
         />
       </v-menu>
     </v-col>
