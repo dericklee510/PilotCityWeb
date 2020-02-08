@@ -20,6 +20,7 @@ import Home from '@/views/Home.vue'
 import login2 from "@/views/Login/Login2.vue"
 import signup2 from "@/views/Signup/Signup2.vue"
 import launcher from "@/views/Myprograms/launcher.vue"
+import Brief from "@/views/ProgramGuide/views/RFP/Brief/Brief.vue"
 
 const routes: RouteConfig [] = [
     ...SignupRoutes,
@@ -57,17 +58,10 @@ const routes: RouteConfig [] = [
         component: signup2
     },
     {
-        path: '/rfp/prompt',
-        name: 'rfp-prompt',
-        component: RFPPrompt
+        path: '/program/rfp',
+        name: 'rfp-brief',
+        component: Brief
     },
-
-    {
-        path: '/rfp/requirements',
-        name: 'rfp-requirements',
-        component: RFPRequirements
-    },
-
     {
         path: '/',
         name: 'home',
