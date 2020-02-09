@@ -25,15 +25,17 @@
               :v-model="completion"
               :value="completion"
               color="success"
+              class="mt-3"
               rounded
               :height="9"
             ></v-progress-linear>
           </v-col>
-          <v-col cols="3">
+          <v-col>
             <v-btn
               class="myprograms__cardbutton"
               :disabled="loading"
               :loading="loader"
+              depressed
               @click="setLoader(() => openprogram(program))"
             >
               {{ openCondition?`Open`:`Launch` }}
