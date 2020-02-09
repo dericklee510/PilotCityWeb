@@ -10,6 +10,9 @@
               <span>Join Team</span>
             </v-col>
           </v-row>
+
+          <!-- JOIN TEAM -->
+
           <v-row no-gutters>
             <v-col cols="12">
               <PCLoader v-slot="{loading,setLoader}">
@@ -34,6 +37,9 @@
               </PCLoader>
             </v-col>
           </v-row>
+
+          <!-- CREATE TEAM -->
+
           <v-row no-gutters>
             <v-col cols="12" class="manageteam__title">
               <span>Create Team</span>
@@ -51,6 +57,7 @@
               <span>Team Name</span>
             </v-col>
           </v-row>-->
+
           <ValidationObserver v-slot="{invalid}">
             <v-row>
               <v-col cols="12" class="join-team__buttons">
@@ -89,6 +96,9 @@
         </v-col>
       </v-row>
     </template>
+
+    <!-- TEAM AND TEAM NAMES -->
+
     <template v-else>
       <v-row no-gutters justify="center">
         <v-col cols="8">
@@ -104,18 +114,18 @@
             style="margin-bottom: 25px;"
           >
             <v-col cols="1" style="margin-right: 20px; margin-left:12px;">
-              <v-btn 
-                small 
-
-                depressed 
-                dark
-                >{{ name }}</v-btn>
+              <v-btn small depressed dark>{{ name }}</v-btn>
             </v-col>
           </v-row>
+
+          <!-- SETTINGS -->
 
           <v-col class="manageteam__title">
             <span>Settings</span>
           </v-col>
+
+          <!-- RENAME TEAM -->
+
           <v-col class="Team__teamname">
             <span>Rename Team</span>
 
@@ -127,7 +137,6 @@
                       <ValidationProvider v-slot="{errors}" slim rules="required">
                         <v-text-field
                           v-model="newTeamName"
-
                           :placeholder="teamName"
                           flat
                           solo
@@ -156,6 +165,8 @@
               </v-row>
             </ValidationObserver>
 
+            <!-- LEAVE TEAM -->
+
             <v-row>
               <PCLoader v-slot="{loading,setLoader}">
                 <span>
@@ -165,7 +176,6 @@
                     depressed
                     dark
                     style="margin-left:12px;"
-
                     @click="setLoader(leaveTeam)"
                   >LEAVE TEAM</v-btn>
                 </span>
