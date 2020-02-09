@@ -29,23 +29,25 @@
           In a tweet or less, describe what your solution is so it is clearly and concisely defined for others to quickly understand.
         </v-row>
         <ValidationObserver v-slot="{invalid, validate}">
-          <v-row
+          <v-col
             justify="center"
-            class="mr-auto ml-auto mt-12 mb-8"
+            cols="10"
+            class="ml-auto mr-auto"
           >
             <ValidationProvider
               v-slot="{errors}"
-              class="pt-1 pb-6 pl-5 pr-4 pitch_enter__onesentence"
-              rules="required|max:255"
+              class="pt-5 pb-5 pl-5 pr-5 m-0"
+              rules="required|max:144"
             >
               <v-textarea
+                class="pitch_enter__onesentence"
                 v-model="pitch"
                 no-resize
                 :error-messages="errors"
-                placeholder="My pitch is..."
+                placeholder=""
               />
             </ValidationProvider>
-          </v-row>
+          </v-col>
     
     
           <v-col
@@ -58,7 +60,7 @@
             >
               <v-btn
                 id="editcasestudies__button"
-                class="mb-10 mt-8"
+                class="mb-2 mt-2"
                 text
                 solo
                 depressed
@@ -87,9 +89,10 @@
           class="mt-3 mb-6 pc-rating"
         >
           <v-rating
-            v-model="rating"
+            v-model="rating"            
             size="30"
             dense
+            light
             readonly=""
           />
         </v-row>
@@ -125,6 +128,7 @@ extend('max',{
   }
 })
 export default class pitch_enter extends Vue{
+  
     pitch:string = FbStore.currentProject!.sentencePitch || ""
     loading:boolean = false
     upnext(){

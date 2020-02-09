@@ -29,7 +29,7 @@
       </v-row>
 
       <v-row
-        class="mt-12 mr-auto ml-auto pl-5 mb-4 elevator_enter__description__label"
+        class="mr-auto ml-auto pl-5 mb-4 elevator_enter__description__label"
       >
         Elevator Pitch
       </v-row>
@@ -37,7 +37,7 @@
       <ValidationObserver v-slot="{invalid, validate}">
         <v-row
           justify="center"
-          class="mr-auto ml-auto mt-6 mb-12"
+          class="mr-auto ml-auto"
         >
           <ValidationProvider
             v-slot="{errors}"
@@ -48,13 +48,13 @@
               v-model="text"
               no-resize
               :error-messages="errors"
-              placeholder="My pitch is..."
+              placeholder=""
             />
           </ValidationProvider>
         </v-row>
 
         <v-col
-          class="mr-auto ml-auto"
+          class="mr-auto ml-auto mt-7 mb-7"
           cols="5"
         >
           <NextNode
@@ -82,7 +82,7 @@
 
       <v-row
         justify="center"
-        class="mt-8 elevator_enter__ratinglabel"
+        class="elevator_enter__ratinglabel"
       >
         {{ rating || `No rating yet` }}
       </v-row>

@@ -17,7 +17,7 @@
         }
     }
     &__check1{
-        margin-top: 4.8%;
+        margin-top: 2.8%;
     }
     &__check2{
         margin-top: 6%;
@@ -96,8 +96,10 @@
         font-style: normal;
         font-weight: 900;
         font-size: 15px;
-        line-height: 18px;
+        // line-height: 18px;
         color: #231F20;
+        text-transform: uppercase;
+        letter-spacing: .05rem;
 
     }
     &__check{

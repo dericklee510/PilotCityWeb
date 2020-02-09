@@ -19,9 +19,11 @@
             class="text-center"
             cols="9"
           >
-            REVIEW CASE STUDIES & USE CASES
-          </v-col>
+            REVIEW CASE STUDIES & USE CASES        
+          </v-col>    
         </v-row>
+
+
     
         <v-col
           cols="12"
@@ -88,7 +90,7 @@
             >
               <v-btn
                 id="editcasestudies__button"
-                class="mb-10 mt-8"
+                class="mb-12 mt-12"
                 text
                 solo
                 depressed

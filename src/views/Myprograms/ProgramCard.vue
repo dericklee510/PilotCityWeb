@@ -21,12 +21,13 @@
           <v-col cols="9">
             <!-- <v-row class="myprograms__progressbaractive" /> -->
             <v-progress-linear
-              v-if="isStudent"
-              v-model="completion"
+              :v-if="isStudent"
+              :v-model="completion"
+              :value="completion"
               color="success"
               rounded
-              height="9"
-            />
+              :height="9"
+            ></v-progress-linear>
           </v-col>
           <v-col cols="3">
             <v-btn

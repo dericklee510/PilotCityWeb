@@ -58,8 +58,9 @@
             <v-alert
               v-if="authResponse"
               text
-              color="error"
+              color=""
             >
+              <!-- Use for above if you want red error box color="error" -->
               <h4
                
                 class="text-center pc-background--dark"
@@ -68,7 +69,7 @@
               >
                 {{ authResponse }}
               </h4>
-            </v-alert>
+            </v-alert> 
             <router-link :to="{name: 'signup'}">
               <h4
                 class="text-center login__noaccount"

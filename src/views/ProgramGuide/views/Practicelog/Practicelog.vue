@@ -34,7 +34,7 @@
           <v-col cols="12">
             <v-row
               justify="center"
-              class="mt-10"
+              class="mt-5"
             >
               <v-col
                 cols="12"
@@ -53,7 +53,7 @@
                     outlined
                     style="font-family='Raleway'"
                     height="100px"
-                    placeholder="0"
+                    placeholder="0m"
                   />
                 </ValidationProvider>
               </v-col>
@@ -61,7 +61,7 @@
             
             <v-row
               justify="center"
-              class="mb-7 logtime__calculated"
+              class="logtime__calculated"
             >
               <v-col
                 cols="12"
@@ -79,7 +79,7 @@
                     :loading="loading"
                     @click="setLoader( ()=> { addTime().then(()=>{reset()})})"
                   >
-                    LOG TIME
+                    LOG MINUTES
                   </v-btn>
                 </PCLoader>
               </v-col>
@@ -88,7 +88,7 @@
         </ValidationObserver>
         <v-row
           justify="center"
-          class="mr-auto ml-auto mt-10 logtime__label"
+          class="mr-auto ml-auto mt-5 logtime__label"
         >
           LOGGED TIME
         </v-row>
@@ -117,7 +117,7 @@ import {firebase} from "@/firebase/init"
 import { FbStore } from '../../../../store';
 import { PCLoader } from '../../../../components/utilities';
 extend("isTime", {
-  message: `Must end with an "h" or an "m"`,
+  message: `Must end with an "m" for minutes`,
   validate: (val: string) =>
     ["h", "m"].map(char => char === val.charAt(val.length - 1)).some(val => val)
 });

@@ -8,7 +8,7 @@
     
       <v-col
         id="presentation_enter__contain"
-        cols="10"
+        cols="8"
       >
         <v-row
           justify="center"
@@ -36,7 +36,6 @@
           >
             <v-col
               cols="9"
-              md="7"
             >
               <LinkChecker
                 v-model="url"
@@ -48,30 +47,17 @@
           <v-row
             justify="center"
             align="center"
-            class="presentation_enter__check"
-            no-gutters
+            class="ml-auto mr-auto presentation_enter__check"
           >
-            <v-col
-              cols="9"
-              md="6"
-            >
-              <v-row
-                justify="center"
-                align="center"
-                no-gutters
-              >
                 <v-col cols="1">
                   <v-checkbox
                     v-model="checkbox"
                     :readonly="invalid"
                     class="presentation_enter__checkbox"
                   />
+                </v-col><v-col cols="11">
+                  I acknowledge this link is set for the public to view.
                 </v-col>
-                <v-col cols="11">
-                  I acknowledge this link is set for the public to view and video length is within a reasonable range.
-                </v-col>
-              </v-row>
-            </v-col>
           </v-row>
     
           <v-col

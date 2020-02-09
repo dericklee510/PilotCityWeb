@@ -26,7 +26,7 @@
         justify="center"
         class="mr-auto ml-auto processlog__description"
       >
-        As you devleop your project, document your progress and milestones to show your project’s evolution.
+        As you develop your project, document your progress and milestones to show your project’s evolution.
       </v-row>
 
       <!-- <i class="pt-3 pb-3 pl-3 fas fa-paperclip"></i> -->
@@ -40,12 +40,13 @@
             <ValidationProvider
               v-slot="{errors}"
               rules="required"
-              class="processlog__logdescription"
+              class="processlog__logdescription mb-4"
             >
               <v-text-field
                 v-model="inputDescription"
                 :error-messages="errors"
                 :disabled="loading"
+                class="processlog__logdescription-textfield pt-0"
               />
             </ValidationProvider>
           
@@ -64,6 +65,7 @@
         
             <v-btn
               class="processlog__logbutton"
+              large
               :disabled="invalid || !fileQueue.length"
               :loading="loading"
               @click="setLoader(appendEntry).then(() => {reset()});"
@@ -83,7 +85,7 @@
         <v-row
           v-for="entry in entries"
           :key="entry.id"
-          class="processlog__logattachment ml-auto mr-auto mt-3 mb-12"
+          class="processlog__logattachment ml-auto mr-auto mt-3 mb-3"
         >
           <v-col class="processlog__filenamecolumn">
             {{ entry.fileName }}
@@ -102,11 +104,12 @@
         :key="`log${key}`"
         v-model="designLog"
         v-slot="{entries, deleteEntry}"
+        class="mb-12 mt-12"
       >
         <v-row
           v-for="entry in entries"
           :key="entry.id"
-          class="processlog__logostamp ml-auto mr-auto mt-3"
+          class="processlog__logostamp ml-auto mr-auto"
         >
           <v-col>
             <v-row>

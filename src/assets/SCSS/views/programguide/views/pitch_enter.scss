@@ -31,7 +31,7 @@
     }
 
 
-}
+} 
 
 .pitch_enter{
 
@@ -65,12 +65,13 @@
     }
 
     &__onesentence{
-        width: 75%;
-        font-size: 22px;
+        width: 100%;
+        font-size: 25px !important;
+        text-align:center;
         font-family: "Raleway";
-        padding-left: 20px;
         font-weight: 700;
         word-wrap: break-word;
+        line-height: 50px !important;
         .v-input__slot{
             border: 1px solid #CCCCCC;
             padding: 20px;

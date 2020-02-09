@@ -28,17 +28,18 @@
         Now that you’ve received feedback from your employer, it is time to evolve, iterate or pivot your project if necessary.
       </v-row>
 
-      <v-col cols="12">
+<v-row no-gutters>
+  <v-col cols="3"></v-col>
+      <v-col cols="8">
         <v-row
           id="posthack__check1"
           justify="center"
           no-gutters
+          class="mt-12 mb-12"
+
         >
           <v-col
             cols="12"
-            md="6"
-            lg="5"
-            xl="4"
             class="posthack__wholeline"
           >
             <input
@@ -55,36 +56,19 @@
             </span>
           </v-col>
         </v-row>
-        <v-row
-          no-gutters
-          justify="center"
-        >
-          <v-col
-            class="posthack__descriptionline"
-            cols="12"
-            md="6"
-            lg="5"
-            xl="4"
-          >
-            Description of business model canvas
-          </v-col>
-        </v-row>
-      </v-col>
 
       
 
-      <v-col cols="12">
+
         <v-row
           id="posthack__check2"
           justify="center"
           no-gutters
+          class="mt-12 mb-12"
         >
           <v-col
             class="posthack__wholeline"
             cols="12"
-            md="6"
-            lg="5"
-            xl="4"
           >
             <input
               v-model="sentencePitch"
@@ -100,36 +84,20 @@
             </span>
           </v-col>
         </v-row>
-        <v-row
-          justify="center"
-          no-gutters
-        >
-          <v-col
-            class="posthack__descriptionline"
-            cols="10"
-            md="6"
-            lg="5"
-            xl="4"
-          >
-            Description of one sentence pitch
-          </v-col>
-        </v-row>
-      </v-col>
+
 
       
 
-      <v-col cols="12">
+
         <v-row
           id="posthack__check2"
           justify="center"
           no-gutters
+          class="mt-12 mb-12"
         >
           <v-col
             class="posthack__wholeline"
             cols="12"
-            md="6"
-            lg="5"
-            xl="4"
           >
             <input
               v-model="elevatorPitch"
@@ -145,27 +113,15 @@
             </span>
           </v-col>
         </v-row>
-        <v-row
-          no-gutters
-          justify="center"
-        >
-          <v-col
-            class="posthack__descriptionline"
-            cols="12"
-            md="6"
-            lg="5"
-            xl="4"
-          >
-            Description of written elevator pitch
-          </v-col>
-        </v-row>
       </v-col>
+
+      </v-row>
 
       
 
       <v-row
         justify="center"
-        class="mt-6"
+        class="mt-1 mb-12"
       >
         <v-col
           cols="10"

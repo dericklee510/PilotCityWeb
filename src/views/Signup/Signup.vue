@@ -26,7 +26,7 @@
                   v-model="firstName"
                   :error-messages="errors"
                   placeholder="First Name"
-                  class="signup__field-input"
+                  class="signup__field-input pt-2"
                 />
               </ValidationProvider>
             </v-col>
@@ -43,7 +43,7 @@
                 <v-text-field
                   v-model="lastName"
                   placeholder="Last Name"
-                  class="signup__field-input "
+                  class="signup__field-input pt-2"
                   :error-messages="errors"
                   @keyup.enter="process()"
                 />
@@ -62,7 +62,7 @@
                 <v-text-field
                   v-model="email"
                   placeholder="Email"
-                  class="signup__field-input "
+                  class="signup__field-input pt-2"
                   :error-messages="errors"
                   @keyup.enter="process()"
                 />
@@ -83,7 +83,7 @@
                     v-model="password"
                     type="password"
                     placeholder="Password"
-                    class="signup__field-input"
+                    class="signup__field-input pt-2"
                     @keyup.enter="process()"
                   />
                   <Password
@@ -115,8 +115,8 @@
                 <v-text-field
                   v-model="confirmPassword"
                   type="password"
-                  placeholder="Password"
-                  class="signup__field-input "
+                  placeholder="Confirm Password"
+                  class="signup__field-input pt-2"
                   :error-messages="errors"
                   @keyup.enter="process()"
                 />
