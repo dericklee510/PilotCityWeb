@@ -43,6 +43,7 @@
                 class="pitch_enter__onesentence"
                 v-model="pitch"
                 no-resize
+                counter
                 :error-messages="errors"
                 placeholder=""
               />

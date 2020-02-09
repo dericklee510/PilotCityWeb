@@ -28,7 +28,7 @@
         @media (max-width: 610px) {
             border: none;
         }
-    }
+    } 
 
     &__borderline{
         padding-top: 0%;
@@ -98,19 +98,24 @@
     }
 
     &__paragraph{
-        height: 240px;
-        border: 1px solid #CCCCCC;
+        // height: 240px;
         // border: 1px solid transparent;
         width: 100%;
         font-size: 18px;
         font-family: "Raleway";
-        padding: 20px;
+        // padding: 20px;
         font-weight: 700;
         word-wrap: break-word;
 
         &::placeholder{
             color: #000000;
         }
+
+        .v-input__slot{
+            border: 1px solid #CCCCCC;
+            padding: 20px;
+        }
+
     }
 
     
@@ -137,7 +142,7 @@
         font-weight: 500;
         font-size: 1.41rem;
         color: #949598;
-        width: 100%;
+        width: 80%;
         text-align: center;
         line-height: unset;
 

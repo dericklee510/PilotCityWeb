@@ -4,7 +4,7 @@
       id="businessmodelcanvas_enter__icon"
       src="@/assets/businessmodelcanvas_enter.png"
     >
-
+ 
     <v-col
       id="businessmodelcanvas_enter__contain"
       cols="8"
@@ -27,7 +27,7 @@
         justify="center"
         class="mr-auto ml-auto businessmodelcanvas_enter__description"
       >
-        Every idea has a model on the business side. Create and refine gameplan by developing your business model canvas.
+        Every idea has a model on the business side. Create and refine your gameplan by developing your business model canvas.
       </v-row>
       <!-- <v-row class="mt-12 mr-auto ml-auto pl-5 mb-4 businessmodelcanvas_enter__description__label">Elevator Pitch</v-row> -->
       <business-model-canvas-comp
