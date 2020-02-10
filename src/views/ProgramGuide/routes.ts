@@ -4,11 +4,18 @@ import * as Guide from '.'
 import RFPGen from "@/views/ProgramGuide/views/RFP/Prompt.vue"
 import StudentID from "@/views/ProgramGuide/views/Profile/StudentID.vue"
 import Brief from "@/views/ProgramGuide/views/RFP/Brief/Brief.vue"
+
+import { AuthStore, FbStore } from '@/store'
 const routes: RouteConfig[] = [
     {
       path: '/',
       name: 'program.programlist'  ,
-      component: Guide.MyPrograms.ProgramList
+      component: Guide.MyPrograms.ProgramList,
+      beforeEnter: (to, from, next) => {
+        if(AuthStore.user)
+        next()
+        else next({name: 'login'})
+      }
     },
     {
         path: '/program/launch',

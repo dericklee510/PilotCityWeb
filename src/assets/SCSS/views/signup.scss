@@ -118,7 +118,7 @@
     }
     &__field-input{
         width: 100%;
-        padding-left:15px;
+        padding-left: 15px;
         font-family: "Raleway";
         font-size: 18px;
         font-weight: 800;
@@ -129,7 +129,7 @@
             caret-color: #fff;
             color: #fff;
             &::placeholder{
-                color: darken(#dbdcde, 15);
+                color: darken(#dbdcde, 30);
             }
         }
 

@@ -31,7 +31,7 @@
         >
           <v-col
             cols="9"
-            class="pt-3 pb-3 text-center"
+            class="pt-3 pb-3 text-center mt-3 mb-10"
           >
             Mark agenda items as you complete them.
           </v-col>

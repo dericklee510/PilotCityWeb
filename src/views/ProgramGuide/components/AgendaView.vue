@@ -39,7 +39,7 @@
         <v-col cols="2" />
           
         <v-col
-          cols="10"
+          cols="9"
           class="pa-0"
         >
           <v-col class="pa-0">
@@ -70,7 +70,7 @@
       >
         <v-btn
           id="editcasestudies__button"
-          class="mb-10"
+          class="mb-12 mt-10"
           :disabled="!isAgendaComplete"
           text
           solo

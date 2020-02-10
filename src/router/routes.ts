@@ -58,11 +58,11 @@ const routes: RouteConfig [] = [
         component: signup2
     },
    
-    // {
-    //     path: '/',
-    //     name: 'home',
-    //     component: Home
-    // },
+    {
+        path: '/home',
+        name: 'home',
+        component: Home
+    },
     {
         path: '',
         redirect: '/'

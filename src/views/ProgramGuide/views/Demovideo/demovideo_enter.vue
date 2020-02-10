@@ -11,7 +11,7 @@
     >
       <v-row
         justify="center"
-        class="mr-auto ml-auto demovideo_enter__title"
+        class="mr-auto ml-auto demovideo_enter__title" 
       >
         ENTER 1-MINUTE PROTOTYPE DEMONSTRATION VIDEO
       </v-row>
@@ -35,7 +35,6 @@
         >
           <v-col
             cols="9"
-            md="7"
           >
             <LinkChecker
               v-model="url"
@@ -131,7 +130,7 @@ import { NextNode } from '@/views/ProgramGuide/components'
 export default class demovideo_enter extends Vue{
     url:string = FbStore.currentProject!.demoLink || ""
     checkbox=false
-    onSubmit(){
+    async onSubmit(){
       FbStore.updateCurrentProject({
         [`programSequence.${'demoVideo'}`]:firebase.firestore.FieldValue.serverTimestamp(),
         demoLink:this.url

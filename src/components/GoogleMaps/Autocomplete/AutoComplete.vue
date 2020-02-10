@@ -11,6 +11,7 @@
     :outlined="outlined"
     :value="address"
     :selection-required="true"
+    :error-messages="errorMessages"
     @placechanged="getAddressData"
   />
 </template>

@@ -123,7 +123,7 @@ export default class Header extends Vue {
 
     public async logout(){
       await AuthStore.logout()
-      this.$router.push({name:'home'})
+      this.$router.push({name:'login'})
     }
 }
 </script>

@@ -427,7 +427,7 @@
               class="mt-5 mb-5"
             >
               <v-col
-                cols="8"
+                cols="8"  
                 class="studentid__questionsubtitle mt-1"
               >
                 Energy, Environment & Utilities

@@ -1,82 +1,71 @@
 <template>
-  <v-container
-    fill-height
-    class="recoverPassword__container"
-  >
-    <v-layout
-      row
-      wrap
-    >
-      <v-flex
-        style="text-align: center"
-        xs12
-        class="recoverPassword__title"
+  <div class="pc-background--dark">
+    <v-container style="padding-top: 10vh; padding-bottom: 25vh">
+      <v-row
+        justify="center"
+        no-gutters
       >
-        <h1>
-          Forgot Password?
-        </h1>
-      </v-flex>
-      <v-flex
-        style="text-align: center"
-        xs12
-        class="recoverPassword__desc"
-      >
-        <p>
-          Enter your email address you’re using for your account below to send a recover password email
-        </p>
-      </v-flex>
-      <v-flex
-        xs12
-      >
-        <v-layout
-          justify-center
-          class="recoverPassword__input"
-        >
-          <ValidationProvider
-            ref="email"
-            v-slot="{errors}"
-            rules="required|email"
+        <v-col cols="4">
+          <v-col
+            class="text-center recovery__header pa-0"
           >
-            <v-text-field
-              v-model="email"
-              :error-messages="errors"
-              name="email"
-              outlined
-              placeholder="Enter your email"
-              required
-              single-line
-            />
-          </ValidationProvider>
-        </v-layout>
-      </v-flex>
-      <v-flex xs12>
-        <v-layout
-          justify-center
-        >
-          <v-btn
-            class="recoverPassword__btn"
-            text
-            rounded
-            :loading="loading"
-            :disabled="loading"
-            @click="process"
-          >
-            Recover Password
-          </v-btn>
-        </v-layout>
-      </v-flex>
-      <v-flex
-        v-show="authResponse"
-        xs12
-        class="signup__message"
-        align-self-center
-      >
-        <v-layout justify-center>
-          <h4>{{ authResponse }}</h4>
-        </v-layout>
-      </v-flex>
-    </v-layout>
-  </v-container>
+            Forgot Password?
+          </v-col>
+          <v-col class="mb-15 text-center">
+            <p >
+              Enter your email address to send a recovery email
+            </p>
+          </v-col>
+          <v-col class="recovery__email pa-0">
+            Email
+          </v-col>
+          <v-col class="pa-0 mt-2">
+            <ValidationProvider
+              ref="email"
+              v-slot="{errors}"
+              rules="required|email"
+            >
+              <input
+                v-model="email"
+                placeholder="Email"
+                class="recovery__email-input"
+                @keyup.enter="process()"
+              >
+            </ValidationProvider>
+          </v-col>
+          <v-col class="mt-5 pa-0">
+            <v-btn
+              id="recovery-button"
+              block
+              depressed
+              :loading="loading"  
+              :disabled="loading"
+              class="mb-6"
+              @click="process()"
+            >
+              <h3 class="text-uppercase">
+                Recover Password
+              </h3>
+            </v-btn>
+            <v-alert
+              v-if="authResponse"
+              text
+              type="success"
+            >
+              <!-- Use for above if you want red error box color="error" -->
+              <h4
+                class="text-center pc-background--dark"
+                style="display: block"
+                
+              >
+                {{ authResponse }}
+              </h4>
+            </v-alert> 
+          </v-col>
+        </v-col>
+      </v-row>
+    </v-container> 
+  </div>
 </template>
 
 

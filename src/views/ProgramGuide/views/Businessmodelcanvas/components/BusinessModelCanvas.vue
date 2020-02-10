@@ -7,7 +7,7 @@
       >
         <v-col
           cols="10"
-          md="12"
+          md="10"
         >
           <v-row
             justify="start"
@@ -16,7 +16,7 @@
             class="businessmodelcanvas_enter__description__label mt-12 mr-auto ml-auto mb-1"
           >
             <v-col
-              cols="12"
+              cols="10"
               md="5"
               class
             >
@@ -24,7 +24,7 @@
             </v-col>
             <v-spacer />
             <v-col
-              cols="12"
+              cols="11"
               md="8"
               lg="7"
               xl="6"
@@ -36,13 +36,13 @@
                 align="center"
                 no-gutters
               >
-                <v-col
+                <!-- <v-col
                   cols="12"
                   md="6"
                   class="businessmodelcanvas_enter__ratinglabel d-none d-lg-inline-block"
                 >
                   <span>Rating</span>
-                </v-col>
+                </v-col> -->
                 <v-col
                   cols="12"
                   sm="6"
@@ -58,6 +58,9 @@
               </v-row>
             </v-col>
           </v-row>
+
+
+
           <v-row
             v-if="readonly==true"
             justify="start"
@@ -66,35 +69,51 @@
           >
             {{ syncedCanvas.problem }}
           </v-row>
+
+
+
+
+
+
+
+
           <v-row
             v-else
             justify="center"
-            class="mr-auto ml-auto mb-12"
+            class="mr-auto ml-auto"
           >
-            <ValidationProvider
-              v-slot="{errors,failedRules}"
-              name="Problem"
-              class="pt-1 pb-12 pl-5 pr-4 businessmodelcanvas_enter__paragraph"
-              rules="required|max:255"
+            <v-col
+              cols="12"
+              class="pa-0"
             >
-              <v-textarea
-                v-model="syncedCanvas.problem"
-                :disabled="readonly"
-                :error-messages="failedRules.max?`Must not be longer than 280 Characters`:errors"
-                counter
-                placeholder="My pitch is..."
-                @input="$emit('input',syncedCanvas)"
-              />
-            </ValidationProvider>
+              <ValidationProvider
+                v-slot="{errors,failedRules}"
+                name="Problem"
+
+                rules="required|max:255"
+              >
+                <v-textarea
+                  v-model="syncedCanvas.problem"
+                  class="businessmodelcanvas_enter__paragraph"
+                  :disabled="readonly"
+                  :error-messages="failedRules.max?`Must not be longer than 280 Characters`:errors"
+                  counter
+                  placeholder=""
+                  @input="$emit('input',syncedCanvas)"
+                />
+              </ValidationProvider>
+            </v-col>
           </v-row>
           
           <!-- COMPONENT -->
           <v-row
-            justify="center"
+            justify="start"
+            justify-lg="center"
+            no-gutters
             class="businessmodelcanvas_enter__description__label mt-12 mr-auto ml-auto mb-1"
           >
             <v-col
-              cols="12"
+              cols="10"
               md="5"
               class
             >
@@ -114,7 +133,7 @@
                 align="center"
                 no-gutters
               >
-                <v-col
+                <!-- <v-col
                   cols="12"
                   sm="8"
                   md="7"
@@ -122,7 +141,7 @@
                   class="businessmodelcanvas_enter__ratinglabel d-none d-lg-inline-block"
                 >
                   <span>Rating</span>
-                </v-col>
+                </v-col> -->
                 <v-col
                   cols="12"
                   sm="6"
@@ -151,33 +170,41 @@
             justify="center"
             class="mr-auto ml-auto mb-12"
           >
-            <ValidationProvider
-              v-slot="{errors,failedRules}"
-              class="pt-1 pb-12 pl-5 pr-4 businessmodelcanvas_enter__paragraph"
-              rules="required|max:255"
+            <v-col
+              cols="12"
+              class="pa-0"
             >
-              <v-textarea
-                v-model="syncedCanvas.solution"
-                :disabled="readonly"
-                :error-messages="failedRules.max?`Must not be longer than 280 Characters`:errors"
-                counter
-                placeholder="My pitch is..."
-                @input="$emit('input',syncedCanvas)"
-              />
-            </ValidationProvider>
+              <ValidationProvider
+                v-slot="{errors,failedRules}"
+
+                rules="required|max:255"
+              >
+                <v-textarea
+                  v-model="syncedCanvas.solution"
+                  class="businessmodelcanvas_enter__paragraph"
+                  :disabled="readonly"
+                  :error-messages="failedRules.max?`Must not be longer than 280 Characters`:errors"
+                  counter
+                  placeholder="My pitch is..."
+                  @input="$emit('input',syncedCanvas)"
+                />
+              </ValidationProvider>
+            </v-col>
           </v-row>
           
           <!-- COMPONENT -->
           <v-row
-            justify="center"
+            justify="start"
+            justify-lg="center"
+            no-gutters
             class="businessmodelcanvas_enter__description__label mt-12 mr-auto ml-auto mb-1"
           >
             <v-col
-              cols="12"
+              cols="10"
               md="5"
               class
             >
-              Unique Value Proposition
+              Innovation
             </v-col>
             <v-spacer />
             <v-col
@@ -193,7 +220,7 @@
                 align="center"
                 no-gutters
               >
-                <v-col
+                <!-- <v-col
                   cols="12"
                   sm="8"
                   md="7"
@@ -201,7 +228,7 @@
                   class="businessmodelcanvas_enter__ratinglabel d-none d-lg-inline-block"
                 >
                   <span>Rating</span>
-                </v-col>
+                </v-col> -->
                 <v-col
                   cols="12"
                   sm="6"
@@ -230,29 +257,36 @@
             justify="center"
             class="mr-auto ml-auto mb-12"
           >
-            <ValidationProvider
-              v-slot="{errors,failedRules}"
-              class="pt-1 pb-12 pl-5 pr-4 businessmodelcanvas_enter__paragraph"
-              rules="required|max:255"
+            <v-col
+              cols="12"
+              class="pa-0"
             >
-              <v-textarea
-                v-model="syncedCanvas.innovation"
-                :disabled="readonly"
-                :error-messages="failedRules.max?`Must not be longer than 280 Characters`:errors"
-                counter
-                placeholder="My pitch is..."
-                @input="$emit('input',syncedCanvas)"
-              />
-            </ValidationProvider>
+              <ValidationProvider
+                v-slot="{errors,failedRules}"
+                rules="required|max:255"
+              >
+                <v-textarea
+                  v-model="syncedCanvas.innovation"
+                  class="businessmodelcanvas_enter__paragraph"
+                  :disabled="readonly"
+                  :error-messages="failedRules.max?`Must not be longer than 280 Characters`:errors"
+                  counter
+                  placeholder="My pitch is..."
+                  @input="$emit('input',syncedCanvas)"
+                />
+              </ValidationProvider>
+            </v-col>
           </v-row>
           
           <!-- COMPONENT -->
           <v-row
-            justify="center"
+            justify="start"
+            justify-lg="center"
+            no-gutters
             class="businessmodelcanvas_enter__description__label mt-12 mr-auto ml-auto mb-1"
           >
             <v-col
-              cols="12"
+              cols="10"
               md="5"
               class
             >
@@ -272,7 +306,7 @@
                 align="center"
                 no-gutters
               >
-                <v-col
+                <!-- <v-col
                   cols="12"
                   sm="8"
                   md="7"
@@ -280,7 +314,7 @@
                   class="businessmodelcanvas_enter__ratinglabel d-none d-lg-inline-block"
                 >
                   <span>Rating</span>
-                </v-col>
+                </v-col> -->
                 <v-col
                   cols="12"
                   sm="6"
@@ -309,20 +343,25 @@
             justify="center"
             class="mr-auto ml-auto mb-12"
           >
-            <ValidationProvider
-              v-slot="{errors,failedRules}"
-              rules="required|max:255"
-              class="pt-1 pb-12 pl-5 pr-4 businessmodelcanvas_enter__paragraph"
+            <v-col
+              cols="12"
+              class="pa-0"
             >
-              <v-textarea
-                v-model="syncedCanvas.customer"
-                :disabled="readonly"
-                :error-messages="failedRules.max?`Must not be longer than 280 Characters`:errors"
-                counter
-                placeholder="My pitch is..."
-                @input="$emit('input',syncedCanvas)"
-              />
-            </ValidationProvider>
+              <ValidationProvider
+                v-slot="{errors,failedRules}"
+                rules="required|max:255"
+              >
+                <v-textarea
+                  v-model="syncedCanvas.customer"
+                  class="businessmodelcanvas_enter__paragraph"
+                  :disabled="readonly"
+                  :error-messages="failedRules.max?`Must not be longer than 280 Characters`:errors"
+                  counter
+                  placeholder="My pitch is..."
+                  @input="$emit('input',syncedCanvas)"
+                />
+              </ValidationProvider>
+            </v-col>
           </v-row>
         </v-col>
       </v-row>

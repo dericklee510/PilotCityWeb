@@ -1,12 +1,12 @@
 
 .manageteam{
     &__container{
-        margin-top : 82.5px;
+        margin-top: none;
         height: 100%;
         .v-application--is-ltr .v-text-field .v-input__append-inner{
             margin-top: 16px;
         }
-        .v-text-field{
+        .v-text-field{ 
             margin-top: 0px;
             padding-top: 0px;
         }
@@ -50,14 +50,34 @@
         font-family: Raleway;
         font-style: normal;
         font-weight: 800;
-        font-size: 37.5px;
+        font-size: 30px;
+        line-height: 44px;
+        color: #231F20;
+        margin-top: 50px;
+        padding-left: 17.84%;
+        padding-bottom: 0;
+        margin-bottom: 15px;
+
+    }
+
+    &__teamtitle{
+        width: 100%;
+        font-family: Raleway;
+        font-style: normal;
+        font-weight: 800;
+        font-size: 30px;
         line-height: 44px;
         color: #231F20;
         margin-top: 65.43px;
         padding-left: 17.84%;
         padding-bottom: 0;
+        margin-bottom: 30px;
+        // border: 1px solid #cccccc;
+        // border-radius: 3px;
 
     }
+
+
     &__labels{
         font-family: Raleway;
         font-style: normal;
@@ -132,7 +152,7 @@
                 padding-left: 10px;
                 font-family: Raleway;
                 font-style: normal;
-                font-weight: 900;
+                font-weight: 800;
                 font-size: 17.1097px;
                 line-height: 20px;
                 color: #231F20;

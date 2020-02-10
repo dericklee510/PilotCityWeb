@@ -138,7 +138,7 @@ export default class introvideo_edit extends Vue{
     success:boolean=false
     showerr = false
     checkbox = false
-    onSubmit(){
+     async onSubmit(){
       FbStore.updateCurrentEmployerProgram({
         introVideo:this.url
       })

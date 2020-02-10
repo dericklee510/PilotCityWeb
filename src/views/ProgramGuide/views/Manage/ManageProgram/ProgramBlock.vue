@@ -50,6 +50,8 @@
           no-title
           :min="minDate"
           max="2020-06-12"
+          title-date-format="mm-dd-yyyy"
+          default-value="2020-06-12"
         />
       </v-menu>
     </v-col>

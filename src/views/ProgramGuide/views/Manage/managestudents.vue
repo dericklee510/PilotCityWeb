@@ -59,7 +59,7 @@
           >
             <span> Name </span>
           </v-col>
-          <v-col class=" d-none d-lg-block">
+          <v-col class="d-none d-lg-block">
             <span> Classes </span>
           </v-col>
           <v-col
