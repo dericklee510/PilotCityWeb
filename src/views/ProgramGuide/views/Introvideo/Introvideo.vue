@@ -108,15 +108,14 @@ import {firebase} from "@/firebase/init"
   }
 })
 export default class Introvideo extends Vue {
-  mounted() {
+  beforeDestroy() {
     // this.key++;
     // this.$forceUpdate()
     // console.log(this.$refs.player.player.nativeView)
+    location.reload()
   }
   key = 0;
-  beforeDestroy() {
-    
-  }
+ 
   canBeAcknowldged: boolean = false;
   acknowledged: boolean =  !!FbStore.currentStudentClassroom?.finishedIntrovideo || false;
   async onSubmit(){

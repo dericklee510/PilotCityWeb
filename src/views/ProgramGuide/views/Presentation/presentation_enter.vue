@@ -150,8 +150,8 @@ import { NextNode } from '@/views/ProgramGuide/components'
 export default class PresentationEnter extends TextEnter {
     url:string = FbStore.currentProject!.presentationLink || ""
     checkbox=false
-    onSubmit(){
-      FbStore.updateCurrentProject({
+    async onSubmit(){
+      await FbStore.updateCurrentProject({
          [`programSequence.${'presentation'}`]:firebase.firestore.FieldValue.serverTimestamp(),
         presentationLink:this.url
       })

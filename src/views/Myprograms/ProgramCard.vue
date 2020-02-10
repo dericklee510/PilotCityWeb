@@ -149,7 +149,8 @@ export default class ProgramCard extends Vue {
     let route = new RouteList(FbStore.currentUserProfile!.citizenType!)
       .linkedList.head.value.routeName;
     this.$router.push({
-      name: this.openCondition ? route : "program.launch"
+      name: this.openCondition ? route : "program.launch",
+      params:{launch:"student"}
       // params: { citizenType: citizenKey }
     });
   }
