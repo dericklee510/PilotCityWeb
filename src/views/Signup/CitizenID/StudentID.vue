@@ -1,5 +1,18 @@
 <template>
   <div>
+
+
+
+    <!-- SCHOOL INFORMATION -->
+
+    <v-row
+      justify="center"
+      class="mr-auto ml-auto mt-5 mb-5 studentid__categorytitle"
+    >
+      School
+    </v-row>
+
+    <!-- GRADE LEVEL -->
     <v-row
       no-gutters
       justify="center"
@@ -8,7 +21,7 @@
         class="d-flex"
         cols="12"
         sm="7"
-      >
+      > 
         <ValidationProvider
           v-slot="{errors}"
           slim
@@ -23,15 +36,6 @@
           />
         </ValidationProvider>
       </v-col>
-    </v-row>
-
-    <!-- SCHOOL INFORMATION -->
-
-    <v-row
-      justify="center"
-      class="mr-auto ml-auto mt-5 mb-5 studentid__categorytitle"
-    >
-      School
     </v-row>
 
     <!-- TEACHER -->

@@ -20,7 +20,7 @@
           GET STARTED
         </v-row>
       </v-col>
-
+ 
       <v-col
         id="citizenid__containbottom"
         cols="8"
@@ -29,7 +29,7 @@
           justify="center"
           class="pt-10"
         >
-          <v-col cols="7">
+          <v-col cols="">
             <!-- PROGRAM INFORMATION -->
             <template>
               <v-row
@@ -237,7 +237,7 @@
               <v-row
                 no-gutters
                 justify="center"
-                class="mt-5 mb-5"
+                class="mt-5 mb-5"  
               >
                 <v-col
                   cols="8"
@@ -998,6 +998,20 @@
                 </v-col>
               </v-row>
             </template>
+
+
+            <!-- SOCIAL MEDIA -->
+            <template>
+              <v-row
+                class="studentid__questiontitle mt-10 mb-10"
+                justify="center"
+              >
+                What's your handle?
+              </v-row>
+            </template>  
+
+
+
           <!-- END -->
           </v-col>
         </v-row>
@@ -1013,7 +1027,7 @@
           </button>
         </v-col>
       </v-col>
-    </v-row>
+    </v-row>  
   </ValidationObserver>
 </template>
 
@@ -1079,7 +1093,7 @@ import { startCase } from "lodash";
       ],
 
 
-            postsecondary: ['Career Technical School', 'Community College', 'Transfer to University', 'University', 'Part-Time Work', 'Full-Time Work'],
+            postsecondary: ['Career Technical School', 'Community College', 'Transfer to University', 'University', 'Part-Time Job', 'Full-Time Job'],
             postsecondaryvalue: null,
 
             techownership: ['Smartphone', 'Tablet', 'Laptop', 'Desktop'],
