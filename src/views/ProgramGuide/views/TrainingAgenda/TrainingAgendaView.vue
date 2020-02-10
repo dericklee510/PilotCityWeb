@@ -31,7 +31,7 @@ import { NextNode } from "@/views/ProgramGuide/components"
 export default class TrainingDayAgendaView extends Vue{
   agendaItems:EventItem[] = FbStore.currentTeacherProgramData?.trainingDayAgenda?.events || FbStore.currentEmployerProgram!.trainingDayTemplate?.events || []
   async onFinish(){
-    if(Object.keys(FbStore.currentProject!.programSequence).length)
+    if(FbStore.currentProject!.programSequence && Object.keys(FbStore.currentProject!.programSequence).length)
     await FbStore.updateCurrentProject({
       [`programSequence.${'train'}`]:firebase.firestore.FieldValue.serverTimestamp()
       

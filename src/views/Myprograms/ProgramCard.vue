@@ -30,6 +30,14 @@
           </v-col>
           <v-col cols="3">
             <v-btn
+              v-if="studentLaunchCondition && studentLaunchConditionBool"
+              :disabled="studentLaunchConditionBool"
+              :loading="loader"
+            >
+              {{ studentLaunchCondition | moment("calendar") }}
+            </v-btn>
+            <v-btn
+              v-else
               class="myprograms__cardbutton"
               :disabled="loading"
               :loading="loader"
@@ -55,6 +63,8 @@ import {
 import { FbStore } from "../../store";
 import { PCLoader } from "../../components/utilities";
 import { RouteList } from "../ProgramGuide/types";
+import {firebase}  from "@/firebase/init"
+import moment from 'moment'
 @Component({
   components: {
     PCLoader
@@ -64,7 +74,24 @@ import { RouteList } from "../ProgramGuide/types";
 
 export default class ProgramCard extends Vue {
   
-  
+  launchDay:Boolean | Date | firebase.firestore.Timestamp|null | undefined= null
+  get studentLaunchCondition(){
+    if(FbStore.userCitizenType === "student"){
+    if(this.launchDay instanceof firebase.firestore.Timestamp){
+      return this.launchDay.toDate()
+    }
+    else 
+      return false
+      }
+    else 
+      return false
+  }
+  get studentLaunchConditionBool(){
+    if(this.studentLaunchCondition instanceof Date)
+      return !moment(this.studentLaunchCondition).isBefore(moment())
+    else
+      return true
+  }
   loader = false;
   @Prop({ required: true })
   program!: EmployerProgram;
@@ -76,6 +103,7 @@ export default class ProgramCard extends Vue {
         employerProgramId: this.program.employerProgramId,
         studentId: FbStore.FBUser!.uid
       });
+     this.launchDay = (await FbStore.firestore.collection("TeacherProgramData").doc(classroomData.teacherProgramId).get()).data<TeacherProgramData>()?.programSequence?.launchDay
       const studentClassroomData = (
         await FbStore.firestore
           .collection("studentClassroom")
@@ -121,7 +149,8 @@ export default class ProgramCard extends Vue {
     let route = new RouteList(FbStore.currentUserProfile!.citizenType!)
       .linkedList.head.value.routeName;
     this.$router.push({
-      name: this.openCondition ? route : "program.launch"
+      name: this.openCondition ? route : "program.launch",
+      params:{launch:"student"}
       // params: { citizenType: citizenKey }
     });
   }

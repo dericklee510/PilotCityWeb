@@ -123,6 +123,12 @@ import { NextNode } from "@/views/ProgramGuide/components"
   }
 })
 export default class ViewCaseStudies extends Vue{
+  created(){
+    if(FbStore.currentProject?.programSequence?.caseStudies)
+      this.namedLinks.forEach((link,index) => {
+        this.caseStudiesReviewed[index] = true
+      })
+  }
     namedLinks:NamedLink[] = FbStore.currentEmployerProgram?.caseStudies || [{} as NamedLink]
     caseStudiesReviewed = FbStore.currentProject?.caseStudiesReviewed || []
   get allReviewed(){
@@ -130,9 +136,8 @@ export default class ViewCaseStudies extends Vue{
   }
   submit(){
     FbStore.updateCurrentProject({
-      programSequence:{
-        caseStudies:firebase.firestore.FieldValue.serverTimestamp()
-      }
+      [`programSequence.${'caseStudies'}`]:firebase.firestore.FieldValue.serverTimestamp()
+      
     })
     this.$emit('nextNode')
   }

@@ -3,7 +3,9 @@
     id="map"
     ref="address"
     :enable-geolocation="true"
-    
+    :dense="dense"
+    :filled="filled"
+    :label="label"
     classname="form-control"
     placeholder="Please type your address"
     :outlined="outlined"
@@ -38,10 +40,14 @@ export default class AutoComplete extends Vue {
         elements: HTMLInputElement[];
         address: any;
     }
-
   @Prop()
-    public title?: string;
-
+  public dense?: false;
+  @Prop()
+  public filled?: false;
+  @Prop()
+  public label?: "";
+  @Prop()
+  public title?: string;
   @Prop()
   public value?: string
 

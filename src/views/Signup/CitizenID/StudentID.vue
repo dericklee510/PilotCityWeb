@@ -340,14 +340,13 @@
             v-model="primaryHomeLanguage"
             :error-messages="errors"
             :items="homelanguage"
-            dense
-            filled
             label="Primary Home Language"
+            outlined
           />
         </ValidationProvider>
       </v-col>
     </v-row>
-    <!-- <v-row
+    <v-row
       no-gutters
       justify="center"
     >
@@ -358,10 +357,11 @@
         <AutoComplete
           v-model="address"
           outlined
+            label="Home Address"
           types="street_address"
         />
       </v-col>
-    </v-row> -->
+    </v-row>
 
     <!-- STREET ADDRESS -->
 

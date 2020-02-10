@@ -39,7 +39,7 @@
             style="width: 100%; height: 100%"
           >
             <router-view
-              @nextNode="$router.push({name: $refs.nextLock.nextModule.value.routeName})"
+              @nextNode="$refs.nextLock.navigateNext()"
               @updateSavedDate="updateSavedDate($event)"
               @saving="saving($event)"
             />
@@ -216,6 +216,8 @@ import { Observable, empty, Subscription, BehaviorSubject } from "rxjs";
         FbStore.initCurrentProject(data);
       }
     );
+    if(this.$route.params.launch === FbStore.userCitizenType)
+      this.navigateLast()
   },
   components: {
     Nav,
@@ -265,6 +267,12 @@ export default class Guide extends Vue {
 
   get routeMap(){
     return new RouteList(FbStore.currentUserProfile!.citizenType!).linkedList
+  }
+  navigateLast(){
+    let currentNode = this.routeMap.head
+    while(currentNode?.next?.value?.isUnlocked)
+      currentNode = currentNode.next
+    this.$router.push({name:currentNode.value.routeName})
   }
 }
 </script>
