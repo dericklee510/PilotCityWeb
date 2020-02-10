@@ -309,7 +309,7 @@ export default class jointeam extends Vue {
   get currentProject(){
     return FbStore.currentProject || "";
   }
-  @Watch('teamIds')
+  @Watch('teamIds',{immediate:true})
   async onIdsChange(){
     this.names = await getNames()
   }

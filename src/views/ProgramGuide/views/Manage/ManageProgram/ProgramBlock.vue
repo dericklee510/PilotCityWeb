@@ -48,7 +48,7 @@
         <v-date-picker
           v-model="syncValue"
           no-title
-          min="2020-02-10"
+          :min="minDate"
           max="2020-06-12"
         />
       </v-menu>
@@ -58,6 +58,7 @@
       class="manageprogram__datepicker mb-12 mt-3"
     >
       <v-progress-linear
+        v-model="completion"
         :color="completion?'green':'red'"
         height="9"
         reactive
@@ -128,7 +129,7 @@ export default class ProgramBlock extends Vue {
     }
     set unlockType(newVal:Unlock){
         FbStore.updateCurrentTeacherProgramData({
-            [`programSequence.${this.sequence}`]:(newVal==="By Date")?new Date():(newVal==="Manually")?false:firebase.firestore.FieldValue.delete()
+            [`programSequence.${this.sequence}`]:(newVal==="By Date")?new Date().setDate(new Date().getDate() + 10):(newVal==="Manually")?false:firebase.firestore.FieldValue.delete()
         })
     }
     get syncValue(){
@@ -141,16 +142,23 @@ export default class ProgramBlock extends Vue {
     set syncValue(newVal:undefined | boolean | string){
         let val:typeof newVal | Date = newVal
         if(typeof newVal == "string")
-            val = new Date(newVal)
+            val = moment(newVal).toDate()
         FbStore.updateCurrentTeacherProgramData({
             [`programSequence.${this.sequence}`]:val
         })
     }
     get isUnlocked(){
         if (typeof this.syncValue === "string")
-            return moment(new Date(this.syncValue)).isBefore(moment())
+            return moment(new Date(this.syncValue)).isBefore(moment(),'d')
+        else if (this.syncValue === undefined)
+          return this.completion
         else
             return this.syncValue
+    }
+    get minDate(){
+      const minDate = new Date()
+      minDate.setDate(minDate.getDate() -1)
+      return minDate.toISOString().substr(0,10)
     }
 }
 </script>

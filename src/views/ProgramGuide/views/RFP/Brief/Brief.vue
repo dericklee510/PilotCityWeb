@@ -31,7 +31,7 @@
           >
             Generate project prompts that best represent employer requirements and your course curriculum by tweaking key information in the mission.
             [INSTRUCTIONS FOR EMPLOYERS, ROOT EMPLOYER RFP FOR TEACHERS, AND REVISED & FINALIZED RFP FOR STUDENTS]
-            TEACHERS: DISABLED-VIEW OF INPUTS; STUDENTS: {{ TEXT-VIEW }}
+            TEACHERS: DISABLED-VIEW OF INPUTS; STUDENTS:
           </v-col>
         </v-row>
         <v-row
@@ -55,9 +55,16 @@
             Enter Name of Company or Organization [DIABLED FOR NOT-EMPLOYER]
           </v-col>
           <v-col cols="7">
-            <input
-              class="prompt__generateinput"
+            <ValidationProvider
+              v-slot="{errors}"
+              rules="required"
             >
+              <v-text-field
+                v-model="rfpCompany"
+                class="prompt__generateinput"
+                :error-messages="errors"
+              />
+            </ValidationProvider>
           </v-col>
         </v-row>
         <v-row
@@ -81,11 +88,18 @@
             Finalize baseline prompt [VIEWABLE FOR ONLY STUDENTS] | ideally is a copy of original RFP
           </v-col>
           <v-col cols="7">
-            <v-textarea
-              outlined
-              depressed
-              solo
-            />
+            <ValidationProvider
+              v-slot="{errors}"
+              rules="required"
+            >
+              <v-textarea
+                v-model="rfpPrompt"
+                outlined
+                :error-messages="errors"
+                depressed
+                solo
+              />
+            </ValidationProvider>
           </v-col>
         </v-row>
         <v-row
@@ -160,6 +174,7 @@
           </v-col>
           <v-col cols="7">
             <v-textarea
+              v-model="rfpAbout"
               outlined
               depressed
               solo
@@ -201,6 +216,7 @@
           </v-col>
           <v-col cols="7">
             <input
+              v-model="rfpResources"
               class="prompt__generateinput"
             >
           </v-col>
@@ -214,11 +230,21 @@
 import Vue from 'vue'
 import Component from 'vue-class-component';
 import { FbStore } from '../../../../../store';
-
-@Component
+import { ValidationProvider, ValidationObserver } from 'vee-validate';
+@Component({
+  components:{
+    ValidationObserver,
+    ValidationProvider
+  }
+})
 export default class RFPBrief extends Vue{
     get citizenType(){
         return FbStore.userCitizenType;
     }
+    rfpCompany = FbStore.currentEmployerProgram?.rfpCompany || ""
+    rfpPrompt = FbStore.currentEmployerProgram?.rfpPrompt || ""
+    rfpRequirements = FbStore.currentEmployerProgram?.rfpRequirements || ""
+    rfpAbout = FbStore.currentEmployerProgram?.rfpAbout || ""
+    rfpResources = FbStore.currentEmployerProgram?.rfpResources || ""
 }
 </script>

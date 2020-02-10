@@ -110,6 +110,7 @@ export default class AgendaView extends Vue {
       .every(isTrue => isTrue);
       }
     else console.error('Agenda not found!')
+    return false
   }
 }
 </script>

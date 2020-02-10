@@ -57,11 +57,7 @@ const routes: RouteConfig [] = [
         name: `signup2`,
         component: signup2
     },
-    {
-        path: '/program/rfp',
-        name: 'rfp-brief',
-        component: Brief
-    },
+   
     {
         path: '/',
         name: 'home',

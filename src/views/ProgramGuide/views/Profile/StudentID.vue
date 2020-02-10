@@ -53,23 +53,29 @@
                 cols="12"
                 sm="7"
               >
-                <v-radio-group
-                  v-model="internshipInterest"
-                  column
+                <ValidationProvider
+                  v-slot="{errors}"
+                  rules="required"
                 >
-                  <v-radio
-                    label="Highly Interested"
-                    value="2"
-                  />
-                  <v-radio
-                    label="Interested"
-                    value="1"
-                  />
-                  <v-radio
-                    label="Not Interested"
-                    value="0"
-                  />
-                </v-radio-group>
+                  <v-radio-group
+                    v-model="internshipInterest"
+                    column
+                    :error-messages="errors"
+                  >
+                    <v-radio
+                      label="Highly Interested"
+                      value="2"
+                    />
+                    <v-radio
+                      label="Interested"
+                      value="1"
+                    />
+                    <v-radio
+                      label="Not Interested"
+                      value="0"
+                    />
+                  </v-radio-group>
+                </ValidationProvider>
               </v-col>
             </v-row>
 
@@ -88,18 +94,26 @@
                 cols="12"
                 sm="7"
               >
-                <v-checkbox
-                  v-model="compensationType"
-                  hide-details
-                  label="Unpaid Experience"
-                  value="Unpaid Experience"
-                />
-                <v-checkbox
-                  v-model="compensationType"
-                  hide-details
-                  label="Paid"
-                  value="Paid"
-                />
+                <ValidationProvider
+                  v-slot="{errors}"
+                  rules="required"
+                >
+                  <v-checkbox
+                    v-model="compensationType"
+                    :error-messages="errors"
+                    hide-details
+                    label="Unpaid Experience"
+                    value="Unpaid Experience"
+                  />
+                  <v-checkbox
+                    v-model="compensationType"
+                    :error-messages="errors"
+                    hide-details
+                    label="Paid"
+                    value="Paid"
+                  />
+                  <span class="error--text caption">{{ errors[0] }}</span>
+                </ValidationProvider>
               </v-col>
             </v-row>
 
@@ -118,27 +132,33 @@
                 cols="12"
                 sm="7"
               >
-                <v-radio-group
-                  v-model="freeLunch"
-                  column
+                <ValidationProvider
+                  v-slot="{errors}"
+                  rules="required"
                 >
-                  <v-radio
-                    label="Yes"
-                    value="Yes"
-                  />
-                  <v-radio
-                    label="No"
-                    value="No"
-                  />
-                  <v-radio
-                    label="I'm not sure"
-                    value="I'm not sure"
-                  />
-                  <v-radio
-                    label="Decline to answer"
-                    value="Decline to answer"
-                  />
-                </v-radio-group>
+                  <v-radio-group
+                    v-model="freeLunch"
+                    column
+                    :error-messages="errors"
+                  >
+                    <v-radio
+                      label="Yes"
+                      value="Yes"
+                    />
+                    <v-radio
+                      label="No"
+                      value="No"
+                    />
+                    <v-radio
+                      label="I'm not sure"
+                      value="I'm not sure"
+                    />
+                    <v-radio
+                      label="Decline to answer"
+                      value="Decline to answer"
+                    />
+                  </v-radio-group>
+                </ValidationProvider>
               </v-col>
             </v-row>
 
@@ -157,24 +177,33 @@
                 cols="12"
                 sm="7"
               >
-                <v-checkbox
-                  v-model="resume"
-                  hide-details
-                  label="Yes"
-                  value="Yes"
-                />
-                <v-checkbox
-                  v-model="resume"
-                  hide-details
-                  label="No"
-                  value="No"
-                />
-                <v-checkbox
-                  v-model="resume"
-                  hide-details
-                  label="LinkedIn.com Resume"
-                  value="LinkedIn.com Resume"
-                />
+                <ValidationProvider
+                  v-slot="{errors}"
+                  rules="required"
+                >
+                  <v-checkbox
+                    v-model="resume"
+                    hide-details
+                    :error-messages="errors"
+                    label="Yes"
+                    value="Yes"
+                  />
+                  <v-checkbox
+                    v-model="resume"
+                    hide-details
+                    :error-messages="errors"
+                    label="No"
+                    value="No"
+                  />
+                  <v-checkbox
+                    v-model="resume"
+                    :error-messages="errors"
+                    hide-details
+                    label="LinkedIn.com Resume"
+                    value="LinkedIn.com Resume"
+                  />
+                  <span class="error--text caption">{{ errors[0] }}</span>
+                </ValidationProvider>
               </v-col>
             </v-row>
 
@@ -196,14 +225,20 @@
                 cols="12"
                 sm="10"
               >
-                <v-select
-                  v-model="postHighPlan"
-                  :items="postsecondary"
-                  chips
-                  label="What is your plan immediately after high school?"
-                  multiple
-                  outlined
-                />
+                <ValidationProvider
+                  v-slot="{errors}"
+                  rules="required"
+                >
+                  <v-select
+                    v-model="postHighPlan"
+                    :error-messages="errors"
+                    :items="postsecondary"
+                    chips
+                    label="What is your plan immediately after high school?"
+                    multiple
+                    outlined
+                  />
+                </ValidationProvider>
               </v-col>
             </v-row>
 
@@ -228,20 +263,24 @@
                 Agriculture & Natural Resources
               </v-col>
               <v-col cols="3">
-                <v-rating
-                  v-model="agricultureNaturalResources"
-                  :length="length"
-                  :empty-icon="emptyIcon"
-                  :full-icon="fullIcon"
-                  :half-icon="halfIcon"
-                  
-                  :hover="hover"
-                 
-                  :size="size"
-                  :dense="dense"
-                  :color="color"
-                  :background-color="bgColor"
-                />
+                <ValidationProvider
+                  v-slot="{errors}"
+                  rules="required"
+                >
+                  <v-rating
+                    v-model="agricultureNaturalResources"
+                    :length="length"
+                    :empty-icon="emptyIcon"
+                    :full-icon="fullIcon"
+                    :half-icon="halfIcon"
+                    :hover="hover"
+                    :size="size"
+                    :dense="dense"
+                    :color="color"
+                    :background-color="bgColor"
+                  />
+                  <span class="error--text caption">{{ errors[0] }}</span>
+                </ValidationProvider>
               </v-col>
             </v-row>
 
@@ -258,20 +297,24 @@
                 Arts, Media and Entertainment
               </v-col>
               <v-col cols="3">
-                <v-rating
-                  v-model="artsMediaAndEntertainment"
-                  :length="length"
-                  :empty-icon="emptyIcon"
-                  :full-icon="fullIcon"
-                  :half-icon="halfIcon"
-                  
-                  :hover="hover"
-                 
-                  :size="size"
-                  :dense="dense"
-                  :color="color"
-                  :background-color="bgColor"
-                />
+                <ValidationProvider
+                  v-slot="{errors}"
+                  rules="required"
+                >
+                  <v-rating
+                    v-model="artsMediaAndEntertainment"
+                    :length="length"
+                    :empty-icon="emptyIcon"
+                    :full-icon="fullIcon"
+                    :half-icon="halfIcon"
+                    :hover="hover"
+                    :size="size"
+                    :dense="dense"
+                    :color="color"
+                    :background-color="bgColor"
+                  />
+                  <span class="error--text caption">{{ errors[0] }}</span>
+                </ValidationProvider>
               </v-col>
             </v-row>
 
@@ -288,20 +331,24 @@
                 Building and Construction Trades
               </v-col>
               <v-col cols="3">
-                <v-rating
-                  v-model="buildingAndConstructionTrades"
-                  :length="length"
-                  :empty-icon="emptyIcon"
-                  :full-icon="fullIcon"
-                  :half-icon="halfIcon"
-                  
-                  :hover="hover"
-                 
-                  :size="size"
-                  :dense="dense"
-                  :color="color"
-                  :background-color="bgColor"
-                />
+                <ValidationProvider
+                  v-slot="{errors}"
+                  rules="required"
+                >
+                  <v-rating
+                    v-model="buildingAndConstructionTrades"
+                    :length="length"
+                    :empty-icon="emptyIcon"
+                    :full-icon="fullIcon"
+                    :half-icon="halfIcon"
+                    :hover="hover"
+                    :size="size"
+                    :dense="dense"
+                    :color="color"
+                    :background-color="bgColor"
+                  />
+                  <span class="error--text caption">{{ errors[0] }}</span>
+                </ValidationProvider>
               </v-col>
             </v-row>
 
@@ -318,20 +365,24 @@
                 Business and Finance
               </v-col>
               <v-col cols="3">
-                <v-rating
-                  v-model="businessAndFinance"
-                  :length="length"
-                  :empty-icon="emptyIcon"
-                  :full-icon="fullIcon"
-                  :half-icon="halfIcon"
-                  
-                  :hover="hover"
-                 
-                  :size="size"
-                  :dense="dense"
-                  :color="color"
-                  :background-color="bgColor"
-                />
+                <ValidationProvider
+                  v-slot="{errors}"
+                  rules="required"
+                >
+                  <v-rating
+                    v-model="businessAndFinance"
+                    :length="length"
+                    :empty-icon="emptyIcon"
+                    :full-icon="fullIcon"
+                    :half-icon="halfIcon"
+                    :hover="hover"
+                    :size="size"
+                    :dense="dense"
+                    :color="color"
+                    :background-color="bgColor"
+                  />
+                  <span class="error--text caption">{{ errors[0] }}</span>
+                </ValidationProvider>
               </v-col>
             </v-row>
 
@@ -348,20 +399,24 @@
                 Education, Childhood Development & Family Services
               </v-col>
               <v-col cols="3">
-                <v-rating
-                  v-model="educationChildhoodDevelopmentFamilyServices"
-                  :length="length"
-                  :empty-icon="emptyIcon"
-                  :full-icon="fullIcon"
-                  :half-icon="halfIcon"
-                  
-                  :hover="hover"
-                 
-                  :size="size"
-                  :dense="dense"
-                  :color="color"
-                  :background-color="bgColor"
-                />
+                <ValidationProvider
+                  v-slot="{errors}"
+                  rules="required"
+                >
+                  <v-rating
+                    v-model="educationChildhoodDevelopmentFamilyServices"
+                    :length="length"
+                    :empty-icon="emptyIcon"
+                    :full-icon="fullIcon"
+                    :half-icon="halfIcon"
+                    :hover="hover"
+                    :size="size"
+                    :dense="dense"
+                    :color="color"
+                    :background-color="bgColor"
+                  />
+                  <span class="error--text caption">{{ errors[0] }}</span>
+                </ValidationProvider>
               </v-col>
             </v-row>
 
@@ -372,24 +427,30 @@
               class="mt-5 mb-5"
             >
               <v-col
-                cols="8"  
+                cols="8"
                 class="studentid__questionsubtitle mt-1"
               >
                 Energy, Environment & Utilities
               </v-col>
               <v-col cols="3">
-                <v-rating
-                  v-model="energyEnvironmentUtilities"
-                  :length="length"
-                  :empty-icon="emptyIcon"
-                  :full-icon="fullIcon"
-                  :half-icon="halfIcon"
-                  :hover="hover"
-                  :size="size"
-                  :dense="dense"
-                  :color="color"
-                  :background-color="bgColor"
-                />
+                <ValidationProvider
+                  v-slot="{errors}"
+                  rules="required"
+                >
+                  <v-rating
+                    v-model="energyEnvironmentUtilities"
+                    :length="length"
+                    :empty-icon="emptyIcon"
+                    :full-icon="fullIcon"
+                    :half-icon="halfIcon"
+                    :hover="hover"
+                    :size="size"
+                    :dense="dense"
+                    :color="color"
+                    :background-color="bgColor"
+                  />
+                  <span class="error--text caption">{{ errors[0] }}</span>
+                </ValidationProvider>
               </v-col>
             </v-row>
 
@@ -406,20 +467,24 @@
                 Engineering & Architecture
               </v-col>
               <v-col cols="3">
-                <v-rating
-                  v-model="engineeringArchitecture"
-                  :length="length"
-                  :empty-icon="emptyIcon"
-                  :full-icon="fullIcon"
-                  :half-icon="halfIcon"
-                  
-                  :hover="hover"
-                 
-                  :size="size"
-                  :dense="dense"
-                  :color="color"
-                  :background-color="bgColor"
-                />
+                <ValidationProvider
+                  v-slot="{errors}"
+                  rules="required"
+                >
+                  <v-rating
+                    v-model="engineeringArchitecture"
+                    :length="length"
+                    :empty-icon="emptyIcon"
+                    :full-icon="fullIcon"
+                    :half-icon="halfIcon"
+                    :hover="hover"
+                    :size="size"
+                    :dense="dense"
+                    :color="color"
+                    :background-color="bgColor"
+                  />
+                  <span class="error--text caption">{{ errors[0] }}</span>
+                </ValidationProvider>
               </v-col>
             </v-row>
 
@@ -436,20 +501,24 @@
                 Fashion & Interior Design
               </v-col>
               <v-col cols="3">
-                <v-rating
-                  v-model="fashionInteriorDesign"
-                  :length="length"
-                  :empty-icon="emptyIcon"
-                  :full-icon="fullIcon"
-                  :half-icon="halfIcon"
-                  
-                  :hover="hover"
-                 
-                  :size="size"
-                  :dense="dense"
-                  :color="color"
-                  :background-color="bgColor"
-                />
+                <ValidationProvider
+                  v-slot="{errors}"
+                  rules="required"
+                >
+                  <v-rating
+                    v-model="fashionInteriorDesign"
+                    :length="length"
+                    :empty-icon="emptyIcon"
+                    :full-icon="fullIcon"
+                    :half-icon="halfIcon"
+                    :hover="hover"
+                    :size="size"
+                    :dense="dense"
+                    :color="color"
+                    :background-color="bgColor"
+                  />
+                  <span class="error--text caption">{{ errors[0] }}</span>
+                </ValidationProvider>
               </v-col>
             </v-row>
 
@@ -466,20 +535,24 @@
                 Health Science & Medical Technology
               </v-col>
               <v-col cols="3">
-                <v-rating
-                  v-model="healthScienceMedicalTechnology"
-                  :length="length"
-                  :empty-icon="emptyIcon"
-                  :full-icon="fullIcon"
-                  :half-icon="halfIcon"
-                  
-                  :hover="hover"
-                 
-                  :size="size"
-                  :dense="dense"
-                  :color="color"
-                  :background-color="bgColor"
-                />
+                <ValidationProvider
+                  v-slot="{errors}"
+                  rules="required"
+                >
+                  <v-rating
+                    v-model="healthScienceMedicalTechnology"
+                    :length="length"
+                    :empty-icon="emptyIcon"
+                    :full-icon="fullIcon"
+                    :half-icon="halfIcon"
+                    :hover="hover"
+                    :size="size"
+                    :dense="dense"
+                    :color="color"
+                    :background-color="bgColor"
+                  />
+                  <span class="error--text caption">{{ errors[0] }}</span>
+                </ValidationProvider>
               </v-col>
             </v-row>
 
@@ -496,20 +569,24 @@
                 Hospitality, Tourism & Recreation
               </v-col>
               <v-col cols="3">
-                <v-rating
-                  v-model="hospitalityTourismRecreation"
-                  :length="length"
-                  :empty-icon="emptyIcon"
-                  :full-icon="fullIcon"
-                  :half-icon="halfIcon"
-                  
-                  :hover="hover"
-                 
-                  :size="size"
-                  :dense="dense"
-                  :color="color"
-                  :background-color="bgColor"
-                />
+                <ValidationProvider
+                  v-slot="{errors}"
+                  rules="required"
+                >
+                  <v-rating
+                    v-model="hospitalityTourismRecreation"
+                    :length="length"
+                    :empty-icon="emptyIcon"
+                    :full-icon="fullIcon"
+                    :half-icon="halfIcon"
+                    :hover="hover"
+                    :size="size"
+                    :dense="dense"
+                    :color="color"
+                    :background-color="bgColor"
+                  />
+                  <span class="error--text caption">{{ errors[0] }}</span>
+                </ValidationProvider>
               </v-col>
             </v-row>
 
@@ -526,20 +603,24 @@
                 Information & Communication Technologies
               </v-col>
               <v-col cols="3">
-                <v-rating
-                  v-model="informationCommunicationTechnologies"
-                  :length="length"
-                  :empty-icon="emptyIcon"
-                  :full-icon="fullIcon"
-                  :half-icon="halfIcon"
-                  
-                  :hover="hover"
-                 
-                  :size="size"
-                  :dense="dense"
-                  :color="color"
-                  :background-color="bgColor"
-                />
+                <ValidationProvider
+                  v-slot="{errors}"
+                  rules="required"
+                >
+                  <v-rating
+                    v-model="informationCommunicationTechnologies"
+                    :length="length"
+                    :empty-icon="emptyIcon"
+                    :full-icon="fullIcon"
+                    :half-icon="halfIcon"
+                    :hover="hover"
+                    :size="size"
+                    :dense="dense"
+                    :color="color"
+                    :background-color="bgColor"
+                  />
+                  <span class="error--text caption">{{ errors[0] }}</span>
+                </ValidationProvider>
               </v-col>
             </v-row>
 
@@ -556,20 +637,24 @@
                 Manufacturing & Product Development
               </v-col>
               <v-col cols="3">
-                <v-rating
-                  v-model="manufacturingProductDevelopment"
-                  :length="length"
-                  :empty-icon="emptyIcon"
-                  :full-icon="fullIcon"
-                  :half-icon="halfIcon"
-                  
-                  :hover="hover"
-                 
-                  :size="size"
-                  :dense="dense"
-                  :color="color"
-                  :background-color="bgColor"
-                />
+                <ValidationProvider
+                  v-slot="{errors}"
+                  rules="required"
+                >
+                  <v-rating
+                    v-model="manufacturingProductDevelopment"
+                    :length="length"
+                    :empty-icon="emptyIcon"
+                    :full-icon="fullIcon"
+                    :half-icon="halfIcon"
+                    :hover="hover"
+                    :size="size"
+                    :dense="dense"
+                    :color="color"
+                    :background-color="bgColor"
+                  />
+                  <span class="error--text caption">{{ errors[0] }}</span>
+                </ValidationProvider>
               </v-col>
             </v-row>
 
@@ -586,20 +671,24 @@
                 Marketing, Sales & Service
               </v-col>
               <v-col cols="3">
-                <v-rating
-                  v-model="marketingSalesService"
-                  :length="length"
-                  :empty-icon="emptyIcon"
-                  :full-icon="fullIcon"
-                  :half-icon="halfIcon"
-                  
-                  :hover="hover"
-                 
-                  :size="size"
-                  :dense="dense"
-                  :color="color"
-                  :background-color="bgColor"
-                />
+                <ValidationProvider
+                  v-slot="{errors}"
+                  rules="required"
+                >
+                  <v-rating
+                    v-model="marketingSalesService"
+                    :length="length"
+                    :empty-icon="emptyIcon"
+                    :full-icon="fullIcon"
+                    :half-icon="halfIcon"
+                    :hover="hover"
+                    :size="size"
+                    :dense="dense"
+                    :color="color"
+                    :background-color="bgColor"
+                  />
+                  <span class="error--text caption">{{ errors[0] }}</span>
+                </ValidationProvider>
               </v-col>
             </v-row>
 
@@ -616,18 +705,24 @@
                 Public Services
               </v-col>
               <v-col cols="3">
-                <v-rating
-                  v-model="publicServices"
-                  :length="length"
-                  :empty-icon="emptyIcon"
-                  :full-icon="fullIcon"
-                  :half-icon="halfIcon"
-                  :hover="hover"
-                  :size="size"
-                  :dense="dense"
-                  :color="color"
-                  :background-color="bgColor"
-                />
+                <ValidationProvider
+                  v-slot="{errors}"
+                  rules="required"
+                >
+                  <v-rating
+                    v-model="publicServices"
+                    :length="length"
+                    :empty-icon="emptyIcon"
+                    :full-icon="fullIcon"
+                    :half-icon="halfIcon"
+                    :hover="hover"
+                    :size="size"
+                    :dense="dense"
+                    :color="color"
+                    :background-color="bgColor"
+                  />
+                  <span class="error--text caption">{{ errors[0] }}</span>
+                </ValidationProvider>
               </v-col>
             </v-row>
 
@@ -644,20 +739,24 @@
                 Transportation
               </v-col>
               <v-col cols="3">
-                <v-rating
-                  v-model="transportation"
-                  :length="length"
-                  :empty-icon="emptyIcon"
-                  :full-icon="fullIcon"
-                  :half-icon="halfIcon"
-                  
-                  :hover="hover"
-                 
-                  :size="size"
-                  :dense="dense"
-                  :color="color"
-                  :background-color="bgColor"
-                />
+                <ValidationProvider
+                  v-slot="{errors}"
+                  rules="required"
+                >
+                  <v-rating
+                    v-model="transportation"
+                    :length="length"
+                    :empty-icon="emptyIcon"
+                    :full-icon="fullIcon"
+                    :half-icon="halfIcon"
+                    :hover="hover"
+                    :size="size"
+                    :dense="dense"
+                    :color="color"
+                    :background-color="bgColor"
+                  />
+                  <span class="error--text caption">{{ errors[0] }}</span>
+                </ValidationProvider>
               </v-col>
             </v-row>
 
@@ -682,20 +781,24 @@
                 Technician & Engineer
               </v-col>
               <v-col cols="3">
-                <v-rating
-                  v-model="technicianEngineer"
-                  :length="length"
-                  :empty-icon="emptyIcon"
-                  :full-icon="fullIcon"
-                  :half-icon="halfIcon"
-                  
-                  :hover="hover"
-                 
-                  :size="size"
-                  :dense="dense"
-                  :color="color"
-                  :background-color="bgColor"
-                />
+                <ValidationProvider
+                  v-slot="{errors}"
+                  rules="required"
+                >
+                  <v-rating
+                    v-model="technicianEngineer"
+                    :length="length"
+                    :empty-icon="emptyIcon"
+                    :full-icon="fullIcon"
+                    :half-icon="halfIcon"
+                    :hover="hover"
+                    :size="size"
+                    :dense="dense"
+                    :color="color"
+                    :background-color="bgColor"
+                  />
+                  <span class="error--text caption">{{ errors[0] }}</span>
+                </ValidationProvider>
               </v-col>
             </v-row>
 
@@ -712,20 +815,24 @@
                 Marketing & Sales
               </v-col>
               <v-col cols="3">
-                <v-rating
-                  v-model="marketingSales"
-                  :length="length"
-                  :empty-icon="emptyIcon"
-                  :full-icon="fullIcon"
-                  :half-icon="halfIcon"
-                  
-                  :hover="hover"
-                 
-                  :size="size"
-                  :dense="dense"
-                  :color="color"
-                  :background-color="bgColor"
-                />
+                <ValidationProvider
+                  v-slot="{errors}"
+                  rules="required"
+                >
+                  <v-rating
+                    v-model="marketingSales"
+                    :length="length"
+                    :empty-icon="emptyIcon"
+                    :full-icon="fullIcon"
+                    :half-icon="halfIcon"
+                    :hover="hover"
+                    :size="size"
+                    :dense="dense"
+                    :color="color"
+                    :background-color="bgColor"
+                  />
+                  <span class="error--text caption">{{ errors[0] }}</span>
+                </ValidationProvider>
               </v-col>
             </v-row>
 
@@ -742,20 +849,24 @@
                 Research & Development
               </v-col>
               <v-col cols="3">
-                <v-rating
-                  v-model="researchDevelopment"
-                  :length="length"
-                  :empty-icon="emptyIcon"
-                  :full-icon="fullIcon"
-                  :half-icon="halfIcon"
-                  
-                  :hover="hover"
-                 
-                  :size="size"
-                  :dense="dense"
-                  :color="color"
-                  :background-color="bgColor"
-                />
+                <ValidationProvider
+                  v-slot="{errors}"
+                  rules="required"
+                >
+                  <v-rating
+                    v-model="researchDevelopment"
+                    :length="length"
+                    :empty-icon="emptyIcon"
+                    :full-icon="fullIcon"
+                    :half-icon="halfIcon"
+                    :hover="hover"
+                    :size="size"
+                    :dense="dense"
+                    :color="color"
+                    :background-color="bgColor"
+                  />
+                  <span class="error--text caption">{{ errors[0] }}</span>
+                </ValidationProvider>
               </v-col>
             </v-row>
 
@@ -772,20 +883,24 @@
                 Operations & Management
               </v-col>
               <v-col cols="3">
-                <v-rating
-                  v-model="operationsManagement"
-                  :length="length"
-                  :empty-icon="emptyIcon"
-                  :full-icon="fullIcon"
-                  :half-icon="halfIcon"
-                  
-                  :hover="hover"
-                 
-                  :size="size"
-                  :dense="dense"
-                  :color="color"
-                  :background-color="bgColor"
-                />
+                <ValidationProvider
+                  v-slot="{errors}"
+                  rules="required"
+                >
+                  <v-rating
+                    v-model="operationsManagement"
+                    :length="length"
+                    :empty-icon="emptyIcon"
+                    :full-icon="fullIcon"
+                    :half-icon="halfIcon"
+                    :hover="hover"
+                    :size="size"
+                    :dense="dense"
+                    :color="color"
+                    :background-color="bgColor"
+                  />
+                  <span class="error--text caption">{{ errors[0] }}</span>
+                </ValidationProvider>
               </v-col>
             </v-row>
 
@@ -802,20 +917,24 @@
                 Community & Customer Success
               </v-col>
               <v-col cols="3">
-                <v-rating
-                  v-model="communityCustomerSuccess"
-                  :length="length"
-                  :empty-icon="emptyIcon"
-                  :full-icon="fullIcon"
-                  :half-icon="halfIcon"
-                  
-                  :hover="hover"
-                 
-                  :size="size"
-                  :dense="dense"
-                  :color="color"
-                  :background-color="bgColor"
-                />
+                <ValidationProvider
+                  v-slot="{errors}"
+                  rules="required"
+                >
+                  <v-rating
+                    v-model="communityCustomerSuccess"
+                    :length="length"
+                    :empty-icon="emptyIcon"
+                    :full-icon="fullIcon"
+                    :half-icon="halfIcon"
+                    :hover="hover"
+                    :size="size"
+                    :dense="dense"
+                    :color="color"
+                    :background-color="bgColor"
+                  />
+                  <span class="error--text caption">{{ errors[0] }}</span>
+                </ValidationProvider>
               </v-col>
             </v-row>
 
@@ -834,31 +953,37 @@
                 cols="12"
                 sm="7"
               >
-                <v-radio-group
-                  v-model="transport"
-                  column
+                <ValidationProvider
+                  v-slot="{errors}"
+                  rules="required"
                 >
-                  <v-radio
-                    label="I drive"
-                    value="Car"
-                  />
-                  <v-radio
-                    label="My family"
-                    value="Family"
-                  />
-                  <v-radio
-                    label="Public transit"
-                    value="Public"
-                  />
-                  <v-radio
-                    label="Ridesharing"
-                    value="Rideshare"
-                  />
-                  <v-radio
-                    label="Decline to answer"
-                    value="Decline"
-                  />
-                </v-radio-group>
+                  <v-radio-group
+                    v-model="transport"
+                    column
+                    :error-messages="errors"
+                  >
+                    <v-radio
+                      label="I drive"
+                      value="Car"
+                    />
+                    <v-radio
+                      label="My family"
+                      value="Family"
+                    />
+                    <v-radio
+                      label="Public transit"
+                      value="Public"
+                    />
+                    <v-radio
+                      label="Ridesharing"
+                      value="Rideshare"
+                    />
+                    <v-radio
+                      label="Decline to answer"
+                      value="Decline"
+                    />
+                  </v-radio-group>
+                </ValidationProvider>
               </v-col>
             </v-row>
 
@@ -880,14 +1005,20 @@
                 cols="12"
                 sm="10"
               >
-                <v-select
-                  v-model="ownedTech"
-                  :items="techownership"
-                  chips
-                  label="What technology do you currently own?"
-                  multiple
-                  outlined
-                />
+                <ValidationProvider
+                  v-slot="{errors}"
+                  rules="required"
+                >
+                  <v-select
+                    v-model="ownedTech"
+                    :items="techownership"
+                    chips
+                    label="What technology do you currently own?"
+                    multiple
+                    outlined
+                    :error-messages="errors"
+                  />
+                </ValidationProvider>
               </v-col>
             </v-row>
 
@@ -901,14 +1032,20 @@
                 cols="12"
                 sm="10"
               >
-                <v-select
-                  v-model="internetAccessMethod"
-                  :items="internetaccess"
-                  chips
-                  label="How do you typically get on the internet?"
-                  multiple
-                  outlined
-                />
+                <ValidationProvider
+                  v-slot="{errors}"
+                  rules="required"
+                >
+                  <v-select
+                    v-model="internetAccessMethod"
+                    :items="internetaccess"
+                    chips
+                    label="How do you typically get on the internet?"
+                    multiple
+                    outlined
+                    :error-messages="errors"
+                  />
+                </ValidationProvider>
               </v-col>
             </v-row>
 
@@ -933,7 +1070,7 @@
                 depressed
                 outlined
                 height="73.5px"
-                @click="setNext(submit)"
+                @click="validate().then(val=>{if(val)setNext(submit)})"
               >
                 NEXT
               </v-btn>
@@ -953,8 +1090,8 @@ import { FbStore } from "@/store";
 import { ValidationObserver, ValidationProvider } from "vee-validate";
 import { startCase } from "lodash";
 import { StudentForm } from "../../../../store/Database/types/types";
-import {firebase} from "@/firebase/init"
-import { NextNode } from "@/views/ProgramGuide/components"
+import { firebase } from "@/firebase/init";
+import { NextNode } from "@/views/ProgramGuide/components";
 @Component<StudentID>({
   components: {
     ValidationObserver,
@@ -967,12 +1104,14 @@ import { NextNode } from "@/views/ProgramGuide/components"
       .doc(FbStore.FBUser!.uid)
       .get();
     next(vm => {
-      let programForm = form.data<StudentForm>().programForm
-      if(programForm){
-      Object.keys(programForm).forEach(key => {
-        (vm as Record<string,any>)[key] = programForm![key as keyof StudentForm.programForm]
-      })
-      vm.programForm = form.data<StudentForm>().programForm!
+      let programForm = form.data<StudentForm>().programForm;
+      if (programForm) {
+        Object.keys(programForm).forEach(key => {
+          (vm as Record<string, any>)[key] = programForm![
+            key as keyof StudentForm.programForm
+          ];
+        });
+        vm.programForm = form.data<StudentForm>().programForm!;
       }
     });
   },
@@ -1036,26 +1175,55 @@ export default class StudentID extends Vue {
   freeLunch = this.programForm?.freeLunch || "";
   resume = this.programForm?.resume || [];
   postHighPlan = this.programForm?.postHighPlan || "";
-  agricultureNaturalResources = this.programForm?.agricultureNaturalResources || null as unknown as number;
-  artsMediaAndEntertainment = this.programForm?.artsMediaAndEntertainment || null as unknown as number;
-  buildingAndConstructionTrades = this.programForm?.buildingAndConstructionTrades || null as unknown as number;
-  businessAndFinance = this.programForm?.businessAndFinance || null as unknown as number;
-  educationChildhoodDevelopmentFamilyServices = this.programForm?.educationChildhoodDevelopmentFamilyServices || null as unknown as number;
-  energyEnvironmentUtilities = this.programForm?.energyEnvironmentUtilities || null as unknown as number;
-  engineeringArchitecture = this.programForm?.engineeringArchitecture || null as unknown as number;
-  fashionInteriorDesign = this.programForm?.fashionInteriorDesign || null as unknown as number;
-  healthScienceMedicalTechnology = this.programForm?.healthScienceMedicalTechnology || null as unknown as number;
-  hospitalityTourismRecreation = this.programForm?.hospitalityTourismRecreation || null as unknown as number;
-  informationCommunicationTechnologies = this.programForm?.informationCommunicationTechnologies || null as unknown as number;
-  manufacturingProductDevelopment = this.programForm?.manufacturingProductDevelopment || null as unknown as number;
-  marketingSalesService = this.programForm?.marketingSalesService || null as unknown as number;
-  publicServices = this.programForm?.publicServices || null as unknown as number;
-  transportation = this.programForm?.transportation || null as unknown as number;
-  technicianEngineer = this.programForm?.technicianEngineer || null as unknown as number;
-  marketingSales = this.programForm?.marketingSales || null as unknown as number;
-  researchDevelopment = this.programForm?.researchDevelopment || null as unknown as number;
-  operationsManagement = this.programForm?.operationsManagement || null as unknown as number;
-  communityCustomerSuccess = this.programForm?.communityCustomerSuccess || null as unknown as number;
+  agricultureNaturalResources =
+    this.programForm?.agricultureNaturalResources ||
+    ((null as unknown) as number);
+  artsMediaAndEntertainment =
+    this.programForm?.artsMediaAndEntertainment ||
+    ((null as unknown) as number);
+  buildingAndConstructionTrades =
+    this.programForm?.buildingAndConstructionTrades ||
+    ((null as unknown) as number);
+  businessAndFinance =
+    this.programForm?.businessAndFinance || ((null as unknown) as number);
+  educationChildhoodDevelopmentFamilyServices =
+    this.programForm?.educationChildhoodDevelopmentFamilyServices ||
+    ((null as unknown) as number);
+  energyEnvironmentUtilities =
+    this.programForm?.energyEnvironmentUtilities ||
+    ((null as unknown) as number);
+  engineeringArchitecture =
+    this.programForm?.engineeringArchitecture || ((null as unknown) as number);
+  fashionInteriorDesign =
+    this.programForm?.fashionInteriorDesign || ((null as unknown) as number);
+  healthScienceMedicalTechnology =
+    this.programForm?.healthScienceMedicalTechnology ||
+    ((null as unknown) as number);
+  hospitalityTourismRecreation =
+    this.programForm?.hospitalityTourismRecreation ||
+    ((null as unknown) as number);
+  informationCommunicationTechnologies =
+    this.programForm?.informationCommunicationTechnologies ||
+    ((null as unknown) as number);
+  manufacturingProductDevelopment =
+    this.programForm?.manufacturingProductDevelopment ||
+    ((null as unknown) as number);
+  marketingSalesService =
+    this.programForm?.marketingSalesService || ((null as unknown) as number);
+  publicServices =
+    this.programForm?.publicServices || ((null as unknown) as number);
+  transportation =
+    this.programForm?.transportation || ((null as unknown) as number);
+  technicianEngineer =
+    this.programForm?.technicianEngineer || ((null as unknown) as number);
+  marketingSales =
+    this.programForm?.marketingSales || ((null as unknown) as number);
+  researchDevelopment =
+    this.programForm?.researchDevelopment || ((null as unknown) as number);
+  operationsManagement =
+    this.programForm?.operationsManagement || ((null as unknown) as number);
+  communityCustomerSuccess =
+    this.programForm?.communityCustomerSuccess || ((null as unknown) as number);
   transport = this.programForm?.transport || "";
   ownedTech = this.programForm?.ownedTech || "";
   internetAccessMethod = this.programForm?.internetAccessMethod || "";
@@ -1090,7 +1258,7 @@ export default class StudentID extends Vue {
       ownedTech,
       internetAccessMethod
     } = this;
-    let programForm:StudentForm.programForm = {
+    let programForm: StudentForm.programForm = {
       internshipInterest,
       compensationType,
       freeLunch,
@@ -1126,9 +1294,9 @@ export default class StudentID extends Vue {
       .update<StudentForm>({
         programForm
       });
-      await FbStore.updateCurrentStudentClassroom({
-        finishedSignupForm:firebase.firestore.FieldValue.serverTimestamp()
-      })
+    await FbStore.updateCurrentStudentClassroom({
+      finishedSignupForm: firebase.firestore.FieldValue.serverTimestamp()
+    });
   }
 }
 </script>

@@ -39,7 +39,7 @@
             style="width: 100%; height: 100%"
           >
             <router-view
-              @nextNode="$router.push({name: $refs.nextLock.nextModule.value.routeName})"
+              @nextNode="$refs.nextLock.navigateNext()"
               @updateSavedDate="updateSavedDate($event)"
               @saving="saving($event)"
             />

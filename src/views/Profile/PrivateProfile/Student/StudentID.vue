@@ -1126,7 +1126,7 @@ import { startCase } from "lodash";
 
 export default class StudentID extends Vue {
   created(){
-    console.log("creating", FbStore.currentUserProfile)
+    console.log("creating")
   }
   items = ["Student", "Teacher", "Employer","Program"];
   firstName = FbStore.currentUserProfile!.firstName || "";
