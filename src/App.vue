@@ -19,7 +19,8 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { AuthStore, FbStore } from '@/store'
 import { Watch } from 'vue-property-decorator'
-
+import { TeacherProgramData } from './store/Database/types/types'
+import {firebase} from "@/firebase/init"
 const DEFAULT_LAYOUT = 'default'
 const NORMAL_LAYOUT = 'new'
 @Component
@@ -28,6 +29,22 @@ export default class App extends Vue {
     get layout() {
     if (!AuthStore.user) return `${this.$route.meta.layout ? this.$route.meta.layout : NORMAL_LAYOUT}-layout`
     return `${this.$route.meta.layout ? this.$route.meta.layout : DEFAULT_LAYOUT}-layout`
+  }
+  fixProgramBrief(){
+    FbStore.firestore.collection("TeacherProgramData").get().then(querySnapshot => {
+      querySnapshot.forEach(snap => {
+        let data = snap.data() as TeacherProgramData
+        if(data?.programSequence?.programBrief){
+          console.log("updating", snap.id)
+          snap.ref.update({
+            'programSequence.programBrief':firebase.firestore.FieldValue.delete()
+          })
+          snap.ref.update({
+            'programSequence.launchDay':data.programSequence.programBrief
+          })
+        }
+      })
+    })
   }
 }
 </script>

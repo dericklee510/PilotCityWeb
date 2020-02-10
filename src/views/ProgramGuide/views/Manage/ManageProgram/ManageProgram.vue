@@ -104,7 +104,7 @@ export default class ManageProgram extends Vue {
   latestProjectData!: (Project)[]
   latestStudentClassroomData!: (studentClassroom)[]
   routeHash = {
-    [`launch day`]: "programBrief",
+    [`launch day`]: "launchDay",
     [`training`]: "train",
     [`practice & research`]: "practice",
     [`ideate`]: "bmc",

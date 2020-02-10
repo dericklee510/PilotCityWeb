@@ -25,8 +25,8 @@ export class RouteList {
     private module:   typeof EMPLOYERSEQUENCE | typeof STUDENTSEQUENCE | typeof TEACHERSEQUENCE
     public get studentSequenceRouteHash():Record<string,Boolean | firebase.firestore.Timestamp | firebase.firestore.FieldValue | Date | undefined>{
         return {
-            'stud-project-profile':true,
-            'stud-project-brief':isBoth((FbStore.currentTeacherProgramData?.programSequence?.programBrief),FbStore.currentStudentClassroom?.finishedSignupForm) ,
+            'stud-project-profile':FbStore.currentTeacherProgramData?.programSequence?.launchDay || true,
+            'stud-project-brief':FbStore.currentStudentClassroom?.finishedSignupForm,
             'stud-project-intro':FbStore.currentStudentClassroom?.finishedProgramBrief,
             'stud-project-team-join':FbStore.currentStudentClassroom?.finishedIntrovideo,
             // 'stud-project-team':FbStore.currentStudentClassroom!.finishedIntrovideo && !!FbStore.currentProject,

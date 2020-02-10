@@ -59,6 +59,11 @@ export interface EmployerProgram {
     programName: string
     employerId?: string,
     launchImg?: string, // link
+    rfpCompany?:string,
+    rfpPrompt?:string,
+    rfpRequirements?:string,
+    rfpAbout?:string,
+    rfpResources?:string
     programLauncher: ProgramEvent[]
     externshipDayAgenda?: AgendaTemplate
     demoDayAgenda?: AgendaTemplate
@@ -88,6 +93,7 @@ export interface TeacherProgramData {
     promptTemplate?: "tech" | "solution" | "problem" | "metric"
     finalPrompt?: string
     programSequence: {
+        launchDay?: Date | firebase.firestore.Timestamp | Boolean
         programBrief?: Date | firebase.firestore.Timestamp | Boolean
         introVideo?: Date | firebase.firestore.Timestamp | Boolean
         train?: Date | firebase.firestore.Timestamp | Boolean
