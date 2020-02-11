@@ -177,8 +177,8 @@ export default class posthack extends Vue {
   get pivotReady(){
     return [this.canvas, this.sentencePitch, this.elevatorPitch].every(val => val)
   }
-  submit(){
-    FbStore.updateCurrentProject({
+  async submit(){
+    await FbStore.updateCurrentProject({
       [`programSequence.${'reflection'}`]:firebase.firestore.FieldValue.serverTimestamp(),
       postHackReflection:firebase.firestore.FieldValue.serverTimestamp()
     })

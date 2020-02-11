@@ -130,7 +130,7 @@ import { NextNode } from '@/views/ProgramGuide/components'
 export default class demovideo_enter extends Vue{
     url:string = FbStore.currentProject!.demoLink || ""
     checkbox=false
-    onSubmit(){
+    async onSubmit(){
       FbStore.updateCurrentProject({
         [`programSequence.${'demoVideo'}`]:firebase.firestore.FieldValue.serverTimestamp(),
         demoLink:this.url

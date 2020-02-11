@@ -47,7 +47,6 @@
                   cols="12"
                   sm="6"
                   class="pc-rating"
-
                 >
                   <v-rating
                     v-model="stars.problem"
@@ -82,23 +81,27 @@
             v-else
             justify="center"
             class="mr-auto ml-auto"
-          ><v-col cols="12" class="pa-0">
-            <ValidationProvider
-              v-slot="{errors,failedRules}"
-              name="Problem"
-
-              rules="required|max:255"
+          >
+            <v-col
+              cols="12"
+              class="pa-0"
             >
-              <v-textarea
-                class="businessmodelcanvas_enter__paragraph"
-                v-model="syncedCanvas.problem"
-                :disabled="readonly"
-                :error-messages="failedRules.max?`Must not be longer than 280 Characters`:errors"
-                counter
-                placeholder=""
-                @input="$emit('input',syncedCanvas)"
-              />
-            </ValidationProvider>
+              <ValidationProvider
+                v-slot="{errors,failedRules}"
+                name="Problem"
+
+                rules="required|max:255"
+              >
+                <v-textarea
+                  v-model="syncedCanvas.problem"
+                  class="businessmodelcanvas_enter__paragraph"
+                  :disabled="readonly"
+                  :error-messages="failedRules.max?`Must not be longer than 280 Characters`:errors"
+                  counter
+                  placeholder=""
+                  @input="$emit('input',syncedCanvas)"
+                />
+              </ValidationProvider>
             </v-col>
           </v-row>
           
@@ -166,22 +169,27 @@
             v-else
             justify="center"
             class="mr-auto ml-auto mb-12"
-          ><v-col cols="12" class="pa-0">
-            <ValidationProvider
-              v-slot="{errors,failedRules}"
-
-              rules="required|max:255"
+          >
+            <v-col
+              cols="12"
+              class="pa-0"
             >
-              <v-textarea
-              class="businessmodelcanvas_enter__paragraph"
-                v-model="syncedCanvas.solution"
-                :disabled="readonly"
-                :error-messages="failedRules.max?`Must not be longer than 280 Characters`:errors"
-                counter
-                placeholder="My pitch is..."
-                @input="$emit('input',syncedCanvas)"
-              />
-            </ValidationProvider></v-col>
+              <ValidationProvider
+                v-slot="{errors,failedRules}"
+
+                rules="required|max:255"
+              >
+                <v-textarea
+                  v-model="syncedCanvas.solution"
+                  class="businessmodelcanvas_enter__paragraph"
+                  :disabled="readonly"
+                  :error-messages="failedRules.max?`Must not be longer than 280 Characters`:errors"
+                  counter
+                  placeholder="My pitch is..."
+                  @input="$emit('input',syncedCanvas)"
+                />
+              </ValidationProvider>
+            </v-col>
           </v-row>
           
           <!-- COMPONENT -->
@@ -248,21 +256,26 @@
             v-else
             justify="center"
             class="mr-auto ml-auto mb-12"
-          ><v-col cols="12" class="pa-0">
-            <ValidationProvider
-              v-slot="{errors,failedRules}"
-              rules="required|max:255"
+          >
+            <v-col
+              cols="12"
+              class="pa-0"
             >
-              <v-textarea
-              class="businessmodelcanvas_enter__paragraph"
-                v-model="syncedCanvas.innovation"
-                :disabled="readonly"
-                :error-messages="failedRules.max?`Must not be longer than 280 Characters`:errors"
-                counter
-                placeholder="My pitch is..."
-                @input="$emit('input',syncedCanvas)"
-              />
-            </ValidationProvider></v-col>
+              <ValidationProvider
+                v-slot="{errors,failedRules}"
+                rules="required|max:255"
+              >
+                <v-textarea
+                  v-model="syncedCanvas.innovation"
+                  class="businessmodelcanvas_enter__paragraph"
+                  :disabled="readonly"
+                  :error-messages="failedRules.max?`Must not be longer than 280 Characters`:errors"
+                  counter
+                  placeholder="My pitch is..."
+                  @input="$emit('input',syncedCanvas)"
+                />
+              </ValidationProvider>
+            </v-col>
           </v-row>
           
           <!-- COMPONENT -->
@@ -329,22 +342,26 @@
             v-else
             justify="center"
             class="mr-auto ml-auto mb-12"
-          ><v-col cols="12" class="pa-0">
-            <ValidationProvider
-              v-slot="{errors,failedRules}"
-              rules="required|max:255"
-
+          >
+            <v-col
+              cols="12"
+              class="pa-0"
             >
-              <v-textarea
-              class="businessmodelcanvas_enter__paragraph"
-                v-model="syncedCanvas.customer"
-                :disabled="readonly"
-                :error-messages="failedRules.max?`Must not be longer than 280 Characters`:errors"
-                counter
-                placeholder="My pitch is..."
-                @input="$emit('input',syncedCanvas)"
-              />
-            </ValidationProvider></v-col>
+              <ValidationProvider
+                v-slot="{errors,failedRules}"
+                rules="required|max:255"
+              >
+                <v-textarea
+                  v-model="syncedCanvas.customer"
+                  class="businessmodelcanvas_enter__paragraph"
+                  :disabled="readonly"
+                  :error-messages="failedRules.max?`Must not be longer than 280 Characters`:errors"
+                  counter
+                  placeholder="My pitch is..."
+                  @input="$emit('input',syncedCanvas)"
+                />
+              </ValidationProvider>
+            </v-col>
           </v-row>
         </v-col>
       </v-row>

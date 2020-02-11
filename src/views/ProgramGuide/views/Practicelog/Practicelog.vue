@@ -53,7 +53,8 @@
                     outlined
                     style="font-family='Raleway'"
                     height="100px"
-                    placeholder="0m"
+                    placeholder="0"
+                    @keypress.enter="addTime().then(()=>{reset()})"
                   />
                 </ValidationProvider>
               </v-col>

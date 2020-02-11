@@ -83,7 +83,7 @@
         </v-btn>
       </v-col>
     </v-row>
-  </v-container> 
+  </v-container>
 </template> 
 <script lang="ts">
 import Vue from "vue";
@@ -110,6 +110,7 @@ export default class AgendaView extends Vue {
       .every(isTrue => isTrue);
       }
     else console.error('Agenda not found!')
+    return false
   }
 }
 </script>

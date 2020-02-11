@@ -46,7 +46,7 @@ import moment from 'moment'
 import {firebase} from "@/firebase/init"
 function isUnlocked(arg:Boolean | firebase.firestore.Timestamp | firebase.firestore.FieldValue | Date | undefined){
 if(arg instanceof firebase.firestore.Timestamp){
-    return moment(arg.toDate()).isBefore(moment()) || moment(arg.toDate()).isSame(moment(),'d')
+    return !moment(arg.toDate()).isAfter(moment(),'d')
 }
 else if (arg instanceof firebase.firestore.FieldValue)
     return true
@@ -70,6 +70,10 @@ export default class Locks extends Vue{
     }
     get isUnlocked(){
       return isUnlocked(this.nextModule?.value.unlocked)
+    }
+    navigateNext(){
+      if(this.isUnlocked)
+        this.$router.push({name:this.nextModule?.value.routeName})
     }
 
 }

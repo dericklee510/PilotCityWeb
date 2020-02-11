@@ -35,9 +35,11 @@
               @keyup.enter="process()"
             >
           </v-col>
-          <!-- <v-col class="login__forgotpassword pl-0 pr-0">
-            Forgot Password
-          </v-col> -->
+          <v-col class="login__forgotpassword pl-0 pr-0" @click="$router.push({name: 'reset-email'})">
+            <a style="color: #fff">
+              Forgot Password
+            </a>
+          </v-col>
 
 
 
@@ -87,7 +89,7 @@
 
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue from 'vue' 
 import Component from 'vue-class-component'
 import { Prop } from 'vue-property-decorator'
 import { ValidationProvider, ValidationObserver } from 'vee-validate'
@@ -126,8 +128,14 @@ export default class Login extends Vue {
                 password: this.password
             }).then(resp => resp).catch(err => `The entered credentials do not exist`)
         // }
-        if (this.authResponse == SUCCESSFUL_LOGIN_RESP && AuthStore.user) {
+        if (this.authResponse == SUCCESSFUL_LOGIN_RESP && AuthStore.user && localStorage.PILOTCITY_EMPLOYERPROGRAMID) {
             await FbStore.initCurrentUserProfile(AuthStore.user.uid)
+            this.$router.push({
+                path: '/'
+            })
+        }
+        else if (this.authResponse == SUCCESSFUL_LOGIN_RESP && AuthStore.user){
+          await FbStore.initCurrentUserProfile(AuthStore.user.uid)
             this.$router.push({
                 name: 'signup.type'
             })

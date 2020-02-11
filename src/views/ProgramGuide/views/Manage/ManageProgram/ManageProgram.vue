@@ -104,7 +104,7 @@ export default class ManageProgram extends Vue {
   latestProjectData!: (Project)[]
   latestStudentClassroomData!: (studentClassroom)[]
   routeHash = {
-    [`launch day`]: "programBrief",
+    [`launch day`]: "launchDay",
     [`training`]: "train",
     [`practice & research`]: "practice",
     [`ideate`]: "bmc",
@@ -148,7 +148,7 @@ export default class ManageProgram extends Vue {
       let total = arr.reduce((sum, entry)=> {
           return sum += get(entry,field,undefined)?1:0
       },0)
-      return total/arr.length
+      return total/arr.length*100
   }
   onUpdateTrigger(route: keyof TeacherProgramData.programSequence, triggerType: trigger) {
     FbStore.updateCurrentTeacherProgramData({

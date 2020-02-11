@@ -29,7 +29,7 @@ import {NextNode} from '@/views/ProgramGuide/components'
 })
 export default class DemoAgendaView extends Vue {
   agendaItems = FbStore.currentEmployerProgram?.demoDayAgenda?.events || []
-  onSubmit(){
+  async onSubmit(){
       FbStore.updateCurrentProject({
          [`programSequence.${'demoDay'}`]:firebase.firestore.FieldValue.serverTimestamp(),
       })

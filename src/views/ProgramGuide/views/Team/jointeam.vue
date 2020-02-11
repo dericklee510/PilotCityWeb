@@ -3,16 +3,23 @@
 <template>
   <v-container>
     <template v-if="!currentProject">
-      <v-row class="join-team" no-gutters justify="center">
-        <v-col class="manageteam__container" cols="8">
+      <v-row
+        class="join-team"
+        no-gutters
+        justify="center"
+      >
+        <v-col
+          class="manageteam__container"
+          cols="8"
+        >
           <v-row no-gutters>
-            <v-col cols="12" class="manageteam__title">
+            <v-col
+              cols="12"
+              class="manageteam__title"
+            >
               <span>Join Team</span>
             </v-col>
           </v-row>
-
-          <!-- JOIN TEAM -->
-
           <v-row no-gutters>
             <v-col cols="12">
               <PCLoader v-slot="{loading,setLoader}">
@@ -23,25 +30,32 @@
                   align="center"
                   style="margin-bottom: 25px;"
                 >
-                  <v-col cols="1" style="margin-right: 20px;">
+                  <v-col
+                    cols="1"
+                    style="margin-right: 20px;"
+                  >
                     <v-btn
                       small
                       :loading="loading"
                       depressed
                       dark
                       @click="setLoader(joinTeam(project))"
-                    >JOIN</v-btn>
+                    >
+                      JOIN
+                    </v-btn>
                   </v-col>
-                  <v-col class="join-team__team-name text-uppercase">{{ project.teamName }}</v-col>
+                  <v-col class="join-team__team-name text-uppercase">
+                    {{ project.teamName }}
+                  </v-col>
                 </v-row>
               </PCLoader>
             </v-col>
           </v-row>
-
-          <!-- CREATE TEAM -->
-
           <v-row no-gutters>
-            <v-col cols="12" class="manageteam__title">
+            <v-col
+              cols="12"
+              class="manageteam__title"
+            >
               <span>Create Team</span>
             </v-col>
           </v-row>
@@ -60,16 +74,23 @@
 
           <ValidationObserver v-slot="{invalid}">
             <v-row>
-              <v-col cols="12" class="join-team__buttons">
+              <v-col
+                cols="12"
+                class="join-team__buttons"
+              >
                 <v-row no-gutters>
                   <v-col cols="6">
-                    <ValidationProvider v-slot="{errors}" rules="required">
+                    <ValidationProvider
+                      v-slot="{errors}"
+                      rules="required"
+                    >
                       <v-text-field
                         v-model="createTeamName"
                         flat
                         solo
                         depressed
                         outlined
+                        :error-messages="errors"
                         class="join-team__dreamteam"
                         placeholder="Name your team"
                       />
@@ -86,7 +107,9 @@
                         :disabled="invalid"
                         class="ml-6"
                         @click="setLoader(createProject)"
-                      >CREATE</v-btn>
+                      >
+                        CREATE
+                      </v-btn>
                     </PCLoader>
                   </v-col>
                 </v-row>
@@ -100,7 +123,10 @@
     <!-- TEAM AND TEAM NAMES -->
 
     <template v-else>
-      <v-row no-gutters justify="center">
+      <v-row
+        no-gutters
+        justify="center"
+      >
         <v-col cols="8">
           <v-col class="manageteam__teamtitle">
             <span>{{ teamName }}</span>
@@ -113,8 +139,17 @@
             align="center"
             style="margin-bottom: 25px;"
           >
-            <v-col cols="1" style="margin-right: 20px; margin-left:12px;">
-              <v-btn small depressed dark>{{ name }}</v-btn>
+            <v-col
+              cols="1"
+              style="margin-right: 20px; margin-left:12px;"
+            >
+              <v-btn
+                small
+                depressed
+                dark
+              >
+                {{ name }}
+              </v-btn>
             </v-col>
           </v-row>
 
@@ -131,12 +166,20 @@
 
             <ValidationObserver v-slot="{invalid}">
               <v-row>
-                <v-col cols="12" class="join-team__buttons">
+                <v-col
+                  cols="12"
+                  class="join-team__buttons"
+                >
                   <v-row no-gutters>
                     <v-col cols="6">
-                      <ValidationProvider v-slot="{errors}" slim rules="required">
+                      <ValidationProvider
+                        v-slot="{errors}"
+                        slim
+                        rules="required"
+                      >
                         <v-text-field
                           v-model="newTeamName"
+                          :error-messages="errors"
                           :placeholder="teamName"
                           flat
                           solo
@@ -157,16 +200,15 @@
                           outlined
                           class="ml-6"
                           @click="setLoader(renameTeam)"
-                        >RENAME</v-btn>
+                        >
+                          RENAME
+                        </v-btn>
                       </PCLoader>
                     </v-col>
                   </v-row>
                 </v-col>
               </v-row>
             </ValidationObserver>
-
-            <!-- LEAVE TEAM -->
-
             <v-row>
               <PCLoader v-slot="{loading,setLoader}">
                 <span>
@@ -296,9 +338,9 @@ export default class jointeam extends Vue {
   get currentProject() {
     return FbStore.currentProject || "";
   }
-  @Watch("teamIds")
-  async onIdsChange() {
-    this.names = await getNames();
+  @Watch('teamIds',{immediate:true})
+  async onIdsChange(){
+    this.names = await getNames()
   }
   async renameTeam() {
     await FbStore.renameProject({

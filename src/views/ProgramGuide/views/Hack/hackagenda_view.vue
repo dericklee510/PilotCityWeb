@@ -28,8 +28,8 @@ import { NextNode } from "@/views/ProgramGuide/components"
   }
 })
 export default class agenda extends Vue {
-  onFinish(){
-    FbStore.updateCurrentProject({
+  async onFinish(){
+    await FbStore.updateCurrentProject({
       [`programSequence.${'hackDay'}`]:firebase.firestore.FieldValue.serverTimestamp()
     })
   }

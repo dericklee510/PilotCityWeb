@@ -9,7 +9,16 @@ import { LinkedList, LinkedListItem } from 'linked-list-typescript';
 import {firebase} from "@/firebase/init"
 import moment from 'moment'
 function isBoth(arg1:any,arg2:any){
-    return arg1?arg1&&arg2:arg2
+    if(arg1 instanceof firebase.firestore.Timestamp ){
+        if(!moment(arg1.toDate()).isAfter(moment(),'d'))
+        return arg2
+        else
+            return arg1
+    }
+    else if(arg1 === false)
+    return false
+    else
+        return arg2
 }
 function isUnlocked(arg:Boolean | firebase.firestore.Timestamp | firebase.firestore.FieldValue | Date | undefined){
 if(arg instanceof firebase.firestore.Timestamp){
@@ -26,7 +35,8 @@ export class RouteList {
     public get studentSequenceRouteHash():Record<string,Boolean | firebase.firestore.Timestamp | firebase.firestore.FieldValue | Date | undefined>{
         return {
             'stud-project-profile':true,
-            'stud-project-brief':isBoth((FbStore.currentTeacherProgramData?.programSequence?.programBrief),FbStore.currentStudentClassroom?.finishedSignupForm) ,
+            'stud-project-brief':FbStore.currentStudentClassroom?.finishedSignupForm,
+            'rfp-brief':FbStore.currentStudentClassroom?.finishedSignupForm,
             'stud-project-intro':FbStore.currentStudentClassroom?.finishedProgramBrief,
             'stud-project-team-join':FbStore.currentStudentClassroom?.finishedIntrovideo,
             // 'stud-project-team':FbStore.currentStudentClassroom!.finishedIntrovideo && !!FbStore.currentProject,

@@ -6,7 +6,7 @@
     max-height="64px;" 
     class="pc-header pc-header--simple"
   >
-    <router-link :to="{name: 'home'}">
+    <router-link :to="{path: '/'}">
       <img
         class="pc-logo--header"
         src="@/assets/Pilotcity_logo.png"
@@ -123,7 +123,7 @@ export default class Header extends Vue {
 
     public async logout(){
       await AuthStore.logout()
-      this.$router.push({name:'home'})
+      this.$router.push({name:'login'})
     }
 }
 </script>

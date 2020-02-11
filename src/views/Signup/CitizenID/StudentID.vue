@@ -344,14 +344,13 @@
             v-model="primaryHomeLanguage"
             :error-messages="errors"
             :items="homelanguage"
-            dense
-            filled
             label="Primary Home Language"
+            outlined
           />
         </ValidationProvider>
       </v-col>
     </v-row>
-    <!-- <v-row
+    <v-row
       no-gutters
       justify="center"
     >
@@ -359,85 +358,21 @@
         cols="12"
         sm="7"
       >
-        <AutoComplete
-          v-model="address"
-          outlined
-          types="street_address"
-        />
+        <ValidationProvider
+          v-slot="{errors}"
+          slim
+          rules="required"
+        >
+          <AutoComplete
+            v-model="address"
+            outlined
+            :error-messages="errors"
+            label="Home Address"
+            types="street_address"
+          />
+        </ValidationProvider>
       </v-col>
-    </v-row> -->
-
-    <!-- STREET ADDRESS -->
-
-    <!-- <v-row
-      no-gutters
-      justify="center"
-    >
-      <v-col
-        cols="12"
-        sm="7"
-      >
-        <v-text-field
-          v-model="streetaddress"
-          label="Street Address"
-          outlined
-        />
-      </v-col>
-    </v-row>-->
-
-    <!-- CITY -->
-
-    <!-- <v-row
-      no-gutters
-      justify="center"
-    >
-      <v-col
-        cols="12"
-        sm="7"
-      >
-        <v-text-field
-          v-model="city"
-          label="City"
-          outlined
-        />
-      </v-col>
-    </v-row>-->
-
-    <!-- STATE -->
-
-    <!-- <v-row
-      no-gutters
-      justify="center"
-    >
-      <v-col
-        cols="12"
-        sm="7"
-      >
-        <v-text-field
-          v-model="state"
-          label="State"
-          outlined
-        />
-      </v-col>
-    </v-row>-->
-
-    <!-- ZIPCODE -->
-
-    <!-- <v-row
-      no-gutters
-      justify="center"
-    >
-      <v-col
-        cols="12"
-        sm="7"
-      >
-        <v-text-field
-          v-model="zipcode"
-          label="Zipcode"
-          outlined
-        />
-      </v-col>
-    </v-row>-->
+    </v-row>
   </div>
 </template>
     

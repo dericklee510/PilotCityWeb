@@ -98,6 +98,7 @@ export const TEACHERSEQUENCE = {
         ],
         'Brief': [
             'teach-externship-brief',
+            // 'rfp-brief',
             'teach-externship-brief-gen'
         ],
         'Manage': [
@@ -152,6 +153,7 @@ export const EMPLOYERSEQUENCE = {
         ],
         'Brief': [
             'emp-externship-brief-edit',
+            // 'rfp-brief'
         ],
         'Intro Video': [
             'emp-project-intro-edit'
@@ -190,6 +192,7 @@ export const STUDENTSEQUENCE = {
         'Launch Day': [
             'stud-project-profile',
             'stud-project-brief',
+            // 'rfp-brief',
             'stud-project-intro',
             'stud-project-team-join',
         ],
