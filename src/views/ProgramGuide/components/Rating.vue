@@ -8,7 +8,10 @@
       class="pt-3 pb-3"
       no-gutters
     >
-      <slot name="link">
+      <slot
+        :snippet="team"
+        name="link"
+      >
         <v-col
           v-if="preview === undefined"
           class="demovideo_view__externallink"
@@ -36,7 +39,10 @@
             {{ team.name }}
           </span>
         </slot>
-        <slot name="body">
+        <slot
+          :item_preview="team.item_preview"
+          name="body"
+        >
           <span
             
             v-if="preview !== undefined"
