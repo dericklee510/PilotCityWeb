@@ -1,11 +1,9 @@
 <template>
   <v-row justify="center">
     <!-- <v-row class="mt-12 mr-auto ml-auto pl-5 mb-4 elevator_view2__description__label">Elevator Pitch</v-row> -->
-    <Rating
-      v-model="syncPitch"
-      preview
-      @ratingChange="$emit('ratingChange',$event)"
-    >
+    <v-col>
+
+      <v-row>
       <template v-slot:header>
         <span
           class="elevator_view2__description__label"
@@ -13,16 +11,24 @@
           Elevator Pitch
         </span>
       </template>
-        
+
+          <Rating
+      v-model="syncPitch"
+      preview
+      @ratingChange="$emit('ratingChange',$event)"
+    ></Rating>
+        </v-row>
+
+        <v-row>
       <template v-slot:body="{item_preview}">
         <v-textarea
           :value="item_preview"
           placeholder="My pitch is..."
-          :disabled="true"
-          class="pt-1 pb-12 pl-5 pr-4 elevator_view2__paragraph"
+
+          class="elevator_view2__paragraph"
         /> 
       </template>
-
+</v-row>
 
 
       <!-- <v-row
@@ -40,7 +46,8 @@
               >Nothing just yet</div>
             </div>
           </v-row> -->
-    </Rating>
+
+          </v-col>
   </v-row>
 
   <!-- <v-col class="mr-auto ml-auto" cols="5"><button class="elevator_view2__button mb-10">SAVE</button></v-col> -->
