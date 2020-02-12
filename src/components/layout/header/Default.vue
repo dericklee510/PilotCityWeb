@@ -34,7 +34,10 @@
       >
         Explore
       </v-btn> -->
-    <span class="ml-2 mr-2">
+    <span
+      v-if="$route.name!='signup.type'"
+      class="ml-2 mr-2"
+    >
       <v-btn
         v-if="user"
         class="pc-navbar__myprograms"
