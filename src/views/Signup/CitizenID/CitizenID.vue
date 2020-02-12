@@ -109,7 +109,7 @@
                 />
               </v-col>
             </v-row>
-
+ 
             <!-- GRADE LEVEL -->
             <StudentID
               v-if="citizenType === `Student`"

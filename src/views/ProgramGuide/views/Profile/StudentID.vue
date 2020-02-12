@@ -29,7 +29,7 @@
           justify="center"
           class="pt-10"
         >
-          <v-col cols="7">
+          <v-col cols="8">
             <!-- PROGRAM INFORMATION -->
             <v-row
               justify="center"

@@ -1,62 +1,39 @@
 <template>
   <v-container>
-    <v-row
-      no-gutters
-      justify="center"
-    >
-      <v-col
-        class="manageclass__container"
-        cols="8"
-      >
-        <v-row
-          class="manageclass__nav text-center"
-          no-gutters
-        >
-          <v-col
-            cols="4"
-            sm="3"
-            lg="2"
-            class="manageclass__nav--active"
+    <v-row no-gutters justify="center">
+      <v-col class="manageclass__container" cols="8">
+
+
+        <v-tabs no-gutters>
+          <v-tab
+            style="cursor: pointer"
+            @click="$router.push({name: 'teach-externship-manage-class'})"
+          >CLASSES</v-tab>
+
+          <v-tab
             style="cursor: normal"
-          >
-            CLASSES
-          </v-col>
-          <v-col
-            cols="4"
-            sm="3"
-            lg="2"
-            style="cursor: pointer"
-            @click="$router.push({name: 'teach-externship-manage-students'})"
-          >
-            STUDENTS
-          </v-col>
-          <v-col
-            cols="4"
-            sm="3"
-            lg="2"
-            style="cursor: pointer"
             @click="$router.push({name: 'teach-externship-manage-teams'})"
-          >
-            TEAMS
-          </v-col>
-        </v-row>
+          >TEAMS</v-tab>
+
+        <v-tab
+          style="cursor: pointer"
+          @click="$router.push({name: 'teach-externship-manage-students'})"
+        >STUDENTS</v-tab>
+
+                </v-tabs>
+
+
+
+
+
+
         <v-row no-gutters>
-          <v-col
-            cols="12"
-            class="manageclass__title"
-          >
+          <v-col cols="12" class="manageteam__title">
             <span>Manage Classes</span>
           </v-col>
         </v-row>
-        <v-row
-          class="manageclass__labels"
-          no-gutters
-        >
-          <v-col
-            cols="12"
-            lg="4"
-            xl="5"
-          >
+        <v-row class="manageclass__labels" no-gutters>
+          <v-col cols="12" lg="4" xl="5">
             <span>Class Name</span>
           </v-col>
           <v-spacer />
@@ -64,17 +41,14 @@
             cols="12"
             lg="3"
             xl="2"
-            class="manageclass__sharecode-label d-none d-lg-block "
-            
+            class="manageclass__sharecode-label d-none d-lg-block"
             style="padding-left: 67px"
           >
-            <span class> Share Code</span>
+            <span class>Share Code</span>
           </v-col>
           <v-col cols="1" />
         </v-row>
-        <ManageClassHelper
-          :generate-first-classroom="generateClassroom"
-        />
+        <ManageClassHelper :generate-first-classroom="generateClassroom" />
       </v-col>
     </v-row>
   </v-container>
@@ -93,10 +67,9 @@ import { Classroom } from "../../../../store/Database/types/types";
   components: {
     ManageClassHelper
   },
-  domStreams: ["onClassChange$"],
-
+  domStreams: ["onClassChange$"]
 })
 export default class ManageClass extends Vue {
-    generateClassroom = !FbStore.currentTeacherProgramData!.classroomIds?.length
+  generateClassroom = !FbStore.currentTeacherProgramData!.classroomIds?.length;
 }
 </script>

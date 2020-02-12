@@ -8,10 +8,11 @@
         id="demovideo_view__icon"
         src="@/assets/demovideo_view.png"
       >
-    
+
       <v-col
         id="demovideo_view__contain"
         cols="8"
+        class="pb-9"
       >
         <v-row
           justify="center"
@@ -19,13 +20,12 @@
         >
           VIEW 1-MINUTE PROTOTYPE DEMONSTRATION VIDEOS
         </v-row>
-    
+
         <v-col
           id="demovideo_view__borderline"
           cols="12"
         />
-    
-    
+
         <v-container>
           <v-row
             class="mt-5"
@@ -38,7 +38,7 @@
             />
             <v-col
               class="demovideo_view__label"
-              cols="6"
+              cols="7"
             >
               Name
             </v-col>
@@ -50,14 +50,14 @@
             </v-col>
           </v-row>
         </v-container>
-    
+
         <!-- TEAM -->
-    
+
         <Rating
           v-model="entries"
           @ratingChange="onRatingChange"
         />
-    
+
         <Oops v-if="!entries.length" />
         <!-- TEAM -->
       </v-col>
@@ -70,62 +70,91 @@
 
 
 <script lang="ts">
-import Vue from 'vue'
-import Component from 'vue-class-component'
-import { Rating } from '../../components'
-import { team_snippet } from '../../components/Rating.vue'
-import { FbStore } from '../../../../store';
-import { doc } from 'rxfire/firestore';
-import { Classroom, Project } from '../../../../store/Database/types/types';
-import { spliceOrPush } from '../../../../utilities/array';
-import { Subscription } from 'rxjs';
-import {firebase} from "@/firebase/init"
-import { Watch } from 'vue-property-decorator';
-import { Oops } from "@/views/ProgramGuide/components"
-Rating
+import Vue from "vue";
+import Component from "vue-class-component";
+import { Rating } from "../../components";
+import { team_snippet } from "../../components/Rating.vue";
+import { FbStore } from "../../../../store";
+import { doc } from "rxfire/firestore";
+import { Classroom, Project } from "../../../../store/Database/types/types";
+import { spliceOrPush } from "../../../../utilities/array";
+import { Subscription } from "rxjs";
+import { firebase } from "@/firebase/init";
+import { Watch } from "vue-property-decorator";
+import { Oops } from "@/views/ProgramGuide/components";
+Rating;
 @Component({
-  components:{
+  components: {
     Rating,
     Oops
   }
 })
-export default class demovideo_view extends Vue{
+export default class demovideo_view extends Vue {
   mounted() {
-      if (FbStore.userCitizenType === "teacher")
-    FbStore.currentTeacherProgramData!.classroomIds.forEach(classroomId => {
-      this.$subscribeTo(
-        doc(FbStore.firestore.collection("Classroom").doc(classroomId)),
-        classSnapshot => {
-          if (this.projectSubscribers[classSnapshot.id])
-            this.projectSubscribers[classSnapshot.id].forEach(subscriber =>
-              subscriber.unsubscribe()
-            );
-          else this.projectSubscribers[classSnapshot.id] = [];
-          classSnapshot.data<Classroom>().projectIds.forEach(projectId => {
-            this.projectSubscribers[classSnapshot.id].push(
-              doc(
-                FbStore.firestore.collection("Project").doc(projectId)
-              ).subscribe(projectSnapshot => {
-                let projectData = projectSnapshot.data<Project>();
-                spliceOrPush(
-                  this.entries,
-                  (({projectId,sentencePitch,teamName,demoLink, ...rest}) => ({projectId,item_preview:sentencePitch || "",name:teamName,href:demoLink, rating:(rest[`demoRating${FbStore.userCitizenType!.charAt(0).toUpperCase()}`]||0)}))(projectData),
-                  "projectId"
-                );
-              })
-            );
-          });
-        }
-      );
-    });else if (FbStore.userCitizenType === "employer") this.onProgramIdsChange();
+    if (FbStore.userCitizenType === "teacher")
+      FbStore.currentTeacherProgramData!.classroomIds.forEach(classroomId => {
+        this.$subscribeTo(
+          doc(FbStore.firestore.collection("Classroom").doc(classroomId)),
+          classSnapshot => {
+            if (this.projectSubscribers[classSnapshot.id])
+              this.projectSubscribers[classSnapshot.id].forEach(subscriber =>
+                subscriber.unsubscribe()
+              );
+            else this.projectSubscribers[classSnapshot.id] = [];
+            classSnapshot.data<Classroom>().projectIds.forEach(projectId => {
+              this.projectSubscribers[classSnapshot.id].push(
+                doc(
+                  FbStore.firestore.collection("Project").doc(projectId)
+                ).subscribe(projectSnapshot => {
+                  let projectData = projectSnapshot.data<Project>();
+                  spliceOrPush(
+                    this.entries,
+                    (({
+                      projectId,
+                      sentencePitch,
+                      teamName,
+                      demoLink,
+                      ...rest
+                    }) => ({
+                      projectId,
+                      item_preview: sentencePitch || "",
+                      name: teamName,
+                      href: demoLink,
+                      rating:
+                        rest[
+                          `demoRating${FbStore.userCitizenType!.charAt(
+                            0
+                          ).toUpperCase()}`
+                        ] || 0
+                    }))(projectData),
+                    "projectId"
+                  );
+                })
+              );
+            });
+          }
+        );
+      });
+    else if (FbStore.userCitizenType === "employer") this.onProgramIdsChange();
   }
-    onRatingChange({newRating,projectId}:{newRating:number,projectId:string}){
-   FbStore.firestore.collection("Project").doc(projectId).update<Project>({
-      [`demoRating${FbStore.userCitizenType!.charAt(0).toUpperCase()}`]:newRating,
-      lastUpdate:firebase.firestore.FieldValue.serverTimestamp()
-    })
+  onRatingChange({
+    newRating,
+    projectId
+  }: {
+    newRating: number;
+    projectId: string;
+  }) {
+    FbStore.firestore
+      .collection("Project")
+      .doc(projectId)
+      .update<Project>({
+        [`demoRating${FbStore.userCitizenType!.charAt(
+          0
+        ).toUpperCase()}`]: newRating,
+        lastUpdate: firebase.firestore.FieldValue.serverTimestamp()
+      });
   }
- get getProjectIds() {
+  get getProjectIds() {
     return FbStore.currentEmployerProgram!.projectIds || [];
   }
   @Watch("getProgramIds")
@@ -138,17 +167,34 @@ export default class demovideo_view extends Vue{
             projectSnapshot => {
               let projectData = projectSnapshot.data<Project>();
               spliceOrPush(
-                  this.entries,
-                  (({projectId,sentencePitch,teamName,demoLink, ...rest}) => ({projectId,item_preview:sentencePitch || "",name:teamName,href:demoLink, rating:(rest[`demoRating${FbStore.userCitizenType!.charAt(0).toUpperCase()}`]||0)}))(projectData),
-                  "projectId"
-                );
+                this.entries,
+                (({
+                  projectId,
+                  sentencePitch,
+                  teamName,
+                  demoLink,
+                  ...rest
+                }) => ({
+                  projectId,
+                  item_preview: sentencePitch || "",
+                  name: teamName,
+                  href: demoLink,
+                  rating:
+                    rest[
+                      `demoRating${FbStore.userCitizenType!.charAt(
+                        0
+                      ).toUpperCase()}`
+                    ] || 0
+                }))(projectData),
+                "projectId"
+              );
             }
           )
         );
       });
     }
   }
-    beforeDestroy() {
+  beforeDestroy() {
     this.employerSubscribers.forEach(subscriber => subscriber.unsubscribe());
   }
   employerSubscribers: Subscription[] = [];

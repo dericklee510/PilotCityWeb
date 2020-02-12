@@ -20,13 +20,38 @@
           placeholder="My pitch is..."
           :disabled="true"
           class="pt-1 pb-12 pl-5 pr-4 elevator_view2__paragraph"
-        />
+        /> 
       </template>
+
+
+
+          <!-- <v-row
+            v-if="readonly==true"
+            justify="start"
+            class="mr-auto ml-auto mb-12 mt-3 businessmodelcanvas_enter__paragraph"
+            style="padding-left: 0px"
+          >
+            {{ syncedCanvas.problem }}
+            <div>
+              <div
+                v-if="!syncedCanvas.problem"
+                class="businessmodelcanvas_enter__paragraph"
+                style="width:100%;"
+              >Nothing just yet</div>
+            </div>
+          </v-row> -->
+
+
+
+
     </Rating>
   </v-row>
 
   <!-- <v-col class="mr-auto ml-auto" cols="5"><button class="elevator_view2__button mb-10">SAVE</button></v-col> -->
 </template>
+
+
+
 
 
 
