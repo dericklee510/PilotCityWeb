@@ -89,38 +89,35 @@
             @input="ratingChange($event,team.projectId)"
           />
         </v-col>
-        </v-col>
       </v-row>
     </v-row>
   </v-container>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import "reflect-metadata";
-import Component from "vue-class-component";
-import { Prop, PropSync, Watch } from "vue-property-decorator";
-import { RawLocation } from "vue-router";
-export interface team_snippet {
-  projectId: string;
-  name: string;
-  item_preview?: string;
-  router_params?: RawLocation;
-  href?: string;
-  rating: number;
-}
+import Vue from 'vue'
+import "reflect-metadata"
+import Component from 'vue-class-component'
+import { Prop, PropSync, Watch } from 'vue-property-decorator'
+import { RawLocation } from 'vue-router'
+import { team_snippet } from '.'
+
 @Component
-export default class Rating extends Vue {
-  @Prop()
-  value!: team_snippet[];
+export default class Rating extends Vue{
+     @Prop()
+    value!: team_snippet[]
 
-  @Prop()
-  preview?: string;
-  ratingChange(newRating: number, projectId: string) {
-    this.$emit("ratingChange", { newRating, projectId });
-  }
-
-  @PropSync("value")
-  syncedSnippet!: team_snippet[];
+    @Prop()
+    preview?:string
+    ratingChange(newRating:number,projectId:string){
+      this.$emit("ratingChange",{newRating,projectId})
+    }
+    @Prop()
+    required!:(keyof team_snippet)[]
+    
+    
+    get syncedSnippet():team_snippet[]{
+      return this.value.filter(snip => this.required?this.required.map(key => snip[key]).every(val => val):true)
+    }
 }
 </script>

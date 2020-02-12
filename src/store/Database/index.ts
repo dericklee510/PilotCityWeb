@@ -26,6 +26,7 @@ export default class Fb extends VuexModule {
     public currentUserProfile: GeneralUser | null = null
     public currentProject: Project | null = null
     public currentStudentClassroom: studentClassroom | null = null
+    
 
     //  @Dependency('FBUser')
     get userDocRef() {
@@ -53,7 +54,7 @@ export default class Fb extends VuexModule {
 
     //  @Dependency('currentUserProfile')
     get userCitizenType() {
-        return this.currentUserProfile!.citizenType;
+        return this.currentUserProfile?.citizenType;
     }
    
     @Mutation

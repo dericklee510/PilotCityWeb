@@ -52,6 +52,7 @@
 
         <Rating
           v-model="entries"
+          :required="['item_preview','href']"
           @ratingChange="onRatingChange"
         />
         <Oops v-if="!entries.length" />
@@ -65,18 +66,17 @@
 
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-import { Rating } from "../../components";
-import { team_snippet } from "../../components/Rating.vue";
-import { FbStore } from "../../../../store";
-import { doc } from "rxfire/firestore";
-import { Classroom, Project } from "../../../../store/Database/types/types";
-import { spliceOrPush } from "../../../../utilities/array";
-import { Subscription } from "rxjs";
-import { firebase } from "@/firebase/init";
-import { Watch } from "vue-property-decorator";
-import { Oops } from "@/views/ProgramGuide/components";
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import { Rating, team_snippet } from '../../components'
+import { FbStore } from '../../../../store';
+import { doc } from 'rxfire/firestore';
+import { Classroom, Project } from '../../../../store/Database/types/types';
+import { spliceOrPush } from '../../../../utilities/array';
+import { Subscription } from 'rxjs';
+import {firebase} from "@/firebase/init"
+import { Watch } from 'vue-property-decorator';
+import { Oops } from "@/views/ProgramGuide/components"
 @Component({
   components: {
     Rating,

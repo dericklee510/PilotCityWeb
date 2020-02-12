@@ -58,7 +58,6 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { Rating } from "../../components";
-import { team_snippet } from "../../components/Rating.vue";
 
 @Component({
   components: {

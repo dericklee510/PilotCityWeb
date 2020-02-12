@@ -154,7 +154,7 @@
               v-model="stars.solution"
               dense
               :readonly="readonly===undefined"
-              @input="onStarsChanged($event,'problem')"
+              @input="onStarsChanged($event,'solution')"
             />
           </v-row>
         </v-col>
@@ -248,7 +248,7 @@
               v-model="stars.innovation"
               dense
               :readonly="readonly===undefined"
-              @input="onStarsChanged($event,'problem')"
+              @input="onStarsChanged($event,'innovation')"
             />
           </v-row>
         </v-col>
@@ -348,7 +348,8 @@
               v-model="stars.cost"
               dense
               :readonly="readonly===undefined"
-              @input="onStarsChanged($event,'problem')"
+              
+              @input="onStarsChanged($event,'cost')"
             />
           </v-row>
         </v-col>
