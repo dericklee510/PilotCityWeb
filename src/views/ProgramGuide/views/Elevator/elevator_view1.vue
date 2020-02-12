@@ -3,7 +3,6 @@
     <Rating
       v-model="entries"
       v-slot:link="{snippet}"
-      preview
       @ratingChange="$emit('ratingChange',$event)"
     >
       <v-col

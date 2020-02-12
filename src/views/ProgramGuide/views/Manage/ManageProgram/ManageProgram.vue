@@ -132,7 +132,7 @@ export default class ManageProgram extends Vue {
   }
   unlockHash:Record<string, "By Date"|"Manually"| "By Completion"> = {
     [`launch day`]: "By Date",
-    [`training`]: "By Completion",
+    [`training`]: "By Date",
     [`practice & research`]: "By Completion",
     [`ideate`]: "By Completion",
     [`hack day`]: "By Date",

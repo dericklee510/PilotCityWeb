@@ -35,8 +35,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { Rating } from '../../components'
-import { team_snippet } from '../../components/Rating.vue'
+import { Rating, team_snippet } from '../../components'
 import { Prop } from 'vue-property-decorator'
 @Component({
   components:{

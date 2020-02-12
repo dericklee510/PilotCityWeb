@@ -73,14 +73,8 @@ import "reflect-metadata"
 import Component from 'vue-class-component'
 import { Prop, PropSync, Watch } from 'vue-property-decorator'
 import { RawLocation } from 'vue-router'
-export interface team_snippet {
-    projectId:string
-    name:string
-    item_preview?:string
-    router_params?:RawLocation
-    href?:string
-    rating:number
-}
+import { team_snippet } from '.'
+
 @Component
 export default class Rating extends Vue{
      @Prop()
@@ -91,10 +85,13 @@ export default class Rating extends Vue{
     ratingChange(newRating:number,projectId:string){
       this.$emit("ratingChange",{newRating,projectId})
     }
-   
-
-    @PropSync("value")
-    syncedSnippet!:team_snippet[]
+    @Prop()
+    required!:(keyof team_snippet)[]
+    
+    
+    get syncedSnippet():team_snippet[]{
+      return this.value.filter(snip => this.required?this.required.map(key => snip[key]).every(val => val):true)
+    }
 
     
 }

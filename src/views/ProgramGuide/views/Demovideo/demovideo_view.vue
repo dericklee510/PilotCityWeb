@@ -55,6 +55,7 @@
     
         <Rating
           v-model="entries"
+          :required="['item_preview','href']"
           @ratingChange="onRatingChange"
         />
     

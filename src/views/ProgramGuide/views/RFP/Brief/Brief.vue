@@ -241,8 +241,8 @@ export default class RFPBrief extends Vue{
     get citizenType(){
         return FbStore.userCitizenType;
     }
-    rfpCompany = FbStore.currentEmployerProgram?.rfpCompany || ""
-    rfpPrompt = FbStore.currentEmployerProgram?.rfpPrompt || ""
+    rfpCompany = FbStore.currentEmployerProgram?.rfpCompany || "" 
+  rfpPrompt = FbStore.currentTeacherProgramData?.rfpPrompt || FbStore.currentEmployerProgram!.rfpPromptTemplate || ""
     rfpRequirements = FbStore.currentEmployerProgram?.rfpRequirements || ""
     rfpAbout = FbStore.currentEmployerProgram?.rfpAbout || ""
     rfpResources = FbStore.currentEmployerProgram?.rfpResources || ""

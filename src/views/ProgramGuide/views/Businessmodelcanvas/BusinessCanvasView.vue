@@ -22,7 +22,7 @@
             id="businessmodelcanvas_view2__backbuttonicon"
             style="color: #dbdcde; font-weight: 900; font-family: Raleway; font-size: 15px;"
             class="fas fa-chevron-left"
-          ><span><nbsp>Back</nbsp></span>
+          ><span>Back</span>
           </i>
         </v-col>
         <v-col

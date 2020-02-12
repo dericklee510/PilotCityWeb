@@ -47,56 +47,23 @@
 
 <script lang="ts">
 import Vue from "vue";
-import Component from "vue-class-component";
-import { Rating } from "../../components";
-import { team_snippet } from "../../components/Rating.vue";
+import Component, { mixins } from "vue-class-component";
+import { Rating, team_snippet } from "../../components";
 import { FbStore } from "../../../../store";
-import { doc } from "rxfire/firestore/";
-import { combineLatest, from } from "rxjs";
-import { map, switchMap, tap } from "rxjs/operators";
+import {getlatestProjectSnippetsMixin} from '../../utilities'
+import {firebase} from "@/firebase/init"
 import { Classroom, Project } from "../../../../store/Database/types/types";
-import { flatten, get, Many } from "lodash";
-@Component<elevator_view>({
+const snippetMixin = getlatestProjectSnippetsMixin({
+  item_preview:"elevatorPitch",
+  rating:"elevatorPitchRating"
+})
+
+@Component({
   components: {
     Rating
   },
-  subscriptions(){
-    return {
-      latestProjectData:combineLatest(
-      FbStore.currentTeacherProgramData!.classroomIds.map(classroomId =>
-        doc(FbStore.firestore.collection("Classroom").doc(classroomId))
-      )
-    ).pipe(
-      map(classroomDocArr =>
-        flatten(
-          classroomDocArr.map(classroomDoc =>
-            classroomDoc
-              .data<Classroom>()
-              .projectIds.map(projectId =>
-                doc(FbStore.firestore.collection("Project").doc(projectId))
-              )
-          )
-        )
-      ),
-      switchMap(projectDocs => combineLatest<firebase.firestore.DocumentSnapshot[]>(...projectDocs)),
-      map(projectdocs => projectdocs.map(projectdoc => projectdoc.data<Project>())),
-    )
-    }
-  }
 })
-export default class elevator_view extends Vue {
-  latestProjectData?:(Project & Record<string, any>)[] = []
-  get entries():team_snippet[]{
-    if(this.latestProjectData)
-    return this.latestProjectData.map(project => ({
-      projectId:project.projectId,
-      item_preview:project.sentencePitch || "",
-      name:project.teamName,
-      rating:project[`elevatorPitchRating${FbStore.userCitizenType!.charAt(0).toUpperCase()}`] || 0
-    }))
-    else
-    return []
-  }
+export default class elevator_view extends mixins(snippetMixin) {
   public page?: string = "view";
   snippet:team_snippet|null = null
   changePage(snippet?:team_snippet) {

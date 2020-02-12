@@ -10,7 +10,7 @@
         class="practicelog_manage__image"
         src="@/assets/practicelog_manage.png"
       >
-    
+
       <v-col
         class="practicelog-manage__contain"
         cols="8"
@@ -46,9 +46,9 @@
             </v-col>
             <!-- <v-col class="practicelog_manage__label" cols="3"></v-col> -->
           </v-row>
-      
+
           <!-- LOGGER -->
-      
+
           <v-row
             v-for="(timeLogs,studentId) in practiceLogs"
             :key="studentId"
@@ -72,11 +72,12 @@
               xl="2"
               style="padding: 0"
             >
-              <v-col class="practicelog-manage__log-header">
-                {{ nameHash[studentId].name }}
+              <v-col
+                class="practicelog-manage__log-header"
+              >
+                {{ (nameHash && nameHash[studentId])?nameHash[studentId].name:"" }}
               </v-col>
               <pc-timelog
-                :key="studentId+key"
                 v-model="practiceLogs[studentId]"
                 v-slot="{entries}"
               >
@@ -89,11 +90,8 @@
                     <button
                       class="practicelog_manage__rejectbutton"
                       @click="rejectEntry(studentId,index)"
-                    >
-                      Reject
-                    </button><span class="practicelog_manage__singlelog">
-                      {{ `${entry.minutes}m` }}
-                    </span>
+                    >Reject</button>
+                    <span class="practicelog_manage__singlelog">{{ `${entry.minutes}m` }}</span>
                   </span>
                 </v-col>
               </pc-timelog>
@@ -112,75 +110,103 @@
 
 
 <script lang="ts">
-import Vue from 'vue'
-import Component from 'vue-class-component'
-import { TimeLog } from '@/store/Database/types/utilities'
-import { PCmultiinput } from '@/components/inputs'
-import {firebase} from "@/firebase/init"
-import { FbStore } from '../../../../store'
-import { Subscription } from 'rxjs'
-import { Classroom, Project } from '../../../../store/Database/types/types'
-import { doc } from 'rxfire/firestore'
-import { Oops } from '../../components'
+import Vue from "vue";
+import Component, { mixins } from "vue-class-component";
+import { TimeLog } from "@/store/Database/types/utilities";
+import { PCmultiinput } from "@/components/inputs";
+import { firebase } from "@/firebase/init";
+import { FbStore } from "../../../../store";
+import { Subscription, Observable, from } from "rxjs";
+import { Classroom, Project } from "../../../../store/Database/types/types";
+import { doc } from "rxfire/firestore";
+import { Oops } from "../../components";
+import { latestProjectDataMixin } from "../../utilities";
+import { switchMap } from "rxjs/operators";
 export const pcTimelog = PCmultiinput.createMultiInput<TimeLog>({
-  minutes:0,
+  minutes: 0,
   lastUpdate: firebase.firestore.Timestamp.fromDate(new Date())
-})
+});
 
-@Component({
-  components:{
+@Component<Logtime>({
+  components: {
     pcTimelog,
     Oops
+  },
+  subscriptions() {
+    return {
+      nameHash: this.latestProjectData$.pipe(
+        switchMap(projectdata =>
+          from(
+            new Promise(async resolve => {
+              let obj = {} as Record<
+                string,
+                { name: string; projectId: string }
+              >;
+              await Promise.all(
+                projectdata.map(async project => {
+                  await Promise.all(
+                    Object.keys(project.practiceLog).map(async studentId => {
+                      obj[studentId] = {
+                        name: await FbStore.getStudentName({
+                          studentUid: studentId
+                        }),
+                        projectId: project.projectId
+                      };
+                    })
+                  );
+                })
+              );
+              resolve(obj);
+            })
+          )
+        )
+      )
+    };
   }
 })
-export default class Logtime extends Vue{
-  key = 0
-  mounted(){
-    FbStore.currentTeacherProgramData!.classroomIds.forEach(async classroomId => {
-     let classroomData = (await FbStore.firestore.collection("Classroom").doc(classroomId).get()).data<Classroom>()
-     classroomData.projectIds.forEach(projectId => {
-       this.$subscribeTo(doc(FbStore.firestore.collection("Project").doc(projectId)), projectSnapshot => {
-         let projectData = projectSnapshot.data<Project>()
-         Object.keys(projectData.practiceLog).forEach(async studentId => {
-           this.nameHash[studentId] = {name:await FbStore.getStudentName({studentUid:studentId}), projectId}
-           this.practiceLogs[studentId] = projectData.practiceLog[studentId]
-           this.$forceUpdate()
-           this.key++
-         })
-       })
-     })
-    })
+export default class Logtime extends mixins(latestProjectDataMixin) {
+  get practiceLogs(): Record<string, TimeLog[]> {
+    let obj: Record<string, TimeLog[]> = {};
+    this.latestProjectData?.forEach(projectData => {
+      Object.keys(projectData.practiceLog).forEach(studentId => {
+        obj[studentId] = projectData.practiceLog[studentId];
+      });
+    });
+    return obj;
   }
-    practiceLogs:Record<string,TimeLog[]> = {
-      // 'someuid':[{
-      //   minutes:45,
-      //   lastUpdate: firebase.firestore.Timestamp.fromDate(new Date(12))
-      // },
-      // {
-      //   minutes:13,
-      //   lastUpdate: firebase.firestore.Timestamp.fromDate(new Date(42))
-      // },
-      // {
-      //   minutes:10,
-      //   lastUpdate: firebase.firestore.Timestamp.fromDate(new Date(14))
-      // }],
-      // "otheruid":[{
-      //   minutes:20,
-      //   lastUpdate: firebase.firestore.Timestamp.fromDate(new Date(23))
-      // }]
-    }
-    nameHash:Record<string,{name:string,projectId:string}> ={
-      // 'someuid': {name:"Antonio Laza"},
-      // otheruid: {name:"Carly Hudson"}
-    }
-    rejectEntry(studentId:string,index:number){
-      FbStore.firestore.collection("Project").doc(this.nameHash[studentId].projectId).update<Project>({
-        [`practiceLog.${studentId}`]: this.practiceLogs[studentId].splice(index,1)
-      })
-      this.$forceUpdate()
-    }
-    reduceEntry(entries:TimeLog[]):number {
-      return entries.reduce((sum,entry) => sum += entry.minutes,0)
-    }
+  // 'someuid':[{
+  //   minutes:45,
+  //   lastUpdate: firebase.firestore.Timestamp.fromDate(new Date(12))
+  // },
+  // {
+  //   minutes:13,
+  //   lastUpdate: firebase.firestore.Timestamp.fromDate(new Date(42))
+  // },
+  // {
+  //   minutes:10,
+  //   lastUpdate: firebase.firestore.Timestamp.fromDate(new Date(14))
+  // }],
+  // "otheruid":[{
+  //   minutes:20,
+  //   lastUpdate: firebase.firestore.Timestamp.fromDate(new Date(23))
+  // }]
+  nameHash!: Record<string, { name: string; projectId: string }>;
+  // 'someuid': {name:"Antonio Laza"},
+  // otheruid: {name:"Carly Hudson"}
+  rejectEntry(studentId: string, index: number) {
+    FbStore.firestore
+      .collection("Project")
+      .doc(this.nameHash[studentId].projectId)
+      .update<Project>({
+        [`practiceLog.${studentId}`]: this.practiceLogs[studentId].splice(
+          index,
+          1
+        )
+      });
+    this.$forceUpdate();
+  }
+  reduceEntry(entries: TimeLog[]): number {
+    return entries.reduce((sum, entry) => (sum += entry.minutes), 0);
+  }
 }
 </script>
