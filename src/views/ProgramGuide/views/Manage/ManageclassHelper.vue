@@ -15,8 +15,8 @@
         >
           <input
             v-model="classNames[index]"
-            @keypress.enter="renameClass(entry.id,index)"
             :placeholder="entry.className"
+            @keypress.enter="renameClass(entry.id,index)"
           >
         </v-col>
         <v-col

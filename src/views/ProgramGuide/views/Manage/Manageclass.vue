@@ -1,26 +1,35 @@
 <template>
   <v-container>
-    <v-row no-gutters justify="center">
-      <v-col class="manageclass__container" cols="8">
-
-
+    <v-row
+      no-gutters
+      justify="center"
+    >
+      <v-col
+        class="manageclass__container"
+        cols="8"
+      >
         <v-tabs no-gutters>
           <v-tab
             style="cursor: pointer"
             @click="$router.push({name: 'teach-externship-manage-class'})"
-          >CLASSES</v-tab>
+          >
+            CLASSES
+          </v-tab>
 
           <v-tab
             style="cursor: normal"
             @click="$router.push({name: 'teach-externship-manage-teams'})"
-          >TEAMS</v-tab>
+          >
+            TEAMS
+          </v-tab>
 
-        <v-tab
-          style="cursor: pointer"
-          @click="$router.push({name: 'teach-externship-manage-students'})"
-        >STUDENTS</v-tab>
-
-                </v-tabs>
+          <v-tab
+            style="cursor: pointer"
+            @click="$router.push({name: 'teach-externship-manage-students'})"
+          >
+            STUDENTS
+          </v-tab>
+        </v-tabs>
 
 
 
@@ -28,12 +37,22 @@
 
 
         <v-row no-gutters>
-          <v-col cols="12" class="manageteam__title">
+          <v-col
+            cols="12"
+            class="manageteam__title"
+          >
             <span>Manage Classes</span>
           </v-col>
         </v-row>
-        <v-row class="manageclass__labels" no-gutters>
-          <v-col cols="12" lg="4" xl="5">
+        <v-row
+          class="manageclass__labels"
+          no-gutters
+        >
+          <v-col
+            cols="12"
+            lg="4"
+            xl="5"
+          >
             <span>Class Name</span>
           </v-col>
           <v-spacer />

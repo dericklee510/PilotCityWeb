@@ -35,7 +35,10 @@
               @keyup.enter="process()"
             >
           </v-col>
-          <v-col class="login__forgotpassword pl-0 pr-0" @click="$router.push({name: 'reset-email'})">
+          <v-col
+            class="login__forgotpassword pl-0 pr-0"
+            @click="$router.push({name: 'reset-email'})"
+          >
             <a style="color: #fff">
               Forgot Password
             </a>

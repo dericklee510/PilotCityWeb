@@ -241,10 +241,10 @@ export default class RFPBrief extends Vue{
     get citizenType(){
         return FbStore.userCitizenType;
     }
-    rfpCompany = FbStore.currentEmployerProgram?.rfpCompany || ""
-    rfpPrompt = FbStore.currentEmployerProgram?.rfpPrompt || ""
-    rfpRequirements = FbStore.currentEmployerProgram?.rfpRequirements || ""
-    rfpAbout = FbStore.currentEmployerProgram?.rfpAbout || ""
-    rfpResources = FbStore.currentEmployerProgram?.rfpResources || ""
+    // rfpCompany = FbStore.currentEmployerProgram?.rfpCompany || ""
+    // rfpPrompt = FbStore.currentEmployerProgram?.rfpPrompt || ""
+    // rfpRequirements = FbStore.currentEmployerProgram?.rfpRequirements || ""
+    // rfpAbout = FbStore.currentEmployerProgram?.rfpAbout || ""
+    // rfpResources = FbStore.currentEmployerProgram?.rfpResources || ""
 }
 </script>

@@ -1,27 +1,59 @@
 <template>
   <v-container>
     <v-row justify="center">
-      <img id="presentation_view__icon" src="@/assets/presentation_view.png" />
+      <img
+        id="presentation_view__icon"
+        src="@/assets/presentation_view.png"
+      >
 
-      <v-col id="presentation_view__contain" cols="8" class="pb-9">
+      <v-col
+        id="presentation_view__contain"
+        cols="8"
+        class="pb-9"
+      >
         <v-row
           justify="center"
           class="mr-auto ml-auto presentation_view__title"
-        >VIEW STUDENT PRESENTATION LINKS</v-row>
+        >
+          VIEW STUDENT PRESENTATION LINKS
+        </v-row>
 
-        <v-col id="presentation_view__borderline" cols="12" />
+        <v-col
+          id="presentation_view__borderline"
+          cols="12"
+        />
 
         <v-container>
-          <v-row class="mt-5" justify="center" no-gutters>
-            <v-col class="demovideo_view__label" cols="1" />
-            <v-col class="demovideo_view__label" cols="7">Name</v-col>
-            <v-col class="demovideo_view__label" cols="2">Rate</v-col>
+          <v-row
+            class="mt-5"
+            justify="center"
+            no-gutters
+          >
+            <v-col
+              class="demovideo_view__label"
+              cols="1"
+            />
+            <v-col
+              class="demovideo_view__label"
+              cols="7"
+            >
+              Name
+            </v-col>
+            <v-col
+              class="demovideo_view__label"
+              cols="2"
+            >
+              Rate
+            </v-col>
           </v-row>
         </v-container>
 
         <!-- TEAM -->
 
-        <Rating v-model="entries" @ratingChange="onRatingChange" />
+        <Rating
+          v-model="entries"
+          @ratingChange="onRatingChange"
+        />
         <Oops v-if="!entries.length" />
       </v-col>
     </v-row>

@@ -1,8 +1,5 @@
 <template>
   <div>
-
-
-
     <!-- SCHOOL INFORMATION -->
 
     <v-row

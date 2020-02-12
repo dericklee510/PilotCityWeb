@@ -79,7 +79,7 @@
         <v-col cols="2" />
       </v-row>
       <v-row
-      class="mt-4"
+        class="mt-4"
         no-gutters
         justify="center"
       >

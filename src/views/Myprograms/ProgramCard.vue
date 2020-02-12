@@ -28,7 +28,7 @@
               class="mt-3"
               rounded
               :height="9"
-            ></v-progress-linear>
+            />
           </v-col>
           <v-col>
             <v-btn

@@ -58,23 +58,23 @@
           cols="5"
         >
           <NextNode
-              v-slot="{setNext}"
-              @CallbackComplete="$emit('nextNode')"
+            v-slot="{setNext}"
+            @CallbackComplete="$emit('nextNode')"
+          >
+            <v-btn
+              id="editcasestudies__button"
+              text
+              solo
+              depressed
+              outlined
+              :loading="loading"
+              :disabled="invalid"
+              height="73.5px"
+              @click="validate().then(valid => {if(valid) setNext(submit)})"
             >
-              <v-btn
-                id="editcasestudies__button"
-                text
-                solo
-                depressed
-                outlined
-                :loading="loading"
-                :disabled="invalid"
-                height="73.5px"
-                @click="validate().then(valid => {if(valid) setNext(submit)})"
-              >
-                NEXT
-              </v-btn>
-            </NextNode>
+              NEXT
+            </v-btn>
+          </NextNode>
         </v-col>
       </ValidationObserver>
 

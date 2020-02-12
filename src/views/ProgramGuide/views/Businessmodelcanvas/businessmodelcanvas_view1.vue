@@ -1,17 +1,39 @@
 
 
 <template>
-  <v-row justify="center" no-gutters>
-    <v-col cols="12" class="pb-9">
-
-      <v-row class="programguide__labels" align="center" justify="center" no-gutters>
-        
-
-            <v-col cols="1" md="1" class="d-none d-lg-inline-block" />
-            <v-col cols="12" md="7" class="d-none d-lg-inline-block">Name</v-col>
-            <v-col cols="12" md="2" class="d-none d-lg-inline-block">Rating</v-col>
-
-
+  <v-row
+    justify="center"
+    no-gutters
+  >
+    <v-col
+      cols="12"
+      class="pb-9"
+    >
+      <v-row
+        class="programguide__labels"
+        align="center"
+        justify="center"
+        no-gutters
+      >
+        <v-col
+          cols="1"
+          md="1"
+          class="d-none d-lg-inline-block"
+        />
+        <v-col
+          cols="12"
+          md="7"
+          class="d-none d-lg-inline-block"
+        >
+          Name
+        </v-col>
+        <v-col
+          cols="12"
+          md="2"
+          class="d-none d-lg-inline-block"
+        >
+          Rating
+        </v-col>
       </v-row>
 
 
@@ -26,20 +48,43 @@
       >
         <!-- insert v-for here -->
 
-        <v-col cols="1" md="1" @click="$emit('changePage',team)">
-          <v-btn dark depressed x-small>View</v-btn>
+        <v-col
+          cols="1"
+          md="1"
+          @click="$emit('changePage',team)"
+        >
+          <v-btn
+            dark
+            depressed
+            x-small
+          >
+            View
+          </v-btn>
         </v-col>
-        <v-col cols="12" md="7" sm="5"  class="programguide__header">
+        <v-col
+          cols="12"
+          md="7"
+          sm="5"
+          class="programguide__header"
+        >
           <span>{{ team.teamName }}</span>
         </v-col>
-        <v-col cols="12" md="2" class="pc-rating">
-          <v-rating v-model="team.averageRating" size="20px" dense readonly />
+        <v-col
+          cols="12"
+          md="2"
+          class="pc-rating"
+        >
+          <v-rating
+            v-model="team.averageRating"
+            size="20px"
+            dense
+            readonly
+          />
         </v-col>
       </v-row>
 
 
       <Oops v-if="!entries.length" />
-
     </v-col>
   </v-row>
 </template>

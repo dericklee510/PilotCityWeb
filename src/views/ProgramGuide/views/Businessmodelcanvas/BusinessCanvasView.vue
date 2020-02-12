@@ -38,7 +38,7 @@
 
             class="fas fa-chevron-left"
           ><span 
-          style="cursor:pointer; color: #C7C8CA; font-weight: 900; font-family: Raleway; font-size: 18px; margin-left:8px; text-transform:uppercase; letter-spacing:.075rem; padding-bottom:10px;"
+            style="cursor:pointer; color: #C7C8CA; font-weight: 900; font-family: Raleway; font-size: 18px; margin-left:8px; text-transform:uppercase; letter-spacing:.075rem; padding-bottom:10px;"
           >Back</span></i>
         </v-row>
 

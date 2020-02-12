@@ -28,93 +28,91 @@
         Now that you’ve received feedback from your employer, it is time to evolve, iterate or pivot your project if necessary.
       </v-row>
 
-<v-row no-gutters>
-  <v-col cols="3"></v-col>
-      <v-col cols="8">
-        <v-row
-          id="posthack__check1"
-          justify="center"
-          no-gutters
-          class="mt-12 mb-12"
-
-        >
-          <v-col
-            cols="12"
-            class="posthack__wholeline"
+      <v-row no-gutters>
+        <v-col cols="3" />
+        <v-col cols="8">
+          <v-row
+            id="posthack__check1"
+            justify="center"
+            no-gutters
+            class="mt-12 mb-12"
           >
-            <input
-              v-model="canvas"
-              class="posthack__check"
-              type="checkbox"
+            <v-col
+              cols="12"
+              class="posthack__wholeline"
             >
-            Update Business Model Canvas
-            <span class="posthack__error">*</span>
-            <span>
-              <button class="posthack__exporticon">
-                <img src="@/assets/greenexport.png">
-              </button>
-            </span>
-          </v-col>
-        </v-row>
+              <input
+                v-model="canvas"
+                class="posthack__check"
+                type="checkbox"
+              >
+              Update Business Model Canvas
+              <span class="posthack__error">*</span>
+              <span>
+                <button class="posthack__exporticon">
+                  <img src="@/assets/greenexport.png">
+                </button>
+              </span>
+            </v-col>
+          </v-row>
 
       
 
 
-        <v-row
-          id="posthack__check2"
-          justify="center"
-          no-gutters
-          class="mt-12 mb-12"
-        >
-          <v-col
-            class="posthack__wholeline"
-            cols="12"
+          <v-row
+            id="posthack__check2"
+            justify="center"
+            no-gutters
+            class="mt-12 mb-12"
           >
-            <input
-              v-model="sentencePitch"
-              class="posthack__check"
-              type="checkbox"
+            <v-col
+              class="posthack__wholeline"
+              cols="12"
             >
-            Update One Sentence Pitch
-            <span class="posthack__error">*</span>
-            <span>
-              <button class="posthack__exporticon">
-                <img src="@/assets/greenexport.png">
-              </button>
-            </span>
-          </v-col>
-        </v-row>
+              <input
+                v-model="sentencePitch"
+                class="posthack__check"
+                type="checkbox"
+              >
+              Update One Sentence Pitch
+              <span class="posthack__error">*</span>
+              <span>
+                <button class="posthack__exporticon">
+                  <img src="@/assets/greenexport.png">
+                </button>
+              </span>
+            </v-col>
+          </v-row>
 
 
       
 
 
-        <v-row
-          id="posthack__check2"
-          justify="center"
-          no-gutters
-          class="mt-12 mb-12"
-        >
-          <v-col
-            class="posthack__wholeline"
-            cols="12"
+          <v-row
+            id="posthack__check2"
+            justify="center"
+            no-gutters
+            class="mt-12 mb-12"
           >
-            <input
-              v-model="elevatorPitch"
-              class="posthack__check"
-              type="checkbox"
+            <v-col
+              class="posthack__wholeline"
+              cols="12"
             >
-            Update Written Elevator Pitch
-            <span class="posthack__error">*</span>
-            <span>
-              <button class="posthack__exporticon">
-                <img src="@/assets/greenexport.png">
-              </button>
-            </span>
-          </v-col>
-        </v-row>
-      </v-col>
-
+              <input
+                v-model="elevatorPitch"
+                class="posthack__check"
+                type="checkbox"
+              >
+              Update Written Elevator Pitch
+              <span class="posthack__error">*</span>
+              <span>
+                <button class="posthack__exporticon">
+                  <img src="@/assets/greenexport.png">
+                </button>
+              </span>
+            </v-col>
+          </v-row>
+        </v-col>
       </v-row>
 
       

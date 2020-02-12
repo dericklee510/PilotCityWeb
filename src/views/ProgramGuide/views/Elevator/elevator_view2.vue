@@ -25,7 +25,7 @@
 
 
 
-          <!-- <v-row
+      <!-- <v-row
             v-if="readonly==true"
             justify="start"
             class="mr-auto ml-auto mb-12 mt-3 businessmodelcanvas_enter__paragraph"
@@ -40,10 +40,6 @@
               >Nothing just yet</div>
             </div>
           </v-row> -->
-
-
-
-
     </Rating>
   </v-row>
 

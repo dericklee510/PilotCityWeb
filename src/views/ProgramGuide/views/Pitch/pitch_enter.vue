@@ -40,8 +40,8 @@
               rules="required|max:144"
             >
               <v-textarea
-                class="pitch_enter__onesentence"
                 v-model="pitch"
+                class="pitch_enter__onesentence"
                 no-resize
                 counter
                 :error-messages="errors"

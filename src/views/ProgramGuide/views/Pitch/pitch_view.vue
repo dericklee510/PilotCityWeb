@@ -1,36 +1,67 @@
 <template>
   <v-container>
     <v-row justify="center">
-      <img id="pitch_view__icon" src="@/assets/pitch_view.png" />
+      <img
+        id="pitch_view__icon"
+        src="@/assets/pitch_view.png"
+      >
 
-      <v-col id="pitch_view__contain" cols="8" class="pb-9">
+      <v-col
+        id="pitch_view__contain"
+        cols="8"
+        class="pb-9"
+      >
         <v-row
           justify="center"
           class="mr-auto ml-auto pitch_view__title"
-        >VIEW ONE SENTENCE PROJECT PITCHES</v-row>
+        >
+          VIEW ONE SENTENCE PROJECT PITCHES
+        </v-row>
 
-        <v-col id="pitch_view__borderline" cols="12" />
-  <!-- <v-row justify="center" no-gutters>
+        <v-col
+          id="pitch_view__borderline"
+          cols="12"
+        />
+        <!-- <v-row justify="center" no-gutters>
     <v-col cols="10" class="pb-9"> -->
-      <v-row class="programguide__labels" justify="center" no-gutters>
-            <!-- <v-col cols="1" md="1" class="d-none d-lg-inline-block" /> -->
-            <v-col cols="12" md="7" class="d-none d-lg-inline-block">Name</v-col>
-            <v-col cols="12" md="2" class="d-none d-lg-inline-block">Rating</v-col>
-          </v-row>
+        <v-row
+          class="programguide__labels"
+          justify="center"
+          no-gutters
+        >
+          <!-- <v-col cols="1" md="1" class="d-none d-lg-inline-block" /> -->
+          <v-col
+            cols="12"
+            md="7"
+            class="d-none d-lg-inline-block"
+          >
+            Name
+          </v-col>
+          <v-col
+            cols="12"
+            md="2"
+            class="d-none d-lg-inline-block"
+          >
+            Rating
+          </v-col>
+        </v-row>
 
 
 
 
         <!-- TEAM -->
 
-        <Rating v-model="entries" preview @ratingChange="onRatingChange" />
+        <Rating
+          v-model="entries"
+          preview
+          @ratingChange="onRatingChange"
+        />
 
         
         <Oops v-if="!entries.length" />
 
-<!-- </v-col>
+        <!-- </v-col>
 </v-row> -->
-
       </v-col>
     </v-row>
   </v-container>

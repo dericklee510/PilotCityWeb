@@ -12,7 +12,7 @@
             Forgot Password?
           </v-col>
           <v-col class="mb-15 text-center">
-            <p >
+            <p>
               Enter your email address to send a recovery email
             </p>
           </v-col>
@@ -56,7 +56,6 @@
               <h4
                 class="text-center pc-background--dark"
                 style="display: block"
-                
               >
                 {{ authResponse }}
               </h4>
