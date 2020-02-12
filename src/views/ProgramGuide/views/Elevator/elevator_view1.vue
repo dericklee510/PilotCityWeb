@@ -65,7 +65,7 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { Rating } from "../../components";
-import { team_snippet } from "../../components/Rating.vue";
+import { team_snippet } from "../../components";
 import { FbStore } from "../../../../store";
 import { doc } from "rxfire/firestore";
 import { Classroom, Project } from "../../../../store/Database/types/types";
