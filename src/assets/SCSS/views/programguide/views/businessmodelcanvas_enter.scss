@@ -104,7 +104,7 @@
         font-size: 18px;
         font-family: "Raleway";
         // padding: 20px;
-        font-weight: 700;
+        font-weight: 500;
         word-wrap: break-word;
 
         &::placeholder{
@@ -115,6 +115,10 @@
             border: 1px solid #CCCCCC;
             padding: 20px;
         }
+
+    }
+
+    &__paragraph-fullwidth{
 
     }
 

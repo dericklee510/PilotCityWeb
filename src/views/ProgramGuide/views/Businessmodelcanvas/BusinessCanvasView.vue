@@ -5,15 +5,15 @@
       justify="center"
       class="programguide__icon"
     >
-      <img
+      <img 
         
         src="@/assets/businessmodelcanvas_view2.png"
       >
-      <v-col
+      <v-col 
         cols="8"
         class="programguide__container"
       >
-        <v-col
+        <!-- <v-col
           cols="12"
           @click="changePage"
         >
@@ -24,7 +24,41 @@
             class="fas fa-chevron-left"
           ><span><nbsp>Back</nbsp></span>
           </i>
-        </v-col>
+        </v-col> -->
+
+
+
+        <v-row
+
+          @click="changePage"        
+        >
+          <i
+            v-if="page!='view'"
+            id="businessmodelcanvas_view2__backbuttonicon"
+
+            class="fas fa-chevron-left"
+          ><span 
+          style="cursor:pointer; color: #C7C8CA; font-weight: 900; font-family: Raleway; font-size: 18px; margin-left:8px; text-transform:uppercase; letter-spacing:.075rem; padding-bottom:10px;"
+          >Back</span></i>
+        </v-row>
+
+
+
+
+        <!-- <v-row>
+          <i
+            id="launcher__backbuttonicon"
+            class="fas fa-chevron-left"
+          ><button 
+      
+            class="launcher__backbutton"
+            @click="$router.push({ name: 'program.programlist' })"
+          >My Programs</button></i>
+        </v-row> -->
+
+
+
+
         <v-col
           cols="12"
           class="programguide__title"

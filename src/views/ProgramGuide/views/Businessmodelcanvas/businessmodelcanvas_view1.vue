@@ -1,73 +1,45 @@
 
 
 <template>
-  <v-row no-gutters>
-    <v-col>
-      <v-row
-        class="programguide__labels d-sm-block d-none"
-        align="center"
-        no-gutters
-      >
-        <v-col cols="12">
-          <v-row no-gutters>
-            <v-col
-              cols="1"
-              style="margin: 0px 33px;"
-            />
-            <v-col
-              cols="12"
-              md="7"
-            >
-              Name
-            </v-col>
-            <v-col
-              cols="12"
-              md="2"
-              class="d-none d-lg-inline-block"
-            >
-              Rating
-            </v-col>
-          </v-row>
-        </v-col>
+  <v-row justify="center" no-gutters>
+    <v-col cols="12" class="pb-9">
+
+      <v-row class="programguide__labels" align="center" justify="center" no-gutters>
+        
+
+            <v-col cols="1" md="1" class="d-none d-lg-inline-block" />
+            <v-col cols="12" md="7" class="d-none d-lg-inline-block">Name</v-col>
+            <v-col cols="12" md="2" class="d-none d-lg-inline-block">Rating</v-col>
+
+
       </v-row>
+
+
+
       <v-row
         v-for="team in entries"
         :key="team.projectId"
         class="programguide__content"
         align="center"
         no-gutters
+        justify="center"
       >
         <!-- insert v-for here -->
-        <v-col
-          cols="3"
-          md="1"
-          class="businesscanvas__actnbtn"
-          @click="$emit('changePage',team)"
-        >
-          <div>View</div>
+
+        <v-col cols="1" md="1" @click="$emit('changePage',team)">
+          <v-btn dark depressed x-small>View</v-btn>
         </v-col>
-        <v-col
-          cols="12"
-          sm="5"
-          md="7"
-          class="programguide__header"
-        >
+        <v-col cols="12" md="7" sm="5"  class="programguide__header">
           <span>{{ team.teamName }}</span>
         </v-col>
-        <v-col
-          cols="12"
-          md="2"
-          class="pc-rating"
-        >
-          <v-rating
-            v-model="team.averageRating"
-            size="20px"
-            dense
-            readonly
-          />
+        <v-col cols="12" md="2" class="pc-rating">
+          <v-rating v-model="team.averageRating" size="20px" dense readonly />
         </v-col>
       </v-row>
+
+
       <Oops v-if="!entries.length" />
+
     </v-col>
   </v-row>
 </template>
@@ -88,7 +60,7 @@ import { Subscription } from "rxjs";
 import { Classroom, Project } from "../../../../store/Database/types/types";
 import { TeamInfo } from "./components";
 import { Watch } from "vue-property-decorator";
-import { Oops } from '../../components'
+import { Oops } from "../../components";
 @Component({
   components: {
     Oops,

@@ -60,8 +60,9 @@
       class="manageprogram__datepicker mb-12 mt-3"
     >
       <v-progress-linear
-        v-model="completion"
+        :v-model="completion"
         :color="completion?'green':'red'"
+        :value="completion"
         height="9"
         reactive
       />
