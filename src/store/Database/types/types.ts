@@ -60,10 +60,10 @@ export interface EmployerProgram {
     employerId?: string,
     launchImg?: string, // link
     rfpCompany?:string,
-    rfpPrompt?:string,
-    rfpRequirements?:string,
+    rfpPromptTemplate?:string,
+    rfpRequirementsList?:{[id:string]:string},
     rfpAbout?:string,
-    rfpResources?:string
+    rfpResource?:string
     programLauncher: ProgramEvent[]
     externshipDayAgenda?: AgendaTemplate
     demoDayAgenda?: AgendaTemplate
@@ -84,6 +84,8 @@ export interface TeacherProgramData {
     classroomIds: string[]
     employerProgramId: string
     caseStudies: NamedLink[]
+    rfpPrompt:string
+    rfpRequirements:string []// ids from Employer.rfpRequirementsList
     trainingDayAgenda?: AgendaTemplate
     hackDayAgenda?: AgendaTemplate    //  Modified  version  of  HackDayAgenda  Master  Template
     problemOrOpportunity?: string
