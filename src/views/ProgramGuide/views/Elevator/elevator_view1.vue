@@ -2,13 +2,14 @@
   <v-row no-gutters>
     <Rating
       v-model="entries"
-      v-slot:link
-      @ratingChange="onRatingChange"
+      v-slot:link="{snippet}"
+      preview
+      @ratingChange="$emit('ratingChange',$event)"
     >
       <v-col
         cols="1"
         class="businesscanvas__actnbtn ml-0"
-        @click="$emit('changePage')"
+        @click="$emit('changePage',snippet)"
       >
         <div>View</div>
       </v-col>
@@ -33,6 +34,7 @@ import { spliceOrPush } from "../../../../utilities/array";
 import { Subscription } from "rxjs";
 import { firebase } from "@/firebase/init";
 import { Oops } from "@/views/ProgramGuide/components"
+import { Prop } from 'vue-property-decorator';
 @Component({
   components:{
     Rating, 
@@ -40,53 +42,9 @@ import { Oops } from "@/views/ProgramGuide/components"
   }
 })
 export default class elevator_view extends Vue{
-     mounted() {
-    FbStore.currentTeacherProgramData!.classroomIds.forEach(classroomId => {
-      this.$subscribeTo(
-        doc(FbStore.firestore.collection("Classroom").doc(classroomId)),
-        classSnapshot => {
-          if (this.projectSubscribers[classSnapshot.id])
-            this.projectSubscribers[classSnapshot.id].forEach(subscriber =>
-              subscriber.unsubscribe()
-            );
-          else this.projectSubscribers[classSnapshot.id] = [];
-          classSnapshot.data<Classroom>().projectIds.forEach(projectId => {
-            this.projectSubscribers[classSnapshot.id].push(
-              doc(
-                FbStore.firestore.collection("Project").doc(projectId)
-              ).subscribe(projectSnapshot => {
-                let projectData = projectSnapshot.data<Project>();
-                spliceOrPush(
-                  this.entries,
-                  (({ projectId, sentencePitch, teamName, ...rest }) => ({
-                    projectId,
-                    item_preview: sentencePitch || "",
-                    name: teamName,
-                    rating:
-                      rest[
-                        `elevatorPitchRating${FbStore.userCitizenType!.charAt(
-                          0
-                        ).toUpperCase()}`
-                      ] || 0
-                  }))(projectData),
-                  "projectId"
-                );
-              })
-            );
-          });
-        }
-      );
-    });
-  }
-    onRatingChange({newRating,projectId}:{newRating:number,projectId:string}){
-   FbStore.firestore.collection("Project").doc(projectId).update<Project>({
-      [`elevatorPitchRating${FbStore.userCitizenType!.charAt(0).toUpperCase()}`]:newRating,
-      lastUpdate:firebase.firestore.FieldValue.serverTimestamp()
-    })
-  }
-  entries: team_snippet[] = [];
-  projectSubscribers: {
-    [classroomId: string]: Subscription[];
-  } = {};
+    
+  @Prop()
+  entries!: team_snippet[]
+  
 }
 </script>
