@@ -65,8 +65,8 @@
             >Not completed yet</span>
           </v-row>
 
-          <v-row v-else justify="left" class="mr-auto ml-auto">
-            <v-col cols="12" class="pa-0">
+          <v-row v-else justify="center" class="mr-auto ml-auto">
+            <v-col cols="11" class="pa-0">
               <ValidationProvider
                 v-slot="{errors,failedRules}"
                 name="Problem"
@@ -136,8 +136,8 @@
 
 
 
-          <v-row v-else justify="center" class="mr-auto ml-auto mb-12">
-            <v-col cols="12" class="pa-0">
+          <v-row v-else justify="center" class="mr-auto ml-auto">
+            <v-col cols="11" class="pa-0">
               <ValidationProvider v-slot="{errors,failedRules}" rules="required|max:255">
                 <v-textarea
                   v-model="syncedCanvas.solution"
@@ -209,8 +209,8 @@
 
 
 
-          <v-row v-else justify="center" class="mr-auto ml-auto mb-12">
-            <v-col cols="12" class="pa-0">
+          <v-row v-else justify="center" class="mr-auto ml-auto">
+            <v-col cols="11" class="pa-0">
               <ValidationProvider v-slot="{errors,failedRules}" rules="required|max:255">
                 <v-textarea
                   v-model="syncedCanvas.innovation"
@@ -285,8 +285,8 @@
 
 
 
-          <v-row v-else justify="center" class="mr-auto ml-auto mb-12">
-            <v-col cols="12" class="pa-0">
+          <v-row v-else justify="center" class="mr-auto ml-auto">
+            <v-col cols="11" class="pa-0">
               <ValidationProvider v-slot="{errors,failedRules}" rules="required|max:255">
                 <v-textarea
                   v-model="syncedCanvas.customer"
