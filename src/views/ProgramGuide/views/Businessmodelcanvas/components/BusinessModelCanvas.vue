@@ -1,33 +1,20 @@
 <template>
   <ValidationObserver v-slot="{invalid}">
     <v-container>
-      <v-row justify="center" no-gutters>
-        <v-col cols="10" md="10">
-
-
-
-
           <v-row
-            justify="start"
+            justify="center"
             justify-lg="center"
             no-gutters
-            class="businessmodelcanvas_enter__description__label mt-12 mr-auto ml-auto mb-1"
+            class="businessmodelcanvas_enter__description__label mt-12 mr-auto ml-auto mb-1 pr-10 pl-10"
           >
+            <!-- PROBLEM -->
 
+            <v-col cols="6" md="6" lg="6" xl="6">Problem</v-col>
 
-          <!-- PROBLEM -->
+            <!-- RATING -->
 
-
-            <v-col cols="10" md="5" class>Problem</v-col>
-
-
-            <v-spacer />
-
-<!-- RATING -->
-
-            <v-col cols="11" md="8" lg="7" xl="6">
-
-              <v-row v-if="stars" justify-md="end" justify="start" align="center" no-gutters>
+            <v-col cols="6" md="6" lg="6" xl="6">
+              <v-row v-if="stars" justify="end" no-gutters class="pc-rating">
                 <!-- <v-col
                   cols="12"
                   md="6"
@@ -35,21 +22,15 @@
                 >
                   <span>Rating</span>
                 </v-col>-->
-                
-                <v-col cols="12" sm="6" class="pc-rating">
-                  <v-rating
-                    v-model="stars.problem"
-                    dense
-                    :readonly="readonly===undefined"
-                    @input="onStarsChanged($event,'problem')"
-                  />
-                </v-col>
 
+                <v-rating
+                  v-model="stars.problem"
+                  dense
+                  :readonly="readonly===undefined"
+                  @input="onStarsChanged($event,'problem')"
+                />
               </v-row>
-
             </v-col>
-
-
           </v-row>
 
           <!-- <v-row
@@ -69,44 +50,22 @@
           > Nothing much yet
           </v-row>-->
 
-
-
-
-
-
+          <!-- THE GNARLY DIV -->
 
           <v-row
             v-if="readonly==true"
             justify="start"
-            class="mr-auto ml-auto mb-12 mt-3 businessmodelcanvas_enter__paragraph"
+            class="mr-auto ml-auto mb-12 mt-3 businessmodelcanvas_enter__paragraph pr-10 pl-10"
             style="padding-left: 0px"
           >
             {{ syncedCanvas.problem }}
-            <div>
-              <div
-                v-if="!syncedCanvas.problem"
-                class="businessmodelcanvas_enter__paragraph"
-                style="width:100%;"
-              >Nothing just yet</div>
-            </div>
+            <span
+              v-if="!syncedCanvas.problem"
+              class="businessmodelcanvas_enter__paragraph-nothingyet"
+            >Not completed yet</span>
           </v-row>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          <v-row v-else justify="center" class="mr-auto ml-auto">
+          <v-row v-else justify="left" class="mr-auto ml-auto">
             <v-col cols="12" class="pa-0">
               <ValidationProvider
                 v-slot="{errors,failedRules}"
@@ -128,15 +87,17 @@
 
           <!-- COMPONENT -->
           <v-row
-            justify="start"
+            justify="center"
             justify-lg="center"
             no-gutters
-            class="businessmodelcanvas_enter__description__label mt-12 mr-auto ml-auto mb-1"
+            class="businessmodelcanvas_enter__description__label mt-12 mr-auto ml-auto mb-1 pr-10 pl-10"
           >
-            <v-col cols="10" md="5" class>Solution</v-col>
-            <v-spacer />
-            <v-col cols="12" md="8" lg="7" xl="6">
-              <v-row v-if="stars" justify-md="end" justify="start" align="center" no-gutters>
+            <v-col cols="6" md="6" lg="6" xl="6" class>Solution</v-col>
+
+            <!-- RATING -->
+
+            <v-col cols="6" md="6" lg="6" xl="6">
+              <v-row v-if="stars" justify="end" no-gutters class="pc-rating">
                 <!-- <v-col
                   cols="12"
                   sm="8"
@@ -146,23 +107,35 @@
                 >
                   <span>Rating</span>
                 </v-col>-->
-                <v-col cols="12" sm="6" class="pc-rating">
+
                   <v-rating
                     v-model="stars.solution"
                     dense
                     :readonly="readonly===undefined"
                     @input="onStarsChanged($event,'problem')"
                   />
-                </v-col>
+
               </v-row>
             </v-col>
           </v-row>
+
+
           <v-row
             v-if="readonly==true"
             justify="start"
-            class="mr-auto ml-auto mb-12 mt-3 businessmodelcanvas_enter__paragraph"
+            class="mr-auto ml-auto mb-12 mt-3 businessmodelcanvas_enter__paragraph pr-10 pl-10"
             style="padding-left: 0px"
-          >{{ syncedCanvas.solution }}</v-row>
+          >
+            {{ syncedCanvas.solution }}
+            <span
+              v-if="!syncedCanvas.solution"
+              class="businessmodelcanvas_enter__paragraph-nothingyet"
+            >Not completed yet</span>
+          </v-row>
+
+
+
+
           <v-row v-else justify="center" class="mr-auto ml-auto mb-12">
             <v-col cols="12" class="pa-0">
               <ValidationProvider v-slot="{errors,failedRules}" rules="required|max:255">
@@ -181,15 +154,17 @@
 
           <!-- COMPONENT -->
           <v-row
-            justify="start"
+            justify="center"
             justify-lg="center"
             no-gutters
-            class="businessmodelcanvas_enter__description__label mt-12 mr-auto ml-auto mb-1"
+            class="businessmodelcanvas_enter__description__label mt-12 mr-auto ml-auto mb-1 pr-10 pl-10"
           >
-            <v-col cols="10" md="5" class>Innovation</v-col>
-            <v-spacer />
-            <v-col cols="12" md="8" lg="7" xl="6">
-              <v-row v-if="stars" justify-md="end" justify="start" align="center" no-gutters>
+            <v-col cols="6" md="6" lg="6" xl="6" class>Innovation</v-col>
+
+            <!-- RATING -->
+
+            <v-col cols="6" md="6" lg="6" xl="6">
+              <v-row v-if="stars" justify="end" no-gutters class="pc-rating">
                 <!-- <v-col
                   cols="12"
                   sm="8"
@@ -199,23 +174,41 @@
                 >
                   <span>Rating</span>
                 </v-col>-->
-                <v-col cols="12" sm="6" class="pc-rating">
+
                   <v-rating
                     v-model="stars.innovation"
                     dense
                     :readonly="readonly===undefined"
                     @input="onStarsChanged($event,'problem')"
                   />
-                </v-col>
+
               </v-row>
             </v-col>
           </v-row>
+
+
+
+
+
+
           <v-row
             v-if="readonly==true"
             justify="start"
-            class="mr-auto ml-auto mb-12 mt-3 businessmodelcanvas_enter__paragraph"
+            class="mr-auto ml-auto mb-12 mt-3 businessmodelcanvas_enter__paragraph pr-10 pl-10"
             style="padding-left: 0px"
-          >{{ syncedCanvas.innovation }}</v-row>
+          >
+{{ syncedCanvas.innovation }}
+            <span
+              v-if="!syncedCanvas.innovation"
+              class="businessmodelcanvas_enter__paragraph-nothingyet"
+            >Not completed yet</span>
+          </v-row>
+
+
+
+
+
+
           <v-row v-else justify="center" class="mr-auto ml-auto mb-12">
             <v-col cols="12" class="pa-0">
               <ValidationProvider v-slot="{errors,failedRules}" rules="required|max:255">
@@ -234,15 +227,17 @@
 
           <!-- COMPONENT -->
           <v-row
-            justify="start"
+            justify="center"
             justify-lg="center"
             no-gutters
-            class="businessmodelcanvas_enter__description__label mt-12 mr-auto ml-auto mb-1"
+            class="businessmodelcanvas_enter__description__label mt-12 mr-auto ml-auto mb-1 pr-10 pl-10"
           >
-            <v-col cols="10" md="5" class>Customer</v-col>
-            <v-spacer />
-            <v-col cols="12" md="8" lg="7" xl="6">
-              <v-row v-if="stars" justify-md="end" justify="start" align="center" no-gutters>
+            <v-col cols="6" md="6" lg="6" xl="6" class>Customer</v-col>
+
+            <!-- RATING -->
+
+            <v-col cols="6" md="6" lg="6" xl="6">
+              <v-row v-if="stars" justify="end" no-gutters class="pc-rating">
                 <!-- <v-col
                   cols="12"
                   sm="8"
@@ -252,23 +247,44 @@
                 >
                   <span>Rating</span>
                 </v-col>-->
-                <v-col cols="12" sm="6" class="pc-rating">
+
                   <v-rating
                     v-model="stars.cost"
                     dense
                     :readonly="readonly===undefined"
                     @input="onStarsChanged($event,'problem')"
                   />
-                </v-col>
+
               </v-row>
             </v-col>
           </v-row>
+
+
+
+
+
+
+
+
+
           <v-row
             v-if="readonly==true"
             justify="start"
-            class="mr-auto ml-auto mb-12 mt-3 businessmodelcanvas_enter__paragraph"
+            class="mr-auto ml-auto mb-12 mt-3 businessmodelcanvas_enter__paragraph pr-10 pl-10"
             style="padding-left: 0px"
-          >{{ syncedCanvas.customer }}</v-row>
+          >
+{{ syncedCanvas.customer }}
+            <span
+              v-if="!syncedCanvas.customer"
+              class="businessmodelcanvas_enter__paragraph-nothingyet"
+            >Not completed yet</span>
+          </v-row>
+
+
+
+
+
+
           <v-row v-else justify="center" class="mr-auto ml-auto mb-12">
             <v-col cols="12" class="pa-0">
               <ValidationProvider v-slot="{errors,failedRules}" rules="required|max:255">
@@ -284,8 +300,6 @@
               </ValidationProvider>
             </v-col>
           </v-row>
-        </v-col>
-      </v-row>
     </v-container>
   </ValidationObserver>
 </template>

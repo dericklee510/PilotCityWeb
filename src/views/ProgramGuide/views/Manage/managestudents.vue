@@ -1,113 +1,90 @@
 <template>
   <v-container>
-    <v-row
-      no-gutters
-      justify="center"
-    >
-      <v-col
-        class="manageclass__container"
-        cols="8"
-      >
-        <v-row
-          class="manageclass__nav text-center"
-          no-gutters
-        >
-          <v-col
-            cols="4"
-            sm="3"
-            lg="2"
+    <v-row no-gutters justify="center">
+      <v-col class="manageclass__container" cols="8">
+
+
+        <v-tabs no-gutters>
+          <v-tab
             style="cursor: pointer"
             @click="$router.push({name: 'teach-externship-manage-class'})"
-          >
-            CLASSES
-          </v-col>
-          <v-col
-            cols="4"
-            sm="3"
-            lg="2"
+          >CLASSES</v-tab>
+
+          <v-tab
             style="cursor: normal"
-            class="manageclass__nav--active"
-          >
-            STUDENTS
-          </v-col>
-          <v-col
-            cols="4"
-            sm="3"
-            lg="2"
-            style="cursor: pointer"
             @click="$router.push({name: 'teach-externship-manage-teams'})"
-          >
-            TEAMS
-          </v-col>
-        </v-row>
+          >TEAMS</v-tab>
+
+          <v-tab
+          style="cursor: pointer"
+          @click="$router.push({name: 'teach-externship-manage-students'})"
+        >STUDENTS</v-tab>
+
+                </v-tabs>
+
+
         <v-row no-gutters>
-          <v-col
-            cols="12"
-            class="manageclass__title"
-          >
+          <v-col cols="12" class="manageteam__title">
             <span>Manage Students</span>
           </v-col>
         </v-row>
-        <v-row
-          class="manageclass__labels"
-          no-gutters
-        >
-          <v-col
-            cols="12"
-            lg="5"
-            xl="6"
-          >
-            <span> Name </span>
+
+        <!-- LABELS -->
+
+
+
+
+
+        <v-row class="manageclass__labels mb-5" no-gutters>
+
+          <v-col cols="4" class="pr-3">
+            <span>Name</span>
           </v-col>
-          <v-col class="d-none d-lg-block">
-            <span> Classes </span>
+
+          <v-col cols="4" class="pr-3 d-none d-lg-block">
+            <span>Classes</span>
           </v-col>
-          <v-col
-            cols="12"
-            lg="4"
-            xl="1"
-            class="manageclass__sharecode-label d-none d-lg-block "
-          >
-            <span> Team </span>
+
+          <v-col cols="4" class="pr-3 d-none d-lg-block">
+            <span>Team</span>
           </v-col>
+
+
         </v-row>
+
+        <!-- CONTENT -->
+
         <v-row no-gutters>
           <v-col cols="12">
-            <v-row
-              v-for="(entry,index) in entries"
-              :key="index"
-              no-gutters
-            >
-              <v-col
-                cols="12"
-                lg="5"
-                xl="6"
-                class="managestudents__name"
-              >
-                {{ entry.name }}
+            <v-row v-for="(entry,index) in entries" :key="index" no-gutters>
+              <!-- NAME -->
+              <v-col cols="12" lg="4" xl="2" class="mt-5 pr-3">
+                <v-btn dark depressed small>{{ entry.name }}</v-btn>
               </v-col>
-              <v-col>
-                <pc-select
+              <!-- CLASS DROPDOWN -->
+              <v-col class="pr-3">
+                <v-select
                   :value="{text:entry.class,value:entry.classroomId}"
                   :items="availableClasses"
                   @input="changeClassroom($event,entry)"
                 />
               </v-col>
-              <v-col
-                cols="12"
-                lg="4"
-                xl="1"
-              >
-                <pc-select
+
+              <!-- TEAM DROPDOWN -->
+              <v-col class="pr-3">
+                <v-select
                   :value="{text:entry.project, value:entry.projectId}"
                   :items="availableProjects[entry.classroomId]"
-                  :label="entry.project || 'No Project'"
+
                   @input="changeProject($event,entry)"
                 />
               </v-col>
             </v-row>
           </v-col>
         </v-row>
+
+        <!-- OOPSIE -->
+
         <Oops v-if="!entries.length" />
       </v-col>
     </v-row>
@@ -121,17 +98,21 @@ import Component from "vue-class-component";
 import { PCselect } from "../../../../components/inputs";
 import { FbStore } from "../../../../store";
 import { doc } from "rxfire/firestore";
-import { Classroom, Project, GeneralUser } from "../../../../store/Database/types/types";
+import {
+  Classroom,
+  Project,
+  GeneralUser
+} from "../../../../store/Database/types/types";
 import { Watch } from "vue-property-decorator";
 import { findIndex } from "lodash";
-import { Oops } from '../../components' 
+import { Oops } from "../../components";
 interface studentInfo {
   studentId: string;
   name: string;
   class: string;
   project: string;
-  classroomId:string,
-  projectId?:string,
+  classroomId: string;
+  projectId?: string;
 }
 function spliceOrPush<T>(
   target: Array<T>,
@@ -146,10 +127,8 @@ function spliceOrPush<T>(
   target.splice(index, index === -1 ? 0 : 1, obj);
 }
 @Component({
-  subscriptions(){
-    return {
-      
-    }
+  subscriptions() {
+    return {};
   },
   components: {
     Oops,
@@ -160,22 +139,33 @@ export default class managestudents extends Vue {
   async mounted() {
     FbStore.currentTeacherProgramData!.classroomIds.forEach(id => {
       let classroomDoc = FbStore.firestore.collection("Classroom").doc(id);
-      this.availableProjects[id] = []
+      this.availableProjects[id] = [];
       this.$subscribeTo(doc(classroomDoc), async snapshot => {
         let classroomData = snapshot.data<Classroom>();
-        spliceOrPush(this.availableClasses,{
-          text:classroomData.className,
-          value:id
-        }, 'value')
+        spliceOrPush(
+          this.availableClasses,
+          {
+            text: classroomData.className,
+            value: id
+          },
+          "value"
+        );
         // handle list of projects here
         classroomData.projectIds.forEach(projectId => {
-          this.$subscribeTo(doc(FbStore.firestore.collection("Project").doc(projectId)), projectsnapshot => {
-            spliceOrPush(this.availableProjects[id],{
-              text:projectsnapshot.data<Project>().teamName,
-              value:projectsnapshot.id
-            },'value')
-          })
-        })
+          this.$subscribeTo(
+            doc(FbStore.firestore.collection("Project").doc(projectId)),
+            projectsnapshot => {
+              spliceOrPush(
+                this.availableProjects[id],
+                {
+                  text: projectsnapshot.data<Project>().teamName,
+                  value: projectsnapshot.id
+                },
+                "value"
+              );
+            }
+          );
+        });
 
         // handle students here
         classroomData.studentIds.forEach(async studentID => {
@@ -194,26 +184,38 @@ export default class managestudents extends Vue {
                       .doc(project.projectId)
                   ),
                   async projectSnapshot => {
-                    let newObj:studentInfo = {
-                      name: await FbStore.getStudentName({studentName: studentSnapshot.data<GeneralUser>()}),
+                    let newObj: studentInfo = {
+                      name: await FbStore.getStudentName({
+                        studentName: studentSnapshot.data<GeneralUser>()
+                      }),
                       project: projectSnapshot.data<Project>().teamName,
-                      class:classroomData.className,
-                      studentId:studentID,
-                      classroomId:projectSnapshot.data<Project>().classroomId,
-                      projectId:projectSnapshot.id
-                    }
-                    spliceOrPush(this.entries,newObj,"studentId")
+                      class: classroomData.className,
+                      studentId: studentID,
+                      classroomId: projectSnapshot.data<Project>().classroomId,
+                      projectId: projectSnapshot.id
+                    };
+                    spliceOrPush(this.entries, newObj, "studentId");
                   }
-                );else {
-                  let relativeClassroom = await FbStore.findRelativeClassroom({employerProgramId:FbStore.currentEmployerProgramUID!, studentId:studentID})
-                  spliceOrPush(this.entries,{
-                    name:await FbStore.getStudentName({studentName: studentSnapshot.data<GeneralUser>()}),
+                );
+              else {
+                let relativeClassroom = await FbStore.findRelativeClassroom({
+                  employerProgramId: FbStore.currentEmployerProgramUID!,
+                  studentId: studentID
+                });
+                spliceOrPush(
+                  this.entries,
+                  {
+                    name: await FbStore.getStudentName({
+                      studentName: studentSnapshot.data<GeneralUser>()
+                    }),
                     studentId: studentID,
-                    class:relativeClassroom.className,
-                    project:"",
-                    classroomId:relativeClassroom.classroomId,
-                  },'studentId')
-                  }
+                    class: relativeClassroom.className,
+                    project: "",
+                    classroomId: relativeClassroom.classroomId
+                  },
+                  "studentId"
+                );
+              }
             }
           );
         });
@@ -221,26 +223,33 @@ export default class managestudents extends Vue {
     });
   }
 
-  get classroomIds(){
-    return FbStore.currentTeacherProgramData!.classroomIds
+  get classroomIds() {
+    return FbStore.currentTeacherProgramData!.classroomIds;
   }
-  availableProjects:{
-    [classroomId:string]:{
-      text:string // projectName
-      value:string //projectId
-    }[]
-  } = {
-  }
-  availableClasses:{
-    text:string //className
-    value:string // classId
-  }[] = []
+  availableProjects: {
+    [classroomId: string]: {
+      text: string; // projectName
+      value: string; //projectId
+    }[];
+  } = {};
+  availableClasses: {
+    text: string; //className
+    value: string; // classId
+  }[] = [];
   entries: studentInfo[] = [];
-  async changeProject(projectId:string,studentEntry:studentInfo){
-    await FbStore.switchProject({oldProjectId:studentEntry.projectId,newProjectId:projectId,studentId:studentEntry.studentId}) 
+  async changeProject(projectId: string, studentEntry: studentInfo) {
+    await FbStore.switchProject({
+      oldProjectId: studentEntry.projectId,
+      newProjectId: projectId,
+      studentId: studentEntry.studentId
+    });
   }
-  async changeClassroom(classroomId:string,studentEntry:studentInfo){
-    await FbStore.switchClassroom({oldClassroomId:studentEntry.classroomId, newClassroomId:classroomId,studentId:studentEntry.studentId})
+  async changeClassroom(classroomId: string, studentEntry: studentInfo) {
+    await FbStore.switchClassroom({
+      oldClassroomId: studentEntry.classroomId,
+      newClassroomId: classroomId,
+      studentId: studentEntry.studentId
+    });
   }
 }
 </script>

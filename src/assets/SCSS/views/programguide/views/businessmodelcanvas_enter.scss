@@ -32,7 +32,7 @@
 
     &__borderline{
         padding-top: 0%;
-        border-spacing: 0px;
+        border-spacing: 0px; 
         position: relative;
         margin-top: 27.07px;
         border: 0.75px solid #000000;
@@ -100,12 +100,17 @@
     &__paragraph{
         // height: 240px;
         // border: 1px solid transparent;
+        // width: 750px;
+        // width: 700px;
         width: 100%;
         font-size: 18px;
         font-family: "Raleway";
         // padding: 20px;
         font-weight: 500;
         word-wrap: break-word;
+        // word-wrap: normal;
+        // word-wrap: initial;
+        // word-wrap: unset;
 
         &::placeholder{
             color: #000000;
@@ -118,8 +123,18 @@
 
     }
 
-    &__paragraph-fullwidth{
-
+    &__paragraph-nothingyet{
+        // width: 10rem;
+        // width: 700px;
+        width: 100%;
+        color: #CCCCCC;
+        font-size: 15px;
+        font-family: "Raleway";
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: .05rem;
+        word-wrap: break-word;   
+    
     }
 
     

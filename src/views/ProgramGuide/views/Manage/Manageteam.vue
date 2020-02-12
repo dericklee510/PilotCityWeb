@@ -1,93 +1,56 @@
 <template>
   <v-container>
-    <v-row
-      no-gutters
-      justify="center"
-    >
-      <v-col
-        class="manageteam__container"
-        cols="8"
-      >
-        <v-row
-          class="manageclass__nav text-center"
-          no-gutters
-        >
-          <v-col
-            cols="4"
-            sm="3"
-            lg="2"
+    <v-row no-gutters justify="center">
+      <v-col class="manageclass__container" cols="8">
+
+
+
+
+        <v-tabs no-gutters>
+          <v-tab
             style="cursor: pointer"
             @click="$router.push({name: 'teach-externship-manage-class'})"
-          >
-            CLASSES
-          </v-col>
-          <v-col
-            cols="4"
-            sm="3"
-            lg="2"
-            style="cursor: pointer"
-            @click="$router.push({name: 'teach-externship-manage-students'})"
-          >
-            STUDENTS
-          </v-col>
-          <v-col
-            cols="4"
-            sm="3"
-            lg="2"
-            class="manageclass__nav--active"
+          >CLASSES</v-tab>
+
+          <v-tab 
             style="cursor: normal"
-          >
-            TEAMS
-          </v-col>
-        </v-row>
+            @click="$router.push({name: 'teach-externship-manage-teams'})"
+          >TEAMS</v-tab>
+
+        <v-tab
+          style="cursor: pointer"
+          @click="$router.push({name: 'teach-externship-manage-students'})"
+        >STUDENTS</v-tab>
+
+                </v-tabs>
+
         <v-row no-gutters>
-          <v-col
-            cols="12"
-            class="manageteam__title"
-          >
+          <v-col cols="12" class="manageteam__title">
             <span>Manage Teams</span>
           </v-col>
         </v-row>
-        <v-row
-          class="manageteam__labels"
-          no-gutters
-        >
-          <v-col
-            cols="12"
-            lg="5"
-            xl="6"
-          >
+
+
+
+
+        <v-row class="manageteam__labels" no-gutters>
+          <v-col cols="12" lg="5" xl="6">
             <span>Team Name</span>
           </v-col>
         </v-row>
-        <multi-input
-          v-model="entries"
-          v-slot="{ }"
-        >
+        <multi-input v-model="entries" v-slot="{ }">
           <v-row
             v-for="(entry,index) in entries"
             :key="entry.id"
             no-gutters
-            class="manageteam__class-input "
+            class="manageteam__class-input"
           >
-            <v-col
-              cols="12"
-              lg="5"
-              xl="6"
-              class="manageteam__input"
-            >
-              <input
-                v-model="teamNames[index]"
-                :placeholder="entry.teamName"
-              >
+            <v-col cols="12" lg="5" xl="6" class="manageteam__input">
+              <input v-model="teamNames[index]" :placeholder="entry.teamName" />
             </v-col>
 
             <template v-if="entry.teamUid">
-              <v-col
-                cols="6"
-                lg="2"
-                class="manageteam__button-wrapper first"
-              >
+              <v-col cols="6" lg="2" class="manageteam__button-wrapper first">
                 <PCLoader v-slot="{loading,setLoader}">
                   <v-btn
                     class="manageteam__button"
@@ -97,16 +60,10 @@
                     depressed
                     text
                     @click="setLoader(() =>renameTeam(entry,index))"
-                  >
-                    RENAME
-                  </v-btn>
+                  >RENAME</v-btn>
                 </PCLoader>
               </v-col>
-              <v-col
-                cols="6"
-                lg="2"
-                class="manageteam__button-wrapper"
-              >
+              <v-col cols="6" lg="2" class="manageteam__button-wrapper">
                 <PCLoader v-slot="{loading,setLoader}">
                   <v-btn
                     class="manageteam__button"
@@ -116,59 +73,33 @@
                     depressed
                     text
                     @click="setLoader(()=>deleteTeam(entry))"
-                  >
-                    DELETE
-                  </v-btn>
+                  >DELETE</v-btn>
                 </PCLoader>
               </v-col>
             </template>
             <template v-else>
               <v-col cols="2">
                 <h4>Generating...</h4>
-                <v-progress-circular
-                  indeterminate
-                  color="primary"
-                />
+                <v-progress-circular indeterminate color="primary" />
               </v-col>
             </template>
           </v-row>
 
           <v-row no-gutters>
-            <v-col
-              cols="12"
-              class="manageteam__title"
-            >
+            <v-col cols="12" class="manageteam__title">
               <span>Create Teams</span>
             </v-col>
           </v-row>
-          <v-row
-            class="manageteam__labels"
-            no-gutters
-          >
-            <v-col
-              cols="12"
-              lg="5"
-              xl="6"
-            >
+          <v-row class="manageteam__labels" no-gutters>
+            <v-col cols="12" lg="5" xl="6">
               <span>Team Name</span>
             </v-col>
           </v-row>
 
           <ValidationObserver v-slot="{invalid, reset}">
-            <v-row
-              no-gutters
-              class="mt-4"
-            >
-              <v-col
-                cols="12"
-                lg="5"
-                xl="6"
-                class="manageteam__input pa-0"
-              >
-                <ValidationProvider
-                  v-slot="{errors}"
-                  rules="required"
-                >
+            <v-row no-gutters class="mt-4">
+              <v-col cols="12" lg="5" xl="6" class="manageteam__input pa-0">
+                <ValidationProvider v-slot="{errors}" rules="required">
                   <v-text-field
                     v-model="currentName"
                     text
@@ -179,16 +110,8 @@
                   />
                 </ValidationProvider>
               </v-col>
-              <v-col
-                cols="12"
-                lg="4"
-                xl="3" 
-                class="manageteam__input"
-              >
-                <ValidationProvider
-                  v-slot="{errors}"
-                  rules="required"
-                >
+              <v-col cols="12" lg="4" xl="3" class="manageteam__input">
+                <ValidationProvider v-slot="{errors}" rules="required">
                   <PCselect
                     v-model="selectedClassroom"
                     style="height: inherit !important;"
@@ -200,10 +123,7 @@
                   />
                 </ValidationProvider>
               </v-col>
-              <v-col
-                cols="2"
-                class="manageteam__button-wrapper"
-              >
+              <v-col cols="2" class="manageteam__button-wrapper">
                 <PCLoader v-slot="{loading, setLoader}">
                   <v-btn
                     :loading="loading"
@@ -217,9 +137,7 @@
                       reset()
                       createNewTeam()
                     })"
-                  >
-                    CREATE
-                  </v-btn>
+                  >CREATE</v-btn>
                 </PCLoader>
               </v-col>
             </v-row>
@@ -247,7 +165,7 @@ import { Classroom, Project } from "../../../../store/Database/types/types";
 import { Subscription } from "rxjs";
 import { spliceOrPush } from "@/utilities/array";
 interface Team {
-  classroomId:string
+  classroomId: string;
   teamName: string;
   teamUid: string;
   createdbyTeacher: boolean;
@@ -275,7 +193,8 @@ export default class ManageTeam extends Vue {
               subscriber.unsubscribe()
             );
 
-          this.entries.filter(entry => entry.classroomId == classroomId)
+          this.entries
+            .filter(entry => entry.classroomId == classroomId)
             .map(entry => entry.teamUid)
             .forEach(existingId => {
               if (!includes(projectIds, existingId)) {
@@ -291,22 +210,20 @@ export default class ManageTeam extends Vue {
               FbStore.firestore.collection("Project").doc(projectId)
             );
             this.projectSubscribers[classSnapshot.id].push(
-              projectObserver.subscribe(
-                projectSnapshot => {
-                  let projectData = projectSnapshot.data<Project>();
-                  spliceOrPush(
-                    this.entries,
-                    {
-                      classroomId:classSnapshot.id,
-                      teamName: projectData.teamName,
-                      teamUid: projectId,
-                      createdbyTeacher: projectData.createdByTeacher,
-                      students: projectData.teamMembersIds
-                    },
-                    "teamUid"
-                  );
-                }
-              )
+              projectObserver.subscribe(projectSnapshot => {
+                let projectData = projectSnapshot.data<Project>();
+                spliceOrPush(
+                  this.entries,
+                  {
+                    classroomId: classSnapshot.id,
+                    teamName: projectData.teamName,
+                    teamUid: projectId,
+                    createdbyTeacher: projectData.createdByTeacher,
+                    students: projectData.teamMembersIds
+                  },
+                  "teamUid"
+                );
+              })
             );
           });
         }
@@ -332,7 +249,7 @@ export default class ManageTeam extends Vue {
       projectId: entry.teamUid!
     });
     this.teamNames[index] = "";
-    this.teamNames = this.teamNames.slice(0)
+    this.teamNames = this.teamNames.slice(0);
   }
   async deleteTeam(entry: Team) {
     await FbStore.deleteProject(entry.teamUid);
