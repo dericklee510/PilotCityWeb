@@ -97,14 +97,15 @@
 
     &__paragraph{
         height: 240px;
-        border: 1px solid #CCCCCC;
+        // border: 1px solid #CCCCCC;
         // border: 1px solid transparent;
-        width: 75%;
+        width: 100%;
         font-size: 18px;
         font-family: "Raleway";
-        padding-left: 20px;
+        // padding-left: 20px;
         font-weight: 700;
         word-wrap: break-word;
+        color: #000000;
 
         &::placeholder{
             color: #000000;
