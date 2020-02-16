@@ -36,8 +36,8 @@
             <v-col cols="3" md="4" class="editcasestudies__inputlinkname">
               <input v-model="entry.linkName" placeholder="Lidar for Drones" />
             </v-col>
-            <v-col cols="3" md="4">
-              <LinkChecker class="editcasestudies__inputlinkurl" v-model="entry.link" placeholder="http://www.velodyne.com/casestudy1" />
+            <v-col cols="3" md="4" class="editcasestudies__inputlinkurl">
+              <LinkChecker v-model="entry.link" placeholder="http://www.velodyne.com/casestudy1" />
             </v-col>
             <v-col cols="2" md="1">
               <i
