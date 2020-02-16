@@ -5,7 +5,7 @@
     style="height: fit-content"
     max-height="64px;"
     class="pc-header pc-header--simple"
-  >
+  > 
     <router-link :to="{path: '/'}">
       <img
         class="pc-logo--header"

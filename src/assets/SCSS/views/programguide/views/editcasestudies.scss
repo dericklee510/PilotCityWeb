@@ -29,7 +29,7 @@
         font-weight: 900;
         font-size: 30px;
         line-height: 35px;
-        color: #231F20;
+        color: #231F20; 
         //to make the border 
     }
     
@@ -134,12 +134,13 @@
             ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
                 opacity: 1; /* Firefox */
             }
-            .v-text-field fieldset, .v-text-field .v-input__control, .v-text-field .v-input__slot{
+            .v-text-field fieldset, .v-text-field .v-input__control, .v-text-field{
                 border-radius: 0px;
             }
             .v-input__slot{
                 height: 41.81px;
                 min-height: 41.81px;
+
                 border: 0.5px solid #231F20;
                 input{
                     font-family: Raleway;

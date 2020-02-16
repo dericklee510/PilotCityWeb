@@ -5,9 +5,11 @@
     style="height: fit-content"
     max-height="64px;"
     class="pc-header pc-header--simple"
-  >
+  > 
     <router-link :to="{name: 'home'}">
       <img
+
+              v-if="user"
         class="pc-logo--header"
         src="@/assets/Pilotcity_logo.png"
         alt="Pilot City"
