@@ -10,7 +10,7 @@
           </v-col>
         </v-col>
         <v-col style="padding: none">
-          <v-col class="guide__mainrow">
+          <v-col class="guide__mainrow pl-3">
             <span
               class="guide__bigdot guide__bigdot--active"
               :class="main=='Externship'?
