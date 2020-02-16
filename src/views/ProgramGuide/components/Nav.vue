@@ -1,5 +1,5 @@
 <template>
-  <v-col cols="12" class="guide__bar pa-2">
+  <v-col cols="12" class="guide__bar">
     <!--MAIN GROUP -->
     <v-col v-for="(nodes, main, index) in sequence" :key="main+index">
       <!-- if index == 1, don't show this "bridge" -->
