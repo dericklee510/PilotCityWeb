@@ -30,7 +30,7 @@
                     class="pt-0 pb-0"
                     style="font-family='Raleway'"
                     height="100px"
-                    placeholder="0"
+                    placeholder="0m"
                     @keypress.enter="addTime().then(()=>{reset()})"
                   />
                 </ValidationProvider>
