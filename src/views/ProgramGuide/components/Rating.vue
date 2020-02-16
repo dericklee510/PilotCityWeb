@@ -1,6 +1,7 @@
 <template>
   <v-container fluid>
     <v-row
+      v-if="team.item_preview"
       v-for="(team,index) in syncedSnippet"
       :key="index"
       justify="center"
@@ -43,12 +44,6 @@
             @input="ratingChange($event,team.projectId)"
           />
         </v-col>
-
-
-
-
-
-
       </v-row>
     </v-row>
   </v-container>
