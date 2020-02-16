@@ -75,6 +75,7 @@
           class="pc-rating"
         >
           <v-rating
+            color="yellow darken-3"
             v-model="team.averageRating"
             size="20px"
             dense

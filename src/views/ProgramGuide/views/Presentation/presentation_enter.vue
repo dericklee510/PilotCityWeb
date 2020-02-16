@@ -97,6 +97,7 @@
           class="mt-3 mb-6 pc-rating"
         >
           <v-rating
+            color="yellow darken-3"
             v-model="rating"
             dense
             size="30px"

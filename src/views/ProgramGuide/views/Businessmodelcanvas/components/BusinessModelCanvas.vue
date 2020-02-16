@@ -41,6 +41,7 @@
                 </v-col>-->
 
             <v-rating
+            color="yellow darken-3"
               v-model="stars.problem"
               dense
               :readonly="readonly===undefined"
@@ -151,6 +152,7 @@
                 </v-col>-->
 
             <v-rating
+            color="yellow darken-3"
               v-model="stars.solution"
               dense
               :readonly="readonly===undefined"
@@ -245,6 +247,7 @@
                 </v-col>-->
 
             <v-rating
+            color="yellow darken-3"
               v-model="stars.innovation"
               dense
               :readonly="readonly===undefined"
@@ -345,6 +348,7 @@
                 </v-col>-->
 
             <v-rating
+            color="yellow darken-3"
               v-model="stars.cost"
               dense
               :readonly="readonly===undefined"

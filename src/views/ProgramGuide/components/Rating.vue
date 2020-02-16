@@ -38,6 +38,7 @@
 
         <v-col cols="12" md="2" class="pc-rating">
           <v-rating
+            color="yellow darken-3"
             v-model="team.rating"
             dense
             size="20px"

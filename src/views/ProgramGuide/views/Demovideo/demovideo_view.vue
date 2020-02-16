@@ -18,7 +18,7 @@
           justify="center"
           class="mr-auto ml-auto demovideo_view__title"
         >
-          VIEW 1-MINUTE PROTOTYPE DEMONSTRATION VIDEOS
+          1-MINUTE PROTOTYPE DEMONSTRATION VIDEOS
         </v-row>
 
         <v-col

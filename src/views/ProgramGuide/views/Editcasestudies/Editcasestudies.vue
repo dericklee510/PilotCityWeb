@@ -19,8 +19,8 @@
 
         <v-row justify="center" no-gutters class="editcasestudies__labels">
           <v-col cols="2" md="1" />
-          <v-col cols="3" md="4" class="editcasestudies__titlename">Link Name</v-col>
-          <v-col cols="3" md="4" class="editcasestudies__titleurl">Link URL</v-col>
+          <v-col cols="3" md="4" class="editcasestudies__titlename mb-3">Link Name</v-col>
+          <v-col cols="3" md="4" class="editcasestudies__titleurl mb-3">Link URL</v-col>
           <v-col cols="2" md="1" />
         </v-row>
 
@@ -48,7 +48,7 @@
             </v-col>
           </v-row>
           <v-row no-gutters justify="center">
-            <v-col cols="8" md="8" class="editcasestudies__box" @click="newEntry">
+            <v-col cols="6" md="8" class="editcasestudies__box" @click="newEntry">
               <span>+</span>
             </v-col>
           </v-row>
