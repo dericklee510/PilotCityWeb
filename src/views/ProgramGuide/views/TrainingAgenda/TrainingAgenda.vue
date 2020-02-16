@@ -9,7 +9,7 @@
           <v-switch @click="toggleView" inset></v-switch>
           <span class="agenda-view__switchlabel">EDIT</span>
         </v-row>
-      </v-col> -->
+      </v-col>-->
 
       <v-col class="agenda-view__container" cols="8">
         <img
@@ -41,12 +41,17 @@
 </template>
 
 
+
+
+
 <script lang="ts">
-import TrainingAgendaEdit from "@/views/ProgramGuide/views/TrainingAgenda/TrainingAgendaEdit.vue";
-import TrainingAgendaView from "@/views/ProgramGuide/views/TrainingAgenda/TrainingAgendaView.vue";
 import Component from "vue-class-component";
 import { FbStore } from "@/store";
 import Vue from "vue";
+// import TrainingAgendaEdit from "@/views/ProgramGuide/views/TrainingAgenda/TrainingAgendaEdit.vue";
+// import TrainingAgendaView from "@/views/ProgramGuide/views/TrainingAgenda/TrainingAgendaView.vue";
+import TrainingAgendaEdit from "./TrainingAgendaEdit.vue";
+import TrainingAgendaView from "./TrainingAgendaView.vue";
 
 @Component({
   components: {
