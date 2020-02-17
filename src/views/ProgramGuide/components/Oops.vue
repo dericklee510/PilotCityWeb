@@ -17,7 +17,7 @@
         <!-- <v-alert
               width="200"
             > -->
-        No students here...yet <i class="fas fa-user-alt-slash" />
+        No student information yet <i class="ml-4 fas fa-hourglass-start" />
         <!-- </v-alert> -->
       </v-row>
       <!-- <v-row
