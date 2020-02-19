@@ -127,7 +127,21 @@
             style="margin-bottom: 25px;"
           >
             <v-col cols="1" style="margin-right: 20px; margin-left:12px;">
-              <v-btn small depressed dark>{{ name }}</v-btn>
+
+            <!-- TOOLTIP TEMPLATE -->
+            <v-tooltip v-model="show" right>
+              <template v-slot:activator="{ on }">
+              <v-btn small depressed dark v-on="on">{{ name }}              </v-btn>
+                
+
+                              </template>
+              <span>Team member of {{ teamName }}</span>
+            </v-tooltip>
+            <!-- TOOLTIP TEMPLATE END -->
+
+
+
+
             </v-col>
           </v-row>
 

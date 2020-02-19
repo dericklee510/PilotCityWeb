@@ -79,7 +79,7 @@
           height="73.5px"
           @click="$emit('finish')"
         >
-          NEXT
+          FINISH
         </v-btn>
       </v-col>
     </v-row>
