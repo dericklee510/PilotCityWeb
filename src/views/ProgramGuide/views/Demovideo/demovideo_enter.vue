@@ -14,6 +14,24 @@
         class="mr-auto ml-auto demovideo_enter__title" 
       >
         ENTER 1-MINUTE PROTOTYPE DEMONSTRATION VIDEO
+
+            <!-- TOOLTIP TEMPLATE -->
+            <v-tooltip v-model="show" top>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  href="https://www.pilotcity.com/library/how-can-i-film-upload-my-prototype-video"
+                  target="_blank"
+                  icon
+                  v-on="on"
+                >
+                  <v-icon class="pb-3" color="grey lighten-1">info</v-icon>
+                </v-btn>
+              </template>
+              <span>How can I film and upload my demonstration video? Click to learn more.</span>
+            </v-tooltip>
+            <!-- TOOLTIP TEMPLATE END -->
+
+
       </v-row>
 
       <v-col

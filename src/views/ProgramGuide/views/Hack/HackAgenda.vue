@@ -1,7 +1,6 @@
 <template>
   <v-container class="agenda-view">
     <v-row justify="center" no-gutters>
-
       <!-- NEW SWITCH BUTTON - NEEDS FRONT END FUNCTIONALITY -->
 
       <!-- <v-col class="agenda-view__switch mt-12" cols="8">
@@ -10,8 +9,7 @@
           <v-switch @click="toggleView" inset></v-switch>
           <span class="agenda-view__switchlabel">EDIT</span>
         </v-row>
-      </v-col> -->
-
+      </v-col>-->
 
       <v-col class="agenda-view__container" cols="8">
         <img
@@ -20,12 +18,37 @@
         />
         <v-row justify="center" class="agenda-view__title" no-gutters>
           HACK DAY AGENDA
+
+            <!-- TOOLTIP TEMPLATE -->
+            <v-tooltip v-model="show" top>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  href="https://www.pilotcity.com/library/hack-day"
+                  target="_blank"
+                  icon
+                  v-on="on"
+                >
+                  <v-icon class="pb-3" color="grey lighten-1">info</v-icon>
+                </v-btn>
+              </template>
+              <span>What is Hack Day? Click to learn more</span>
+            </v-tooltip>
+            <!-- TOOLTIP TEMPLATE END -->
+        </v-row>
+
+        <v-row justify="center" class="agenda-view__titlewithline" no-gutters>
           <i
             v-if="citizenType=='teacher'|| citizenType=='employer'"
             class="far fa-edit edit-icon__externship"
             @click="toggleView"
           />
-        </v-row>
+
+          </v-row>
+
+
+
+
+
         <v-row justify="center" no-gutters class="businessmodelcanvas_view2__description">
           <v-col
             cols="9"

@@ -3,20 +3,10 @@
 <template>
   <v-container>
     <template v-if="!currentProject">
-      <v-row
-        class="join-team"
-        no-gutters
-        justify="center"
-      >
-        <v-col
-          class="manageteam__container"
-          cols="8"
-        >
+      <v-row class="join-team" no-gutters justify="center">
+        <v-col class="manageteam__container" cols="8">
           <v-row no-gutters>
-            <v-col
-              cols="12"
-              class="manageteam__title"
-            >
+            <v-col cols="12" class="manageteam__title">
               <span>Join Team</span>
             </v-col>
           </v-row>
@@ -30,32 +20,22 @@
                   align="center"
                   style="margin-bottom: 25px;"
                 >
-                  <v-col
-                    cols="1"
-                    style="margin-right: 20px;"
-                  >
+                  <v-col cols="1" style="margin-right: 20px;">
                     <v-btn
                       small
                       :loading="loading"
                       depressed
                       dark
                       @click="setLoader(joinTeam(project))"
-                    >
-                      JOIN
-                    </v-btn>
+                    >JOIN</v-btn>
                   </v-col>
-                  <v-col class="join-team__team-name text-uppercase">
-                    {{ project.teamName }}
-                  </v-col>
+                  <v-col class="join-team__team-name text-uppercase">{{ project.teamName }}</v-col>
                 </v-row>
               </PCLoader>
             </v-col>
           </v-row>
           <v-row no-gutters>
-            <v-col
-              cols="12"
-              class="manageteam__title"
-            >
+            <v-col cols="12" class="manageteam__title">
               <span>Create Team</span>
             </v-col>
           </v-row>
@@ -74,16 +54,10 @@
 
           <ValidationObserver v-slot="{invalid}">
             <v-row>
-              <v-col
-                cols="12"
-                class="join-team__buttons"
-              >
+              <v-col cols="12" class="join-team__buttons">
                 <v-row no-gutters>
                   <v-col cols="6">
-                    <ValidationProvider
-                      v-slot="{errors}"
-                      rules="required"
-                    >
+                    <ValidationProvider v-slot="{errors}" rules="required">
                       <v-text-field
                         v-model="createTeamName"
                         flat
@@ -107,9 +81,7 @@
                         :disabled="invalid"
                         class="ml-6"
                         @click="setLoader(createProject)"
-                      >
-                        CREATE
-                      </v-btn>
+                      >CREATE</v-btn>
                     </PCLoader>
                   </v-col>
                 </v-row>
@@ -123,13 +95,28 @@
     <!-- TEAM AND TEAM NAMES -->
 
     <template v-else>
-      <v-row
-        no-gutters
-        justify="center"
-      >
+      <v-row no-gutters justify="center">
         <v-col cols="8">
           <v-col class="manageteam__teamtitle">
-            <span>{{ teamName }}</span>
+            <span>{{ teamName }}
+
+
+            <!-- TOOLTIP TEMPLATE -->
+            <v-tooltip v-model="show" top>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  icon
+                  v-on="on"
+                >
+                  <v-icon class="pb-1" color="grey lighten-1">info</v-icon>
+                </v-btn>
+              </template>
+              <span>This is your team's name</span>
+            </v-tooltip>
+            <!-- TOOLTIP TEMPLATE END -->
+
+
+            </span>
           </v-col>
 
           <v-row
@@ -139,17 +126,8 @@
             align="center"
             style="margin-bottom: 25px;"
           >
-            <v-col
-              cols="1"
-              style="margin-right: 20px; margin-left:12px;"
-            >
-              <v-btn
-                small
-                depressed
-                dark
-              >
-                {{ name }}
-              </v-btn>
+            <v-col cols="1" style="margin-right: 20px; margin-left:12px;">
+              <v-btn small depressed dark>{{ name }}</v-btn>
             </v-col>
           </v-row>
 
@@ -166,17 +144,10 @@
 
             <ValidationObserver v-slot="{invalid}">
               <v-row>
-                <v-col
-                  cols="12"
-                  class="join-team__buttons"
-                >
+                <v-col cols="12" class="join-team__buttons">
                   <v-row no-gutters>
                     <v-col cols="6">
-                      <ValidationProvider
-                        v-slot="{errors}"
-                        slim
-                        rules="required"
-                      >
+                      <ValidationProvider v-slot="{errors}" slim rules="required">
                         <v-text-field
                           v-model="newTeamName"
                           :error-messages="errors"
@@ -200,9 +171,7 @@
                           outlined
                           class="ml-6"
                           @click="setLoader(renameTeam)"
-                        >
-                          RENAME
-                        </v-btn>
+                        >RENAME</v-btn>
                       </PCLoader>
                     </v-col>
                   </v-row>
@@ -338,9 +307,9 @@ export default class jointeam extends Vue {
   get currentProject() {
     return FbStore.currentProject || "";
   }
-  @Watch('teamIds',{immediate:true})
-  async onIdsChange(){
-    this.names = await getNames()
+  @Watch("teamIds", { immediate: true })
+  async onIdsChange() {
+    this.names = await getNames();
   }
   async renameTeam() {
     await FbStore.renameProject({

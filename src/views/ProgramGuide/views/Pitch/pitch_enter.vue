@@ -15,6 +15,24 @@
           class="mr-auto ml-auto pitch_enter__title"
         >
           YOUR ONE SENTENCE PROJECT PITCH
+
+
+            <!-- TOOLTIP TEMPLATE -->
+            <v-tooltip v-model="show" top>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  href="https://www.pilotcity.com/library/formatting-1-sentence-pitch"
+                  target="_blank"
+                  icon
+                  v-on="on"
+                >
+                  <v-icon class="pb-3" color="grey lighten-1">info</v-icon>
+                </v-btn>
+              </template>
+              <span>Click here to learn how to best format your pitch</span>
+            </v-tooltip>
+            <!-- TOOLTIP TEMPLATE END -->
+
         </v-row>
     
         <v-col
@@ -83,7 +101,8 @@
           justify="center"
           class="mt-8 pitch_enter__ratinglabel"
         >
-          {{ rating || `No rating yet` }}
+        YOUR RATING
+          <!-- {{ rating || `No rating yet` }} -->
         </v-row>
     
         <v-row

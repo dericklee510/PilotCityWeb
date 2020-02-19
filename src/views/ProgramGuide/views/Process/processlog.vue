@@ -15,6 +15,24 @@
         class="mr-auto ml-auto processlog__title"
       >
         DESIGN & PROTOTYPE PROCESS LOG
+
+
+            <!-- TOOLTIP TEMPLATE -->
+            <v-tooltip v-model="show" top>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  href="https://www.pilotcity.com/library/using-the-design-prototype-log"
+                  target="_blank"
+                  icon
+                  v-on="on"
+                >
+                  <v-icon class="pb-3" color="grey lighten-1">info</v-icon>
+                </v-btn>
+              </template>
+              <span>Click to learn more about how to log and document your process</span>
+            </v-tooltip>
+            <!-- TOOLTIP TEMPLATE END -->
+
       </v-row>
 
       <v-col

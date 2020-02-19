@@ -19,12 +19,32 @@
 
         <v-row justify="center" class="agenda-view__title" no-gutters>
           TRAINING DAY AGENDA
+            <!-- TOOLTIP TEMPLATE -->
+            <!-- <v-tooltip v-model="show" top>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  href="https://www.pilotcity.com/library/demo-day"
+                  target="_blank"
+                  icon
+                  v-on="on"
+                >
+                  <v-icon class="pb-3" color="grey lighten-1">info</v-icon>
+                </v-btn>
+              </template>
+              <span>What is Demo Day? Click to learn more</span>
+            </v-tooltip> -->
+            <!-- TOOLTIP TEMPLATE END -->
+        </v-row>
+
+        <v-row justify="center" class="agenda-view__titlewithline" no-gutters>
           <i
             v-if="citizenType == 'teacher'"
             class="far fa-edit edit-icon__externship"
             @click="toggleView"
           />
-        </v-row>
+
+          </v-row>
+
         <v-row justify="center" no-gutters class="businessmodelcanvas_view2__description">
           <v-col cols="9" class="pt-3 pb-3 text-center">Mark agenda items as you complete them.</v-col>
         </v-row>

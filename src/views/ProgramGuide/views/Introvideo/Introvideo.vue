@@ -19,7 +19,11 @@
             class="text-center"
           >
             WATCH INTRODUCTION VIDEO
+
+
           </v-col>
+
+
         </v-row>
     
         <v-col

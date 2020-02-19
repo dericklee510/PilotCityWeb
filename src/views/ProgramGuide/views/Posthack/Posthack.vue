@@ -2,7 +2,26 @@
   <v-row justify="center">
     <img id="posthack__icon" class="posthack__image" src="@/assets/Posthack.png" />
     <v-col id="posthack__contain" cols="8">
-      <v-row justify="center" class="mr-auto ml-auto posthack__title">POST-HACK REFLECTION</v-row>
+      <v-row justify="center" class="mr-auto ml-auto posthack__title">POST-HACK REFLECTION
+
+
+            <!-- TOOLTIP TEMPLATE -->
+            <v-tooltip v-model="show" top>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  href="https://www.pilotcity.com/library/what-to-do-with-feedback-after-hack-day"
+                  target="_blank"
+                  icon
+                  v-on="on"
+                >
+                  <v-icon class="pb-3" color="grey lighten-1">info</v-icon>
+                </v-btn>
+              </template>
+              <span>What do I do with feedback after Hack Day? Click here to learn more.</span>
+            </v-tooltip>
+            <!-- TOOLTIP TEMPLATE END -->
+
+      </v-row>
 
       <v-col cols="12" class="posthack__borderline" />
 

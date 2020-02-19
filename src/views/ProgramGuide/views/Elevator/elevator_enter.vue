@@ -14,6 +14,26 @@
         class="mr-auto ml-auto elevator_enter__title"
       >
         WRITE YOUR 60-SECOND ELEVATOR PITCH
+
+
+            <!-- TOOLTIP TEMPLATE -->
+            <v-tooltip v-model="show" top>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  href="https://www.pilotcity.com/library/tips-to-prep-60-second-pitch"
+                  target="_blank"
+                  icon
+                  v-on="on"
+                >
+                  <v-icon class="pb-3" color="grey lighten-1">info</v-icon>
+                </v-btn>
+              </template>
+              <span>Click here for tips on preparing your elevator pitch</span>
+            </v-tooltip>
+            <!-- TOOLTIP TEMPLATE END -->
+
+
+
       </v-row>
 
       <v-col
@@ -32,6 +52,21 @@
         class="mr-auto ml-auto pl-5 mb-4 elevator_enter__description__label"
       >
         Elevator Pitch
+
+            <!-- TOOLTIP TEMPLATE -->
+            <v-tooltip v-model="show" right>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  icon
+                  v-on="on"
+                >
+                  <v-icon small class="pb-1" color="grey lighten-1">info</v-icon>
+                </v-btn>
+              </template>
+              <span>Write as if you're speaking from your heart</span>
+            </v-tooltip>
+            <!-- TOOLTIP TEMPLATE END -->
+
       </v-row>
 
       <ValidationObserver v-slot="{invalid, validate}">
@@ -84,7 +119,8 @@
         justify="center"
         class="elevator_enter__ratinglabel"
       >
-        {{ rating || `No rating yet` }}
+      YOUR RATING
+        <!-- {{ rating || `No rating yet` }} -->
       </v-row>
 
       <v-row

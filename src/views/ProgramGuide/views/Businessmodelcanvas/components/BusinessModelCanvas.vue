@@ -9,39 +9,39 @@
       >
         <!-- PROBLEM -->
 
-        <v-col
-          cols="6"
-          md="6"
-          lg="6"
-          xl="6"
-        >
-          Problem
+        <v-col cols="6" md="6" lg="6" xl="6">Problem
+
+
+            <!-- TOOLTIP TEMPLATE -->
+            <v-tooltip v-model="show" right>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  icon
+                  v-on="on"
+                >
+                  <v-icon small class="pb-1" color="grey lighten-1">info</v-icon>
+                </v-btn>
+              </template>
+              <span>What problem are you solving for?</span>
+            </v-tooltip>
+            <!-- TOOLTIP TEMPLATE END -->
+
         </v-col>
 
         <!-- RATING -->
 
-        <v-col
-          cols="6"
-          md="6"
-          lg="6"
-          xl="6"
-        >
-          <v-row
-            v-if="stars"
-            justify="end"
-            no-gutters
-            class="pc-rating"
-          >
+        <v-col cols="6" md="6" lg="6" xl="6">
+          <v-row v-if="stars" justify="end" no-gutters class="pc-rating">
             <!-- <v-col
                   cols="12"
                   md="6"
                   class="businessmodelcanvas_enter__ratinglabel d-none d-lg-inline-block"
                 >
                   <span>Rating</span>
-                </v-col>-->
+            </v-col>-->
 
             <v-rating
-            color="yellow darken-3"
+              color="yellow darken-3"
               v-model="stars.problem"
               dense
               :readonly="readonly===undefined"
@@ -66,7 +66,7 @@
             class="mr-auto ml-auto mb-12 mt-3 businessmodelcanvas_enter__paragraph text-center"
             style="width:100%;"
           > Nothing much yet
-          </v-row>-->
+      </v-row>-->
 
       <!-- THE GNARLY DIV -->
 
@@ -83,20 +83,9 @@
         >Not completed yet</span>
       </v-row>
 
-      <v-row
-        v-else
-        justify="center"
-        class="mr-auto ml-auto"
-      >
-        <v-col
-          cols="11"
-          class="pa-0"
-        >
-          <ValidationProvider
-            v-slot="{errors,failedRules}"
-            name="Problem"
-            rules="required|max:255"
-          >
+      <v-row v-else justify="center" class="mr-auto ml-auto">
+        <v-col cols="11" class="pa-0">
+          <ValidationProvider v-slot="{errors,failedRules}" name="Problem" rules="required|max:255">
             <v-textarea
               v-model="syncedCanvas.problem"
               class="businessmodelcanvas_enter__paragraph"
@@ -117,30 +106,29 @@
         no-gutters
         class="businessmodelcanvas_enter__description__label mt-12 mr-auto ml-auto mb-1 pr-10 pl-10"
       >
-        <v-col
-          cols="6"
-          md="6"
-          lg="6"
-          xl="6"
-          class
-        >
-          Solution
+        <v-col cols="6" md="6" lg="6" xl="6" class>Solution
+
+            <!-- TOOLTIP TEMPLATE -->
+            <v-tooltip v-model="show" right>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  icon
+                  v-on="on"
+                >
+                  <v-icon small class="pb-1" color="grey lighten-1">info</v-icon>
+                </v-btn>
+              </template>
+              <span>Describe your project and it's solution to the problem</span>
+            </v-tooltip>
+            <!-- TOOLTIP TEMPLATE END -->
+
+
         </v-col>
 
         <!-- RATING -->
 
-        <v-col
-          cols="6"
-          md="6"
-          lg="6"
-          xl="6"
-        >
-          <v-row
-            v-if="stars"
-            justify="end"
-            no-gutters
-            class="pc-rating"
-          >
+        <v-col cols="6" md="6" lg="6" xl="6">
+          <v-row v-if="stars" justify="end" no-gutters class="pc-rating">
             <!-- <v-col
                   cols="12"
                   sm="8"
@@ -149,10 +137,10 @@
                   class="businessmodelcanvas_enter__ratinglabel d-none d-lg-inline-block"
                 >
                   <span>Rating</span>
-                </v-col>-->
+            </v-col>-->
 
             <v-rating
-            color="yellow darken-3"
+              color="yellow darken-3"
               v-model="stars.solution"
               dense
               :readonly="readonly===undefined"
@@ -161,7 +149,6 @@
           </v-row>
         </v-col>
       </v-row>
-
 
       <v-row
         v-if="readonly==true"
@@ -176,22 +163,9 @@
         >Not completed yet</span>
       </v-row>
 
-
-
-
-      <v-row
-        v-else
-        justify="center"
-        class="mr-auto ml-auto"
-      >
-        <v-col
-          cols="11"
-          class="pa-0"
-        >
-          <ValidationProvider
-            v-slot="{errors,failedRules}"
-            rules="required|max:255"
-          >
+      <v-row v-else justify="center" class="mr-auto ml-auto">
+        <v-col cols="11" class="pa-0">
+          <ValidationProvider v-slot="{errors,failedRules}" rules="required|max:255">
             <v-textarea
               v-model="syncedCanvas.solution"
               class="businessmodelcanvas_enter__paragraph"
@@ -212,30 +186,31 @@
         no-gutters
         class="businessmodelcanvas_enter__description__label mt-12 mr-auto ml-auto mb-1 pr-10 pl-10"
       >
-        <v-col
-          cols="6"
-          md="6"
-          lg="6"
-          xl="6"
-          class
-        >
-          Innovation
+        <v-col cols="6" md="6" lg="6" xl="6" class>Innovation
+
+
+            <!-- TOOLTIP TEMPLATE -->
+            <v-tooltip v-model="show" right>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  icon
+                  v-on="on"
+                >
+                  <v-icon small class="pb-1" color="grey lighten-1">info</v-icon>
+                </v-btn>
+              </template>
+              <span>What unique value proposition does your solution offer?</span>
+            </v-tooltip>
+            <!-- TOOLTIP TEMPLATE END -->
+
+
+
         </v-col>
 
         <!-- RATING -->
 
-        <v-col
-          cols="6"
-          md="6"
-          lg="6"
-          xl="6"
-        >
-          <v-row
-            v-if="stars"
-            justify="end"
-            no-gutters
-            class="pc-rating"
-          >
+        <v-col cols="6" md="6" lg="6" xl="6">
+          <v-row v-if="stars" justify="end" no-gutters class="pc-rating">
             <!-- <v-col
                   cols="12"
                   sm="8"
@@ -244,10 +219,10 @@
                   class="businessmodelcanvas_enter__ratinglabel d-none d-lg-inline-block"
                 >
                   <span>Rating</span>
-                </v-col>-->
+            </v-col>-->
 
             <v-rating
-            color="yellow darken-3"
+              color="yellow darken-3"
               v-model="stars.innovation"
               dense
               :readonly="readonly===undefined"
@@ -256,11 +231,6 @@
           </v-row>
         </v-col>
       </v-row>
-
-
-
-
-
 
       <v-row
         v-if="readonly==true"
@@ -275,24 +245,9 @@
         >Not completed yet</span>
       </v-row>
 
-
-
-
-
-
-      <v-row
-        v-else
-        justify="center"
-        class="mr-auto ml-auto"
-      >
-        <v-col
-          cols="11"
-          class="pa-0"
-        >
-          <ValidationProvider
-            v-slot="{errors,failedRules}"
-            rules="required|max:255"
-          >
+      <v-row v-else justify="center" class="mr-auto ml-auto">
+        <v-col cols="11" class="pa-0">
+          <ValidationProvider v-slot="{errors,failedRules}" rules="required|max:255">
             <v-textarea
               v-model="syncedCanvas.innovation"
               class="businessmodelcanvas_enter__paragraph"
@@ -313,30 +268,29 @@
         no-gutters
         class="businessmodelcanvas_enter__description__label mt-12 mr-auto ml-auto mb-1 pr-10 pl-10"
       >
-        <v-col
-          cols="6"
-          md="6"
-          lg="6"
-          xl="6"
-          class
-        >
-          Customer
+        <v-col cols="6" md="6" lg="6" xl="6" class>Customer
+
+
+            <!-- TOOLTIP TEMPLATE -->
+            <v-tooltip v-model="show" right>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  icon
+                  v-on="on"
+                >
+                  <v-icon small class="pb-1" color="grey lighten-1">info</v-icon>
+                </v-btn>
+              </template>
+              <span>Who is the user, stakeholder or customer of your solution?</span>
+            </v-tooltip>
+            <!-- TOOLTIP TEMPLATE END -->
+
         </v-col>
 
         <!-- RATING -->
 
-        <v-col
-          cols="6"
-          md="6"
-          lg="6"
-          xl="6"
-        >
-          <v-row
-            v-if="stars"
-            justify="end"
-            no-gutters
-            class="pc-rating"
-          >
+        <v-col cols="6" md="6" lg="6" xl="6">
+          <v-row v-if="stars" justify="end" no-gutters class="pc-rating">
             <!-- <v-col
                   cols="12"
                   sm="8"
@@ -345,27 +299,18 @@
                   class="businessmodelcanvas_enter__ratinglabel d-none d-lg-inline-block"
                 >
                   <span>Rating</span>
-                </v-col>-->
+            </v-col>-->
 
             <v-rating
-            color="yellow darken-3"
+              color="yellow darken-3"
               v-model="stars.cost"
               dense
               :readonly="readonly===undefined"
-              
               @input="onStarsChanged($event,'cost')"
             />
           </v-row>
         </v-col>
       </v-row>
-
-
-
-
-
-
-
-
 
       <v-row
         v-if="readonly==true"
@@ -380,24 +325,9 @@
         >Not completed yet</span>
       </v-row>
 
-
-
-
-
-
-      <v-row
-        v-else
-        justify="center"
-        class="mr-auto ml-auto"
-      >
-        <v-col
-          cols="11"
-          class="pa-0"
-        >
-          <ValidationProvider
-            v-slot="{errors,failedRules}"
-            rules="required|max:255"
-          >
+      <v-row v-else justify="center" class="mr-auto ml-auto">
+        <v-col cols="11" class="pa-0">
+          <ValidationProvider v-slot="{errors,failedRules}" rules="required|max:255">
             <v-textarea
               v-model="syncedCanvas.customer"
               class="businessmodelcanvas_enter__paragraph"
