@@ -4,7 +4,28 @@
       <img id="prompt__icon" src="@/assets/pitch_enter.png" />
 
       <v-col id="prompt__contain" cols="8">
-        <v-row justify="center" class="mr-auto ml-auto prompt__title">PROJECT PROMPT GENERATOR</v-row>
+        <v-row justify="center" class="mr-auto ml-auto prompt__title">PROJECT PROMPT GENERATOR
+
+
+
+            <!-- TOOLTIP TEMPLATE -->
+            <v-tooltip v-model="show" top>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  href="https://www.pilotcity.com/library/how-do-i-decide-on-my-project-for-students"
+                  target="_blank"
+                  icon
+                  v-on="on"
+                >
+                  <v-icon class="pb-3" color="grey lighten-1">info</v-icon>
+                </v-btn>
+              </template>
+              <span>How do I decide on my project for students? Click to learn more.</span>
+            </v-tooltip>
+            <!-- TOOLTIP TEMPLATE END -->
+
+
+        </v-row>
 
         <v-col id="prompt__borderline" cols="12" />
 
@@ -26,25 +47,25 @@
         <v-row>
           <v-col align="right" cols="4" class="prompt__generatetitle">Problem or Opportunity</v-col>
           <v-col cols="7">
-            <input v-model="problemOrOpportunity" class="prompt__generateinput" />
+            <input v-model="problemOrOpportunity" placeholder="the manual assessment of road conditions" class="prompt__generateinput" />
           </v-col>
         </v-row>
         <v-row>
           <v-col align="right" cols="4" class="prompt__generatetitle">Solution</v-col>
           <v-col cols="7">
-            <input v-model="solution" class="prompt__generateinput" />
+            <input v-model="solution" placeholder="an autonomous solution" class="prompt__generateinput" />
           </v-col>
         </v-row>
         <v-row>
           <v-col align="right" cols="4" class="prompt__generatetitle">Key Metric</v-col>
           <v-col cols="7">
-            <input v-model="keyMetric" class="prompt__generateinput" />
+            <input v-model="keyMetric" placeholder="savings in city engineers' time and tax-payer dollars" class="prompt__generateinput" />
           </v-col>
         </v-row>
         <v-row>
           <v-col align="right" cols="4" class="prompt__generatetitle">Product or Service</v-col>
           <v-col cols="7">
-            <input v-model="productOrService" class="prompt__generateinput" />
+            <input v-model="productOrService" placeholder="programmable drones" class="prompt__generateinput" />
           </v-col>
         </v-row>
 

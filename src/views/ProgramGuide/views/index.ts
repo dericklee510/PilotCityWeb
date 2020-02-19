@@ -96,7 +96,7 @@ export const TEACHERSEQUENCE = {
             // 'teach-externship-agenda',
             'externship-agenda'
         ],
-        'Brief': [
+        'RFP': [
             'teach-externship-brief',
             // 'rfp-brief',
             'teach-externship-brief-gen'
@@ -151,7 +151,7 @@ export const EMPLOYERSEQUENCE = {
             'externship-agenda',
             
         ],
-        'Brief': [
+        'RFP': [
             'emp-externship-brief-edit',
             // 'rfp-brief'
         ],

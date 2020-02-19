@@ -7,7 +7,7 @@
       <img
         id="demovideo_view__icon"
         src="@/assets/demovideo_view.png"
-      >
+      > 
 
       <v-col
         id="demovideo_view__contain"
@@ -19,6 +19,23 @@
           class="mr-auto ml-auto demovideo_view__title"
         >
           1-MINUTE PROTOTYPE DEMONSTRATION VIDEOS
+
+            <!-- TOOLTIP TEMPLATE -->
+            <v-tooltip v-model="show" top v-if="citizenType == 'teacher'">
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  href="https://www.pilotcity.com/library/how-can-i-film-upload-my-prototype-video"
+                  target="_blank"
+                  icon
+                  v-on="on"
+                >
+                  <v-icon class="pb-3" color="grey lighten-1">info</v-icon>
+                </v-btn>
+              </template>
+              <span>What instructions can I share with my students on how to develop their demonstration video? Click here.</span>
+            </v-tooltip>
+            <!-- TOOLTIP TEMPLATE END -->
+
         </v-row>
 
         <v-col
@@ -158,6 +175,11 @@ export default class demovideo_view extends Vue {
   get getProjectIds() {
     return FbStore.currentEmployerProgram!.projectIds || [];
   }
+
+  get citizenType() {
+    return FbStore.userCitizenType;
+  }
+
   @Watch("getProgramIds")
   onProgramIdsChange() {
     if (FbStore.userCitizenType === "employer") {
@@ -204,5 +226,8 @@ export default class demovideo_view extends Vue {
   projectSubscribers: {
     [classroomId: string]: Subscription[];
   } = {};
+
+
+
 }
 </script>

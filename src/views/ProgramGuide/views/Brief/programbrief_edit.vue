@@ -16,7 +16,7 @@
         md="10"
       >
         <v-col class="programbrief__tile">
-          Program Briefs
+          Request for Pilot (RFP)
         </v-col>
         <v-col>
           <BriefCard_edit

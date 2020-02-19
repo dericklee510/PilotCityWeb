@@ -27,7 +27,24 @@
 
         <v-row class="manageteam__labels" no-gutters>
           <v-col cols="12" lg="5" xl="6">
-            <span>Team Name</span>
+            <span>Team Name
+
+            <!-- TOOLTIP TEMPLATE -->
+            <v-tooltip v-model="show" top>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  icon
+                  v-on="on"
+                >
+                  <v-icon small class="pb-1" color="grey lighten-1">info</v-icon>
+                </v-btn>
+              </template>
+              <span>Rename or delete student project teams</span>
+            </v-tooltip>
+            <!-- TOOLTIP TEMPLATE END -->
+
+
+            </span>
           </v-col>
         </v-row>
         <multi-input v-model="entries" v-slot="{ }">

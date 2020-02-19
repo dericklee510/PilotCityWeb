@@ -41,7 +41,9 @@
             cols="12"
             class="manageteam__title"
           >
-            <span>Manage Classes</span>
+            <span>Manage Classes
+
+            </span>
           </v-col>
         </v-row>
         <v-row
@@ -53,7 +55,24 @@
             lg="4"
             xl="5"
           >
-            <span>Class Name</span>
+            <span>Class Name
+
+            <!-- TOOLTIP TEMPLATE -->
+            <v-tooltip v-model="show" top>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  icon
+                  v-on="on"
+                >
+                  <v-icon small class="pb-1" color="grey lighten-1">info</v-icon>
+                </v-btn>
+              </template>
+              <span>Format your class name to include the period and class name</span>
+            </v-tooltip>
+            <!-- TOOLTIP TEMPLATE END -->
+
+
+            </span>
           </v-col>
           <v-spacer />
           <v-col
@@ -63,7 +82,24 @@
             class="manageclass__sharecode-label d-none d-lg-block"
             style="padding-left: 67px"
           >
-            <span class>Share Code</span>
+            <span class>Share Code
+
+            <!-- TOOLTIP TEMPLATE -->
+            <v-tooltip v-model="show" top>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  icon
+                  v-on="on"
+                >
+                  <v-icon small class="pb-1" color="grey lighten-1">info</v-icon>
+                </v-btn>
+              </template>
+              <span>Share this program code with your students to onboard</span>
+            </v-tooltip>
+            <!-- TOOLTIP TEMPLATE END -->
+
+
+            </span>
           </v-col>
           <v-col cols="1" />
         </v-row>

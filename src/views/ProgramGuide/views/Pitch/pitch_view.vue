@@ -10,12 +10,30 @@
         id="pitch_view__contain"
         cols="8"
         class="pb-9"
-      >
+      > 
         <v-row
           justify="center"
           class="mr-auto ml-auto pitch_view__title"
         >
           VIEW ONE SENTENCE PROJECT PITCHES
+
+            <!-- TOOLTIP TEMPLATE -->
+            <v-tooltip v-model="show" top v-if="citizenType == 'teacher'">
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  href="https://www.pilotcity.com/library/formatting-1-sentence-pitch"
+                  target="_blank"
+                  icon
+                  v-on="on"
+                >
+                  <v-icon class="pb-3" color="grey lighten-1">info</v-icon>
+                </v-btn>
+              </template>
+              <span>Wondering how your students format their one sentence project pitch? Click here.</span>
+            </v-tooltip>
+            <!-- TOOLTIP TEMPLATE END -->
+
+
         </v-row>
 
         <v-col
@@ -94,5 +112,10 @@ export default class pitch_view extends mixins(snippetMixin){
       lastUpdate:firebase.firestore.FieldValue.serverTimestamp()
     })
   }
+
+  get citizenType() {
+    return FbStore.userCitizenType;
+  }
+
 }
 </script>

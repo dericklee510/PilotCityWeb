@@ -211,6 +211,10 @@
         font-family: "Raleway";
         font-weight: 800;
 
+        &::placeholder{
+        color: #CCCCCC;
+        }
+
     }
 
     &__ratedstar{
