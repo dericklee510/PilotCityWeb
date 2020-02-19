@@ -4,9 +4,28 @@
       <img id="logtime__icon" class="logtime__image" src="@/assets/log.png" />
 
       <v-col id="logtime__contain" cols="8">
-        <v-row justify="center" class="mr-auto ml-auto logtime__title">PRACTICE LOG</v-row>
+        <v-row justify="center" class="mr-auto ml-auto logtime__title">PRACTICE LOG
 
-        <v-col cols="12" class="logtime__borderline" />
+            <!-- TOOLTIP TEMPLATE -->
+            <v-tooltip v-model="show" top>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  href="https://www.pilotcity.com/library/when-should-i-record-hours-practice-log"
+                  target="_blank"
+                  icon
+                  v-on="on"
+                >
+                  <v-icon class="pb-3" color="grey lighten-1">info</v-icon>
+                </v-btn>
+              </template>
+              <span>When should I log my practice hours on the employer's product or service? Click here to learn more</span>
+            </v-tooltip>
+            <!-- TOOLTIP TEMPLATE END -->
+
+
+        </v-row>
+
+        <v-col cols="12" class="logtime__borderline" /> 
 
         <v-row
           justify="center"
