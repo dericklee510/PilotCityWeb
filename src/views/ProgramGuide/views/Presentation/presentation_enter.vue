@@ -89,7 +89,8 @@
           justify="center"
           class="mt-8 presentation_enter__ratinglabel"
         >
-          {{ rating || `No rating yet` }}
+        YOUR RATING
+          <!-- {{ rating || `No rating yet` }} -->
         </v-row>
     
         <v-row
