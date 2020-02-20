@@ -164,6 +164,7 @@ export const pcTimelog = PCmultiinput.createMultiInput<TimeLog>({
             })
           )
         ),
+        tap(() => this.key++)
       )
       
     };
@@ -188,12 +189,8 @@ export default class Logtime extends mixins(latestProjectDataMixin) {
   // }]
   key=0
   practiceHash!: Record<string, { name: string; projectId: string, practiceLog:TimeLog[] }>;
-  @Watch('practiceHash')
-  onHash(){
-    this.key++
-  }
   async rejectEntry(studentId: string, lastUpdate: firebase.firestore.Timestamp) {
-    console.log({studentId,lastUpdate})
+    
     await FbStore.firestore
       .collection("Project")
       .doc(this.practiceHash[studentId].projectId)
