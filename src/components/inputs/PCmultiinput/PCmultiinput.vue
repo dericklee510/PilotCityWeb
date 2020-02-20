@@ -122,19 +122,22 @@ export default class PCmultiinput extends Vue {
       created() {
         if (this.dontFill === "") this.entries = [];
         else if (emptyEntry) this.entries = [{ ...emptyEntry, id: 0 }];
-        if (this.value) {
+        if (this.syncVal) {
           let counter = 0;
-          this.entries = this.addEntryId(this.value)
+          this.entries = this.addEntryId(this.syncVal)
         }
       }
       @Prop()
       value!: EntryClass[];
+      get syncVal(){
+        return this.value
+      }
       @Prop()
       dontFill: "" | undefined;
 
       addEntryId(entries:EntryClass[]){
         let counter = 0
-        return this.value.map(entry => ({ id: counter++, ...entry }));
+        return this.syncVal.map(entry => ({ id: counter++, ...entry }));
       }
       allocateEntry = (val: ExtendId): EntryClassID =>
         new EntryClassIDGen(val) as EntryClassID;
