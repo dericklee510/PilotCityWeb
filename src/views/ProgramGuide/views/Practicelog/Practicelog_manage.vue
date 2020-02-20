@@ -22,7 +22,7 @@
         >
           MANAGE PRACTICE LOGS
         </v-row>
-        <v-container v-if="Object.keys(practiceLogs).length">
+        <v-container v-if="practiceHash && Object.keys(practiceHash).length">
           <v-row
             justify="center"
             class="practicelog-manage__label mt-12 mb-6"
@@ -50,7 +50,7 @@
           <!-- LOGGER -->
 
           <v-row
-            v-for="(timeLogs,studentId) in practiceLogs"
+            v-for="(entry,studentId) in practiceHash"
             :key="studentId"
             justify="center"
             class="practicelog-manage__logged"
@@ -63,7 +63,7 @@
               lg="2"
               xl="1"
             >
-              {{ `${reduceEntry(timeLogs)}m` }}
+              {{ `${reduceEntry(entry.practiceLog)}m` }}
             </v-col>
             <v-col
               cols="7"
@@ -75,23 +75,24 @@
               <v-col
                 class="practicelog-manage__log-header"
               >
-                {{ (nameHash && nameHash[studentId])?nameHash[studentId].name:"" }}
+                {{ entry.name }}
               </v-col>
               <pc-timelog
-                v-model="practiceLogs[studentId]"
+                :key="key"
+                v-model="entry.practiceLog"
                 v-slot="{entries}"
               >
                 <v-col
-                  v-for="(entry,index) in entries"
-                  :key="entry.id"
+                  v-for="(log) in entries"
+                  :key="log.id"
                   style="padding: 0"
                 >
                   <span>
                     <button
                       class="practicelog_manage__rejectbutton"
-                      @click="rejectEntry(studentId,index)"
+                      @click="rejectEntry(studentId,log.lastUpdate)"
                     >Reject</button>
-                    <span class="practicelog_manage__singlelog">{{ `${entry.minutes}m` }}</span>
+                    <span class="practicelog_manage__singlelog">{{ `${log.minutes}m` }}</span>
                   </span>
                 </v-col>
               </pc-timelog>
@@ -121,7 +122,9 @@ import { Classroom, Project } from "../../../../store/Database/types/types";
 import { doc } from "rxfire/firestore";
 import { Oops } from "../../components";
 import { latestProjectDataMixin } from "../../utilities";
-import { switchMap } from "rxjs/operators";
+import { switchMap, tap, filter } from "rxjs/operators";
+import { Watch } from 'vue-property-decorator';
+
 export const pcTimelog = PCmultiinput.createMultiInput<TimeLog>({
   minutes: 0,
   lastUpdate: firebase.firestore.Timestamp.fromDate(new Date())
@@ -134,13 +137,13 @@ export const pcTimelog = PCmultiinput.createMultiInput<TimeLog>({
   },
   subscriptions() {
     return {
-      nameHash: this.latestProjectData$.pipe(
+      practiceHash: this.latestProjectData$.pipe(
         switchMap(projectdata =>
           from(
             new Promise(async resolve => {
               let obj = {} as Record<
                 string,
-                { name: string; projectId: string }
+                { name: string; projectId: string, practiceLog:TimeLog[] }
               >;
               await Promise.all(
                 projectdata.map(async project => {
@@ -150,7 +153,8 @@ export const pcTimelog = PCmultiinput.createMultiInput<TimeLog>({
                         name: await FbStore.getStudentName({
                           studentUid: studentId
                         }),
-                        projectId: project.projectId
+                        projectId: project.projectId,
+                        practiceLog:project.practiceLog[studentId]
                       };
                     })
                   );
@@ -159,21 +163,14 @@ export const pcTimelog = PCmultiinput.createMultiInput<TimeLog>({
               resolve(obj);
             })
           )
-        )
+        ),
+        tap(() => this.key++)
       )
+      
     };
   }
 })
 export default class Logtime extends mixins(latestProjectDataMixin) {
-  get practiceLogs(): Record<string, TimeLog[]> {
-    let obj: Record<string, TimeLog[]> = {};
-    this.latestProjectData?.forEach(projectData => {
-      Object.keys(projectData.practiceLog).forEach(studentId => {
-        obj[studentId] = projectData.practiceLog[studentId];
-      });
-    });
-    return obj;
-  }
   // 'someuid':[{
   //   minutes:45,
   //   lastUpdate: firebase.firestore.Timestamp.fromDate(new Date(12))
@@ -190,18 +187,15 @@ export default class Logtime extends mixins(latestProjectDataMixin) {
   //   minutes:20,
   //   lastUpdate: firebase.firestore.Timestamp.fromDate(new Date(23))
   // }]
-  nameHash!: Record<string, { name: string; projectId: string }>;
-  // 'someuid': {name:"Antonio Laza"},
-  // otheruid: {name:"Carly Hudson"}
-  rejectEntry(studentId: string, index: number) {
-    FbStore.firestore
+  key=0
+  practiceHash!: Record<string, { name: string; projectId: string, practiceLog:TimeLog[] }>;
+  async rejectEntry(studentId: string, lastUpdate: firebase.firestore.Timestamp) {
+    
+    await FbStore.firestore
       .collection("Project")
-      .doc(this.nameHash[studentId].projectId)
+      .doc(this.practiceHash[studentId].projectId)
       .update<Project>({
-        [`practiceLog.${studentId}`]: this.practiceLogs[studentId].splice(
-          index,
-          1
-        )
+        [`practiceLog.${studentId}`]: this.practiceHash[studentId].practiceLog.filter((val,filterIndex) => !val.lastUpdate.isEqual(lastUpdate))
       });
     this.$forceUpdate();
   }

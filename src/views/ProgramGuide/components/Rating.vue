@@ -2,7 +2,6 @@
   <v-container fluid>
     <v-row
       v-for="(team,index) in syncedSnippet"
-      v-if="team.item_preview"
       :key="index"
       justify="center"
       class="pt-3 pb-3"
