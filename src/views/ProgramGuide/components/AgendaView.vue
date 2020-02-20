@@ -90,12 +90,26 @@ import Vue from "vue";
 import "reflect-metadata";
 import Component from "vue-class-component";
 import { EventItem } from "../../../store/Database/types/utilities";
-import { PropSync, Watch } from "vue-property-decorator";
+import { PropSync, Watch, Prop } from "vue-property-decorator";
 @Component
 export default class AgendaView extends Vue {
-  @PropSync("value")
-  syncedAgenda!: EventItem[];
+  @Prop()
+  value!:EventItem[]
   
+  get syncedAgenda(): EventItem[]{
+    return this.value
+  }
+  set syncedAgenda(val:EventItem[]){
+    this.$emit('input',val)
+  }
+  @Prop()
+  completed!:boolean
+  @Watch('completed',{immediate:true})
+  onComplete(){
+    if(this.completed){
+      this.syncedAgenda = this.syncedAgenda.map(item => ({...item,completed:true}))
+    }
+  }
   static emptyAgenda: EventItem[] = [
     {
       name: "",
