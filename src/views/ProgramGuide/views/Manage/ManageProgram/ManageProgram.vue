@@ -22,66 +22,85 @@
             Experience
 
             <!-- TOOLTIP TEMPLATE -->
-            <v-tooltip v-model="show" top>
+            <v-tooltip
+              v-model="show"
+              top
+            >
               <template v-slot:activator="{ on }">
                 <v-btn
                   icon
                   v-on="on"
                 >
-                  <v-icon small class="pb-1" color="grey lighten-1">info</v-icon>
+                  <v-icon
+                    small
+                    class="pb-1"
+                    color="grey lighten-1"
+                  >
+                    info
+                  </v-icon>
                 </v-btn>
               </template>
               <span>This is the sequence of your student's program</span>
             </v-tooltip>
             <!-- TOOLTIP TEMPLATE END -->
-
-
           </v-col>
           <v-col class="manageprogram__title">
             Unlock
 
             <!-- TOOLTIP TEMPLATE -->
-            <v-tooltip v-model="show" top>
+            <v-tooltip
+              v-model="show"
+              top
+            >
               <template v-slot:activator="{ on }">
                 <v-btn
                   icon
                   v-on="on"
                 >
-                  <v-icon small class="pb-1" color="grey lighten-1">info</v-icon>
+                  <v-icon
+                    small
+                    class="pb-1"
+                    color="grey lighten-1"
+                  >
+                    info
+                  </v-icon>
                 </v-btn>
               </template>
               <span>This is the unlocking mechanism for your student's program</span>
             </v-tooltip>
             <!-- TOOLTIP TEMPLATE END -->
-
           </v-col>
           <v-col class="manageprogram__title">
             Trigger
 
             <!-- TOOLTIP TEMPLATE -->
-            <v-tooltip v-model="show" top>
+            <v-tooltip
+              v-model="show"
+              top
+            >
               <template v-slot:activator="{ on }">
                 <v-btn
                   icon
                   v-on="on"
                 >
-                  <v-icon small class="pb-1" color="grey lighten-1">info</v-icon>
+                  <v-icon
+                    small
+                    class="pb-1"
+                    color="grey lighten-1"
+                  >
+                    info
+                  </v-icon>
                 </v-btn>
               </template>
               <span>Monitor completion, set trigger or manually unlock your student's program</span>
             </v-tooltip>
             <!-- TOOLTIP TEMPLATE END -->
-
           </v-col>
           <v-col
             cols="1"
             class="manageprogram__title pt-1"
           >
             Status
-
-
-            
-
           </v-col>
         </v-row>
         <!-- LAUNCH DAY -->

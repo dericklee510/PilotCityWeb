@@ -1,6 +1,9 @@
 <template>
   <v-container class="agenda-view">
-    <v-row justify="center" no-gutters>
+    <v-row
+      justify="center"
+      no-gutters
+    >
       <!-- NEW SWITCH BUTTON - NEEDS FRONT END FUNCTIONALITY -->
 
       <!-- <v-col class="agenda-view__switch mt-12" cols="8">
@@ -11,16 +14,23 @@
         </v-row>
       </v-col>-->
 
-      <v-col class="agenda-view__container" cols="8">
+      <v-col
+        class="agenda-view__container"
+        cols="8"
+      >
         <img
           class="pc-vh-center agenda-view__icon"
           src="@/assets/icons/programguide/agendaPink.png"
-        />
+        >
 
-        <v-row justify="center" class="agenda-view__title" no-gutters>
+        <v-row
+          justify="center"
+          class="agenda-view__title"
+          no-gutters
+        >
           TRAINING DAY AGENDA
-            <!-- TOOLTIP TEMPLATE -->
-            <!-- <v-tooltip v-model="show" top>
+          <!-- TOOLTIP TEMPLATE -->
+          <!-- <v-tooltip v-model="show" top>
               <template v-slot:activator="{ on }">
                 <v-btn
                   href="https://www.pilotcity.com/library/demo-day"
@@ -33,20 +43,32 @@
               </template>
               <span>What is Demo Day? Click to learn more</span>
             </v-tooltip> -->
-            <!-- TOOLTIP TEMPLATE END -->
+          <!-- TOOLTIP TEMPLATE END -->
         </v-row>
 
-        <v-row justify="center" class="agenda-view__titlewithline" no-gutters>
+        <v-row
+          justify="center"
+          class="agenda-view__titlewithline"
+          no-gutters
+        >
           <i
             v-if="citizenType == 'teacher'"
             class="far fa-edit edit-icon__externship"
             @click="toggleView"
           />
+        </v-row>
 
-          </v-row>
-
-        <v-row justify="center" no-gutters class="businessmodelcanvas_view2__description">
-          <v-col cols="9" class="pt-3 pb-3 text-center">Mark agenda items as you complete them.</v-col>
+        <v-row
+          justify="center"
+          no-gutters
+          class="businessmodelcanvas_view2__description"
+        >
+          <v-col
+            cols="9"
+            class="pt-3 pb-3 text-center"
+          >
+            Mark agenda items as you complete them.
+          </v-col>
         </v-row>
         <component
           :is="currentView"

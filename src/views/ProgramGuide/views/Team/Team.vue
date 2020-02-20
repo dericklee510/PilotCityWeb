@@ -19,22 +19,26 @@
 
 
           </span>
-
         </v-col>
         <v-col class="Team__Settings"> 
           <span>
             Settings
 
 
-<!-- TOOLTIP TEMPLATE -->
+            <!-- TOOLTIP TEMPLATE -->
 
             <v-btn 
               href="https://github.com/vuetifyjs/vuetify/releases/latest"
               target="_blank"
-              icon v-on="on">
-              <v-icon class="pb-1" color="grey lighten-1">info</v-icon>
+              icon
+              v-on="on"
+            >
+              <v-icon
+                class="pb-1"
+                color="grey lighten-1"
+              >info</v-icon>
             </v-btn>
-<!-- TOOLTIP TEMPLATE END -->
+            <!-- TOOLTIP TEMPLATE END -->
 
 
           </span>

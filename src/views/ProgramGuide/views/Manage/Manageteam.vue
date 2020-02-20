@@ -1,65 +1,109 @@
 <template>
   <v-container>
-    <v-row no-gutters justify="center">
-      <v-col class="manageclass__container" cols="8">
+    <v-row
+      no-gutters
+      justify="center"
+    >
+      <v-col
+        class="manageclass__container"
+        cols="8"
+      >
         <v-tabs no-gutters>
           <v-tab
             style="cursor: pointer"
             @click="$router.push({name: 'teach-externship-manage-class'})"
-          >CLASSES</v-tab>
+          >
+            CLASSES
+          </v-tab>
 
           <v-tab
             style="cursor: normal"
             @click="$router.push({name: 'teach-externship-manage-teams'})"
-          >TEAMS</v-tab>
+          >
+            TEAMS
+          </v-tab>
 
           <v-tab
             style="cursor: pointer"
             @click="$router.push({name: 'teach-externship-manage-students'})"
-          >STUDENTS</v-tab>
+          >
+            STUDENTS
+          </v-tab>
         </v-tabs>
 
         <v-row no-gutters>
-          <v-col cols="12" class="manageteam__title">
+          <v-col
+            cols="12"
+            class="manageteam__title"
+          >
             <span>Manage Teams</span>
           </v-col>
         </v-row>
 
-        <v-row class="manageteam__labels" no-gutters>
-          <v-col cols="12" lg="5" xl="6">
+        <v-row
+          class="manageteam__labels"
+          no-gutters
+        >
+          <v-col
+            cols="12"
+            lg="5"
+            xl="6"
+          >
             <span>Team Name
 
-            <!-- TOOLTIP TEMPLATE -->
-            <v-tooltip v-model="show" top>
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  icon
-                  v-on="on"
-                >
-                  <v-icon small class="pb-1" color="grey lighten-1">info</v-icon>
-                </v-btn>
-              </template>
-              <span>Rename or delete student project teams</span>
-            </v-tooltip>
+              <!-- TOOLTIP TEMPLATE -->
+              <v-tooltip
+                v-model="show"
+                top
+              >
+                <template v-slot:activator="{ on }">
+                  <v-btn
+                    icon
+                    v-on="on"
+                  >
+                    <v-icon
+                      small
+                      class="pb-1"
+                      color="grey lighten-1"
+                    >info</v-icon>
+                  </v-btn>
+                </template>
+                <span>Rename or delete student project teams</span>
+              </v-tooltip>
             <!-- TOOLTIP TEMPLATE END -->
 
 
             </span>
           </v-col>
         </v-row>
-        <multi-input v-model="entries" v-slot="{ }">
+        <multi-input
+          v-model="entries"
+          v-slot="{ }"
+        >
           <v-row
             v-for="(entry,index) in entries"
             :key="entry.id"
             no-gutters
             class="manageteam__class-input"
           >
-            <v-col cols="12" lg="5" xl="6" class="manageteam__input">
-              <input v-model="teamNames[index]" :placeholder="entry.teamName" />
+            <v-col
+              cols="12"
+              lg="5"
+              xl="6"
+              class="manageteam__input"
+            >
+              <input
+                v-model="teamNames[index]"
+                :placeholder="entry.teamName"
+              >
             </v-col>
 
             <template v-if="entry.teamUid">
-              <v-col cols="6" lg="2" class="manageteam__button-wrapper first">
+              <v-col
+                cols="6"
+                lg="2"
+                class="manageteam__button-wrapper first"
+              >
                 <PCLoader v-slot="{loading,setLoader}">
                   <v-btn
                     class="manageteam__button"
@@ -69,10 +113,16 @@
                     depressed
                     text
                     @click="setLoader(() =>renameTeam(entry,index))"
-                  >RENAME</v-btn>
+                  >
+                    RENAME
+                  </v-btn>
                 </PCLoader>
               </v-col>
-              <v-col cols="6" lg="2" class="manageteam__button-wrapper">
+              <v-col
+                cols="6"
+                lg="2"
+                class="manageteam__button-wrapper"
+              >
                 <PCLoader v-slot="{loading,setLoader}">
                   <v-btn
                     class="manageteam__button"
@@ -82,33 +132,59 @@
                     depressed
                     text
                     @click="setLoader(()=>deleteTeam(entry))"
-                  >DELETE</v-btn>
+                  >
+                    DELETE
+                  </v-btn>
                 </PCLoader>
               </v-col>
             </template>
             <template v-else>
               <v-col cols="2">
                 <h4>Generating...</h4>
-                <v-progress-circular indeterminate color="primary" />
+                <v-progress-circular
+                  indeterminate
+                  color="primary"
+                />
               </v-col>
             </template>
           </v-row>
 
           <v-row no-gutters>
-            <v-col cols="12" class="manageteam__title">
+            <v-col
+              cols="12"
+              class="manageteam__title"
+            >
               <span>Create Teams</span>
             </v-col>
           </v-row>
-          <v-row class="manageteam__labels" no-gutters>
-            <v-col cols="12" lg="5" xl="6">
+          <v-row
+            class="manageteam__labels"
+            no-gutters
+          >
+            <v-col
+              cols="12"
+              lg="5"
+              xl="6"
+            >
               <span>Team Name</span>
             </v-col>
           </v-row>
 
           <ValidationObserver v-slot="{invalid, reset}">
-            <v-row no-gutters class="mt-4 mb-12">
-              <v-col cols="12" lg="5" xl="6" class="manageteam__input pa-0">
-                <ValidationProvider v-slot="{errors}" rules="required">
+            <v-row
+              no-gutters
+              class="mt-4 mb-12"
+            >
+              <v-col
+                cols="12"
+                lg="5"
+                xl="6"
+                class="manageteam__input pa-0"
+              >
+                <ValidationProvider
+                  v-slot="{errors}"
+                  rules="required"
+                >
                   <v-text-field
                     v-model="currentName"
                     text
@@ -119,8 +195,16 @@
                   />
                 </ValidationProvider>
               </v-col>
-              <v-col cols="12" lg="5" xl="3" class="manageteam__input pa-0">
-                <ValidationProvider v-slot="{errors}" rules="required">
+              <v-col
+                cols="12"
+                lg="5"
+                xl="3"
+                class="manageteam__input pa-0"
+              >
+                <ValidationProvider
+                  v-slot="{errors}"
+                  rules="required"
+                >
                   <PCselect
                     v-model="selectedClassroom"
                     style="height: inherit !important;"
@@ -132,7 +216,12 @@
                   />
                 </ValidationProvider>
               </v-col>
-              <v-col cols="12" lg="2" xl="3" class="manageteam__button-wrapper pa-0">
+              <v-col
+                cols="12"
+                lg="2"
+                xl="3"
+                class="manageteam__button-wrapper pa-0"
+              >
                 <PCLoader v-slot="{loading, setLoader}">
                   <v-btn
                     :loading="loading"
@@ -146,7 +235,9 @@
                       reset()
                       createNewTeam()
                     })"
-                  >CREATE</v-btn>
+                  >
+                    CREATE
+                  </v-btn>
                 </PCLoader>
               </v-col>
             </v-row>
