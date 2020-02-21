@@ -27,8 +27,8 @@
           </v-col>
           <v-col class="pa-0 mt-2">
             <input
+              ref="password"
               v-model="password"
-              refs="password"
               type="password"
               placeholder="Password"
               class="login__password-input "

@@ -163,7 +163,7 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import { FbStore } from "../../store";
+import { FbStore, AuthStore } from "../../store";
 import {
   EmployerProgram,
   Classroom,
@@ -184,10 +184,22 @@ import ProgramCard from "./ProgramCard.vue"
     return {
       
     };
-  }
+  },
+  async beforeRouteEnter(to, from, next) {
+    if (FbStore.userCitizenType == 'student' || FbStore.userCitizenType === undefined){
+      const studentFormRef = await FbStore.firestore.collection("StudentForm").doc(FbStore.FBUser!.uid).get()
+      if (studentFormRef.exists) {
+        next()
+      }
+      else next({name: 'signup.type'})
+    }
+    else next()
+    next();
+  },
 })
 export default class myprograms extends Vue {
   created(){
+    localStorage.PILOTCITY_EMPLOYERPROGRAMID = null;
     this.onProgramChange()
   }
   dialog:boolean = false
