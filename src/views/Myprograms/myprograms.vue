@@ -186,15 +186,15 @@ import ProgramCard from "./ProgramCard.vue"
     };
   },
   async beforeRouteEnter(to, from, next) {
-    if (FbStore.userCitizenType == 'student' || FbStore.userCitizenType === undefined){
+    if (FbStore.userCitizenType == 'student' || !FbStore.userCitizenType ){
       const studentFormRef = await FbStore.firestore.collection("StudentForm").doc(FbStore.FBUser!.uid).get()
       if (studentFormRef.exists) {
         next()
       }
       else next({name: 'signup.type'})
     }
-    else next()
-    next();
+    else if(AuthStore.user) next()
+    else next({name: 'login'})
   },
 })
 export default class myprograms extends Vue {

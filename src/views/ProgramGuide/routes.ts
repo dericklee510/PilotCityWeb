@@ -9,11 +9,6 @@ const routes: RouteConfig[] = [
       path: '/',
       name: 'program.programlist'  ,
       component: Guide.MyPrograms.ProgramList,
-      beforeEnter: (to, from, next) => {
-        if(AuthStore.user)
-        next()
-        else next({name: 'login'})
-      }
     },
     {
         path: '/program/launch',
