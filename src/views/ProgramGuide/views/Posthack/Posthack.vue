@@ -18,7 +18,6 @@
 
         <!-- TOOLTIP TEMPLATE -->
         <v-tooltip
-          v-model="show"
           top
         >
           <template v-slot:activator="{ on }">
@@ -72,12 +71,14 @@
                 type="checkbox"
               >
               Update Business Model Canvas
-              <!-- <span class="posthack__error">*</span>
-              <span>
-                <button class="posthack__exporticon">
-                  <img src="@/assets/greenexport.png" />
-                </button>
-              </span> -->
+              <span class="posthack__error">*</span>
+              <router-link :to="{name:'stud-project-canvas-edit'}">
+                <span>
+                  <button class="posthack__exporticon">
+                    <img src="@/assets/greenexport.png">
+                  </button>
+                </span>
+              </router-link>
             </v-col>
           </v-row>
 
@@ -97,12 +98,14 @@
                 type="checkbox"
               >
               Update One Sentence Pitch
-              <!-- <span class="posthack__error">*</span>
-              <span>
-                <button class="posthack__exporticon">
-                  <img src="@/assets/greenexport.png" />
-                </button>
-              </span> -->
+              <span class="posthack__error">*</span>
+              <router-link :to="{name:'stud-project-ospitch-edit'}">
+                <span>
+                  <button class="posthack__exporticon">
+                    <img src="@/assets/greenexport.png">
+                  </button>
+                </span>
+              </router-link>
             </v-col>
           </v-row>
 
@@ -122,12 +125,14 @@
                 type="checkbox"
               >
               Update Written Elevator Pitch
-              <!-- <span class="posthack__error">*</span>
-              <span>
-                <button class="posthack__exporticon">
-                  <img src="@/assets/greenexport.png" />
-                </button>
-              </span> -->
+              <span class="posthack__error">*</span>
+              <router-link :to="{name:'stud-project-elevator-edit'}">
+                <span>
+                  <button class="posthack__exporticon">
+                    <img src="@/assets/greenexport.png">
+                  </button>
+                </span>
+              </router-link>
             </v-col>
           </v-row>
         </v-col>
