@@ -19,11 +19,12 @@
 
         <v-row justify="center" class="agenda-view__title" no-gutters>
           TRAINING DAY AGENDA
+
             <!-- TOOLTIP TEMPLATE -->
-            <!-- <v-tooltip v-model="show" top>
+            <v-tooltip v-model="show" top>
               <template v-slot:activator="{ on }">
                 <v-btn
-                  href="https://www.pilotcity.com/library/demo-day"
+                  href="https://www.pilotcity.com/library/training-day"
                   target="_blank"
                   icon
                   v-on="on"
@@ -31,9 +32,10 @@
                   <v-icon class="pb-3" color="grey lighten-1">info</v-icon>
                 </v-btn>
               </template>
-              <span>What is Demo Day? Click to learn more</span>
-            </v-tooltip> -->
+              <span>What is Training Day? Click to learn more</span>
+            </v-tooltip>
             <!-- TOOLTIP TEMPLATE END -->
+
         </v-row>
 
         <v-row justify="center" class="agenda-view__titlewithline" no-gutters>
