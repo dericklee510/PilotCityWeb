@@ -1301,6 +1301,7 @@ export default class EmployerProfile extends app {
         await query.init();
         await query.submitQuery();
       }
+    // eslint-disable-next-line no-empty
     } catch (err) {
     }
     this.loading = false;

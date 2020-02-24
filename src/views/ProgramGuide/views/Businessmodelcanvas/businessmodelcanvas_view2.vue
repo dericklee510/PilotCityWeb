@@ -62,7 +62,6 @@ export default class businessmodelcanvas_view2 extends Vue {
   }
   async onStarsChanged({newRating,canvasField}:{ newRating:number,
     canvasField: "problem" | "solution" | "innovation" | "customer"}){
-      console.log({canvasField,key:`${canvasField}Rating${FbStore.userCitizenType!.charAt(0).toUpperCase()}`})
 await FbStore.firestore.collection("Project").doc(this.canvas.projectId).update<Project>({
       [`${canvasField}Rating${FbStore.userCitizenType!.charAt(0).toUpperCase()}`]:newRating,
       lastUpdate:firebase.firestore.FieldValue.serverTimestamp()

@@ -77,7 +77,7 @@ export function getlatestProjectSnippetsMixin(arg: {
                 return this.latestProjectData.map(project => ({
                     projectId: project.projectId,
                     name: project.teamName,
-                    item_preview: project[arg.item_preview] || "",
+                    item_preview: arg.item_preview ? project[arg.item_preview] || "": undefined,
                     router_params: arg.router_params,
                     href: arg.href ? project[arg.href] : undefined,
                     rating: project[`${arg.rating}${FbStore.userCitizenType?.charAt(0).toUpperCase()}`] || 0

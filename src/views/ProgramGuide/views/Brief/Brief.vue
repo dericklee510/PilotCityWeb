@@ -74,7 +74,6 @@ created(){
       this.acknowledgedBriefs = FbStore.currentEmployerProgram!.programBrief!.map(val => true)
   }
   onConfirmed(){
-    console.log("running")
     if(this.acknowledgedBriefs.every(val => val))
     FbStore.updateCurrentStudentClassroom({
       finishedProgramBrief: firebase.firestore.FieldValue.serverTimestamp()
