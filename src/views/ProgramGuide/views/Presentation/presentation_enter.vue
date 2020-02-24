@@ -15,6 +15,22 @@
           class="mr-auto ml-auto presentation_enter__title"
         >
           ENTER LINK TO PRESENTATION
+            <!-- TOOLTIP TEMPLATE -->
+            <v-tooltip v-model="show" top>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  href="https://www.pilotcity.com/library/what-should-i-include-in-my-final-presentation"
+                  target="_blank"
+                  icon
+                  v-on="on"
+                >
+                  <v-icon class="pb-3" color="grey lighten-1">info</v-icon>
+                </v-btn>
+              </template>
+              <span>What should I include in my final presentation? Click to learn more.</span>
+            </v-tooltip>
+            <!-- TOOLTIP TEMPLATE END -->
+
         </v-row>
     
         <v-col
