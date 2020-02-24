@@ -33,7 +33,6 @@
           <!-- TOOLTIP TEMPLATE -->
           <v-tooltip
             v-if="citizenType == 'teacher'"
-            v-model="show"
             top
           >
             <template v-slot:activator="{ on }">

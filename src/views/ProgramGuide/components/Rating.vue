@@ -115,9 +115,9 @@ export default class Rating extends Vue {
 
   get syncedSnippet(): team_snippet[] {
     return this.value.filter(snip =>
-      this.required
+      (this.required
         ? this.required.map(key => snip[key]).every(val => val)
-        : true
+        : true) && snip.item_preview
     );
   }
 }

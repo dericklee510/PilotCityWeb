@@ -59,7 +59,6 @@
 
               <!-- TOOLTIP TEMPLATE -->
               <v-tooltip
-                v-model="show"
                 top
               >
                 <template v-slot:activator="{ on }">
@@ -93,7 +92,6 @@
 
               <!-- TOOLTIP TEMPLATE -->
               <v-tooltip
-                v-model="show"
                 top
               >
                 <template v-slot:activator="{ on }">

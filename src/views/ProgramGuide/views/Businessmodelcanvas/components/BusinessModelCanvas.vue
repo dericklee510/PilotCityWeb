@@ -20,7 +20,6 @@
 
           <!-- TOOLTIP TEMPLATE -->
           <v-tooltip
-            v-model="show"
             right
           >
             <template v-slot:activator="{ on }">

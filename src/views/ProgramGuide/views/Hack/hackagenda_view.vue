@@ -30,7 +30,7 @@ import { NextNode } from "@/views/ProgramGuide/components"
 })
 export default class agenda extends Vue {
    get completed(){
-    return FbStore.currentProject!.programSequence.hackDay
+    return FbStore.currentProject?.programSequence.hackDay
   }
   async onFinish(){
     await FbStore.updateCurrentProject({
