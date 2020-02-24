@@ -16,7 +16,7 @@ const routes: RouteConfig[] = [
         path: '/signup/citizen-id',
         component: Signup.children.CitizenID,
         beforeEnter(to, from, next): void{
-            AuthStore.user ? next() : next({ name: 'signup' })
+            AuthStore.user ? next() : next({ name: 'login' })
         }
     },
     // {

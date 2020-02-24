@@ -35,7 +35,6 @@ export default class App extends Vue {
       querySnapshot.forEach(snap => {
         let data = snap.data() as TeacherProgramData
         if(data?.programSequence?.programBrief){
-          console.log("updating", snap.id)
           snap.ref.update({
             'programSequence.programBrief':firebase.firestore.FieldValue.delete()
           })

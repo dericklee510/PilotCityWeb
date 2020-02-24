@@ -49,7 +49,6 @@
 
             <!-- TOOLTIP TEMPLATE -->
             <v-tooltip
-             
               top
             >
               <template v-slot:activator="{ on }">
@@ -75,7 +74,6 @@
 
             <!-- TOOLTIP TEMPLATE -->
             <v-tooltip
-             
               top
             >
               <template v-slot:activator="{ on }">

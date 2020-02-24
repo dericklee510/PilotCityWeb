@@ -29,20 +29,28 @@
           no-gutters
         >
           TRAINING DAY AGENDA
+
           <!-- TOOLTIP TEMPLATE -->
-          <!-- <v-tooltip v-model="show" top>
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  href="https://www.pilotcity.com/library/demo-day"
-                  target="_blank"
-                  icon
-                  v-on="on"
+          <v-tooltip
+            top
+          >
+            <template v-slot:activator="{ on }">
+              <v-btn
+                href="https://www.pilotcity.com/library/training-day"
+                target="_blank"
+                icon
+                v-on="on"
+              >
+                <v-icon
+                  class="pb-3"
+                  color="grey lighten-1"
                 >
-                  <v-icon class="pb-3" color="grey lighten-1">info</v-icon>
-                </v-btn>
-              </template>
-              <span>What is Demo Day? Click to learn more</span>
-            </v-tooltip> -->
+                  info
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>What is Training Day? Click to learn more</span>
+          </v-tooltip>
           <!-- TOOLTIP TEMPLATE END -->
         </v-row>
 
@@ -90,8 +98,6 @@
 import Component from "vue-class-component";
 import { FbStore } from "@/store";
 import Vue from "vue";
-// import TrainingAgendaEdit from "@/views/ProgramGuide/views/TrainingAgenda/TrainingAgendaEdit.vue";
-// import TrainingAgendaView from "@/views/ProgramGuide/views/TrainingAgenda/TrainingAgendaView.vue";
 import TrainingAgendaEdit from "./TrainingAgendaEdit.vue";
 import TrainingAgendaView from "./TrainingAgendaView.vue";
 

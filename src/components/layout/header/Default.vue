@@ -127,6 +127,7 @@ export default class Header extends Vue {
 
     public async logout(){
       await AuthStore.logout()
+      this.$forceUpdate()
       this.$router.push({name:'login'})
     }
 }
