@@ -57,18 +57,25 @@
           >
             <span>Class Name
 
-            <!-- TOOLTIP TEMPLATE -->
-            <v-tooltip v-model="show" top>
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  icon
-                  v-on="on"
-                >
-                  <v-icon small class="pb-1" color="grey lighten-1">info</v-icon>
-                </v-btn>
-              </template>
-              <span>Format your class name to include the period and class name</span>
-            </v-tooltip>
+              <!-- TOOLTIP TEMPLATE -->
+              <v-tooltip
+                v-model="show"
+                top
+              >
+                <template v-slot:activator="{ on }">
+                  <v-btn
+                    icon
+                    v-on="on"
+                  >
+                    <v-icon
+                      small
+                      class="pb-1"
+                      color="grey lighten-1"
+                    >info</v-icon>
+                  </v-btn>
+                </template>
+                <span>Format your class name to include the period and class name</span>
+              </v-tooltip>
             <!-- TOOLTIP TEMPLATE END -->
 
 
@@ -84,18 +91,25 @@
           >
             <span class>Share Code
 
-            <!-- TOOLTIP TEMPLATE -->
-            <v-tooltip v-model="show" top>
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  icon
-                  v-on="on"
-                >
-                  <v-icon small class="pb-1" color="grey lighten-1">info</v-icon>
-                </v-btn>
-              </template>
-              <span>Share this program code with your students to onboard</span>
-            </v-tooltip>
+              <!-- TOOLTIP TEMPLATE -->
+              <v-tooltip
+                v-model="show"
+                top
+              >
+                <template v-slot:activator="{ on }">
+                  <v-btn
+                    icon
+                    v-on="on"
+                  >
+                    <v-icon
+                      small
+                      class="pb-1"
+                      color="grey lighten-1"
+                    >info</v-icon>
+                  </v-btn>
+                </template>
+                <span>Share this program code with your students to onboard</span>
+              </v-tooltip>
             <!-- TOOLTIP TEMPLATE END -->
 
 

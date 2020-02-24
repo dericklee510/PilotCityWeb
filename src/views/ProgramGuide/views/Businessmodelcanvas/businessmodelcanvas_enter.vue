@@ -17,22 +17,29 @@
       >
         BUSINESS MODEL CANVAS
 
-            <!-- TOOLTIP TEMPLATE -->
-            <v-tooltip v-model="show" top>
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  href="https://www.pilotcity.com/library/how-do-i-create-a-strong-bmc"
-                  target="_blank"
-                  icon
-                  v-on="on"
-                >
-                  <v-icon class="pb-3" color="grey lighten-1">info</v-icon>
-                </v-btn>
-              </template>
-              <span>Click here to learn how to develop a strong business model canvas</span>
-            </v-tooltip>
-            <!-- TOOLTIP TEMPLATE END -->
-
+        <!-- TOOLTIP TEMPLATE -->
+        <v-tooltip
+          v-model="show"
+          top
+        >
+          <template v-slot:activator="{ on }">
+            <v-btn
+              href="https://www.pilotcity.com/library/how-do-i-create-a-strong-bmc"
+              target="_blank"
+              icon
+              v-on="on"
+            >
+              <v-icon
+                class="pb-3"
+                color="grey lighten-1"
+              >
+                info
+              </v-icon>
+            </v-btn>
+          </template>
+          <span>Click here to learn how to develop a strong business model canvas</span>
+        </v-tooltip>
+        <!-- TOOLTIP TEMPLATE END -->
       </v-row>
 
       <v-col

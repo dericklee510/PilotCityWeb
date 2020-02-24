@@ -17,22 +17,29 @@
           YOUR ONE SENTENCE PROJECT PITCH
 
 
-            <!-- TOOLTIP TEMPLATE -->
-            <v-tooltip v-model="show" top>
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  href="https://www.pilotcity.com/library/formatting-1-sentence-pitch"
-                  target="_blank"
-                  icon
-                  v-on="on"
+          <!-- TOOLTIP TEMPLATE -->
+          <v-tooltip
+            v-model="show"
+            top
+          >
+            <template v-slot:activator="{ on }">
+              <v-btn
+                href="https://www.pilotcity.com/library/formatting-1-sentence-pitch"
+                target="_blank"
+                icon
+                v-on="on"
+              >
+                <v-icon
+                  class="pb-3"
+                  color="grey lighten-1"
                 >
-                  <v-icon class="pb-3" color="grey lighten-1">info</v-icon>
-                </v-btn>
-              </template>
-              <span>Click here to learn how to best format your pitch</span>
-            </v-tooltip>
-            <!-- TOOLTIP TEMPLATE END -->
-
+                  info
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>Click here to learn how to best format your pitch</span>
+          </v-tooltip>
+          <!-- TOOLTIP TEMPLATE END -->
         </v-row>
     
         <v-col
@@ -101,7 +108,7 @@
           justify="center"
           class="mt-8 pitch_enter__ratinglabel"
         >
-        YOUR RATING
+          YOUR RATING
           <!-- {{ rating || `No rating yet` }} -->
         </v-row>
     
@@ -110,8 +117,8 @@
           class="mt-3 mb-6 pc-rating"
         >
           <v-rating
-            color="yellow darken-3"
-            v-model="rating"            
+            v-model="rating"
+            color="yellow darken-3"            
             size="30"
             dense
             light

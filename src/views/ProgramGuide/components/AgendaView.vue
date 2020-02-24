@@ -109,6 +109,7 @@ export default class AgendaView extends Vue {
       .map(item => item.completed)
       .every(isTrue => isTrue);
       }
+    // eslint-disable-next-line no-console
     else console.error('Agenda not found!')
     return false
   }

@@ -20,22 +20,30 @@
         >
           1-MINUTE PROTOTYPE DEMONSTRATION VIDEOS
 
-            <!-- TOOLTIP TEMPLATE -->
-            <v-tooltip v-model="show" top v-if="citizenType == 'teacher'">
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  href="https://www.pilotcity.com/library/how-can-i-film-upload-my-prototype-video"
-                  target="_blank"
-                  icon
-                  v-on="on"
+          <!-- TOOLTIP TEMPLATE -->
+          <v-tooltip
+            v-if="citizenType == 'teacher'"
+            v-model="show"
+            top
+          >
+            <template v-slot:activator="{ on }">
+              <v-btn
+                href="https://www.pilotcity.com/library/how-can-i-film-upload-my-prototype-video"
+                target="_blank"
+                icon
+                v-on="on"
+              >
+                <v-icon
+                  class="pb-3"
+                  color="grey lighten-1"
                 >
-                  <v-icon class="pb-3" color="grey lighten-1">info</v-icon>
-                </v-btn>
-              </template>
-              <span>What instructions can I share with my students on how to develop their demonstration video? Click here.</span>
-            </v-tooltip>
-            <!-- TOOLTIP TEMPLATE END -->
-
+                  info
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>What instructions can I share with my students on how to develop their demonstration video? Click here.</span>
+          </v-tooltip>
+          <!-- TOOLTIP TEMPLATE END -->
         </v-row>
 
         <v-col

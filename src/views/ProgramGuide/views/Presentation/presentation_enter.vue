@@ -89,7 +89,7 @@
           justify="center"
           class="mt-8 presentation_enter__ratinglabel"
         >
-        YOUR RATING
+          YOUR RATING
           <!-- {{ rating || `No rating yet` }} -->
         </v-row>
     
@@ -98,8 +98,8 @@
           class="mt-3 mb-6 pc-rating"
         >
           <v-rating
-            color="yellow darken-3"
             v-model="rating"
+            color="yellow darken-3"
             dense
             size="30px"
             readonly
