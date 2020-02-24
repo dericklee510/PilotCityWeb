@@ -196,6 +196,7 @@ export default class demovideo_view extends Vue {
           doc(FbStore.firestore.collection("Project").doc(projectId)).subscribe(
             projectSnapshot => {
               let projectData = projectSnapshot.data<Project>();
+              if(projectData)
               spliceOrPush(
                 this.entries,
                 (({
