@@ -18,26 +18,41 @@ import Vue from "vue";
     data: (): { latestProjectData: (Project & Record<string, any>)[] } => ({ latestProjectData: [] })
 })
 export class latestProjectDataMixin extends Vue {
+    // employerStream$: 
     latestProjectData?: (Project & Record<string, any>)[] = []
-    latestProjectData$: Observable<(Project & Record<string, any>)[]> = combineLatest(
-        FbStore.currentTeacherProgramData!.classroomIds.map(classroomId =>
-            doc(FbStore.firestore.collection("Classroom").doc(classroomId))
-        )
-    ).pipe(
-        map(classroomDocArr =>
-            flatten(
-                classroomDocArr.map(classroomDoc =>
-                    classroomDoc
-                        .data<Classroom>()
-                        .projectIds.map(projectId =>
-                            doc(FbStore.firestore.collection("Project").doc(projectId))
-                        )
-                )
-            )
-        ),
-        switchMap(projectDocs => combineLatest<firebase.firestore.DocumentSnapshot[]>(...projectDocs)),
-        map(projectdocs => projectdocs.map(projectdoc => projectdoc.data<Project>())),
+    latestProjectData$= ((FbStore.userCitizenType === "employer")?this.getEmployerStream():this.getTeacherStream()).pipe(
+        map(projects => projects.filter(project => project))
     )
+    getEmployerStream():Observable<(Project)[]>{
+        return combineLatest(
+            FbStore.currentEmployerProgram!.projectIds!.map(projectId =>
+                doc(FbStore.firestore.collection("Project").doc(projectId))
+            )
+        ).pipe(
+            map(projectdocs => projectdocs.map(projectDoc => projectDoc.data()))
+        )
+    }
+    getTeacherStream(): Observable<(Project & Record<string, any>)[]> {
+        return combineLatest(
+            FbStore.currentTeacherProgramData!.classroomIds.map(classroomId =>
+                doc(FbStore.firestore.collection("Classroom").doc(classroomId))
+            )
+        ).pipe(
+            map(classroomDocArr =>
+                flatten(
+                    classroomDocArr.map(classroomDoc =>
+                        classroomDoc
+                            .data<Classroom>()
+                            .projectIds.map(projectId =>
+                                doc(FbStore.firestore.collection("Project").doc(projectId))
+                            )
+                    )
+                )
+            ),
+            switchMap(projectDocs => combineLatest<firebase.firestore.DocumentSnapshot[]>(...projectDocs)),
+            map(projectdocs => projectdocs.map(projectdoc => projectdoc.data<Project>())),
+        )
+    }
 
 }
 
