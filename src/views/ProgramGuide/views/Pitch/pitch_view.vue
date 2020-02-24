@@ -78,6 +78,7 @@
         <Rating
           v-model="entries"
           preview
+          :required="['item_preview']"
           @ratingChange="onRatingChange"
         />
 

@@ -57,7 +57,7 @@ export class latestProjectDataMixin extends Vue {
 }
 
 export function getlatestProjectSnippetsMixin(arg: {
-    item_preview: keyof PickByValue<Project, string | undefined>,
+    item_preview?: keyof PickByValue<Project, string | undefined>,
     router_params?: RawLocation,
     href?: keyof PickByValue<Project, string | undefined>
     rating: "problemRating" | "solutionRating" |

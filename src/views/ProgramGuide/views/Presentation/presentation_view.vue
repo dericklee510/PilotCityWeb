@@ -52,7 +52,7 @@
 
         <Rating
           v-model="entries"
-          :required="['item_preview','href']"
+          :required="['href']"
           @ratingChange="onRatingChange"
         />
         <Oops v-if="!entries.length" />
@@ -67,7 +67,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import Component from 'vue-class-component'
+import Component, { mixins } from 'vue-class-component'
 import { Rating, team_snippet } from '../../components'
 import { FbStore } from '../../../../store';
 import { doc } from 'rxfire/firestore';
@@ -77,60 +77,18 @@ import { Subscription } from 'rxjs';
 import {firebase} from "@/firebase/init"
 import { Watch } from 'vue-property-decorator';
 import { Oops } from "@/views/ProgramGuide/components"
+import { getlatestProjectSnippetsMixin } from '../../utilities';
+const snippetMixin = getlatestProjectSnippetsMixin({
+  href:"presentationLink",
+  rating:"presentationRating"
+})
 @Component({
   components: {
     Rating,
     Oops
   }
 })
-export default class presentation_view extends Vue {
-  mounted() {
-    if (FbStore.userCitizenType === "teacher")
-      FbStore.currentTeacherProgramData!.classroomIds.forEach(classroomId => {
-        this.$subscribeTo(
-          doc(FbStore.firestore.collection("Classroom").doc(classroomId)),
-          classSnapshot => {
-            if (this.projectSubscribers[classSnapshot.id])
-              this.projectSubscribers[classSnapshot.id].forEach(subscriber =>
-                subscriber.unsubscribe()
-              );
-            else this.projectSubscribers[classSnapshot.id] = [];
-            classSnapshot.data<Classroom>().projectIds.forEach(projectId => {
-              this.projectSubscribers[classSnapshot.id].push(
-                doc(
-                  FbStore.firestore.collection("Project").doc(projectId)
-                ).subscribe(projectSnapshot => {
-                  let projectData = projectSnapshot.data<Project>();
-                  spliceOrPush(
-                    this.entries,
-                    (({
-                      projectId,
-                      sentencePitch,
-                      teamName,
-                      presentationLink,
-                      ...rest
-                    }) => ({
-                      projectId,
-                      item_preview: sentencePitch || "",
-                      name: teamName,
-                      href: presentationLink,
-                      rating:
-                        rest[
-                          `presentationRating${FbStore.userCitizenType!.charAt(
-                            0
-                          ).toUpperCase()}`
-                        ] || 0
-                    }))(projectData),
-                    "projectId"
-                  );
-                })
-              );
-            });
-          }
-        );
-      });
-    else if (FbStore.userCitizenType === "employer") this.onProgramIdsChange();
-  }
+export default class presentation_view extends mixins(snippetMixin) {
   onRatingChange({
     newRating,
     projectId
@@ -148,55 +106,5 @@ export default class presentation_view extends Vue {
         lastUpdate: firebase.firestore.FieldValue.serverTimestamp()
       });
   }
-  get getProjectIds() {
-    return FbStore.currentEmployerProgram!.projectIds || [];
-  }
-  @Watch("getProgramIds")
-  onProgramIdsChange() {
-    if (FbStore.userCitizenType === "employer") {
-      this.employerSubscribers.forEach(subscriber => subscriber.unsubscribe());
-      this.getProjectIds.forEach(projectId => {
-        this.employerSubscribers.push(
-          doc(FbStore.firestore.collection("Project").doc(projectId)).subscribe(
-            projectSnapshot => {
-              let projectData = projectSnapshot.data<Project>();
-              if(projectData)
-              spliceOrPush(
-                this.entries,
-                (({
-                  projectId,
-                  sentencePitch,
-                  teamName,
-                  presentationLink,
-                  ...rest
-                }) => ({
-                  projectId,
-                  item_preview: sentencePitch || "",
-                  name: teamName,
-                  href: presentationLink,
-                  rating:
-                    rest[
-                      `presentationRating${FbStore.userCitizenType!.charAt(
-                        0
-                      ).toUpperCase()}`
-                    ] || 0
-                }))(projectData),
-                "projectId"
-              );
-            }
-          )
-        );
-      });
-    }
-  }
-  beforeDestroy() {
-    this.employerSubscribers.forEach(subscriber => subscriber.unsubscribe());
-  }
-  employerSubscribers: Subscription[] = [];
-
-  entries: team_snippet[] = [];
-  projectSubscribers: {
-    [classroomId: string]: Subscription[];
-  } = {};
 }
 </script>

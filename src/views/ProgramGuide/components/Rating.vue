@@ -8,7 +8,6 @@
       no-gutters
     >
       <v-row
-        v-if="team.item_preview"
         no-gutters
         justify="center"
       >
@@ -117,7 +116,7 @@ export default class Rating extends Vue {
     return this.value.filter(snip =>
       (this.required
         ? this.required.map(key => snip[key]).every(val => val)
-        : true) && snip.item_preview
+        : true)
     );
   }
 }
