@@ -198,8 +198,9 @@ import ProgramCard from "./ProgramCard.vue"
   },
 })
 export default class myprograms extends Vue {
-  created(){
+  async created(){
     localStorage.PILOTCITY_EMPLOYERPROGRAMID = null;
+    await FbStore.initCurrentTeacherProgramData(null);
     this.onProgramChange()
   }
   dialog:boolean = false
