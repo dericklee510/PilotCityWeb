@@ -49,7 +49,7 @@ import { Prop } from 'vue-property-decorator';
     }
   },
   beforeDestroy() {
-      console.log(this.$refs.player)
+      // console.log(this.$refs.player)
     this.$refs.player.nativeView.destroy();
   }
 })

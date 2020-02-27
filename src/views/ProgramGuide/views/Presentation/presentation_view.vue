@@ -16,6 +16,30 @@
           class="mr-auto ml-auto presentation_view__title"
         >
           VIEW STUDENT PRESENTATION LINKS
+          <!-- TOOLTIP TEMPLATE -->
+          <v-tooltip
+            v-if="citizenType == 'teacher'"
+            v-model="show"
+            top
+          >
+            <template v-slot:activator="{ on }">
+              <v-btn
+                href="https://www.pilotcity.com/library/what-should-i-include-in-my-final-presentation"
+                target="_blank"
+                icon
+                v-on="on"
+              >
+                <v-icon
+                  class="pb-2"
+                  color="grey lighten-1"
+                >
+                  info
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>What should my students include in their final presentation? Click to learn more.</span>
+          </v-tooltip>
+          <!-- TOOLTIP TEMPLATE END -->
         </v-row>
 
         <v-col
