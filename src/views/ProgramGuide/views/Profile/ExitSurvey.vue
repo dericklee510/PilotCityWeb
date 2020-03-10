@@ -32,7 +32,7 @@
             <v-row no-gutters justify="center" class="mt-5 mb-5">
               <ValidationProvider v-slot="{errors}" rules="required">
                 <v-rating
-                  v-model="agricultureNaturalResources"
+                  v-model="outcome1"
                   :length="length"
                   :empty-icon="emptyIcon"
                   :full-icon="fullIcon"
@@ -58,7 +58,7 @@
             <v-row no-gutters justify="center" class="mt-5 mb-5">
               <ValidationProvider v-slot="{errors}" rules="required">
                 <v-rating
-                  v-model="agricultureNaturalResources"
+                  v-model="outcome2"
                   :length="length"
                   :empty-icon="emptyIcon"
                   :full-icon="fullIcon"
@@ -84,7 +84,7 @@
             <v-row no-gutters justify="center" class="mt-5 mb-5">
               <ValidationProvider v-slot="{errors}" rules="required">
                 <v-rating
-                  v-model="agricultureNaturalResources"
+                  v-model="outcome3"
                   :length="length"
                   :empty-icon="emptyIcon"
                   :full-icon="fullIcon"
@@ -1140,6 +1140,9 @@ import { NextNode } from "@/views/ProgramGuide/components";
     mobilenumber:null,
     autoapp: 'true',
     communitycollege:null,
+    outcome1: null,
+    outcome2: null,
+    outcome3: null,
 
     phonemask: "###-###-####",
     emptyIcon: "mdi-heart-outline",
