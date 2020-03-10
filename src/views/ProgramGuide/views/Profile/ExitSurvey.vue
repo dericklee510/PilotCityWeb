@@ -4,20 +4,25 @@
       <img id="citizenid__exitsurveyicon" src="@/assets/exitsurvey.png" />
 
       <v-col id="citizenid__containtop" cols="8">
-        <v-row justify="center" class="mr-auto ml-auto citizenid__title">FINISH YOUR PROGRAM</v-row>
+        <v-row justify="center" class="mr-auto ml-auto citizenid__title">COMPLETE THE PROGRAM</v-row>
       </v-col>
 
       <v-col id="citizenid__containbottom" cols="8">
         <v-row justify="center" class="pt-10">
           <v-col cols="9">
+
             <!-- PROGRAM INFORMATION -->
             <v-row
               justify="center"
               class="mr-auto ml-auto mt-5 mb-12 studentid__categorytitle"
             >Share your experience and auto-apply for internship</v-row>
 
+        <v-row
+          justify="center"
+          class="prompt__divider ml-auto mr-auto mt-5 mb-12"
+        />
 
-<!-- PROGRAM OUTCOME 1 -->
+            <!-- PROGRAM OUTCOME 1 -->
 
             <v-row
               class="studentid__questiontitle mt-12"
@@ -25,25 +30,25 @@
             >Would you prefer this type of learning or regular school?</v-row>
 
             <v-row no-gutters justify="center" class="mt-5 mb-5">
-                <ValidationProvider v-slot="{errors}" rules="required">
-                  <v-rating
-                    v-model="agricultureNaturalResources"
-                    :length="length"
-                    :empty-icon="emptyIcon"
-                    :full-icon="fullIcon"
-                    :half-icon="halfIcon"
-                    :hover="hover"
-                    :size="size"
-                    :dense="dense"
-                    :color="color"
-                    :background-color="bgColor"
-                    large
-                  />
-                  <span class="error--text caption">{{ errors[0] }}</span>
-                </ValidationProvider>
+              <ValidationProvider v-slot="{errors}" rules="required">
+                <v-rating
+                  v-model="agricultureNaturalResources"
+                  :length="length"
+                  :empty-icon="emptyIcon"
+                  :full-icon="fullIcon"
+                  :half-icon="halfIcon"
+                  :hover="hover"
+                  :size="size"
+                  :dense="dense"
+                  :color="color"
+                  :background-color="bgColor"
+                  large
+                />
+                <span class="error--text caption">{{ errors[0] }}</span>
+              </ValidationProvider>
             </v-row>
 
-<!-- PROGRAM OUTCOME 2 -->
+            <!-- PROGRAM OUTCOME 2 -->
 
             <v-row
               class="studentid__questiontitle mt-10"
@@ -51,25 +56,25 @@
             >Would you like to do this program again next year?</v-row>
 
             <v-row no-gutters justify="center" class="mt-5 mb-5">
-                <ValidationProvider v-slot="{errors}" rules="required">
-                  <v-rating
-                    v-model="agricultureNaturalResources"
-                    :length="length"
-                    :empty-icon="emptyIcon"
-                    :full-icon="fullIcon"
-                    :half-icon="halfIcon"
-                    :hover="hover"
-                    :size="size"
-                    :dense="dense"
-                    :color="color"
-                    :background-color="bgColor"
-                    large
-                  />
-                  <span class="error--text caption">{{ errors[0] }}</span>
-                </ValidationProvider>
+              <ValidationProvider v-slot="{errors}" rules="required">
+                <v-rating
+                  v-model="agricultureNaturalResources"
+                  :length="length"
+                  :empty-icon="emptyIcon"
+                  :full-icon="fullIcon"
+                  :half-icon="halfIcon"
+                  :hover="hover"
+                  :size="size"
+                  :dense="dense"
+                  :color="color"
+                  :background-color="bgColor"
+                  large
+                />
+                <span class="error--text caption">{{ errors[0] }}</span>
+              </ValidationProvider>
             </v-row>
 
-<!-- PROGRAM OUTCOME 3 -->
+            <!-- PROGRAM OUTCOME 3 -->
 
             <v-row
               class="studentid__questiontitle mt-10"
@@ -77,137 +82,339 @@
             >Would you recommend this to your other teachers?</v-row>
 
             <v-row no-gutters justify="center" class="mt-5 mb-5">
-                <ValidationProvider v-slot="{errors}" rules="required">
-                  <v-rating
-                    v-model="agricultureNaturalResources"
-                    :length="length"
-                    :empty-icon="emptyIcon"
-                    :full-icon="fullIcon"
-                    :half-icon="halfIcon"
-                    :hover="hover"
-                    :size="size"
-                    :dense="dense"
-                    :color="color"
-                    :background-color="bgColor"
-                    large
-                  />
-                  <span class="error--text caption">{{ errors[0] }}</span>
-                </ValidationProvider>
+              <ValidationProvider v-slot="{errors}" rules="required">
+                <v-rating
+                  v-model="agricultureNaturalResources"
+                  :length="length"
+                  :empty-icon="emptyIcon"
+                  :full-icon="fullIcon"
+                  :half-icon="halfIcon"
+                  :hover="hover"
+                  :size="size"
+                  :dense="dense"
+                  :color="color"
+                  :background-color="bgColor"
+                  large
+                />
+                <span class="error--text caption">{{ errors[0] }}</span>
+              </ValidationProvider>
             </v-row>
 
-
-
-
-<!-- AUTO-APP OPT-IN VIA MOBILE VERIFICATION -->
-
-            <v-row
-              justify="center"
-              class="mr-auto ml-auto mt-12 mb-12 studentid__categorytitle"
-            >Let us help you with your goals after high school</v-row>
+<!-- GRADUATING SENIOR V2 -->
 
             <v-row
               class="studentid__questiontitle mt-10"
               justify="center"
-            >How can we help you with your plans after high school?</v-row>
+            >Are you a graduating high school senior?</v-row>
 
-            <v-row no-gutters justify="center">
-        <v-col cols="12" sm="9">
-  <v-sheet class="pa-5">
-    <v-switch v-model="graduatingsenior" inset :label="`Are you a graduating senior?`"></v-switch>
+<v-row no-gutters justify="center">
+                  <v-switch
+                    v-model="graduatingsenior"
+                    inset
+                  ></v-switch>
 
-    <v-switch v-model="switch2" inset :label="`Interested in computer science or being a coder?`"></v-switch>
-
-
-
-  </v-sheet>
-        </v-col>
-            </v-row>
+                  </v-row>
 
 
-<!-- AUTO-APP OPT-IN VIA MOBILE VERIFICATION -->
+                  <v-row v-if="graduatingsenior" no-gutters justify="center mt-2">
+                    <v-col cols="12" sm="9">
+                      <v-text-field
+                        label="Where are you going after high school?"
+                        hint="Enter the name of the college, school, employer or description"
+                        persistent-hint
+                        outlined
+                      ></v-text-field>
+                    </v-col>
+                  </v-row>
+
+
+<!-- CODING SCHOOL V2 -->
 
             <v-row
+              class="studentid__questiontitle mt-7"
               justify="center"
-              class="mr-auto ml-auto mt-5 mb-12 studentid__categorytitle"
+            >Are you interested in coding or studying computer science?</v-row>
+
+<v-row no-gutters justify="center">
+                  <v-switch
+                    v-model="codingschool"
+                    inset
+                  ></v-switch>
+                  </v-row>
+
+
+                  <v-row no-gutters justify="center" v-if="codingschool">
+                    <v-col cols="12" sm="9">
+                      <ValidationProvider v-slot="{errors}" rules="required">
+                        <v-checkbox
+                          v-model="compensationType"
+                          :error-messages="errors"
+                          hide-details
+                          label="Plan to study in university"
+                          value="codingschool1"
+                        />
+                        <v-checkbox
+                          v-model="compensationType"
+                          :error-messages="errors"
+                          hide-details
+                          label="Willing to take a bootcamp"
+                          value="codingschool2"
+                        />
+                        <v-checkbox
+                          v-model="compensationType"
+                          :error-messages="errors"
+                          hide-details
+                          label="I cannot afford"
+                          value="codingschool3"
+                        />
+                        <span class="error--text caption">{{ errors[0] }}</span>
+                      </ValidationProvider>
+                    </v-col>
+                  </v-row>
+
+
+
+
+            <!-- GOALS AFTER HIGH SCHOOL -->
+
+            <!-- <v-row
+              justify="center"
+              class="mr-auto ml-auto mt-12 mb-12 studentid__categorytitle"
+            >Let us help you with your goals after high school</v-row> -->
+
+
+            <!-- GRADUATING SENIOR? -->
+
+            <!-- <v-row no-gutters justify="center">
+              <v-col cols="12" sm="9">
+                <v-sheet class="pa-5">
+                  <v-switch
+                    v-model="graduatingsenior"
+                    inset
+                    :label="`Are you a graduating senior?`"
+                  ></v-switch>
+
+                  <v-row v-if="graduatingsenior" no-gutters justify="center mt-2">
+                    <v-col cols="12" sm="12">
+                      <v-text-field
+                        label="Where are you going after high school?"
+                        hint="Enter the name of the college, school, employer or description"
+                        persistent-hint
+                        outlined
+                      ></v-text-field>
+                    </v-col>
+                  </v-row>
+
+                  <v-switch
+                    v-model="codingschool"
+                    inset
+                    :label="`Interested in computer science or being a coder?`"
+                  ></v-switch> -->
+
+                  <!-- CODING SCHOOL -->
+
+                  <!-- <v-row no-gutters justify="center" v-if="codingschool">
+                    <v-col cols="12" sm="7">
+                      <ValidationProvider v-slot="{errors}" rules="required">
+                        <v-checkbox
+                          v-model="compensationType"
+                          :error-messages="errors"
+                          hide-details
+                          label="Plan to study in university"
+                          value="codingschool1"
+                        />
+                        <v-checkbox
+                          v-model="compensationType"
+                          :error-messages="errors"
+                          hide-details
+                          label="Willing to take a bootcamp"
+                          value="codingschool2"
+                        />
+                        <v-checkbox
+                          v-model="compensationType"
+                          :error-messages="errors"
+                          hide-details
+                          label="I cannot afford"
+                          value="codingschool3"
+                        />
+                        <span class="error--text caption">{{ errors[0] }}</span>
+                      </ValidationProvider>
+                    </v-col>
+                  </v-row>
+                </v-sheet>
+              </v-col>
+            </v-row> -->
+
+
+
+
+            <!-- AUTO-APP OPT-IN VIA MOBILE VERIFICATION -->
+<v-col class="auto-app mt-12 pt-12 pb-12">
+            <v-row
+              justify="center"
+              class="mr-auto ml-auto mb-12 studentid__categorytitle"
             >Auto-apply for an internship</v-row>
 
-<template class="mt-12 mb-12">
+
+        <!-- <v-row
+          justify="center"
+          class="prompt__dividerexitsurvey ml-auto mr-auto mt-5 mb-12"
+        /> -->
 
 
-            <v-row
-              class="studentid__questiontitle"
-              justify="center"
-            >Verify your mobile phone number</v-row>
+            <!-- <v-row class="studentid__questiontitle" justify="center">Verify your mobile phone number</v-row> -->
 
-            <v-row no-gutters justify="center mt-10">
-        <v-col cols="12" sm="7">
-          <v-text-field
-            label="Mobile Number"
-            hint="(555) 555-5555"
-            persistent-hint
-            outlined
-          ></v-text-field>
-        </v-col>
+            <v-row no-gutters justify="center">
+              <v-col class="mr-2" cols="9" sm="5">
+                <v-text-field v-model="mobilenumber" label="Verify your mobile number" hint="(555) 555-5555" persistent-hint outlined></v-text-field>
+              </v-col>
+
+              <v-col cols="3" sm="2">
+                <v-btn x-large dark depressed>Verify
+                  </v-btn>
+
+                </v-col>
             </v-row>
 
             <v-row
-              class="studentid__nomobile mt-1"
+              class="studentid__nomobile mt-4"
               justify="center"
-                href="https://www.pilotcity.com/library/tips-to-prep-60-second-pitch"
-                target="_blank"
+              href="https://www.pilotcity.com/library/tips-to-prep-60-second-pitch"
+              target="_blank"
+            >
+              <a>I don't have a mobile number</a>
+            </v-row>
 
-            >            <a>
-              I don't have a mobile number
-            </a></v-row>
 
+
+            <!-- SUMMER PLANS -->
+
+            <v-row
+              class="studentid__questiontitle mt-10"
+              justify="center"
+              v-if="mobilenumber"
+            >Do you have any additional Summer plans?</v-row>
+
+            <v-row class="" v-if="mobilenumber" no-gutters justify="center">
+              <v-col cols="12" sm="9">
+                <v-sheet class="pa-5 auto-app">
+                  <v-switch
+                    v-model="summervacation"
+                    inset
+                    :label="`Do you plan on going on Summer Vacation?`"
+                  ></v-switch>
+
+                  <v-row v-if="summervacation" justify="center">
+                    <v-col cols="12" sm="9">
+                      <v-text-field
+                        v-model="dateRangeText"
+                        label="When do you leave & come back?"
+                        prepend-icon="event"
+                        readonly
+                      ></v-text-field>
+                      <!-- model: {{ dates }} -->
+                    </v-col>
+                  </v-row>
+
+                  <v-switch
+                    v-model="summerjob"
+                    inset
+                    :label="`Do you plan on getting a Summer Job?`"
+                  ></v-switch>
+
+                  <v-row v-if="summerjob" no-gutters justify="center mt-2">
+                    <v-col cols="12" sm="9">
+                      <v-text-field
+                        label="How many hours per week?"
+                        hint="Enter number of hours only"
+                        persistent-hint
+                        outlined
+                      ></v-text-field>
+                    </v-col>
+                  </v-row>
+
+                  <v-switch
+                    v-model="summercollegeclass"
+                    inset
+                    :label="`Do you plan on taking Summer College Classes?`"
+                  ></v-switch>
+
+                  <v-row v-if="summercollegeclass" no-gutters justify="center mt-2">
+                    <v-col cols="12" sm="9">
+                      <v-text-field
+                        label="College Name"
+                        hint="Enter the name of the college"
+                        persistent-hint
+                        outlined
+                      ></v-text-field>
+                    </v-col>
+                  </v-row>
+
+                  <v-row v-if="summercollegeclass" justify="center">
+                    <v-col cols="12" sm="9">
+                      <v-text-field
+                        v-model="dateRangeText"
+                        label="When does it start & end?"
+                        prepend-icon="event"
+                        readonly
+                      ></v-text-field>
+                      <!-- model: {{ dates }} -->
+                    </v-col>
+                  </v-row>
+
+                  <v-switch
+                    v-model="summerschool"
+                    inset
+                    :label="`Will you have to take Summer School?`"
+                  ></v-switch>
+
+                  <v-row v-if="summerschool" justify="center">
+                    <v-col cols="12" sm="9">
+                      <v-text-field
+                        v-model="dateRangeText"
+                        label="When does it start & end?"
+                        prepend-icon="event"
+                        readonly
+                      ></v-text-field>
+                      <!-- model: {{ dates }} -->
+                    </v-col>
+                  </v-row>
+                </v-sheet>
+              </v-col>
+            </v-row>
+
+            </v-col>
+
+
+
+
+
+
+          </v-col>
+        </v-row>
+        <v-row class="mt-10 mb-10" no-gutters justify="center">
+          <v-col cols="4">
+            <NextNode v-slot="{setNext}" @CallbackComplete="$emit('nextNode')">
+              <v-btn
+                id="editcasestudies__button"
+                class="mb-10 mt-8"
+                text
+                solo
+                depressed
+                outlined
+                height="73.5px"
+                @click="validate().then(val=>{if(val)setNext(submit)})"
+              >SUBMIT</v-btn>
+            </NextNode>
+          </v-col>
+        </v-row>
+      </v-col>
+    </v-row>
+  </ValidationObserver>
 </template>
 
 
-
-<!-- SUMMER PLANS -->
-
-            <v-row
-              class="studentid__questiontitle mt-10"
-              justify="center"
-            >What are you doing this Summer?</v-row>
-
-            <v-row no-gutters justify="center">
-        <v-col cols="12" sm="9">
-  <v-sheet class="pa-5">
-    <v-switch v-model="switch2" inset :label="`Is it looking like you will have Summer School?`"></v-switch>
-    <v-switch v-model="switch1" inset :label="`Do you plan on going on Summer Vacation?`"></v-switch>
-    <v-switch v-model="switch2" inset :label="`Do you plan on getting a Summer Job?`"></v-switch>
-    <v-switch v-model="switch2" inset :label="`Do you plan on taking Summer College Classes?`"></v-switch>
-
-  </v-sheet>
-        </v-col>
-            </v-row>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <!-- INTERNSHIP INTEREST LEVEL -->
+           <!-- INTERNSHIP INTEREST LEVEL -->
             <!-- <v-row
               class="studentid__questiontitle mt-10"
               justify="center"
@@ -862,28 +1069,8 @@
             </v-row> -->
 
             <!-- END -->
-          </v-col>
-        </v-row>
-        <v-row class="mt-10 mb-10" no-gutters justify="center">
-          <v-col cols="4">
-            <NextNode v-slot="{setNext}" @CallbackComplete="$emit('nextNode')">
-              <v-btn
-                id="editcasestudies__button"
-                class="mb-10 mt-8"
-                text
-                solo
-                depressed
-                outlined
-                height="73.5px"
-                @click="validate().then(val=>{if(val)setNext(submit)})"
-              >NEXT</v-btn>
-            </NextNode>
-          </v-col>
-        </v-row>
-      </v-col>
-    </v-row>
-  </ValidationObserver>
-</template>
+
+
 
 <script lang="ts">
 import Vue from "vue";
@@ -895,14 +1082,6 @@ import { startCase } from "lodash";
 import { StudentForm } from "../../../../store/Database/types/types";
 import { firebase } from "@/firebase/init";
 import { NextNode } from "@/views/ProgramGuide/components";
-
-
-
-
-
-
-
-
 
 @Component<StudentID>({
   components: {
@@ -929,7 +1108,15 @@ import { NextNode } from "@/views/ProgramGuide/components";
   },
   data: () => ({
     // HEART RATING
-    phonemask: '###-###-####',
+    graduatingsenior: null,
+    codingschool: null,
+    summervacation: null,
+    summercollegeclass: null,
+    summerjob: null,
+    summerschool: null,
+    mobilenumber:null,
+
+    phonemask: "###-###-####",
     emptyIcon: "mdi-heart-outline",
     fullIcon: "mdi-heart",
     halfIcon: "mdi-heart-half-full",
@@ -981,7 +1168,6 @@ import { NextNode } from "@/views/ProgramGuide/components";
   })
 })
 export default class StudentID extends Vue {
- 
   programForm!: StudentForm.programForm;
 
   internshipInterest = this.programForm?.internshipInterest || "";
@@ -1112,6 +1298,5 @@ export default class StudentID extends Vue {
       finishedSignupForm: firebase.firestore.FieldValue.serverTimestamp()
     });
   }
-
 }
 </script>
