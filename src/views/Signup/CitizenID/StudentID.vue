@@ -2,28 +2,12 @@
   <div>
     <!-- SCHOOL INFORMATION -->
 
-    <v-row
-      justify="center"
-      class="mr-auto ml-auto mt-5 mb-5 studentid__categorytitle"
-    >
-      School
-    </v-row>
+    <v-row justify="center" class="mr-auto ml-auto mt-5 mb-5 studentid__categorytitle">School</v-row>
 
     <!-- GRADE LEVEL -->
-    <v-row
-      no-gutters
-      justify="center"
-    >
-      <v-col
-        class="d-flex"
-        cols="12"
-        sm="7"
-      > 
-        <ValidationProvider
-          v-slot="{errors}"
-          slim
-          rules="required"
-        >
+    <v-row no-gutters justify="center">
+      <v-col class="d-flex" cols="12" sm="7">
+        <ValidationProvider v-slot="{errors}" slim rules="required">
           <v-select
             v-model="gradeLevel"
             :error-messages="errors"
@@ -37,20 +21,9 @@
 
     <!-- TEACHER -->
 
-    <v-row
-      no-gutters
-      justify="center"
-    >
-      <v-col
-        class="d-flex"
-        cols="12"
-        sm="7"
-      >
-        <ValidationProvider
-          v-slot="{errors}"
-          slim
-          rules="required"
-        >
+    <v-row no-gutters justify="center">
+      <v-col class="d-flex" cols="12" sm="7">
+        <ValidationProvider v-slot="{errors}" slim rules="required">
           <v-autocomplete
             v-model="teacher"
             :error-messages="errors"
@@ -65,20 +38,9 @@
 
     <!-- SCHOOL NAME -->
 
-    <v-row
-      no-gutters
-      justify="center"
-    >
-      <v-col
-        class="d-flex"
-        cols="12"
-        sm="7"
-      >
-        <ValidationProvider
-          v-slot="{errors}"
-          slim
-          rules="required"
-        >
+    <v-row no-gutters justify="center">
+      <v-col class="d-flex" cols="12" sm="7">
+        <ValidationProvider v-slot="{errors}" slim rules="required">
           <v-autocomplete
             v-model="schoolName"
             :error-messages="errors"
@@ -93,20 +55,9 @@
 
     <!-- SCHOOL DISTRICT -->
 
-    <v-row
-      no-gutters
-      justify="center"
-    >
-      <v-col
-        class="d-flex"
-        cols="12"
-        sm="7"
-      >
-        <ValidationProvider
-          v-slot="{errors}"
-          slim
-          rules="required"
-        >
+    <v-row no-gutters justify="center">
+      <v-col class="d-flex" cols="12" sm="7">
+        <ValidationProvider v-slot="{errors}" slim rules="required">
           <v-autocomplete
             v-model="schoolDistrict"
             :error-messages="errors"
@@ -121,24 +72,12 @@
 
     <!-- PERSONAL INFORMATION -->
 
-    <v-row
-      justify="center"
-      class="mr-auto ml-auto mt-5 mb-5 studentid__categorytitle"
-    >
-      Personal
-    </v-row>
+    <v-row justify="center" class="mr-auto ml-auto mt-5 mb-5 studentid__categorytitle">Personal</v-row>
 
     <!-- BIRTHDATE -->
 
-    <v-row
-      no-gutters
-      justify="center"
-    >
-      <v-col
-        class="d-flex"
-        cols="12"
-        sm="7"
-      >
+    <v-row no-gutters justify="center">
+      <v-col class="d-flex" cols="12" sm="7">
         <template>
           <v-menu
             ref="menu"
@@ -148,11 +87,7 @@
             min-width="290px"
           >
             <template v-slot:activator="{ on }">
-              <ValidationProvider
-                v-slot="{errors}"
-                slim
-                rules="required"
-              >
+              <ValidationProvider v-slot="{errors}" slim rules="required">
                 <v-text-field
                   v-model="date"
                   :error-messages="errors"
@@ -163,11 +98,7 @@
                 />
               </ValidationProvider>
             </template>
-            <ValidationProvider
-              v-slot="{errors}"
-              slim
-              rules="required"
-            >
+            <ValidationProvider v-slot="{errors}" slim rules="required">
               <v-date-picker
                 ref="picker"
                 v-model="date"
@@ -184,20 +115,9 @@
 
     <!-- SUPERGENDER -->
 
-    <v-row
-      no-gutters
-      justify="center"
-    >
-      <v-col
-        class="d-flex"
-        cols="12"
-        sm="7"
-      >
-        <ValidationProvider
-          v-slot="{errors}"
-          slim
-          rules="required"
-        >
+    <v-row no-gutters justify="center">
+      <v-col class="d-flex" cols="12" sm="7">
+        <ValidationProvider v-slot="{errors}" slim rules="required">
           <v-select
             v-model="superGender"
             :error-messages="errors"
@@ -211,20 +131,9 @@
 
     <!-- ETHNICITY & CULTURE -->
 
-    <v-row
-      no-gutters
-      justify="center"
-    >
-      <v-col
-        class="d-flex"
-        cols="12"
-        sm="7"
-      >
-        <ValidationProvider
-          v-slot="{errors}"
-          slim
-          rules="required"
-        > 
+    <v-row no-gutters justify="center">
+      <v-col class="d-flex" cols="12" sm="7">
+        <ValidationProvider v-slot="{errors}" slim rules="required">
           <v-select
             v-model="ethnicity"
             :error-messages="errors"
@@ -239,28 +148,13 @@
 
     <!-- GUARDIAN INFORMATION -->
 
-    <v-row
-      justify="center"
-      class="mr-auto ml-auto mt-5 mb-5 studentid__categorytitle"
-    >
-      Guardian
-    </v-row>
+    <v-row justify="center" class="mr-auto ml-auto mt-5 mb-5 studentid__categorytitle">Guardian</v-row>
 
     <!-- GUARDIAN FIRST NAME -->
 
-    <v-row
-      no-gutters
-      justify="center"
-    >
-      <v-col
-        cols="12"
-        sm="7"
-      >
-        <ValidationProvider
-          v-slot="{errors}"
-          slim
-          rules="required"
-        >
+    <v-row no-gutters justify="center">
+      <v-col cols="12" sm="7">
+        <ValidationProvider v-slot="{errors}" slim rules="required">
           <v-text-field
             v-model="guardianFirstName"
             :error-messages="errors"
@@ -271,19 +165,9 @@
       </v-col>
     </v-row>
     <!-- GUARDIAN LAST NAME -->
-    <v-row
-      no-gutters
-      justify="center"
-    >
-      <v-col
-        cols="12"
-        sm="7"
-      >
-        <ValidationProvider
-          v-slot="{errors}"
-          slim
-          rules="required"
-        >
+    <v-row no-gutters justify="center">
+      <v-col cols="12" sm="7">
+        <ValidationProvider v-slot="{errors}" slim rules="required">
           <v-text-field
             v-model="guardianLastName"
             :error-messages="errors"
@@ -296,20 +180,9 @@
 
     <!-- GUARDIAN RELATIONSHIP -->
 
-    <v-row
-      no-gutters
-      justify="center"
-    >
-      <v-col
-        class="d-flex"
-        cols="12"
-        sm="7"
-      >
-        <ValidationProvider
-          v-slot="{errors}"
-          slim
-          rules="required"
-        >
+    <v-row no-gutters justify="center">
+      <v-col class="d-flex" cols="12" sm="7">
+        <ValidationProvider v-slot="{errors}" slim rules="required">
           <v-select
             v-model="guardianRelationship"
             :error-messages="errors"
@@ -323,20 +196,9 @@
 
     <!-- PRIMARY HOME LANGUAGE -->
 
-    <v-row
-      no-gutters
-      justify="center"
-    >
-      <v-col
-        class="d-flex"
-        cols="12"
-        sm="7"
-      >
-        <ValidationProvider
-          v-slot="{errors}"
-          slim
-          rules="required"
-        >
+    <v-row no-gutters justify="center">
+      <v-col class="d-flex" cols="12" sm="7">
+        <ValidationProvider v-slot="{errors}" slim rules="required">
           <v-autocomplete
             v-model="primaryHomeLanguage"
             :error-messages="errors"
@@ -347,21 +209,11 @@
         </ValidationProvider>
       </v-col>
     </v-row>
-    <v-row
-      no-gutters
-      justify="center"
-    >
-      <v-col
-        cols="12"
-        sm="7"
-      >
-        <ValidationProvider
-          v-slot="{errors}"
-          slim
-          rules="required"
-        >
+    <v-row no-gutters justify="center">
+      <v-col cols="12" sm="7">
+        <ValidationProvider v-slot="{errors}" slim rules="required">
           <AutoComplete
-            v-model="address" 
+            v-model="address"
             outlined
             :error-messages="errors"
             label="Home Address"
@@ -391,12 +243,17 @@ import { ValidationProvider } from "vee-validate";
     ValidationProvider
   },
   async created() {
-    let form = (await FbStore.firestore.collection("StudentForm").doc(FbStore.FBUser!.uid).get()).data<StudentForm>()?.signupForm
-    if(form)
+    let form = (
+      await FbStore.firestore
+        .collection("StudentForm")
+        .doc(FbStore.FBUser!.uid)
+        .get()
+    ).data<StudentForm>()?.signupForm;
+    if (form)
       Object.keys(form).forEach(key => {
-        (this as Record<string,any>)[key] = form[key as keyof StudentForm.signupForm]
-     
-    });
+        (this as Record<string, any>)[key] =
+          form[key as keyof StudentForm.signupForm];
+      });
   },
   data: () => ({
     gradelevel: [
@@ -447,6 +304,7 @@ import { ValidationProvider } from "vee-validate";
       "Michael Simon",
       "Nancy Read",
       "Poitier Stringer",
+      "Rebekah Kotlar",
       "Rick Charles",
       "Romany Corella",
       "Selina Mandel",
@@ -467,6 +325,7 @@ import { ValidationProvider } from "vee-validate";
       "Basis Independent Fremont",
       "Berkeley Technology Academy",
       "Brenkwitz High School",
+      "California Crosspoint Academy",
       "Clayton Valley Charter High School",
       "Code For Fun",
       "Dewey Academy",
@@ -594,9 +453,10 @@ export default class StudentID extends Vue {
   guardianLastName: string = "";
   guardianRelationship: string = "";
   primaryHomeLanguage: string = "";
-  address: string = ""
-  get signupForm():StudentForm.signupForm {
-    return (({ gradeLevel,
+  address: string = "";
+  get signupForm(): StudentForm.signupForm {
+    return (({
+      gradeLevel,
       teacher,
       schoolName,
       birthDate,
@@ -607,9 +467,10 @@ export default class StudentID extends Vue {
       guardianRelationship,
       primaryHomeLanguage,
       schoolDistrict,
-      address}) => ({
-        gradeLevel,
-     teacher,
+      address
+    }) => ({
+      gradeLevel,
+      teacher,
       schoolName,
       birthDate,
       superGender,
@@ -620,18 +481,24 @@ export default class StudentID extends Vue {
       primaryHomeLanguage,
       schoolDistrict,
       address
-    }))(this)
+    }))(this);
   }
-  async submit(){
-    const studentFormRef = await FbStore.firestore.collection("StudentForm").doc(FbStore.FBUser!.uid).get()
+  async submit() {
+    const studentFormRef = await FbStore.firestore
+      .collection("StudentForm")
+      .doc(FbStore.FBUser!.uid)
+      .get();
     if (studentFormRef.exists)
-    await FbStore.firestore.collection("StudentForm").doc(FbStore.FBUser!.uid).update<StudentForm>({
-      signupForm:this.signupForm
-    })
+      await FbStore.firestore
+        .collection("StudentForm")
+        .doc(FbStore.FBUser!.uid)
+        .update<StudentForm>({
+          signupForm: this.signupForm
+        });
     else
-    await studentFormRef.ref.set<StudentForm>({
-      signupForm:this.signupForm
-    })
+      await studentFormRef.ref.set<StudentForm>({
+        signupForm: this.signupForm
+      });
   }
 }
 </script>
