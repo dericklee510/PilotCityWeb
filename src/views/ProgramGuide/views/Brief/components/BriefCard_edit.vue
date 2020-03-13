@@ -45,7 +45,7 @@
                     v-if="entry.link"
                     class="briefcard__buton mr-3"
                   >
-                    <a :href="`https://drive.google.com/viewerng/viewer?url=${encodeURIComponent(entry.link)}?pid%3Dexplorer&efh=false&a=v&chrome=false&rm=minimal`">VIEW</a>
+                    <a target="_blank" :href="`https://drive.google.com/viewerng/viewer?url=${encodeURIComponent(entry.link)}?pid%3Dexplorer&efh=false&a=v&chrome=false&rm=minimal`">VIEW</a>
                   </button>
                   <button
                     class="briefcard__buton mr-3"

@@ -1,8 +1,11 @@
 <template>
   <div class="guide-snackbar__div">
-    <slot :updateSavedDate="updateSavedDate" :saving="saving" />
+    <slot
+      :updateSavedDate="updateSavedDate"
+      :saving="saving"
+    />
     <v-snackbar
-    v-if="(text instanceof Date)"
+      v-if="(text instanceof Date)"
       v-model="snackbar"
       class="guide-snackbar"
       left
@@ -11,7 +14,10 @@
     >
       <span v-if="(text instanceof Date)">{{ text | moment("calendar") }}</span>
       <span v-else>{{ text }}</span>
-<i class="fas fa-times guide-snackbar__close" @click="snackbar = false"></i>
+      <i
+        class="fas fa-times guide-snackbar__close"
+        @click="snackbar = false"
+      />
 
       <!-- <v-btn color="pink" text @click="snackbar = false">close</v-btn> -->
     </v-snackbar>

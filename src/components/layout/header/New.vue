@@ -9,7 +9,7 @@
     <router-link :to="{name: 'home'}">
       <img
 
-              v-if="user"
+        v-if="user"
         class="pc-logo--header"
         src="@/assets/Pilotcity_logo.png"
         alt="Pilot City"

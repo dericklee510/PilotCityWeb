@@ -64,23 +64,29 @@
           class="programguide__title"
         >
           BUSINESS MODEL CANVAS
-            <!-- TOOLTIP TEMPLATE -->
-            <v-tooltip v-model="show" top v-if="citizenType == 'teacher'">
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  href="https://www.pilotcity.com/library/how-do-i-create-a-strong-bmc"
-                  target="_blank"
-                  icon
-                  v-on="on"
+          <!-- TOOLTIP TEMPLATE -->
+          <v-tooltip
+            v-if="citizenType == 'teacher'"
+            top
+          >
+            <template v-slot:activator="{ on }">
+              <v-btn
+                href="https://www.pilotcity.com/library/how-do-i-create-a-strong-bmc"
+                target="_blank"
+                icon
+                v-on="on"
+              >
+                <v-icon
+                  class="pb-1"
+                  color="grey lighten-1"
                 >
-                  <v-icon class="pb-1" color="grey lighten-1">info</v-icon>
-                </v-btn>
-              </template>
-              <span>How do your students create a strong business model canvas? Click here.</span>
-            </v-tooltip>
-            <!-- TOOLTIP TEMPLATE END -->
-
-
+                  info
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>How do your students create a strong business model canvas? Click here.</span>
+          </v-tooltip>
+          <!-- TOOLTIP TEMPLATE END -->
         </v-col>  
         <v-col>
           <router-view

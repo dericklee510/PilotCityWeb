@@ -186,7 +186,7 @@ import ProgramCard from "./ProgramCard.vue"
     };
   },
   async beforeRouteEnter(to, from, next) {
-    if (FbStore.userCitizenType == 'student' || !FbStore.userCitizenType ){
+    if (FbStore.userCitizenType == 'student'){
       const studentFormRef = await FbStore.firestore.collection("StudentForm").doc(FbStore.FBUser!.uid).get()
       if (studentFormRef.exists) {
         next()
@@ -198,8 +198,9 @@ import ProgramCard from "./ProgramCard.vue"
   },
 })
 export default class myprograms extends Vue {
-  created(){
+  async created(){
     localStorage.PILOTCITY_EMPLOYERPROGRAMID = null;
+    await FbStore.initCurrentTeacherProgramData(null);
     this.onProgramChange()
   }
   dialog:boolean = false

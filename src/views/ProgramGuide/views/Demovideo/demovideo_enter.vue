@@ -15,23 +15,29 @@
       >
         ENTER 1-MINUTE PROTOTYPE DEMONSTRATION VIDEO
 
-            <!-- TOOLTIP TEMPLATE -->
-            <v-tooltip v-model="show" top>
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  href="https://www.pilotcity.com/library/how-can-i-film-upload-my-prototype-video"
-                  target="_blank"
-                  icon
-                  v-on="on"
-                >
-                  <v-icon class="pb-3" color="grey lighten-1">info</v-icon>
-                </v-btn>
-              </template>
-              <span>How can I film and upload my demonstration video? Click to learn more.</span>
-            </v-tooltip>
-            <!-- TOOLTIP TEMPLATE END -->
-
-
+        <!-- TOOLTIP TEMPLATE -->
+        <v-tooltip
+          v-model="show"
+          top
+        >
+          <template v-slot:activator="{ on }">
+            <v-btn
+              href="https://www.pilotcity.com/library/how-can-i-film-upload-my-prototype-video"
+              target="_blank"
+              icon
+              v-on="on"
+            >
+              <v-icon
+                class="pb-3"
+                color="grey lighten-1"
+              >
+                info
+              </v-icon>
+            </v-btn>
+          </template>
+          <span>How can I film and upload my demonstration video? Click to learn more.</span>
+        </v-tooltip>
+        <!-- TOOLTIP TEMPLATE END -->
       </v-row>
 
       <v-col
@@ -108,7 +114,7 @@
         justify="center"
         class="mt-8 demovideo_enter__ratinglabel"
       >
-      YOUR RATING
+        YOUR RATING
         <!-- {{ rating || `No rating yet` }} -->
       </v-row>
 
@@ -117,8 +123,8 @@
         class="mt-3 mb-6 pc-rating"
       >
         <v-rating
-            color="yellow darken-3"
           v-model="rating"
+          color="yellow darken-3"
           dense
           size="30px"
           readonly

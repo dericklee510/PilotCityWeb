@@ -82,7 +82,7 @@ export default class Fb extends VuexModule {
         }
     }
     @MutationAction({ mutate: ['currentTeacherProgramData'] })
-    async initCurrentTeacherProgramData(arg: TeacherProgramData | string) {
+    async initCurrentTeacherProgramData(arg: TeacherProgramData | string | null) {
         if (typeof arg === "string")
             return { currentTeacherProgramData: (await (firestore.collection("TeacherProgramData").doc(arg).get())).data<TeacherProgramData>() }
         else

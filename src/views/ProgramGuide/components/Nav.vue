@@ -1,7 +1,13 @@
 <template>
-  <v-col cols="12" class="guide__bar">
+  <v-col
+    cols="12"
+    class="guide__bar"
+  >
     <!--MAIN GROUP -->
-    <v-col v-for="(nodes, main, index) in sequence" :key="main+index">
+    <v-col
+      v-for="(nodes, main, index) in sequence"
+      :key="main+index"
+    >
       <!-- if index == 1, don't show this "bridge" -->
       <div class="guide__sub-container">
         <v-col>
@@ -40,7 +46,11 @@
           </v-col>
         </v-col>
       </div>
-      <v-col v-for="(node, i) in nodes" :key="i" class="guide__sub-container">
+      <v-col
+        v-for="(node, i) in nodes"
+        :key="i"
+        class="guide__sub-container"
+      >
         <v-col>
           <v-col class="guide__bridge" />
         </v-col>
@@ -72,7 +82,10 @@
         </v-col>
         <v-col style="padding: none">
           <v-col class="guide__mainrow pl-3">
-            <span class="guide__bigdot guide__bigdot--active" :class="'guide__background--grey'">
+            <span
+              class="guide__bigdot guide__bigdot--active"
+              :class="'guide__background--grey'"
+            >
               <i class="guide__icon_white fas fa-seedling guide__programicon" />
             </span>
             <span class="guide__maintext">{{ 'Internship' }}</span>
@@ -85,7 +98,10 @@
         </v-col>
         <v-col class="guide__subrow">
           <span class="guide__smalldot" />
-          <span class="guide__smalldotfilled" :class="'guide__background--grey'" />
+          <span
+            class="guide__smalldotfilled"
+            :class="'guide__background--grey'"
+          />
           <span class="guide__subtext">{{ 'Auto-app' }}</span>
         </v-col>
       </v-col>
@@ -95,7 +111,10 @@
         </v-col>
         <v-col class="guide__subrow">
           <span class="guide__smalldot" />
-          <span class="guide__smalldotfilled" :class="'guide__background--grey'" />
+          <span
+            class="guide__smalldotfilled"
+            :class="'guide__background--grey'"
+          />
           <span class="guide__subtext">{{ 'Interviews' }}</span>
         </v-col>
       </v-col>
@@ -105,7 +124,10 @@
         </v-col>
         <v-col class="guide__subrow">
           <span class="guide__smalldot" />
-          <span class="guide__smalldotfilled" :class="'guide__background--grey'" />
+          <span
+            class="guide__smalldotfilled"
+            :class="'guide__background--grey'"
+          />
           <span class="guide__subtext">{{ 'Offers' }}</span>
         </v-col>
       </v-col>

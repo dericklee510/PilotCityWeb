@@ -30,23 +30,29 @@
         >
           VIEW 60-SECOND ELEVATOR PITCH
 
-            <!-- TOOLTIP TEMPLATE -->
-            <v-tooltip v-model="show" top v-if="citizenType == 'teacher'">
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  href="https://www.pilotcity.com/library/tips-to-prep-60-second-pitch"
-                  target="_blank"
-                  icon
-                  v-on="on"
+          <!-- TOOLTIP TEMPLATE -->
+          <v-tooltip
+            v-if="citizenType == 'teacher'"
+            top
+          >
+            <template v-slot:activator="{ on }">
+              <v-btn
+                href="https://www.pilotcity.com/library/tips-to-prep-60-second-pitch"
+                target="_blank"
+                icon
+                v-on="on"
+              >
+                <v-icon
+                  class="pb-1"
+                  color="grey lighten-1"
                 >
-                  <v-icon class="pb-1" color="grey lighten-1">info</v-icon>
-                </v-btn>
-              </template>
-              <span>What tips can I share with my students on how to write an elevator pitch? Click here.</span>
-            </v-tooltip>
-            <!-- TOOLTIP TEMPLATE END -->
-
-
+                  info
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>What tips can I share with my students on how to write an elevator pitch? Click here.</span>
+          </v-tooltip>
+          <!-- TOOLTIP TEMPLATE END -->
         </v-col>
         <v-col justify="center">
           <router-view

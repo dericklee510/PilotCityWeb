@@ -143,7 +143,7 @@ export default class ManageClassHelper extends app {
   classNames: string[] = [""];
   async renameClass(id: number, index: number) {
     let entryIndex = findIndex(this.entries, { id: id });
-    FbStore.firestore
+    await FbStore.firestore
       .collection("Classroom")
       .doc(this.entries[entryIndex].classroomId)
       .update({
@@ -151,6 +151,7 @@ export default class ManageClassHelper extends app {
       });
     this.entries[entryIndex].className = this.classNames[index];
     this.classNames[index] = "";
+    this.$forceUpdate()
   }
   async removeEntry(id: number) {
     let entryIndex = findIndex(this.entries, { id: id });

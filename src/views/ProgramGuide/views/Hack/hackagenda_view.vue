@@ -5,6 +5,7 @@
   > 
     <AgendaView
       v-model="agendaItems"
+      :completed="completed"
       @finish="setNext(onFinish)"
     />
   </NextNode>
@@ -28,13 +29,14 @@ import { NextNode } from "@/views/ProgramGuide/components"
   }
 })
 export default class agenda extends Vue {
+   get completed(){
+    return FbStore.currentProject?.programSequence.hackDay
+  }
   async onFinish(){
     await FbStore.updateCurrentProject({
       [`programSequence.${'hackDay'}`]:firebase.firestore.FieldValue.serverTimestamp()
     })
   }
-  get agendaItems(){
-    return FbStore.currentTeacherProgramData?.hackDayAgenda?.events || FbStore.currentEmployerProgram?.masterHackDayAgenda?.events || []
-  }
+  agendaItems = FbStore.currentTeacherProgramData?.hackDayAgenda?.events || FbStore.currentEmployerProgram?.masterHackDayAgenda?.events || []
 }
 </script>

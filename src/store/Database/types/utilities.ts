@@ -18,7 +18,7 @@ export interface EventItem {
     name: string
     duration: string
     description: string
-    completed?: Date
+    completed?: boolean
 }
 export interface AgendaTemplate {
     agendaTitle?: string

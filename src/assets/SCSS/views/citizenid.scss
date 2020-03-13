@@ -6,6 +6,13 @@
         margin-top:28px; 
     }
 
+    &__exitsurveyicon{
+        width: 111px;
+        height: 110px;
+        position: absolute;
+        margin-top:52px;
+    }
+
     &__backbuttonicon{
         font-size: 20px;
 
@@ -365,6 +372,12 @@
 
 }
 
+.auto-app{
+    background-color: #f6f6f6 !important;
+    border-radius: 2rem;
+    border: 1px dashed #404142;
+}
+
 .studentid{
 
 
@@ -386,12 +399,22 @@
         text-align: center;
     }
 
+    &__nomobile{
+        font-family: "Raleway";
+        color: #404142;
+        font-size: 14px;
+        font-style: italic;
+        font-weight: 500;
+        text-align: center;
+    }
+
 
     &__categorytitle{
         font-family: "Raleway";
         color: #404142;
-        font-size: 25px;
+        font-size: 30px;
         font-weight: 800;
+        text-align: center;
     }
 
 

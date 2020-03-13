@@ -1301,8 +1301,8 @@ export default class EmployerProfile extends app {
         await query.init();
         await query.submitQuery();
       }
+    // eslint-disable-next-line no-empty
     } catch (err) {
-      console.log(err);
     }
     this.loading = false;
   }
@@ -1315,7 +1315,6 @@ export default class EmployerProfile extends app {
     this.citizenBase.citizenType = this.$route.params.citizenType;
 
     let arr: string[] = [];
-    console.log(typeof arr);
   }
 }
 </script>
