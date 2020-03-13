@@ -325,6 +325,7 @@ import { ValidationProvider } from "vee-validate";
       "Basis Independent Fremont",
       "Berkeley Technology Academy",
       "Brenkwitz High School",
+      "California Crosspoint Academy",
       "Clayton Valley Charter High School",
       "Code For Fun",
       "Dewey Academy",
