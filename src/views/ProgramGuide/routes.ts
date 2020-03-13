@@ -3,6 +3,7 @@ import { AuthStore } from '@/store'
 import * as Guide from '.'
 import RFPGen from "@/views/ProgramGuide/views/RFP/Prompt.vue"
 import StudentID from "@/views/ProgramGuide/views/Profile/StudentID.vue"
+import ExitSurvey from "@/views/ProgramGuide/views/Profile/ExitSurvey.vue"
 import Brief from "@/views/ProgramGuide/views/RFP/Brief/Brief.vue"
 const routes: RouteConfig[] = [
     {
@@ -39,6 +40,13 @@ const routes: RouteConfig[] = [
                 name: 'stud-project-profile',
                 component:StudentID
             },
+
+            {
+                path:'student/project/exitsurvey',
+                name: 'stud-project-exitsurvey',
+                component:ExitSurvey
+            },
+
             {
                 path: 'student/project/brief',
                 name: 'stud-project-brief',
