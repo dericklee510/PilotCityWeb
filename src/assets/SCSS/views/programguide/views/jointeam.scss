@@ -1,0 +1,158 @@
+.join-team{
+
+
+    .pc-input .v-text-field{
+        color: #000;
+    }
+    &__team-name{
+        font-family: Raleway;
+        font-style: normal;
+        font-weight: 900;
+        font-size: 15px;
+        line-height: 100%; 
+        display: block;
+    }
+    &__buttons{
+
+    }
+    &__dreamteam{
+        font-family: Raleway;
+        font-style: normal;
+        font-weight: 700;
+        // font-size: 18px;
+
+        .v-text-field input{
+
+        }
+    }
+    .manageteam{
+        &__container{
+            // margin-top : 82.5px;
+            height: 100%;
+        }
+        &__nav{
+            width:100%;
+            font-family: Raleway;
+            font-style: normal;
+            font-weight: 900;
+            font-size: 17.1097px;
+            color: #231F20;
+            div{
+                line-height: 55.82px;
+                vertical-align: middle;
+                width: 100%;
+                height: 55.82px;
+                border: 0.428px solid #231F20;
+                margin-right: 3%;
+                &--active{
+                    background: #F1F2F2;    
+                }
+                @media only screen and (max-width: 600px){
+                    margin: 0;
+                }
+            }
+        }
+        // &__title{
+        //     width: 100%;
+        //     font-family: Raleway;
+        //     font-style: normal;
+        //     font-weight: 800;
+        //     font-size: 37.5px;
+        //     line-height: 44px;
+        //     color: #231F20;
+        //     margin-top: 65.43px;
+        //     margin-bottom: 41.6px;
+        //     padding-left: 17.84%;
+        //     padding-bottom: 0;
+
+        // }
+        &__labels{
+            font-family: Raleway;
+            font-style: normal;
+            font-weight: 800;
+            font-size: 15px;
+            margin-top: 0px;
+        }
+        &__button{
+            width: 100%;
+            &-wrapper{
+                height: 55.88px;
+                &.first{
+                    margin: 0 22px;
+                    @media only screen and (max-width: 1264px){
+                        margin: 0;
+                    }
+                }
+                .v-btn{
+                    border-radius: 0px;
+                }
+            }
+            &.v-btn{
+                border-radius: 0px;
+            }
+            .v-btn{
+                
+                &__content{
+                    width: 100%;
+                    height: 100%;
+                    font-family: Raleway;
+                    font-style: normal;
+                    font-weight: 900;
+                    font-size: 17.1097px;
+                    line-height: 20px;
+                    color: #231F20;
+                }
+                
+            }
+            .v-btn--outlined{
+                border: 0.428px solid #231F20;
+            }
+            
+        }
+        &__input{
+            border: 0.428px solid #231F20;
+            height: 55.88px;
+            ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+                opacity: 1; /* Firefox */
+            }
+            
+            :-ms-input-placeholder { /* Internet Explorer 10-11 */
+
+            }
+            
+            ::-ms-input-placeholder { /* Microsoft Edge */
+
+            }
+            input{
+                font-family: Raleway;
+                font-style: normal;
+                font-weight: 900;
+                font-size: 17.1097px;
+                line-height: 20px;
+                color: #231F20;
+                width: inherit;
+                height: inherit;
+                padding: 10px;
+            }
+            &.problem-child{
+                margin-left: 15px;
+            }
+        }
+        &__create-button{
+            font-family: Raleway;
+            font-style: normal;
+            font-weight: 800;
+            font-size: 15px;
+            width: 100%;
+            height: 100%;
+            &:hover{
+                cursor: pointer;
+            }
+            &-wrapper{
+                margin-left: 23px;
+            }
+        }
+    }
+}
+
+

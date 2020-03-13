@@ -1,1 +1,1 @@
-export {hasKey} from "./hasKey"
+export { hasKey } from './hasKey'

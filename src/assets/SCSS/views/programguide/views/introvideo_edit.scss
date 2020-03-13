@@ -1,0 +1,131 @@
+#introvideo_edit{
+    &__icon{
+        width: 112px;
+        height: 84.36px;
+        position: absolute;
+        margin-top:27px;
+    }
+
+    &__contain{
+        
+        height: 100%;
+        border: 0.75px solid #000000;
+        margin-top: 69.29px;
+        margin-bottom: 49.29px;
+        padding-left: 0%;
+        padding-right: 0%;
+        @media (max-width: 610px) {
+            border: none;
+        }
+    }
+
+    &__borderline{
+        padding-top: 0%;
+        border-spacing: 0px;
+        position: relative;
+        margin-top: 27.07px;
+        border: 0.75px solid #000000;
+        border-top-color: transparent;
+        border-left-color: transparent;
+        border-right-color: transparent;
+    }
+    &__button{
+        // margin-top: 2%;
+        width: 100%;
+        font-family: Raleway;
+        font-style: normal;
+        font-weight: 900;
+        font-size: 1.88rem;
+        line-height: 35px;
+        color: #BCBEC0;
+        background-color: #E6E7E8;
+    }
+    &__button:hover { 
+        background-color:$pc-blue;
+        color: #ffffff;
+    }
+}
+
+.introvideo_edit{
+
+    &__copyicon{
+        font-size: 25px;
+
+        &:hover{
+            color: #EDA1BF;
+        }
+    }
+
+    &__videolink{
+        height: 60px;
+        border: 1px solid #CCCCCC;
+        width: 100%;
+        font-family: "Raleway";
+        padding-left: 20px;
+        .v-input__slot{
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+    }
+
+    
+
+    &__title{
+
+    margin-top:56.78px ;
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 1.41rem;
+    line-height: 26px;
+    color: #000000;
+    width: 75%;
+    text-align: center;
+    letter-spacing: .05rem;
+
+    }
+
+    &__description{
+
+    margin-top: 5%;
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.41rem;
+    color: #949598;
+    width: 75%;
+    text-align: center;
+    line-height: unset;
+
+    }
+
+    &__check{
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.41rem;
+    line-height: 26px;
+    color: #949598;
+
+    }
+
+    &__checkbox{
+        width: 18px;
+        height: 18px;
+        margin-top: .5%;
+        margin-right: 2%;
+        border: 1.5px;
+        border-color: #C7C8CA;
+        
+    }
+
+
+
+
+
+}
+
+
+
+

@@ -3,21 +3,37 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "test": "jest",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "test": "jest",
     "lint": "vue-cli-service lint",
-    "beautify": "eslint --fix .",
+    "generate": "graphql-codegen --config src/codegen.json",
+    "preserve": "npm run generate",
     "test:e2e": "vue-cli-service test:e2e",
-    "test:unit": "vue-cli-service test:unit"
+    "test:unit": "vue-cli-service test:unit",
+    "hide": "git secret hide -m",
+    "reveal": "git secret reveal"
   },
   "dependencies": {
     "@google/maps": "^0.5.5",
+    "@graphql-codegen/cli": "^1.9.1",
+    "@graphql-codegen/typescript": "^1.9.1",
+    "@graphql-codegen/typescript-graphql-files-modules": "^1.9.1",
+    "@graphql-codegen/typescript-graphql-request": "^1.11.2",
+    "@graphql-codegen/typescript-operations": "^1.11.2",
+    "@types/axios": "^0.14.0",
     "@types/google__maps": "^0.5.7",
+    "@types/googlemaps": "^3.39.2",
     "@types/lodash": "^4.14.136",
+    "@types/node-fetch": "^2.5.4",
+    "@types/vue-moment": "^4.0.0",
+    "@types/vue-the-mask": "^0.11.0",
     "@types/zxcvbn": "^4.4.0",
+    "@typescript-eslint/parser": "^2.11.0",
+    "axios": "^0.19.0",
     "babel-plugin-transform-decorators": "^6.24.1",
     "core-js": "^2.6.5",
+    "dotenv": "^8.2.0",
     "filepond": "^4.4.12",
     "filepond-plugin-file-validate-type": "^1.2.4",
     "filepond-plugin-image-crop": "^2.0.3",
@@ -26,44 +42,65 @@
     "filepond-plugin-image-preview": "^4.2.1",
     "filepond-plugin-image-resize": "^2.0.4",
     "filepond-plugin-image-transform": "^3.3.3",
-    "firebase": "^6.2.1",
+    "filter-async-rxjs-pipe": "^0.1.5",
+    "firebase": "^6.6.2",
     "flush-promises": "^1.0.2",
+    "graphql": "^14.5.8",
+    "graphql-request": "^1.8.2",
+    "graphql-tag": "^2.10.1",
+    "grpc": "^1.24.1",
+    "husky": "^3.1.0",
+    "linked-list-typescript": "^1.0.15",
+    "lodash": "^4.17.15",
+    "reflect-metadata": "^0.1.13",
     "rxfire": "^3.6.11",
     "rxjs": "^6.5.2",
     "semantic-ui-vue": "^0.8.1",
-    "vee-validate": "^2.2.11",
+    "utility-types": "^3.10.0",
+    "vee-validate": "^3.0.11",
+    "videojs-youtube": "^2.6.1",
     "vue": "^2.6.10",
+    "vue-apollo": "^3.0.0-beta.11",
+    "vue-async-computed": "^3.8.2",
     "vue-eslint-parser": "^6.0.4",
     "vue-filepond": "^5.1.3",
+    "vue-moment": "^4.1.0",
+    "vue-password-strength-meter": "^1.6.1",
     "vue-router": "^3.0.3",
     "vue-rx": "^6.2.0",
     "vue-the-mask": "^0.11.1",
+    "vue-video-player": "^5.0.2",
     "vuetify": "^2.0.15",
-    "vuetify-google-autocomplete": "^2.0.0-beta.6",
+    "vuetify-google-autocomplete": "^2.0.1",
     "vuex": "^3.0.1",
-    "vuex-module-decorators": "^0.9.9",
+    "vuex-module-decorators": "^0.9.11",
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.8.3",
     "@mdi/font": "^4.3.95",
     "@types/jest": "^23.1.4",
+    "@types/node": "^12.12.22",
     "@typescript-eslint/eslint-plugin": "^1.13.0",
     "@vue/cli-plugin-babel": "^3.8.0",
     "@vue/cli-plugin-e2e-cypress": "^3.8.0",
-    "@vue/cli-plugin-eslint": "^3.8.0",
+    "@vue/cli-plugin-eslint": "^3.12.1",
     "@vue/cli-plugin-typescript": "^3.8.1",
     "@vue/cli-plugin-unit-jest": "^3.9.0",
     "@vue/cli-service": "^3.8.0",
+    "@vue/eslint-config-airbnb": "^4.0.0",
     "@vue/eslint-config-prettier": "^4.0.1",
     "@vue/eslint-config-typescript": "^4.0.0",
     "@vue/test-utils": "1.0.0-beta.29",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
+    "case-sensitive-paths-webpack-plugin": "^2.2.0",
     "css-loader": "^3.0.0",
     "eslint": "^5.16.0",
     "eslint-loader": "^2.1.2",
     "eslint-plugin-es-beautifier": "^1.0.1",
     "eslint-plugin-vue": "^5.0.0",
+    "husky": "^3.1.0",
     "sass": "^1.18.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
@@ -72,9 +109,11 @@
     "ts-jest": "^23.0.0",
     "typescript": "^3.4.3",
     "vue-class-component": "^7.1.0",
+    "vue-cli-plugin-apollo": "^0.21.3",
     "vue-cli-plugin-vuetify": "^0.5.0",
     "vue-jest": "^3.0.4",
     "vue-property-decorator": "^8.2.2",
+    "vue-svg-loader": "^0.12.0",
     "vue-template-compiler": "^2.6.10",
     "vuetify-loader": "^1.2.2"
   },
@@ -94,7 +133,8 @@
       "plugin:@typescript-eslint/recommended",
       "@vue/typescript",
       "eslint:recommended",
-      "plugin:vue/recommended"
+      "plugin:vue/recommended",
+      "@vue/airbnb"
     ],
     "rules": {
       "no-object-literal-type-assertion": [
@@ -126,6 +166,9 @@
           "ignoreRestSiblings": false
         }
       ]
+    },
+    "parserOptions": {
+      "parser": "@typescript-eslint/parser"
     }
   },
   "postcss": {
@@ -192,6 +235,12 @@
       "ts-jest": {
         "babelConfig": true
       }
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run hide",
+      "post-commit": "npm run reveal"
     }
   }
 }

@@ -1,7 +1,6 @@
 .DS_Store
 node_modules
 /dist
-src/keys.ts
 /firebase-build-step/
 /tests/e2e/videos/
 /tests/e2e/screenshots/
@@ -23,3 +22,6 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+.gitsecret/keys/random_seed
+!*.secret
+.env

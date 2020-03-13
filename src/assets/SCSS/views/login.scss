@@ -1,0 +1,129 @@
+#login-button{
+    font-family: "Raleway";
+    letter-spacing: 1px;
+    color: #ffffff;
+    background-color:$pc-blue;
+    font-weight: 900;
+    // text-transform: uppercase;
+    font-size: 10px;
+    width: 100%;
+    height: 50px;
+    border-radius: 0px;
+    &:hover{
+        border: 1px solid #ffffff;
+    }
+}
+
+.login{
+    &__header{
+        font-family: "Raleway";
+        font-size: 30px;
+        letter-spacing: 1px;
+        color: #3c9dcd;
+        font-weight: 800;
+        margin-bottom:48px;
+    }
+    &__email{
+        font-family: "Raleway";
+        font-size: 12px;
+        letter-spacing: 2px;
+        color: #ffffff;
+        font-weight: 900;
+        text-transform: uppercase;
+        margin-left:15px;
+    }
+    &__email-input{
+        width: 100%;
+        padding-left:15px;
+        font-family: "Raleway";
+        font-size: 18px;
+        font-weight: 800;
+        color: #ffffff;
+        border: 1px solid #ffffff;
+        height: 50px;
+    }
+    &__password{
+        font-family: "Raleway";
+        font-size: 12px;
+        letter-spacing: 2px;
+        color: #ffffff;
+        font-weight: 900;
+        text-transform: uppercase;
+        margin-left:15px;
+    }
+
+    &__password-input{
+        width: 100%;
+        height: 50px;
+        padding-left:15px;
+        font-family: "Raleway";
+        font-size: 18px;
+        font-weight: 800;
+        color: #ffffff;
+        border: 1px solid #ffffff;
+        height: 50px;
+    }
+    &__forgotpassword{
+        font-family: "Raleway";
+        font-size: .7rem;
+        font-weight: 700;
+        color: #ffffff;
+        font-style: italic;
+        text-align: right;
+    }
+
+    &__noaccount{
+        font-family: "Raleway"; 
+        font-size: 1rem;
+        font-weight: 700;
+        color: #ffffff;
+        font-style: italic;
+        text-align: right;
+    }
+
+}
+
+.recovery{
+    &__header{
+        font-family: "Raleway";
+        font-size: 30px;
+        letter-spacing: 1px;
+        color: $pc-red;
+        font-weight: 800;
+        margin-bottom:48px;
+    }
+    &__email{
+        font-family: "Raleway";
+        font-size: 12px;
+        letter-spacing: 2px;
+        color: #ffffff;
+        font-weight: 900;
+        text-transform: uppercase;
+        margin-left:15px;
+        &-input{
+            width: 100%;
+            padding-left:15px;
+            font-family: "Raleway";
+            font-size: 18px;
+            font-weight: 800;
+            color: #ffffff;
+            border: 1px solid #ffffff;
+            height: 50px;
+        }
+    }
+}
+#recovery-button{
+    font-family: "Raleway";
+    letter-spacing: 1px;
+    color: #ffffff;
+    background-color:$pc-red;
+    font-weight: 900;
+    // text-transform: uppercase;
+    font-size: 10px;
+    width: 100%;
+    height: 50px;
+    border-radius: 0px;
+    &:hover{
+        border: 1px solid #ffffff;
+    }
+}

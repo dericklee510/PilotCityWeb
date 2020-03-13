@@ -1,0 +1,178 @@
+@import "./views/manageteam.scss";
+@import "./views/trainingday.scss";
+@import "./views/manageclass.scss";
+@import "./views/posthack.scss";
+@import "./views/programbrief.scss";
+@import "./views/viewcasestudies.scss";
+@import "./views/programbrief_edit.scss";
+@import "./views/introvideo.scss";
+@import "./views/introvideo_edit.scss";
+@import "./views/practicelog.scss";
+@import "./views/practicelog_manage.scss";
+@import "./views/presentation_enter.scss";
+@import "./views/presentation_view.scss";
+@import "./views/demovideo_view.scss";
+@import "./views/demovideo_enter.scss";
+@import "./views/pitch_enter.scss";
+@import "./views/pitch_view.scss";
+@import "./views/elevator_enter.scss";
+@import "./views/elevator_view.scss";
+@import "./views/elevator_view2.scss";
+@import "./views/businessmodelcanvas_enter.scss";
+@import "./views/businessmodelcanvas_view2.scss";
+@import "./views/agenda.scss";
+@import "./views/agenda_view.scss";
+@import "./views/demoagenda_edit.scss";
+@import "./views/demoagenda_view.scss";
+@import "./views/externshipagenda_edit.scss";
+@import "./views/externshipagenda_view.scss";
+@import "./views/hackagenda_edit.scss";
+@import "./views/hackagenda_view.scss";
+@import "./views/processlog.scss";
+@import "./views/login2.scss";
+@import "./views/signup2.scss";
+@import "./views/myprograms.scss";
+@import "./views/launcher.scss";
+@import "./views/Guide.scss";
+@import "./views/editcasestudies.scss";
+@import "./views/jointeam.scss";
+@import "./views/Team.scss";
+@import "./views/managestudents.scss";
+@import "./views/manageclass.scss";
+@import "./views/manageprogram.scss";
+@import "./lock.scss";
+
+@import "./views/manageprogram.scss";
+@import "./views/rfp-prompt.scss";
+@import "./views/requirements.scss";
+
+
+.programguide{
+    height: 100%;
+    &__container{
+        height: 100%;
+        border: 0.75px solid #000000;
+        margin-top: 69.29px;
+        margin-bottom: 49.29px;
+    }
+    &__title{
+        margin-top: 50px;
+        padding-bottom: 27px;
+        border-bottom: .75px solid #000;
+        font-family: 'Raleway';
+        font-style: normal;
+        font-weight: 900;
+        font-size: 1.41rem;
+        line-height: 26px;
+        color: #000000;
+        width: 100%;
+        text-align: center;
+        letter-spacing: .05rem;
+    }
+    &__description{
+        margin-top: 5%;
+        font-family: Raleway;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 1.41rem;
+        color: #949598;
+        width: 75%;
+        text-align: center;
+        line-height: unset;
+        }
+    &__icon img{
+        width: 94px;
+        height: 79px;
+        position: absolute;
+        margin-top:25px;
+    }
+    &__labels{
+        font-family: Raleway;
+        font-style: normal;
+        font-weight: 800;
+        font-size: 0.94rem;
+        line-height: 18px;
+        color: #231F20;
+        margin-top: 33px;
+    }
+    &__header{
+        font-family: Raleway;
+        font-style: normal;
+        font-weight: 900;
+        font-size: 15px;
+        line-height: 18px;
+        text-transform: uppercase;
+        letter-spacing: .05rem;
+    } 
+    &__content{
+        margin-top: 20px;
+        & span{
+            width: 100%;
+            display: inline-block;
+            vertical-align: middle;
+        }
+    }
+}
+
+.edit-icon{
+   &__externship{
+        margin-left: 15px;
+        color: #000000;
+        i.fa-edit{
+        }
+        &:hover{
+            cursor: pointer;
+            color: darken(#dbdcde, 15);
+        }
+   }
+   &__project{
+        margin-left: 15px;
+        color: #dbdcde;
+        i.fa-edit{
+        }
+        &:hover{
+            cursor: pointer;
+            color: darken(#dbdcde, 15);
+        }
+    }
+    &__internship{
+        margin-left: 15px;
+        color: #dbdcde;
+        i.fa-edit{
+        }
+        &:hover{
+            cursor: pointer;
+            color: darken(#dbdcde, 15);
+        }
+    }
+}
+
+.businesscanvas{
+    &__actnbtn{
+        height: 20px;
+        border: 0.5px solid #231F20;
+        margin: 0 33px;
+        cursor: pointer;
+
+        &:hover{
+            background-color: #dbdcde;
+        }
+
+        & div{
+            width: 100%;
+            height: 100%;
+            font-family: Raleway;
+            font-style: normal;
+            font-weight: 900;
+            font-size: 11px;
+            letter-spacing: .075rem;
+            text-transform: uppercase;
+            line-height: 16.54px;
+            color: #231F20;
+            text-align: center;
+            padding-top:3px;
+
+        }
+    }
+    
+}

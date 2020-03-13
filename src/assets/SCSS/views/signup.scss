@@ -1,0 +1,164 @@
+#signup-button{
+    font-family: "Raleway";
+    letter-spacing: 1px;
+    color: #ffffff;
+    background-color:$pc-green;
+    font-weight: 900;
+    // text-transform: uppercase;
+    font-size: 10px;
+    width: 100%;
+    height: 50px;
+
+    &:hover{
+        border: 1px solid #ffffff;
+    }
+
+}
+
+#password{
+    
+}
+
+
+.Password__badge--error{
+    background: none;
+    color:none;
+}
+
+.Password__badge{
+    background: none;
+    color:none;
+}
+
+.Password__badge--success{
+    background: none;
+    color:none;
+}
+
+.Password__strength-meter::before{
+
+}
+
+.Password__strength-meter--fill{
+    background-color: transparent;
+}
+
+.Password__field{
+    background-color: #404142 !important;
+    width: 100%;
+    height: 50px;
+    padding-left:15px;
+    font-family: "Raleway";
+    font-weight: 800 !important;
+    font-size: 18px !important;
+    color: #ffffff;
+}
+
+
+
+.signup{
+    &-container{
+        .v-text-field > .v-input__control > .v-input__slot:before, .v-text-field > .v-input__control > .v-input__slot:after{
+            content: none;
+        }
+        .theme--light.v-text-field:not(.v-input--has-state):hover{
+            border-color: #fff;
+        }
+        .Password__strength-meter{
+            margin: 10px auto 4px;
+        }
+    }
+    &__termstext{
+        font-size: .75rem;
+        font-family: "Raleway";
+        font-weight: 500;
+    }
+
+    &__termscheck{
+        margin-bottom: 3%;
+        font-family: Raleway;
+        font-style: normal;
+        font-weight: 500;
+        font-size: .75rem;
+        line-height: 30px;
+        color: #949598;
+        width: 75%;
+        text-align: left;
+        margin-left: 10%;
+        }
+        &__termscheckbox{
+            width: 18px;
+            height: 18px;
+            margin-right: 2%;
+            border: 1.5px;
+            border-color: #C7C8CA;
+        }
+    &__header{
+        font-family: "Raleway";
+        font-size: 30px;
+        letter-spacing: 1px;
+        color: #6fba7f;
+        font-weight: 800;
+        margin-bottom: 48px;
+    }
+
+    &__label{
+        font-family: "Raleway";
+        font-size: 12px;
+        letter-spacing: 2px;
+        color: #ffffff;
+        font-weight: 900;
+        text-transform: uppercase;
+        padding-left:15px;
+
+    }
+    &__field-input.theme--light.v-text-field{
+        color: #ffffff;
+        border: 1px solid #ffffff;
+    }
+    &__field-input{
+        width: 100%;
+        padding-left: 15px;
+        font-family: "Raleway";
+        font-size: 18px;
+        font-weight: 800;
+        &.theme--light.v-input {
+            height: 48px;
+        }
+        &.theme--light.v-input input{
+            caret-color: #fff;
+            color: #fff;
+            &::placeholder{
+                color: darken(#dbdcde, 30);
+            }
+        }
+
+        .Password{
+            border: none;
+            max-width: 100%; 
+            margin: 0;
+            &__group{
+                height: 100%;
+            }
+        }
+
+        & .Password{
+            padding-left: 0px;
+        }
+    }
+
+    &__forgotpassword{
+        font-family: "Raleway";
+        font-size: 15px;
+        font-weight: 700;
+        color: #ffffff;
+        font-style: italic;
+
+
+    }
+
+    &__background{
+        background-color:#404142;
+        height: 100vh;
+    }
+}

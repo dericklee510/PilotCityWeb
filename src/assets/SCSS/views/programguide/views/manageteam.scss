@@ -1,0 +1,200 @@
+
+.manageteam{
+    &__container{
+        margin-top: none;
+        height: 100%;
+        .v-application--is-ltr .v-text-field .v-input__append-inner{
+            margin-top: 16px;
+        }
+        .v-text-field{ 
+            margin-top: 0px;
+            padding-top: 0px;
+        }
+        #pc-app .pc-input .theme--light.v-select .v-select__selections{
+            color: #000;
+        }
+        .v-text-field > .v-input__control > .v-input__slot:before {
+            border: none;
+        }
+        .theme--light.v-text-field > .v-input__control > .v-input__slot:before{
+            border: none;
+        }
+        #pc-app .pc-input__select{
+            letter-spacing: normal;
+        }
+    }
+    &__nav{
+        width:100%;
+        font-family: Raleway;
+        font-style: normal;
+        font-weight: 900;
+        font-size: 17.1097px;
+        color: #231F20;
+        div{
+            line-height: 55.82px;
+            vertical-align: middle;
+            width: 100%;
+            height: 55.82px;
+            border: 0.428px solid #231F20;
+            margin-right: 3%;
+            &--active{
+                background: #F1F2F2;    
+            }
+            @media only screen and (max-width: 600px){
+                margin: 0;
+            }
+        }
+    }
+    &__title{
+        width: 100%;
+        font-family: Raleway;
+        font-style: normal;
+        font-weight: 800;
+        font-size: 30px;
+        line-height: 44px;
+        color: #231F20;
+        margin-top: 50px;
+        // padding-left: 17.84%;
+        padding-bottom: 0;
+        margin-bottom: 15px;
+
+    }
+
+    &__teamtitle{
+        width: 100%;
+        font-family: Raleway;
+        font-style: normal;
+        font-weight: 800;
+        font-size: 30px;
+        line-height: 44px;
+        color: #231F20;
+        margin-top: 65.43px;
+        // padding-left: 17.84%;
+        padding-bottom: 0;
+        margin-bottom: 30px;
+        // border: 1px solid #cccccc;
+        // border-radius: 3px;
+
+    }
+
+
+    &__labels{
+        font-family: Raleway;
+        font-style: normal;
+        font-weight: 800;
+        font-size: 15px;
+        margin-top: 50px;
+    }
+    &__button{
+        width: 100%;
+        &-wrapper{
+            height: 55.88px;
+            &.first{
+                margin: 0 22px;
+                @media only screen and (max-width: 1264px){
+                    margin: 0;
+                }
+            }
+            .v-btn{
+                border-radius: 0px;
+            }
+        }
+        &.v-btn{
+            border-radius: 0px;
+        }
+        .v-btn{
+            
+            &__content{
+                width: 100%;
+                height: 55.88px;
+                font-family: Raleway;
+                font-style: normal;
+                font-weight: 900;
+                font-size: 17.1097px;
+                line-height: 20px;
+                color: #231F20;
+            }
+            
+        }
+        .v-btn--outlined{
+            border: 0.428px solid #231F20;
+        }
+        
+    }
+    &__input{
+        height: 55.88px;
+        ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            // opacity: 1; /* Firefox */
+            color: #000000;
+        }
+          
+        :-ms-input-placeholder { /* Internet Explorer 10-11 */
+
+        }
+          
+        ::-ms-input-placeholder { /* Microsoft Edge */
+
+        }
+        .v-select__slot{
+            border: 0.428px solid #231F20;
+            height: 55.87px;
+            
+            margin: 0 23px;
+            .v-select__selection {
+                padding-left: 10px;
+            }
+        }
+        .input__slot:before, .v-text-field > .v-input__control > .v-input__slot:after{
+            content: none;
+        }
+        .v-input__slot{
+            border: 0.428px solid #231F20;
+            input{
+                padding-left: 10px;
+                font-family: Raleway;
+                font-style: normal;
+                font-weight: 800;
+                font-size: 17.1097px;
+                line-height: 20px;
+                color: #231F20;
+            }
+        }
+        & > input{
+            border: 0.428px solid #231F20;
+        }
+        input{
+            font-family: Raleway;
+            font-style: normal;
+            font-weight: 900;
+            font-size: 17.1097px;
+            line-height: 20px;
+            color: #231F20;
+            width: inherit;
+            height: inherit;
+            padding: 10px;
+        }
+    }
+    &__class-input{
+        margin: 11.37px 0;
+    }
+    &__sharecode{
+        font-family: Raleway;
+        font-style: normal;
+        font-weight: 900;
+        font-size: 14px;
+        color: #231F20;
+        margin-left: 22.9px;
+        line-height: 55.88px;  
+        vertical-align: middle;
+        &-label{
+            margin-left: -22.74px;
+        }
+    }
+    &__create-button{
+        font-family: Raleway;
+        font-style: normal;
+        font-weight: 800;
+        font-size: 15px;
+        width: 100%;
+    }
+}

@@ -1,1 +1,1 @@
-export {default as CitizenData} from "./CitizenData.vue"
+export { default as CitizenData } from './CitizenData.vue'

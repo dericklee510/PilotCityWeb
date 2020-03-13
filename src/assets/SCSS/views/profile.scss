@@ -1,0 +1,200 @@
+/* PUBLIC-PROFILE - PAGE */
+.pc-profile-page{
+    &--light{
+        background-color: #fff;
+        color: black;
+    }
+    &--dark .v-list-item__title, &--dark{
+        background-color: #414042 !important;
+        color: #fff !important;
+    }
+    &--dark .mdi-chevron-down{
+        color: #C7C8CA !important;
+    }
+}
+
+.pc-profile-page #profileDescription{
+    box-shadow: none;
+    border: 2px dashed #BFBFBF;
+}
+#profileDescription{
+    margin-top: 80px;
+    margin-right: 10%;
+    margin-left: 10%;
+}
+#profileDescription .container{
+    padding: 40px;
+}
+
+#profileFields .v-list-item__title{
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 2.5em;
+    line-height: 1.2em;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.0625em;
+
+}
+#profileFields .v-list-item__subtitle{
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 1.5em;
+    line-height: 1.8em;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.2em;
+}
+#profileFields .pc-badge{
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 1.4em;
+    line-height: 2.1em;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.034em;
+    padding: 0 px;
+}
+.pc-profile-page .v-list{
+    margin-top: 80px;
+    
+}
+#profileFields .v-list-item{
+    padding: 0;
+}
+#profileFields .v-list-group__header .mdi-chevron-down{
+    font-size: 70px;
+}
+
+#profileContainer{
+    position: relative;
+}
+#profileContainer .pc-profile-picture{ 
+    position: absolute;
+}
+
+#profileBanner{
+// MUST set height property, using Doka
+    height: 400px;
+    object-fit: cover;
+    width: 100%;
+}
+#save_profile-button{
+    border: 0.75px dashed #C7C8CA;
+    color: #fff;
+    height: 75px;
+}
+.profile__switch{
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 1.8em;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.312em;
+    &--active{
+        color: #000;
+    }
+    &--inactive{
+        color: #c7c8ca;
+    }
+}
+#profileFields .v-list-item__title{
+    border-bottom: 1px solid darken($color: #C7C8CA, $amount: 20);
+}
+#profileFields .item-subheaders{
+    border-bottom: 1px solid #AE90B0;
+}
+
+/* Media Queries */
+@media only screen and (min-width : 1900px){
+    #profileContainer .pc-profile-picture{
+        &--page{
+            height: 400px;
+            width: 400px;
+        }
+
+    }
+}
+@media only screen and (min-width : 1500px){}
+@media only screen and (max-width : 1240px){
+    #profileContainer .pc-profile-picture{
+        position: absolute;
+        top: 20%;
+        bottom: 0%;
+        right: 0%;
+    }
+
+    #profileContainer .pc-profile-picture--page{
+        width: 200px;
+        height: 200px;
+    }
+
+}
+@media only screen and (max-width :950px){
+    #profileContainer .pc-profile-picture{
+        position: absolute;
+        top: -150px;
+        bottom: 0%;
+        right: 30%;
+    } 
+    .pc-profile-page .v-list{
+        margin-top: 40px;
+    }
+    #profileDetails .pc-badge{
+        border-radius: 0px;
+    }
+    #profileDetails h3, h1{
+        justify-content:center;
+    }
+    #profileDescription{
+        margin: 40px;
+    }
+    #profileSwitch label{
+
+    }
+}
+@media only screen and (max-width : 500px){
+    #profileContainer .pc-profile-picture{
+        position: absolute;
+        top: -75px;
+        bottom: 0%;
+    }
+    #profileContainer .pc-profile-picture--page{
+        width: 100px;
+        height: 100px;
+    }
+    #profileBanner{
+    // MUST set height property, using Doka
+        height: 200px;
+        object-fit: cover;
+        width: 100%;
+    }
+    #profileDescription{
+        margin: 20px;
+    }
+    #profileFields{
+        .v-list-group__header .mdi-chevron-down{
+            font-size: 1.35em;
+        }
+        .v-list-item__title{
+            font-size: 1.35em;
+        }
+        .v-list-item__subtitle{
+            font-size: .75em;
+        }
+        .pc-profile-picture--icon{
+            width: 25px;
+            height: 25px;
+            margin: 0;
+        }
+        .pc-badge{
+            font-size: 0.7em;
+        }
+    }
+
+}

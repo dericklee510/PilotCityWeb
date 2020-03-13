@@ -1,0 +1,117 @@
+#viewcasestudies{
+    &__icon{
+        width: 86.25px;
+        height: 83.26px;
+        position: absolute;
+        margin-top: 2%;
+    }
+    &__contain{
+        height: 100%;
+        border: 0.75px solid #000000;
+        margin-top: 69.29px;
+        margin-bottom: 49.29px;
+        padding-left: 0%;
+        padding-right: 0%;
+        @media (max-width: 610px) {
+            border: none;
+        }
+    }
+    &__check1{
+        margin-top: 2.8%;
+    }
+    &__check2{
+        margin-top: 6%;
+    }
+    &__savebutton{
+        //border box
+        width: 100%;
+        background: #E6E7E8;
+        //for font 
+        font-family: Raleway;
+        font-style: normal;
+        font-weight: 900;
+        font-size: 30px;
+        line-height: 35px;
+        color: #BCBEC0;
+        //to make the border 
+        margin-top: 10.7%;
+    }
+}
+.viewcasestudies{
+    &__title{
+        
+        margin-top:56.78px ;
+        font-family: 'Raleway';
+        font-style: normal;
+        font-weight: 900;
+        font-size: 1.41rem;
+        line-height: 26px;
+        color: #000000;
+        width: 100%;
+        text-align: center;
+        letter-spacing: .05rem;
+    
+    }
+    &__borderline{
+        
+        border-spacing: 0px;
+        position: relative;
+
+        border: 0.75px solid #000000;
+        border-top-color: transparent;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        padding-top: 0%;
+            
+    }
+    &__description{
+        
+        margin-top: 5%;
+        font-family: Raleway;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 1.41rem;
+        color: #949598;
+        width: 100%;
+        text-align: center;
+        line-height: unset;
+    
+    }
+    &__reviewtitle{
+        //text format
+        font-family: Raleway;
+        font-style: normal;
+        font-weight: 800;
+        font-size: 15px;
+        line-height: 18px;
+        color: #231F20;
+        //margin format
+        margin-top: 35px;
+    }
+    &__wholeline{
+        
+        width: 100%;
+        padding-left: 9%;
+        font-family: Raleway;
+        font-style: normal;
+        font-weight: 900;
+        font-size: 15px;
+        // line-height: 18px;
+        color: #231F20;
+        text-transform: uppercase;
+        letter-spacing: .05rem;
+
+    }
+    &__check{
+        width: 18px;
+        height: 18px;
+
+        border: 0.75px solid #231F20;
+
+        margin-right: 4%;
+        color: #231F20;
+    }
+    &__exporticon{
+        margin-left: 4.5%;
+    }
+}

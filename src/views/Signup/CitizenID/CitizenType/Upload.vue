@@ -9,7 +9,7 @@
           row
           wrap
         >
-          <v-flex xs12> 
+          <v-flex xs12>
             <v-card class="signup-profile__card">
               <v-layout
                 justify-center
@@ -46,7 +46,7 @@
                 <v-flex
                   align-self-end
                   class="signup-profile__action"
-                > 
+                >
                   <v-layout
                     justify-center
                   >
@@ -77,14 +77,14 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue"
-import Component from "vue-class-component"
-import {ProfileUpload} from "@/components/Doka"
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import { ProfileUpload } from '@/components/Doka'
 // import { AuthStore } from "@/store"
 
 
 @Component({
-    components:{
+    components: {
         ProfileUpload
     }
 })
@@ -155,5 +155,3 @@ export default class Upload extends Vue {
   }
 }
 </style>
-
-

@@ -1,0 +1,65 @@
+
+.code-modal{
+    & > .row{
+        background-color: #fff;
+        border: 0.428px solid #231F20;
+    }
+    &__container{ 
+        // background-color: #fff;
+        // border: 0.428px solid #231F20;
+        // border-left: none;
+        // border-right: none;
+        width: 584px;
+        height: 322px;
+        max-height: 100%;
+        max-width: 100%;
+    }
+    &__title{
+        margin: 56.78px 0px 40px 0px;
+        font-family: 'Raleway';
+        font-style: normal;
+        font-weight: 800;
+        font-size: 1.75rem;
+        line-height: 2rem;
+        width: 100%;
+        text-align: center;
+        // letter-spacing: .05rem;
+    }
+    &__input{
+        margin-bottom: 40px;
+        height: 55.88px;
+        ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            opacity: 1; /* Firefox */
+        }
+          
+          :-ms-input-placeholder { /* Internet Explorer 10-11 */
+        }
+          
+          ::-ms-input-placeholder { /* Microsoft Edge */
+        }
+        input{
+            font-family: Raleway;
+            font-style: normal;
+            font-weight: 800;
+            font-size: 27.1097px;
+            line-height: 20px;
+            color: #231F20;
+            width: inherit;
+            height: inherit;
+            padding: 10px;
+            text-align: center;
+            
+        }
+    }
+    &__button{
+        height: 40px;
+        button{
+            font-family: Raleway;
+            font-style: normal;
+            font-weight: 800;
+            font-size: 15px;
+            color: #231F20;
+            // width: fit-content;
+        }
+    }
+}

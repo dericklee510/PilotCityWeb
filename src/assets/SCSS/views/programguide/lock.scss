@@ -1,0 +1,84 @@
+.guide__locks{
+    i{
+        transition: ease 0.3s;
+        color: #dbdcde;
+        font-size: 1.5em;
+        &[class*="lock"]{
+            font-size: 2em;
+        }
+    }
+    &-wrapper{
+        position: sticky;
+        top: 0px;
+        height: calc(75vh + 66px);
+        max-height: 100%;
+        & .fa-lock{
+            color: $pc-red;
+        }
+        & .fa-unlock{
+            color: $pc-green;
+        }
+        &:hover, &:focus{
+            & .fa-chevron-right, .fa-chevron-left{
+                color: darken(#dbdcde, 20);
+            }
+        }
+        &:active{
+            & .fa-lock{
+                color: darken($pc-red, 10);
+            }
+            & .fa-unlock{
+                color: darken($pc-green, 10);
+            }
+            & .fa-chevron-right, .fa-chevron-left{
+                color: darken(#dbdcde, 30);
+            }
+        }
+    }
+    & .right{
+        text-align: right;
+        margin-right: 20px;
+        i[class*="lock"]{
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+    }
+    & .left{
+        text-align: left;
+        margin-left: 20px;
+        i[class*="lock"]{
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+    }
+    & .fa-lock-alt{
+        &::before{
+            color: inherit;
+        }
+        &:hover, &:focus{
+            color: $pc-red;
+        }
+        &:active{
+            color: darken($pc-red, 10);
+        }
+        
+    }
+    & .fa-unlock-alt{
+        &::before{
+            color: inherit;
+        }
+        &:hover, &:focus{
+            color: $pc-green;
+        }
+        &:active{
+            color: darken($pc-green, 10);
+        }
+    }
+    
+    @media only screen and (max-width: 600px) {
+        height: 100%;
+        & .right, & .left{
+            margin: 0;
+        }
+    }
+}

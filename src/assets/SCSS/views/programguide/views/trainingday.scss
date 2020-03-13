@@ -1,0 +1,61 @@
+#trainingday{
+    &__icon{
+        width: 80.56px;
+        height: 75px;
+        position: absolute;
+        margin-top: 33px;
+        background-color: white;
+    }
+
+    &__contain{ 
+
+            height: 100%;
+            border: 0.75px solid #000000;
+            margin-top: 69.29px;
+            margin-bottom: 49.29px;
+            padding-left: 0%;
+            padding-right: 0%;
+            @media (max-width: 610px) {
+                border: none;
+            }
+    
+
+    }
+
+
+}
+
+
+.trainingday{
+
+            &__title{
+        
+            margin-top:56.78px ;
+            font-family: 'Raleway';
+            font-style: normal;
+            font-weight: 900;
+            font-size: 1.41rem;
+            line-height: 26px;
+            color: #000000;
+            width: 75%;
+            text-align: center;
+            letter-spacing: .05rem;
+        
+            }
+        
+            &__borderline{
+        
+                border-spacing: 0px;
+                position: relative;
+
+                border: 0.75px solid #000000;
+                border-top-color: transparent;
+                border-left-color: transparent;
+                border-right-color: transparent;
+                padding-top: 0%;
+                
+            }
+
+            
+
+}

@@ -43,8 +43,9 @@
             <v-btn
               :id="CITIZENSTYLES[type]"
               block
-              @click="$router.push({name:`signup.data`, props: {citizenType: type}})"
+              @click="selectCitizenType(type)"
             >
+              <!-- @click="$router.push({name:`signup.data`, props: {citizenType: type}})" -->
               <h2 class="text-capitalize">
                 {{ type }}
               </h2>
@@ -57,17 +58,37 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue"
-import Component from "vue-class-component"
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import { FbStore, GraphqlStore } from '../../../../store'
+import { GeneralUser } from '../../../../store/Database/types/types'
+import { userTypes } from '../../../../store/Database/types/utilities'
 
-
-@Component
+@Component({
+  // beforeRouteEnter(to,from,next){
+  //   const {citizenType} = FbStore.currentUserProfile!
+  //   if(citizenType)
+  //     next({name:'signup.data'})
+  // }
+})
 export default class CitizenType extends Vue {
+  
     private CITIZENSTYLES = {
-        Teacher: "citizen-id__type--teacher", 
-        Employer: "citizen-id__type--employer", 
-        Student: "citizen-id__type--student"
+        Teacher: 'citizen-id__type--teacher',
+        Employer: 'citizen-id__type--employer',
+        Student: 'citizen-id__type--student'
     }
-    private AVAILABLETYPES: string[] = ["Teacher", "Employer", "Student"]
+
+    private AVAILABLETYPES: string[] = ['Employer', 'Teacher', 'Student']
+
+    async selectCitizenType(citizenKey: string) {
+        await FbStore.updateCurrentUserProfile({
+          citizenType: citizenKey.toLowerCase() as userTypes
+        })
+
+        this.$router.push({
+            name: 'signup.data',
+        })
+    }
 }
 </script>

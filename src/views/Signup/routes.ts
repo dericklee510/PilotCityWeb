@@ -1,36 +1,31 @@
-import { AuthStore } from './../../store/index'
-import * as Signup from "../Signup"
 import { RouteConfig } from 'vue-router'
+import { AuthStore } from '../../store/index'
+import * as Signup from '.'
 
 const routes: RouteConfig[] = [
     {
-        name: "signup",
-        path: "/signup",
+        name: 'signup',
+        path: '/signup',
         component: Signup.Main,
-        beforeEnter(to,from,next): void{
-            AuthStore.user?next({name:'signup.id'}):next()
+        beforeEnter(to, from, next): void{
+            AuthStore.user ? next({ name: 'signup.type' }) : next()
         }
     },
     {
-        name: "signup.id",
-        path: `/signup/citizen-id`,
+        name: 'signup.type',
+        path: '/signup/citizen-id',
         component: Signup.children.CitizenID,
-        children: [
-            {
-                name: "signup.type",
-                path: ``,
-                component: Signup.children.CitizenType
-            },
-            {
-                name: "signup.data",
-                path: `data`,
-                component: Signup.children.CitizenData,
-                props: {citizenType: `Teacher`}
-            }
-        ],
-        beforeEnter(to,from,next): void{
-            AuthStore.user?next():next({name:'signup'})
+        beforeEnter(to, from, next): void{
+            AuthStore.user ? next() : next({ name: 'login' })
         }
-    }
+    },
+    // {
+    //     name: 'signup.data',
+    //     path: 'data',
+    //     component: Signup.children.CitizenData,
+    //     beforeEnter(to, from, next): void{
+    //         AuthStore.user ? next() : next({ name: 'signup' })
+    //     }
+    // }
 ]
 export default routes
