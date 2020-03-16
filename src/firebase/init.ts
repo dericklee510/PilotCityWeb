@@ -12,7 +12,7 @@ import 'firebase/storage'
 // var config = new ApplicationConfig(process.env.NODE_ENV)
 const config = new ApplicationConfig('production')
 export const firebaseApp = firebase.initializeApp(config)
-if (process.env.NODE_ENV === 'development') firebaseApp.functions().useFunctionsEmulator('http://localhost:5001')
+// if (process.env.NODE_ENV === 'development') firebaseApp.functions()
 
 export default firebaseApp.firestore()
 export {firebase}
