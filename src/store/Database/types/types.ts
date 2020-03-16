@@ -255,52 +255,34 @@ export interface StudentForm {
         ownedTech: string
         internetAccessMethod: string
     }
+    exitForm?: {
+        traditional: number
+        joinAgain: number
+        recommend: number
+        graduating:boolean
+        communityCollegeOffer:boolean
+        csOffer:boolean
+        csFuture:string
+        internshipOffer:boolean
+        internshipApplication: {
+            summerPlans:boolean
+            summerSchedule:{
+                begin:Date
+                end:Date
+            }
+            summerJob:boolean
+            summerJobHours:number
+            summerCollegeClasses:boolean
+            summerCollegeName:string
+            summerSchool:boolean
+            summerSchoolSchedule:{
+                begin:Date
+                end:Date
+            }
+        }
+    }
 }
 export namespace StudentForm {
-    export type signupForm = {
-        gradeLevel: string
-        teacher: string
-        schoolName: string
-        schoolDistrict: string
-        birthDate: Date | firebase.firestore.Timestamp
-        superGender: string
-        ethnicity: string
-        guardianFirstName: string
-        guardianLastName: string
-        guardianRelationship: string
-        primaryHomeLanguage: string
-        address: string
-    }
-    export type programForm = {
-        internshipInterest: string
-        compensationType: string[],
-        freeLunch: string,
-        resume: string[],
-        postHighPlan: string
-        agricultureNaturalResources: number
-        artsMediaAndEntertainment: number
-        buildingAndConstructionTrades: number
-        businessAndFinance: number
-        educationChildhoodDevelopmentFamilyServices: number
-        energyEnvironmentUtilities: number
-        engineeringArchitecture: number
-        fashionInteriorDesign: number
-        healthScienceMedicalTechnology: number
-        hospitalityTourismRecreation: number
-        informationCommunicationTechnologies: number
-        manufacturingProductDevelopment: number
-        marketingSalesService: number
-        publicServices: number
-        transportation: number
-        technicianEngineer: number
-        marketingSales: number
-        researchDevelopment: number
-        operationsManagement: number
-        communityCustomerSuccess: number
-        transport: string
-        ownedTech: string
-        internetAccessMethod: string
-    }
     export namespace signupForm {
         export type teacher = string
         export type schoolName = string
