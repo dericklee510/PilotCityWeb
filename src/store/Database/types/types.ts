@@ -1,3 +1,4 @@
+
 import { AgendaTemplate, ProgramEvent, DesignLog, TimeLog, NamedLink } from './utilities';
 import { AutoCompleteAddress } from '@/components/GoogleMaps';
 
@@ -261,10 +262,11 @@ export namespace StudentForm {
         joinAgain: number
         recommend: number
         graduating: boolean
+        postHighPlan:string
         communityCollegeOffer: boolean
         csOffer: boolean
         csFuture: string
-        internshipOffer: boolean
+        autoApp: boolean
         internshipApplication: {
             summerPlans: boolean
             summerSchedule: {
