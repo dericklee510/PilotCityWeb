@@ -1,4 +1,3 @@
-
 import { AgendaTemplate, ProgramEvent, DesignLog, TimeLog, NamedLink } from './utilities';
 import { AutoCompleteAddress } from '@/components/GoogleMaps';
 
@@ -210,22 +209,24 @@ export interface Project {
     presentationRatingE?: number
     lastUpdate: firebase.firestore.Timestamp | firebase.firestore.FieldValue
 }
-export interface StudentForm {
-    signupForm: {
+export interface StudentForm{
+}
+export namespace StudentForm {
+    export interface signupForm {
         gradeLevel: string
-        teacher: string,
-        schoolName: string,
-        schoolDistrict: string,
+        teacher: string
+        schoolName: string
+        schoolDistrict: string
         birthDate: Date | firebase.firestore.Timestamp
         superGender: string
-        ethnicity: string,
-        guardianFirstName: string,
-        guardianLastName: string,
+        ethnicity: string
+        guardianFirstName: string
+        guardianLastName: string
         guardianRelationship: string
         primaryHomeLanguage: string
         address: string
     }
-    programForm?: {
+    export interface programForm{
         internshipInterest: string
         compensationType: string[],
         freeLunch: string,
@@ -255,75 +256,31 @@ export interface StudentForm {
         ownedTech: string
         internetAccessMethod: string
     }
-    exitForm?: {
+    export interface exitForm {
         traditional: number
         joinAgain: number
         recommend: number
-        graduating:boolean
-        communityCollegeOffer:boolean
-        csOffer:boolean
-        csFuture:string
-        internshipOffer:boolean
+        graduating: boolean
+        communityCollegeOffer: boolean
+        csOffer: boolean
+        csFuture: string
+        internshipOffer: boolean
         internshipApplication: {
-            summerPlans:boolean
-            summerSchedule:{
-                begin:Date
-                end:Date
+            summerPlans: boolean
+            summerSchedule: {
+                begin: Date
+                end: Date
             }
-            summerJob:boolean
-            summerJobHours:number
-            summerCollegeClasses:boolean
-            summerCollegeName:string
-            summerSchool:boolean
-            summerSchoolSchedule:{
-                begin:Date
-                end:Date
+            summerJob: boolean
+            summerJobHours: number
+            summerCollegeClasses: boolean
+            summerCollegeName: string
+            summerSchool: boolean
+            summerSchoolSchedule: {
+                begin: Date
+                end: Date
             }
         }
     }
 }
-export namespace StudentForm {
-    export namespace signupForm {
-        export type teacher = string
-        export type schoolName = string
-        export type schoolDistrict = string
-        export type birthDate = Date | firebase.firestore.Timestamp
-        export type superGender = string
-        export type ethnicity = string
-        export type guardianFirstName = string
-        export type guardianLastName = string
-        export type guardianRelationship = string
-        export type primaryHomeLanguage = string
-        export type address = string
-    }
-    export namespace programForm {
-        export type internshipInterest = string
-        export type compensationType = string[]
-        export type freeLunch = string
-        export type resume = string[]
-        export type postHighPlan = string
-        export type agricultureNaturalResources = number
-        export type artsMediaAndEntertainment = number
-        export type buildingAndConstructionTrades = number
-        export type businessAndFinance = number
-        export type educationChildhoodDevelopmentFamilyServices = number
-        export type energyEnvironmentUtilities = number
-        export type engineeringArchitecture = number
-        export type fashionInteriorDesign = number
-        export type healthScienceMedicalTechnology = number
-        export type hospitalityTourismRecreation = number
-        export type informationCommunicationTechnologies = number
-        export type manufacturingProductDevelopment = number
-        export type marketingSalesService = number
-        export type publicServices = number
-        export type transportation = number
-        export type technicianEngineer= number
-        export type marketingSales = number
-        export type researchDevelopment = number
-        export type operationsManagement = number
-        export type communityCustomerSuccess = number
-        export type transport = string
-        export type ownedTech = string
-        export type internetAccessMethod = string
-    }
-}
+

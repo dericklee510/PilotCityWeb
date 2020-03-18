@@ -316,10 +316,9 @@
             <v-row
               class="studentid__questiontitle mt-10"
               justify="center"
-              v-if="mobilenumber"
             >Do you have any additional Summer plans?</v-row>
 
-            <v-row v-if="mobilenumber" no-gutters justify="center">
+            <v-row  no-gutters justify="center">
               <v-col cols="12" sm="9" class="pa-5">
                   <v-switch
                     v-model="summervacation"
@@ -375,12 +374,28 @@
 
                   <v-row v-if="summercollegeclass" justify="center">
                     <v-col cols="12" sm="9">
-                      <v-text-field
-                        v-model="dateRangeText"
-                        label="When does it start and end?"
-                        prepend-icon="event"
-                        readonly
-                      ></v-text-field>
+                      <v-menu
+          v-model="menu1"
+          :close-on-content-click="false"
+          max-width="290"
+        >
+          <template v-slot:activator="{ on }">
+            <v-text-field
+              :value="date | moment('calendar')"
+              clearable
+              label="When does it start and end?"
+              prepend-icon="event"
+              readonly
+              v-on="on"
+              @click:clear="date = null"
+            ></v-text-field>
+          </template>
+          <v-date-picker
+            v-model="date"
+            @change="menu1 = false"
+            range
+          ></v-date-picker>
+        </v-menu>
                       <!-- model: {{ dates }} -->
                     </v-col>
                   </v-row>
@@ -1105,7 +1120,8 @@ import { startCase } from "lodash";
 import { StudentForm } from "../../../../store/Database/types/types";
 import { firebase } from "@/firebase/init";
 import { NextNode } from "@/views/ProgramGuide/components";
-
+import { keys } from 'ts-transformer-keys';
+ import moment from 'moment'
 @Component<StudentID>({
   components: {
     ValidationObserver,
@@ -1196,135 +1212,21 @@ import { NextNode } from "@/views/ProgramGuide/components";
   })
 })
 export default class StudentID extends Vue {
-  programForm!: StudentForm.programForm;
-
-  internshipInterest = this.programForm?.internshipInterest || "";
-  compensationType = this.programForm?.compensationType || [];
-  freeLunch = this.programForm?.freeLunch || "";
-  resume = this.programForm?.resume || [];
-  postHighPlan = this.programForm?.postHighPlan || "";
-  agricultureNaturalResources =
-    this.programForm?.agricultureNaturalResources ||
-    ((null as unknown) as number);
-  artsMediaAndEntertainment =
-    this.programForm?.artsMediaAndEntertainment ||
-    ((null as unknown) as number);
-  buildingAndConstructionTrades =
-    this.programForm?.buildingAndConstructionTrades ||
-    ((null as unknown) as number);
-  businessAndFinance =
-    this.programForm?.businessAndFinance || ((null as unknown) as number);
-  educationChildhoodDevelopmentFamilyServices =
-    this.programForm?.educationChildhoodDevelopmentFamilyServices ||
-    ((null as unknown) as number);
-  energyEnvironmentUtilities =
-    this.programForm?.energyEnvironmentUtilities ||
-    ((null as unknown) as number);
-  engineeringArchitecture =
-    this.programForm?.engineeringArchitecture || ((null as unknown) as number);
-  fashionInteriorDesign =
-    this.programForm?.fashionInteriorDesign || ((null as unknown) as number);
-  healthScienceMedicalTechnology =
-    this.programForm?.healthScienceMedicalTechnology ||
-    ((null as unknown) as number);
-  hospitalityTourismRecreation =
-    this.programForm?.hospitalityTourismRecreation ||
-    ((null as unknown) as number);
-  informationCommunicationTechnologies =
-    this.programForm?.informationCommunicationTechnologies ||
-    ((null as unknown) as number);
-  manufacturingProductDevelopment =
-    this.programForm?.manufacturingProductDevelopment ||
-    ((null as unknown) as number);
-  marketingSalesService =
-    this.programForm?.marketingSalesService || ((null as unknown) as number);
-  publicServices =
-    this.programForm?.publicServices || ((null as unknown) as number);
-  transportation =
-    this.programForm?.transportation || ((null as unknown) as number);
-  technicianEngineer =
-    this.programForm?.technicianEngineer || ((null as unknown) as number);
-  marketingSales =
-    this.programForm?.marketingSales || ((null as unknown) as number);
-  researchDevelopment =
-    this.programForm?.researchDevelopment || ((null as unknown) as number);
-  operationsManagement =
-    this.programForm?.operationsManagement || ((null as unknown) as number);
-  communityCustomerSuccess =
-    this.programForm?.communityCustomerSuccess || ((null as unknown) as number);
-  transport = this.programForm?.transport || "";
-  ownedTech = this.programForm?.ownedTech || "";
-  internetAccessMethod = this.programForm?.internetAccessMethod || "";
-  async submit() {
-    let {
-      internshipInterest,
-      compensationType,
-      freeLunch,
-      resume,
-      postHighPlan,
-      agricultureNaturalResources,
-      artsMediaAndEntertainment,
-      buildingAndConstructionTrades,
-      businessAndFinance,
-      educationChildhoodDevelopmentFamilyServices,
-      energyEnvironmentUtilities,
-      engineeringArchitecture,
-      fashionInteriorDesign,
-      healthScienceMedicalTechnology,
-      hospitalityTourismRecreation,
-      informationCommunicationTechnologies,
-      manufacturingProductDevelopment,
-      marketingSalesService,
-      publicServices,
-      transportation,
-      technicianEngineer,
-      marketingSales,
-      researchDevelopment,
-      operationsManagement,
-      communityCustomerSuccess,
-      transport,
-      ownedTech,
-      internetAccessMethod
-    } = this;
-    let programForm: StudentForm.programForm = {
-      internshipInterest,
-      compensationType,
-      freeLunch,
-      resume,
-      postHighPlan,
-      agricultureNaturalResources,
-      artsMediaAndEntertainment,
-      buildingAndConstructionTrades,
-      businessAndFinance,
-      educationChildhoodDevelopmentFamilyServices,
-      energyEnvironmentUtilities,
-      engineeringArchitecture,
-      fashionInteriorDesign,
-      healthScienceMedicalTechnology,
-      hospitalityTourismRecreation,
-      informationCommunicationTechnologies,
-      manufacturingProductDevelopment,
-      marketingSalesService,
-      publicServices,
-      transportation,
-      technicianEngineer,
-      marketingSales,
-      researchDevelopment,
-      operationsManagement,
-      communityCustomerSuccess,
-      transport,
-      ownedTech,
-      internetAccessMethod
-    };
-    await FbStore.firestore
-      .collection("StudentForm")
-      .doc(FbStore.FBUser!.uid)
-      .update<StudentForm>({
-        programForm
-      });
-    await FbStore.updateCurrentStudentClassroom({
-      finishedSignupForm: firebase.firestore.FieldValue.serverTimestamp()
-    });
+  created(){
   }
+  date = null
+  programForm!: StudentForm.programForm;
+  menu1 = false
+  // async submit() {
+  //   await FbStore.firestore
+  //     .collection("StudentForm")
+  //     .doc(FbStore.FBUser!.uid)
+  //     .update<StudentForm>({
+  //       programForm
+  //     });
+  //   await FbStore.updateCurrentStudentClassroom({
+  //     finishedSignupForm: firebase.firestore.FieldValue.serverTimestamp()
+  //   });
+  // }
 }
 </script>
