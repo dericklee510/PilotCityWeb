@@ -1,36 +1,66 @@
 <template>
   <ValidationObserver v-slot="{validate}">
-    <v-row justify="center" class="mt-12">
-      <img id="citizenid__exitsurveyicon" src="@/assets/exitsurvey.png" />
+    <v-row
+      justify="center"
+      class="mt-12"
+    >
+      <img
+        id="citizenid__exitsurveyicon"
+        src="@/assets/exitsurvey.png"
+      >
 
-      <v-col id="citizenid__containtop" cols="8">
-        <v-row justify="center" class="mr-auto ml-auto citizenid__title">COMPLETE THE PROGRAM</v-row>
+      <v-col
+        id="citizenid__containtop"
+        cols="8"
+      >
+        <v-row
+          justify="center"
+          class="mr-auto ml-auto citizenid__title"
+        >
+          COMPLETE THE PROGRAM
+        </v-row>
       </v-col>
 
-      <v-col id="citizenid__containbottom" cols="8">
-        <v-row justify="center" class="pt-10">
+      <v-col
+        id="citizenid__containbottom"
+        cols="8"
+      >
+        <v-row
+          justify="center"
+          class="pt-10"
+        >
           <v-col cols="9">
-
             <!-- PROGRAM INFORMATION -->
             <v-row
               justify="center"
               class="mr-auto ml-auto mt-5 mb-12 studentid__categorytitle"
-            >Share your experience, qualify for opportunities and auto-apply for internship</v-row>
+            >
+              Share your experience, qualify for opportunities and auto-apply for internship
+            </v-row>
 
-        <v-row
-          justify="center"
-          class="prompt__divider ml-auto mr-auto mt-5 mb-12"
-        />
+            <v-row
+              justify="center"
+              class="prompt__divider ml-auto mr-auto mt-5 mb-12"
+            />
 
             <!-- PROGRAM OUTCOME 1 -->
 
             <v-row
               class="studentid__questiontitle mt-12"
               justify="center"
-            >Would you prefer this program over traditional learning?</v-row>
+            >
+              Would you prefer this program over traditional learning?
+            </v-row>
 
-            <v-row no-gutters justify="center" class="mt-5 mb-5">
-              <ValidationProvider v-slot="{errors}" rules="required">
+            <v-row
+              no-gutters
+              justify="center"
+              class="mt-5 mb-5"
+            >
+              <ValidationProvider
+                v-slot="{errors}"
+                rules="required"
+              >
                 <v-rating
                   v-model="outcome1"
                   :length="length"
@@ -53,10 +83,19 @@
             <v-row
               class="studentid__questiontitle mt-10"
               justify="center"
-            >Would you like to join our program next year?</v-row>
+            >
+              Would you like to join our program next year?
+            </v-row>
 
-            <v-row no-gutters justify="center" class="mt-5 mb-5">
-              <ValidationProvider v-slot="{errors}" rules="required">
+            <v-row
+              no-gutters
+              justify="center"
+              class="mt-5 mb-5"
+            >
+              <ValidationProvider
+                v-slot="{errors}"
+                rules="required"
+              >
                 <v-rating
                   v-model="outcome2"
                   :length="length"
@@ -79,10 +118,19 @@
             <v-row
               class="studentid__questiontitle mt-10"
               justify="center"
-            >Would you recommend this program to your other teachers?</v-row>
+            >
+              Would you recommend this program to your other teachers?
+            </v-row>
 
-            <v-row no-gutters justify="center" class="mt-5 mb-5">
-              <ValidationProvider v-slot="{errors}" rules="required">
+            <v-row
+              no-gutters
+              justify="center"
+              class="mt-5 mb-5"
+            >
+              <ValidationProvider
+                v-slot="{errors}"
+                rules="required"
+              >
                 <v-rating
                   v-model="outcome3"
                   :length="length"
@@ -100,102 +148,136 @@
               </ValidationProvider>
             </v-row>
 
-<!-- GRADUATING SENIOR V2 -->
+            <!-- GRADUATING SENIOR V2 -->
 
             <v-row
               class="studentid__questiontitle mt-10"
               justify="center"
-            >Are you a graduating high school senior?</v-row>
+            >
+              Are you a graduating high school senior?
+            </v-row>
 
 
-<v-row no-gutters justify="center">
-          <span class="agenda-view__switchlabel">NO</span>
-                  <v-switch
-                    v-model="graduatingsenior"
-                    inset
-                  ></v-switch>
-          <span class="agenda-view__switchlabel">YES</span>
-        </v-row>
+            <v-row
+              no-gutters
+              justify="center"
+            >
+              <span class="agenda-view__switchlabel">NO</span>
+              <v-switch
+                v-model="graduatingsenior"
+                inset
+              />
+              <span class="agenda-view__switchlabel">YES</span>
+            </v-row>
 
 
-                  <v-row v-if="graduatingsenior" no-gutters justify="center mt-2">
-                    <v-col cols="12" sm="7">
-                      <v-text-field
-                        label="Where are you going after high school?"
-                        hint="Describe or enter name of school, college or program"
-                        persistent-hint
-                        outlined
-                      ></v-text-field>
-                    </v-col>
-                  </v-row>
+            <v-row
+              v-if="graduatingsenior"
+              no-gutters
+              justify="center mt-2"
+            >
+              <v-col
+                cols="12"
+                sm="7"
+              >
+                <v-text-field
+                  label="Where are you going after high school?"
+                  hint="Describe or enter name of school, college or program"
+                  persistent-hint
+                  outlined
+                />
+              </v-col>
+            </v-row>
 
-<!-- COMMUNITY COLLEGE -->
+            <!-- COMMUNITY COLLEGE -->
 
             <v-row
               class="studentid__questiontitle mt-7"
               justify="center"
-            >Automatically qualify to take classes at your local community college?</v-row>
+            >
+              Automatically qualify to take classes at your local community college?
+            </v-row>
 
 
-<v-row no-gutters justify="center">
-          <span class="agenda-view__switchlabel">NO</span>
-                  <v-switch
-                    v-model="communitycollege"
-                    inset
-                  ></v-switch>
-          <span class="agenda-view__switchlabel">YES</span>
-        </v-row>
+            <v-row
+              no-gutters
+              justify="center"
+            >
+              <span class="agenda-view__switchlabel">NO</span>
+              <v-switch
+                v-model="communitycollege"
+                inset
+              />
+              <span class="agenda-view__switchlabel">YES</span>
+            </v-row>
 
 
-<!-- CODING SCHOOL V2 -->
+            <!-- CODING SCHOOL V2 -->
 
             <v-row
               class="studentid__questiontitle mt-7"
               justify="center"
-            >Automatically qualify for coding or computer science programs?</v-row>
+            >
+              Automatically qualify for coding or computer science programs?
+            </v-row>
 
-<v-row no-gutters justify="center">
-          <span class="agenda-view__switchlabel">NO</span>
-                  <v-switch
-                    v-model="codingschool"
-                    inset
-                  ></v-switch>
-          <span class="agenda-view__switchlabel">YES</span>
-        </v-row>
-
-
-
-                  <v-row v-if="codingschool" no-gutters justify="center mt-2">
-                    <v-col cols="12" sm="7">
-                      <v-text-field
-                        label="What future do you see in this career path?"
-
-                        persistent-hint
-                        outlined
-                      ></v-text-field>
-                    </v-col>
-                  </v-row>
+            <v-row
+              no-gutters
+              justify="center"
+            >
+              <span class="agenda-view__switchlabel">NO</span>
+              <v-switch
+                v-model="codingschool"
+                inset
+              />
+              <span class="agenda-view__switchlabel">YES</span>
+            </v-row>
 
 
 
+            <v-row
+              v-if="codingschool"
+              no-gutters
+              justify="center mt-2"
+            >
+              <v-col
+                cols="12"
+                sm="7"
+              >
+                <v-text-field
+                  label="What future do you see in this career path?"
+
+                  persistent-hint
+                  outlined
+                />
+              </v-col>
+            </v-row>
 
 
-<!-- AUTO APP APPLY>? -->
+
+
+
+            <!-- AUTO APP APPLY>? -->
 
             <v-row
               class="studentid__questiontitle mt-7"
               justify="center"
-            >Automatically apply for an internship with your employer?</v-row>
+            >
+              Automatically apply for an internship with your employer?
+            </v-row>
 
-<v-row no-gutters justify="center">
-          <span class="agenda-view__switchlabel">NO</span>
-                  <v-switch
-                    v-model="autoapp"
-                    inset
-                    value="true"
-                  ></v-switch>
-          <span class="agenda-view__switchlabel">YES</span>
-        </v-row>
+            <v-row
+              no-gutters
+              justify="center"
+            >
+              <span class="agenda-view__switchlabel">NO</span>
+              <v-switch
+                v-model="autoapp"
+                inset
+                value="true"
+              />
+              <span class="agenda-view__switchlabel">YES</span>
+            </v-row>
 
 
 
@@ -235,9 +317,9 @@
                     :label="`Interested in computer science or being a coder?`"
                   ></v-switch> -->
 
-                  <!-- CODING SCHOOL -->
+            <!-- CODING SCHOOL -->
 
-                  <!-- <v-row no-gutters justify="center" v-if="codingschool">
+            <!-- <v-row no-gutters justify="center" v-if="codingschool">
                     <v-col cols="12" sm="7">
                       <ValidationProvider v-slot="{errors}" rules="required">
                         <v-checkbox
@@ -273,67 +355,107 @@
 
 
             <!-- AUTO-APP OPT-IN VIA MOBILE VERIFICATION -->
-<v-col v-if="autoapp" class="auto-app mt-12 pt-12 pb-12">
-            <v-row
-              justify="center"
-              class="mr-auto ml-auto mb-12 studentid__categorytitle"
-            >Auto-apply for an internship</v-row>
+            <v-col
+              v-if="autoapp"
+              class="auto-app mt-12 pt-12 pb-12"
+            >
+              <v-row
+                justify="center"
+                class="mr-auto ml-auto mb-12 studentid__categorytitle"
+              >
+                Auto-apply for an internship
+              </v-row>
 
 
-        <!-- <v-row
+              <!-- <v-row
           justify="center"
           class="prompt__dividerexitsurvey ml-auto mr-auto mt-5 mb-12"
         /> -->
 
 
-            <!-- <v-row class="studentid__questiontitle" justify="center">Verify your mobile phone number</v-row> -->
+              <!-- <v-row class="studentid__questiontitle" justify="center">Verify your mobile phone number</v-row> -->
 
-            <v-row no-gutters justify="center">
-              <v-col class="mr-2" cols="9" sm="5">
-                <v-text-field v-model="mobilenumber" label="Verify your mobile number" hint="(555) 555-5555" persistent-hint outlined></v-text-field>
-              </v-col>
-
-              <v-col cols="3" sm="2">
-                <v-btn x-large dark depressed>Verify
-                  </v-btn>
-
+              <v-row
+                no-gutters
+                justify="center"
+              >
+                <v-col
+                  class="mr-2"
+                  cols="9"
+                  sm="5"
+                >
+                  <v-text-field
+                    v-model="mobilenumber"
+                    label="Verify your mobile number"
+                    hint="(555) 555-5555"
+                    persistent-hint
+                    outlined
+                  />
                 </v-col>
-            </v-row>
 
-            <v-row
-              class="studentid__nomobile mt-4"
-              justify="center"
-              href="https://www.pilotcity.com/library/tips-to-prep-60-second-pitch"
-              target="_blank"
-            >
-              <a>I don't have a mobile number</a>
-            </v-row>
+                <v-col
+                  cols="3"
+                  sm="2"
+                >
+                  <v-btn
+                    x-large
+                    dark
+                    depressed
+                  >
+                    Verify
+                  </v-btn>
+                </v-col>
+              </v-row>
+
+              <v-row
+                class="studentid__nomobile mt-4"
+                justify="center"
+                href="https://www.pilotcity.com/library/tips-to-prep-60-second-pitch"
+                target="_blank"
+              >
+                <a>I don't have a mobile number</a>
+              </v-row>
 
 
 
-            <!-- SUMMER PLANS -->
+              <!-- SUMMER PLANS -->
 
-            <v-row
-              class="studentid__questiontitle mt-10"
-              justify="center"
-            >Do you have any additional Summer plans?</v-row>
+              <v-row
+                class="studentid__questiontitle mt-10"
+                justify="center"
+              >
+                Do you have any additional Summer plans?
+              </v-row>
 
-            <v-row  no-gutters justify="center">
-              <v-col cols="12" sm="9" class="pa-5">
+              <v-row
+                no-gutters
+                justify="center"
+              >
+                <v-col
+                  cols="12"
+                  sm="9"
+                  class="pa-5"
+                >
                   <v-switch
                     v-model="summervacation"
                     inset
                     :label="`Do you plan on going on Summer Vacation?`"
-                  ></v-switch>
+                  />
 
-                  <v-row v-if="summervacation" justify="center">
-                    <v-col cols="12" sm="9">
+                  <v-row
+                    v-if="summervacation"
+                    justify="center"
+                  >
+                    <v-col
+                      cols="12"
+                      sm="9"
+                    >
                       <v-text-field
                         v-model="dateRangeText"
                         label="When do you leave and come back?"
                         prepend-icon="event"
                         readonly
-                      ></v-text-field>
+                      />
                       <!-- model: {{ dates }} -->
                     </v-col>
                   </v-row>
@@ -342,16 +464,23 @@
                     v-model="summerjob"
                     inset
                     :label="`Do you plan on getting a Summer Job?`"
-                  ></v-switch>
+                  />
 
-                  <v-row v-if="summerjob" no-gutters justify="center mt-2">
-                    <v-col cols="12" sm="9">
+                  <v-row
+                    v-if="summerjob"
+                    no-gutters
+                    justify="center mt-2"
+                  >
+                    <v-col
+                      cols="12"
+                      sm="9"
+                    >
                       <v-text-field
                         label="How many hours per week?"
                         hint="Enter number of hours only"
                         persistent-hint
                         outlined
-                      ></v-text-field>
+                      />
                     </v-col>
                   </v-row>
 
@@ -359,43 +488,56 @@
                     v-model="summercollegeclass"
                     inset
                     :label="`Do you plan on taking Summer College Classes?`"
-                  ></v-switch>
+                  />
 
-                  <v-row v-if="summercollegeclass" no-gutters justify="center mt-2">
-                    <v-col cols="12" sm="9">
+                  <v-row
+                    v-if="summercollegeclass"
+                    no-gutters
+                    justify="center mt-2"
+                  >
+                    <v-col
+                      cols="12"
+                      sm="9"
+                    >
                       <v-text-field
                         label="College Name"
                         hint="Enter the name of the college"
                         persistent-hint
                         outlined
-                      ></v-text-field>
+                      />
                     </v-col>
                   </v-row>
 
-                  <v-row v-if="summercollegeclass" justify="center">
-                    <v-col cols="12" sm="9">
+                  <v-row
+                    v-if="summercollegeclass"
+                    justify="center"
+                  >
+                    <v-col
+                      cols="12"
+                      sm="9"
+                    >
                       <v-menu
-          v-model="menu1"
-          :close-on-content-click="false"
-          max-width="290"
-        >
-          <template v-slot:activator="{ on }">
-            <v-text-field
-              :value="date | moment('calendar')"
-              clearable
-              label="When does it start and end?"
-              prepend-icon="event"
-              readonly
-              v-on="on"
-              @click:clear="date = null"
-            ></v-text-field>
-          </template>
-          <v-date-picker
-            v-model="date"
-            @change="menu1 = false"
-            range
-          ></v-date-picker>
-        </v-menu>
+                        v-model="menu1"
+                        :close-on-content-click="false"
+                        max-width="290"
+                      >
+                        <template v-slot:activator="{ on }">
+                          <v-text-field
+                            :value="date | moment('calendar')"
+                            clearable
+                            label="When does it start and end?"
+                            prepend-icon="event"
+                            readonly
+                            v-on="on"
+                            @click:clear="date = null"
+                          />
+                        </template>
+                        <v-date-picker
+                          v-model="date"
+                          range
+                          @change="menu1 = false"
+                        />
+                      </v-menu>
                       <!-- model: {{ dates }} -->
                     </v-col>
                   </v-row>
@@ -404,35 +546,40 @@
                     v-model="summerschool"
                     inset
                     :label="`Will you have to take Summer School?`"
-                  ></v-switch>
+                  />
 
-                  <v-row v-if="summerschool" justify="center">
-                    <v-col cols="12" sm="9">
+                  <v-row
+                    v-if="summerschool"
+                    justify="center"
+                  >
+                    <v-col
+                      cols="12"
+                      sm="9"
+                    >
                       <v-text-field
                         v-model="dateRangeText"
                         label="When does it start and end?"
                         prepend-icon="event"
                         readonly
-                      ></v-text-field>
+                      />
                       <!-- model: {{ dates }} -->
                     </v-col>
                   </v-row>
-
-              </v-col>
-            </v-row>
-
+                </v-col>
+              </v-row>
             </v-col>
-
-
-
-
-
-
           </v-col>
         </v-row>
-        <v-row class="mt-10 mb-10" no-gutters justify="center">
+        <v-row
+          class="mt-10 mb-10"
+          no-gutters
+          justify="center"
+        >
           <v-col cols="4">
-            <NextNode v-slot="{setNext}" @CallbackComplete="$emit('nextNode')">
+            <NextNode
+              v-slot="{setNext}"
+              @CallbackComplete="$emit('nextNode')"
+            >
               <v-btn
                 id="editcasestudies__button"
                 class="mb-10 mt-8"
@@ -442,7 +589,9 @@
                 outlined
                 height="73.5px"
                 @click="validate().then(val=>{if(val)setNext(submit)})"
-              >SUBMIT</v-btn>
+              >
+                SUBMIT
+              </v-btn>
             </NextNode>
           </v-col>
         </v-row>

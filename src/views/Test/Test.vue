@@ -11,7 +11,6 @@
           v-model="phone"
           @keyup.enter="sendCode(phone)"
         />
-        <h1> your number is: {{ phone }} </h1>
       </v-col>
       <v-col cols="12">
         <h2>Enter Verification Code</h2>
