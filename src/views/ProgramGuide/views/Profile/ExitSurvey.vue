@@ -1,5 +1,5 @@
 <template>
-  <ValidationObserver v-slot="{validate}">
+  <ValidationObserver v-slot="{ validate }">
     <v-row
       justify="center"
       class="mt-12"
@@ -58,7 +58,7 @@
               class="mt-5 mb-5"
             >
               <ValidationProvider
-                v-slot="{errors}"
+                v-slot="{ errors }"
                 rules="required"
               >
                 <v-rating
@@ -93,7 +93,7 @@
               class="mt-5 mb-5"
             >
               <ValidationProvider
-                v-slot="{errors}"
+                v-slot="{ errors }"
                 rules="required"
               >
                 <v-rating
@@ -128,7 +128,7 @@
               class="mt-5 mb-5"
             >
               <ValidationProvider
-                v-slot="{errors}"
+                v-slot="{ errors }"
                 rules="required"
               >
                 <v-rating
@@ -157,7 +157,6 @@
               Are you a graduating high school senior?
             </v-row>
 
-
             <v-row
               no-gutters
               justify="center"
@@ -170,18 +169,17 @@
               <span class="agenda-view__switchlabel">YES</span>
             </v-row>
 
-
             <v-row
               v-if="graduating"
               no-gutters
-              justify="center mt-2"
+              justify="center"
             >
               <v-col
                 cols="12"
                 sm="7"
               >
                 <ValidationProvider
-                  v-slot="{errors}"
+                  v-slot="{ errors }"
                   rules="required"
                 >
                   <v-text-field
@@ -205,7 +203,6 @@
               Automatically qualify to take classes at your local community college?
             </v-row>
 
-
             <v-row
               no-gutters
               justify="center"
@@ -217,7 +214,6 @@
               />
               <span class="agenda-view__switchlabel">YES</span>
             </v-row>
-
 
             <!-- CODING SCHOOL V2 -->
 
@@ -240,19 +236,17 @@
               <span class="agenda-view__switchlabel">YES</span>
             </v-row>
 
-
-
             <v-row
               v-if="csOffer"
               no-gutters
-              justify="center mt-2"
+              justify="center"
             >
               <v-col
                 cols="12"
                 sm="7"
               >
                 <ValidationProvider
-                  v-slot="{errors}"
+                  v-slot="{ errors }"
                   rules="required"
                 >
                   <v-text-field
@@ -265,10 +259,6 @@
                 </ValidationProvider>
               </v-col>
             </v-row>
-
-
-
-
 
             <!-- AUTO APP APPLY>? -->
 
@@ -304,12 +294,10 @@
                 Auto-apply for an internship
               </v-row>
 
-
               <!-- <v-row
           justify="center"
           class="prompt__dividerexitsurvey ml-auto mr-auto mt-5 mb-12"
         /> -->
-
 
               <!-- <v-row class="studentid__questiontitle" justify="center">Verify your mobile phone number</v-row> -->
 
@@ -388,8 +376,6 @@
                 <a>I don't have a mobile number</a>
               </v-row>
 
-
-
               <!-- SUMMER PLANS -->
 
               <v-row
@@ -409,79 +395,13 @@
                   class="pa-5"
                 >
                   <v-switch
-                    v-model="summerPlans"
+                    v-model="summerVacation"
                     inset
                     :label="`Do you plan on going on Summer Vacation?`"
                   />
 
                   <v-row
-                    v-if="summerPlans"
-                    justify="center"
-                  >
-                    <v-col
-                      cols="12"
-                      sm="9"
-                    >
-                      <v-text-field
-                        v-model="dateRangeText"
-                        label="When do you leave and come back?"
-                        prepend-icon="event"
-                        readonly
-                      />
-                      <!-- model: {{ dates }} -->
-                    </v-col>
-                  </v-row>
-
-                  <v-switch
-                    v-model="summerjob"
-                    inset
-                    :label="`Do you plan on getting a Summer Job?`"
-                  />
-
-                  <v-row
-                    v-if="summerjob"
-                    no-gutters
-                    justify="center mt-2"
-                  >
-                    <v-col
-                      cols="12"
-                      sm="9"
-                    >
-                      <v-text-field
-                        label="How many hours per week?"
-                        hint="Enter number of hours only"
-                        persistent-hint
-                        outlined
-                      />
-                    </v-col>
-                  </v-row>
-
-                  <v-switch
-                    v-model="summercollegeclass"
-                    inset
-                    :label="`Do you plan on taking Summer College Classes?`"
-                  />
-
-                  <v-row
-                    v-if="summercollegeclass"
-                    no-gutters
-                    justify="center"
-                  >
-                    <v-col
-                      cols="12"
-                      sm="9"
-                    >
-                      <v-text-field
-                        label="College Name"
-                        hint="Enter the name of the college"
-                        persistent-hint
-                        outlined
-                      />
-                    </v-col>
-                  </v-row>
-
-                  <v-row
-                    v-if="summercollegeclass"
+                    v-if="summerVacation"
                     justify="center"
                   >
                     <v-col
@@ -489,52 +409,193 @@
                       sm="9"
                     >
                       <v-menu
-                        v-model="menu1"
+                        v-model="summerVacationMenu"
                         :close-on-content-click="false"
                         max-width="290"
                       >
                         <template v-slot:activator="{ on }">
-                          <v-text-field
-                            :value="date.every(val => val)?date:null | daterange"
-                            clearable
-                            label="When does it start and end?"
-                            prepend-icon="event"
-                            readonly
-                            v-on="on"
-                            @click:clear="date = []"
-                          />
+                          <ValidationProvider
+                            v-slot="{ errors }"
+                            rules="required|daterange"
+                          >
+                            <v-text-field
+                              :value="
+                                summerSchedule.every(val => val) ? summerSchedule : null | daterange
+                              "
+                              clearable
+                              label="When do you leave and come back?"
+                              prepend-icon="event"
+                              readonly
+                              :error-messages="errors"
+                              v-on="on"
+                              @click:clear="summerSchedule = []"
+                            />
+                          </ValidationProvider>
                         </template>
                         <v-date-picker
-                          v-model="date"
+                          v-model="summerSchedule"
                           range
-                          @change="menu1=(date.length == 2)?false:true"
+                          @change="summerVacationMenu = summerSchedule.length == 2 ? false : true"
                         />
                       </v-menu>
-                      <!-- model: {{ dates }} -->
                     </v-col>
                   </v-row>
 
                   <v-switch
-                    v-model="summerschool"
+                    v-model="summerJob"
                     inset
-                    :label="`Will you have to take Summer School?`"
+                    :label="`Do you plan on getting a Summer Job?`"
                   />
 
                   <v-row
-                    v-if="summerschool"
+                    v-if="summerJob"
+                    no-gutters
                     justify="center"
                   >
                     <v-col
                       cols="12"
                       sm="9"
                     >
-                      <v-text-field
-                        v-model="dateRangeText"
-                        label="When does it start and end?"
-                        prepend-icon="event"
-                        readonly
-                      />
-                      <!-- model: {{ dates }} -->
+                      <ValidationProvider
+                        v-slot="{ errors }"
+                        rules="required|numeric"
+                      >
+                        <v-text-field
+                          v-model="summerJobHours"
+                          :error-messages="errors"
+                          label="How many hours per week?"
+                          hint="Enter number of hours only"
+                          persistent-hint
+                          outlined
+                        />
+                      </ValidationProvider>
+                    </v-col>
+                  </v-row>
+
+                  <v-switch
+                    v-model="summerCollegeClasses"
+                    inset
+                    :label="`Do you plan on taking Summer College Classes?`"
+                  />
+
+                  <v-row
+                    v-if="summerCollegeClasses"
+                    no-gutters
+                    justify="center"
+                  >
+                    <v-col
+                      cols="12"
+                      sm="9"
+                    >
+                      <ValidationProvider
+                        v-slot="{ errors }"
+                        rules="required"
+                      >
+                        <v-text-field
+                          v-model="summerCollegeName"
+                          :error-messages="errors"
+                          label="College Name"
+                          hint="Enter the name of the college"
+                          persistent-hint
+                          outlined
+                        />
+                      </ValidationProvider>
+                    </v-col>
+                  </v-row>
+
+                  <v-row
+                    v-if="summerCollegeClasses"
+                    justify="center"
+                  >
+                    <v-col
+                      cols="12"
+                      sm="9"
+                    >
+                      <v-menu
+                        v-model="summerCollegeMenu"
+                        :close-on-content-click="false"
+                        max-width="290"
+                      >
+                        <template v-slot:activator="{ on }">
+                          <ValidationProvider
+                            v-slot="{ errors }"
+                            rules="required|daterange"
+                          >
+                            <v-text-field
+                              :value="
+                                summerCollegeSchedule.every(val => val)
+                                  ? summerCollegeSchedule
+                                  : null | daterange
+                              "
+                              clearable
+                              label="When does it start and end?"
+                              prepend-icon="event"
+                              readonly
+                              :error-messages="errors"
+                              v-on="on"
+                              @click:clear="summerCollegeSchedule = []"
+                            />
+                          </ValidationProvider>
+                        </template>
+                        <v-date-picker
+                          v-model="summerCollegeSchedule"
+                          range
+                          @change="
+                            summerCollegeMenu = summerCollegeSchedule.length == 2 ? false : true
+                          "
+                        />
+                      </v-menu>
+                    </v-col>
+                  </v-row>
+
+                  <v-switch
+                    v-model="summerSchool"
+                    inset
+                    :label="`Will you have to take Summer School?`"
+                  />
+
+                  <v-row
+                    v-if="summerSchool"
+                    justify="center"
+                  >
+                    <v-col
+                      cols="12"
+                      sm="9"
+                    >
+                      <v-menu
+                        v-model="summerSchoolMenu"
+                        :close-on-content-click="false"
+                        max-width="290"
+                      >
+                        <template v-slot:activator="{ on }">
+                          <ValidationProvider
+                            v-slot="{ errors }"
+                            rules="required|daterange"
+                          >
+                            <v-text-field
+                              :value="
+                                summerSchoolSchedule.every(val => val)
+                                  ? summerSchoolSchedule
+                                  : null | daterange
+                              "
+                              clearable
+                              label="When does it start and end?"
+                              prepend-icon="event"
+                              readonly
+                              :error-messages="errors"
+                              v-on="on"
+                              @click:clear="summerSchoolSchedule = []"
+                            />
+                          </ValidationProvider>
+                        </template>
+                        <v-date-picker
+                          v-model="summerSchoolSchedule"
+                          range
+                          @change="
+                            summerSchoolMenu = summerSchoolSchedule.length == 2 ? false : true
+                          "
+                        />
+                      </v-menu>
                     </v-col>
                   </v-row>
                 </v-col>
@@ -549,7 +610,7 @@
         >
           <v-col cols="4">
             <NextNode
-              v-slot="{setNext}"
+              v-slot="{ setNext }"
               @CallbackComplete="$emit('nextNode')"
             >
               <v-btn
@@ -560,7 +621,11 @@
                 depressed
                 outlined
                 height="73.5px"
-                @click="validate().then(val=>{if(val)setNext(submit)})"
+                @click="
+                  validate().then(val => {
+                    if (val) setNext(submit);
+                  })
+                "
               >
                 SUBMIT
               </v-btn>
@@ -572,44 +637,44 @@
   </ValidationObserver>
 </template>
 
-
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
 import { mask } from "vue-the-mask";
 import { FbStore } from "@/store";
-import { SMSsendCode, isValidSMS } from "@/api"
+import { SMSsendCode, isValidSMS } from "@/api";
 import { ValidationObserver, ValidationProvider } from "vee-validate";
 import { startCase } from "lodash";
 import { StudentForm } from "../../../../store/Database/types/types";
 import { firebase } from "@/firebase/init";
 import { NextNode } from "@/views/ProgramGuide/components";
-import { keys } from 'ts-transformer-keys';
- import moment from 'moment'
+import { keys } from "ts-transformer-keys";
+import moment from "moment";
 @Component<ExitSurvey>({
   components: {
     ValidationObserver,
     ValidationProvider,
     NextNode
   },
-  data: () => {
-    let style  = ({
-    // Data Typings
-    graduating: null,
-    postHighPlan: null,
-    csOffer: null,
-    csFuture:null,
-    summerPlans: null,
-    summercollegeclass: null,
-    summerjob: null,
-    summerschool: null,
-    mobilenumber:null,
-    autoApp: true,
-    communityCollegeOffer:null,
-    traditional: null,
-    joinAgain: null,
-    recommend: null,
-
+  async created() {
+    let form = (
+      await FbStore.firestore
+        .collection("StudentForm")
+        .doc(FbStore.FBUser!.uid)
+        .get()
+    ).data<StudentForm>()?.exitForm;
+    if (form){
+      Object.keys(form).forEach(key => {
+        (this as Record<string, any>)[key] =
+          (form as StudentForm.exitForm)[key as keyof StudentForm.exitForm];
+      });
+      Object.keys(form.internshipApplication).forEach(key => {
+        (this as Record<string, any>)[key] =
+          ((form as StudentForm.exitForm).internshipApplication)[key as keyof StudentForm.exitForm.internshipApplication];
+      });
+      }
+  },
+  data: () => ({
     phonemask: "###-###-####",
     emptyIcon: "mdi-heart-outline",
     fullIcon: "mdi-heart",
@@ -619,16 +684,7 @@ import { keys } from 'ts-transformer-keys';
     size: 22,
     dense: true,
     color: "red lighten-3",
-    colors: [
-      "primary",
-      "warning",
-      "green",
-      "red",
-      "blue",
-      "error",
-      "teal",
-      "red lighten-3"
-    ],
+    colors: ["primary", "warning", "green", "red", "blue", "error", "teal", "red lighten-3"],
     bgColor: "grey lighten-1",
     bgColors: [
       "grey lighten-2",
@@ -639,46 +695,121 @@ import { keys } from 'ts-transformer-keys';
       "#eee",
       "cyan lighten-2",
       "grey lighten-1"
-    ],
+    ]
 
     // HEART RATING END
     // END
-  })
-  // console.log(keys<StudentForm.exitForm>())
-  return style
-  },
-  filters:{
-    daterange: function(range:[string]| [string,string] | null){
+  }),
+  filters: {
+    daterange: function(range: [string] | [string, string] | null) {
       //each string is date in iso8601 format
-      return range?range.map(val => moment(val).format("MMMM Do")).join(" - "):null
+      return range ? range.map(val => moment(val).format("MMMM Do")).join(" - ") : null;
     }
   }
 })
 export default class ExitSurvey extends Vue {
-  code: string  = "";
+  code: string = "";
   private sid: string = "";
   vStatus: string = "";
-  date = []
+  date = [];
   programForm!: StudentForm.programForm;
-  menu1 = false;
-  async sendCode(phone: string){
+  summerVacationMenu = false;
+  summerCollegeMenu = false;
+  summerSchoolMenu = false;
+  graduating = null;
+  postHighPlan = null;
+  csOffer = null;
+  csFuture = null;
+  summerVacation = null;
+  summerSchedule = [];
+  summerCollegeClasses = null;
+  summerCollegeName = null;
+  summerCollegeSchedule = [];
+  summerJob = null;
+  summerJobHours = null;
+  summerSchool = null;
+  summerSchoolSchedule = [];
+  mobilenumber = null;
+  autoApp = true;
+  communityCollegeOffer = null;
+  traditional = null;
+  joinAgain = null;
+  recommend = null;
+  async sendCode(phone: string) {
     try {
-      const data = await SMSsendCode({to: phone});
+      const data = await SMSsendCode({ to: phone });
       this.sid = data.data;
-      console.info('%c Code has been sent!', 'background: green; color: white; display: block; text-align: center')
-    } catch(err) {
-      console.error(`${err} \nThere was an error sending code to ${phone} \n Please try again later`)
+      console.info(
+        "%c Code has been sent!",
+        "background: green; color: white; display: block; text-align: center"
+      );
+    } catch (err) {
+      console.error(
+        `${err} \nThere was an error sending code to ${phone} \n Please try again later`
+      );
     }
   }
-  async verifyPhone( phone: string, code: string,) {
+  async verifyPhone(phone: string, code: string) {
     try {
-      console.log({to: phone, code: code})
-      const val = await isValidSMS({to: phone, code: code});
-      console.log(val)
-      console.info('%c Code has been verified!', 'background: green; color: white; display: block; text-align: center')
-    } catch(err) {
-      console.error(`${err}`)
+      console.log({ to: phone, code: code });
+      const val = await isValidSMS({ to: phone, code: code });
+      console.log(val);
+      console.info(
+        "%c Code has been verified!",
+        "background: green; color: white; display: block; text-align: center"
+      );
+    } catch (err) {
+      console.error(`${err}`);
     }
+  }
+  submit() {
+    let {
+      traditional,
+      joinAgain,
+      recommend,
+      graduating,
+      postHighPlan,
+      communityCollegeOffer,
+      csOffer,
+      csFuture,
+      autoApp,
+      summerVacation,
+      summerSchedule,
+      summerJob,
+      summerJobHours,
+      summerCollegeClasses,
+      summerCollegeName,
+      summerCollegeSchedule,
+      summerSchool,
+      summerSchoolSchedule
+    } = this;
+    FbStore.firestore
+      .collection("StudentForm")
+      .doc(FbStore.FBUser!.uid)
+      .update<StudentForm>({
+        exitForm: {
+          traditional,
+          joinAgain,
+          recommend,
+          graduating,
+          postHighPlan,
+          communityCollegeOffer,
+          csOffer,
+          csFuture,
+          autoApp,
+          internshipApplication: {
+            summerVacation,
+            summerSchedule,
+            summerJob,
+            summerJobHours,
+            summerCollegeClasses,
+            summerCollegeName,
+            summerCollegeSchedule,
+            summerSchool,
+            summerSchoolSchedule
+          }
+        } as unknown as StudentForm.exitForm
+      });
   }
 }
 </script>
