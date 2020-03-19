@@ -19,7 +19,8 @@ export interface studentClassroom {
     classroomId: string
     finishedProgramBrief?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
     finishedIntrovideo?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
-    finishedSignupForm?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+    finishedSignupForm?: firebase.firestore.Timestamp | firebase.firestore.FieldValue,
+    finishedExitForm?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
 }
 export interface GeneralUser {
     userId: string
@@ -175,7 +176,6 @@ export interface Project {
         demoVideo?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
         presentation?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
         demoDay?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
-        exitForm?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
         interviewOffer?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
     }
     caseStudiesReviewed?: boolean[]

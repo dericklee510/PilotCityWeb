@@ -342,7 +342,7 @@
                     depressed
                     @click="sendCode(mobilenumber)"
                   >
-                    Send Code
+                    {{ sid ? `Resend`:`Send Code` }}
                   </v-btn>
                 </v-col>
               </v-row>
@@ -368,14 +368,23 @@
                   cols="3"
                   sm="2"
                 >
-                  <v-btn
-                    x-large
-                    dark
-                    depressed
-                    @click="verifyPhone(mobilenumber, code)"
+                  <v-tooltip
+                    :v-model="false"
+                    top
                   >
-                    Verify
-                  </v-btn>
+                    <template v-slot:activator="{ on }">
+                      <v-btn
+                        x-large
+                        dark
+                        depressed
+                        @click="verifyPhone(mobilenumber, code)"
+                        v-on="on"
+                      >
+                        Verify
+                      </v-btn>
+                    </template>
+                    <span>SUCCESS</span>
+                  </v-tooltip>
                 </v-col>
               </v-row>
 
@@ -672,9 +681,8 @@ export default class ExitSurvey extends Vue {
   }
   async verifyPhone( phone: string, code: string,) {
     try {
-      console.log({to: phone, code: code})
       const val = await isValidSMS({to: phone, code: code});
-      console.log(val)
+      this.sid = "";
       console.info('%c Code has been verified!', 'background: green; color: white; display: block; text-align: center')
     } catch(err) {
       console.error(`${err}`)
