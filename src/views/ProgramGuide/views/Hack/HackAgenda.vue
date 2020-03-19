@@ -12,7 +12,7 @@
           <v-switch @click="toggleView" inset></v-switch>
           <span class="agenda-view__switchlabel">EDIT</span>
         </v-row>
-      </v-col>-->
+      </v-col> -->
 
       <v-col
         class="agenda-view__container"
@@ -66,11 +66,54 @@
           />
         </v-row>
 
+      <!-- NEW SWITCH BUTTON - NEEDS FRONT END FUNCTIONALITY -->
 
+<v-row>
+      <v-col class="agenda-view__switch mt-12" cols="12">
+        <v-row v-if="" justify="center">
+          <span class="agenda-view__switchlabel">RECORD</span>
+          <v-switch v-model="record" @click="toggleView" inset></v-switch>
+          <span class="agenda-view__switchlabel">LIVE</span>
+        </v-row>
+      </v-col>
+</v-row>
 
-
-
+<!-- FOR STUDENT -->
         <v-row
+           v-if="citizenType == 'student'" 
+          justify="center"
+          no-gutters
+          class="businessmodelcanvas_view2__description"
+        >
+<v-btn dark depressed x-large>Record Hack Day</v-btn>
+        </v-row>
+
+<!-- FOR EMPLOYER -->
+
+          <v-row
+           v-if="citizenType == 'employer'" 
+            justify="center"
+            class="mr-auto ml-auto mt-12 mb-12"
+            no-gutters
+          >
+            <v-col
+              cols="9"
+              md="7"
+            >
+              <LinkChecker
+              disabled
+                v-model="url"
+                :success="success"
+                placeholder="https://"
+                class="introvideo_edit__videolink"
+              />
+            </v-col>
+          </v-row>
+
+
+<!-- END -->
+
+        <!-- <v-row
           justify="center"
           no-gutters
           class="businessmodelcanvas_view2__description"
@@ -82,13 +125,14 @@
             Mark agenda items as you complete them.
           </v-col>
         </v-row>
+
         <component
           :is="currentView"
           @toggleView="toggleView"
           @nextNode="$emit('nextNode')"
           @updateSavedDate="$emit('updateSavedDate', $event)"
           @saving="$emit('saving', $event)"
-        />
+        /> -->
       </v-col>
     </v-row>
   </v-container>
@@ -104,10 +148,12 @@ import Component from "vue-class-component";
 import { FbStore } from "@/store";
 import HackAgendaView from "./hackagenda_view.vue";
 import HackAgendaEdit from "./hackagenda_edit.vue";
+import { LinkChecker, NextNode } from "../../components";
 @Component({
   components: {
     HackAgendaView,
-    HackAgendaEdit
+    HackAgendaEdit,
+    LinkChecker
   }
 })
 export default class HackAgenda extends Vue {
