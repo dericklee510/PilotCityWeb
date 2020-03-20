@@ -25,3 +25,4 @@ yarn-error.log*
 .gitsecret/keys/random_seed
 !*.secret
 .env
+src/views/ProgramGuide/views/Hack/HackAgenda.vue

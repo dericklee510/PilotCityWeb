@@ -312,9 +312,9 @@
                     sm="5"
                   >
                     <ValidationProvider
-                      v-slot="numberProvider" 
+                      ref="numProvider" 
+                      v-slot="numberProvider"
                       rules="required|verifyPhone"
-                      ref="numProvider"
                     >
                       <v-text-field
                         v-model="mobilenumber"
@@ -635,7 +635,7 @@
           <v-col cols="4">
             <NextNode
               v-slot="{ setNext }"
-              @CallbackComplete="$emit('nextNode')"
+              @CallbackComplete="postSave ='Saved. Auto-App is coming soon'"
             >
               <v-btn
                 id="editcasestudies__button"
@@ -655,6 +655,9 @@
               </v-btn>
             </NextNode>
           </v-col>
+        </v-row>
+        <v-row justify="center">
+          {{ postSave }}
         </v-row>
       </v-col>
     </v-row>
@@ -738,6 +741,7 @@ import { PCLoader } from '@/components/utilities';
   }
 })
 export default class ExitSurvey extends Vue {
+  postSave=""
   code: string = "";
   private sid: string = "";
   vStatus: string = "";
