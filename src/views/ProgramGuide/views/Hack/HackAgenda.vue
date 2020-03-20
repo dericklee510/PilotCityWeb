@@ -12,7 +12,7 @@
           <v-switch @click="toggleView" inset></v-switch>
           <span class="agenda-view__switchlabel">EDIT</span>
         </v-row>
-      </v-col>-->
+      </v-col> -->
 
       <v-col
         class="agenda-view__container"
@@ -31,7 +31,6 @@
 
           <!-- TOOLTIP TEMPLATE -->
           <v-tooltip
-            v-model="show"
             top
           >
             <template v-slot:activator="{ on }">
@@ -60,35 +59,149 @@
           no-gutters
         >
           <i
-            v-if="citizenType=='teacher'|| citizenType=='employer'"
+            v-if="live && (citizenType=='teacher'|| citizenType=='employer')"
             class="far fa-edit edit-icon__externship"
             @click="toggleView"
           />
         </v-row>
 
+        <!-- NEW SWITCH BUTTON - NEEDS FRONT END FUNCTIONALITY -->
 
-
-
-
-        <v-row
-          justify="center"
-          no-gutters
-          class="businessmodelcanvas_view2__description"
-        >
+        <v-row>
           <v-col
-            cols="9"
-            class="pt-3 pb-3 text-center mt-3 mb-10"
+            class="agenda-view__switch mt-12"
+            cols="12"
           >
-            Mark agenda items as you complete them.
+            <v-row
+              justify="center"
+            >
+              <span
+                class="agenda-view__switchlabel" 
+              >RECORD</span>
+              <v-switch
+                v-model="live"
+                inset
+                :color="(!live)?'green':undefined"
+              />
+              <span class="agenda-view__switchlabel">LIVE</span>
+            </v-row>
           </v-col>
         </v-row>
-        <component
-          :is="currentView"
-          @toggleView="toggleView"
-          @nextNode="$emit('nextNode')"
-          @updateSavedDate="$emit('updateSavedDate', $event)"
-          @saving="$emit('saving', $event)"
-        />
+
+        <div
+          v-if="!live"
+        >
+          <!-- FOR STUDENT -->
+          <div v-if="citizenType == 'student'">
+            <v-row
+             
+              justify="center"
+              no-gutters
+              class="businessmodelcanvas_view2__description"
+            >
+              <v-btn
+                :dark="!completedBy"
+                depressed
+                x-large
+                :href="url"
+                :disabled="!!completedBy"
+              >
+                Record Hack Day
+              </v-btn>
+            </v-row>
+            <v-row
+              v-if="completedBy"
+              justify="center"
+            >
+              <span class="caption text-uppercase text--lighten-5 mt-2">
+                {{ `Completed By ${completedBy}` }}
+              </span>
+            </v-row>
+            <v-row
+              justify="center"
+            >
+              <v-checkbox
+                :label="studentCheckbox"
+              />
+            </v-row>
+          </div>
+          <!-- FOR EMPLOYER -->
+        
+          <v-row
+            v-if="citizenType == 'employer'" 
+            justify="center"
+            class="mr-auto ml-auto mt-12 mb-12"
+            no-gutters
+          >
+            <v-col
+              cols="9"
+              md="7"
+            >
+              <LinkChecker
+                v-model="url"
+                disabled
+                placeholder="https://"
+                class="introvideo_edit__videolink"
+              />
+            </v-col>
+          </v-row>
+          <v-row
+            v-if="!live"
+            class="mt-4"
+            no-gutters
+            justify="center"
+          >
+            <v-col
+              cols="4"
+            >
+              <PCLoader #default="{loading,setLoader}">
+                <v-btn
+                  id="editcasestudies__button"
+                  class="mb-10"
+                  text
+                  solo
+                  depressed
+                  outlined
+                  height="73.5px"
+                  :loading="loading"
+                  :dark="acknowledged"
+                  :disabled="!acknowledged"
+                  @click="setLoader(() => {submit.then(() => $emit('nextNode'))})"
+                >
+                  FINISH
+                </v-btn>
+              </PCLoader>
+            </v-col>
+          </v-row>
+        </div>
+
+
+        <!-- END -->
+
+        <div
+          v-if="live"
+        >
+          <v-row
+            justify="center"
+            no-gutters
+            class="businessmodelcanvas_view2__description"
+          >
+            <v-col
+              cols="9"
+              class="pt-3 pb-3 text-center mt-3 mb-10"
+            >
+              Mark agenda items as you complete them.
+            </v-col>
+          </v-row>
+          
+          <component
+            :is="currentView"
+            @toggleView="toggleView"
+            @nextNode="$emit('nextNode')"
+            @updateSavedDate="$emit('updateSavedDate', $event)"
+            @saving="$emit('saving', $event)"
+          />
+        </div>
       </v-col>
     </v-row>
   </v-container>
@@ -104,14 +217,32 @@ import Component from "vue-class-component";
 import { FbStore } from "@/store";
 import HackAgendaView from "./hackagenda_view.vue";
 import HackAgendaEdit from "./hackagenda_edit.vue";
+import { LinkChecker } from "../../components";
+import  {firebase} from '@/firebase/init';
+import { from } from 'rxjs';
+import { PCLoader } from '@/components/utilities';
 @Component({
   components: {
     HackAgendaView,
-    HackAgendaEdit
+    HackAgendaEdit,
+    LinkChecker,
+    PCLoader
+  },
+  subscriptions(){
+    return {
+      completedBy: from(new Promise((resolve) => resolve(FbStore.currentProject?.hackDayCompletedBy?FbStore.getStudentName({studentUid:FbStore.currentProject!.hackDayCompletedBy}):null)))
+    }
   }
 })
 export default class HackAgenda extends Vue {
   public edit: boolean = false;
+  live:boolean = false;
+  url:string = FbStore.currentEmployerProgram!.hackDayVideoLink || ""
+  completedBy!:string
+  acknowledged:boolean = false
+  get studentCheckbox(){
+    return `I acknowledge that I ${FbStore.currentUserProfile!.firstName} ${FbStore.currentUserProfile!.lastName} have complete hackday for my team.`
+  }
   get currentView(): string {
     return this.edit ? "HackAgendaEdit" : "HackAgendaView";
   }
@@ -120,6 +251,18 @@ export default class HackAgenda extends Vue {
   }
   toggleView() {
     this.edit = !this.edit;
+  }
+  async submit(){
+    if(FbStore.userCitizenType === "employer")
+    await FbStore.updateCurrentEmployerProgram({
+      hackDayVideoLink:this.url
+    })
+    else if (FbStore.userCitizenType === "student"){
+      await FbStore.updateCurrentProject({
+        programSequence:Object.assign({},FbStore.currentProject!.programSequence,{hackDay:firebase.firestore.FieldValue.serverTimestamp()}),
+        hackDayCompletedBy:FbStore.userUid
+      })
+    }
   }
 }
 </script>
