@@ -628,7 +628,7 @@
           </v-col>
         </v-row>
         <v-row
-          class="mt-10 mb-10"
+          class="mt-10"
           no-gutters
           justify="center"
         >
@@ -656,8 +656,12 @@
             </NextNode>
           </v-col>
         </v-row>
-        <v-row justify="center">
-          {{ postSave }}
+        <v-row
+          class="mb-10 text--grey"
+          style="font-family: Raleway"
+          justify="center"
+        >
+          <h5> {{ postSave }}</h5>
         </v-row>
       </v-col>
     </v-row>
