@@ -135,7 +135,7 @@ export default class ProgramCard extends Vue {
         demoVideo: project?.programSequence?.demoVideo,
         presentation: project?.programSequence?.presentation,
         demoDay: project?.programSequence?.demoDay,
-        exitForm: project?.programSequence?.exitForm,
+        exitForm: studentClassroomData?.finishedExitForm,
         interviewOffer: project?.programSequence?.interviewOffer
       };
       let progress = [...Object.values(keysOfSequence)].reduce(

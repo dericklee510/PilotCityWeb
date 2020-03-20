@@ -1,4 +1,3 @@
-
 import { AgendaTemplate, ProgramEvent, DesignLog, TimeLog, NamedLink } from './utilities';
 import { AutoCompleteAddress } from '@/components/GoogleMaps';
 
@@ -211,6 +210,9 @@ export interface Project {
     lastUpdate: firebase.firestore.Timestamp | firebase.firestore.FieldValue
 }
 export interface StudentForm{
+    signupForm:StudentForm.signupForm
+    programForm?:StudentForm.programForm
+    exitForm?:StudentForm.exitForm
 }
 export namespace StudentForm {
     export interface signupForm {
@@ -267,21 +269,19 @@ export namespace StudentForm {
         csOffer: boolean
         csFuture: string
         autoApp: boolean
-        internshipApplication: {
-            summerPlans: boolean
-            summerSchedule: {
-                begin: Date
-                end: Date
-            }
+        internshipApplication:StudentForm.exitForm.internshipApplication
+    }
+    export namespace exitForm{
+        export interface internshipApplication {
+            summerVacation: boolean
+            summerSchedule: [string,string]
             summerJob: boolean
             summerJobHours: number
             summerCollegeClasses: boolean
             summerCollegeName: string
+            summerCollegeSchedule:[string,string]
             summerSchool: boolean
-            summerSchoolSchedule: {
-                begin: Date
-                end: Date
-            }
+            summerSchoolSchedule:[string,string]
         }
     }
 }
