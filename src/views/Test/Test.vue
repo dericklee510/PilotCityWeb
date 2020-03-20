@@ -11,13 +11,12 @@
           v-model="phone"
           @keyup.enter="sendCode(phone)"
         />
-        <h1> your number is: {{ phone }} </h1>
       </v-col>
       <v-col cols="12">
         <h2>Enter Verification Code</h2>
         <v-text-field
           :code="code"
-          @keyup.enter="verifyPhone(code)"
+          @keyup.enter="verifyPhone(phone, code)"
         />
       </v-col>
     </v-row>    
@@ -40,7 +39,6 @@ export default class Test extends Vue {
 
   async sendCode(phone: string){
     try {
-      console.log(phone, {to: phone})
       const data = await SMSsendCode({to: phone});
       console.info('%c Code has been sent!', 'background: green; color: white; display: block; text-align: center')
     } catch(err) {
@@ -49,10 +47,10 @@ export default class Test extends Vue {
   }
   async verifyPhone( phone: string, code: string,) {
     try {
-      console.log({to: phone, code: code})
       const val = await isValidSMS({to: phone, code: code});
       console.log(val)
       console.info('%c Code has been verified!', 'background: green; color: white; display: block; text-align: center')
+      console.log(val)
     } catch(err) {
       console.error(`${err} \n There was an error verifying code: ${code} \n Please try again later`)
     }

@@ -38,6 +38,7 @@ import ManageTeam from "@/views/ProgramGuide/views/Team/Team.vue"
 import HackReflection from "@/views/ProgramGuide/views/Posthack/Posthack.vue"
 import ProcessLog from "@/views/ProgramGuide/views/Process/processlog.vue"
 import DemoVideoSubmit from "@/views/ProgramGuide/views/Demovideo/demovideo_enter.vue"
+import ExitSurvey from "@/views/ProgramGuide/views/Profile/ExitSurvey.vue"
 
 
 import ProgramList from "@/views/Myprograms/myprograms.vue"
@@ -88,6 +89,7 @@ export const Program = {
     ProcessLog,
     DemoVideoSubmit,
     BusinessCanvasEdit,
+    ExitSurvey
 }
 export const TEACHERSEQUENCE = {
     Externship: {
@@ -224,9 +226,9 @@ export const STUDENTSEQUENCE = {
         ],
         'Demo Day': [
             'project-demo-agenda',
+        ],
+        'Finish Line': [
+            'stud-project-exitsurvey'
         ]
     },
-    Internship: {
-
-    }
 }

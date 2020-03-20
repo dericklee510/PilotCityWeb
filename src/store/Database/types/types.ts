@@ -1,4 +1,3 @@
-
 import { AgendaTemplate, ProgramEvent, DesignLog, TimeLog, NamedLink } from './utilities';
 import { AutoCompleteAddress } from '@/components/GoogleMaps';
 
@@ -19,7 +18,8 @@ export interface studentClassroom {
     classroomId: string
     finishedProgramBrief?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
     finishedIntrovideo?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
-    finishedSignupForm?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+    finishedSignupForm?: firebase.firestore.Timestamp | firebase.firestore.FieldValue,
+    finishedExitForm?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
 }
 export interface GeneralUser {
     userId: string
@@ -67,7 +67,9 @@ export interface EmployerProgram {
     programLauncher: ProgramEvent[]
     externshipDayAgenda?: AgendaTemplate
     demoDayAgenda?: AgendaTemplate
+    demoDayVideoLink?: string
     masterHackDayAgenda?: AgendaTemplate    //  Employer  cannot  modify  this
+    hackDayVideoLink?:string
     trainingDayTemplate?: AgendaTemplate // Employer cannot modify this
     programBrief?: NamedLink[]
     introVideo?: string
@@ -175,7 +177,6 @@ export interface Project {
         demoVideo?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
         presentation?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
         demoDay?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
-        exitForm?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
         interviewOffer?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
     }
     caseStudiesReviewed?: boolean[]
@@ -190,6 +191,8 @@ export interface Project {
     elevatorPitch?: string
     demoLink?: string
     presentationLink?: string
+    hackDayCompletedBy?:string // uid of student that completed hackday
+    demoDayCompletedBy?:string 
     postHackReflection?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
     designLog?: DesignLog[]
     problemRatingT?: number
@@ -210,54 +213,13 @@ export interface Project {
     presentationRatingE?: number
     lastUpdate: firebase.firestore.Timestamp | firebase.firestore.FieldValue
 }
-export interface StudentForm {
-    signupForm: {
-        gradeLevel: string
-        teacher: string,
-        schoolName: string,
-        schoolDistrict: string,
-        birthDate: Date | firebase.firestore.Timestamp
-        superGender: string
-        ethnicity: string,
-        guardianFirstName: string,
-        guardianLastName: string,
-        guardianRelationship: string
-        primaryHomeLanguage: string
-        address: string
-    }
-    programForm?: {
-        internshipInterest: string
-        compensationType: string[],
-        freeLunch: string,
-        resume: string[],
-        postHighPlan: string
-        agricultureNaturalResources: number
-        artsMediaAndEntertainment: number
-        buildingAndConstructionTrades: number
-        businessAndFinance: number
-        educationChildhoodDevelopmentFamilyServices: number
-        energyEnvironmentUtilities: number
-        engineeringArchitecture: number
-        fashionInteriorDesign: number
-        healthScienceMedicalTechnology: number
-        hospitalityTourismRecreation: number
-        informationCommunicationTechnologies: number
-        manufacturingProductDevelopment: number
-        marketingSalesService: number
-        publicServices: number
-        transportation: number
-        technicianEngineer: number
-        marketingSales: number
-        researchDevelopment: number
-        operationsManagement: number
-        communityCustomerSuccess: number
-        transport: string
-        ownedTech: string
-        internetAccessMethod: string
-    }
+export interface StudentForm{
+    signupForm:StudentForm.signupForm
+    programForm?:StudentForm.programForm
+    exitForm?:StudentForm.exitForm
 }
 export namespace StudentForm {
-    export type signupForm = {
+    export interface signupForm {
         gradeLevel: string
         teacher: string
         schoolName: string
@@ -271,7 +233,7 @@ export namespace StudentForm {
         primaryHomeLanguage: string
         address: string
     }
-    export type programForm = {
+    export interface programForm{
         internshipInterest: string
         compensationType: string[],
         freeLunch: string,
@@ -301,47 +263,30 @@ export namespace StudentForm {
         ownedTech: string
         internetAccessMethod: string
     }
-    export namespace signupForm {
-        export type teacher = string
-        export type schoolName = string
-        export type schoolDistrict = string
-        export type birthDate = Date | firebase.firestore.Timestamp
-        export type superGender = string
-        export type ethnicity = string
-        export type guardianFirstName = string
-        export type guardianLastName = string
-        export type guardianRelationship = string
-        export type primaryHomeLanguage = string
-        export type address = string
+    export interface exitForm {
+        traditional: number
+        joinAgain: number
+        recommend: number
+        graduating: boolean
+        postHighPlan:string
+        communityCollegeOffer: boolean
+        csOffer: boolean
+        csFuture: string
+        autoApp: boolean
+        internshipApplication:StudentForm.exitForm.internshipApplication
     }
-    export namespace programForm {
-        export type internshipInterest = string
-        export type compensationType = string[]
-        export type freeLunch = string
-        export type resume = string[]
-        export type postHighPlan = string
-        export type agricultureNaturalResources = number
-        export type artsMediaAndEntertainment = number
-        export type buildingAndConstructionTrades = number
-        export type businessAndFinance = number
-        export type educationChildhoodDevelopmentFamilyServices = number
-        export type energyEnvironmentUtilities = number
-        export type engineeringArchitecture = number
-        export type fashionInteriorDesign = number
-        export type healthScienceMedicalTechnology = number
-        export type hospitalityTourismRecreation = number
-        export type informationCommunicationTechnologies = number
-        export type manufacturingProductDevelopment = number
-        export type marketingSalesService = number
-        export type publicServices = number
-        export type transportation = number
-        export type technicianEngineer= number
-        export type marketingSales = number
-        export type researchDevelopment = number
-        export type operationsManagement = number
-        export type communityCustomerSuccess = number
-        export type transport = string
-        export type ownedTech = string
-        export type internetAccessMethod = string
+    export namespace exitForm{
+        export interface internshipApplication {
+            summerVacation: boolean
+            summerSchedule: [string,string]
+            summerJob: boolean
+            summerJobHours: number
+            summerCollegeClasses: boolean
+            summerCollegeName: string
+            summerCollegeSchedule:[string,string]
+            summerSchool: boolean
+            summerSchoolSchedule:[string,string]
+        }
     }
 }
+

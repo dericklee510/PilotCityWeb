@@ -9,7 +9,7 @@ export const complexPassword: ValidationRule = {
         return `Password strength is ${passwordStrength[zxcvbn(value).score]}. ${passwordInfo.feedback.suggestions}`
     },
     validate: (value): boolean =>
-    // console.log(zxcvbn(value).score,REQ_PASSWORD_STRENGTH)
-    zxcvbn(value).score >= REQ_PASSWORD_STRENGTH
+        // console.log(zxcvbn(value).score,REQ_PASSWORD_STRENGTH)
+        zxcvbn(value).score >= REQ_PASSWORD_STRENGTH
 
 }

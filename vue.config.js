@@ -1,3 +1,4 @@
+const keysTransformer = require('ts-transformer-keys/transformer').default;
 module.exports = {
     pluginOptions: {
         apollo: {
@@ -16,5 +17,6 @@ module.exports = {
         svgRule
             .use('vue-svg-loader')
             .loader('vue-svg-loader')
-    }
+    },
+    
 }
