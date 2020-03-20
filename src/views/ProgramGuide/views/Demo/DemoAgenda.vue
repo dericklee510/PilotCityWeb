@@ -63,7 +63,7 @@
             @click="toggleView"
           />
         </v-row>
-        <v-row>
+        <v-row no-gutters>
           <v-col
             class="agenda-view__switch mt-12"
             cols="12"
@@ -90,20 +90,35 @@
           <!-- FOR STUDENT -->
           <div v-if="citizenType == 'student'">
             <v-row
-             
               justify="center"
+              align="center"
               no-gutters
               class="businessmodelcanvas_view2__description"
             >
-              <v-btn
-                :dark="!completedBy"
-                depressed
-                x-large
-                :href="url"
-                :disabled="!!completedBy"
+              <v-col>
+                <v-btn
+                  :dark="!completedBy"
+                  depressed
+                  x-large
+                  :href="url"
+                  :disabled="!!completedBy"
+                  :color="url?'':'error'"
+                >
+                  Record Hack Day
+                </v-btn>
+              </v-col>
+            </v-row>
+            <v-row
+              v-show="!url"
+              no-gutters
+              justify="center"
+              class="mt-4"
+            >
+              <h5
+                class="error--text text-center"
               >
-                Record Hack Day
-              </v-btn>
+                Your employer has not uploaded a VideoAsk yet
+              </h5>
             </v-row>
             <v-row
               v-if="completedBy"
@@ -114,6 +129,7 @@
               </span>
             </v-row>
             <v-row
+              v-if="!completedBy"
               justify="center"
             >
               <v-checkbox
@@ -151,7 +167,10 @@
             <v-col
               cols="4"
             >
-              <PCLoader #default="{loading,setLoader}">
+              <NextNode
+                v-slot="{setNext}"
+                @CallbackComplete="$emit('nextNode')"
+              >
                 <v-btn
                   id="editcasestudies__button"
                   class="mb-10"
@@ -160,14 +179,13 @@
                   depressed
                   outlined
                   height="73.5px"
-                  :loading="loading"
                   :dark="acknowledged"
-                  :disabled="!acknowledged"
-                  @click="setLoader(() => {submit.then(() => $emit('nextNode'))})"
+                  :disabled="citizenType == 'employer'?false:!acknowledged"
+                  @click="setNext(submit)"
                 >
                   FINISH
                 </v-btn>
-              </PCLoader>
+              </NextNode>
             </v-col>
           </v-row>
         </div>
@@ -214,7 +232,7 @@ import { FbStore } from "@/store";
 import DemoAgendaView from "./demoagenda_view.vue";
 import DemoAgendaEdit from "./demoagenda_edit.vue";
 import { PCLoader } from '@/components/utilities';
-import { LinkChecker } from '../../components';
+import { LinkChecker, NextNode} from '../../components';
 import {firebase} from "@/firebase/init"
 import { from } from 'rxjs';
 @Component({
@@ -222,7 +240,8 @@ import { from } from 'rxjs';
     DemoAgendaView,
     DemoAgendaEdit,
     LinkChecker,
-    PCLoader
+    PCLoader,
+    NextNode
   },
   subscriptions(){
     return {

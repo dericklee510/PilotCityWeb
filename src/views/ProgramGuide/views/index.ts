@@ -226,11 +226,9 @@ export const STUDENTSEQUENCE = {
         ],
         'Demo Day': [
             'project-demo-agenda',
-        ]
-    },
-    Internship: {
-        'Auto-App': [
+        ],
+        'Finish Line': [
             'stud-project-exitsurvey'
         ]
-    }
+    },
 }
