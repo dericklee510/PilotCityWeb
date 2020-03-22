@@ -12,12 +12,30 @@
           class="manageteam__container"
           cols="8"
         >
+
+<!-- JOIN PILOTCITY DISCORD -->
           <v-row no-gutters>
             <v-col
               cols="12"
               class="manageteam__title"
             >
-              <span>Join Team</span>
+              <span>Team Communication</span>     
+              <v-row class="mt-3" no-gutters><v-btn 
+                                href="https://discord.gg/2rU7tsd"
+                  target="_blank"
+                  dark large depressed>Join PilotCity Discord</v-btn></v-row>
+            </v-col>
+          </v-row>
+
+<!-- END JOIN PILOTCITY DISCORD -->
+
+
+          <v-row no-gutters>
+            <v-col
+              cols="12"
+              class="manageteam__title"
+            >
+              <span>Join Team</span>              
             </v-col>
           </v-row>
           <v-row no-gutters>
@@ -123,12 +141,30 @@
     <!-- TEAM AND TEAM NAMES -->
 
     <template v-else>
+
       <v-row
         no-gutters
         justify="center"
       >
         <v-col cols="8">
+
           <v-col class="manageteam__teamtitle">
+
+<!-- JOIN PILOTCITY DISCORD -->
+          <v-row class="mb-10" no-gutters>
+            <v-col
+              cols="12"
+            >
+              <span>Team Communication</span>     
+              <v-row class="mt-3" no-gutters><v-btn 
+                                href="https://discord.gg/2rU7tsd"
+                  target="_blank"
+                  dark large depressed>Join PilotCity Discord</v-btn></v-row>
+            </v-col>
+          </v-row>
+
+<!-- END JOIN PILOTCITY DISCORD -->
+
             <span>{{ teamName }}
 
 
