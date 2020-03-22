@@ -1,7 +1,8 @@
 <template>
   <v-toolbar
-    extension-heigh="0"
+    extension-height="0"
     dark
+
     style="height: fit-content"
     max-height="64px;" 
     class="pc-header pc-header--simple"

@@ -19,16 +19,27 @@
     }
 }
 .guide{
+
+    &__navcomms{
+        // position: absolute;
+        // position: fixed;
+        // position: relative;
+        // position: fixed !important;
+        // width: 100%;
+        // text-align: center !important;
+    }
     &__bar{
         // min-height: 100vh;
         // box-sizing: border-box;
         padding: 5% 0%;
         height: 100%;
         background-color: transparent;
+        // background-color: #dedede;
         border-right: 1px solid #404142;
         border-bottom: 1px dashed #404142;
         overflow: auto;
         width: 100%;
+        // position:fixed;
     }
 
     &__bar > .col:first-child .guide__bridge--first{

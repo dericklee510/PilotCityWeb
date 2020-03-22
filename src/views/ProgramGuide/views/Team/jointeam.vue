@@ -23,7 +23,7 @@
               <v-row class="mt-3" no-gutters><v-btn 
                                 href="https://discord.gg/2rU7tsd"
                   target="_blank"
-                  dark large depressed>Join PilotCity Discord</v-btn></v-row>
+                  dark large depressed>Join PilotCity Discord<v-icon right>mdi-discord</v-icon></v-btn></v-row>
             </v-col>
           </v-row>
 
@@ -159,7 +159,7 @@
               <v-row class="mt-3" no-gutters><v-btn 
                                 href="https://discord.gg/2rU7tsd"
                   target="_blank"
-                  dark large depressed>Join PilotCity Discord</v-btn></v-row>
+                  dark large depressed>Join PilotCity Discord<v-icon right>mdi-discord</v-icon></v-btn></v-row>
             </v-col>
           </v-row>
 
