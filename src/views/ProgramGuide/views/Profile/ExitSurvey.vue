@@ -361,7 +361,7 @@
                     <v-text-field
                       v-model="code"
                       v-mask="`######`"
-                      label="Enter SMS Code"
+                      label="Enter SMS code"
                       outlined
                       @keyup.enter="setLoader( () => verifyPhone(mobilenumber, code).then(() => $refs.numProvider.validate()))"
                     />
