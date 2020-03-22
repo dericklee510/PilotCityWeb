@@ -341,7 +341,7 @@
                       :loading="loading"
                       @click="setLoader( () => sendCode(mobilenumber))"
                     >
-                      {{ sid ? `Resend`:`Send Code ` }}
+                      {{ sid ? `Resend`:`Verify ` }}
                     </v-btn>
                   </v-col>
                 </v-row>
@@ -361,7 +361,7 @@
                     <v-text-field
                       v-model="code"
                       v-mask="`######`"
-                      label="Enter Verification Code"
+                      label="Enter SMS Code"
                       outlined
                       @keyup.enter="setLoader( () => verifyPhone(mobilenumber, code).then(() => $refs.numProvider.validate()))"
                     />
@@ -378,13 +378,13 @@
                       <template v-slot:activator="{ on }">
                         <v-btn
                           x-large
-                          dark
                           depressed
+                          outlined
                           :loading="loading"
                           @click="setLoader( () => verifyPhone(mobilenumber, code).then(() => $refs.numProvider.validate()))"
                           v-on="on"
                         >
-                          Verify
+                          Confirm
                         </v-btn>
                       </template>
                       <span                       :v-model="false">SUCCESS</span>

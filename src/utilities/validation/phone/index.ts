@@ -22,7 +22,7 @@ function parseUSphoneE164(phoneNumber: string){
 }
 
 export const phone: ValidationRule = {
-    message:'Your phone number has not yet been verified',
+    message:'Your mobile has not been verified yet',
     validate:  async (value):Promise<boolean> => {
         let doc:GeneralUser = (await FbStore.firestore.collection("GeneralUser").doc(FbStore.FBUser?.uid).get()).data()
         if(doc.phoneNumber == `${parseUSphoneE164(value)}`) return true
