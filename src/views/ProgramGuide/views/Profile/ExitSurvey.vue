@@ -404,6 +404,7 @@
               <!-- SUMMER PLANS -->
 
               <v-row
+                        v-if="mobilenumber"
                 class="studentid__questiontitle mt-10"
                 justify="center"
               >
@@ -411,6 +412,7 @@
               </v-row>
 
               <v-row
+                        v-if="mobilenumber"
                 no-gutters
                 justify="center"
               >
