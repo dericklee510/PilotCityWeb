@@ -380,6 +380,13 @@
 
 .studentid{
 
+    &__categorytitle{
+        font-family: "Raleway";
+        color: #404142;
+        font-size: 25px;
+        font-weight: 800;
+        text-align: center;
+    }
 
     &__questionsubtitle{
         font-family: "Raleway";
@@ -405,15 +412,6 @@
         font-size: 14px;
         font-style: italic;
         font-weight: 500;
-        text-align: center;
-    }
-
-
-    &__categorytitle{
-        font-family: "Raleway";
-        color: #404142;
-        font-size: 30px;
-        font-weight: 800;
         text-align: center;
     }
 
