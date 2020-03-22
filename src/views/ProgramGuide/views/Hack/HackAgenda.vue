@@ -27,7 +27,7 @@
           class="agenda-view__title"
           no-gutters
         >
-          HACK DAY AGENDA
+          HACK DAY
 
           <!-- TOOLTIP TEMPLATE -->
           <v-tooltip
@@ -69,7 +69,7 @@
 
         <v-row no-gutters>
           <v-col
-            class="agenda-view__switch mt-12"
+            class="agenda-view__switch mt-6"
             cols="12"
           >
             <v-row
@@ -77,13 +77,13 @@
             >
               <span
                 class="agenda-view__switchlabel" 
-              >RECORD</span>
+              >AT HOME</span>
               <v-switch
                 v-model="live"
                 inset
                 :color="(!live)?'green':undefined"
               />
-              <span class="agenda-view__switchlabel">LIVE</span>
+              <span class="agenda-view__switchlabel">IN CLASS</span>
             </v-row>
           </v-col>
         </v-row>
@@ -91,29 +91,69 @@
         <div
           v-if="!live"
         >
+
+<!-- FOR STUDENT DESCRIPTION -->
+
+          <v-row
+            v-if="citizenType == 'student'"
+            justify="center"
+            no-gutters
+            class="businessmodelcanvas_view2__description"
+
+          >
+            <v-col
+              cols="10"
+              class="text-center"
+            >
+              Record and send your team's project pitch video to your employer to receive feedback via VideoAsk.com
+            </v-col>
+          </v-row>
+
+<!-- FOR EMPLOYER DESCRIPTION -->
+
+          <v-row
+            v-if="citizenType == 'employer'"
+            justify="center"
+            no-gutters
+            class="businessmodelcanvas_view2__description"
+          >
+            <v-col
+              cols="10"
+              class="text-center"
+            >
+              Enter the share link for your VideoAsk.com interactive video form for students. Request VideoAsk.com login credentials from PilotCity to reply to student submissions.
+            </v-col>
+          </v-row>
+
+<!-- FOR TEACHER DESCRIPTION -->
+
+          <v-row
+            v-if="citizenType == 'teacher'"
+            justify="center"
+            no-gutters
+            class="businessmodelcanvas_view2__description"
+          >
+            <v-col
+              cols="10"
+              class="text-center"
+            >
+              Your students are provided this link to record and send their team's project pitch video to the employer to receive feedback via VideoAsk.com
+            </v-col>
+          </v-row>
+
+
+
+
+
+
           <!-- FOR STUDENT -->
           <div v-if="citizenType == 'student'">
-            <v-row
-              justify="center"
-              no-gutters
-              class="businessmodelcanvas_view2__description"
-            >
-              <v-btn
-                :dark="!completedBy"
-                depressed
-                x-large
-                :href="url"
-                :disabled="!!completedBy"
-                :color="url?'':'error'"
-              >
-                Record Hack Day
-              </v-btn>
-            </v-row>
+
             <v-row
               v-show="!url"
               no-gutters
-              justify="center"
-              class="mt-4"
+              justify="center mt-4"
+
             >
               <h5
                 class="error--text text-center"
@@ -121,6 +161,30 @@
                 Your employer has not uploaded a VideoAsk yet
               </h5>
             </v-row>
+
+            <v-row
+              justify="center"
+              no-gutters
+              class="businessmodelcanvas_view2__description mb-12"
+            >
+              <v-btn
+                :dark="!completedBy"
+                target="_blank"
+                depressed
+                x-large
+                :href="url"
+                :disabled="!!completedBy"
+                :color="url?'':'error'"
+              >
+                Record & Send Project Pitch
+              </v-btn>
+            </v-row>
+
+
+
+
+
+            
             <v-row
               v-if="completedBy"
               justify="center"
@@ -142,7 +206,7 @@
           <!-- FOR EMPLOYER -->
         
           <v-row
-            v-if="citizenType == 'employer'" 
+            v-if="citizenType=='teacher'|| citizenType=='employer'"
             justify="center"
             class="mr-auto ml-auto mt-12 mb-12"
             no-gutters
@@ -155,10 +219,13 @@
                 v-model="url"
                 disabled
                 placeholder="https://"
-                class="introvideo_edit__videolink"
+                class="introvideo_edit__videolink mb-12"
               />
             </v-col>
           </v-row>
+
+
+
           <v-row
             v-if="!live"
             class="mt-4"
@@ -258,7 +325,7 @@ export default class HackAgenda extends Vue {
   completedBy!:string
   acknowledged:boolean = false
   get studentCheckbox(){
-    return `I acknowledge that I ${FbStore.currentUserProfile!.firstName} ${FbStore.currentUserProfile!.lastName} have complete hackday for my team.`
+    return `I acknowledge that I, ${FbStore.currentUserProfile!.firstName} ${FbStore.currentUserProfile!.lastName}, have completed Hack Day for my team.`
   }
   get currentView(): string {
     return this.edit ? "HackAgendaEdit" : "HackAgendaView";

@@ -17,6 +17,8 @@
       :color="color"
       placeholder="https://"
     />
+
+
   </ValidationProvider>
 </template>
 <script lang="ts">
@@ -75,7 +77,6 @@ export default class LinkChecker extends Vue {
   inputChange$!: Subject<nativeEvent>;
   result!: string;
   color: "success" | "error" = "success";
-
   async checkUrl(URL: string) {
     this.loading = true;
     return new Promise(async (resolve, reject) => {

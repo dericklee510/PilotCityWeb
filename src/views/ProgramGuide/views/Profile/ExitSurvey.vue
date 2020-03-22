@@ -351,6 +351,7 @@
                   v-show="sid"
                   no-gutters
                   justify="center"
+                  class="mt-2"
                 >
                   <v-col
                     class="mr-2"
@@ -372,7 +373,7 @@
                   >
                     <v-tooltip
                       :v-model="false"
-                      top
+                      bottom
                     >
                       <template v-slot:activator="{ on }">
                         <v-btn
@@ -386,7 +387,7 @@
                           Verify
                         </v-btn>
                       </template>
-                      <span>SUCCESS</span>
+                      <span                       :v-model="false">SUCCESS</span>
                     </v-tooltip>
                   </v-col>
                 </v-row>
