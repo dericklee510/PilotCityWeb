@@ -29,7 +29,13 @@ import { switchMap} from 'rxjs/operators'
 import {from} from "rxjs"
 import { doc } from 'rxfire/firestore';
 import AsyncComputed from 'vue-async-computed'
+import VueAnalytics from 'vue-analytics';
 
+Vue.use(VueAnalytics, {
+    id: 'UA-155083286-1',
+    checkDuplicatedScript: true,
+    router
+  });
 Vue.use(AsyncComputed)
 Vue.use(VueRx)
 Vue.use(Vuetify)
