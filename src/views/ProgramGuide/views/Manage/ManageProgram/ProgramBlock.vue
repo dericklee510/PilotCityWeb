@@ -132,7 +132,7 @@ export default class ProgramBlock extends Vue {
     }
     set unlockType(newVal:Unlock){
         FbStore.updateCurrentTeacherProgramData({
-            [`programSequence.${this.sequence}`]:(newVal==="By Date")?moment('06-15-2020').toDate():(newVal==="Manually")?false:firebase.firestore.FieldValue.delete()
+            [`programSequence.${this.sequence}`]:(newVal==="By Date")?moment('02-15-2020').toDate():(newVal==="Manually")?false:firebase.firestore.FieldValue.delete()
         })
     }
     get syncValue(){
