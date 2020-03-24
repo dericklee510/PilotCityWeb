@@ -179,12 +179,6 @@
                 Record & Send Project Pitch
               </v-btn>
             </v-row>
-
-
-
-
-
-            
             <v-row
               v-if="completedBy"
               justify="center"
@@ -223,9 +217,6 @@
               />
             </v-col>
           </v-row>
-
-
-
           <v-row
             v-if="!live"
             class="mt-4"
@@ -248,7 +239,6 @@
                   outlined
                   height="73.5px"
                   :dark="acknowledged"
-                  :disabled="citizenType == 'employer'?false:!acknowledged"
                   @click="setNext(submit)"
                 >
                   FINISH
