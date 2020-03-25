@@ -2,8 +2,8 @@
   <v-toolbar
     extension-height="0"
     dark
-
-    style="height: fit-content"
+    
+    style="height: fit-content, position:sticky"
     max-height="64px;" 
     class="pc-header pc-header--simple"
   > 
