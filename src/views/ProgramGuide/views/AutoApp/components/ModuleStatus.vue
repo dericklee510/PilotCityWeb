@@ -27,8 +27,8 @@ import { Prop } from 'vue-property-decorator'
 
 @Component
 export default class ModuleStatus extends Vue{
-    @Prop()
-    sequence: Array<Record<'status' | 'name', string | null>> = [];
+    @Prop({default:[{status: 'N/A', name: 'default module'}]})
+    sequence: Array<Record<'status' | 'name', string | null>> | undefined
 
     get seq() {
         let seq = this.sequence;
