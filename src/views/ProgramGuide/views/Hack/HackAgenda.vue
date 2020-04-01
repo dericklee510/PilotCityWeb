@@ -91,15 +91,13 @@
         <div
           v-if="!live"
         >
-
-<!-- FOR STUDENT DESCRIPTION -->
+          <!-- FOR STUDENT DESCRIPTION -->
 
           <v-row
             v-if="citizenType == 'student'"
             justify="center"
             no-gutters
             class="businessmodelcanvas_view2__description"
-
           >
             <v-col
               cols="10"
@@ -109,7 +107,7 @@
             </v-col>
           </v-row>
 
-<!-- FOR EMPLOYER DESCRIPTION -->
+          <!-- FOR EMPLOYER DESCRIPTION -->
 
           <v-row
             v-if="citizenType == 'employer'"
@@ -125,7 +123,7 @@
             </v-col>
           </v-row>
 
-<!-- FOR TEACHER DESCRIPTION -->
+          <!-- FOR TEACHER DESCRIPTION -->
 
           <v-row
             v-if="citizenType == 'teacher'"
@@ -148,12 +146,10 @@
 
           <!-- FOR STUDENT -->
           <div v-if="citizenType == 'student'">
-
             <v-row
               v-show="!url"
               no-gutters
               justify="center mt-4"
-
             >
               <h5
                 class="error--text text-center"

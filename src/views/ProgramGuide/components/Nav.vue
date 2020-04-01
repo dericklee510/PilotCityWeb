@@ -1,5 +1,4 @@
 <template>
-
   <v-col
     cols="12"
     class="guide__bar"
@@ -135,11 +134,9 @@
       </v-col>
     </v-col>  
 
-<!-- CHAT BUTTON -->
+    <!-- CHAT BUTTON -->
   <!-- <v-btn class="mt-3 guide__navcomms" fixed outlined depressed width="15%">CHAT</v-btn> -->
-
   </v-col>
-
 </template>
 
 <script lang="ts">

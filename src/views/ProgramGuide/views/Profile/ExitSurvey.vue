@@ -387,7 +387,7 @@
                           Confirm
                         </v-btn>
                       </template>
-                      <span                       :v-model="false">SUCCESS</span>
+                      <span :v-model="false">SUCCESS</span>
                     </v-tooltip>
                   </v-col>
                 </v-row>
@@ -404,7 +404,7 @@
               <!-- SUMMER PLANS -->
 
               <v-row
-                        v-if="mobilenumber"
+                v-if="mobilenumber"
                 class="studentid__questiontitle mt-10"
                 justify="center"
               >
@@ -412,7 +412,7 @@
               </v-row>
 
               <v-row
-                        v-if="mobilenumber"
+                v-if="mobilenumber"
                 no-gutters
                 justify="center"
               >
