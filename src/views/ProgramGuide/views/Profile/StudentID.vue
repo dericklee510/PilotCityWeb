@@ -219,7 +219,8 @@
 
             <v-row
               no-gutters
-              justify="center mt-10"
+              class="mt-10"
+              justify="center"
             >
               <v-col
                 cols="12"
@@ -999,7 +1000,8 @@
 
             <v-row
               no-gutters
-              justify="center mt-10"
+              class="mt-10"
+              justify="center"
             >
               <v-col
                 cols="12"
@@ -1026,7 +1028,8 @@
 
             <v-row
               no-gutters
-              justify="center mt-10"
+              class="mt-10"
+              justify="center"
             >
               <v-col
                 cols="12"

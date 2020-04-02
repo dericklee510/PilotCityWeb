@@ -17,8 +17,6 @@
       :color="color"
       placeholder="https://"
     />
-
-
   </ValidationProvider>
 </template>
 <script lang="ts">
