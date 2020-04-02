@@ -13,6 +13,13 @@
         margin-top:52px;
     }
 
+    &__autoappicon{
+        width: 111px;
+        height: 110px;
+        position: absolute;
+        margin-top:35px;
+    }
+
     &__backbuttonicon{
         font-size: 20px;
 
@@ -32,6 +39,17 @@
         padding-right: 0%;
         background-color:#404142;
     }
+
+    &__autoappcontaintop{
+        
+        height: 100%;
+        border: 0.75px solid #000000;
+        margin-top: 69.29px;
+        padding-left: 0%;
+        padding-right: 0%;
+        background-color:#404142;
+    }
+
 
     &__containbottom{
         

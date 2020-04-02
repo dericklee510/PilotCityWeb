@@ -4,6 +4,7 @@ import * as Guide from '.'
 import RFPGen from "@/views/ProgramGuide/views/RFP/Prompt.vue"
 import StudentID from "@/views/ProgramGuide/views/Profile/StudentID.vue"
 import Brief from "@/views/ProgramGuide/views/RFP/Brief/Brief.vue"
+import AutoApp from "@/views/ProgramGuide/views/AutoApp/AutoApp.vue"
 const routes: RouteConfig[] = [
     {
       path: '/',
@@ -295,6 +296,12 @@ const routes: RouteConfig[] = [
                 name: 'stud-project-exitsurvey',
                 component: Guide.Program.ExitSurvey
             },
+            {
+                path:'student/project/autoapp',
+                name: 'stud-project-autoapp',
+                component: Guide.Program.AutoApp
+            },
+
         ],
         meta: { layout: 'simple' },
         // beforeEnter(to, from, next): void{

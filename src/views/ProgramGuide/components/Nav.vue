@@ -4,9 +4,6 @@
     cols="12"
     class="guide__bar"
   >
-
-
-
     <!--MAIN GROUP -->
     <v-col
       v-for="(nodes, main, index) in sequence"
@@ -79,7 +76,7 @@
 
 
     <v-col>
-      <div class="guide__sub-container">
+      <!-- <div class="guide__sub-container">
         <v-col>
           <v-col>
             <v-col class="guide__bridge guide__bridge--first" />
@@ -109,7 +106,7 @@
           />
           <span class="guide__subtext">{{ 'Auto-app' }}</span>
         </v-col>
-      </v-col>
+      </v-col> -->
       <v-col class="guide__sub-container">
         <v-col>
           <v-col class="guide__bridge" />
@@ -139,7 +136,7 @@
     </v-col>  
 
 <!-- CHAT BUTTON -->
-  <!-- <v-row><v-btn class="mt-3" fixed outlined depressed width="15%">CHAT</v-btn></v-row> -->
+  <!-- <v-btn class="mt-3 guide__navcomms" fixed outlined depressed width="15%">CHAT</v-btn> -->
 
   </v-col>
 
