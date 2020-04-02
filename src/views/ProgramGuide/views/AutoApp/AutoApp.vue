@@ -139,8 +139,8 @@ export default class AutoApp extends Vue {
   studentForm: StudentForm = {} as StudentForm;
   get valueMap(): Record<AutoAppKeys,AutoAppValue> {
     let valueMap = {} as AutoApp['valueMap']
-    let storeValues: Record<AutoAppKeys,Pick<AutoAppValue,'value'>> = {
-      "Get Started": { value: !!this.studentForm?.signupForm },
+    let storeValues: Record<AutoAppKeys, Omit<AutoAppValue,'status'>> = {
+      "Get Started": { value: !!this.studentForm?.programForm },
       "Request for Pilot (RFP)": { value: !!FbStore.currentStudentClassroom?.finishedProgramBrief },
       "Introduction Video": { value: !!FbStore.currentStudentClassroom?.finishedIntrovideo },
       "Team": { value: !!FbStore.currentProject },
@@ -164,7 +164,7 @@ export default class AutoApp extends Vue {
     return valueMap
   }
   getColor(strength: number) {
-    return strength<=65?'red':strength<=85 && strength>65?'yellow':strength>85?'green':'grey'
+    return strength<=65?'error':strength<=85 && strength>65?'secondary':strength>85?'success':'grey'
   }
   get completionPercent(){
     return Math.ceil(getCompletion(this.valueMap)*100)

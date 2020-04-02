@@ -12,9 +12,12 @@
             class="mr-3 text-uppercase module-status__button"
             x-small
             depressed
+            light
             :color="color(obj)"
+            :to="{name: routeList(mod)}"
           >
-            {{ obj.status }}
+            <span class="module-status__status">{{ obj.status }}</span>
+            <span class="module-status__edit">Edit</span>
           </v-btn>
           <span class="pitch_view__teamtitle3 text-capitalize">
             {{ mod }}
@@ -30,6 +33,19 @@
     .module-status__button{
       height: 40px;
       width: 90px;
+      &.v-btn{
+        span.module-status__edit{
+          display: none;
+        }
+        &:hover{
+          span.module-status__edit{
+            display: inline;
+          }
+          span.module-status__status{
+            display: none;
+          }
+        }
+      }
     }
     .pitch_view__teamtitle3{
       max-width: 100%;
@@ -46,12 +62,32 @@ import {AutoAppKeys, AutoAppValue, assignValidator, assignWeights, getCompletion
 
 @Component
 export default class ModuleStatus extends Vue{
-    @Prop()
-    sequence: Record<AutoAppKeys, AutoAppValue> | undefined
-    color(mod: Record<'status' | 'name', string>) {
-        let msg = mod.status;
-        return msg == 'complete'?'green':msg == 'missing'?'red':msg == 'incomplete'?'yellow':'grey'
-    }
-
+  @Prop()
+  sequence: Record<AutoAppKeys, AutoAppValue> | undefined
+  color(mod: Record<'status' | 'name', string>) {
+      let msg = mod.status;
+      return msg == 'complete'?'success':msg == 'missing'?'error':msg == 'incomplete'?'secondary':'grey'
+  }
+  routeList(mod: AutoAppKeys): string{
+    let list: Record<AutoAppKeys, string>= {
+      "Get Started": 'stud-project-profile',
+      "Request for Pilot (RFP)": 'stud-project-profile',
+      "Introduction Video": 'stud-project-intro',
+      "Team": 'stud-project-team-join',
+      "Training Day": 'project-training',
+      "Practice Log": 'stud-project-practicelog',
+      "Research": 'stud-project-casestudy',
+      "Business Model Canvas": 'stud-project-canvas-edit',
+      "One Sentence Pitch": 'stud-project-ospitch-edit',
+      "Elevator Pitch": 'stud-project-elevator-edit',
+      "Hack Day": 'project-hack',
+      "Reflection": 'stud-project-hack-reflect',
+      "Design & Prototype Process Log": 'stud-project-processlog',
+      "Prototype Video": 'stud-project-demo-edit',
+      "Presentation Link": 'stud-project-presentation-edit',
+      "Demo Day": 'project-demo-agenda'
+    };
+    return list[mod];
+  }
 }
 </script>
