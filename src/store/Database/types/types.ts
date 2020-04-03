@@ -160,6 +160,7 @@ export namespace TeacherProgramData {
 //  StudentProject  should  be  an  extension  of  a  Team
 export interface Project {
     projectId: string
+    lockTeam?:boolean
     classroomId: string
     teamMembersIds: string[]
     teamName: string

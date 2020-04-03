@@ -285,7 +285,7 @@ export default class AutoApp extends Vue {
   studentForm!: StudentForm;
   get valueMap(): Record<AutoAppKeys,AutoAppValue> {
     let valueMap = {} as AutoApp['valueMap']
-    let storeValues: Record<AutoAppKeys,Pick<AutoAppValue,'value'>> = {
+    let storeValues: Record<AutoAppKeys,Omit<AutoAppValue,'status'>> = {
       "Get Started": { value: !!this.studentForm.signupForm },
       "Request for Pilot (RFP)": { value: !!FbStore.currentStudentClassroom?.finishedProgramBrief },
       "Introduction Video": { value: !!FbStore.currentStudentClassroom?.finishedIntrovideo },

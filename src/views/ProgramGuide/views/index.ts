@@ -33,7 +33,7 @@ import PracticeLogEdit from "@/views/ProgramGuide/views/Practicelog/Practicelog.
 import PresentationSubmit from "@/views/ProgramGuide/views/Presentation/presentation_enter.vue"
 import OSPitchSubmit from "@/views/ProgramGuide/views/Pitch/pitch_enter.vue"
 import ElevatorSubmit from "@/views/ProgramGuide/views/Elevator/elevator_enter.vue"
-import TeamJoin from "@/views/ProgramGuide/views/Team/jointeam.vue"
+import TeamJoin from "@/views/ProgramGuide/views/Team/Team.vue"
 import ManageTeam from "@/views/ProgramGuide/views/Team/Team.vue"
 import HackReflection from "@/views/ProgramGuide/views/Posthack/Posthack.vue"
 import ProcessLog from "@/views/ProgramGuide/views/Process/processlog.vue"
