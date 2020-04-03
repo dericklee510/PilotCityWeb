@@ -52,22 +52,28 @@
                     cols="12"
                   > 
                     <span>Enter program code
-                                <!-- TOOLTIP TEMPLATE -->
-          <v-tooltip v-model="show" top>
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  href="https://www.pilotcity.com/library/program-code"
-                  target="_blank"
-                  icon
-                  v-on="on"
-                >
-                  <v-icon class="pb-1" color="grey lighten-1">info</v-icon>
-                </v-btn>
-              </template>
-              <span>How do I get my program code?</span>
-            </v-tooltip>
-          <!-- TOOLTIP TEMPLATE END -->
-                      </span> 
+                      <!-- TOOLTIP TEMPLATE -->
+                      <v-tooltip
+                        v-model="show"
+                        top
+                      >
+                        <template v-slot:activator="{ on }">
+                          <v-btn
+                            href="https://www.pilotcity.com/library/program-code"
+                            target="_blank"
+                            icon
+                            v-on="on"
+                          >
+                            <v-icon
+                              class="pb-1"
+                              color="grey lighten-1"
+                            >info</v-icon>
+                          </v-btn>
+                        </template>
+                        <span>How do I get my program code?</span>
+                      </v-tooltip>
+                      <!-- TOOLTIP TEMPLATE END -->
+                    </span> 
                   </v-col>
                 </v-row>
                 <v-row

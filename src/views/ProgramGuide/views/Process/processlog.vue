@@ -23,7 +23,7 @@
         >
           <template v-slot:activator="{ on }">
             <v-btn
-              href="https://www.pilotcity.com/library/using-the-design-prototype-log"
+              href="https://www.pilotcity.com/library/digital-design-prototype-process-guide"
               target="_blank"
               icon
               v-on="on"

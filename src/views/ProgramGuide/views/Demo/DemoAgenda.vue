@@ -87,10 +87,9 @@
         <div
           v-if="!live"
         >
+          <!-- FOR STUDENT DESCRIPTION -->
 
-<!-- FOR STUDENT DESCRIPTION -->
-
-                  <v-row
+          <v-row
             v-if="citizenType == 'student'"
             justify="center"
             no-gutters
@@ -104,25 +103,23 @@
             </v-col>
           </v-row>
 
-<!-- FOR EMPLOYER DESCRIPTION -->
+          <!-- FOR EMPLOYER DESCRIPTION -->
 
           <v-row
             v-if="citizenType == 'employer'"
             justify="center"
             no-gutters
             class="businessmodelcanvas_view2__description"
-
           >
             <v-col
               cols="10"
               class="text-center"
             >
               Enter the share link for your VideoAsk.com interactive video form for students. Request VideoAsk.com login credentials from PilotCity to reply to student submissions.
-            
             </v-col>
           </v-row>
 
-<!-- FOR TEACHER DESCRIPTION -->
+          <!-- FOR TEACHER DESCRIPTION -->
 
           <v-row
             v-if="citizenType == 'teacher'"
@@ -144,8 +141,6 @@
 
           <!-- FOR STUDENT -->
           <div v-if="citizenType == 'student'">
-
-
             <v-row
               v-show="!url"
               no-gutters
@@ -168,7 +163,7 @@
               <v-col>
                 <v-btn 
                   :dark="!completedBy"
-                target="_blank"
+                  target="_blank"
                   depressed
                   x-large
                   :href="url"

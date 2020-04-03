@@ -12,13 +12,14 @@ export default new Vuetify({
         dark: false,
         themes: {
             light: {
-                primary: '#4682b4',
-                secondary: '#b0bec5',
-                accent: '#8c9eff',
-                error: '#b71c1c',
+                success: '#6fba7f', //pc-green
+                primary: '#3c9dcd', //pc-blue
+                secondary: '#f79961', //pc-yellow
+                error: '#ea6764', //pc-red
+                warn: '#fdd35a', //pc-yellow
+                pink: '#eda1bf', //pc-pink
+                purple: '#b092b5', //pc-purple
                 transparent:'transparent',
-                pink: '#eda1bf',
-                purple: '#b092b5'
             }
         }
     }
