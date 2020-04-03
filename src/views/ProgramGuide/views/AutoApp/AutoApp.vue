@@ -25,14 +25,14 @@
       <div class="mt-3 mb-6">
         <v-progress-linear
           color="green lighten-1"
-          buffer-value="25"
+          buffer-value="0"
           stream
         />
       </div>
       <v-row
         justify="center"
         no-gutters
-        class="prompt__header mt-12 mb-3"
+        class="prompt__header mt-12 mb-5"
       >
         <v-col
           cols="10"
@@ -41,22 +41,14 @@
           You've automatically applied!
         </v-col>
       </v-row>
-      <v-row
-        justify="center"
-        no-gutters
-        class="prompt__headerdescription2 mb-9"
-      >
-        <v-col
-          class="text-center"
-          cols="10"
-        >
-          In the meantime, edit your application items below for improvements.
-        </v-col>
-      </v-row>
+
       <v-row
         no-gutters
       >
-        <v-col class="text-center mt-6 mb-12">
+        <v-col class="text-center mt-6 mb-6">
+
+
+
           <v-btn
             x-large
             disabled
@@ -64,9 +56,38 @@
           >
             Application In Review
           </v-btn>
+
+
         </v-col>
       </v-row>
-      <v-row no-gutters>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <v-row
+        justify="center"
+        no-gutters
+        class="prompt__headerdescription2 mt-8 mb-10"
+      >
+        <v-col
+          class="text-center"
+          cols="10"
+        >
+          In the meantime, improve your application by editing project items below
+        </v-col>
+      </v-row>
+
+      <v-row no-gutters class="mt-8">
         <v-col
           cols="12"
           lg="6"
