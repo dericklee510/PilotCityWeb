@@ -169,11 +169,11 @@ export default class AutoApp extends Vue {
       "Business Model Canvas": { value: FbStore.currentProject! },
       "One Sentence Pitch": { value: FbStore.currentProject?.sentencePitch },
       "Elevator Pitch": { value: FbStore.currentProject?.elevatorPitch },
-      "Hack Day": { value: FbStore.currentProject?.hackDayCompletedBy },
+      "Hack Day": { value: !!FbStore.currentProject?.programSequence.hackDay },
       "Reflection": { value: !!FbStore.currentProject?.postHackReflection },
       "Design & Prototype Process Log": { value: FbStore.currentProject?.designLog },
-      "Prototype Video": { value: FbStore.currentProject?.demoLink },
-      "Presentation Link": { value: FbStore.currentProject?.presentationLink },
+      "Prototype Video": { value: !!FbStore.currentProject?.demoLink },
+      "Presentation Link": { value: !!FbStore.currentProject?.presentationLink },
       "Demo Day": { value: !!FbStore.currentProject?.programSequence.demoDay }
     };
 
