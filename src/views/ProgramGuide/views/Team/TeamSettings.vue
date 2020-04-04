@@ -74,7 +74,6 @@
         >
           <!-- TOOLTIP TEMPLATE -->
           <v-tooltip
-            v-model="show"
             right
           >
             <template v-slot:activator="{ on }">
@@ -111,7 +110,7 @@
       >
         <span class="agenda-view__switchlabel">UNLOCK</span>
         <v-switch
-          v-model="currentProject.lockTeam"
+          v-model="lockTeam"
           inset
         />
         <span class="agenda-view__switchlabel">LOCK</span>

@@ -62,7 +62,8 @@
                   small
                   :loading="loading"
                   depressed
-                  dark
+                  :dark="!project.lockTeam"
+                  :disabled="project.lockTeam"
                   @click="setLoader(joinTeam(project))"
                 >
                   JOIN
@@ -149,9 +150,10 @@ import Component from "vue-class-component";
 import { FbStore } from "../../../../store";
 import { combineLatest } from "rxjs";
 import { doc } from "rxfire/firestore";
-import { map } from 'rxjs/operators';
-import { Project } from '../../../../store/Database/types/types';
-import { PCLoader } from '../../../../components/utilities';
+import { map } from "rxjs/operators";
+import { Project } from "../../../../store/Database/types/types";
+import { PCLoader } from "../../../../components/utilities";
+import { ValidationObserver, ValidationProvider } from 'vee-validate';
 
 @Component<FindTeam>({
   subscriptions() {
@@ -160,19 +162,29 @@ import { PCLoader } from '../../../../components/utilities';
         FbStore.currentClassroom!.projectIds.map((projectId) =>
           doc(FbStore.firestore.collection("Project").doc(projectId))
         )
-      ).pipe(
-          map(projectDocs => projectDocs.map(projectDoc => projectDoc.data()))
-      ),
+      ).pipe(map((projectDocs) => projectDocs.map((projectDoc) => projectDoc.data()))),
     };
   },
-  components:{
-      PCLoader
-  }
+  components: {
+    PCLoader,
+    ValidationObserver,
+    ValidationProvider
+  },
 })
 export default class FindTeam extends Vue {
-projects!:Project[]
-async joinTeam(project: Project) {
+  projects!: Project[];
+  createTeamName: string = "";
+  async joinTeam(project: Project) {
     await FbStore.joinProject({ projectId: project.projectId });
+  }
+  async createProject() {
+    let projectId = await FbStore.createProject({
+      teamName: this.createTeamName,
+      classroomId: FbStore.currentClassroom!.classroomId,
+    });
+    await FbStore.joinProject({ projectId });
+    this.createTeamName = "";
+    this.$forceUpdate();
   }
 }
 </script>
