@@ -198,15 +198,15 @@ export default class ManageProgram extends Vue {
     }
   }
   unlockHash:Record<string, "By Date"|"Manually"| "By Completion"> = {
-    [`launch day`]: "By Date",
-    [`training`]: "By Date",
+    [`launch day`]: "By Completion",
+    [`training`]: "By Completion",
     [`practice & research`]: "By Completion",
     [`ideate`]: "By Completion",
-    [`hack day`]: "By Date",
+    [`hack day`]: "By Completion",
     [`reflection`]: "By Completion",
-    [`design & prototype`]: "Manually",
+    [`design & prototype`]: "By Completion",
     [`package`]: "By Completion",
-    [`demo day`]: "By Date",
+    [`demo day`]: "By Completion",
     [`exit survey`]: "By Completion",
   }
   getAverage<TObject extends object, TKey extends keyof TObject>(arr:TObject[],field:TKey | [TKey] | Many<string | number | symbol> ){
