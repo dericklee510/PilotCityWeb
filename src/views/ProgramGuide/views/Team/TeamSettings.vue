@@ -97,27 +97,27 @@
       <v-col class="manageteam__title">
         <span>Settings</span>
       </v-col>
-      <v-row
-        class="studentid__questiontitle mt-7"
-        justify="center"
-      >
-        {{ `Team ${lockTeam?'Locked':'Unlocked'}` }}
-      </v-row>
 
-      <v-row
+
+
+
+      <!-- RENAME TEAM -->
+
+      <v-col class="Team__teamname">
+
+        <span>{{ `Team ${lockTeam?'Locked':'Unlocked'}` }}</span>
+
+              <v-row
         no-gutters
-        justify="center"
+        justify="left"
+        class="mb-3"
       >
-        <span class="agenda-view__switchlabel">UNLOCK</span>
         <v-switch
           v-model="lockTeam"
           inset
         />
-        <span class="agenda-view__switchlabel">LOCK</span>
       </v-row>
-      <!-- RENAME TEAM -->
 
-      <v-col class="Team__teamname">
         <span>Rename Team</span>
 
         <ValidationObserver v-slot="{invalid}">

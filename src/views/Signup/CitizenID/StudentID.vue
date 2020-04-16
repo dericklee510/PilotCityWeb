@@ -405,16 +405,21 @@ import { ValidationProvider } from "vee-validate";
   },
   data: () => ({
     gradelevel: [
-      "12th Grade",
-      "11th Grade",
-      "10th Grade",
-      "9th Grade",
-      "8th Grade",
+      "6th Grade",
       "7th Grade",
-      "6th Grade"
+      "8th Grade",
+      "9th Grade",
+      "10th Grade",
+      "11th Grade",
+      "12th Grade",
+      "College Freshmen",
+      "College Sophomore",
+      "College Junior",
+      "College Senior"
     ],
 
     teacherOptions: [
+      "None of the below",
       "Alvin Burns",
       "Andrew Doolittle",
       "Anthony Anderson",
@@ -466,6 +471,7 @@ import { ValidationProvider } from "vee-validate";
     ],
 
     schoolname: [
+      "None of the below",
       "Alameda High School",
       "American High School",
       "Antioch High School",
@@ -490,9 +496,11 @@ import { ValidationProvider } from "vee-validate";
       "Skyline High School",
       "Terra Nova High School",
       "Washington High School",
-      "Westmoor High School"
+      "Westmoor High School",
+      "None of the above"
     ],
     schooldistrict: [
+      "None of the below",
       "Alameda Unified School District",
       "Antioch Unified School District",
       "Berkeley Unified School District",
@@ -501,7 +509,7 @@ import { ValidationProvider } from "vee-validate";
       "Emery Unified School District",
       "Fremont Unified School District",
       "Hayward Unified School District",
-      "Independent",
+      "Independent Private School",
       "Jefferson Union High School District",
       "Oakland Unified School District",
       "San Leandro Unified School District",

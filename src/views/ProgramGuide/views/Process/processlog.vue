@@ -68,6 +68,7 @@
             >
               <v-text-field
                 v-model="inputDescription"
+                placeholder="Describe and upload the progress on your project"
                 :error-messages="errors"
                 :disabled="loading"
                 class="processlog__logdescription-textfield pt-0"
