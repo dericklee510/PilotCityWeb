@@ -162,10 +162,12 @@ export const EMPLOYERSEQUENCE = {
         'Intro Video': [
             'emp-project-intro-edit'
         ],
+        'Train': [
+            'project-training'
+        ],
         'Research': [
             'emp-project-casestudy-edit',
             'emp-project-casestudy',
-            
         ],
 
     },

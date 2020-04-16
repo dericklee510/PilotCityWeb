@@ -327,7 +327,7 @@ import { tap } from 'rxjs/operators';
 export default class HackAgenda extends Vue {
   public edit: boolean = false;
   live:boolean = false;
-  url:string = FbStore.currentEmployerProgram!.hackDayVideoLink || ""
+  url:string = FbStore.currentEmployerProgram?.hackDayVideoLink || ""
   completedBy!:string
   acknowledged:boolean = false
   get studentCheckbox(){
