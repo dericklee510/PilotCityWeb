@@ -123,10 +123,10 @@
             <v-textarea
               v-model="syncedCanvas.problem"
               class="businessmodelcanvas_enter__paragraph"
+              placeholder="Describe the problem your project addresses"
               :disabled="readonly"
               :error-messages="failedRules.max?`Must not be longer than 280 Characters`:errors"
               counter
-              placeholder
               @input="$emit('input',syncedCanvas)"
             />
           </ValidationProvider>
@@ -239,7 +239,7 @@
               :disabled="readonly"
               :error-messages="failedRules.max?`Must not be longer than 280 Characters`:errors"
               counter
-              placeholder="My pitch is..."
+              placeholder="Describe the solution your project offers"
               @input="$emit('input',syncedCanvas)"
             />
           </ValidationProvider>
@@ -353,7 +353,7 @@
               :disabled="readonly"
               :error-messages="failedRules.max?`Must not be longer than 280 Characters`:errors"
               counter
-              placeholder="My pitch is..."
+              placeholder="Describe your project's innovation or unique value proposition"
               @input="$emit('input',syncedCanvas)"
             />
           </ValidationProvider>
@@ -467,7 +467,7 @@
               :disabled="readonly"
               :error-messages="failedRules.max?`Must not be longer than 280 Characters`:errors"
               counter
-              placeholder="My pitch is..."
+              placeholder="Describe your customer, user or stakeholder"
               @input="$emit('input',syncedCanvas)"
             />
           </ValidationProvider>

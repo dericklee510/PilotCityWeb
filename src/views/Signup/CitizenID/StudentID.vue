@@ -471,7 +471,7 @@ import { ValidationProvider } from "vee-validate";
     ],
 
     schoolname: [
-      "None of the below"
+      "None of the below",
       "Alameda High School",
       "American High School",
       "Antioch High School",
