@@ -13,7 +13,7 @@
       <!-- ACTIVE CARD -->
       <div class="mt-5 mb-5">
         <ProgramCard
-          v-for="(program,index) in Programs"
+          v-for="(program, index) in Programs"
           :key="index"
           :program="program"
         />
@@ -24,7 +24,7 @@
         v-model="dialog"
         max-width="50vw"
       >
-        <template v-slot:activator="{on}">
+        <template v-slot:activator="{ on }">
           <v-row
             justify="center"
             class="myprograms__addcard mt-9"
@@ -50,7 +50,7 @@
                   <v-col
                     class="code-modal__title"
                     cols="12"
-                  > 
+                  >
                     <span>Enter program code
                       <!-- TOOLTIP TEMPLATE -->
                       <v-tooltip
@@ -73,7 +73,7 @@
                         <span>How do I get my program code?</span>
                       </v-tooltip>
                       <!-- TOOLTIP TEMPLATE END -->
-                    </span> 
+                    </span>
                   </v-col>
                 </v-row>
                 <v-row
@@ -178,73 +178,72 @@
   </v-row>
 </template>
 
-
-
-
-
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
 import { FbStore, AuthStore } from "../../store";
-import {
-  EmployerProgram,
-  Classroom,
-  GeneralUser
-} from "../../store/Database/types/types";
+import { EmployerProgram, Classroom, GeneralUser } from "../../store/Database/types/types";
 import { firebase } from "@/firebase/init";
 import { from } from "rxjs";
 import { map, switchMap } from "rxjs/operators";
 import { PCLoader } from "../../components/utilities";
-import { Watch } from 'vue-property-decorator';
-import ProgramCard from "./ProgramCard.vue"
+import { Watch } from "vue-property-decorator";
+import ProgramCard from "./ProgramCard.vue";
 @Component<myprograms>({
   components: {
     PCLoader,
     ProgramCard
   },
   subscriptions() {
-    return {
-      
-    };
+    return {};
   },
   async beforeRouteEnter(to, from, next) {
-    if (FbStore.userCitizenType == 'student'){
-      const studentFormRef = await FbStore.firestore.collection("StudentForm").doc(FbStore.FBUser!.uid).get()
-      if (studentFormRef.exists) {
-        next()
-      }
-      else next({name: 'signup.type'})
+    //signup guard
+    if (
+      ["employer", "teacher", "student"].some(
+        citizenType => FbStore.currentUserProfile?.citizenType === citizenType
+      )
+    ) {
+      if (FbStore.userCitizenType == "student") {
+        const studentFormRef = await FbStore.firestore
+          .collection("StudentForm")
+          .doc(FbStore.FBUser!.uid)
+          .get();
+        if (studentFormRef.exists) {
+          next();
+        } else next({ name: "signup.type" });
+      } else next();
     }
-    else if(AuthStore.user) next()
-    else next({name: 'login'})
-  },
+    else if (AuthStore.user) next({name:"signup.type"})
+    else next({name:'login'})
+  }
 })
 export default class myprograms extends Vue {
-  async created(){
+  async created() {
     localStorage.PILOTCITY_EMPLOYERPROGRAMID = null;
     await FbStore.initCurrentTeacherProgramData(null);
-    this.onProgramChange()
+    this.onProgramChange();
   }
-  dialog:boolean = false
+  dialog: boolean = false;
   Programs: EmployerProgram[] = [];
   get programIds() {
-    switch(FbStore.userCitizenType!){
-      case("employer"):
-      return FbStore.currentUserProfile!.employerProgramIds
-      case("teacher"):
-      return Object.keys(FbStore.currentUserProfile!.teacherProgramDataIds)
-      case("student"):
-      return FbStore.currentUserProfile!.classroomIds
+    switch (FbStore.userCitizenType!) {
+      case "employer":
+        return FbStore.currentUserProfile!.employerProgramIds;
+      case "teacher":
+        return Object.keys(FbStore.currentUserProfile!.teacherProgramDataIds);
+      case "student":
+        return FbStore.currentUserProfile!.classroomIds;
     }
-    return []
+    return [];
   }
-@Watch('programIds')
-async onProgramChange(){
-  this.Programs = (await this.getEmployerPrograms()).map(snapshot => snapshot.data())
-  this.$forceUpdate()
-}
+  @Watch("programIds")
+  async onProgramChange() {
+    this.Programs = (await this.getEmployerPrograms()).map(snapshot => snapshot.data());
+    this.$forceUpdate();
+  }
 
-  async getEmployerProgramIds():Promise<string []> {
+  async getEmployerProgramIds(): Promise<string[]> {
     if (FbStore.userCitizenType === "student")
       return await Promise.all(
         FbStore.currentUserProfile!.classroomIds.map(
@@ -257,10 +256,9 @@ async onProgramChange(){
             ).data<Classroom>().employerProgramId
         )
       );
-    else if(FbStore.userCitizenType === "employer") 
+    else if (FbStore.userCitizenType === "employer")
       return FbStore.currentUserProfile!.employerProgramIds;
-    else  
-      return Object.keys(FbStore.currentUserProfile!.teacherProgramDataIds)
+    else return Object.keys(FbStore.currentUserProfile!.teacherProgramDataIds);
   }
   async getEmployerPrograms() {
     return Promise.all(
@@ -286,7 +284,7 @@ async onProgramChange(){
         lastUpdate: firebase.firestore.FieldValue.serverTimestamp()
       });
     FbStore.updateCurrentUserProfile({
-      employerProgramIds:firebase.firestore.FieldValue.arrayUnion(id) as unknown as string[]
+      employerProgramIds: (firebase.firestore.FieldValue.arrayUnion(id) as unknown) as string[]
     });
   }
   value = "";
@@ -299,33 +297,27 @@ async onProgramChange(){
         .collection("EmployerProgram")
         .where("shareCode", "==", this.shareCode)
         .get();
-        let foundProgramDoc =  querySnapshot.docs[0]
-      let foundProgram = querySnapshot.docs[0]?.data() as
-        | EmployerProgram
-        | undefined;
-      if (foundProgram && !FbStore.currentUserProfile!.teacherProgramDataIds[foundProgramDoc.id]){
-        await FbStore.createTeacherProgramData(foundProgram.employerProgramId)
-        this.dialog = false
-        }
-      else this.result = "Could not verify share code";
+      let foundProgramDoc = querySnapshot.docs[0];
+      let foundProgram = querySnapshot.docs[0]?.data() as EmployerProgram | undefined;
+      if (foundProgram && !FbStore.currentUserProfile!.teacherProgramDataIds[foundProgramDoc.id]) {
+        await FbStore.createTeacherProgramData(foundProgram.employerProgramId);
+        this.dialog = false;
+      } else this.result = "Could not verify share code";
     } else if (FbStore.userCitizenType === "student") {
       let querySnapshot = await FbStore.firestore
         .collection("Classroom")
         .where("shareCode", "==", this.shareCode)
         .get();
       let foundProgram = querySnapshot.docs[0]?.data() as Classroom | undefined;
-      if (foundProgram){
+      if (foundProgram) {
         FbStore.joinClassroom({
           classroomUid: foundProgram.classroomId,
           studentUid: FbStore.FBUser!.uid
         });
-        this.dialog = false
-        }
-      else this.result = "Could not verify share code";
+        this.dialog = false;
+      } else this.result = "Could not verify share code";
     } else if (FbStore.userCitizenType === "employer") {
-      let ref = FbStore.firestore
-        .collection("EmployerProgram")
-        .doc(this.shareCode);
+      let ref = FbStore.firestore.collection("EmployerProgram").doc(this.shareCode);
       let doc = await ref.get();
       if (doc.exists) {
         ref.update<EmployerProgram>({
@@ -337,7 +329,7 @@ async onProgramChange(){
             doc.id
           ) as unknown) as string[]
         });
-        this.dialog = false
+        this.dialog = false;
       }
     }
   }

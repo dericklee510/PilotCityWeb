@@ -161,13 +161,26 @@
               class="businessmodelcanvas_view2__description mb-12"
             >
               <v-col>
-                <v-btn 
-                  :dark="!completedBy"
+                <v-btn
+                  v-if="!completedBy"
+                  dark
                   target="_blank"
                   depressed
                   x-large
                   :href="url"
-                  :disabled="!!completedBy"
+                  :color="url?'':'error'"
+                >
+                  Record & Send Final Presentation
+                </v-btn>
+                <!-- Button logic after first completetion -->
+                <v-btn
+                  v-else
+                  :dark="!acknowledged"
+                  target="_blank"
+                  depressed
+                  x-large
+                  :href="url"
+                  :disabled="!!acknowledged"
                   :color="url?'':'error'"
                 >
                   Record & Send Final Presentation
@@ -184,7 +197,7 @@
               </span>
             </v-row>
             <v-row
-              v-if="!completedBy"
+
               justify="center"
             >
               <v-checkbox
@@ -290,7 +303,8 @@ import { PCLoader } from '@/components/utilities';
 import { LinkChecker, NextNode} from '../../components';
 import {firebase} from "@/firebase/init"
 import { from } from 'rxjs';
-@Component({
+import { tap } from 'rxjs/operators';
+@Component<DemoAgenda>({
   components: {
     DemoAgendaView,
     DemoAgendaEdit,
@@ -300,7 +314,11 @@ import { from } from 'rxjs';
   },
   subscriptions(){
     return {
-      completedBy: from(new Promise((resolve) => resolve(FbStore.currentProject?.hackDayCompletedBy?FbStore.getStudentName({studentUid:FbStore.currentProject!.hackDayCompletedBy}):null)))
+      completedBy: from(new Promise((resolve) => resolve(FbStore.currentProject?.demoDayCompletedBy?FbStore.getStudentName({studentUid:FbStore.currentProject!.demoDayCompletedBy}):null))).pipe(
+        tap(value => {
+          this.acknowledged = value?true:false
+        })
+      )
     }
   }
 })
