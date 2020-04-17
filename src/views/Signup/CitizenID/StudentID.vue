@@ -480,6 +480,7 @@ import { ValidationProvider } from "vee-validate";
       "Berkeley Technology Academy",
       "Brenkwitz High School",
       "California Crosspoint Academy",
+      "Castro Valley High School",
       "Clayton Valley Charter High School",
       "Code For Fun",
       "Dewey Academy",
@@ -488,6 +489,7 @@ import { ValidationProvider } from "vee-validate";
       "Irvington High School",
       "Island High School",
       "Jefferson High School",
+      "Menlo School",
       "Mount Eden High School",
       "Oakland High School",
       "Oakland Military Institute",
@@ -496,11 +498,11 @@ import { ValidationProvider } from "vee-validate";
       "Skyline High School",
       "Terra Nova High School",
       "Washington High School",
-      "Westmoor High School",
-      "None of the above"
+      "Westmoor High School"
     ],
     schooldistrict: [
       "None of the below",
+      "Independent Private School",
       "Alameda Unified School District",
       "Antioch Unified School District",
       "Berkeley Unified School District",
@@ -509,7 +511,6 @@ import { ValidationProvider } from "vee-validate";
       "Emery Unified School District",
       "Fremont Unified School District",
       "Hayward Unified School District",
-      "Independent Private School",
       "Jefferson Union High School District",
       "Oakland Unified School District",
       "San Leandro Unified School District",
