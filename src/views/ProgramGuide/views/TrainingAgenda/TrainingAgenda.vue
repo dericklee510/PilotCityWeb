@@ -103,7 +103,7 @@
               cols="10"
               class="text-center"
             >
-              Schedule a day and time with your team to work on your project together with mentorship, training and guidance from the PilotCity team. Be sure to add your team member's emails to the calendar invite. Teams will meet on the PilotCity Discord server: https://discord.gg/2rU7tsd.
+              Schedule a day and time with your team to work on your project together. Be sure to add your team member's emails to the calendar invite. Teams will meet on the PilotCity Discord server: https://discord.gg/2rU7tsd. Students may request mentorship, training and guidance from the PilotCity team. 
             </v-col>
           </v-row>
 
@@ -119,7 +119,7 @@
               cols="10"
               class="text-center"
             >
-              For PilotCity Team only. Enter a scheduling link for students in the program to work together as a team with the mentorship, training and guidance from the PilotCity team.
+              For PilotCity Team Only: Enter a scheduling link for students in the program to work together as a team. Note, they may request your presence for mentorship, training or guidance.
             </v-col>
           </v-row>
 
@@ -135,7 +135,7 @@
               cols="10"
               class="text-center"
             >
-              Your students are provided this scheduling link to work together as a team on the PilotCity Discord server with the mentorship, training and guidance of the PilotCity team: https://discord.gg/2rU7tsd.
+              Your students are provided this scheduling link to work together as a team on the PilotCity Discord server: https://discord.gg/2rU7tsd. Note your students may request mentorship, training and guidance from the PilotCity team.
             </v-col>
           </v-row>
 
