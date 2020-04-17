@@ -197,22 +197,20 @@
                 {{ `Scheduled By ${completedBy}` }}
               </span>
             </v-row>
-<v-row
-            justify="center"
-            no-gutters
->
-            <v-col
-              cols="10"
-              class="text-center"
+            <v-row
+              justify="center"
+              no-gutters
             >
-              <v-checkbox
-                v-model="acknowledged"
-                :label="studentCheckbox" 
-              />
-            </v-col>
+              <v-col
+                cols="10"
+                class="text-center"
+              >
+                <v-checkbox
+                  v-model="acknowledged"
+                  :label="studentCheckbox" 
+                />
+              </v-col>
             </v-row>
-
-
           </div>
           <!-- FOR EMPLOYER -->
         
@@ -317,7 +315,7 @@ import { tap } from 'rxjs/operators';
     NextNode
   },subscriptions(){
     return {
-      completedBy: from(new Promise((resolve) => resolve(FbStore.currentProject?.trainingDayCompletedBy?FbStore.getStudentName({studentUid:FbStore.currentProject!.hackDayCompletedBy}):null))).pipe(
+      completedBy: from(new Promise(async (resolve) => resolve(FbStore.currentProject?.trainingDayCompletedBy?await FbStore.getStudentName({studentUid:FbStore.currentProject!.trainingDayCompletedBy}):null))).pipe(
         tap(value => {
           this.acknowledged = value?true:false
         })
