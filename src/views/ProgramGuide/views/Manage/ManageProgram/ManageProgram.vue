@@ -172,8 +172,8 @@ export default class ManageProgram extends Vue {
   latestStudentClassroomData!: (studentClassroom)[]
   routeHash = {
     [`launch day`]: "launchDay",
-    [`training`]: "train",
-    [`practice & research`]: "practice",
+    [`cowork`]: "train",
+    [`research & practice`]: "practice",
     [`ideate`]: "bmc",
     [`hack day`]: "hackDay",
     [`reflection`]: "reflection",
@@ -186,8 +186,8 @@ export default class ManageProgram extends Vue {
     const { routeHash } = this
     return {
         "launch day":this.getAverage(this.latestStudentClassroomData,"finishedIntrovideo"),
-        "training":this.getAverage(this.latestProjectData,"programSequence.train"),
-        "practice & research": this.getAverage(this.latestProjectData,"programSequence.caseStudies"),
+        "cowork":this.getAverage(this.latestProjectData,"programSequence.train"),
+        "research & practice": this.getAverage(this.latestProjectData,"programSequence.caseStudies"),
         "ideate" : this.getAverage(this.latestProjectData,"programSequence.elevatorPitch"),
         "hack day":this.getAverage(this.latestProjectData,"programSequence.hackDay"),
         "reflection":this.getAverage(this.latestProjectData,"programSequence.reflection"),
@@ -199,8 +199,8 @@ export default class ManageProgram extends Vue {
   }
   unlockHash:Record<string, "By Date"|"Manually"| "By Completion"> = {
     [`launch day`]: "By Completion",
-    [`training`]: "By Completion",
-    [`practice & research`]: "By Completion",
+    [`cowork`]: "By Completion",
+    [`research & practice`]: "By Completion",
     [`ideate`]: "By Completion",
     [`hack day`]: "By Completion",
     [`reflection`]: "By Completion",
