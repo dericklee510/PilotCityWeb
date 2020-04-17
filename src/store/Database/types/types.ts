@@ -71,6 +71,7 @@ export interface EmployerProgram {
     masterHackDayAgenda?: AgendaTemplate    //  Employer  cannot  modify  this
     hackDayVideoLink?:string
     trainingDayTemplate?: AgendaTemplate // Employer cannot modify this
+    trainingDayVideoLink?:string
     programBrief?: NamedLink[]
     introVideo?: string
     caseStudies?: NamedLink[]
@@ -194,6 +195,7 @@ export interface Project {
     presentationLink?: string
     hackDayCompletedBy?:string // uid of student that completed hackday
     demoDayCompletedBy?:string 
+    trainingDayCompletedBy?:string
     postHackReflection?: firebase.firestore.Timestamp | firebase.firestore.FieldValue
     designLog?: DesignLog[]
     problemRatingT?: number

@@ -116,7 +116,7 @@ export const TEACHERSEQUENCE = {
         'Launch Day': [
             'teach-project-intro'
         ],
-        'Train': [
+        'Cowork': [
             // 'teach-project-training-edit',
             // 'teach-project-training',
             'project-training'
@@ -162,10 +162,12 @@ export const EMPLOYERSEQUENCE = {
         'Intro Video': [
             'emp-project-intro-edit'
         ],
+        'Cowork': [
+            'project-training'
+        ],
         'Research': [
             'emp-project-casestudy-edit',
             'emp-project-casestudy',
-            
         ],
 
     },
@@ -200,13 +202,14 @@ export const STUDENTSEQUENCE = {
             'stud-project-intro',
             'stud-project-team-join',
         ],
-        'Train': [
+        'Cowork': [
             // 'stud-project-training',
             'project-training'
         ],
-        'Practice & Research': [
-            'stud-project-practicelog',
+        'Research & Practice': [
             'stud-project-casestudy',
+            'stud-project-practicelog',
+
         ],
         'Ideate': [
             'stud-project-canvas-edit',

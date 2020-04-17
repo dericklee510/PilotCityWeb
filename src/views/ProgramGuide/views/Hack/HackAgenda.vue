@@ -163,13 +163,27 @@
               no-gutters
               class="businessmodelcanvas_view2__description mb-12"
             >
+              <!-- Button logic before first completetion -->
               <v-btn
-                :dark="!completedBy"
+                v-if="!completedBy"
+                dark
                 target="_blank"
                 depressed
                 x-large
                 :href="url"
-                :disabled="!!completedBy"
+                :color="url?'':'error'"
+              >
+                Record & Send Project Pitch
+              </v-btn>
+              <!-- Button logic after first completetion -->
+              <v-btn
+                v-else
+                :dark="!acknowledged"
+                target="_blank"
+                depressed
+                x-large
+                :href="url"
+                :disabled="!!acknowledged"
                 :color="url?'':'error'"
               >
                 Record & Send Project Pitch
@@ -184,7 +198,7 @@
               </span>
             </v-row>
             <v-row
-              v-if="!completedBy"
+              
               justify="center"
             >
               <v-checkbox
@@ -290,7 +304,9 @@ import { LinkChecker, NextNode } from "../../components";
 import  {firebase} from '@/firebase/init';
 import { from } from 'rxjs';
 import { PCLoader } from '@/components/utilities';
-@Component({
+import { Watch } from 'vue-property-decorator';
+import { tap } from 'rxjs/operators';
+@Component<HackAgenda>({
   components: {
     HackAgendaView,
     HackAgendaEdit,
@@ -300,14 +316,18 @@ import { PCLoader } from '@/components/utilities';
   },
   subscriptions(){
     return {
-      completedBy: from(new Promise((resolve) => resolve(FbStore.currentProject?.hackDayCompletedBy?FbStore.getStudentName({studentUid:FbStore.currentProject!.hackDayCompletedBy}):null)))
+      completedBy: from(new Promise((resolve) => resolve(FbStore.currentProject?.hackDayCompletedBy?FbStore.getStudentName({studentUid:FbStore.currentProject!.hackDayCompletedBy}):null))).pipe(
+        tap(value => {
+          this.acknowledged = value?true:false
+        })
+      )
     }
   }
 })
 export default class HackAgenda extends Vue {
   public edit: boolean = false;
   live:boolean = false;
-  url:string = FbStore.currentEmployerProgram!.hackDayVideoLink || ""
+  url:string = FbStore.currentEmployerProgram?.hackDayVideoLink || ""
   completedBy!:string
   acknowledged:boolean = false
   get studentCheckbox(){

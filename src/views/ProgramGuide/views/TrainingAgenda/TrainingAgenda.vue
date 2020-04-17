@@ -28,7 +28,7 @@
           class="agenda-view__title"
           no-gutters
         >
-          TRAINING DAY AGENDA
+          COWORKING DAY
 
           <!-- TOOLTIP TEMPLATE -->
           <v-tooltip
@@ -60,31 +60,234 @@
           no-gutters
         >
           <i
-            v-if="citizenType == 'teacher'"
+            v-if="live && (citizenType=='teacher'|| citizenType=='employer')"
             class="far fa-edit edit-icon__externship"
             @click="toggleView"
           />
         </v-row>
-
-        <v-row
-          justify="center"
-          no-gutters
-          class="businessmodelcanvas_view2__description"
-        >
+        
+        <v-row no-gutters>
           <v-col
-            cols="9"
-            class="pt-3 pb-3 text-center"
+            class="agenda-view__switch mt-6"
+            cols="12"
           >
-            Mark agenda items as you complete them.
+            <v-row
+              justify="center"
+            >
+              <span
+                class="agenda-view__switchlabel" 
+              >AT HOME</span>
+              <v-switch
+                v-model="live"
+                inset
+                :color="(!live)?'green':undefined"
+              />
+              <span class="agenda-view__switchlabel">IN CLASS</span>
+            </v-row>
           </v-col>
         </v-row>
-        <component
-          :is="currentView"
-          @toggleView="toggleView"
-          @nextNode="$emit('nextNode')"
-          @updateSavedDate="$emit('updateSavedDate', $event)"
-          @saving="$emit('saving', $event)"
-        />
+        
+        
+        <div
+          v-if="!live"
+        >
+          <!-- FOR STUDENT DESCRIPTION -->
+
+          <v-row
+            v-if="citizenType == 'student'"
+            justify="center"
+            no-gutters
+            class="businessmodelcanvas_view2__description"
+          >
+            <v-col
+              cols="10"
+              class="text-center"
+            >
+              Schedule a day and time with your team to work on your project together with mentorship, training and guidance from the PilotCity team. Be sure to add your team member's emails to the calendar invite. Teams will meet on the PilotCity Discord server: https://discord.gg/2rU7tsd.
+            </v-col>
+          </v-row>
+
+          <!-- FOR EMPLOYER DESCRIPTION -->
+
+          <v-row
+            v-if="citizenType == 'employer'"
+            justify="center"
+            no-gutters
+            class="businessmodelcanvas_view2__description"
+          >
+            <v-col
+              cols="10"
+              class="text-center"
+            >
+              For PilotCity Team only. Enter a scheduling link for students in the program to work together as a team with the mentorship, training and guidance from the PilotCity team.
+            </v-col>
+          </v-row>
+
+          <!-- FOR TEACHER DESCRIPTION -->
+
+          <v-row
+            v-if="citizenType == 'teacher'"
+            justify="center"
+            no-gutters
+            class="businessmodelcanvas_view2__description"
+          >
+            <v-col
+              cols="10"
+              class="text-center"
+            >
+              Your students are provided this scheduling link to work together as a team on the PilotCity Discord server with the mentorship, training and guidance of the PilotCity team: https://discord.gg/2rU7tsd.
+            </v-col>
+          </v-row>
+
+
+
+
+
+
+          <!-- FOR STUDENT -->
+          <div v-if="citizenType == 'student'">
+            <v-row
+              v-show="!url"
+              no-gutters
+              justify="center"
+            >
+              <h5
+                class="error--text text-center"
+              >
+                The PilotCity team has not uploaded a scheduling link yet
+              </h5>
+            </v-row>
+
+            <v-row
+              justify="center"
+              no-gutters
+              class="businessmodelcanvas_view2__description mb-12"
+            >
+              <!-- Button logic before first completetion -->
+              <v-btn
+                v-if="!completedBy"
+                dark
+                target="_blank"
+                depressed
+                x-large
+                :href="url"
+                :color="url?'':'error'"
+              >
+                Schedule Work Day & Time
+              </v-btn>
+              <!-- Button logic after first completetion -->
+              <v-btn
+                v-else
+                :dark="!acknowledged"
+                target="_blank"
+                depressed
+                x-large
+                :href="url"
+                :disabled="!!acknowledged"
+                :color="url?'':'error'"
+              >
+                Schedule Work Day & Time
+              </v-btn>
+            </v-row>
+            <v-row
+              v-if="completedBy"
+              justify="center"
+            >
+              <span class="caption text-uppercase text--lighten-5 mt-2">
+                {{ `Scheduled By ${completedBy}` }}
+              </span>
+            </v-row>
+<v-row
+            justify="center"
+            no-gutters
+>
+            <v-col
+              cols="10"
+              class="text-center"
+            >
+              <v-checkbox
+                v-model="acknowledged"
+                :label="studentCheckbox" 
+              />
+            </v-col>
+            </v-row>
+
+
+          </div>
+          <!-- FOR EMPLOYER -->
+        
+          <v-row
+            v-if="citizenType=='teacher'|| citizenType=='employer'"
+            justify="center"
+            class="mr-auto ml-auto mt-12 mb-12"
+            no-gutters
+          >
+            <v-col
+              cols="9"
+              md="7"
+            >
+              <LinkChecker
+                v-model="url"
+                disabled
+                placeholder="https://"
+                class="introvideo_edit__videolink mb-12"
+              />
+            </v-col>
+          </v-row>
+          <v-row
+            v-if="!live"
+            class="mt-4"
+            no-gutters
+            justify="center"
+          >
+            <v-col
+              cols="4"
+            >
+              <NextNode
+                v-slot="{setNext}"
+                @CallbackComplete="$emit('nextNode')"
+              >
+                <v-btn
+                  id="editcasestudies__button"
+                  class="mb-10"
+                  text
+                  solo
+                  depressed
+                  outlined
+                  height="73.5px"
+                  :dark="acknowledged"
+                  @click="setNext(submit)"
+                >
+                  FINISH
+                </v-btn>
+              </NextNode>
+            </v-col>
+          </v-row>
+        </div>
+
+        <div
+          v-if="live"
+        >
+          <v-row
+            justify="center"
+            no-gutters
+            class="businessmodelcanvas_view2__description"
+          >
+            <v-col
+              cols="9"
+              class="pt-3 pb-3 text-center"
+            >
+              Mark agenda items as you complete them.
+            </v-col>
+          </v-row>
+          <component
+            :is="currentView"
+            @toggleView="toggleView"
+            @nextNode="$emit('nextNode')"
+            @updateSavedDate="$emit('updateSavedDate', $event)"
+            @saving="$emit('saving', $event)"
+          />
+        </div>
       </v-col>
     </v-row>
   </v-container>
@@ -100,15 +303,37 @@ import { FbStore } from "@/store";
 import Vue from "vue";
 import TrainingAgendaEdit from "./TrainingAgendaEdit.vue";
 import TrainingAgendaView from "./TrainingAgendaView.vue";
-
-@Component({
+import { LinkChecker, NextNode } from "../../components";
+import  {firebase} from '@/firebase/init';
+import { PCLoader } from '@/components/utilities';
+import { from } from 'rxjs';
+import { tap } from 'rxjs/operators';
+@Component<TrainingAgenda>({
   components: {
     TrainingAgendaView,
-    TrainingAgendaEdit
+    TrainingAgendaEdit,
+     LinkChecker,
+    PCLoader,
+    NextNode
+  },subscriptions(){
+    return {
+      completedBy: from(new Promise((resolve) => resolve(FbStore.currentProject?.trainingDayCompletedBy?FbStore.getStudentName({studentUid:FbStore.currentProject!.hackDayCompletedBy}):null))).pipe(
+        tap(value => {
+          this.acknowledged = value?true:false
+        })
+      )
+    }
   }
 })
 export default class TrainingAgenda extends Vue {
+  live:boolean=false;
+  url:string = FbStore.currentEmployerProgram?.trainingDayVideoLink || ""
+  acknowledged:boolean = false
+  completedBy!:string
   public edit: boolean = false;
+  get studentCheckbox(){
+    return `I acknowledge that I, ${FbStore.currentUserProfile!.firstName} ${FbStore.currentUserProfile!.lastName}, have scheduled a day and time for our team to work together and added them to the calendar invite.`
+  }
   get currentView(): string {
     return this.edit ? "TrainingAgendaEdit" : "TrainingAgendaView";
   }
@@ -117,6 +342,18 @@ export default class TrainingAgenda extends Vue {
   }
   toggleView() {
     this.edit = !this.edit;
+  }
+  async submit(){
+    if(FbStore.userCitizenType === "employer")
+    await FbStore.updateCurrentEmployerProgram({
+      trainingDayVideoLink:this.url
+    })
+    else if (FbStore.userCitizenType === "student"){
+      await FbStore.updateCurrentProject({
+        programSequence:Object.assign({},FbStore.currentProject!.programSequence,{hackDay:firebase.firestore.FieldValue.serverTimestamp()}),
+        trainingDayCompletedBy:FbStore.userUid
+      })
+    }
   }
 }
 </script>"
