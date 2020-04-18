@@ -348,7 +348,7 @@ export default class TrainingAgenda extends Vue {
     })
     else if (FbStore.userCitizenType === "student"){
       await FbStore.updateCurrentProject({
-        programSequence:Object.assign({},FbStore.currentProject!.programSequence,{hackDay:firebase.firestore.FieldValue.serverTimestamp()}),
+        programSequence:Object.assign({},FbStore.currentProject!.programSequence,{train:firebase.firestore.FieldValue.serverTimestamp()}),
         trainingDayCompletedBy:FbStore.userUid
       })
     }
