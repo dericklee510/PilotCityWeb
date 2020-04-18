@@ -74,7 +74,7 @@ export default class ModuleStatus extends Vue{
       "Request for Pilot (RFP)": 'stud-project-profile',
       "Introduction Video": 'stud-project-intro',
       "Team": 'stud-project-team-join',
-      "Training Day": 'project-training',
+      "Cowork": 'project-training',
       "Practice Log": 'stud-project-practicelog',
       "Research": 'stud-project-casestudy',
       "Business Model Canvas": 'stud-project-canvas-edit',
