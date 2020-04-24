@@ -53,7 +53,7 @@ export class RouteList {
             'stud-project-presentation-edit':isBoth(FbStore.currentTeacherProgramData?.programSequence?.presentation , FbStore.currentProject?.programSequence?.demoVideo),
             'project-demo-agenda':isBoth(FbStore.currentTeacherProgramData?.programSequence?.demoDay , FbStore.currentProject?.programSequence?.presentation),
             'stud-project-exitsurvey': FbStore.currentProject?.programSequence?.demoDay,
-            'stud-project-autoapp': true,
+            'stud-project-autoapp': FbStore.currentStudentClassroom?.finishedExitForm,
             // FbStore.currentStudentClassroom?.finishedExitForm
         }
     }

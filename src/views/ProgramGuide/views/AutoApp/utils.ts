@@ -24,7 +24,7 @@ export type AutoAppKeys = "Get Started" |
     "Request for Pilot (RFP)" |
     "Introduction Video" |
     "Team" |
-    "Training Day" |
+    "Cowork" |
     "Practice Log" |
     "Research" |
     "Business Model Canvas" |
