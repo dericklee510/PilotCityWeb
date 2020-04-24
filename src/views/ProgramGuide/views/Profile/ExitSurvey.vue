@@ -638,7 +638,7 @@
           <v-col cols="4">
             <NextNode
               v-slot="{ setNext }"
-              @CallbackComplete="postSave ='Saved. Auto-App is coming soon'"
+              @CallbackComplete="$emit('nextNode')"
             >
               <v-btn
                 id="editcasestudies__button"
@@ -748,7 +748,6 @@ import { PCLoader } from '@/components/utilities';
   }
 })
 export default class ExitSurvey extends Vue {
-  postSave=""
   code: string = "";
   private sid: string = "";
   vStatus: string = "";

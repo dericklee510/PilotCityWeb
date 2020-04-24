@@ -51,10 +51,9 @@
           slim
           rules="required"
         >
-          <v-autocomplete
+          <v-text-field
             v-model="teacher"
             :error-messages="errors"
-            :items="teacherOptions"
             dense
             filled
             label="Teacher"
