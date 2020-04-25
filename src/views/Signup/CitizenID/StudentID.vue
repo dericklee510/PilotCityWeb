@@ -51,9 +51,10 @@
           slim
           rules="required"
         >
-          <v-text-field
+          <v-autocomplete
             v-model="teacher"
             :error-messages="errors"
+            :items="teacherOptions"
             dense
             filled
             label="Teacher"
@@ -78,10 +79,9 @@
           slim
           rules="required"
         >
-          <v-autocomplete
+          <v-text-field
             v-model="schoolName"
             :error-messages="errors"
-            :items="schoolname"
             dense
             filled
             label="School Name"
@@ -106,7 +106,8 @@
           slim
           rules="required"
         >
-          <v-autocomplete
+
+          <v-text-field
             v-model="schoolDistrict"
             :error-messages="errors"
             :items="schooldistrict"
@@ -114,6 +115,7 @@
             filled
             label="School District"
           />
+
         </ValidationProvider>
       </v-col>
     </v-row>
