@@ -204,7 +204,7 @@ export default class ManageProgram extends Vue {
     [`ideate`]: "By Completion",
     [`hack day`]: "By Completion",
     [`reflection`]: "By Completion",
-    [`design & prototype`]: "Manually",
+    [`design & prototype`]: "By Completion",
     [`package`]: "By Completion",
     [`demo day`]: "By Completion",
     [`exit survey`]: "By Completion",
