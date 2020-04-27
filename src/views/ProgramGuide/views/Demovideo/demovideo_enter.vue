@@ -13,7 +13,7 @@
         justify="center"
         class="mr-auto ml-auto demovideo_enter__title" 
       >
-        ENTER 1-MINUTE PROTOTYPE DEMONSTRATION VIDEO
+        ENTER PROTOTYPE DEMONSTRATION VIDEO
 
         <!-- TOOLTIP TEMPLATE -->
         <v-tooltip

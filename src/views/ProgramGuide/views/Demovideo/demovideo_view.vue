@@ -18,7 +18,7 @@
           justify="center"
           class="mr-auto ml-auto demovideo_view__title"
         >
-          1-MINUTE PROTOTYPE DEMONSTRATION VIDEOS
+          PROTOTYPE DEMONSTRATION VIDEOS
 
           <!-- TOOLTIP TEMPLATE -->
           <v-tooltip
