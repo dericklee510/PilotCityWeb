@@ -79,16 +79,19 @@ export default class LinkChecker extends Vue {
     this.loading = true;
     return new Promise(async (resolve, reject) => {
       setTimeout(() => {
-        reject("Could not verify URL, server timeout");
+        reject("Could not verify URL, but will still save");
+        // reject("Could not verify URL, server timeout");
       }, 5000);
       try {
         let value = await isLinkValid(URL);
         resolve("Link is verified");
       } catch (err) {
         if (err.response.status == 400)
-          reject("Link does not exist")
+          reject("Link not verified, but will still save")
+                    // reject("Link does not exist")
         else
-          reject("Could not verify URL, exception occured");
+          reject("Could not verify URL, but will still save");
+                    // reject("Could not verify URL, exception occured");
       }
     })
       .then(value => {
