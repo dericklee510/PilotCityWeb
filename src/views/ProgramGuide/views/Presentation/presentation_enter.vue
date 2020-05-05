@@ -14,7 +14,7 @@
           justify="center"
           class="mr-auto ml-auto presentation_enter__title"
         >
-          ENTER LINK TO PRESENTATION
+          ENTER LINK TO PRESENTATION DECK
           <!-- TOOLTIP TEMPLATE -->
           <v-tooltip
             v-model="show"
@@ -49,7 +49,7 @@
           justify="center"
           class="mr-auto ml-auto presentation_enter__description"
         >
-          Develop a final presentation and enter the link. You can use it to present to employers, customers or who you wish.
+          Develop a final presentation deck and enter the link to the slides. You can use it to present to employers, customers or who you wish.
         </v-row>
         <ValidationObserver v-slot="{invalid}">
           <v-row
