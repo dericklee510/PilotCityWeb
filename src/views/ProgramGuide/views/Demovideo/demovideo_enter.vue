@@ -49,7 +49,7 @@
         justify="center"
         class="mr-auto ml-auto demovideo_enter__description"
       >
-        Record and upload a video demonstration your project. This will give your employer a good understanding of how it works.
+        Record and upload a video demonstration your project. This will give your employer a good understanding of how it works. Be sure to include "https://" in the beginning of your link.
       </v-row>
       <ValidationObserver v-slot="{invalid}">
         <v-row
