@@ -347,10 +347,19 @@ export default class TrainingAgenda extends Vue {
       trainingDayVideoLink:this.url
     })
     else if (FbStore.userCitizenType === "student"){
-      await FbStore.updateCurrentProject({
-        programSequence:Object.assign({},FbStore.currentProject!.programSequence,{train:firebase.firestore.FieldValue.serverTimestamp()}),
-        trainingDayCompletedBy:FbStore.userUid
-      })
+        if(FbStore.currentProject!.programSequence && Object.keys(FbStore.currentProject!.programSequence).length)
+    await FbStore.updateCurrentProject({
+      [`programSequence.${'train'}`]:firebase.firestore.FieldValue.serverTimestamp()
+      
+    });else{
+    const ref = FbStore.firestore.collection("Project").doc(FbStore.currentProject!.projectId)
+     await ref.update(({
+      programSequence:{train:true}
+    }))
+    await ref.update(({
+      programSequence:{train:firebase.firestore.FieldValue.serverTimestamp()}
+    }))
+    }
     }
   }
 }
