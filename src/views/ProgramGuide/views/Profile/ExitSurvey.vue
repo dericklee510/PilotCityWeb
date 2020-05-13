@@ -659,6 +659,14 @@
             </NextNode>
           </v-col>
         </v-row>
+
+            <v-row
+              class="studentid__questiontitle"
+              justify="center"
+            >
+              You can still edit your project after submitting
+            </v-row>
+
         <v-row
           class="mb-10 text--grey"
           style="font-family: Raleway"
