@@ -82,7 +82,7 @@
                     style="font-family='Raleway'"
                     height="100px"
                     placeholder="0m"
-                    @keypress.enter="addTime().then(()=>{reset()})"
+                    @keypress.enter="clickBtn()"
                   />
                 </ValidationProvider>
               </v-col>
@@ -100,6 +100,7 @@
               >
                 <PCLoader v-slot="{loading,setLoader}">
                   <v-btn
+                    ref="enter"
                     class="logtime__button pt-0 pb-0"
                     outlined
                     solo
@@ -171,6 +172,9 @@ export default class logtime extends Vue {
   timeInput: string = "";
   timeLog: TimeLog[] =
     FbStore.currentProject!.practiceLog[FbStore.FBUser!.uid!] || [];
+    clickBtn(){
+      (this.$refs.enter as any).$el.click()
+    }
   get totalTime() {
     return this.timeLog.reduce((sum, entry) => (sum += entry.minutes), 0);
   }
